@@ -3,14 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>docker_install | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="�����������룺����yumԴcat &amp;gt;/etc/yum.repos.d/docker.repo &amp;lt;&amp;lt;-EOF[dockerrepo]name=Docker Repositorybaseurl=https://yum.dockerproject.org/repo/main/centos/6enabled=1gpgcheck=1gpgkey=https://yum.doc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker_install">
+<meta property="og:url" content="http://yoursite.com/2016/11/27/docker-install/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="�����������룺����yumԴcat &amp;gt;/etc/yum.repos.d/docker.repo &amp;lt;&amp;lt;-EOF[dockerrepo]name=Docker Repositorybaseurl=https://yum.dockerproject.org/repo/main/centos/6enabled=1gpgcheck=1gpgkey=https://yum.doc">
+<meta property="og:updated_time" content="2016-11-27T13:36:06.845Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="docker_install">
+<meta name="twitter:description" content="�����������룺����yumԴcat &amp;gt;/etc/yum.repos.d/docker.repo &amp;lt;&amp;lt;-EOF[dockerrepo]name=Docker Repositorybaseurl=https://yum.dockerproject.org/repo/main/centos/6enabled=1gpgcheck=1gpgkey=https://yum.doc">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -59,9 +63,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-docker-install" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-docker-install" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/dey/2016/11/27/docker-install/" class="article-date">
   <time datetime="2016-11-27T13:33:03.000Z" itemprop="datePublished">2016-11-27</time>
@@ -74,8 +76,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/dey/2016/11/27/docker-install/">docker_install</a>
+    <h1 class="article-title" itemprop="name">
+      docker_install
     </h1>
   
 
@@ -119,98 +121,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-kafka_high_level_api" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/dey/2016/11/25/kafka_high_level_api/" class="article-date">
-  <time datetime="2016-11-25T11:10:33.000Z" itemprop="datePublished">2016-11-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/dey/2016/11/25/kafka_high_level_api/">Kafka_high_level_api测试</a>
-    </h1>
+    <a href="/dey/2016/11/25/kafka_high_level_api/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Kafka_high_level_api测试</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-查看官网API"><a href="#1-查看官网API" class="headerlink" title="1.查看官网API"></a>1.查看官网API</h1><p><a href="http://kafka.apache.org/0101/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html">Kafka API</a></p>
-<h3 id="Automatic-Offset-Committing"><a href="#Automatic-Offset-Committing" class="headerlink" title="Automatic Offset Committing"></a>Automatic Offset Committing</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Properties props = <span class="keyword">new</span> Properties();</div><div class="line">     props.put(<span class="string">"bootstrap.servers"</span>, <span class="string">"localhost:9092"</span>);</div><div class="line">     props.put(<span class="string">"group.id"</span>, <span class="string">"test"</span>);</div><div class="line">     props.put(<span class="string">"enable.auto.commit"</span>, <span class="string">"true"</span>);</div><div class="line">     props.put(<span class="string">"auto.commit.interval.ms"</span>, <span class="string">"1000"</span>);</div><div class="line">     props.put(<span class="string">"key.deserializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringDeserializer"</span>);</div><div class="line">     props.put(<span class="string">"value.deserializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringDeserializer"</span>);</div><div class="line">     KafkaConsumer&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; consumer = <span class="keyword">new</span> KafkaConsumer&lt;&gt;(props);</div><div class="line">     consumer.subscribe(Arrays.asList(<span class="string">"foo"</span>, <span class="string">"bar"</span>));</div><div class="line">     <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">         ConsumerRecords&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; records = consumer.poll(<span class="number">100</span>);</div><div class="line">         <span class="keyword">for</span> (ConsumerRecord&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; record : records)</div><div class="line">             System.out.printf(<span class="string">"offset = %d, key = %s, value = %s%n"</span>, record.offset(), record.key(), record.value());</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
-<h3 id="Manual-Offset-Control"><a href="#Manual-Offset-Control" class="headerlink" title="Manual Offset Control"></a>Manual Offset Control</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Properties props = <span class="keyword">new</span> Properties();</div><div class="line">     props.put(<span class="string">"bootstrap.servers"</span>, <span class="string">"localhost:9092"</span>);</div><div class="line">     props.put(<span class="string">"group.id"</span>, <span class="string">"test"</span>);</div><div class="line">     props.put(<span class="string">"enable.auto.commit"</span>, <span class="string">"false"</span>);</div><div class="line">     props.put(<span class="string">"key.deserializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringDeserializer"</span>);</div><div class="line">     props.put(<span class="string">"value.deserializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringDeserializer"</span>);</div><div class="line">     KafkaConsumer&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; consumer = <span class="keyword">new</span> KafkaConsumer&lt;&gt;(props);</div><div class="line">     consumer.subscribe(Arrays.asList(<span class="string">"foo"</span>, <span class="string">"bar"</span>));</div><div class="line">     final int minBatchSize = <span class="number">200</span>;</div><div class="line">     List&lt;ConsumerRecord&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;&gt; buffer = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">     <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">         ConsumerRecords&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; records = consumer.poll(<span class="number">100</span>);</div><div class="line">         <span class="keyword">for</span> (ConsumerRecord&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; record : records) &#123;</div><div class="line">             buffer.add(record);</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">if</span> (buffer.size() &gt;= minBatchSize) &#123;</div><div class="line">             insertIntoDb(buffer);</div><div class="line">             consumer.commitSync();</div><div class="line">             buffer.clear();</div><div class="line">         &#125;</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/dey/2016/11/25/kafka_high_level_api/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/dey/2016/11/25/kafka_high_level_api/" data-id="ciw0ovva900022ghl4cn5bz6i" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/dey/2015/11/25/hello-world/" class="article-date">
-  <time datetime="2015-11-25T11:10:33.000Z" itemprop="datePublished">2015-11-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/dey/2015/11/25/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/dey/2015/11/25/hello-world/" data-id="ciw0ovv8000012ghl6wyni7ch" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
