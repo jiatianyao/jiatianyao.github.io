@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Kafka_high_level_api测试 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.查看官网APIKafka API
+Automatic Offset Committing1234567891011121314Properties props = new Properties();     props.put(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;);     props.put(&quot;group.id&quot;, &quot;test&quot;);     props">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka_high_level_api测试">
+<meta property="og:url" content="http://yoursite.com/2016/11/25/kafka_high_level_api/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.查看官网APIKafka API
+Automatic Offset Committing1234567891011121314Properties props = new Properties();     props.put(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;);     props.put(&quot;group.id&quot;, &quot;test&quot;);     props">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/kafka-high-level-api-demo1.png">
+<meta property="og:updated_time" content="2016-11-27T01:33:35.214Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kafka_high_level_api测试">
+<meta name="twitter:description" content="1.查看官网APIKafka API
+Automatic Offset Committing1234567891011121314Properties props = new Properties();     props.put(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;);     props.put(&quot;group.id&quot;, &quot;test&quot;);     props">
+<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/kafka-high-level-api-demo1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/dey/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/dey/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/dey/">Home</a>
+        
+          <a class="main-nav-link" href="/dey/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-kafka_high_level_api" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/dey/2016/11/25/kafka_high_level_api/" class="article-date">
+  <time datetime="2016-11-25T11:10:33.000Z" itemprop="datePublished">2016-11-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Kafka_high_level_api测试
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-查看官网API"><a href="#1-查看官网API" class="headerlink" title="1.查看官网API"></a>1.查看官网API</h1><p><a href="http://kafka.apache.org/0101/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html" target="_blank" rel="external">Kafka API</a></p>
+<h3 id="Automatic-Offset-Committing"><a href="#Automatic-Offset-Committing" class="headerlink" title="Automatic Offset Committing"></a>Automatic Offset Committing</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Properties props = <span class="keyword">new</span> Properties();</div><div class="line">     props.put(<span class="string">"bootstrap.servers"</span>, <span class="string">"localhost:9092"</span>);</div><div class="line">     props.put(<span class="string">"group.id"</span>, <span class="string">"test"</span>);</div><div class="line">     props.put(<span class="string">"enable.auto.commit"</span>, <span class="string">"true"</span>);</div><div class="line">     props.put(<span class="string">"auto.commit.interval.ms"</span>, <span class="string">"1000"</span>);</div><div class="line">     props.put(<span class="string">"key.deserializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringDeserializer"</span>);</div><div class="line">     props.put(<span class="string">"value.deserializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringDeserializer"</span>);</div><div class="line">     KafkaConsumer&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; consumer = <span class="keyword">new</span> KafkaConsumer&lt;&gt;(props);</div><div class="line">     consumer.subscribe(Arrays.asList(<span class="string">"foo"</span>, <span class="string">"bar"</span>));</div><div class="line">     <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">         ConsumerRecords&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; records = consumer.poll(<span class="number">100</span>);</div><div class="line">         <span class="keyword">for</span> (ConsumerRecord&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; record : records)</div><div class="line">             System.out.printf(<span class="string">"offset = %d, key = %s, value = %s%n"</span>, record.offset(), record.key(), record.value());</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
+<h3 id="Manual-Offset-Control"><a href="#Manual-Offset-Control" class="headerlink" title="Manual Offset Control"></a>Manual Offset Control</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Properties props = <span class="keyword">new</span> Properties();</div><div class="line">     props.put(<span class="string">"bootstrap.servers"</span>, <span class="string">"localhost:9092"</span>);</div><div class="line">     props.put(<span class="string">"group.id"</span>, <span class="string">"test"</span>);</div><div class="line">     props.put(<span class="string">"enable.auto.commit"</span>, <span class="string">"false"</span>);</div><div class="line">     props.put(<span class="string">"key.deserializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringDeserializer"</span>);</div><div class="line">     props.put(<span class="string">"value.deserializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringDeserializer"</span>);</div><div class="line">     KafkaConsumer&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; consumer = <span class="keyword">new</span> KafkaConsumer&lt;&gt;(props);</div><div class="line">     consumer.subscribe(Arrays.asList(<span class="string">"foo"</span>, <span class="string">"bar"</span>));</div><div class="line">     final int minBatchSize = <span class="number">200</span>;</div><div class="line">     List&lt;ConsumerRecord&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;&gt; buffer = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">     <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">         ConsumerRecords&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; records = consumer.poll(<span class="number">100</span>);</div><div class="line">         <span class="keyword">for</span> (ConsumerRecord&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; record : records) &#123;</div><div class="line">             buffer.add(record);</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">if</span> (buffer.size() &gt;= minBatchSize) &#123;</div><div class="line">             insertIntoDb(buffer);</div><div class="line">             consumer.commitSync();</div><div class="line">             buffer.clear();</div><div class="line">         &#125;</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
+ <a id="more"></a> 
+<h5 id="另外auto-offset-reset这个参数可以设置为smallest和largest"><a href="#另外auto-offset-reset这个参数可以设置为smallest和largest" class="headerlink" title="另外auto.offset.reset这个参数可以设置为smallest和largest"></a>另外auto.offset.reset这个参数可以设置为smallest和largest</h5><p>largest表示接受接收最大的offset(即最新消息),<br>smallest表示最小offset,即从topic的开始位置消费所有消息.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>Default</th>
+<th>Valid Values</th>
+<th>Importance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>auto.offset.reset</td>
+<td>What to do when there is no initial offset in Kafka or if the current offset does not exist any more on the server (e.g. because that data has been deleted) earliest: automatically reset the offset to the earliest offset latest: automatically reset the offset to the latest offset. none: throw exception to the consumer if no previous offset is found for the consumer’s group anything else: throw exception to the consumer.</td>
+<td>string</td>
+<td>latest</td>
+<td>[latest, earliest, none]</td>
+<td>medium</td>
+</tr>
+</tbody>
+</table>
+<h4 id="kafka-high-level-API提交offset"><a href="#kafka-high-level-API提交offset" class="headerlink" title="kafka high level API提交offset"></a>kafka high level API提交offset</h4><p>首先判断config.offsetsStorage == “zookeeper”<br>如果是zk，通过foreach提交所消费的所有的topic的所有的partition的offset。提交的方式是commitOffsetToZooKeeper-&gt;updatePersistentPath<br>如果是kafka会<br>通过NIO的offsetchannel提交当前的offset到broker</p>
+<h4 id="kafka-high-level-API测试"><a href="#kafka-high-level-API测试" class="headerlink" title="kafka high level API测试"></a>kafka high level API测试</h4><p>启动kafka<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-server-start.sh config/server.properties &amp; nohup    kafka-server-start.sh /home/hadoop/apps/kafka_2<span class="number">.11</span><span class="number">-0.9</span><span class="number">.0</span><span class="number">.1</span>/config/server.properties &amp;</div></pre></td></tr></table></figure></p>
+<p>创建topic_high_level_api_test<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/kafka-topics.sh  --create --zookeeper www.hadoop01.com:<span class="number">2181</span>,www.hadoop02.com:<span class="number">2181</span>,www.hadoop03.com:<span class="number">2181</span>/kafka --replication-factor <span class="number">1</span> --partitions <span class="number">3</span> --topic topic_high_level_api_test</div></pre></td></tr></table></figure></p>
+<p>启动kafka high level demo<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">package kafka.javaapi.consumer;</div><div class="line"></div><div class="line"><span class="keyword">import</span> kafka.consumer.Consumer;</div><div class="line"><span class="keyword">import</span> kafka.consumer.ConsumerConfig;</div><div class="line"><span class="keyword">import</span> kafka.consumer.ConsumerIterator;</div><div class="line"><span class="keyword">import</span> kafka.consumer.KafkaStream;</div><div class="line"><span class="keyword">import</span> kafka.message.MessageAndMetadata;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"><span class="keyword">import</span> java.util.Properties;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2016/11/26.</div><div class="line"> */</div><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">DemoHighLevelConsumer</span> </span>&#123;</div><div class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) &#123;</div><div class="line">        args = <span class="keyword">new</span> <span class="built_in">String</span>[]&#123;<span class="string">"www.hadoop01.com:2181,www.hadoop02.com:2181,www.hadoop03.com:2181/kafka"</span>, <span class="string">"topic_high_level_api_test"</span>, <span class="string">"group1"</span>, <span class="string">"consumer1"</span>&#125;;</div><div class="line">        <span class="keyword">if</span> (args == <span class="literal">null</span> || args.length != <span class="number">4</span>) &#123;</div><div class="line">            System.err.print(</div><div class="line">                    <span class="string">"Usage:\n\tjava -jar kafka_consumer.jar $&#123;zookeeper_list&#125; $&#123;topic_name&#125; $&#123;group_name&#125; $&#123;consumer_id&#125;"</span>);</div><div class="line">            System.exit(<span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">String</span> zk = args[<span class="number">0</span>];</div><div class="line">        <span class="built_in">String</span> topic = args[<span class="number">1</span>];</div><div class="line">        <span class="built_in">String</span> groupid = args[<span class="number">2</span>];</div><div class="line">        <span class="built_in">String</span> consumerid = args[<span class="number">3</span>];</div><div class="line">        Properties props = <span class="keyword">new</span> Properties();</div><div class="line">        props.put(<span class="string">"zookeeper.connect"</span>, zk);</div><div class="line">        props.put(<span class="string">"zookeeper.session.timeout.ms"</span>, <span class="string">"3600000"</span>);</div><div class="line">        props.put(<span class="string">"group.id"</span>, groupid);</div><div class="line">        props.put(<span class="string">"client.id"</span>, <span class="string">"test"</span>);</div><div class="line">        props.put(<span class="string">"consumer.id"</span>, consumerid);</div><div class="line">        props.put(<span class="string">"auto.offset.reset"</span>,<span class="string">"smallest"</span>);<span class="comment">// "largest");</span></div><div class="line">        props.put(<span class="string">"auto.commit.enable"</span>, <span class="string">"true"</span>);</div><div class="line">        props.put(<span class="string">"auto.commit.interval.ms"</span>, <span class="string">"60000"</span>);</div><div class="line"></div><div class="line">        ConsumerConfig consumerConfig = <span class="keyword">new</span> ConsumerConfig(props);</div><div class="line">        ConsumerConnector consumerConnector = Consumer.createJavaConsumerConnector(consumerConfig);</div><div class="line"></div><div class="line">        <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, Integer&gt; topicCountMap = <span class="keyword">new</span> HashMap&lt;<span class="built_in">String</span>, Integer&gt;();</div><div class="line">        topicCountMap.put(topic, <span class="number">1</span>);</div><div class="line">        <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, List&lt;KafkaStream&lt;byte[], byte[]&gt;&gt;&gt; consumerMap =</div><div class="line">                consumerConnector.createMessageStreams(topicCountMap);</div><div class="line"></div><div class="line">        KafkaStream&lt;byte[], byte[]&gt; stream1 = consumerMap.get(topic).get(<span class="number">0</span>);</div><div class="line">        ConsumerIterator&lt;byte[], byte[]&gt; it1 = stream1.iterator();</div><div class="line">        <span class="keyword">while</span> (it1.hasNext()) &#123;</div><div class="line">            MessageAndMetadata&lt;byte[], byte[]&gt; messageAndMetadata = it1.next();</div><div class="line">            <span class="built_in">String</span> message =</div><div class="line">                    <span class="built_in">String</span>.format(<span class="string">"Consumer ID:%s, Topic:%s, GroupID:%s, PartitionID:%s, Offset:%s, Message Key:%s, Message Payload: %s"</span>,</div><div class="line">                            consumerid,</div><div class="line">                            messageAndMetadata.topic(), groupid, messageAndMetadata.partition(),</div><div class="line">                            messageAndMetadata.offset(), <span class="keyword">new</span> <span class="built_in">String</span>(messageAndMetadata.key()),<span class="keyword">new</span> <span class="built_in">String</span>(messageAndMetadata.message()));</div><div class="line">            System.out.println(message);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>启动生产者用随机算法生产数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">package kafka;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"><span class="keyword">import</span> java.util.Properties;</div><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"></div><div class="line"><span class="keyword">import</span> kafka.javaapi.producer.Producer;</div><div class="line"><span class="keyword">import</span> kafka.producer.KeyedMessage;</div><div class="line"><span class="keyword">import</span> kafka.producer.ProducerConfig;</div><div class="line"><span class="keyword">import</span> kafka.serializer.StringEncoder;</div><div class="line"></div><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ProducerDemo</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">static</span> private final <span class="built_in">String</span> TOPIC = <span class="string">"topic_high_level_api_test"</span>;</div><div class="line">  <span class="keyword">static</span> private final <span class="built_in">String</span> ZOOKEEPER = <span class="string">"www.hadoop01.com:2181,www.hadoop02.com:2181,www.hadoop03.com:2181/kafka"</span>;</div><div class="line">  <span class="keyword">static</span> private final <span class="built_in">String</span> BROKER_LIST = <span class="string">"www.hadoop01.com:9092,www.hadoop02.com:9092,www.hadoop03.com:9092"</span>;</div><div class="line"><span class="comment">//  static private final int PARTITIONS = TopicAdmin.partitionNum(ZOOKEEPER, TOPIC);</span></div><div class="line">  <span class="keyword">static</span> private final int PARTITIONS = <span class="number">3</span>;</div><div class="line"></div><div class="line"></div><div class="line">  public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) throws Exception &#123;</div><div class="line">    Producer&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; producer = initProducer();</div><div class="line">    System.out.print(<span class="string">"1111"</span>);</div><div class="line">    sendOne(producer, TOPIC);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  private <span class="keyword">static</span> Producer&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; initProducer() &#123;</div><div class="line">    Properties props = <span class="keyword">new</span> Properties();</div><div class="line">    props.put(<span class="string">"metadata.broker.list"</span>, BROKER_LIST);</div><div class="line">    <span class="comment">// props.put("serializer.class", "kafka.serializer.StringEncoder");</span></div><div class="line">    props.put(<span class="string">"serializer.class"</span>, StringEncoder.class.getName());</div><div class="line">    props.put(<span class="string">"partitioner.class"</span>, RoundRobinPartitioner.class.getName());</div><div class="line">    <span class="comment">// props.put("partitioner.class", "kafka.producer.DefaultPartitioner");</span></div><div class="line"><span class="comment">//    props.put("compression.codec", "0");</span></div><div class="line">    props.put(<span class="string">"producer.type"</span>, <span class="string">"async"</span>);</div><div class="line">    props.put(<span class="string">"batch.num.messages"</span>, <span class="string">"3"</span>);</div><div class="line">    props.put(<span class="string">"queue.buffer.max.ms"</span>, <span class="string">"10000000"</span>);</div><div class="line">    props.put(<span class="string">"queue.buffering.max.messages"</span>, <span class="string">"1000000"</span>);</div><div class="line">    props.put(<span class="string">"queue.enqueue.timeout.ms"</span>, <span class="string">"20000000"</span>);</div><div class="line"></div><div class="line">    ProducerConfig config = <span class="keyword">new</span> ProducerConfig(props);</div><div class="line">    Producer&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; producer = <span class="keyword">new</span> Producer&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;(config);</div><div class="line">    <span class="keyword">return</span> producer;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  public <span class="keyword">static</span> <span class="keyword">void</span> sendOne(Producer&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; producer, <span class="built_in">String</span> topic) throws InterruptedException &#123;</div><div class="line">    KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; message1 = <span class="keyword">new</span> KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;(topic, <span class="string">"31"</span>, <span class="string">"test 31"</span>);</div><div class="line">    producer.send(message1);</div><div class="line">    KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; message2 = <span class="keyword">new</span> KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;(topic, <span class="string">"31"</span>, <span class="string">"test 32"</span>);</div><div class="line">    producer.send(message2);</div><div class="line">    KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; message3 = <span class="keyword">new</span> KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;(topic, <span class="string">"31"</span>, <span class="string">"test 33"</span>);</div><div class="line">    producer.send(message3);</div><div class="line">    KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; message4 = <span class="keyword">new</span> KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;(topic, <span class="string">"31"</span>, <span class="string">"test 34"</span>);</div><div class="line">    producer.send(message4);</div><div class="line">    KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; message5 = <span class="keyword">new</span> KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;(topic, <span class="string">"31"</span>, <span class="string">"test 35"</span>);</div><div class="line">    producer.send(message5);</div><div class="line">    KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; message6 = <span class="keyword">new</span> KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;(topic, <span class="string">"31"</span>, <span class="string">"test 36"</span>);</div><div class="line">    producer.send(message6);</div><div class="line">    KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; message7 = <span class="keyword">new</span> KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;(topic, <span class="string">"31"</span>, <span class="string">"test 37"</span>);</div><div class="line">    producer.send(message7);</div><div class="line">    KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; message8 = <span class="keyword">new</span> KeyedMessage&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;(topic, <span class="string">"31"</span>, <span class="string">"test 38"</span>);</div><div class="line">    producer.send(message8);</div><div class="line">    producer.close();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>查看kafka high level demo打印的信息<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Consumer ID:consumer1, <span class="attr">Topic</span>:topic_high_level_api_test, <span class="attr">GroupID</span>:group1, <span class="attr">PartitionID</span>:<span class="number">2</span>, <span class="attr">Offset</span>:<span class="number">0</span>, Message Key:<span class="number">31</span>, Message Payload: test <span class="number">32</span></div><div class="line">Consumer ID:consumer1, <span class="attr">Topic</span>:topic_high_level_api_test, <span class="attr">GroupID</span>:group1, <span class="attr">PartitionID</span>:<span class="number">1</span>, <span class="attr">Offset</span>:<span class="number">0</span>, Message Key:<span class="number">31</span>, Message Payload: test <span class="number">31</span></div><div class="line">Consumer ID:consumer1, <span class="attr">Topic</span>:topic_high_level_api_test, <span class="attr">GroupID</span>:group1, <span class="attr">PartitionID</span>:<span class="number">0</span>, <span class="attr">Offset</span>:<span class="number">0</span>, Message Key:<span class="number">31</span>, Message Payload: test <span class="number">33</span></div><div class="line">Consumer ID:consumer1, <span class="attr">Topic</span>:topic_high_level_api_test, <span class="attr">GroupID</span>:group1, <span class="attr">PartitionID</span>:<span class="number">2</span>, <span class="attr">Offset</span>:<span class="number">1</span>, Message Key:<span class="number">31</span>, Message Payload: test <span class="number">35</span></div><div class="line">Consumer ID:consumer1, <span class="attr">Topic</span>:topic_high_level_api_test, <span class="attr">GroupID</span>:group1, <span class="attr">PartitionID</span>:<span class="number">2</span>, <span class="attr">Offset</span>:<span class="number">2</span>, Message Key:<span class="number">31</span>, Message Payload: test <span class="number">38</span></div><div class="line">Consumer ID:consumer1, <span class="attr">Topic</span>:topic_high_level_api_test, <span class="attr">GroupID</span>:group1, <span class="attr">PartitionID</span>:<span class="number">1</span>, <span class="attr">Offset</span>:<span class="number">1</span>, Message Key:<span class="number">31</span>, Message Payload: test <span class="number">34</span></div><div class="line">Consumer ID:consumer1, <span class="attr">Topic</span>:topic_high_level_api_test, <span class="attr">GroupID</span>:group1, <span class="attr">PartitionID</span>:<span class="number">1</span>, <span class="attr">Offset</span>:<span class="number">2</span>, Message Key:<span class="number">31</span>, Message Payload: test <span class="number">37</span></div></pre></td></tr></table></figure></p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/kafka-high-level-api-demo1.png" alt="image"></p>
+<p>查看zookeeper里的信息</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">[zk: localhost:<span class="number">2181</span>(CONNECTED) <span class="number">92</span>] get /kafka/consumers/group1/offsets/topic_high_level_api_test/<span class="number">1</span></div><div class="line"><span class="number">3</span></div><div class="line">cZxid = <span class="number">0x36000000f4</span></div><div class="line">ctime = Sat Nov <span class="number">26</span> <span class="number">16</span>:<span class="number">29</span>:<span class="number">21</span> CST <span class="number">2016</span></div><div class="line">mZxid = <span class="number">0x36000000f7</span></div><div class="line">mtime = Sat Nov <span class="number">26</span> <span class="number">16</span>:<span class="number">31</span>:<span class="number">21</span> CST <span class="number">2016</span></div><div class="line">pZxid = <span class="number">0x36000000f4</span></div><div class="line">cversion = <span class="number">0</span></div><div class="line">dataVersion = <span class="number">1</span></div><div class="line">aclVersion = <span class="number">0</span></div><div class="line">ephemeralOwner = <span class="number">0x0</span></div><div class="line">dataLength = <span class="number">1</span></div><div class="line">numChildren = <span class="number">0</span></div><div class="line">[zk: localhost:<span class="number">2181</span>(CONNECTED) <span class="number">93</span>] get /kafka/consumers/group1/offsets/topic_high_level_api_test/<span class="number">2</span></div><div class="line"><span class="number">3</span></div><div class="line">cZxid = <span class="number">0x36000000f1</span></div><div class="line">ctime = Sat Nov <span class="number">26</span> <span class="number">16</span>:<span class="number">29</span>:<span class="number">21</span> CST <span class="number">2016</span></div><div class="line">mZxid = <span class="number">0x36000000f6</span></div><div class="line">mtime = Sat Nov <span class="number">26</span> <span class="number">16</span>:<span class="number">31</span>:<span class="number">21</span> CST <span class="number">2016</span></div><div class="line">pZxid = <span class="number">0x36000000f1</span></div><div class="line">cversion = <span class="number">0</span></div><div class="line">dataVersion = <span class="number">1</span></div><div class="line">aclVersion = <span class="number">0</span></div><div class="line">ephemeralOwner = <span class="number">0x0</span></div><div class="line">dataLength = <span class="number">1</span></div><div class="line">numChildren = <span class="number">0</span></div><div class="line">[zk: localhost:<span class="number">2181</span>(CONNECTED) <span class="number">94</span>] get /kafka/consumers/group1/offsets/topic_high_level_api_test/<span class="number">0</span></div><div class="line"><span class="number">1</span></div><div class="line">cZxid = <span class="number">0x36000000ee</span></div><div class="line">ctime = Sat Nov <span class="number">26</span> <span class="number">16</span>:<span class="number">29</span>:<span class="number">21</span> CST <span class="number">2016</span></div><div class="line">mZxid = <span class="number">0x36000000f5</span></div><div class="line">mtime = Sat Nov <span class="number">26</span> <span class="number">16</span>:<span class="number">31</span>:<span class="number">21</span> CST <span class="number">2016</span></div><div class="line">pZxid = <span class="number">0x36000000ee</span></div><div class="line">cversion = <span class="number">0</span></div><div class="line">dataVersion = <span class="number">1</span></div><div class="line">aclVersion = <span class="number">0</span></div><div class="line">ephemeralOwner = <span class="number">0x0</span></div><div class="line">dataLength = <span class="number">1</span></div><div class="line">numChildren = <span class="number">0</span></div></pre></td></tr></table></figure>
+<p>可以对应的上，分区0消费了1条数据，分区2和3消费了3条数据</p>
+<p>如果我们队上述数据做处理，kafka high level demo里的<br>auto.commit.enable设置为false</p>
+<p>启动kafka high level demo，发送数据，再重新启动kafka high level demo 还会消费之前发送的数据，是因为offset没有更改</p>
+<p>此时我们可以在代码里增加手工提交的代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">consumerConnector.commitOffsets();</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/dey/2016/11/25/kafka_high_level_api/" data-id="civzyfpxh0000a0hl3eka0kwz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/dey/2015/11/25/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/dey/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/dey/archives/2015/11/">November 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/dey/2016/11/25/kafka_high_level_api/">Kafka_high_level_api测试</a>
+          </li>
+        
+          <li>
+            <a href="/dey/2015/11/25/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 jiatianyao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/dey/" class="mobile-nav-link">Home</a>
+  
+    <a href="/dey/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/dey/fancybox/jquery.fancybox.css">
+  <script src="/dey/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/dey/js/script.js"></script>
+
+  </div>
+</body>
+</html>
