@@ -1,205 +1,612 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
+<!doctype html>
+
+
+
   
-  <title>docker_install | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.123�����������룺12345678cat &amp;gt;/etc/yum.repos.d/docker.repo &amp;lt;&amp;lt;-EOF[dockerrepo]name=Docker Repositorybaseurl=https://yum.dockerproject.org/repo/main/centos/6enabled=1gpgcheck=1gpgkey=https://yu">
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/dey/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/dey/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/dey/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/dey/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1.增加yum源在命令行输入：12345678cat &amp;gt;/etc/yum.repos.d/docker.repo &amp;lt;&amp;lt;-EOF[dockerrepo]name=Docker Repositorybaseurl=https://yum.dockerproject.org/repo/main/centos/6enabled=1gpgcheck=1gpgkey=https://yum.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker_install">
 <meta property="og:url" content="http://yoursite.com/2016/11/27/docker-install/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.123�����������룺12345678cat &amp;gt;/etc/yum.repos.d/docker.repo &amp;lt;&amp;lt;-EOF[dockerrepo]name=Docker Repositorybaseurl=https://yum.dockerproject.org/repo/main/centos/6enabled=1gpgcheck=1gpgkey=https://yu">
-<meta property="og:updated_time" content="2016-11-29T15:23:42.361Z">
+<meta property="og:description" content="1.增加yum源在命令行输入：12345678cat &amp;gt;/etc/yum.repos.d/docker.repo &amp;lt;&amp;lt;-EOF[dockerrepo]name=Docker Repositorybaseurl=https://yum.dockerproject.org/repo/main/centos/6enabled=1gpgcheck=1gpgkey=https://yum.">
+<meta property="og:updated_time" content="2016-11-29T16:13:40.550Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker_install">
-<meta name="twitter:description" content="1.123�����������룺12345678cat &amp;gt;/etc/yum.repos.d/docker.repo &amp;lt;&amp;lt;-EOF[dockerrepo]name=Docker Repositorybaseurl=https://yum.dockerproject.org/repo/main/centos/6enabled=1gpgcheck=1gpgkey=https://yu">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+<meta name="twitter:description" content="1.增加yum源在命令行输入：12345678cat &amp;gt;/etc/yum.repos.d/docker.repo &amp;lt;&amp;lt;-EOF[dockerrepo]name=Docker Repositorybaseurl=https://yum.dockerproject.org/repo/main/centos/6enabled=1gpgcheck=1gpgkey=https://yum.">
 
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/dey/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/11/27/docker-install/"/>
+
+
+
+
+
+  <title> docker_install | Hexo </title>
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-docker-install" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/27/docker-install/" class="article-date">
-  <time datetime="2016-11-27T13:33:03.000Z" itemprop="datePublished">2016-11-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      docker_install
-    </h1>
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
   
 
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/dey/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/dey/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/dey/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/dey/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/dey/2016/11/27/docker-install/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="jiatianyao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/dey/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                docker_install
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-27T21:33:03+08:00">
+                2016-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h4 id="1-123"><a href="#1-123" class="headerlink" title="1.123"></a>1.123</h4><p>�����������룺<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat &gt;<span class="regexp">/etc/yum</span>.repos.d/docker.repo &lt;&lt;-EOF</div><div class="line">[dockerrepo]</div><div class="line">name=Docker Repository</div><div class="line">baseurl=https:<span class="comment">//yum.dockerproject.org/repo/main/centos/6</span></div><div class="line">enabled=<span class="number">1</span></div><div class="line">gpgcheck=<span class="number">1</span></div><div class="line">gpgkey=https:<span class="comment">//yum.dockerproject.org/gpg</span></div><div class="line">EOF</div></pre></td></tr></table></figure></p>
-<p>ͨ��yum����docker<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install docker-engine</div></pre></td></tr></table></figure></p>
-<h4 id="2-����selinux"><a href="#2-����selinux" class="headerlink" title="2.����selinux"></a>2.����selinux</h4><p>#####2.1.�鿴selinux״̬</p>
-<p>[root@localhost ~]# cat /etc/selinux/config<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"># This file controls the state of SELinux on the system.</div><div class="line"># SELINUX= can take one of these three values:</div><div class="line">#     enforcing - SELinux security policy is enforced.</div><div class="line">#     permissive - SELinux prints warnings instead of enforcing.</div><div class="line">#     disabled - No SELinux policy is loaded.</div><div class="line">SELINUX=enforcing</div><div class="line"># SELINUXTYPE= can take one of these two values:</div><div class="line">#     targeted - Targeted processes are protected,</div><div class="line">#     mls - Multi Level Security protection.</div><div class="line">SELINUXTYPE=targeted</div><div class="line">``` </div><div class="line">2.2.�޸ĸ������ļ��н�enforcing�滻Ϊdisabled</div><div class="line"> </div><div class="line">[root@localhost ~]# cat /etc/selinux/config</div><div class="line">```js</div><div class="line"># This file controls the state of SELinux on the system.</div><div class="line"># SELINUX= can take one of these three values:</div><div class="line">#     enforcing - SELinux security policy is enforced.</div><div class="line">#     permissive - SELinux prints warnings instead of enforcing.</div><div class="line">#     disabled - No SELinux policy is loaded.</div><div class="line">SELINUX=disabled</div><div class="line"># SELINUXTYPE= can take one of these two values:</div><div class="line">#     targeted - Targeted processes are protected,</div><div class="line">#     mls - Multi Level Security protection.</div><div class="line">SELINUXTYPE=targeted</div></pre></td></tr></table></figure></p>
-<p>2.3.Dockerʹ�÷�root�û�<br>����ǰ�û�����docker��<br>sudo gpasswd -a ${USER} docker</p>
-<p>2.4.Ȼ������<br>restart</p>
+      
+
+      
+        <h4 id="1-增加yum源"><a href="#1-增加yum源" class="headerlink" title="1.增加yum源"></a>1.增加yum源</h4><p>在命令行输入：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat &gt;<span class="regexp">/etc/yum</span>.repos.d/docker.repo &lt;&lt;-EOF</div><div class="line">[dockerrepo]</div><div class="line">name=Docker Repository</div><div class="line">baseurl=https:<span class="comment">//yum.dockerproject.org/repo/main/centos/6</span></div><div class="line">enabled=<span class="number">1</span></div><div class="line">gpgcheck=<span class="number">1</span></div><div class="line">gpgkey=https:<span class="comment">//yum.dockerproject.org/gpg</span></div><div class="line">EOF</div></pre></td></tr></table></figure></p>
+<p>通过yum加载docker<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install docker-engine</div></pre></td></tr></table></figure></p>
+<h4 id="2-禁用selinux"><a href="#2-禁用selinux" class="headerlink" title="2.禁用selinux"></a>2.禁用selinux</h4><p>#####2.1.查看selinux状态</p>
+<p>[root@localhost ~]# cat /etc/selinux/config<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"># This file controls the state of SELinux on the system.</div><div class="line"># SELINUX= can take one of these three values:</div><div class="line">#     enforcing - SELinux security policy is enforced.</div><div class="line">#     permissive - SELinux prints warnings instead of enforcing.</div><div class="line">#     disabled - No SELinux policy is loaded.</div><div class="line">SELINUX=enforcing</div><div class="line"># SELINUXTYPE= can take one of these two values:</div><div class="line">#     targeted - Targeted processes are protected,</div><div class="line">#     mls - Multi Level Security protection.</div><div class="line">SELINUXTYPE=targeted</div><div class="line">``` </div><div class="line">2.2.修改该配置文件中将enforcing替换为disabled</div><div class="line"> </div><div class="line">[root@localhost ~]# cat /etc/selinux/config</div><div class="line">```js</div><div class="line"># This file controls the state of SELinux on the system.</div><div class="line"># SELINUX= can take one of these three values:</div><div class="line">#     enforcing - SELinux security policy is enforced.</div><div class="line">#     permissive - SELinux prints warnings instead of enforcing.</div><div class="line">#     disabled - No SELinux policy is loaded.</div><div class="line">SELINUX=disabled</div><div class="line"># SELINUXTYPE= can take one of these two values:</div><div class="line">#     targeted - Targeted processes are protected,</div><div class="line">#     mls - Multi Level Security protection.</div><div class="line">SELINUXTYPE=targeted</div></pre></td></tr></table></figure></p>
+<p>2.3.Docker使用非root用户<br>将当前用户加入docker组<br>sudo gpasswd -a ${USER} docker</p>
+<p>2.4.然后重启<br>restart</p>
 <a id="more"></a> 
-<h4 id="3-����docker"><a href="#3-����docker" class="headerlink" title="3.����docker"></a>3.����docker</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/docker start</div><div class="line"></div><div class="line">[hadoop@www.hadoop02.com ~]$ps -ef | grep docker </div><div class="line">root       <span class="number">2398</span>      <span class="number">1</span>  <span class="number">0</span> <span class="number">19</span>:<span class="number">26</span> ?        <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> /usr/bin/docker -d</div><div class="line">hadoop     <span class="number">2817</span>   <span class="number">2761</span>  <span class="number">0</span> <span class="number">19</span>:<span class="number">27</span> pts/<span class="number">0</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> grep docker</div><div class="line"></div><div class="line"></div><div class="line">[hadoop@www.hadoop02.com ~]$docker version</div><div class="line">Client version: <span class="number">1.7</span><span class="number">.1</span></div><div class="line">Client API version: <span class="number">1.19</span></div><div class="line">Go version (client): go1<span class="number">.4</span><span class="number">.2</span></div><div class="line">Git commit (client): <span class="number">786</span>b29d</div><div class="line">OS/Arch (client): linux/amd64</div><div class="line">Get http:<span class="comment">///var/run/docker.sock/v1.19/version: dial unix /var/run/docker.sock: permission denied. Are you trying to connect to a TLS-enabled daemon without TLS?</span></div><div class="line"></div><div class="line"></div><div class="line">[hadoop@www.hadoop02.com ~]$docker -d </div><div class="line">FATA[<span class="number">0000</span>] <span class="built_in">Error</span> starting daemon: open /<span class="keyword">var</span>/run/docker.pid: permission denied</div></pre></td></tr></table></figure>
-<p>����hadoop�û���docker��<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop02.com run]$sudo gpasswd -a hadoop docker</div><div class="line">Adding user hadoop to group docker</div></pre></td></tr></table></figure></p>
-<p>�鿴docker��Ϣ<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop02.com ~]$docker info</div><div class="line">Containers: <span class="number">0</span></div><div class="line">Images: <span class="number">0</span></div><div class="line">Storage Driver: devicemapper</div><div class="line"> Pool Name: docker<span class="number">-253</span>:<span class="number">0</span><span class="number">-798129</span>-pool</div><div class="line"> Pool Blocksize: <span class="number">65.54</span> kB</div><div class="line"> Backing Filesystem: extfs</div><div class="line"> Data file: <span class="regexp">/dev/</span>loop0</div><div class="line"> Metadata file: <span class="regexp">/dev/</span>loop1</div><div class="line"> Data Space Used: <span class="number">305.7</span> MB</div><div class="line"> Data Space Total: <span class="number">107.4</span> GB</div><div class="line"> Data Space Available: <span class="number">3.967</span> GB</div><div class="line"> Metadata Space Used: <span class="number">729.1</span> kB</div><div class="line"> Metadata Space Total: <span class="number">2.147</span> GB</div><div class="line"> Metadata Space Available: <span class="number">2.147</span> GB</div><div class="line"> Udev Sync Supported: <span class="literal">true</span></div><div class="line"> Deferred Removal Enabled: <span class="literal">false</span></div><div class="line"> Data loop file: <span class="regexp">/var/</span>lib/docker/devicemapper/devicemapper/data</div><div class="line"> Metadata loop file: <span class="regexp">/var/</span>lib/docker/devicemapper/devicemapper/metadata</div><div class="line"> Library Version: <span class="number">1.02</span><span class="number">.95</span>-RHEL6 (<span class="number">2015</span><span class="number">-04</span><span class="number">-15</span>)</div><div class="line">Execution Driver: native<span class="number">-0.2</span></div><div class="line">Logging Driver: json-file</div><div class="line">Kernel Version: <span class="number">2.6</span><span class="number">.32</span><span class="number">-573.</span>el6.x86_64</div><div class="line">Operating System: &lt;unknown&gt;</div><div class="line">CPUs: 1</div><div class="line">Total Memory: 1.82 GiB</div><div class="line">Name: www.hadoop02.com</div><div class="line">ID: XL2K:2DEZ:GF27:JL4P:AHWJ:HEGF:QNQ7:HVT3:3SLS:75GJ:LRQM:E7OJ</div></pre></td></tr></table></figure></p>
-<p>������ip addr��docker0����<br>������һ��˽������<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UNKNOWN </div><div class="line">   link/ether 26:75:34:2e:06:26 brd ff:ff:ff:ff:ff:ff</div><div class="line">   inet 172.17.42.1/16 scope global docker0</div><div class="line">   inet6 fe80::2475:34ff:fe2e:626/64 scope link </div><div class="line">      valid_lft forever preferred_lft forever</div></pre></td></tr></table></figure></p>
-<p>�ϴ�docker�ļ�<br>build�ļ���ע�������и���<br>docker build -t hadoop/zookeeper:3.4.6 -f zookeeper.Dockerfile .<br>���ֱ�����ԭ����û�а�װREPL</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http:<span class="comment">//download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm</span></div><div class="line"></div><div class="line">rpm -ivh epel-release<span class="number">-6</span><span class="number">-8.</span>noarch.rpm</div><div class="line">yum repolist</div><div class="line">yum makecache  ��ִ�д˾�Ҳ��</div></pre></td></tr></table></figure>
-<p>ִ��docker search centos���Կ�����Ϣ<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">docker search centos</div><div class="line">NAME                            DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</div><div class="line">centos                          The official build <span class="keyword">of</span> CentOS.                   <span class="number">2757</span>      [OK]       </div><div class="line">jdeathe/centos-ssh              CentOS<span class="number">-6</span> <span class="number">6.8</span> x86_64 / CentOS<span class="number">-7</span> <span class="number">7.2</span><span class="number">.1511</span> x8...   <span class="number">42</span>                   [OK]</div><div class="line">jdeathe/centos-ssh-apache-php   CentOS<span class="number">-6</span> <span class="number">6.8</span> x86_64 / Apache / PHP / PHP M...   <span class="number">21</span>                   [OK]</div><div class="line">nimmis/java-centos              This is docker images <span class="keyword">of</span> CentOS <span class="number">7</span> <span class="keyword">with</span> dif...   <span class="number">16</span>                   [OK]</div><div class="line">gluster/gluster-centos          Official GlusterFS Image [ CentOS7 +  Glus...   <span class="number">12</span>                   [OK]</div><div class="line">million12/centos-supervisor     Base CentOS<span class="number">-7</span> <span class="keyword">with</span> supervisord launcher, h...   <span class="number">12</span>                   [OK]</div><div class="line">torusware/speedus-centos        Always updated official CentOS docker imag...   <span class="number">8</span>                    [OK]</div><div class="line">nickistre/centos-lamp           LAMP on centos setup                            <span class="number">7</span>                    [OK]</div><div class="line">kinogmt/centos-ssh              CentOS <span class="keyword">with</span> SSH                                 <span class="number">6</span>                    [OK]</div><div class="line">nathonfowlie/centos-jre         Latest CentOS image <span class="keyword">with</span> the JRE pre-insta...   <span class="number">4</span>                    [OK]</div><div class="line">centos/mariadb55-centos7                                                        <span class="number">3</span>                    [OK]</div><div class="line">consol/sakuli-centos-xfce       Sakuli JavaScript based end<span class="number">-2</span>-end testing ...   <span class="number">2</span>                    [OK]</div><div class="line">timhughes/centos                Centos <span class="keyword">with</span> systemd installed and running       <span class="number">1</span>                    [OK]</div><div class="line">blacklabelops/centos            CentOS Base Image! Built and Updates Daily!     <span class="number">1</span>                    [OK]</div><div class="line">darksheer/centos                Base Centos Image -- Updated hourly             <span class="number">1</span>                    [OK]</div><div class="line">harisekhon/centos-scala         Scala + CentOS (OpenJDK tags <span class="number">2.10</span>-jre7 - <span class="number">2.</span>..   <span class="number">1</span>                    [OK]</div><div class="line">harisekhon/centos-java          Java on CentOS (OpenJDK, tags jre/jdk7<span class="number">-8</span>)       <span class="number">1</span>                    [OK]</div><div class="line">repositoryjp/centos             Docker Image <span class="keyword">for</span> CentOS.                        <span class="number">0</span>                    [OK]</div><div class="line">labengine/centos                Centos image base                               <span class="number">0</span>                    [OK]</div><div class="line">smartentry/centos               centos <span class="keyword">with</span> smartentry                          <span class="number">0</span>                    [OK]</div><div class="line">januswel/centos                 yum update-ed CentOS image                      <span class="number">0</span>                    [OK]</div><div class="line">vcatechnology/centos            A CentOS Image which is updated daily           <span class="number">0</span>                    [OK]</div><div class="line">grayzone/centos                 auto build <span class="keyword">for</span> centos.                          <span class="number">0</span>                    [OK]</div><div class="line">ustclug/centos                   USTC centos                                    <span class="number">0</span>                    [OK]</div><div class="line">kz8s/centos                     Official CentOS plus epel-release               <span class="number">0</span>                    [OK]</div></pre></td></tr></table></figure></p>
-<p>����ִ��docker build</p>
+<h4 id="3-启动docker"><a href="#3-启动docker" class="headerlink" title="3.启动docker"></a>3.启动docker</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/docker start</div><div class="line"></div><div class="line">[hadoop@www.hadoop02.com ~]$ps -ef | grep docker </div><div class="line">root       <span class="number">2398</span>      <span class="number">1</span>  <span class="number">0</span> <span class="number">19</span>:<span class="number">26</span> ?        <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> /usr/bin/docker -d</div><div class="line">hadoop     <span class="number">2817</span>   <span class="number">2761</span>  <span class="number">0</span> <span class="number">19</span>:<span class="number">27</span> pts/<span class="number">0</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> grep docker</div><div class="line"></div><div class="line"></div><div class="line">[hadoop@www.hadoop02.com ~]$docker version</div><div class="line">Client version: <span class="number">1.7</span><span class="number">.1</span></div><div class="line">Client API version: <span class="number">1.19</span></div><div class="line">Go version (client): go1<span class="number">.4</span><span class="number">.2</span></div><div class="line">Git commit (client): <span class="number">786</span>b29d</div><div class="line">OS/Arch (client): linux/amd64</div><div class="line">Get http:<span class="comment">///var/run/docker.sock/v1.19/version: dial unix /var/run/docker.sock: permission denied. Are you trying to connect to a TLS-enabled daemon without TLS?</span></div><div class="line"></div><div class="line"></div><div class="line">[hadoop@www.hadoop02.com ~]$docker -d </div><div class="line">FATA[<span class="number">0000</span>] <span class="built_in">Error</span> starting daemon: open /<span class="keyword">var</span>/run/docker.pid: permission denied</div></pre></td></tr></table></figure>
+<p>添加hadoop用户到docker组<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop02.com run]$sudo gpasswd -a hadoop docker</div><div class="line">Adding user hadoop to group docker</div></pre></td></tr></table></figure></p>
+<p>查看docker信息<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop02.com ~]$docker info</div><div class="line">Containers: <span class="number">0</span></div><div class="line">Images: <span class="number">0</span></div><div class="line">Storage Driver: devicemapper</div><div class="line"> Pool Name: docker<span class="number">-253</span>:<span class="number">0</span><span class="number">-798129</span>-pool</div><div class="line"> Pool Blocksize: <span class="number">65.54</span> kB</div><div class="line"> Backing Filesystem: extfs</div><div class="line"> Data file: <span class="regexp">/dev/</span>loop0</div><div class="line"> Metadata file: <span class="regexp">/dev/</span>loop1</div><div class="line"> Data Space Used: <span class="number">305.7</span> MB</div><div class="line"> Data Space Total: <span class="number">107.4</span> GB</div><div class="line"> Data Space Available: <span class="number">3.967</span> GB</div><div class="line"> Metadata Space Used: <span class="number">729.1</span> kB</div><div class="line"> Metadata Space Total: <span class="number">2.147</span> GB</div><div class="line"> Metadata Space Available: <span class="number">2.147</span> GB</div><div class="line"> Udev Sync Supported: <span class="literal">true</span></div><div class="line"> Deferred Removal Enabled: <span class="literal">false</span></div><div class="line"> Data loop file: <span class="regexp">/var/</span>lib/docker/devicemapper/devicemapper/data</div><div class="line"> Metadata loop file: <span class="regexp">/var/</span>lib/docker/devicemapper/devicemapper/metadata</div><div class="line"> Library Version: <span class="number">1.02</span><span class="number">.95</span>-RHEL6 (<span class="number">2015</span><span class="number">-04</span><span class="number">-15</span>)</div><div class="line">Execution Driver: native<span class="number">-0.2</span></div><div class="line">Logging Driver: json-file</div><div class="line">Kernel Version: <span class="number">2.6</span><span class="number">.32</span><span class="number">-573.</span>el6.x86_64</div><div class="line">Operating System: &lt;unknown&gt;</div><div class="line">CPUs: 1</div><div class="line">Total Memory: 1.82 GiB</div><div class="line">Name: www.hadoop02.com</div><div class="line">ID: XL2K:2DEZ:GF27:JL4P:AHWJ:HEGF:QNQ7:HVT3:3SLS:75GJ:LRQM:E7OJ</div></pre></td></tr></table></figure></p>
+<p>可以用ip addr看docker0网桥<br>分配了一个私有网段<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UNKNOWN </div><div class="line">   link/ether 26:75:34:2e:06:26 brd ff:ff:ff:ff:ff:ff</div><div class="line">   inet 172.17.42.1/16 scope global docker0</div><div class="line">   inet6 fe80::2475:34ff:fe2e:626/64 scope link </div><div class="line">      valid_lft forever preferred_lft forever</div></pre></td></tr></table></figure></p>
+<p>上传docker文件<br>build文件，注意最后有个点<br>docker build -t hadoop/zookeeper:3.4.6 -f zookeeper.Dockerfile .<br>发现报错，原因是没有安装REPL</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget http:<span class="comment">//download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm</span></div><div class="line"></div><div class="line">rpm -ivh epel-release<span class="number">-6</span><span class="number">-8.</span>noarch.rpm</div><div class="line">yum repolist</div><div class="line">yum makecache  不执行此句也可</div></pre></td></tr></table></figure>
+<p>执行docker search centos可以看到信息<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">docker search centos</div><div class="line">NAME                            DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</div><div class="line">centos                          The official build <span class="keyword">of</span> CentOS.                   <span class="number">2757</span>      [OK]       </div><div class="line">jdeathe/centos-ssh              CentOS<span class="number">-6</span> <span class="number">6.8</span> x86_64 / CentOS<span class="number">-7</span> <span class="number">7.2</span><span class="number">.1511</span> x8...   <span class="number">42</span>                   [OK]</div><div class="line">jdeathe/centos-ssh-apache-php   CentOS<span class="number">-6</span> <span class="number">6.8</span> x86_64 / Apache / PHP / PHP M...   <span class="number">21</span>                   [OK]</div><div class="line">nimmis/java-centos              This is docker images <span class="keyword">of</span> CentOS <span class="number">7</span> <span class="keyword">with</span> dif...   <span class="number">16</span>                   [OK]</div><div class="line">gluster/gluster-centos          Official GlusterFS Image [ CentOS7 +  Glus...   <span class="number">12</span>                   [OK]</div><div class="line">million12/centos-supervisor     Base CentOS<span class="number">-7</span> <span class="keyword">with</span> supervisord launcher, h...   <span class="number">12</span>                   [OK]</div><div class="line">torusware/speedus-centos        Always updated official CentOS docker imag...   <span class="number">8</span>                    [OK]</div><div class="line">nickistre/centos-lamp           LAMP on centos setup                            <span class="number">7</span>                    [OK]</div><div class="line">kinogmt/centos-ssh              CentOS <span class="keyword">with</span> SSH                                 <span class="number">6</span>                    [OK]</div><div class="line">nathonfowlie/centos-jre         Latest CentOS image <span class="keyword">with</span> the JRE pre-insta...   <span class="number">4</span>                    [OK]</div><div class="line">centos/mariadb55-centos7                                                        <span class="number">3</span>                    [OK]</div><div class="line">consol/sakuli-centos-xfce       Sakuli JavaScript based end<span class="number">-2</span>-end testing ...   <span class="number">2</span>                    [OK]</div><div class="line">timhughes/centos                Centos <span class="keyword">with</span> systemd installed and running       <span class="number">1</span>                    [OK]</div><div class="line">blacklabelops/centos            CentOS Base Image! Built and Updates Daily!     <span class="number">1</span>                    [OK]</div><div class="line">darksheer/centos                Base Centos Image -- Updated hourly             <span class="number">1</span>                    [OK]</div><div class="line">harisekhon/centos-scala         Scala + CentOS (OpenJDK tags <span class="number">2.10</span>-jre7 - <span class="number">2.</span>..   <span class="number">1</span>                    [OK]</div><div class="line">harisekhon/centos-java          Java on CentOS (OpenJDK, tags jre/jdk7<span class="number">-8</span>)       <span class="number">1</span>                    [OK]</div><div class="line">repositoryjp/centos             Docker Image <span class="keyword">for</span> CentOS.                        <span class="number">0</span>                    [OK]</div><div class="line">labengine/centos                Centos image base                               <span class="number">0</span>                    [OK]</div><div class="line">smartentry/centos               centos <span class="keyword">with</span> smartentry                          <span class="number">0</span>                    [OK]</div><div class="line">januswel/centos                 yum update-ed CentOS image                      <span class="number">0</span>                    [OK]</div><div class="line">vcatechnology/centos            A CentOS Image which is updated daily           <span class="number">0</span>                    [OK]</div><div class="line">grayzone/centos                 auto build <span class="keyword">for</span> centos.                          <span class="number">0</span>                    [OK]</div><div class="line">ustclug/centos                   USTC centos                                    <span class="number">0</span>                    [OK]</div><div class="line">kz8s/centos                     Official CentOS plus epel-release               <span class="number">0</span>                    [OK]</div></pre></td></tr></table></figure></p>
+<p>重新执行docker build</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop02.com ~]$docker run -itd --name zookeeper -h zookeeper -p 2181:2181 jason/zookeeper:3.4.6 bash</div><div class="line">b023a24424772462cc8d63e79dc3c3fe9e06dd0825ad617c65006e1ef331656d</div><div class="line">[hadoop@www.hadoop02.com ~]$docker ps</div><div class="line">CONTAINER ID        IMAGE                   COMMAND                CREATED             STATUS              PORTS                    NAMES</div><div class="line">b023a2442477        jason/zookeeper:3.4.6   "sh /opt/zookeeper/s   11 seconds ago      Up 8 seconds        0.0.0.0:2181-&gt;2181/tcp   zookeeper      </div><div class="line"></div><div class="line"></div><div class="line">docker build -t hadoop/kafka:0.8.2.2 -f zookeeper.Dockerfile .</div></pre></td></tr></table></figure>
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/11/27/docker-install/" data-id="ciw3nlq7q0000gchl8ha80tjr" class="article-share-link">Share</a>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/dey/2016/11/25/kafka_high_level_api/" rel="next" title="Kafka_high_level_api测试">
+                <i class="fa fa-chevron-left"></i> Kafka_high_level_api测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
       
       
     </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2016/11/25/kafka_high_level_api/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Kafka_high_level_api测试</div>
-    </a>
-  
-</nav>
+  </article>
 
-  
-</article>
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
 
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
+    <div class="post-spread">
+      
     </div>
   </div>
 
 
-  
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
-    <div class="widget">
-      <ul>
+  </div>
+
+
+        </div>
         
-          <li>
-            <a href="/2016/11/27/docker-install/">docker_install</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/25/kafka_high_level_api/">Kafka_high_level_api测试</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/25/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
 
-  
-</aside>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/dey/images/avatar.gif"
+               alt="jiatianyao" />
+          <p class="site-author-name" itemprop="name">jiatianyao</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/dey/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-增加yum源"><span class="nav-number">1.</span> <span class="nav-text">1.增加yum源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-禁用selinux"><span class="nav-number">2.</span> <span class="nav-text">2.禁用selinux</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-启动docker"><span class="nav-number">3.</span> <span class="nav-text">3.启动docker</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-      <footer id="footer">
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 jiatianyao<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiatianyao</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
     </div>
   </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+
+
+
   
-</nav>
-    
+  <script type="text/javascript" src="/dey/lib/jquery/index.js?v=2.1.3"></script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  
+  <script type="text/javascript" src="/dey/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/dey/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/dey/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/dey/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/dey/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  
 
 
-<script src="/js/script.js"></script>
+  <script type="text/javascript" src="/dey/js/src/utils.js?v=5.1.0"></script>
 
-  </div>
+  <script type="text/javascript" src="/dey/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/dey/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/dey/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/dey/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
 </body>
 </html>
