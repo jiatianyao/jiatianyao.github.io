@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -83,11 +83,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="1-123"><a href="#1-123" class="headerlink" title="1.123"></a>1.123</h4>
+        <h4 id="1-123"><a href="#1-123" class="headerlink" title="1.123"></a>1.123</h4><p>�����������룺<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat &gt;<span class="regexp">/etc/yum</span>.repos.d/docker.repo &lt;&lt;-EOF</div><div class="line">[dockerrepo]</div><div class="line">name=Docker Repository</div><div class="line">baseurl=https:<span class="comment">//yum.dockerproject.org/repo/main/centos/6</span></div><div class="line">enabled=<span class="number">1</span></div><div class="line">gpgcheck=<span class="number">1</span></div><div class="line">gpgkey=https:<span class="comment">//yum.dockerproject.org/gpg</span></div><div class="line">EOF</div></pre></td></tr></table></figure></p>
+<p>ͨ��yum����docker<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install docker-engine</div></pre></td></tr></table></figure></p>
+<h4 id="2-����selinux"><a href="#2-����selinux" class="headerlink" title="2.����selinux"></a>2.����selinux</h4><p>#####2.1.�鿴selinux״̬</p>
+<p>[root@localhost ~]# cat /etc/selinux/config<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"># This file controls the state of SELinux on the system.</div><div class="line"># SELINUX= can take one of these three values:</div><div class="line">#     enforcing - SELinux security policy is enforced.</div><div class="line">#     permissive - SELinux prints warnings instead of enforcing.</div><div class="line">#     disabled - No SELinux policy is loaded.</div><div class="line">SELINUX=enforcing</div><div class="line"># SELINUXTYPE= can take one of these two values:</div><div class="line">#     targeted - Targeted processes are protected,</div><div class="line">#     mls - Multi Level Security protection.</div><div class="line">SELINUXTYPE=targeted</div><div class="line">``` </div><div class="line">2.2.�޸ĸ������ļ��н�enforcing�滻Ϊdisabled</div><div class="line"> </div><div class="line">[root@localhost ~]# cat /etc/selinux/config</div><div class="line">```js</div><div class="line"># This file controls the state of SELinux on the system.</div><div class="line"># SELINUX= can take one of these three values:</div><div class="line">#     enforcing - SELinux security policy is enforced.</div><div class="line">#     permissive - SELinux prints warnings instead of enforcing.</div><div class="line">#     disabled - No SELinux policy is loaded.</div><div class="line">SELINUX=disabled</div><div class="line"># SELINUXTYPE= can take one of these two values:</div><div class="line">#     targeted - Targeted processes are protected,</div><div class="line">#     mls - Multi Level Security protection.</div><div class="line">SELINUXTYPE=targeted</div></pre></td></tr></table></figure></p>
+<p>2.3.Dockerʹ�÷�root�û�<br>����ǰ�û�����docker��<br>sudo gpasswd -a ${USER} docker</p>
+<p>2.4.Ȼ������<br>restart</p>
+        
+          <p class="article-more-link">
+            <a href="/2016/11/27/docker-install/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/11/27/docker-install/" data-id="ciw3mt2810000k4hl022wwkql" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/11/27/docker-install/" data-id="ciw3nlq7q0000gchl8ha80tjr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -130,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/11/25/kafka_high_level_api/" data-id="ciw3mt28k0002k4hlmn1fvjwp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/11/25/kafka_high_level_api/" data-id="ciw3nlq8v0002gchlbms8bnbz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -175,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/11/25/hello-world/" data-id="ciw3mt28d0001k4hlxe1mwbn0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/11/25/hello-world/" data-id="ciw3nlq800001gchl364hp7v9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -200,7 +210,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li></ul>
     </div>
@@ -210,7 +220,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
