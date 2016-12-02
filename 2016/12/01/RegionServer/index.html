@@ -84,25 +84,22 @@
 
 
 
-<meta name="description" content="减少RegionServer节点退役：在制定节点上运行，停止的节点上的RegionServer
-./bin/hbase-daemon.sh stop regionserver
+<meta name="description" content="减少RegionServer节点退役：在制定节点上运行，停止的节点上的RegionServer1./bin/hbase-daemon.sh stop regionserver
 如果在关闭时Hbase存在正在运行的负载均衡，那么Maser针对Region的恢复操作和负载均衡之前可能会产生竞争，尤其是在生产环境中，碰到的几率更大，所以建议现金用负载均衡
-./hbase shell./hbase(mai">
+12./hbase shell./hbase(m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hbase region处理">
 <meta property="og:url" content="http://yoursite.com/2016/12/01/RegionServer/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="减少RegionServer节点退役：在制定节点上运行，停止的节点上的RegionServer
-./bin/hbase-daemon.sh stop regionserver
+<meta property="og:description" content="减少RegionServer节点退役：在制定节点上运行，停止的节点上的RegionServer1./bin/hbase-daemon.sh stop regionserver
 如果在关闭时Hbase存在正在运行的负载均衡，那么Maser针对Region的恢复操作和负载均衡之前可能会产生竞争，尤其是在生产环境中，碰到的几率更大，所以建议现金用负载均衡
-./hbase shell./hbase(mai">
-<meta property="og:updated_time" content="2016-12-01T15:18:37.278Z">
+12./hbase shell./hbase(m">
+<meta property="og:updated_time" content="2016-12-01T16:09:11.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hbase region处理">
-<meta name="twitter:description" content="减少RegionServer节点退役：在制定节点上运行，停止的节点上的RegionServer
-./bin/hbase-daemon.sh stop regionserver
+<meta name="twitter:description" content="减少RegionServer节点退役：在制定节点上运行，停止的节点上的RegionServer1./bin/hbase-daemon.sh stop regionserver
 如果在关闭时Hbase存在正在运行的负载均衡，那么Maser针对Region的恢复操作和负载均衡之前可能会产生竞争，尤其是在生产环境中，碰到的几率更大，所以建议现金用负载均衡
-./hbase shell./hbase(mai">
+12./hbase shell./hbase(m">
 
 
 
@@ -337,18 +334,25 @@
       
 
       
-        <h3 id="减少RegionServer"><a href="#减少RegionServer" class="headerlink" title="减少RegionServer"></a>减少RegionServer</h3><p>节点退役：在制定节点上运行，停止的节点上的RegionServer</p>
-<p>./bin/hbase-daemon.sh stop regionserver</p>
+        <h3 id="减少RegionServer"><a href="#减少RegionServer" class="headerlink" title="减少RegionServer"></a>减少RegionServer</h3><p>节点退役：在制定节点上运行，停止的节点上的RegionServer<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/hbase-daemon.sh stop regionserver</div></pre></td></tr></table></figure></p>
 <p>如果在关闭时Hbase存在正在运行的负载均衡，那么Maser针对Region的恢复操作和负载均衡之前可能会产生竞争，尤其是在生产环境中，碰到的几率更大，所以建议现金用负载均衡</p>
-<p>./hbase shell<br>./hbase(main):001:0&gt;blance_switch false</p>
-<h3 id="滚动重启"><a href="#滚动重启" class="headerlink" title="滚动重启"></a>滚动重启</h3><p>./bin/graceful_stop slave2</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./hbase shell</div><div class="line">./hbase(main):<span class="number">001</span>:<span class="number">0</span>&gt;blance_switch <span class="literal">false</span></div></pre></td></tr></table></figure>
+<h3 id="滚动重启"><a href="#滚动重启" class="headerlink" title="滚动重启"></a>滚动重启</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/graceful_stop slave2</div></pre></td></tr></table></figure>
 <p>如果同时退役多个节点，为了防止正在退役的节点把region move到即将退役的节点上可以利用zookeeper，在<br>Hbase_root/training znode中创建要退役的RegionServer的entry</p>
 <p>滚动重启三种方式：<br>使用rolling-restart.sh脚本<br>手工进行滚动重启<br>编写自定义的滚动重启脚本</p>
-<h3 id="增加节点"><a href="#增加节点" class="headerlink" title="增加节点"></a>增加节点</h3><p>为避免Master故障，添加备用Master<br>在所有节点的conf目录下创建文件backup-masters<br>在里面添加备份主机名</p>
-<p>启动：<br>./bin/hbase-daemon.sh start master<br>如果发现端口冲突，需要修改hbase-site.xml</p>
-<property><br><name>hbase.regionserver.port</name><br><value>16012</value><br></property>
+<a id="more"></a> 
+<h3 id="备Master"><a href="#备Master" class="headerlink" title="备Master"></a>备Master</h3><p>为避免Master故障，添加备用Master<br>在所有节点的conf目录下创建文件backup-masters<br>在里面添加备份主机名</p>
+<p>启动：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/hbase-daemon.sh start master</div></pre></td></tr></table></figure></p>
+<p>如果发现端口冲突，需要修改hbase-site.xml<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;property&gt;</div><div class="line">&lt;name&gt;hbase.regionserver.port&lt;/name&gt;</div><div class="line">&lt;value&gt;16012&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure></p>
+<p>查看进程占用端口号：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -an -p | grep -i PID</div></pre></td></tr></table></figure></p>
+<h3 id="增加节点"><a href="#增加节点" class="headerlink" title="增加节点"></a>增加节点</h3><p>在conf/regionservers增加节点，直接start会跳过已经启动的regionserver</p>
+<h3 id="Hbase冷备"><a href="#Hbase冷备" class="headerlink" title="Hbase冷备"></a>Hbase冷备</h3><p>需要停止hbase<br>distcp<br>该命令位于hdoop的tools包中<br>hadoop distcp /hbase /hbasebackup</p>
+<p>hbase-site.xml里面有hbase.rootdir参数，可以修改为备份后的路径来恢复数据</p>
+<p>操作流程：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">./bin/hbase shell</div><div class="line">create <span class="string">'testbackup'</span> <span class="string">'columnfamily'</span></div><div class="line">put <span class="string">'testbackup'</span>,<span class="string">'row1'</span>,<span class="string">'columnfamily:column1'</span>,<span class="string">'value1'</span></div><div class="line">scan <span class="string">'testbackup'</span></div><div class="line"></div><div class="line">./bin/stop-hbase.sh</div><div class="line">hadoop distcp /hbae /hbasebackup</div><div class="line"></div><div class="line">./bin/start-hbase.sh</div><div class="line">./bin/hbase shell</div><div class="line"></div><div class="line">disable <span class="string">'testbackup'</span></div><div class="line">drop <span class="string">'testbackup'</span></div><div class="line">list</div><div class="line"></div><div class="line">./bin/stop-hbase.sh</div><div class="line">hdfs dfs -mv /hbase /hbase_tmp</div><div class="line">hadoop distcp -overwrite /hbasebackupd /hbase</div><div class="line"></div><div class="line">./bin/start-hbase.sh</div><div class="line">./bin/hbase shell</div><div class="line"></div><div class="line">list</div><div class="line">scan <span class="string">'testbackup'</span></div></pre></td></tr></table></figure></p>
+<h3 id="Hbase热备"><a href="#Hbase热备" class="headerlink" title="Hbase热备"></a>Hbase热备</h3><p>不需要停止hbase<br>方式一：CopyTble<br>方式二：Export<br>方式三：集群复制</p>
+<p>方式二<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">./bin/hbase org.apache.hadoop.hbase.mapreduce.Export testbackup /tmp/test</div><div class="line">./bin/hbase org.apache.hadoop.hbase.mapreduce.Export testbackup hdfs:<span class="comment">//www.hadoop01.com/test</span></div><div class="line"></div><div class="line">./bin/hbase shell</div><div class="line">disbale testbackup</div><div class="line">drop testbackup</div><div class="line"></div><div class="line">create <span class="string">'testbackup'</span> <span class="string">'columnfamily'</span></div><div class="line">scan testbackup</div><div class="line"></div><div class="line">.Import testbackup /tmp/test</div><div class="line">./bin/hbase shell</div><div class="line">scan testbackup</div></pre></td></tr></table></figure></p>
+<p>方式一：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">create <span class="string">'mubiao'</span> <span class="string">'columnfamily'</span></div><div class="line">./bin/hbase org.apache.hadoop.hbase.mapreduce.CopyTable --<span class="keyword">new</span>.name=mubiao testbackup</div><div class="line"></div><div class="line">./hbase shell</div><div class="line">scan <span class="string">'mubiao'</span></div></pre></td></tr></table></figure></p>
 
-<h3 id="Hbase冷备"><a href="#Hbase冷备" class="headerlink" title="Hbase冷备"></a>Hbase冷备</h3><h3 id="Hbase热备"><a href="#Hbase热备" class="headerlink" title="Hbase热备"></a>Hbase热备</h3>
       
     </div>
 
@@ -519,7 +523,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#减少RegionServer"><span class="nav-number">1.</span> <span class="nav-text">减少RegionServer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滚动重启"><span class="nav-number">2.</span> <span class="nav-text">滚动重启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加节点"><span class="nav-number">3.</span> <span class="nav-text">增加节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hbase冷备"><span class="nav-number">4.</span> <span class="nav-text">Hbase冷备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hbase热备"><span class="nav-number">5.</span> <span class="nav-text">Hbase热备</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#减少RegionServer"><span class="nav-number">1.</span> <span class="nav-text">减少RegionServer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滚动重启"><span class="nav-number">2.</span> <span class="nav-text">滚动重启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备Master"><span class="nav-number">3.</span> <span class="nav-text">备Master</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加节点"><span class="nav-number">4.</span> <span class="nav-text">增加节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hbase冷备"><span class="nav-number">5.</span> <span class="nav-text">Hbase冷备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hbase热备"><span class="nav-number">6.</span> <span class="nav-text">Hbase热备</span></a></li></ol></div>
             
 
           </div>

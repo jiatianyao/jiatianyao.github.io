@@ -333,20 +333,19 @@
 
       
         
-          
-            <h3 id="减少RegionServer"><a href="#减少RegionServer" class="headerlink" title="减少RegionServer"></a>减少RegionServer</h3><p>节点退役：在制定节点上运行，停止的节点上的RegionServer</p>
-<p>./bin/hbase-daemon.sh stop regionserver</p>
+          <h3 id="减少RegionServer"><a href="#减少RegionServer" class="headerlink" title="减少RegionServer"></a>减少RegionServer</h3><p>节点退役：在制定节点上运行，停止的节点上的RegionServer<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/hbase-daemon.sh stop regionserver</div></pre></td></tr></table></figure></p>
 <p>如果在关闭时Hbase存在正在运行的负载均衡，那么Maser针对Region的恢复操作和负载均衡之前可能会产生竞争，尤其是在生产环境中，碰到的几率更大，所以建议现金用负载均衡</p>
-<p>./hbase shell<br>./hbase(main):001:0&gt;blance_switch false</p>
-<h3 id="滚动重启"><a href="#滚动重启" class="headerlink" title="滚动重启"></a>滚动重启</h3><p>./bin/graceful_stop slave2</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./hbase shell</div><div class="line">./hbase(main):<span class="number">001</span>:<span class="number">0</span>&gt;blance_switch <span class="literal">false</span></div></pre></td></tr></table></figure>
+<h3 id="滚动重启"><a href="#滚动重启" class="headerlink" title="滚动重启"></a>滚动重启</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/graceful_stop slave2</div></pre></td></tr></table></figure>
 <p>如果同时退役多个节点，为了防止正在退役的节点把region move到即将退役的节点上可以利用zookeeper，在<br>Hbase_root/training znode中创建要退役的RegionServer的entry</p>
 <p>滚动重启三种方式：<br>使用rolling-restart.sh脚本<br>手工进行滚动重启<br>编写自定义的滚动重启脚本</p>
-<h3 id="增加节点"><a href="#增加节点" class="headerlink" title="增加节点"></a>增加节点</h3><p>为避免Master故障，添加备用Master<br>在所有节点的conf目录下创建文件backup-masters<br>在里面添加备份主机名</p>
-<p>启动：<br>./bin/hbase-daemon.sh start master<br>如果发现端口冲突，需要修改hbase-site.xml</p>
-<property><br><name>hbase.regionserver.port</name><br><value>16012</value><br></property>
-
-<h3 id="Hbase冷备"><a href="#Hbase冷备" class="headerlink" title="Hbase冷备"></a>Hbase冷备</h3><h3 id="Hbase热备"><a href="#Hbase热备" class="headerlink" title="Hbase热备"></a>Hbase热备</h3>
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/01/RegionServer/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
