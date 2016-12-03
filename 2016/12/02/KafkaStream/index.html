@@ -1,0 +1,686 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="以下内容摘自官网，熟悉的同学可跳过
+Use Kafka Streams to process dataKafka Streams is a client library of Kafka for real-time stream processing and analyzing data stored in Kafka brokers. This quickstart example will d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka Stream">
+<meta property="og:url" content="http://yoursite.com/2016/12/02/KafkaStream/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="以下内容摘自官网，熟悉的同学可跳过
+Use Kafka Streams to process dataKafka Streams is a client library of Kafka for real-time stream processing and analyzing data stored in Kafka brokers. This quickstart example will d">
+<meta property="og:updated_time" content="2016-12-03T01:56:20.664Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kafka Stream">
+<meta name="twitter:description" content="以下内容摘自官网，熟悉的同学可跳过
+Use Kafka Streams to process dataKafka Streams is a client library of Kafka for real-time stream processing and analyzing data stored in Kafka brokers. This quickstart example will d">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/02/KafkaStream/"/>
+
+
+
+
+
+  <title> Kafka Stream | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f1d5376670df380fc71bd039c45d6049";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/KafkaStream/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Kafka Stream
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-02T23:33:30+08:00">
+                2016-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/02/KafkaStream/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/KafkaStream/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以下内容摘自官网，熟悉的同学可跳过</p>
+<h2 id="Use-Kafka-Streams-to-process-data"><a href="#Use-Kafka-Streams-to-process-data" class="headerlink" title="Use Kafka Streams to process data"></a>Use Kafka Streams to process data</h2><p>Kafka Streams is a client library of Kafka for real-time stream processing and analyzing data stored in Kafka brokers. This quickstart example will demonstrate how to run a streaming application coded in this library. Here is the gist of the WordCountDemo example code (converted to use Java 8 lambda expressions for easy reading).<br>Kafka Streams是Kafka中用于客户端的库，主要用于获取实时流处理以及分析Kafka brokers中存储的数据。这个例子将会展示如何使用这个库来运行一个流式处理应用。这里有一个WordCountDemo的主要代码（转换成Java8 lambda表达式更易读）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">KTable wordCounts = textLines</div><div class="line">    <span class="comment">// Split each text line, by whitespace, into words.</span></div><div class="line">    .flatMapValues(value -&gt; Arrays.asList(value.toLowerCase().split(<span class="string">"\\W+"</span>)))</div><div class="line"></div><div class="line">    <span class="comment">// Ensure the words are available as record keys for the next aggregate operation.</span></div><div class="line">    .map((key, value) -&gt; <span class="keyword">new</span> KeyValue&lt;&gt;(value, value))</div><div class="line"></div><div class="line">    <span class="comment">// Count the occurrences of each word (record key) and store the results into a table named "Counts".</span></div><div class="line">    .countByKey(<span class="string">"Counts"</span>)</div></pre></td></tr></table></figure>
+<p> It implements the WordCount algorithm, which computes a word occurrence histogram from the input text. However, unlike other WordCount examples you might have seen before that operate on bounded data, the WordCount demo application behaves slightly differently because it is designed to operate on an infinite, unbounded stream of data. Similar to the bounded variant, it is a stateful algorithm that tracks and updates the counts of words. However, since it must assume potentially unbounded input data, it will periodically output its current state and results while continuing to process more data because it cannot know when it has processed “all” the input data.</p>
+<p>它实现了WordCount算法，计算了输入文本中的词频。然而，并不像其他的WordCount的例子，都是计算固定大小的数据，这个WordCount demo应用稍微有点不同，它是基于不会终止的数据流计算的。和计算固定数据的模型比较形似的是，它也会不停的更新词频计算结果。然而，由于它是基于永不停止的数据流，所以会周期性的输出当前的计算结果，他会不停的处理更多的数据，因为它也不知道何时它处理过“所有”的输入数据。</p>
+<p>We will now prepare input data to a Kafka topic, which will subsequently be processed by a Kafka Streams application.<br>现在我们将输入数据导入Kafka topic，这些数据将会被Kafka Streams应用处理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; echo -e <span class="string">"all streams lead to kafka\nhello kafka streams\njoin kafka summit"</span> &gt; file-input.txt</div></pre></td></tr></table></figure>
+<p>Or on Windows:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; echo all streams lead to kafka&gt; file-input.txt</div><div class="line">&gt; echo hello kafka streams&gt;&gt; file-input.txt</div><div class="line">&gt; echo|set /p=join kafka summit&gt;&gt; file-input.txt</div></pre></td></tr></table></figure></p>
+<p>Next, we send this input data to the input topic named streams-file-input using the console producer (in practice, stream data will likely be flowing continuously into Kafka where the application will be up and running):<br>接着，我们使用终端producer来将这些输入数据发送到名为streams-file-input的topic（在实践中，流数据会持续不断的流入kafka，当应用将会启动并运行时）：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; bin/kafka-topics.sh --create \</div><div class="line">            --zookeeper localhost:<span class="number">2181</span> \</div><div class="line">            --replication-factor <span class="number">1</span> \</div><div class="line">            --partitions <span class="number">1</span> \</div><div class="line">            --topic streams-file-input</div></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; bin/kafka-<span class="built_in">console</span>-producer.sh --broker-list localhost:<span class="number">9092</span> --topic streams-file-input &lt; file-input.txt</div></pre></td></tr></table></figure>
+<p>We can now run the WordCount demo application to process the input data:<br>我们可以运行WordCount demo应用来处理输入数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; bin/kafka-run-<span class="class"><span class="keyword">class</span>.<span class="title">sh</span> <span class="title">org</span>.<span class="title">apache</span>.<span class="title">kafka</span>.<span class="title">streams</span>.<span class="title">examples</span>.<span class="title">wordcount</span>.<span class="title">WordCountDem</span></span></div></pre></td></tr></table></figure></p>
+<p>There won’t be any STDOUT output except log entries as the results are continuously written back into another topic named streams-wordcount-output in Kafka. The demo will run for a few seconds and then, unlike typical stream processing applications, terminate automatically.<br>不会有任何的stdout输出除了日志条目，结果会持续不断的写回kafka中另一个名为streams-wordcount-output的topic。这个demo将会运行数秒，不会像典型的流处理应用，自动终止。</p>
+<p>We can now inspect the output of the WordCount demo application by reading from its output topic:<br>我们现在通过阅读主题的数来来检查WordCount demo应用程序的输出： </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt; bin/kafka-<span class="built_in">console</span>-consumer.sh --bootstrap-server localhost:<span class="number">9092</span> \</div><div class="line">            --topic streams-wordcount-output \</div><div class="line">            --<span class="keyword">from</span>-beginning \</div><div class="line">            --formatter kafka.tools.DefaultMessageFormatter \</div><div class="line">            --property print.key=<span class="literal">true</span> \</div><div class="line">            --property print.value=<span class="literal">true</span> \</div><div class="line">            --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \</div><div class="line">            --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer</div></pre></td></tr></table></figure>
+<p>with the following output data being printed to the console:<br>终端会打印出以下数据：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">all     <span class="number">1</span></div><div class="line">lead    <span class="number">1</span></div><div class="line">to      <span class="number">1</span></div><div class="line">hello   <span class="number">1</span></div><div class="line">streams <span class="number">2</span></div><div class="line">join    <span class="number">1</span></div><div class="line">kafka   <span class="number">3</span></div><div class="line">summit  <span class="number">1</span></div></pre></td></tr></table></figure></p>
+<p>Here, the first column is the Kafka message key, and the second column is the message value, both in in java.lang.String format. Note that the output is actually a continuous stream of updates, where each data record (i.e. each line in the original output above) is an updated count of a single word, aka record key such as “kafka”. For multiple records with the same key, each later record is an update of the previous one.<br>第一列是Kafka消息的key，第二列是消息value，两者都是java.lang.String格式。注意，输出实际上应该是持续的更新数据流，数据流中的每一个记录（例如，上面输出的每一行）都是一个单独词汇的数量，或者是记录了key的数量，例如上面的“kafka”。对于多条记录的key一致这种情况，每一条后面的记录都是对前一条记录的更新。</p>
+<p>Now you can write more input messages to the streams-file-input topic and observe additional messages added to streams-wordcount-output topic, reflecting updated word counts (e.g., using the console producer and the console consumer, as described above).<br>现在你可以写入更多的消息到streams-file-input这个topic，可以观察到更多的消息会发送到streams-wordcount-output这个topic，反映了更新之后的词汇数量。</p>
+<p>You can stop the console consumer via Ctrl-C.<br>你可以使用Ctrl+C结束控制台的消费者</p>
+<p>Stream Processing<br>Many users of Kafka process data in processing pipelines consisting of multiple stages, where raw input data is consumed from Kafka topics and then aggregated, enriched, or otherwise transformed into new topics for further consumption or follow-up processing. For example, a processing pipeline for recommending news articles might crawl article content from RSS feeds and publish it to an “articles” topic; further processing might normalize or deduplicate this content and published the cleansed article content to a new topic; a final processing stage might attempt to recommend this content to users. Such processing pipelines create graphs of real-time data flows based on the individual topics. Starting in 0.10.0.0, a light-weight but powerful stream processing library called Kafka Streams is available in Apache Kafka to perform such data processing as described above. Apart from Kafka Streams, alternative open source stream processing tools include Apache Storm and Apache Samza.<br>很多用户将kafka用作多级数据处理之间的消息管道：原始数据存放于Kafka不同的topics中，然后经过聚合、增强、或者其他的转换之后，导入Kafka新的topics中，以供后面的消费。例如，对于新闻推荐的处理流程来所：首先从RSS信息流中获取文章内容，然后导入名为“articles”的topic; 其次，后面的处理可能是对这些内容进行规范化或者精简操作，然后将经过上述处理的内容导入新的topic;最后的处理可能是试图将这些内容推荐给用户。这样的处理流程实际展现了实时流在独立的topics之间流动的流程图。从0.10.0.0开始，Apache Kafka推出了一款称为Kafka Streams的流式处理库，优点是轻量级同时性能很好，它可以完成上面所描述的多级处理。除了Kafka streams之外，还有一些开源流式处理工具可以选用，包括Apache  Storm和Samza。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/wechat-reward-image.jpg" alt="张洪铭 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/alipay-reward-image.jpg" alt="张洪铭 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/01/RegionServer/" rel="next" title="Hbase region处理">
+                <i class="fa fa-chevron-left"></i> Hbase region处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/02/KafkaStream/"
+           data-title="Kafka Stream" data-url="http://yoursite.com/2016/12/02/KafkaStream/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="张洪铭" />
+          <p class="site-author-name" itemprop="name">张洪铭</p>
+          <p class="site-description motion-element" itemprop="description">人生在勤 勤则不匮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-Kafka-Streams-to-process-data"><span class="nav-number">1.</span> <span class="nav-text">Use Kafka Streams to process data</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张洪铭</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhm8"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
