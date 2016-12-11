@@ -93,7 +93,7 @@ Use Kafka Streams to process dataKafka Streams is a client library of Kafka for 
 <meta property="og:description" content="以下内容摘自官网，熟悉的同学可跳过
 Use Kafka Streams to process dataKafka Streams is a client library of Kafka for real-time stream processing and analyzing data stored in Kafka brokers. This quickstart example will d">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/kafka-stream%E7%9A%84%E6%97%B6%E9%97%B4%E6%88%B3.png">
-<meta property="og:updated_time" content="2016-12-07T14:31:52.522Z">
+<meta property="og:updated_time" content="2016-12-11T14:06:19.066Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka Stream">
 <meta name="twitter:description" content="以下内容摘自官网，熟悉的同学可跳过
@@ -345,7 +345,7 @@ Use Kafka Streams to process dataKafka Streams is a client library of Kafka for 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; bin/kafka-<span class="built_in">console</span>-producer.sh --broker-list localhost:<span class="number">9092</span> --topic streams-file-input &lt; file-input.txt</div></pre></td></tr></table></figure>
 <p>We can now run the WordCount demo application to process the input data:<br>我们可以运行WordCount demo应用来处理输入数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; bin/kafka-run-<span class="class"><span class="keyword">class</span>.<span class="title">sh</span> <span class="title">org</span>.<span class="title">apache</span>.<span class="title">kafka</span>.<span class="title">streams</span>.<span class="title">examples</span>.<span class="title">wordcount</span>.<span class="title">WordCountDemo</span></span></div></pre></td></tr></table></figure></p>
 <p>There won’t be any STDOUT output except log entries as the results are continuously written back into another topic named streams-wordcount-output in Kafka. The demo will run for a few seconds and then, unlike typical stream processing applications, terminate automatically.<br>不会有任何的stdout输出除了日志条目，结果会持续不断的写回kafka中另一个名为streams-wordcount-output的topic。这个demo将会运行数秒，不会像典型的流处理应用，自动终止。</p>
-<p>We can now inspect the output of the WordCount demo application by reading from its output topic:<br>我们现在通过阅读主题的数来来检查WordCount demo应用程序的输出： </p>
+<p>We can now inspect the output of the WordCount demo application by reading from its output topic:<br>我们现在通过阅读主题的数来来检查WordCount demo应用程序的输出：<br> <a id="more"></a></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt; bin/kafka-<span class="built_in">console</span>-consumer.sh --bootstrap-server localhost:<span class="number">9092</span> \</div><div class="line">            --topic streams-wordcount-output \</div><div class="line">            --<span class="keyword">from</span>-beginning \</div><div class="line">            --formatter kafka.tools.DefaultMessageFormatter \</div><div class="line">            --property print.key=<span class="literal">true</span> \</div><div class="line">            --property print.value=<span class="literal">true</span> \</div><div class="line">            --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer \</div><div class="line">            --property value.deserializer=org.apache.kafka.common.serialization.LongDeserializer</div></pre></td></tr></table></figure>
 <p>with the following output data being printed to the console:<br>终端会打印出以下数据：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">all     <span class="number">1</span></div><div class="line">lead    <span class="number">1</span></div><div class="line">to      <span class="number">1</span></div><div class="line">hello   <span class="number">1</span></div><div class="line">streams <span class="number">2</span></div><div class="line">join    <span class="number">1</span></div><div class="line">kafka   <span class="number">3</span></div><div class="line">summit  <span class="number">1</span></div></pre></td></tr></table></figure></p>
 <p>Here, the first column is the Kafka message key, and the second column is the message value, both in in java.lang.String format. Note that the output is actually a continuous stream of updates, where each data record (i.e. each line in the original output above) is an updated count of a single word, aka record key such as “kafka”. For multiple records with the same key, each later record is an update of the previous one.<br>第一列是Kafka消息的key，第二列是消息value，两者都是java.lang.String格式。注意，输出实际上应该是持续的更新数据流，数据流中的每一个记录（例如，上面输出的每一行）都是一个单独词汇的数量，或者是记录了key的数量，例如上面的“kafka”。对于多条记录的key一致这种情况，每一条后面的记录都是对前一条记录的更新。</p>
@@ -517,8 +517,8 @@ Use Kafka Streams to process dataKafka Streams is a client library of Kafka for 
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/01/RegionServer/" rel="next" title="Hbase region处理">
-                <i class="fa fa-chevron-left"></i> Hbase region处理
+              <a href="/2016/12/02/redis集群/" rel="next" title="Redis 集群">
+                <i class="fa fa-chevron-left"></i> Redis 集群
               </a>
             
           </div>
@@ -526,10 +526,6 @@ Use Kafka Streams to process dataKafka Streams is a client library of Kafka for 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/02/redis集群/" rel="prev" title="Redis 集群">
-                Redis 集群 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
