@@ -249,6 +249,153 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/13/码云操作/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/13/码云操作/" itemprop="url">
+                  用git上传代码到码云
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-13T10:33:30+08:00">
+                2016-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/13/码云操作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/13/码云操作/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>用git上传代码到码云</p>
+<p>下载git客户端<br>Window 下的安装<br>从 <a href="http://git-scm.com/download" target="_blank" rel="external">http://git-scm.com/download</a> 上下载window版的客户端，然后一直下一步下一步安装git即可，请注意，如果你不熟悉每个选项的意思，请保持默认的选项</p>
+<p>git config –global user.name Jenick<br>git config –global user.email 258409707@qq.com</p>
+<p>以下内容Wie转载：<br>1.先在远程库创建项目，然后复制远程库里面的项目的地址；</p>
+<p>2.打开命令行（电脑上用windows+R键），创建一个文件夹用于从远程库里克</p>
+<p>隆所要更改的文件：命令为：mkdir + “目录名”；</p>
+<p>3.用cd + “目录名”跳转到所创建的目录名下，用命令git clone +远程库</p>
+<p>文件地址；此时刷新所创建的目录，会发现新出现了一个文件夹，那就是</p>
+<p>从远程库里面复制的文件目录（里面包含有后缀为.git的文件）</p>
+<p>4.用cd 命令跳转到新的文件夹里，把所需要提交的文件复制到这个文件夹</p>
+<p>里；</p>
+<p>5.用git status命令能看到所改变了的文件目录列表，用git diff命令能看</p>
+<p>到具体改变了的哪一行代码；</p>
+<p>6.用命令git branch + “分支名”创建本地分支，用命令git branch可查看</p>
+<p>目前所在分支，用 git checkout “你所创建的分支名”；跳转到你所创建的分</p>
+<p>支；</p>
+<p>7.用git  add+(空格)+ “.”将所有的修改追加到文件中去；</p>
+<p>8.用git commit -m“更改的文件备注”命令将你的文件提交到本地库；</p>
+<p>9.用git checkout master 切换回到主分支；</p>
+<p>10.用git pull  origin  master 命令将主分支从远程仓库里面拉过来；</p>
+<p>11.用git merge+”你所创建的分支名”合并分支；</p>
+<p>12.用git push  origin  master 命令将合并分支提交到远程库；</p>
+<p>13.刷新一下远程库，就能发现所要提交的文件了</p>
+<p>文／玄薛烨（简书作者）<br>原文链接：<a href="http://www.jianshu.com/p/edf037f921c7" target="_blank" rel="external">http://www.jianshu.com/p/edf037f921c7</a><br>著作权归作者所有，转载请联系作者获得授权，并标注“简书作者”。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/KafkaStream/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1361,7 +1508,7 @@ cluster-config-file nodes-6379.conf
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1371,7 +1518,7 @@ cluster-config-file nodes-6379.conf
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
