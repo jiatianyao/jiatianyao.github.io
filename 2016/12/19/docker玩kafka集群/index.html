@@ -96,7 +96,7 @@
 选择DVD ISO
 找到地址并下载http://101.96.8.151/isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso
 安装参考：http://blog.csdn.net/alex_my">
-<meta property="og:updated_time" content="2016-12-20T14:57:05.903Z">
+<meta property="og:updated_time" content="2016-12-26T15:28:26.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker版Kafka集群">
 <meta name="twitter:description" content="入手centos7首先打开centos 官网下载https://www.centos.org/download/
@@ -361,7 +361,7 @@
 <h4 id="Partition"><a href="#Partition" class="headerlink" title="Partition"></a>Partition</h4><p>每一个Topic可以有多个Partition,这样做是为了提高KAFKA系统的并发能力，每个Partition中按照消息发送的顺序保存着Producer发来的消息,每个消息用ID标识,代表这个消息在改Partition中的偏移量,这样,知道了ID,就可以方便的定位一个消息了;每个新提交过来的消息,被追加到Partition的尾部;如果一个Partition被写满了,就不再追加;(注意,KAFKA不保证不同Partition之间的消息有序保存)</p>
 <h4 id="Leader"><a href="#Leader" class="headerlink" title="Leader"></a>Leader</h4><p>Partition中负责消息读写的节点;Leader是从Partition的节点中随机选取的。每个Partition都会在集中的其中一台服务器存在Leader。一个Topic如果有多个Partition，则会有多个Leader。</p>
 <h4 id="ReplicationFactor"><a href="#ReplicationFactor" class="headerlink" title="ReplicationFactor"></a>ReplicationFactor</h4><p>一个Partition中复制数据的所有节点,包括已经挂了的;数量不会超过集群中broker的数量</p>
-<h4 id="isr"><a href="#isr" class="headerlink" title="isr"></a>isr</h4><p>ReplicationFactor的子集,存活的且和Leader保持同步的节点;</p>
+<h4 id="isr"><a href="#isr" class="headerlink" title="isr"></a>isr</h4><p>ReplicationFactor的子集,存活的且和Leader保持同步的节点;leade会维护一个与其基本保持同步的Replica列表，该列表成为ISR（in-sync Replica）.如果一个Follower比leader落后太多，或者超过一段时间未发起数据复制请求（kafka的数据复制是follower的pull形式），则leader将其从ISR中移除</p>
 <p>balabala..那么多，来个实例玩玩吧</p>
 <p>打开另外一个终端，进入kafka1启动个消费者，此处要注意消费者路径也要指定kafka<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@kafka1 kafka_2.11-0.8.2.2]# bin/kafka-console-consumer.sh --zookeeper zookeeper0:2181,zookeeper1:2182,zookeeper2:2183/kafka --topic topic3 --from-beginning</div></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@kafka0 kafka_2.11-0.8.2.2]# bin/kafka-console-producer.sh --broker-list kafka0:9092 --topic topic3</div></pre></td></tr></table></figure>
