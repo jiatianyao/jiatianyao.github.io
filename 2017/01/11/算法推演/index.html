@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="算法," />
 
 
 
@@ -84,16 +84,31 @@
 
 
 
-<meta name="description" content="Consistency 一致性Ø 通过某个节点的写操作结果对后面通过其它节点的读操作可见Ø 如果更新数据后，并发访问情况下可立即感知该更新，称为强一致性Ø 如果允许之后部分或者全部感知不到该更新，称为弱一致性Ø 若在之后的一段时间（通常该时间不固定）后，一定可以感知该更新，称为最终一致性Availability  可用性Ø 任何一个没有发生故障的节点必须在有限的时间内返回合理的结果Partitio">
+<meta name="description" content="条件概率事件A在另外一个事件B已经发生条件下的发生概率。条件概率表示为P（A|B），读作“在B条件下A的概率”。
+设A，B 是两个事件，且A不是不可能事件，则称为在事件A发生的条件下，事件B发生的条件概率。一般地，，且它满足以下三条件：（1）非负性；（2）规范性；（3）可列可加性。
+如上图求：红球来自A的概率P（A|红） =  P（A红）/P（红）
+全概率公式全概率公式为概率论中的重要公式，它将">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CAP原理">
-<meta property="og:url" content="http://yoursite.com/2015/03/03/CAP原理/index.html">
+<meta property="og:title" content="算法推演">
+<meta property="og:url" content="http://yoursite.com/2017/01/11/算法推演/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Consistency 一致性Ø 通过某个节点的写操作结果对后面通过其它节点的读操作可见Ø 如果更新数据后，并发访问情况下可立即感知该更新，称为强一致性Ø 如果允许之后部分或者全部感知不到该更新，称为弱一致性Ø 若在之后的一段时间（通常该时间不固定）后，一定可以感知该更新，称为最终一致性Availability  可用性Ø 任何一个没有发生故障的节点必须在有限的时间内返回合理的结果Partitio">
-<meta property="og:updated_time" content="2016-12-26T15:07:43.167Z">
+<meta property="og:description" content="条件概率事件A在另外一个事件B已经发生条件下的发生概率。条件概率表示为P（A|B），读作“在B条件下A的概率”。
+设A，B 是两个事件，且A不是不可能事件，则称为在事件A发生的条件下，事件B发生的条件概率。一般地，，且它满足以下三条件：（1）非负性；（2）规范性；（3）可列可加性。
+如上图求：红球来自A的概率P（A|红） =  P（A红）/P（红）
+全概率公式全概率公式为概率论中的重要公式，它将">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%872.jpg">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F.png">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%BC%94.png">
+<meta property="og:updated_time" content="2017-01-11T01:10:22.646Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CAP原理">
-<meta name="twitter:description" content="Consistency 一致性Ø 通过某个节点的写操作结果对后面通过其它节点的读操作可见Ø 如果更新数据后，并发访问情况下可立即感知该更新，称为强一致性Ø 如果允许之后部分或者全部感知不到该更新，称为弱一致性Ø 若在之后的一段时间（通常该时间不固定）后，一定可以感知该更新，称为最终一致性Availability  可用性Ø 任何一个没有发生故障的节点必须在有限的时间内返回合理的结果Partitio">
+<meta name="twitter:title" content="算法推演">
+<meta name="twitter:description" content="条件概率事件A在另外一个事件B已经发生条件下的发生概率。条件概率表示为P（A|B），读作“在B条件下A的概率”。
+设A，B 是两个事件，且A不是不可能事件，则称为在事件A发生的条件下，事件B发生的条件概率。一般地，，且它满足以下三条件：（1）非负性；（2）规范性；（3）可列可加性。
+如上图求：红球来自A的概率P（A|红） =  P（A红）/P（红）
+全概率公式全概率公式为概率论中的重要公式，它将">
+<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png">
 
 
 
@@ -121,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/03/03/CAP原理/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/01/11/算法推演/"/>
 
 
 
 
 
-  <title> CAP原理 | Hexo </title>
+  <title> 算法推演 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -247,8 +262,8 @@
   
   
 
-  <article class="post post-type-原理 " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/03/CAP原理/">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/11/算法推演/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -272,7 +287,7 @@
             
             
               
-                CAP原理
+                算法推演
               
             
           </h1>
@@ -285,8 +300,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-03T21:31:10+08:00">
-                2015-03-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T09:10:22+08:00">
+                2017-01-11
               </time>
             
 
@@ -301,8 +316,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/03/03/CAP原理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/03/CAP原理/" itemprop="commentCount"></span>
+                <a href="/2017/01/11/算法推演/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/算法推演/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -328,8 +343,18 @@
       
 
       
-        <p>Consistency 一致性<br>Ø 通过某个节点的写操作结果对后面通过其它节点的读操作可见<br>Ø 如果更新数据后，并发访问情况下可立即感知该更新，称为强一致性<br>Ø 如果允许之后部分或者全部感知不到该更新，称为弱一致性<br>Ø 若在之后的一段时间（通常该时间不固定）后，一定可以感知该更新，称为最终一致性<br>Availability  可用性<br>Ø 任何一个没有发生故障的节点必须在有限的时间内返回合理的结果<br>Partition tolerance  分区容忍性<br>Ø 部分节点宕机或者无法与其它节点通信时，各分区间还可保持分布式系统的功能</p>
-<p>结论：<br>分布式存储系统中，一致性，可用性，分区容忍性只能满足两个，不能满足三个。<br>由于当前的网络硬件肯定会出现延迟丢包等问题，所以分区容忍性是我们必须需要实现的。因此很多时候是在可用性和一致性之间权衡。。</p>
+        <p><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" alt="此处输入图片的描述"></p>
+<h2 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h2><p>事件A在另外一个事件B已经发生条件下的发生概率。条件概率表示为P（A|B），读作“在B条件下A的概率”。</p>
+<p>设A，B 是两个事件，且A不是不可能事件，则称<img src="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" alt="此处输入图片的描述"><br>为在事件A发生的条件下，事件B发生的条件概率。一般地，<img src="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%872.jpg" alt="此处输入图片的描述"><br>，且它满足以下三条件：<br>（1）非负性；（2）规范性；（3）可列可加性。</p>
+<p>如上图<br>求：红球来自A的概率<br>P（A|红） =  P（A红）/P（红）</p>
+<h2 id="全概率公式"><a href="#全概率公式" class="headerlink" title="全概率公式"></a>全概率公式</h2><p>全概率公式为概率论中的重要公式，它将对一复杂事件A的概率求解问题转化为了在不同情况下发生的简单事件的概率的求和问题。</p>
+<p>公式表示若事件A1，A2，…，An构成一个完备事件组且都有正概率，则对任意一个事件B都有公式成立。</p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F.png" alt="此处输入图片的描述"></p>
+<p>如上图<br>求：红球的概率<br>P（红） =  P（A红）+P（B红）</p>
+<h2 id="贝叶斯定理"><a href="#贝叶斯定理" class="headerlink" title="贝叶斯定理"></a>贝叶斯定理</h2><p>贝叶斯定理是关于随机事件A和B的条件概率（或边缘概率）的一则定理。<br>其中P(A|B)是在B发生的情况下A发生的可能性。</p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%BC%94.png" alt="此处输入图片的描述"></p>
+<h2 id="欧几里得定理"><a href="#欧几里得定理" class="headerlink" title="欧几里得定理"></a>欧几里得定理</h2><p>二维空间的公式<br>0ρ = sqrt( (x1-x2)^2+(y1-y2)^2 )　|x| = √( x2 + y2 )<br>三维空间的公式<br>0ρ = √( (x1-x2)^2+(y1-y2)^2+(z1-z2)^2 )　|x| = √( x2 + y2 + z2 )<br>n维空间的公式<br>n维欧氏空间是一个点集,它的每个点 X 或向量 x 可以表示为 (x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>，x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>，…，x[n]) ，其中 x<a href="i = 1，2，…，n">i</a> 是实数，称为 X 的第i个坐标。<br>两个点 A = (a<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>，a<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>，…，a[n]) 和 B = (b<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>，b<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>，…，b[n]) 之间的距离 ρ(A，B) 定义为下面的公式：<br>ρ(A，B) =√ [ ∑( a[i] - b[i] )^2 ] (i = 1，2，…，n)<br>向量 x = (x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>，x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>，…，x[n]) 的自然长度 |x| 定义为下面的公式：<br>|x| = √( x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>^2 + x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>^2 + … + x[n]^2 )</p>
+<h2 id="线性方程"><a href="#线性方程" class="headerlink" title="线性方程"></a>线性方程</h2><p>ax + by =c<br>机器学习里面用逼近论来算</p>
 
       
     </div>
@@ -372,13 +397,19 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/12/04/jdk8-Optional/" rel="next" title="jdk8 Optional">
-                <i class="fa fa-chevron-left"></i> jdk8 Optional
+              <a href="/2017/01/10/python 初探/" rel="next" title="python 初探">
+                <i class="fa fa-chevron-left"></i> python 初探
               </a>
             
           </div>
@@ -386,10 +417,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/25/kafka_high_level_api/" rel="prev" title="Kafka_high_level_api测试">
-                Kafka_high_level_api测试 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -421,8 +448,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/03/03/CAP原理/"
-           data-title="CAP原理" data-url="http://yoursite.com/2015/03/03/CAP原理/">
+      <div class="ds-thread" data-thread-key="2017/01/11/算法推演/"
+           data-title="算法推演" data-url="http://yoursite.com/2017/01/11/算法推演/">
       </div>
     
   </div>
@@ -446,8 +473,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -493,6 +529,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#条件概率"><span class="nav-number">1.</span> <span class="nav-text">条件概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全概率公式"><span class="nav-number">2.</span> <span class="nav-text">全概率公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贝叶斯定理"><span class="nav-number">3.</span> <span class="nav-text">贝叶斯定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里得定理"><span class="nav-number">4.</span> <span class="nav-text">欧几里得定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性方程"><span class="nav-number">5.</span> <span class="nav-text">线性方程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
