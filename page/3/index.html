@@ -248,6 +248,136 @@
   
   
 
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/25/kafka_high_level_api/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/25/kafka_high_level_api/" itemprop="url">
+                  Kafka_high_level_api测试
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-25T19:10:33+08:00">
+                2016-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/11/25/kafka_high_level_api/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/25/kafka_high_level_api/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="1-查看官网API"><a href="#1-查看官网API" class="headerlink" title="1.查看官网API"></a>1.查看官网API</h1><p><a href="http://kafka.apache.org/0101/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html">Kafka API</a></p>
+<h3 id="Automatic-Offset-Committing"><a href="#Automatic-Offset-Committing" class="headerlink" title="Automatic Offset Committing"></a>Automatic Offset Committing</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Properties props = <span class="keyword">new</span> Properties();</div><div class="line">     props.put(<span class="string">"bootstrap.servers"</span>, <span class="string">"localhost:9092"</span>);</div><div class="line">     props.put(<span class="string">"group.id"</span>, <span class="string">"test"</span>);</div><div class="line">     props.put(<span class="string">"enable.auto.commit"</span>, <span class="string">"true"</span>);</div><div class="line">     props.put(<span class="string">"auto.commit.interval.ms"</span>, <span class="string">"1000"</span>);</div><div class="line">     props.put(<span class="string">"key.deserializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringDeserializer"</span>);</div><div class="line">     props.put(<span class="string">"value.deserializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringDeserializer"</span>);</div><div class="line">     KafkaConsumer&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; consumer = <span class="keyword">new</span> KafkaConsumer&lt;&gt;(props);</div><div class="line">     consumer.subscribe(Arrays.asList(<span class="string">"foo"</span>, <span class="string">"bar"</span>));</div><div class="line">     <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">         ConsumerRecords&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; records = consumer.poll(<span class="number">100</span>);</div><div class="line">         <span class="keyword">for</span> (ConsumerRecord&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; record : records)</div><div class="line">             System.out.printf(<span class="string">"offset = %d, key = %s, value = %s%n"</span>, record.offset(), record.key(), record.value());</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
+<h3 id="Manual-Offset-Control"><a href="#Manual-Offset-Control" class="headerlink" title="Manual Offset Control"></a>Manual Offset Control</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Properties props = <span class="keyword">new</span> Properties();</div><div class="line">     props.put(<span class="string">"bootstrap.servers"</span>, <span class="string">"localhost:9092"</span>);</div><div class="line">     props.put(<span class="string">"group.id"</span>, <span class="string">"test"</span>);</div><div class="line">     props.put(<span class="string">"enable.auto.commit"</span>, <span class="string">"false"</span>);</div><div class="line">     props.put(<span class="string">"key.deserializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringDeserializer"</span>);</div><div class="line">     props.put(<span class="string">"value.deserializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringDeserializer"</span>);</div><div class="line">     KafkaConsumer&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; consumer = <span class="keyword">new</span> KafkaConsumer&lt;&gt;(props);</div><div class="line">     consumer.subscribe(Arrays.asList(<span class="string">"foo"</span>, <span class="string">"bar"</span>));</div><div class="line">     final int minBatchSize = <span class="number">200</span>;</div><div class="line">     List&lt;ConsumerRecord&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;&gt; buffer = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">     <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">         ConsumerRecords&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; records = consumer.poll(<span class="number">100</span>);</div><div class="line">         <span class="keyword">for</span> (ConsumerRecord&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; record : records) &#123;</div><div class="line">             buffer.add(record);</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">if</span> (buffer.size() &gt;= minBatchSize) &#123;</div><div class="line">             insertIntoDb(buffer);</div><div class="line">             consumer.commitSync();</div><div class="line">             buffer.clear();</div><div class="line">         &#125;</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/25/kafka_high_level_api/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
   <article class="post post-type-原理 " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/03/CAP原理/">
 
@@ -944,7 +1074,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
