@@ -1,0 +1,789 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。算法涉及3个主要因素：1)    训练数据集2)    距离或相似度的计算衡量3)    k的大小绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。
+KNN分类算法Python实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习之KNN算法推演">
+<meta property="og:url" content="http://yoursite.com/2017/01/21/机器学习之KNN算法推演/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。算法涉及3个主要因素：1)    训练数据集2)    距离或相似度的计算衡量3)    k的大小绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。
+KNN分类算法Python实">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/KNN%E7%AE%97%E6%B3%95.jpg">
+<meta property="og:updated_time" content="2017-01-22T01:08:38.576Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习之KNN算法推演">
+<meta name="twitter:description" content="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。算法涉及3个主要因素：1)    训练数据集2)    距离或相似度的计算衡量3)    k的大小绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。
+KNN分类算法Python实">
+<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/KNN%E7%AE%97%E6%B3%95.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/21/机器学习之KNN算法推演/"/>
+
+
+
+
+
+  <title> 机器学习之KNN算法推演 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7429985a9690d626019a4aae76bf7702";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/21/机器学习之KNN算法推演/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                机器学习之KNN算法推演
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T21:06:30+08:00">
+                2017-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/01/21/机器学习之KNN算法推演/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/21/机器学习之KNN算法推演/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。"><a href="#从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。" class="headerlink" title="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。"></a>从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。</h4><h5 id="算法涉及3个主要因素："><a href="#算法涉及3个主要因素：" class="headerlink" title="算法涉及3个主要因素："></a>算法涉及3个主要因素：</h5><p>1)    训练数据集<br>2)    距离或相似度的计算衡量<br>3)    k的大小<br><img src="http://oh6ybr0jg.bkt.clouddn.com/KNN%E7%AE%97%E6%B3%95.jpg" alt="此处输入图片的描述"><br>绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。</p>
+<h2 id="KNN分类算法Python实战"><a href="#KNN分类算法Python实战" class="headerlink" title="KNN分类算法Python实战"></a>KNN分类算法Python实战</h2><p>有以下先验数据，使用knn算法对未知类别数据分类</p>
+<table>
+<thead>
+<tr>
+<th>x轴</th>
+<th style="text-align:center">y轴</th>
+<th style="text-align:right">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td style="text-align:center">0.9</td>
+<td style="text-align:right">A</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:right">A</td>
+</tr>
+<tr>
+<td>0.0</td>
+<td style="text-align:center">0.1</td>
+<td style="text-align:right">B</td>
+</tr>
+<tr>
+<td>0.1</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:right">B</td>
+</tr>
+</tbody>
+</table>
+<p>未知类别数据</p>
+<table>
+<thead>
+<tr>
+<th>x轴</th>
+<th style="text-align:center">y轴</th>
+<th style="text-align:right">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.2</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:right">？</td>
+</tr>
+<tr>
+<td>0.1</td>
+<td style="text-align:center">0.3</td>
+<td style="text-align:right">？</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#########################################</span></div><div class="line"><span class="comment"># kNN: k Nearest Neighbors</span></div><div class="line"></div><div class="line"><span class="comment"># 输入:      newInput:  (1xN)的待分类向量</span></div><div class="line"><span class="comment">#             dataSet:   (NxM)的训练数据集</span></div><div class="line"><span class="comment">#             labels: 	训练数据集的类别标签向量</span></div><div class="line"><span class="comment">#             k: 		近邻数 </span></div><div class="line">            </div><div class="line"><span class="comment"># 输出:     可能性最大的分类标签</span></div><div class="line"><span class="comment">#########################################</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="keyword">import</span> operator</div><div class="line"></div><div class="line"><span class="comment">#创建一个数据集，包含2个类别共4个样本</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></div><div class="line">	<span class="comment"># 生成一个矩阵，每行表示一个样本</span></div><div class="line">	group = array([[<span class="number">1.0</span>, <span class="number">0.9</span>], [<span class="number">1.0</span>, <span class="number">1.0</span>], [<span class="number">0.1</span>, <span class="number">0.2</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>]])</div><div class="line">	<span class="comment"># 4个样本分别所属的类别</span></div><div class="line">	labels = [<span class="string">'A'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>]</div><div class="line">	<span class="keyword">return</span> group, labels</div><div class="line"></div><div class="line"><span class="comment"># KNN分类算法函数定义</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">kNNClassify</span><span class="params">(newInput, dataSet, labels, k)</span>:</span></div><div class="line">	numSamples = dataSet.shape[<span class="number">0</span>]   <span class="comment"># shape[0]表示行数</span></div><div class="line"></div><div class="line">	<span class="comment">## step 1: 计算距离</span></div><div class="line">	<span class="comment"># tile(A, reps): 构造一个矩阵，通过A重复reps次得到(tile(A, （repsX，repsY）)此处在行的方向重复repsX次，在Y的方向重复repsY次)</span></div><div class="line">	<span class="comment"># the following copy numSamples rows for dataSet</span></div><div class="line">	diff = tile(newInput, (numSamples, <span class="number">1</span>)) - dataSet  <span class="comment"># 按元素求差值</span></div><div class="line">	squaredDiff = diff ** <span class="number">2</span>  <span class="comment">#将差值平方</span></div><div class="line">	squaredDist = sum(squaredDiff, axis = <span class="number">1</span>)   <span class="comment"># 按行累加</span></div><div class="line">	distance = squaredDist ** <span class="number">0.5</span>  <span class="comment">#将差值平方和求开方，即得距离</span></div><div class="line"></div><div class="line">	<span class="comment">## step 2: 对距离排序</span></div><div class="line">	<span class="comment">## 此处排序需要注意样本标签的顺序。排序后存的是角标号。后续直接从排序后的标签序列找下标是排序内容的数据</span></div><div class="line">	<span class="comment"># argsort() 返回排序后的索引值</span></div><div class="line">	sortedDistIndices = argsort(distance)  <span class="comment">#或distance.argsort()</span></div><div class="line">	classCount = &#123;&#125; <span class="comment"># define a dictionary (can be append element)</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(k):</div><div class="line">		<span class="comment">## step 3: 选择k个最近邻</span></div><div class="line">		voteLabel = labels[sortedDistIndices[i]]</div><div class="line"></div><div class="line">		<span class="comment">## step 4: 计算k个最近邻中各类别出现的次数</span></div><div class="line">		<span class="comment"># when the key voteLabel is not in dictionary classCount, get()</span></div><div class="line">		<span class="comment"># will return 0</span></div><div class="line">		classCount[voteLabel] = classCount.get(voteLabel, <span class="number">0</span>) + <span class="number">1</span></div><div class="line"></div><div class="line">	<span class="comment">## step 5: 返回出现次数最多的类别标签</span></div><div class="line">	maxCount = <span class="number">0</span></div><div class="line">	<span class="keyword">for</span> key, value <span class="keyword">in</span> classCount.items():</div><div class="line">		<span class="keyword">if</span> value &gt; maxCount:</div><div class="line">			maxCount = value</div><div class="line">			maxIndex = key</div><div class="line"></div><div class="line">	<span class="keyword">return</span> maxIndex	</div><div class="line">	</div><div class="line">	<span class="comment">##step 5 可以改成：</span></div><div class="line">	<span class="comment"># sortedClassCount = sorted(classCount.iteritems(),key=operator.itemgetter(1),reverse=True)</span></div><div class="line">	<span class="comment">#return sortedClassCount[0][0]</span></div></pre></td></tr></table></figure>
+<p>然后调用算法进行测试：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> kNN</div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> * </div><div class="line"><span class="comment">#生成数据集和类别标签</span></div><div class="line">dataSet, labels = kNN.createDataSet()</div><div class="line"><span class="comment">#定义一个未知类别的数据</span></div><div class="line">testX = array([<span class="number">1.2</span>, <span class="number">1.0</span>])</div><div class="line">k = <span class="number">3</span></div><div class="line"><span class="comment">#调用分类函数对未知数据分类</span></div><div class="line">outputLabel = kNN.kNNClassify(testX, dataSet, labels, <span class="number">3</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">"Your input is:"</span>, testX, <span class="string">"and classified to class: "</span>, outputLabel</div><div class="line"></div><div class="line">testX = array([<span class="number">0.1</span>, <span class="number">0.3</span>])</div><div class="line">outputLabel = kNN.kNNClassify(testX, dataSet, labels, <span class="number">3</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">"Your input is:"</span>, testX, <span class="string">"and classified to class: "</span>, outputLabel</div></pre></td></tr></table></figure></p>
+<p>这时候会输出<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Your input <span class="keyword">is</span>: [ <span class="number">1.2</span>  <span class="number">1.0</span>] <span class="keyword">and</span> classified to <span class="class"><span class="keyword">class</span>:</span>  A</div><div class="line">Your input <span class="keyword">is</span>: [ <span class="number">0.1</span>  <span class="number">0.3</span>] <span class="keyword">and</span> classified to <span class="class"><span class="keyword">class</span>:</span>  B</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/wechat-reward-image.jpg" alt="张洪铭 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/alipay-reward-image.jpg" alt="张洪铭 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/18/Apache Kylin/" rel="next" title="Apache Kylin">
+                <i class="fa fa-chevron-left"></i> Apache Kylin
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/25/kNN实现手写数字识别/" rel="prev" title="kNN实现手写数字识别">
+                kNN实现手写数字识别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/21/机器学习之KNN算法推演/"
+           data-title="机器学习之KNN算法推演" data-url="http://yoursite.com/2017/01/21/机器学习之KNN算法推演/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="张洪铭" />
+          <p class="site-author-name" itemprop="name">张洪铭</p>
+          <p class="site-description motion-element" itemprop="description">人生在勤 勤则不匮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。"><span class="nav-number">1.</span> <span class="nav-text">从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#算法涉及3个主要因素："><span class="nav-number">1.1.</span> <span class="nav-text">算法涉及3个主要因素：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KNN分类算法Python实战"><span class="nav-number"></span> <span class="nav-text">KNN分类算法Python实战</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张洪铭</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhm8"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
