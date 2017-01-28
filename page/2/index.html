@@ -1512,6 +1512,179 @@
   
   
 
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/redis集群/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/02/redis集群/" itemprop="url">
+                  Redis 集群
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-02T23:33:30+08:00">
+                2016-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/02/redis集群/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/redis集群/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>同时在每台机器配置如下内容：<br>创建一个空的集群文件</p>
+<pre><code>vi nodes-6379.conf
+:wq
+</code></pre><p>修改配置文件，开启集群模式</p>
+<pre><code>vi redis.conf
+cluster-enabled yes
+cluster-config-file nodes-6379.conf
+</code></pre><p>启动：</p>
+<pre><code>./src/redis-server redis.conf
+</code></pre><p>然后输入查看命令<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop01.com ~]$ps -ef | grep redis</div><div class="line">hadoop  <span class="number">2657</span>  <span class="number">2506</span>  <span class="number">0</span> <span class="number">21</span>:<span class="number">59</span> pts/<span class="number">0</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> ./src/redis-server *:<span class="number">6379</span> [cluster]</div><div class="line">hadoop  <span class="number">2695</span>  <span class="number">2670</span>  <span class="number">0</span> <span class="number">22</span>:<span class="number">00</span> pts/<span class="number">1</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> grep redis</div><div class="line">    </div><div class="line">[hadoop@www.hadoop02.com ~]$ps -ef | grep redis</div><div class="line">hadoop  <span class="number">2991</span>  <span class="number">2662</span>  <span class="number">0</span> <span class="number">10</span>:<span class="number">12</span> pts/<span class="number">0</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">01</span> ./src/redis-server *:<span class="number">6379</span> [cluster]</div><div class="line">hadoop  <span class="number">3039</span>  <span class="number">2999</span>  <span class="number">0</span> <span class="number">10</span>:<span class="number">21</span> pts/<span class="number">1</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> grep redis</div><div class="line">    </div><div class="line">[hadoop@www.hadoop03.com ~]$ps -ef | grep redis</div><div class="line">hadoop  <span class="number">2482</span>  <span class="number">2417</span>  <span class="number">0</span> <span class="number">13</span>:<span class="number">41</span> pts/<span class="number">0</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">01</span> ./src/redis-server *:<span class="number">6379</span> [cluster]</div><div class="line">hadoop  <span class="number">2530</span>  <span class="number">2490</span>  <span class="number">0</span> <span class="number">13</span>:<span class="number">51</span> pts/<span class="number">1</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> grep redis</div></pre></td></tr></table></figure></p>
+<p>每个后面都有一个cluster<br>此时并没有把节点添加到一个集群，用命令查看nodes为1<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop01.com redis<span class="number">-3.0</span><span class="number">.7</span>]$./src/redis-cli</div><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster info</div><div class="line">cluster_state:fail</div><div class="line">cluster_slots_assigned:<span class="number">5</span></div><div class="line">cluster_slots_ok:<span class="number">5</span></div><div class="line">cluster_slots_pfail:<span class="number">0</span></div><div class="line">cluster_slots_fail:<span class="number">0</span></div><div class="line">cluster_known_nodes:<span class="number">1</span></div><div class="line">cluster_size:<span class="number">1</span></div><div class="line">cluster_current_epoch:<span class="number">0</span></div><div class="line">cluster_my_epoch:<span class="number">0</span></div><div class="line">cluster_stats_messages_sent:<span class="number">0</span></div><div class="line">cluster_stats_messages_received:<span class="number">0</span></div></pre></td></tr></table></figure></p>
+<p>这时需要添加集群节点：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; Cluster meet www.hadoop02.com <span class="number">6379</span></div><div class="line">(error) ERR Invalid node address specified: www.hadoop02.com:<span class="number">6379</span></div><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; Cluster meet <span class="number">192.168</span><span class="number">.247</span><span class="number">.152</span> <span class="number">6379</span></div><div class="line">OK</div><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; Cluster meet <span class="number">192.168</span><span class="number">.247</span><span class="number">.154</span> <span class="number">6379</span></div><div class="line">OK</div><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster info</div><div class="line">cluster_state:fail</div><div class="line">cluster_slots_assigned:<span class="number">5</span></div><div class="line">cluster_slots_ok:<span class="number">5</span></div><div class="line">cluster_slots_pfail:<span class="number">0</span></div><div class="line">cluster_slots_fail:<span class="number">0</span></div><div class="line">cluster_known_nodes:<span class="number">3</span></div><div class="line">cluster_size:<span class="number">1</span></div><div class="line">cluster_current_epoch:<span class="number">1</span></div><div class="line">cluster_my_epoch:<span class="number">1</span></div><div class="line">cluster_stats_messages_sent:<span class="number">27</span></div><div class="line">cluster_stats_messages_received:<span class="number">26</span></div></pre></td></tr></table></figure></p>
+<p>可以看到节点数为3-&gt;cluster_known_nodes:3，但是集群状态是失败-&gt;cluster_state:fail</p>
+<p>分配槽位一共16384个槽位<br>cluster addslots 0 1 2 …</p>
+<p>写个脚本：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">vi fenpeicaowei.sh</div><div class="line">#bash</div><div class="line">for i in &#123;10000..16384&#125;; do ./src/redis-cli cluster addslots $i; done</div><div class="line"></div><div class="line"></div><div class="line">chmod a+x fenpeicaowei.sh</div><div class="line">./fenpeicaowei.sh</div></pre></td></tr></table></figure></p>
+<p>查看有哪些节点(因为之前配置了主从，读者忽略slave节点，另外从节点分配槽位是不会被同步的)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">./src/redis-cli -c</div><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster nodes</div><div class="line"><span class="number">276</span>a3675a706d4626a25c54892c368ca6c37002c <span class="number">192.168</span><span class="number">.247</span><span class="number">.154</span>:<span class="number">6379</span> slave <span class="number">64</span>a2d824459edc01c7b6b205021d01da96513121 <span class="number">0</span> <span class="number">1481166569926</span> <span class="number">1</span> connected</div><div class="line">da0322b3160917ff99e363b7488e833be959205d <span class="number">192.168</span><span class="number">.247</span><span class="number">.150</span>:<span class="number">6379</span> slave <span class="number">64</span>a2d824459edc01c7b6b205021d01da96513121 <span class="number">0</span> <span class="number">1481166571948</span> <span class="number">1</span> connected</div><div class="line"><span class="number">64</span>a2d824459edc01c7b6b205021d01da96513121 <span class="number">192.168</span><span class="number">.247</span><span class="number">.152</span>:<span class="number">6379</span> myself,master - <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> connected <span class="number">1584</span> <span class="number">2171</span> <span class="number">5649</span> <span class="number">9842</span> <span class="number">10000</span><span class="number">-16383</span></div></pre></td></tr></table></figure></p>
+<p>查看槽位分配到哪些节点<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster slots</div><div class="line"><span class="number">1</span>) <span class="number">1</span>) (integer) <span class="number">1584</span></div><div class="line">   <span class="number">2</span>) (integer) <span class="number">1584</span></div><div class="line">   <span class="number">3</span>) <span class="number">1</span>) <span class="string">"192.168.247.152"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">4</span>) <span class="number">1</span>) <span class="string">"192.168.247.150"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">5</span>) <span class="number">1</span>) <span class="string">"192.168.247.154"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line"><span class="number">2</span>) <span class="number">1</span>) (integer) <span class="number">2171</span></div><div class="line">   <span class="number">2</span>) (integer) <span class="number">2171</span></div><div class="line">   <span class="number">3</span>) <span class="number">1</span>) <span class="string">"192.168.247.152"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">4</span>) <span class="number">1</span>) <span class="string">"192.168.247.150"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">5</span>) <span class="number">1</span>) <span class="string">"192.168.247.154"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line"><span class="number">3</span>) <span class="number">1</span>) (integer) <span class="number">5649</span></div><div class="line">   <span class="number">2</span>) (integer) <span class="number">5649</span></div><div class="line">   <span class="number">3</span>) <span class="number">1</span>) <span class="string">"192.168.247.152"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">4</span>) <span class="number">1</span>) <span class="string">"192.168.247.150"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">5</span>) <span class="number">1</span>) <span class="string">"192.168.247.154"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line"><span class="number">4</span>) <span class="number">1</span>) (integer) <span class="number">9842</span></div><div class="line">   <span class="number">2</span>) (integer) <span class="number">9842</span></div><div class="line">   <span class="number">3</span>) <span class="number">1</span>) <span class="string">"192.168.247.152"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">4</span>) <span class="number">1</span>) <span class="string">"192.168.247.150"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">5</span>) <span class="number">1</span>) <span class="string">"192.168.247.154"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line"><span class="number">5</span>) <span class="number">1</span>) (integer) <span class="number">10000</span></div><div class="line">   <span class="number">2</span>) (integer) <span class="number">16383</span></div><div class="line">   <span class="number">3</span>) <span class="number">1</span>) <span class="string">"192.168.247.152"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">4</span>) <span class="number">1</span>) <span class="string">"192.168.247.150"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">5</span>) <span class="number">1</span>) <span class="string">"192.168.247.154"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster info</div><div class="line">cluster_state:fail</div><div class="line">cluster_slots_assigned:<span class="number">6388</span></div><div class="line">cluster_slots_ok:<span class="number">6388</span></div><div class="line">cluster_slots_pfail:<span class="number">0</span></div><div class="line">cluster_slots_fail:<span class="number">0</span></div><div class="line">cluster_known_nodes:<span class="number">3</span></div><div class="line">cluster_size:<span class="number">1</span></div><div class="line">cluster_current_epoch:<span class="number">1</span></div><div class="line">cluster_my_epoch:<span class="number">1</span></div><div class="line">cluster_stats_messages_sent:<span class="number">3002</span></div><div class="line">cluster_stats_messages_received:<span class="number">2999</span></div></pre></td></tr></table></figure>
+<p>全部分配完成，就可以看到<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster info</div><div class="line">cluster_state:ok</div><div class="line">cluster_slots_assigned:<span class="number">16384</span></div><div class="line">cluster_slots_ok:<span class="number">16384</span></div><div class="line">cluster_slots_pfail:<span class="number">0</span></div><div class="line">cluster_slots_fail:<span class="number">0</span></div><div class="line">cluster_known_nodes:<span class="number">3</span></div><div class="line">cluster_size:<span class="number">1</span></div><div class="line">cluster_current_epoch:<span class="number">1</span></div><div class="line">cluster_my_epoch:<span class="number">1</span></div><div class="line">cluster_stats_messages_sent:<span class="number">792</span></div><div class="line">cluster_stats_messages_received:<span class="number">798</span></div></pre></td></tr></table></figure></p>
+<p>查看某个key对应的槽位<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster keyslot <span class="number">3</span></div><div class="line">(integer) <span class="number">1584</span></div></pre></td></tr></table></figure></p>
+<p>重新分片<br>redis提供一个工具：redis-trib.rb</p>
+<p>但是要用这个工具需要安装ruby环境</p>
+<p>下载repo文件<br>wget <a href="http://mirrors.163.com/.help/CentOS6-Base-163.repo" target="_blank" rel="external">http://mirrors.163.com/.help/CentOS6-Base-163.repo</a></p>
+<p>备份并替换系统的repo文件<br>cd /etc/yum.repos.d/<br>mv CentOS-Base.repo CentOS-Base.repo.bak<br>mv CentOS6-Base-163.repo CentOS-Base.repo</p>
+<p>执行yum源更新命令<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">yum clean all</div><div class="line">yum makecache</div><div class="line">yum update</div><div class="line"></div><div class="line">yum install -y ruby* --skip-broken </div><div class="line">yum install rubygems</div><div class="line">wget https:<span class="comment">//rubygems.global.ssl.fastly.net/gems/redis-3.2.2.gem</span></div><div class="line">gem install redis</div><div class="line">gem install -l ./redis<span class="number">-3.2</span><span class="number">.2</span>.gem</div></pre></td></tr></table></figure></p>
+<p>用redis-trib.rb创建集群<br>./src/redis-trib.rb  create –replicas 1 192.168.1.150:6379 192.168.1.152:6379 192.168.1.154:6379<br>可能会报错，是版本太低的原因<br>解决方案：<br>ftp://ftp.ruby-lang.org/pub/ruby/  下载最新的ruby安装包  ruby-2.3.3.tar.gz<br>gem update –system  升级到最新版本2.5.1<br>gem install redis  安装redis模块</p>
+<p>重新执行<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop02.com redis<span class="number">-3.0</span><span class="number">.7</span>]$./src/redis-trib.rb  create --replicas <span class="number">1</span> <span class="number">192.168</span><span class="number">.247</span><span class="number">.150</span>:<span class="number">6379</span> <span class="number">192.168</span><span class="number">.247</span><span class="number">.152</span>:<span class="number">6379</span> <span class="number">192.168</span><span class="number">.247</span><span class="number">.154</span>:<span class="number">6379</span></div><div class="line">&gt;&gt;&gt; Creating cluster</div><div class="line">[ERR] Node <span class="number">192.168</span><span class="number">.247</span><span class="number">.150</span>:<span class="number">6379</span> is not empty. Either the node already knows other nodes (check <span class="keyword">with</span> CLUSTER NODES) or contains some key <span class="keyword">in</span> database <span class="number">0.</span></div></pre></td></tr></table></figure></p>
+<p>因为刚才已经分配了节点</p>
+<p>现在做重新分区<br>查看分区前：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster nodes</div><div class="line"><span class="number">276</span>a3675a706d4626a25c54892c368ca6c37002c <span class="number">192.168</span><span class="number">.247</span><span class="number">.154</span>:<span class="number">6379</span> slave <span class="number">64</span>a2d824459edc01c7b6b205021d01da96513121 <span class="number">0</span> <span class="number">1481242407249</span> <span class="number">1</span> connected</div><div class="line"><span class="number">64</span>a2d824459edc01c7b6b205021d01da96513121 <span class="number">192.168</span><span class="number">.247</span><span class="number">.152</span>:<span class="number">6379</span> master - <span class="number">0</span> <span class="number">1481242405165</span> <span class="number">1</span> connected <span class="number">0</span><span class="number">-16383</span></div><div class="line">da0322b3160917ff99e363b7488e833be959205d <span class="number">192.168</span><span class="number">.247</span><span class="number">.150</span>:<span class="number">6379</span> myself,slave <span class="number">64</span>a2d824459edc01c7b6b205021d01da96513121 <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> connected</div></pre></td></tr></table></figure></p>
+<p>分区：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop02.com redis-3.0.7]$./src/redis-trib.rb reshard 127.0.0.1:6379</div><div class="line">&gt;&gt;&gt; Performing Cluster Check (using node 127.0.0.1:6379)</div><div class="line">M: 64a2d824459edc01c7b6b205021d01da96513121 127.0.0.1:6379</div><div class="line">   slots:0-16383 (16384 slots) master</div><div class="line">   2 additional replica(s)</div><div class="line">S: 276a3675a706d4626a25c54892c368ca6c37002c 192.168.247.154:6379</div><div class="line">   slots: (0 slots) slave</div><div class="line">   replicates 64a2d824459edc01c7b6b205021d01da96513121</div><div class="line">S: da0322b3160917ff99e363b7488e833be959205d 192.168.247.150:6379</div><div class="line">   slots: (0 slots) slave</div><div class="line">   replicates 64a2d824459edc01c7b6b205021d01da96513121</div><div class="line">[OK] All nodes agree about slots configuration.</div><div class="line">&gt;&gt;&gt; Check for open slots...</div><div class="line">&gt;&gt;&gt; Check slots coverage...</div><div class="line">[OK] All 16384 slots covered.</div><div class="line">How many slots do you want to move (from 1 to 16384)? 5000</div><div class="line">What is the receiving node ID? 276a3675a706d4626a25c54892c368ca6c37002c</div><div class="line">*** The specified node is not known or not a master, please retry.</div><div class="line">What is the receiving node ID? 64a2d824459edc01c7b6b205021d01da9651312</div><div class="line">*** The specified node is not known or not a master, please retry.</div><div class="line">What is the receiving node ID? 64a2d824459edc01c7b6b205021d01da96513121</div><div class="line">Please enter all the source node IDs.</div><div class="line">  Type 'all' to use all the nodes as source nodes for the hash slots.</div><div class="line">  Type 'done' once you entered all the source nodes IDs.</div><div class="line">Source node #1:all</div><div class="line"></div><div class="line">Ready to move 5000 slots.</div><div class="line">  Source nodes:</div><div class="line">  Destination node:</div><div class="line">    M: 64a2d824459edc01c7b6b205021d01da96513121 127.0.0.1:6379</div><div class="line">   slots:0-16383 (16384 slots) master</div><div class="line">   2 additional replica(s)</div><div class="line">  Resharding plan:</div><div class="line">Do you want to proceed with the proposed reshard plan (yes/no)? yes</div></pre></td></tr></table></figure></p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/redis%E9%9B%86%E7%BE%A4rehash.png" alt="image"></p>
+<p>rehash只能在主节点进行，故247.152分配给了247.152，没有变化</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
   <article class="post post-type-kafka " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/KafkaStream/">
 
@@ -1756,179 +1929,6 @@
 <p>Write streams back to Kafka</p>
 <p>At the end of the processing, users can choose to (continuously) write the final resulted streams back to a Kafka topic through KStream.to and KTable.to.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">joined.to(<span class="string">"topic4"</span>);</div></pre></td></tr></table></figure></p>
 <p>If your application needs to continue reading and processing the records after they have been materialized to a topic via to above, one option is to construct a new stream that reads from the output topic; Kafka Streams provides a convenience method called through:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// equivalent to</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">// joined.to("topic4");</span></div><div class="line"><span class="comment">// materialized = builder.stream("topic4");</span></div><div class="line">KStream materialized = joined.through(<span class="string">"topic4"</span>);</div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/redis集群/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Hexo">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/02/redis集群/" itemprop="url">
-                  Redis 集群
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-02T23:33:30+08:00">
-                2016-12-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
-                    <span itemprop="name">大数据</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/12/02/redis集群/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/redis集群/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>同时在每台机器配置如下内容：<br>创建一个空的集群文件</p>
-<pre><code>vi nodes-6379.conf
-:wq
-</code></pre><p>修改配置文件，开启集群模式</p>
-<pre><code>vi redis.conf
-cluster-enabled yes
-cluster-config-file nodes-6379.conf
-</code></pre><p>启动：</p>
-<pre><code>./src/redis-server redis.conf
-</code></pre><p>然后输入查看命令<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop01.com ~]$ps -ef | grep redis</div><div class="line">hadoop  <span class="number">2657</span>  <span class="number">2506</span>  <span class="number">0</span> <span class="number">21</span>:<span class="number">59</span> pts/<span class="number">0</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> ./src/redis-server *:<span class="number">6379</span> [cluster]</div><div class="line">hadoop  <span class="number">2695</span>  <span class="number">2670</span>  <span class="number">0</span> <span class="number">22</span>:<span class="number">00</span> pts/<span class="number">1</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> grep redis</div><div class="line">    </div><div class="line">[hadoop@www.hadoop02.com ~]$ps -ef | grep redis</div><div class="line">hadoop  <span class="number">2991</span>  <span class="number">2662</span>  <span class="number">0</span> <span class="number">10</span>:<span class="number">12</span> pts/<span class="number">0</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">01</span> ./src/redis-server *:<span class="number">6379</span> [cluster]</div><div class="line">hadoop  <span class="number">3039</span>  <span class="number">2999</span>  <span class="number">0</span> <span class="number">10</span>:<span class="number">21</span> pts/<span class="number">1</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> grep redis</div><div class="line">    </div><div class="line">[hadoop@www.hadoop03.com ~]$ps -ef | grep redis</div><div class="line">hadoop  <span class="number">2482</span>  <span class="number">2417</span>  <span class="number">0</span> <span class="number">13</span>:<span class="number">41</span> pts/<span class="number">0</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">01</span> ./src/redis-server *:<span class="number">6379</span> [cluster]</div><div class="line">hadoop  <span class="number">2530</span>  <span class="number">2490</span>  <span class="number">0</span> <span class="number">13</span>:<span class="number">51</span> pts/<span class="number">1</span>    <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> grep redis</div></pre></td></tr></table></figure></p>
-<p>每个后面都有一个cluster<br>此时并没有把节点添加到一个集群，用命令查看nodes为1<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop01.com redis<span class="number">-3.0</span><span class="number">.7</span>]$./src/redis-cli</div><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster info</div><div class="line">cluster_state:fail</div><div class="line">cluster_slots_assigned:<span class="number">5</span></div><div class="line">cluster_slots_ok:<span class="number">5</span></div><div class="line">cluster_slots_pfail:<span class="number">0</span></div><div class="line">cluster_slots_fail:<span class="number">0</span></div><div class="line">cluster_known_nodes:<span class="number">1</span></div><div class="line">cluster_size:<span class="number">1</span></div><div class="line">cluster_current_epoch:<span class="number">0</span></div><div class="line">cluster_my_epoch:<span class="number">0</span></div><div class="line">cluster_stats_messages_sent:<span class="number">0</span></div><div class="line">cluster_stats_messages_received:<span class="number">0</span></div></pre></td></tr></table></figure></p>
-<p>这时需要添加集群节点：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; Cluster meet www.hadoop02.com <span class="number">6379</span></div><div class="line">(error) ERR Invalid node address specified: www.hadoop02.com:<span class="number">6379</span></div><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; Cluster meet <span class="number">192.168</span><span class="number">.247</span><span class="number">.152</span> <span class="number">6379</span></div><div class="line">OK</div><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; Cluster meet <span class="number">192.168</span><span class="number">.247</span><span class="number">.154</span> <span class="number">6379</span></div><div class="line">OK</div><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster info</div><div class="line">cluster_state:fail</div><div class="line">cluster_slots_assigned:<span class="number">5</span></div><div class="line">cluster_slots_ok:<span class="number">5</span></div><div class="line">cluster_slots_pfail:<span class="number">0</span></div><div class="line">cluster_slots_fail:<span class="number">0</span></div><div class="line">cluster_known_nodes:<span class="number">3</span></div><div class="line">cluster_size:<span class="number">1</span></div><div class="line">cluster_current_epoch:<span class="number">1</span></div><div class="line">cluster_my_epoch:<span class="number">1</span></div><div class="line">cluster_stats_messages_sent:<span class="number">27</span></div><div class="line">cluster_stats_messages_received:<span class="number">26</span></div></pre></td></tr></table></figure></p>
-<p>可以看到节点数为3-&gt;cluster_known_nodes:3，但是集群状态是失败-&gt;cluster_state:fail</p>
-<p>分配槽位一共16384个槽位<br>cluster addslots 0 1 2 …</p>
-<p>写个脚本：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">vi fenpeicaowei.sh</div><div class="line">#bash</div><div class="line">for i in &#123;10000..16384&#125;; do ./src/redis-cli cluster addslots $i; done</div><div class="line"></div><div class="line"></div><div class="line">chmod a+x fenpeicaowei.sh</div><div class="line">./fenpeicaowei.sh</div></pre></td></tr></table></figure></p>
-<p>查看有哪些节点(因为之前配置了主从，读者忽略slave节点，另外从节点分配槽位是不会被同步的)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">./src/redis-cli -c</div><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster nodes</div><div class="line"><span class="number">276</span>a3675a706d4626a25c54892c368ca6c37002c <span class="number">192.168</span><span class="number">.247</span><span class="number">.154</span>:<span class="number">6379</span> slave <span class="number">64</span>a2d824459edc01c7b6b205021d01da96513121 <span class="number">0</span> <span class="number">1481166569926</span> <span class="number">1</span> connected</div><div class="line">da0322b3160917ff99e363b7488e833be959205d <span class="number">192.168</span><span class="number">.247</span><span class="number">.150</span>:<span class="number">6379</span> slave <span class="number">64</span>a2d824459edc01c7b6b205021d01da96513121 <span class="number">0</span> <span class="number">1481166571948</span> <span class="number">1</span> connected</div><div class="line"><span class="number">64</span>a2d824459edc01c7b6b205021d01da96513121 <span class="number">192.168</span><span class="number">.247</span><span class="number">.152</span>:<span class="number">6379</span> myself,master - <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> connected <span class="number">1584</span> <span class="number">2171</span> <span class="number">5649</span> <span class="number">9842</span> <span class="number">10000</span><span class="number">-16383</span></div></pre></td></tr></table></figure></p>
-<p>查看槽位分配到哪些节点<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster slots</div><div class="line"><span class="number">1</span>) <span class="number">1</span>) (integer) <span class="number">1584</span></div><div class="line">   <span class="number">2</span>) (integer) <span class="number">1584</span></div><div class="line">   <span class="number">3</span>) <span class="number">1</span>) <span class="string">"192.168.247.152"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">4</span>) <span class="number">1</span>) <span class="string">"192.168.247.150"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">5</span>) <span class="number">1</span>) <span class="string">"192.168.247.154"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line"><span class="number">2</span>) <span class="number">1</span>) (integer) <span class="number">2171</span></div><div class="line">   <span class="number">2</span>) (integer) <span class="number">2171</span></div><div class="line">   <span class="number">3</span>) <span class="number">1</span>) <span class="string">"192.168.247.152"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">4</span>) <span class="number">1</span>) <span class="string">"192.168.247.150"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">5</span>) <span class="number">1</span>) <span class="string">"192.168.247.154"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line"><span class="number">3</span>) <span class="number">1</span>) (integer) <span class="number">5649</span></div><div class="line">   <span class="number">2</span>) (integer) <span class="number">5649</span></div><div class="line">   <span class="number">3</span>) <span class="number">1</span>) <span class="string">"192.168.247.152"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">4</span>) <span class="number">1</span>) <span class="string">"192.168.247.150"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">5</span>) <span class="number">1</span>) <span class="string">"192.168.247.154"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line"><span class="number">4</span>) <span class="number">1</span>) (integer) <span class="number">9842</span></div><div class="line">   <span class="number">2</span>) (integer) <span class="number">9842</span></div><div class="line">   <span class="number">3</span>) <span class="number">1</span>) <span class="string">"192.168.247.152"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">4</span>) <span class="number">1</span>) <span class="string">"192.168.247.150"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">5</span>) <span class="number">1</span>) <span class="string">"192.168.247.154"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line"><span class="number">5</span>) <span class="number">1</span>) (integer) <span class="number">10000</span></div><div class="line">   <span class="number">2</span>) (integer) <span class="number">16383</span></div><div class="line">   <span class="number">3</span>) <span class="number">1</span>) <span class="string">"192.168.247.152"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">4</span>) <span class="number">1</span>) <span class="string">"192.168.247.150"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div><div class="line">   <span class="number">5</span>) <span class="number">1</span>) <span class="string">"192.168.247.154"</span></div><div class="line">      <span class="number">2</span>) (integer) <span class="number">6379</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster info</div><div class="line">cluster_state:fail</div><div class="line">cluster_slots_assigned:<span class="number">6388</span></div><div class="line">cluster_slots_ok:<span class="number">6388</span></div><div class="line">cluster_slots_pfail:<span class="number">0</span></div><div class="line">cluster_slots_fail:<span class="number">0</span></div><div class="line">cluster_known_nodes:<span class="number">3</span></div><div class="line">cluster_size:<span class="number">1</span></div><div class="line">cluster_current_epoch:<span class="number">1</span></div><div class="line">cluster_my_epoch:<span class="number">1</span></div><div class="line">cluster_stats_messages_sent:<span class="number">3002</span></div><div class="line">cluster_stats_messages_received:<span class="number">2999</span></div></pre></td></tr></table></figure>
-<p>全部分配完成，就可以看到<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster info</div><div class="line">cluster_state:ok</div><div class="line">cluster_slots_assigned:<span class="number">16384</span></div><div class="line">cluster_slots_ok:<span class="number">16384</span></div><div class="line">cluster_slots_pfail:<span class="number">0</span></div><div class="line">cluster_slots_fail:<span class="number">0</span></div><div class="line">cluster_known_nodes:<span class="number">3</span></div><div class="line">cluster_size:<span class="number">1</span></div><div class="line">cluster_current_epoch:<span class="number">1</span></div><div class="line">cluster_my_epoch:<span class="number">1</span></div><div class="line">cluster_stats_messages_sent:<span class="number">792</span></div><div class="line">cluster_stats_messages_received:<span class="number">798</span></div></pre></td></tr></table></figure></p>
-<p>查看某个key对应的槽位<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster keyslot <span class="number">3</span></div><div class="line">(integer) <span class="number">1584</span></div></pre></td></tr></table></figure></p>
-<p>重新分片<br>redis提供一个工具：redis-trib.rb</p>
-<p>但是要用这个工具需要安装ruby环境</p>
-<p>下载repo文件<br>wget <a href="http://mirrors.163.com/.help/CentOS6-Base-163.repo" target="_blank" rel="external">http://mirrors.163.com/.help/CentOS6-Base-163.repo</a></p>
-<p>备份并替换系统的repo文件<br>cd /etc/yum.repos.d/<br>mv CentOS-Base.repo CentOS-Base.repo.bak<br>mv CentOS6-Base-163.repo CentOS-Base.repo</p>
-<p>执行yum源更新命令<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">yum clean all</div><div class="line">yum makecache</div><div class="line">yum update</div><div class="line"></div><div class="line">yum install -y ruby* --skip-broken </div><div class="line">yum install rubygems</div><div class="line">wget https:<span class="comment">//rubygems.global.ssl.fastly.net/gems/redis-3.2.2.gem</span></div><div class="line">gem install redis</div><div class="line">gem install -l ./redis<span class="number">-3.2</span><span class="number">.2</span>.gem</div></pre></td></tr></table></figure></p>
-<p>用redis-trib.rb创建集群<br>./src/redis-trib.rb  create –replicas 1 192.168.1.150:6379 192.168.1.152:6379 192.168.1.154:6379<br>可能会报错，是版本太低的原因<br>解决方案：<br>ftp://ftp.ruby-lang.org/pub/ruby/  下载最新的ruby安装包  ruby-2.3.3.tar.gz<br>gem update –system  升级到最新版本2.5.1<br>gem install redis  安装redis模块</p>
-<p>重新执行<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop02.com redis<span class="number">-3.0</span><span class="number">.7</span>]$./src/redis-trib.rb  create --replicas <span class="number">1</span> <span class="number">192.168</span><span class="number">.247</span><span class="number">.150</span>:<span class="number">6379</span> <span class="number">192.168</span><span class="number">.247</span><span class="number">.152</span>:<span class="number">6379</span> <span class="number">192.168</span><span class="number">.247</span><span class="number">.154</span>:<span class="number">6379</span></div><div class="line">&gt;&gt;&gt; Creating cluster</div><div class="line">[ERR] Node <span class="number">192.168</span><span class="number">.247</span><span class="number">.150</span>:<span class="number">6379</span> is not empty. Either the node already knows other nodes (check <span class="keyword">with</span> CLUSTER NODES) or contains some key <span class="keyword">in</span> database <span class="number">0.</span></div></pre></td></tr></table></figure></p>
-<p>因为刚才已经分配了节点</p>
-<p>现在做重新分区<br>查看分区前：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; cluster nodes</div><div class="line"><span class="number">276</span>a3675a706d4626a25c54892c368ca6c37002c <span class="number">192.168</span><span class="number">.247</span><span class="number">.154</span>:<span class="number">6379</span> slave <span class="number">64</span>a2d824459edc01c7b6b205021d01da96513121 <span class="number">0</span> <span class="number">1481242407249</span> <span class="number">1</span> connected</div><div class="line"><span class="number">64</span>a2d824459edc01c7b6b205021d01da96513121 <span class="number">192.168</span><span class="number">.247</span><span class="number">.152</span>:<span class="number">6379</span> master - <span class="number">0</span> <span class="number">1481242405165</span> <span class="number">1</span> connected <span class="number">0</span><span class="number">-16383</span></div><div class="line">da0322b3160917ff99e363b7488e833be959205d <span class="number">192.168</span><span class="number">.247</span><span class="number">.150</span>:<span class="number">6379</span> myself,slave <span class="number">64</span>a2d824459edc01c7b6b205021d01da96513121 <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> connected</div></pre></td></tr></table></figure></p>
-<p>分区：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">[hadoop@www.hadoop02.com redis-3.0.7]$./src/redis-trib.rb reshard 127.0.0.1:6379</div><div class="line">&gt;&gt;&gt; Performing Cluster Check (using node 127.0.0.1:6379)</div><div class="line">M: 64a2d824459edc01c7b6b205021d01da96513121 127.0.0.1:6379</div><div class="line">   slots:0-16383 (16384 slots) master</div><div class="line">   2 additional replica(s)</div><div class="line">S: 276a3675a706d4626a25c54892c368ca6c37002c 192.168.247.154:6379</div><div class="line">   slots: (0 slots) slave</div><div class="line">   replicates 64a2d824459edc01c7b6b205021d01da96513121</div><div class="line">S: da0322b3160917ff99e363b7488e833be959205d 192.168.247.150:6379</div><div class="line">   slots: (0 slots) slave</div><div class="line">   replicates 64a2d824459edc01c7b6b205021d01da96513121</div><div class="line">[OK] All nodes agree about slots configuration.</div><div class="line">&gt;&gt;&gt; Check for open slots...</div><div class="line">&gt;&gt;&gt; Check slots coverage...</div><div class="line">[OK] All 16384 slots covered.</div><div class="line">How many slots do you want to move (from 1 to 16384)? 5000</div><div class="line">What is the receiving node ID? 276a3675a706d4626a25c54892c368ca6c37002c</div><div class="line">*** The specified node is not known or not a master, please retry.</div><div class="line">What is the receiving node ID? 64a2d824459edc01c7b6b205021d01da9651312</div><div class="line">*** The specified node is not known or not a master, please retry.</div><div class="line">What is the receiving node ID? 64a2d824459edc01c7b6b205021d01da96513121</div><div class="line">Please enter all the source node IDs.</div><div class="line">  Type 'all' to use all the nodes as source nodes for the hash slots.</div><div class="line">  Type 'done' once you entered all the source nodes IDs.</div><div class="line">Source node #1:all</div><div class="line"></div><div class="line">Ready to move 5000 slots.</div><div class="line">  Source nodes:</div><div class="line">  Destination node:</div><div class="line">    M: 64a2d824459edc01c7b6b205021d01da96513121 127.0.0.1:6379</div><div class="line">   slots:0-16383 (16384 slots) master</div><div class="line">   2 additional replica(s)</div><div class="line">  Resharding plan:</div><div class="line">Do you want to proceed with the proposed reshard plan (yes/no)? yes</div></pre></td></tr></table></figure></p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/redis%E9%9B%86%E7%BE%A4rehash.png" alt="image"></p>
-<p>rehash只能在主节点进行，故247.152分配给了247.152，没有变化</p>
 
           
         
