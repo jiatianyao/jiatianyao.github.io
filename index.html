@@ -515,7 +515,7 @@
       
         
           
-            <p>##安装<br>配置zookeeper略</p>
+            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>配置zookeeper略</p>
 <p>下载：<br>wget <a href="http://mirrors.cnnic.cn/apache/storm/apache-storm-1.0.2/apache-storm-1.0.2.tar.gz" target="_blank" rel="external">http://mirrors.cnnic.cn/apache/storm/apache-storm-1.0.2/apache-storm-1.0.2.tar.gz</a></p>
 <p>解压，并创建符号链接<br>修改profile配置文件<br>修改配置文件：<br>vi storm.yaml </p>
 <p>添加如下内容<br>storm.zookeeper.servers:</p>
@@ -525,7 +525,7 @@
 - 6701
 - 6702
 - 6703
-</code></pre><p>##启动<br>启动zookeeper<br>启动nimbus<br>./bin/storm nimbus &amp;<br>启动ui</p>
+</code></pre><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>启动zookeeper<br>启动nimbus<br>./bin/storm nimbus &amp;<br>启动ui</p>
 <p>./bin/storm ui &amp;</p>
 <h2 id="登录UI："><a href="#登录UI：" class="headerlink" title="登录UI："></a>登录UI：</h2><p><a href="http://www.hadoop01.com:8080/index.html" target="_blank" rel="external">http://www.hadoop01.com:8080/index.html</a><br><img src="http://oh6ybr0jg.bkt.clouddn.com/UI1.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/UI2.png" alt="此处输入图片的描述"><br>启动supervisor<br>./bin/storm supervisor &amp;<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%90%AF%E5%8A%A8supervisor%E5%90%8E.png" alt="此处输入图片的描述"><br>启动logviewer<br>./bin/storm logviewer &amp; </p>
 <h2 id="执行demo"><a href="#执行demo" class="headerlink" title="执行demo"></a>执行demo</h2><p>cd /home/hadoop/apps/storm/storm/examples/storm-starter</p>
@@ -817,7 +817,7 @@
       
         
           
-            <p>Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。<br>Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止<br><img src="http://storm.apache.org/images/storm-flow.png" alt="此处输入图片的描述"><br>主要版本</p>
+            <h2 id="Storm基本概念"><a href="#Storm基本概念" class="headerlink" title="Storm基本概念"></a>Storm基本概念</h2><p>Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。<br>Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止<br><img src="http://storm.apache.org/images/storm-flow.png" alt="此处输入图片的描述"><br>主要版本</p>
 <table>
 <thead>
 <tr>

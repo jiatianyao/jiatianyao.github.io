@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapRedu">
+<meta name="description" content="Storm基本概念Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提">
 <meta property="og:type" content="article">
 <meta property="og:title" content="storm基础知识">
 <meta property="og:url" content="http://yoursite.com/2017/01/27/storm基础知识/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapRedu">
+<meta property="og:description" content="Storm基本概念Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提">
 <meta property="og:image" content="http://storm.apache.org/images/storm-flow.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/storm%E6%9E%B6%E6%9E%84.png">
-<meta property="og:updated_time" content="2017-02-08T13:20:21.287Z">
+<meta property="og:updated_time" content="2017-02-15T02:50:43.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="storm基础知识">
-<meta name="twitter:description" content="Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapRedu">
+<meta name="twitter:description" content="Storm基本概念Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提">
 <meta name="twitter:image" content="http://storm.apache.org/images/storm-flow.png">
 
 
@@ -369,7 +369,7 @@
       
 
       
-        <p>Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。<br>Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止<br><img src="http://storm.apache.org/images/storm-flow.png" alt="此处输入图片的描述"><br>主要版本</p>
+        <h2 id="Storm基本概念"><a href="#Storm基本概念" class="headerlink" title="Storm基本概念"></a>Storm基本概念</h2><p>Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。<br>Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止<br><img src="http://storm.apache.org/images/storm-flow.png" alt="此处输入图片的描述"><br>主要版本</p>
 <table>
 <thead>
 <tr>
@@ -611,7 +611,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#编程模型"><span class="nav-number">1.</span> <span class="nav-text">编程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storm优点"><span class="nav-number">2.</span> <span class="nav-text">Storm优点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#健壮性"><span class="nav-number">2.0.1.</span> <span class="nav-text">健壮性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#准确性"><span class="nav-number">2.0.2.</span> <span class="nav-text">准确性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#storm架构"><span class="nav-number">3.</span> <span class="nav-text">storm架构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Storm基本概念"><span class="nav-number">1.</span> <span class="nav-text">Storm基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程模型"><span class="nav-number">2.</span> <span class="nav-text">编程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storm优点"><span class="nav-number">3.</span> <span class="nav-text">Storm优点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#健壮性"><span class="nav-number">3.0.1.</span> <span class="nav-text">健壮性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#准确性"><span class="nav-number">3.0.2.</span> <span class="nav-text">准确性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#storm架构"><span class="nav-number">4.</span> <span class="nav-text">storm架构</span></a></li></ol></div>
             
 
           </div>
