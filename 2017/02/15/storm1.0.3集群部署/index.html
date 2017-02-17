@@ -95,7 +95,7 @@
 环境：zookeeper3.4.9节点：storm01，storm02，storm03storm1.0.3 nimbus节点storm01，supervisor节点storm02，storm03
 1234567[storm@localhost app]$ wget http://apache.fayea.com/zookeeper/zookeeper">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/storm%E9%9B%86%E7%BE%A4.png">
-<meta property="og:updated_time" content="2017-02-16T15:19:10.069Z">
+<meta property="og:updated_time" content="2017-02-17T12:38:19.759Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="storm1.0.3集群部署">
 <meta name="twitter:description" content="昨日已经发布storm1.0.3版本，来玩一玩
@@ -375,13 +375,13 @@
 
       
         <p>昨日已经发布storm1.0.3版本，来玩一玩</p>
-<p>环境：<br>zookeeper3.4.9节点：storm01，storm02，storm03<br>storm1.0.3 nimbus节点storm01，supervisor节点storm02，storm03</p>
+<h2 id="环境："><a href="#环境：" class="headerlink" title="环境："></a>环境：</h2><p>zookeeper3.4.9节点：storm01，storm02，storm03<br>storm1.0.3 nimbus节点storm01，supervisor节点storm02，storm03</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[storm@localhost app]$ wget http://apache.fayea.com/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz</div><div class="line">[storm@localhost app]$ tar zxvf zookeeper-3.4.9.tar.gz</div><div class="line">[storm@localhost app]$ ln -s -f zookeeper-3.4.9 zookeeper</div><div class="line">[storm@localhost app]$ mkdir zookeeper/data</div><div class="line">[storm@localhost app]$ cd zookeeper/conf/</div><div class="line">[storm@localhost conf]$ cp zoo_sample.cfg zoo.cfg</div><div class="line">[storm@localhost conf]$ vi zoo.cfg</div></pre></td></tr></table></figure>
 <p>修改dataDir<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dataDir=/home/storm/app/zookeeper/data</div><div class="line">server.1=storm01:2888:3888</div><div class="line">server.2=storm02:2888:3888</div><div class="line">server.3=storm03:2888:3888</div></pre></td></tr></table></figure></p>
 <p>在storm01下执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[storm@storm01 conf]# cd /home/storm/app/zookeeper/data</div><div class="line">[storm@storm01 data]# echo 1 &gt; myid</div></pre></td></tr></table></figure></p>
 <p>在storm02下执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[storm@storm01 conf]# cd /home/storm/app/zookeeper/data</div><div class="line">[storm@storm01 data]# echo 2 &gt; myid</div></pre></td></tr></table></figure></p>
 <p>在storm03下执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[storm@storm01 conf]# cd /home/storm/app/zookeeper/data</div><div class="line">[storm@storm01 data]# echo 3 &gt; myid</div></pre></td></tr></table></figure></p>
-<p>部署storm<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[storm@localhost app]$ wget https://mirrors.tuna.tsinghua.edu.cn/apache/storm/apache-storm-1.0.3/apache-storm-1.0.3.tar.gz</div><div class="line">[storm@localhost app]$ tar zxvf apache-storm-1.0.3.tar.gz</div><div class="line">[storm@localhost app]$ ln -s -f apache-storm-1.0.3 storm</div></pre></td></tr></table></figure></p>
+<h2 id="部署storm"><a href="#部署storm" class="headerlink" title="部署storm"></a>部署storm</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[storm@localhost app]$ wget https://mirrors.tuna.tsinghua.edu.cn/apache/storm/apache-storm-1.0.3/apache-storm-1.0.3.tar.gz</div><div class="line">[storm@localhost app]$ tar zxvf apache-storm-1.0.3.tar.gz</div><div class="line">[storm@localhost app]$ ln -s -f apache-storm-1.0.3 storm</div></pre></td></tr></table></figure>
 <p>修改配置文件，jdk安装此处略<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[storm@localhost app]$ su</div><div class="line">[root@localhost app]# echo &quot;export JAVA_HOME=/home/storm/app/jdk&quot;&gt;&gt; /etc/profile</div><div class="line">[root@localhost app]# echo &quot;export ZOOKEEPER_HOME=/home/storm/app/zookeeper&quot;&gt;&gt; /etc/profile</div><div class="line">[root@localhost app]# echo &quot;export STORM_HOME=/home/storm/app/storm&quot;&gt;&gt; /etc/profile</div><div class="line">[root@localhost app]# source /etc/profile</div><div class="line">[root@localhost app]# echo &quot;export PATH=$&#123;JAVA_HOME&#125;/bin:$&#123;ZOOKEEPER_HOME&#125;/bin:$&#123;STORM_HOME&#125;/bin:$PATH&quot;&gt;&gt; /etc/profile</div><div class="line">[root@localhost app]# source /etc/profile</div><div class="line">[root@localhost app]# su storm</div></pre></td></tr></table></figure></p>
 <p>修改stom配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[storm@localhost app]$ cd storm/conf</div><div class="line">[storm@localhost conf]$ vi storm.yaml</div></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">storm.zookeeper.servers:</div><div class="line">     - &quot;storm01&quot;</div><div class="line">     - &quot;storm02&quot;</div><div class="line">     - &quot;storm03&quot;</div><div class="line">storm.local.dir: &quot;/home/storm/app/storm/data&quot;</div><div class="line">storm.zookeeper.root: &quot;/storm&quot;  </div><div class="line">nimbus.seeds: [&quot;storm01&quot;]</div><div class="line">supervisor.slots.ports:</div><div class="line">    - 6700</div><div class="line">    - 6701</div><div class="line">    - 6702</div><div class="line">    - 6703</div></pre></td></tr></table></figure>
@@ -510,8 +510,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -564,6 +573,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境："><span class="nav-number">1.</span> <span class="nav-text">环境：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署storm"><span class="nav-number">2.</span> <span class="nav-text">部署storm</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
