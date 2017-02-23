@@ -269,6 +269,172 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/23/canal分析binlog/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/23/canal分析binlog/" itemprop="url">
+                  canal分析binlog
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-23T14:00:00+08:00">
+                2017-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/canal/" itemprop="url" rel="index">
+                    <span itemprop="name">canal</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/02/23/canal分析binlog/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/23/canal分析binlog/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="环境介绍："><a href="#环境介绍：" class="headerlink" title="环境介绍："></a>环境介绍：</h2><p>linux服务器：centos7.1<br>mysql : 5.7.10<br>canal : 1.0.23</p>
+<h2 id="一-centos7下安装mysql"><a href="#一-centos7下安装mysql" class="headerlink" title="一.centos7下安装mysql"></a>一.centos7下安装mysql</h2><h4 id="1-下载mysql的repo源"><a href="#1-下载mysql的repo源" class="headerlink" title="1.下载mysql的repo源"></a>1.下载mysql的repo源</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure>
+<h4 id="2-安装mysql-community-release-el7-5-noarch-rpm包"><a href="#2-安装mysql-community-release-el7-5-noarch-rpm包" class="headerlink" title="2.安装mysql-community-release-el7-5.noarch.rpm包"></a>2.安装mysql-community-release-el7-5.noarch.rpm包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -ivh mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure>
+<h4 id="3-安装mysql"><a href="#3-安装mysql" class="headerlink" title="3.安装mysql"></a>3.安装mysql</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server</div></pre></td></tr></table></figure>
+<h4 id="4-设置用户"><a href="#4-设置用户" class="headerlink" title="4.设置用户"></a>4.设置用户</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE USER &apos;canal&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;canal&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;canal&apos;@&apos;localhost&apos; WITH GRANT OPTION;</div><div class="line">CREATE USER &apos;canal&apos;@&apos;%&apos; IDENTIFIED BY &apos;canal&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;canal&apos;@&apos;%&apos; WITH GRANT OPTION;</div><div class="line">flush privileges;</div></pre></td></tr></table></figure>
+<h4 id="5-修改配置文件"><a href="#5-修改配置文件" class="headerlink" title="5.修改配置文件"></a>5.修改配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line">log-bin=mysql-bin #添加这一行就ok</div><div class="line">binlog-format=ROW #选择row模式</div><div class="line">server_id=1 #配置mysql replaction需要定义，不能和canal的slaveId重复</div></pre></td></tr></table></figure>
+<h2 id="二-安装canal"><a href="#二-安装canal" class="headerlink" title="二.安装canal"></a>二.安装canal</h2><h4 id="1-下载canal"><a href="#1-下载canal" class="headerlink" title="1.下载canal"></a>1.下载canal</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/alibaba/canal/releases/download/canal-1.0.23/canal.deployer-1.0.23.tar.gz</div></pre></td></tr></table></figure>
+<h4 id="2-解压缩"><a href="#2-解压缩" class="headerlink" title="2.解压缩"></a>2.解压缩</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir /root/canal</div><div class="line">tar zxvf canal.deployer-1.0.23.tar.gz  -C /root/canal</div></pre></td></tr></table></figure>
+<h4 id="3-修改配置文件-如果是访问本机，并且用户密码都为canal则不需要修改配置文件"><a href="#3-修改配置文件-如果是访问本机，并且用户密码都为canal则不需要修改配置文件" class="headerlink" title="3.修改配置文件(如果是访问本机，并且用户密码都为canal则不需要修改配置文件)"></a>3.修改配置文件(如果是访问本机，并且用户密码都为canal则不需要修改配置文件)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /root/canal/conf/example/instance.properties</div></pre></td></tr></table></figure>
+<h4 id="4-启动"><a href="#4-启动" class="headerlink" title="4.启动"></a>4.启动</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh /root/canal/bin/startup.sh</div></pre></td></tr></table></figure>
+<h4 id="5-查看日志"><a href="#5-查看日志" class="headerlink" title="5.查看日志"></a>5.查看日志</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@zhm1 ~]# cat /root/canal/logs/canal/canal.log</div><div class="line">OpenJDK 64-Bit Server VM warning: ignoring option PermSize=96m; support was removed in 8.0</div><div class="line">OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0</div><div class="line">OpenJDK 64-Bit Server VM warning: UseCMSCompactAtFullCollection is deprecated and will likely be removed in a future release.</div><div class="line">2017-02-22 17:40:08.901 [main] INFO  com.alibaba.otter.canal.deployer.CanalLauncher - ## start the canal server.</div><div class="line">2017-02-22 17:40:09.069 [main] INFO  com.alibaba.otter.canal.deployer.CanalController - ## start the canal server[192.168.118.128:11111]</div><div class="line">2017-02-22 17:40:09.758 [main] INFO  com.alibaba.otter.canal.deployer.CanalLauncher - ## the canal server is running now ......</div></pre></td></tr></table></figure>
+<p>具体instance的日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@zhm1 ~]# cat /root/canal/logs/example/example.log</div></pre></td></tr></table></figure></p>
+<h4 id="6-关闭"><a href="#6-关闭" class="headerlink" title="6.关闭"></a>6.关闭</h4><p>sh /root/canal/bin/stop.sh</p>
+<h2 id="三-写客户端代码"><a href="#三-写客户端代码" class="headerlink" title="三.写客户端代码"></a>三.写客户端代码</h2><h4 id="1-在maven的setting-xml加入阿里的镜像"><a href="#1-在maven的setting-xml加入阿里的镜像" class="headerlink" title="1.在maven的setting.xml加入阿里的镜像"></a>1.在maven的setting.xml加入阿里的镜像</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;mirror&gt;</div><div class="line">	&lt;id&gt;alimaven&lt;/id&gt;</div><div class="line">	&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</div><div class="line">	&lt;name&gt;aliyun maven&lt;/name&gt;</div><div class="line">	&lt;url&gt;http://maven.aliyun.com/nexus/content/repositories/central/&lt;/url&gt;</div><div class="line">&lt;/mirror&gt;</div></pre></td></tr></table></figure>
+<h4 id="2-创建初始项目"><a href="#2-创建初始项目" class="headerlink" title="2.创建初始项目"></a>2.创建初始项目</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn archetype:generate -DgroupId=com.alibaba.otter -DartifactId=canal.sample</div></pre></td></tr></table></figure>
+<h4 id="3-pom文件增加"><a href="#3-pom文件增加" class="headerlink" title="3.pom文件增加"></a>3.pom文件增加</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;com.alibaba.otter&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;canal.client&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;1.0.12&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<h4 id="4-ClientSample代码"><a href="#4-ClientSample代码" class="headerlink" title="4. ClientSample代码"></a>4. ClientSample代码</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line">package com.alibaba.otter;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by Administrator on 2017/2/23.</div><div class="line"> */</div><div class="line">import java.net.InetSocketAddress;</div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">import com.alibaba.otter.canal.client.CanalConnector;</div><div class="line">import com.alibaba.otter.canal.client.CanalConnectors;</div><div class="line">import com.alibaba.otter.canal.common.utils.AddressUtils;</div><div class="line">import com.alibaba.otter.canal.protocol.Message;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.Column;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.Entry;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.EntryType;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.EventType;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.RowChange;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.RowData;</div><div class="line"></div><div class="line">public class  ClientSample &#123;</div><div class="line"></div><div class="line">    public static void main(String args[]) &#123;</div><div class="line">        // 创建链接</div><div class="line">        CanalConnector connector = CanalConnectors.newSingleConnector(</div><div class="line">            new InetSocketAddress("192.168.118.128",//AddressUtils.getHostIp(),</div><div class="line">                11111), "example", "", "");</div><div class="line">        int batchSize = 1000;</div><div class="line">        int emptyCount = 0;</div><div class="line">        try &#123;</div><div class="line">            connector.connect();</div><div class="line">            connector.subscribe(".*\\..*");</div><div class="line">            connector.rollback();</div><div class="line">            int totalEmptyCount = 120;</div><div class="line">            while (emptyCount &lt; totalEmptyCount) &#123;</div><div class="line">                Message message = connector.getWithoutAck(batchSize); // 获取指定数量的数据</div><div class="line">                long batchId = message.getId();</div><div class="line">                int size = message.getEntries().size();</div><div class="line">                if (batchId == -1 || size == 0) &#123;</div><div class="line">                    emptyCount++;</div><div class="line">                    System.out.println("empty count : " + emptyCount);</div><div class="line">                    try &#123;</div><div class="line">                        Thread.sleep(1000);</div><div class="line">                    &#125; catch (InterruptedException e) &#123;</div><div class="line">                    &#125;</div><div class="line">                &#125; else &#123;</div><div class="line">                    emptyCount = 0;</div><div class="line">                    // System.out.printf("message[batchId=%s,size=%s] \n", batchId, size);</div><div class="line">                    printEntry(message.getEntries());</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                connector.ack(batchId); // 提交确认</div><div class="line">                // connector.rollback(batchId); // 处理失败, 回滚数据</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            System.out.println("empty too many times, exit");</div><div class="line">        &#125; finally &#123;</div><div class="line">            connector.disconnect();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static void printEntry(List&lt;Entry&gt; entrys) &#123;</div><div class="line">        for (Entry entry : entrys) &#123;</div><div class="line">            if (entry.getEntryType() == EntryType.TRANSACTIONBEGIN || </div><div class="line">                entry.getEntryType() == EntryType.TRANSACTIONEND) &#123;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            RowChange rowChage = null;</div><div class="line">            try &#123;</div><div class="line">                rowChage = RowChange.parseFrom(entry.getStoreValue());</div><div class="line">            &#125; catch (Exception e) &#123;</div><div class="line">                throw new RuntimeException("ERROR ## parser of eromanga-event has an error,</div><div class="line">                                            data:" + entry.toString(),e);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            EventType eventType = rowChage.getEventType();</div><div class="line">            System.out.println(String.format("================&gt; binlog[%s:%s] ,</div><div class="line">                                name[%s,%s] , eventType : %s",</div><div class="line">                    entry.getHeader().getLogfileName(), entry.getHeader().getLogfileOffset(),</div><div class="line">                    entry.getHeader().getSchemaName(), entry.getHeader().getTableName(),</div><div class="line">                    eventType));</div><div class="line"></div><div class="line">            for (RowData rowData : rowChage.getRowDatasList()) &#123;</div><div class="line">                if (eventType == EventType.DELETE) &#123;</div><div class="line">                    printColumn(rowData.getBeforeColumnsList());</div><div class="line">                &#125; else if (eventType == EventType.INSERT) &#123;</div><div class="line">                    printColumn(rowData.getAfterColumnsList());</div><div class="line">                &#125; else &#123;</div><div class="line">                    System.out.println("-------&gt; before");</div><div class="line">                    printColumn(rowData.getBeforeColumnsList());</div><div class="line">                    System.out.println("-------&gt; after");</div><div class="line">                    printColumn(rowData.getAfterColumnsList());</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static void printColumn(List&lt;Column&gt; columns) &#123;</div><div class="line">        for (Column column : columns) &#123;</div><div class="line">            System.out.println(column.getName() + " : " + column.getValue() + "    update=" +                                       column.getUpdated());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="5-mysql下执行操作"><a href="#5-mysql下执行操作" class="headerlink" title="5. mysql下执行操作"></a>5. mysql下执行操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">mysql&gt; use test;</div><div class="line">Database changed</div><div class="line">mysql&gt; CREATE TABLE `xdual` (</div><div class="line">    -&gt;   `ID` int(11) NOT NULL AUTO_INCREMENT,</div><div class="line">    -&gt;   `X` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,</div><div class="line">    -&gt;   PRIMARY KEY (`ID`)</div><div class="line">    -&gt; ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ;</div><div class="line">Query OK, 0 rows affected (0.06 sec)</div><div class="line"></div><div class="line">mysql&gt; insert into xdual(id,x) values(4,now());</div><div class="line">Query OK, 1 row affected (0.06 sec)</div></pre></td></tr></table></figure>
+<p>可以从控制台中看到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">empty count : 1</div><div class="line">empty count : 2</div><div class="line">empty count : 3</div><div class="line">empty count : 4</div><div class="line">================&gt; binlog[mysql-bin.001946:313661577] , name[test,xdual] , eventType : INSERT</div><div class="line">ID : 4    update=true</div><div class="line">X : 2017-02-23 14:20:00    update=true</div></pre></td></tr></table></figure></p>
+<h2 id="四-canal集群搭建"><a href="#四-canal集群搭建" class="headerlink" title="四.canal集群搭建"></a>四.canal集群搭建</h2><h4 id="1-安装zookeeper"><a href="#1-安装zookeeper" class="headerlink" title="1.安装zookeeper"></a>1.安装zookeeper</h4><p>略</p>
+<h4 id="2-修改配置文件"><a href="#2-修改配置文件" class="headerlink" title="2.修改配置文件"></a>2.修改配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">vi /root/canal/conf/canal.properties</div><div class="line">canal.zkServers=1.1.1.1:2181,1.1.1.2:2181,1.1.1.3:2181</div><div class="line"></div><div class="line">vi /root/canal/conf/example/instance.properties</div><div class="line">canal.instance.mysql.slaveId = 1234  另外一个机器改成1235与1234不同即可</div></pre></td></tr></table></figure>
+<h4 id="3-进入到zkClient查看状态"><a href="#3-进入到zkClient查看状态" class="headerlink" title="3.进入到zkClient查看状态"></a>3.进入到zkClient查看状态</h4><h5 id="获取正在运行的canal-server"><a href="#获取正在运行的canal-server" class="headerlink" title="获取正在运行的canal server"></a>获取正在运行的canal server</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get /otter/canal/destinations/example/running</div></pre></td></tr></table></figure>
+<h5 id="获取正在连接的canal-client"><a href="#获取正在连接的canal-client" class="headerlink" title="获取正在连接的canal client"></a>获取正在连接的canal client</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get /otter/canal/destinations/example/1001/running</div></pre></td></tr></table></figure>
+<h5 id="获取当前最后一次消费车成功的binlog"><a href="#获取当前最后一次消费车成功的binlog" class="headerlink" title="获取当前最后一次消费车成功的binlog"></a>获取当前最后一次消费车成功的binlog</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get /otter/canal/destinations/example/1001/cursor</div></pre></td></tr></table></figure>
+<h4 id="4-客户端代码"><a href="#4-客户端代码" class="headerlink" title="4.客户端代码"></a>4.客户端代码</h4><p>修改如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CanalConnector connector = CanalConnectors.newClusterConnector(<span class="string">"192.168.213.44:4180,192.168.213.45:4180,192.168.213.46:4180"</span>, <span class="string">"example"</span>, <span class="string">""</span>, <span class="string">""</span>);</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/15/storm1.0.3集群部署/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -533,7 +699,8 @@
           
             <h2 id="大数据及机器学习学习计划"><a href="#大数据及机器学习学习计划" class="headerlink" title="大数据及机器学习学习计划"></a>大数据及机器学习学习计划</h2><p>0.编程基础：Python<br><a href="https://cn.udacity.com/course/programming-foundations-with-python--ud036" target="_blank" rel="external">https://cn.udacity.com/course/programming-foundations-with-python--ud036</a></p>
 <p>1.计算机科学导论  72小时<br><a href="https://cn.udacity.com/course/intro-to-computer-science--cs101" target="_blank" rel="external">https://cn.udacity.com/course/intro-to-computer-science--cs101</a><br>2.推论统计学  48小时<br><a href="https://cn.udacity.com/course/intro-to-inferential-statistics--ud201" target="_blank" rel="external">https://cn.udacity.com/course/intro-to-inferential-statistics--ud201</a><br>3.描述统计学  48小时<br><a href="https://cn.udacity.com/course/intro-to-inferential-statistics--ud201" target="_blank" rel="external">https://cn.udacity.com/course/intro-to-inferential-statistics--ud201</a><br>4.机器学习  240小时<br><a href="https://cn.udacity.com/course/machine-learning--ud262" target="_blank" rel="external">https://cn.udacity.com/course/machine-learning--ud262</a><br>5.统计学入门<br><a href="https://cn.udacity.com/course/intro-to-statistics--st101" target="_blank" rel="external">https://cn.udacity.com/course/intro-to-statistics--st101</a><br>6.基础线性代数<br><a href="https://cn.udacity.com/course/linear-algebra-refresher-course--ud953" target="_blank" rel="external">https://cn.udacity.com/course/linear-algebra-refresher-course--ud953</a><br>7.机器学习<br><a href="https://cn.udacity.com/course/machine-learning-engineer-nanodegree--nd009" target="_blank" rel="external">https://cn.udacity.com/course/machine-learning-engineer-nanodegree--nd009</a></p>
-<p>5.Apache Storm 进行实时分析  48小时<br><a href="https://cn.udacity.com/course/real-time-analytics-with-apache-storm--ud381" target="_blank" rel="external">https://cn.udacity.com/course/real-time-analytics-with-apache-storm--ud381</a><br>6.Bash脚本  40+</p>
+<p>5.Apache Storm 进行实时分析  48小时<br><a href="https://cn.udacity.com/course/real-time-analytics-with-apache-storm--ud381" target="_blank" rel="external">https://cn.udacity.com/course/real-time-analytics-with-apache-storm--ud381</a></p>
+<p>6.Bash脚本  40+小时</p>
 
           
         
@@ -1691,189 +1858,6 @@ Query with ANSI-SQL and get results in sub-second, via ODBC, JDBC or RESTful API
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/16/Apache Beam/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Hexo">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/16/Apache Beam/" itemprop="url">
-                  Apache Beam
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-16T23:02:30+08:00">
-                2017-01-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
-                    <span itemprop="name">大数据</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/01/16/Apache Beam/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/16/Apache Beam/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Apache Beam<br>Apache Beam provides an advanced unified programming model, allowing you to implement batch and streaming data processing jobs that can run on any execution engine.</p>
-<p>Apache Beam提供了一个先进的统一编程模型，可以实现批量和流数据处理工作，可以运行在任何执行引擎。<br>Apache Beam is:</p>
-<ul>
-<li>UNIFIED - Use a single programming model for both batch and streaming use cases.</li>
-<li>PORTABLE - Execute pipelines on multiple execution environments, including Apache Apex, Apache Flink, Apache Spark, and Google Cloud Dataflow.</li>
-<li>EXTENSIBLE - Write and share new SDKs, IO connectors, and transformation libraries.<br> 统一的 - 对批处理和流媒体用例使用单一编程模型。<br> 轻便的(可移植) - 便携式管道上执行多个执行环境，包括Apache的先端，ApacheFlink，Apache Spark，和谷歌云数据流。<br> 可扩展的 - 写和分享新的软件开发工具包，IO连接器，和动态库。</li>
-</ul>
-<p>Get Started</p>
-<p>To use Beam for your data processing tasks, start by reading the Beam Overview and performing the steps in the Quickstart. Then dive into the Documentation section for in-depth concepts and reference materials for the Beam model, SDKs, and runners.<br>使用Beam为你的数据处理任务，开始通过阅读Beam概述和示例执行以下步骤。然后潜入文档部分进行深入的概念和Beam模型，SDKs，和执行。</p>
-<p>Contribute</p>
-<p>Beam is an Apache Software Foundation project, available under the Apache v2 license. Beam is an open source community and contributions are greatly appreciated! If you’d like to contribute, please see the Contribute section.<br>Beam 是Apache软件基金会的项目，Apache v2许可下可用。Beam是一个开源社区和贡献非常感谢！如果你想贡献，请参阅投稿部分。</p>
-<p>Apache Beam Overview</p>
-<p>Apache Beam is an open source, unified programming model that you can use to create a data processing pipeline. You start by building a program that defines the pipeline using one of the open source Beam SDKs. The pipeline is then executed by one of Beam’s supported distributed processing back-ends, which include Apache Apex, Apache Flink, Apache Spark, and Google Cloud Dataflow.<br>Apache的Beam是一个开源的、统一的编程模型，可以用来创建一个数据处理管道。你开始建立一个程序，定义了管道使用一个开源的Beam的SDK。管道是通过一Beam的支持分布式处理后端执行，包括Apache的先端，Apache Flink，Apache的Spark，和谷歌云数据流。 </p>
-<p>Beam is particularly useful for Embarrassingly Parallel data processing tasks, in which the problem can be decomposed into many smaller bundles of data that can be processed independently and in parallel. You can also use Beam for Extract, Transform, and Load (ETL) tasks and pure data integration. These tasks are useful for moving data between different storage media and data sources, transforming data into a more desirable format, or loading data onto a new system.<br>Beam的高度并行的数据处理任务是特别有用的，其中的问题可以被分解成许多较小的许多数据，可以独立和并行处理。你也可以使用Beam变换，提取，和加载（ETL）任务和纯数据集成。这些任务用于在不同的存储介质和数据源之间移动数据，将数据转换成更理想的格式，或者将数据加载到新系统上。 </p>
-<p>Apache Beam SDKs</p>
-<p>The Beam SDKs provide a unified programming model that can represent and transform data sets of any size, whether the input is a finite data set from a batch data source, or an infinite data set from a streaming data source. The Beam SDKs use the same classes to represent both bounded and unbounded data, and the same transforms to operate on that data. You use the Beam SDK of your choice to build a program that defines your data processing pipeline.<br>Beam的SDK提供了一个统一的编程模型，可以表示和变换任意大小的数据集，输入是否是一个有限的数据集从一个批处理的数据源，或无限的数据集从一个流的数据源。Beam的SDK使用同一类的代表有界和无界的数据，和相同的变换，对这些数据的操作。你用你选择的Beam SDK构建的程序定义数据处理管道。 </p>
-<p>Beam currently supports the following language-specific SDKs:<br>Language     SDK Status<br>Java     Active Development<br>Python     Coming Soon<br>Other     TBD</p>
-<p>Apache Beam Pipeline Runners</p>
-<p>The Beam Pipeline Runners translate the data processing pipeline you define with your Beam program into the API compatible with the distributed processing back-end of your choice. When you run your Beam program, you’ll need to specify the appropriate runner for the back-end where you want to execute your pipeline.<br>Beam流管道翻译您定义的数据处理管道与您的Beam程序到API与您选择的分布式处理后端兼容。当你运行你的Beam束计划时，你需要指定你想要执行你的管道的后端的合适的执行.。</p>
-<p>Beam currently supports Runners that work with the following distributed processing back-ends:<br>Beam目前支持运行与下列分布式处理后端<br>Runner     Status<br>Apache Apex     In Development<br>Apache Flink     In Development<br>Apache Spark     In Development<br>Google Cloud Dataflow     In Development</p>
-<p>Quickstart  来一段hello World吧<br>环境准备：<br>JDK1.7+。Maven</p>
-<p>maven命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ mvn archetype:generate \</div><div class="line">      -DarchetypeRepository=https://repository.apache.org/content/groups/snapshots \</div><div class="line">      -DarchetypeGroupId=org.apache.beam \</div><div class="line">      -DarchetypeArtifactId=beam-sdks-java-maven-archetypes-examples \</div><div class="line">      -DarchetypeVersion=LATEST \</div><div class="line">      -DgroupId=org.example \</div><div class="line">      -DartifactId=word-count-beam \</div><div class="line">      -Dversion=<span class="string">"0.1"</span> \</div><div class="line">      -Dpackage=org.apache.beam.examples \</div><div class="line">      -DinteractiveMode=<span class="literal">false</span></div></pre></td></tr></table></figure></p>
-<p>查看文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@zhm1 Beam]<span class="comment">#  ls</span></div><div class="line">word-count-beam</div><div class="line">[root@zhm1 Beam]<span class="comment"># cd word-count-beam/</span></div><div class="line">[root@zhm1 word-count-beam]<span class="comment"># ls src/main/java/org/apache/beam/examples/</span></div><div class="line">common  DebuggingWordCount.java  MinimalWordCount.java  WindowedWordCount.java  WordCount.java</div></pre></td></tr></table></figure></p>
-<p>运行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mvn compile <span class="built_in">exec</span>:java -Dexec.mainClass=org.apache.beam.examples.WordCount \</div><div class="line">&gt; -Dexec.args=<span class="string">"--inputFile=pom.xml --output=counts"</span> -Pdirect-runner</div></pre></td></tr></table></figure></p>
-<p>结果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div></pre></td><td class="code"><pre><div class="line">[root@zhm1 word-count-beam]<span class="comment"># ll -lh counts*</span></div><div class="line">-rw-r--r--. 1 root root 618 1月  19 14:02 counts-00000-of-00005</div><div class="line">-rw-r--r--. 1 root root 596 1月  19 14:02 counts-00001-of-00005</div><div class="line">-rw-r--r--. 1 root root 585 1月  19 14:02 counts-00002-of-00005</div><div class="line">-rw-r--r--. 1 root root 581 1月  19 14:02 counts-00003-of-00005</div><div class="line">-rw-r--r--. 1 root root 593 1月  19 14:02 counts-00004-of-00005</div><div class="line"></div><div class="line">[root@zhm1 word-count-beam]<span class="comment"># cat counts-00000-of-00005</span></div><div class="line">work: 1</div><div class="line">IS: 1</div><div class="line">versions: 1</div><div class="line">direct: 3</div><div class="line">specified: 1</div><div class="line">incubating: 1</div><div class="line">more: 1</div><div class="line">snapshots: 4</div><div class="line">submission: 1</div><div class="line">...</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    Minimal WordCount demonstrates the basic principles involved <span class="keyword">in</span> building a pipeline.</div><div class="line">    WordCount introduces some of the more common best practices <span class="keyword">in</span> creating re-usable and maintainable pipelines.</div><div class="line">    Debugging WordCount introduces logging and debugging practices.</div><div class="line">    Windowed WordCount demonstrates how you can use Beam’s programming model to handle both bounded and unbounded datasets.</div><div class="line"></div><div class="line">```java</div><div class="line">从Minimal WordCount分析代码：</div><div class="line"></div><div class="line">/*</div><div class="line"> * Licensed to the Apache Software Foundation (ASF) under one</div><div class="line"> * or more contributor license agreements.  See the NOTICE file</div><div class="line"> * distributed with this work <span class="keyword">for</span> additional information</div><div class="line"> * regarding copyright ownership.  The ASF licenses this file</div><div class="line"> * to you under the Apache License, Version 2.0 (the</div><div class="line"> * <span class="string">"License"</span>); you may not use this file except <span class="keyword">in</span> compliance</div><div class="line"> * with the License.  You may obtain a copy of the License at</div><div class="line"> *</div><div class="line"> *     http://www.apache.org/licenses/LICENSE-2.0</div><div class="line"> *</div><div class="line"> * Unless required by applicable law or agreed to <span class="keyword">in</span> writing, software</div><div class="line"> * distributed under the License is distributed on an <span class="string">"AS IS"</span> BASIS,</div><div class="line"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</div><div class="line"> * See the License <span class="keyword">for</span> the specific language governing permissions and</div><div class="line"> * limitations under the License.</div><div class="line"> */</div><div class="line">package org.apache.beam.examples;</div><div class="line"></div><div class="line">import org.apache.beam.sdk.Pipeline;</div><div class="line">import org.apache.beam.sdk.io.TextIO;</div><div class="line">import org.apache.beam.sdk.options.PipelineOptions;</div><div class="line">import org.apache.beam.sdk.options.PipelineOptionsFactory;</div><div class="line">import org.apache.beam.sdk.transforms.Count;</div><div class="line">import org.apache.beam.sdk.transforms.DoFn;</div><div class="line">import org.apache.beam.sdk.transforms.MapElements;</div><div class="line">import org.apache.beam.sdk.transforms.ParDo;</div><div class="line">import org.apache.beam.sdk.transforms.SimpleFunction;</div><div class="line">import org.apache.beam.sdk.values.KV;</div><div class="line"></div><div class="line"></div><div class="line">/**</div><div class="line"> * An example that counts words <span class="keyword">in</span> Shakespeare.</div><div class="line"> *</div><div class="line"> * &lt;p&gt;This class, &#123;@link MinimalWordCount&#125;, is the first <span class="keyword">in</span> a series of four successively more</div><div class="line"> * detailed <span class="string">'word count'</span> examples. Here, <span class="keyword">for</span> simplicity, we don<span class="string">'t show any error-checking or</span></div><div class="line"> * argument processing, and focus on construction of the pipeline, which chains together the</div><div class="line"> * application of core transforms.</div><div class="line"> *</div><div class="line"> * &lt;p&gt;Next, see the &#123;@link WordCount&#125; pipeline, then the &#123;@link DebuggingWordCount&#125;, and finally the</div><div class="line"> * &#123;@link WindowedWordCount&#125; pipeline, for more detailed examples that introduce additional</div><div class="line"> * concepts.</div><div class="line"> *</div><div class="line"> * &lt;p&gt;Concepts:</div><div class="line"> *</div><div class="line"> * &lt;pre&gt;</div><div class="line"> *   1. Reading data from text files</div><div class="line"> *   2. Specifying 'inline<span class="string">' transforms</span></div><div class="line"> *   3. Counting items in a PCollection</div><div class="line"> *   4. Writing data to text files</div><div class="line"> * &lt;/pre&gt;</div><div class="line"> *</div><div class="line"> * &lt;p&gt;No arguments are required to run this pipeline. It will be executed with the DirectRunner. You</div><div class="line"> * can see the results in the output files in your current working directory, with names like</div><div class="line"> * "wordcounts-00001-of-00005. When running on a distributed service, you would use an appropriate</div><div class="line"> * file service.</div><div class="line"> */</div><div class="line">public class MinimalWordCount &#123;</div><div class="line"></div><div class="line">  public static void main(String[] args) &#123;</div><div class="line">    // Create a PipelineOptions object. This object lets us set various execution</div><div class="line">    // options for our pipeline, such as the runner you wish to use. This example</div><div class="line">    // will run with the DirectRunner by default, based on the class path configured</div><div class="line">    // in its dependencies.</div><div class="line">    PipelineOptions options = PipelineOptionsFactory.create();</div><div class="line">    //默认是options.setRunner(DirectRunner.class);</div><div class="line">    // Create the Pipeline object with the options we defined above.</div><div class="line">    Pipeline p = Pipeline.create(options);</div><div class="line"></div><div class="line">    // Apply the pipeline's transforms.</div><div class="line"></div><div class="line">    // Concept <span class="comment">#1: Apply a root transform to the pipeline; in this case, TextIO.Read to read a set</span></div><div class="line">    // of input text files. TextIO.Read returns a PCollection <span class="built_in">where</span> each element is one line from</div><div class="line">    // the input text (a <span class="built_in">set</span> of Shakespeare<span class="string">'s texts).</span></div><div class="line"></div><div class="line">    // This example reads a public data set consisting of the complete works of Shakespeare.</div><div class="line">    </div><div class="line">    </div><div class="line">    p.apply(TextIO.Read.from("gs://apache-beam-samples/shakespeare/*"))</div><div class="line">     // 读取本地文件，构建第一个PTransfor</div><div class="line"></div><div class="line">     // Concept #2: Apply a ParDo transform to our PCollection of text lines. This ParDo invokes a</div><div class="line">     // DoFn (defined in-line) on each element that tokenizes the text line into individual words.</div><div class="line">     // The ParDo returns a PCollection&lt;String&gt;, where each element is an individual word in</div><div class="line">     // Shakespeare's collected texts.</div><div class="line">     .apply(<span class="string">"ExtractWords"</span>, ParDo.of(new DoFn&lt;String, String&gt;() &#123;</div><div class="line">                       @ProcessElement</div><div class="line">                       public void processElement(ProcessContext c) &#123;</div><div class="line">                         <span class="keyword">for</span> (String word : c.element().split(<span class="string">"[^a-zA-Z']+"</span>)) &#123;</div><div class="line">                           <span class="keyword">if</span> (!word.isEmpty()) &#123;</div><div class="line">                             c.output(word);</div><div class="line">                           &#125;</div><div class="line">                         &#125;</div><div class="line">                       &#125;</div><div class="line">                     &#125;))</div><div class="line"></div><div class="line">     // Concept <span class="comment">#3: Apply the Count transform to our PCollection of individual words. The Count</span></div><div class="line">     // transform returns a new PCollection of key/value pairs, <span class="built_in">where</span> each key represents a unique</div><div class="line">     // word <span class="keyword">in</span> the text. The associated value is the occurrence count <span class="keyword">for</span> that word.</div><div class="line">     .apply(Count.&lt;String&gt;perElement())</div><div class="line"></div><div class="line">     // Apply a MapElements transform that formats our PCollection of word counts into a printable</div><div class="line">     // string, suitable <span class="keyword">for</span> writing to an output file.</div><div class="line">     .apply(<span class="string">"FormatResults"</span>, MapElements.via(new SimpleFunction&lt;KV&lt;String, Long&gt;, String&gt;() &#123;</div><div class="line">                       @Override</div><div class="line">                       public String apply(KV&lt;String, Long&gt; input) &#123;</div><div class="line">                         <span class="built_in">return</span> input.getKey() + <span class="string">": "</span> + input.getValue();</div><div class="line">                       &#125;</div><div class="line">                     &#125;))</div><div class="line"></div><div class="line">     // Concept <span class="comment">#4: Apply a write transform, TextIO.Write, at the end of the pipeline.</span></div><div class="line">     // TextIO.Write writes the contents of a PCollection (<span class="keyword">in</span> this <span class="keyword">case</span>, our PCollection of</div><div class="line">     // formatted strings) to a series of text files.</div><div class="line">     //</div><div class="line">     // By default, it will write to a <span class="built_in">set</span> of files with names like wordcount-00001-of-00005</div><div class="line">     .apply(TextIO.Write.to(<span class="string">"wordcounts"</span>));</div><div class="line"></div><div class="line">    // Run the pipeline.</div><div class="line">    p.run().waitUntilFinish();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="创建管道"><a href="#创建管道" class="headerlink" title="创建管道"></a>创建管道</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PipelineOptions options = PipelineOptionsFactory.create();</div></pre></td></tr></table></figure>
-<p> 下一步是使用我们刚才构建的选项创建一个Pipeline对象。Pipeline对象构建要执行的变换图，与特定流水线相关联。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Pipeline p = Pipeline.create(options);</div></pre></td></tr></table></figure></p>
-<p> 应用管道变换<br> Minimal的WordCount流水线包含几个变换，以将数据读入流水线，操纵或以其他方式transform数据，并写出结果。每个transform表示管道中的操作。</p>
-<p>每个transform采用某种输入（数据或其他），并产生一些输出数据。输入和输出数据是由SDK类表示PCollection。PCollection是一个特殊的类，由Beam SDK提供，您可以使用它来表示几乎任何大小的数据集，包括无限数据集。</p>
-<p><img src="https://beam.apache.org/images/wordcount-pipeline.png" alt="此处输入图片的描述"></p>
-<p>Minimal WordCount流水线包含五个transform</p>
-<p>1.一个文本文件Read transform应用于流水线对象本身，并产生PCollection作为输出。输出PCollection中的每个元素表示输入文件中的一行文本。此示例恰好使用存储在可公开访问的Google Cloud Storage存储桶（“gs：//”）中的输入数据。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p.apply(TextIO.Read.from(<span class="string">"gs://apache-beam-samples/shakespeare/*"</span>))</div></pre></td></tr></table></figure></p>
-<p>2.一个ParDo transform它调用DoFn了tokenizes文本行成单个的单词每个元素（在线作为一个匿名类中定义）。对于此transform的输入是PCollection由先前生成的文本的行TextIO.Read变换。的ParDo变换输出一个新的PCollection，其中每个元素表示的文本的单词。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">.apply(<span class="string">"ExtractWords"</span>, ParDo.of(<span class="keyword">new</span> DoFn&lt;String, String&gt;() &#123;</div><div class="line">            <span class="meta">@ProcessElement</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processElement</span><span class="params">(ProcessContext c)</span> </span>&#123;</div><div class="line">                <span class="keyword">for</span> (String word : c.element().split(<span class="string">"[^a-zA-Z']+"</span>)) &#123;</div><div class="line">                    <span class="keyword">if</span> (!word.isEmpty()) &#123;</div><div class="line">                        c.output(word);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;))</div></pre></td></tr></table></figure></p>
-<p>3.该SDK提供的Count transform是一个通用的transform，它接受一个PCollection任何类型的，和返回PCollection键/值对。每个键表示输入集合中的唯一元素，每个值表示键在输入集合中出现的次数。</p>
-<p>这条管线，用于将输入Count的是PCollection由以前产生个别单词ParDo，并输出为一个PCollection，其中每个键代表一个唯一字中的文本和相关值是出现计数每个键/值对。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.apply(Count.&lt;String&gt;perElement())</div></pre></td></tr></table></figure></p>
-<p>4.下一个transform将唯一字和出现计数的每个键/值对格式化为适于写入输出文件的可打印字符串。</p>
-<p>MapElements是一个更高层次的复合转换，它封装了一个简单的ParDo; 为输入中的每个元件PCollection，MapElements适用于产生恰好一个输出元件的功能。在这个例子中，MapElements调用SimpleFunction（在线作为匿名类中定义），该确实的格式。作为输入，MapElements取PCollection所产生的键/值对的Count，并产生一个新PCollection的可打印字符串。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.apply(<span class="string">"FormatResults"</span>, MapElements.via(<span class="keyword">new</span> SimpleFunction&lt;KV&lt;String, Long&gt;, String&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">apply</span><span class="params">(KV&lt;String, Long&gt; input)</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> input.getKey() + <span class="string">": "</span> + input.getValue();</div><div class="line">            &#125;</div><div class="line">        &#125;))</div></pre></td></tr></table></figure></p>
-<p>5.一个文本文件Write。此transform需要的最终PCollection格式字符串作为输入和每个元素写入到输出文本文件。输入中的每个元素PCollection表示在所产生的输出文件的文本的一个行。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.apply(TextIO.Write.to(<span class="string">"wordcounts"</span>));</div></pre></td></tr></table></figure></p>
-<p>注意，该Write变换产生类型的琐碎结果值PDone，在这种情况下被忽略</p>
-<h2 id="运行管道"><a href="#运行管道" class="headerlink" title="运行管道"></a>运行管道</h2><p>通过调用运行管线run的方法，它会将您的管道由您在创建您的管道中指定的管道运行程序执行。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p.run().waitUntilFinish();</div></pre></td></tr></table></figure></p>
-<p>注意，该run方法是异步的。对于阻止执行，而不是，运行管线追加waitUntilFinish方法。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1919,7 +1903,7 @@ Query with ANSI-SQL and get results in sub-second, via ODBC, JDBC or RESTful API
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">35</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1927,7 +1911,7 @@ Query with ANSI-SQL and get results in sub-second, via ODBC, JDBC or RESTful API
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1936,7 +1920,7 @@ Query with ANSI-SQL and get results in sub-second, via ODBC, JDBC or RESTful API
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
