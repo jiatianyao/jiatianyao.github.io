@@ -372,13 +372,13 @@
       
         
           
-            <h1 id="canal分析binlog"><a href="#canal分析binlog" class="headerlink" title="canal分析binlog"></a>canal分析binlog</h1><h2 id="环境介绍："><a href="#环境介绍：" class="headerlink" title="环境介绍："></a>环境介绍：</h2><p>linux服务器：centos7.1<br>mysql : 5.7.10<br>canal : 1.0.23</p>
+            <h2 id="环境介绍："><a href="#环境介绍：" class="headerlink" title="环境介绍："></a>环境介绍：</h2><p>linux服务器：centos7.1<br>mysql : 5.7.10<br>canal : 1.0.23</p>
 <h2 id="一-centos7下安装mysql"><a href="#一-centos7下安装mysql" class="headerlink" title="一.centos7下安装mysql"></a>一.centos7下安装mysql</h2><h4 id="1-下载mysql的repo源"><a href="#1-下载mysql的repo源" class="headerlink" title="1.下载mysql的repo源"></a>1.下载mysql的repo源</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure>
 <h4 id="2-安装mysql-community-release-el7-5-noarch-rpm包"><a href="#2-安装mysql-community-release-el7-5-noarch-rpm包" class="headerlink" title="2.安装mysql-community-release-el7-5.noarch.rpm包"></a>2.安装mysql-community-release-el7-5.noarch.rpm包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -ivh mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure>
 <h4 id="3-安装mysql"><a href="#3-安装mysql" class="headerlink" title="3.安装mysql"></a>3.安装mysql</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server</div></pre></td></tr></table></figure>
 <h4 id="4-设置用户"><a href="#4-设置用户" class="headerlink" title="4.设置用户"></a>4.设置用户</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE USER &apos;canal&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;canal&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;canal&apos;@&apos;localhost&apos; WITH GRANT OPTION;</div><div class="line">CREATE USER &apos;canal&apos;@&apos;%&apos; IDENTIFIED BY &apos;canal&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;canal&apos;@&apos;%&apos; WITH GRANT OPTION;</div><div class="line">flush privileges;</div></pre></td></tr></table></figure>
 <h4 id="5-修改配置文件"><a href="#5-修改配置文件" class="headerlink" title="5.修改配置文件"></a>5.修改配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line">log-bin=mysql-bin #添加这一行就ok</div><div class="line">binlog-format=ROW #选择row模式</div><div class="line">server_id=1 #配置mysql replaction需要定义，不能和canal的slaveId重复</div></pre></td></tr></table></figure>
-<h2 id="二-安装canal"><a href="#二-安装canal" class="headerlink" title="二.安装canal"></a>二.安装canal</h2><h4 id="1-下载canal"><a href="#1-下载canal" class="headerlink" title="1.下载canal"></a>1.下载canal</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/alibaba/canal/releases/download/canal-1.0.23/canal.deployer-1.0.23.tar.gz</div></pre></td></tr></table></figure>
+<h2 id="二-安装canal"><a href="#二-安装canal" class="headerlink" title="二.安装canal"></a>二.安装canal</h2><h4 id="1-下载canal"><a href="#1-下载canal" class="headerlink" title="1.下载canal"></a>1.下载canal</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/alibaba/canal/releases/download/v1.0.23/canal.deployer-1.0.23.tar.gz</div></pre></td></tr></table></figure>
 <h4 id="2-解压缩"><a href="#2-解压缩" class="headerlink" title="2.解压缩"></a>2.解压缩</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir /root/canal</div><div class="line">tar zxvf canal.deployer-1.0.23.tar.gz  -C /root/canal</div></pre></td></tr></table></figure>
 <h4 id="3-修改配置文件-如果是访问本机，并且用户密码都为canal则不需要修改配置文件"><a href="#3-修改配置文件-如果是访问本机，并且用户密码都为canal则不需要修改配置文件" class="headerlink" title="3.修改配置文件(如果是访问本机，并且用户密码都为canal则不需要修改配置文件)"></a>3.修改配置文件(如果是访问本机，并且用户密码都为canal则不需要修改配置文件)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /root/canal/conf/example/instance.properties</div></pre></td></tr></table></figure>
 <h4 id="4-启动"><a href="#4-启动" class="headerlink" title="4.启动"></a>4.启动</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh /root/canal/bin/startup.sh</div></pre></td></tr></table></figure>
@@ -388,15 +388,20 @@
 <h2 id="三-写客户端代码"><a href="#三-写客户端代码" class="headerlink" title="三.写客户端代码"></a>三.写客户端代码</h2><h4 id="1-在maven的setting-xml加入阿里的镜像"><a href="#1-在maven的setting-xml加入阿里的镜像" class="headerlink" title="1.在maven的setting.xml加入阿里的镜像"></a>1.在maven的setting.xml加入阿里的镜像</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;mirror&gt;</div><div class="line">	&lt;id&gt;alimaven&lt;/id&gt;</div><div class="line">	&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</div><div class="line">	&lt;name&gt;aliyun maven&lt;/name&gt;</div><div class="line">	&lt;url&gt;http://maven.aliyun.com/nexus/content/repositories/central/&lt;/url&gt;</div><div class="line">&lt;/mirror&gt;</div></pre></td></tr></table></figure>
 <h4 id="2-创建初始项目"><a href="#2-创建初始项目" class="headerlink" title="2.创建初始项目"></a>2.创建初始项目</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn archetype:generate -DgroupId=com.alibaba.otter -DartifactId=canal.sample</div></pre></td></tr></table></figure>
 <h4 id="3-pom文件增加"><a href="#3-pom文件增加" class="headerlink" title="3.pom文件增加"></a>3.pom文件增加</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;com.alibaba.otter&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;canal.client&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;1.0.12&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<h4 id="4-ClientSample代码"><a href="#4-ClientSample代码" class="headerlink" title="4. ClientSample代码"></a>4. ClientSample代码</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line">package com.alibaba.otter;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by Administrator on 2017/2/23.</div><div class="line"> */</div><div class="line">import java.net.InetSocketAddress;</div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">import com.alibaba.otter.canal.client.CanalConnector;</div><div class="line">import com.alibaba.otter.canal.client.CanalConnectors;</div><div class="line">import com.alibaba.otter.canal.common.utils.AddressUtils;</div><div class="line">import com.alibaba.otter.canal.protocol.Message;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.Column;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.Entry;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.EntryType;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.EventType;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.RowChange;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.RowData;</div><div class="line"></div><div class="line">public class  ClientSample &#123;</div><div class="line"></div><div class="line">    public static void main(String args[]) &#123;</div><div class="line">        // 创建链接</div><div class="line">        CanalConnector connector = CanalConnectors.newSingleConnector(</div><div class="line">            new InetSocketAddress("192.168.118.128",//AddressUtils.getHostIp(),</div><div class="line">                11111), "example", "", "");</div><div class="line">        int batchSize = 1000;</div><div class="line">        int emptyCount = 0;</div><div class="line">        try &#123;</div><div class="line">            connector.connect();</div><div class="line">            connector.subscribe(".*\\..*");</div><div class="line">            connector.rollback();</div><div class="line">            int totalEmptyCount = 120;</div><div class="line">            while (emptyCount &lt; totalEmptyCount) &#123;</div><div class="line">                Message message = connector.getWithoutAck(batchSize); // 获取指定数量的数据</div><div class="line">                long batchId = message.getId();</div><div class="line">                int size = message.getEntries().size();</div><div class="line">                if (batchId == -1 || size == 0) &#123;</div><div class="line">                    emptyCount++;</div><div class="line">                    System.out.println("empty count : " + emptyCount);</div><div class="line">                    try &#123;</div><div class="line">                        Thread.sleep(1000);</div><div class="line">                    &#125; catch (InterruptedException e) &#123;</div><div class="line">                    &#125;</div><div class="line">                &#125; else &#123;</div><div class="line">                    emptyCount = 0;</div><div class="line">                    // System.out.printf("message[batchId=%s,size=%s] \n", batchId, size);</div><div class="line">                    printEntry(message.getEntries());</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                connector.ack(batchId); // 提交确认</div><div class="line">                // connector.rollback(batchId); // 处理失败, 回滚数据</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            System.out.println("empty too many times, exit");</div><div class="line">        &#125; finally &#123;</div><div class="line">            connector.disconnect();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static void printEntry(List&lt;Entry&gt; entrys) &#123;</div><div class="line">        for (Entry entry : entrys) &#123;</div><div class="line">            if (entry.getEntryType() == EntryType.TRANSACTIONBEGIN || </div><div class="line">                entry.getEntryType() == EntryType.TRANSACTIONEND) &#123;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            RowChange rowChage = null;</div><div class="line">            try &#123;</div><div class="line">                rowChage = RowChange.parseFrom(entry.getStoreValue());</div><div class="line">            &#125; catch (Exception e) &#123;</div><div class="line">                throw new RuntimeException("ERROR ## parser of eromanga-event has an error,</div><div class="line">                                            data:" + entry.toString(),e);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            EventType eventType = rowChage.getEventType();</div><div class="line">            System.out.println(String.format("================&gt; binlog[%s:%s] ,</div><div class="line">                                name[%s,%s] , eventType : %s",</div><div class="line">                    entry.getHeader().getLogfileName(), entry.getHeader().getLogfileOffset(),</div><div class="line">                    entry.getHeader().getSchemaName(), entry.getHeader().getTableName(),</div><div class="line">                    eventType));</div><div class="line"></div><div class="line">            for (RowData rowData : rowChage.getRowDatasList()) &#123;</div><div class="line">                if (eventType == EventType.DELETE) &#123;</div><div class="line">                    printColumn(rowData.getBeforeColumnsList());</div><div class="line">                &#125; else if (eventType == EventType.INSERT) &#123;</div><div class="line">                    printColumn(rowData.getAfterColumnsList());</div><div class="line">                &#125; else &#123;</div><div class="line">                    System.out.println("-------&gt; before");</div><div class="line">                    printColumn(rowData.getBeforeColumnsList());</div><div class="line">                    System.out.println("-------&gt; after");</div><div class="line">                    printColumn(rowData.getAfterColumnsList());</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static void printColumn(List&lt;Column&gt; columns) &#123;</div><div class="line">        for (Column column : columns) &#123;</div><div class="line">            System.out.println(column.getName() + " : " + column.getValue() + "    update=" +                                       column.getUpdated());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="4-ClientSample代码"><a href="#4-ClientSample代码" class="headerlink" title="4. ClientSample代码"></a>4. ClientSample代码</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line">package com.alibaba.otter;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by Administrator on 2017/2/23.</div><div class="line"> */</div><div class="line">import java.net.InetSocketAddress;</div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">import com.alibaba.otter.canal.client.CanalConnector;</div><div class="line">import com.alibaba.otter.canal.client.CanalConnectors;</div><div class="line">import com.alibaba.otter.canal.common.utils.AddressUtils;</div><div class="line">import com.alibaba.otter.canal.protocol.Message;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.Column;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.Entry;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.EntryType;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.EventType;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.RowChange;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.RowData;</div><div class="line"></div><div class="line">public class  ClientSample &#123;</div><div class="line"></div><div class="line">    public static void main(String args[]) &#123;</div><div class="line">        // 创建链接</div><div class="line">        CanalConnector connector = CanalConnectors.newSingleConnector(</div><div class="line">            new InetSocketAddress("192.168.118.128",//AddressUtils.getHostIp(),</div><div class="line">                11111), "example", "", "");</div><div class="line">        int batchSize = 1000;</div><div class="line">        int emptyCount = 0;</div><div class="line">        try &#123;</div><div class="line">            connector.connect();</div><div class="line">            connector.subscribe(".*\\..*");</div><div class="line">            connector.rollback();</div><div class="line">            int totalEmptyCount = 120;</div><div class="line">            while (emptyCount &lt; totalEmptyCount) &#123;</div><div class="line">                Message message = connector.getWithoutAck(batchSize);                            // 获取指定数量的数据</div><div class="line">                long batchId = message.getId();</div><div class="line">                int size = message.getEntries().size();</div><div class="line">                if (batchId == -1 || size == 0) &#123;</div><div class="line">                    emptyCount++;</div><div class="line">                    System.out.println("empty count : " + emptyCount);</div><div class="line">                    try &#123;</div><div class="line">                        Thread.sleep(1000);</div><div class="line">                    &#125; catch (InterruptedException e) &#123;</div><div class="line">                    &#125;</div><div class="line">                &#125; else &#123;</div><div class="line">                    emptyCount = 0;</div><div class="line">                    // System.out.printf("message[batchId=%s,size=%s] \n", batchId, size);</div><div class="line">                    printEntry(message.getEntries());</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                connector.ack(batchId); // 提交确认</div><div class="line">                // connector.rollback(batchId); // 处理失败, 回滚数据</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            System.out.println("empty too many times, exit");</div><div class="line">        &#125; finally &#123;</div><div class="line">            connector.disconnect();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static void printEntry(List&lt;Entry&gt; entrys) &#123;</div><div class="line">        for (Entry entry : entrys) &#123;</div><div class="line">            if (entry.getEntryType() == EntryType.TRANSACTIONBEGIN || </div><div class="line">                entry.getEntryType() == EntryType.TRANSACTIONEND) &#123;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            RowChange rowChage = null;</div><div class="line">            try &#123;</div><div class="line">                rowChage = RowChange.parseFrom(entry.getStoreValue());</div><div class="line">            &#125; catch (Exception e) &#123;</div><div class="line">                throw new RuntimeException("ERROR ## parser of eromanga-event has an error,</div><div class="line">                                            data:" + entry.toString(),e);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            EventType eventType = rowChage.getEventType();</div><div class="line">            System.out.println(String.format("================&gt; binlog[%s:%s] ,</div><div class="line">                                name[%s,%s] , eventType : %s",</div><div class="line">                    entry.getHeader().getLogfileName(), entry.getHeader().getLogfileOffset(),</div><div class="line">                    entry.getHeader().getSchemaName(), entry.getHeader().getTableName(),</div><div class="line">                    eventType));</div><div class="line"></div><div class="line">            for (RowData rowData : rowChage.getRowDatasList()) &#123;</div><div class="line">                if (eventType == EventType.DELETE) &#123;</div><div class="line">                    printColumn(rowData.getBeforeColumnsList());</div><div class="line">                &#125; else if (eventType == EventType.INSERT) &#123;</div><div class="line">                    printColumn(rowData.getAfterColumnsList());</div><div class="line">                &#125; else &#123;</div><div class="line">                    System.out.println("-------&gt; before");</div><div class="line">                    printColumn(rowData.getBeforeColumnsList());</div><div class="line">                    System.out.println("-------&gt; after");</div><div class="line">                    printColumn(rowData.getAfterColumnsList());</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static void printColumn(List&lt;Column&gt; columns) &#123;</div><div class="line">        for (Column column : columns) &#123;</div><div class="line">            System.out.println(column.getName() + " : " + column.getValue() + "    update=" +                                       column.getUpdated());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="5-mysql下执行操作"><a href="#5-mysql下执行操作" class="headerlink" title="5. mysql下执行操作"></a>5. mysql下执行操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">mysql&gt; use test;</div><div class="line">Database changed</div><div class="line">mysql&gt; CREATE TABLE `xdual` (</div><div class="line">    -&gt;   `ID` int(11) NOT NULL AUTO_INCREMENT,</div><div class="line">    -&gt;   `X` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,</div><div class="line">    -&gt;   PRIMARY KEY (`ID`)</div><div class="line">    -&gt; ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ;</div><div class="line">Query OK, 0 rows affected (0.06 sec)</div><div class="line"></div><div class="line">mysql&gt; insert into xdual(id,x) values(4,now());</div><div class="line">Query OK, 1 row affected (0.06 sec)</div></pre></td></tr></table></figure>
 <p>可以从控制台中看到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">empty count : 1</div><div class="line">empty count : 2</div><div class="line">empty count : 3</div><div class="line">empty count : 4</div><div class="line">================&gt; binlog[mysql-bin.001946:313661577] , name[test,xdual] , eventType : INSERT</div><div class="line">ID : 4    update=true</div><div class="line">X : 2017-02-23 14:20:00    update=true</div></pre></td></tr></table></figure></p>
 <h2 id="四-canal集群搭建"><a href="#四-canal集群搭建" class="headerlink" title="四.canal集群搭建"></a>四.canal集群搭建</h2><h4 id="1-安装zookeeper"><a href="#1-安装zookeeper" class="headerlink" title="1.安装zookeeper"></a>1.安装zookeeper</h4><p>略</p>
-<h4 id="2-修改配置文件"><a href="#2-修改配置文件" class="headerlink" title="2.修改配置文件"></a>2.修改配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">vi /root/canal/conf/canal.properties</div><div class="line">canal.zkServers=1.1.1.1:2181,1.1.1.2:2181,1.1.1.3:2181</div><div class="line"></div><div class="line">vi /root/canal/conf/example/instance.properties</div><div class="line">canal.instance.mysql.slaveId = 1234  另外一个机器改成1235与1234不同即可</div></pre></td></tr></table></figure>
+<h4 id="2-修改配置文件"><a href="#2-修改配置文件" class="headerlink" title="2.修改配置文件"></a>2.修改配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">vi /root/canal/conf/canal.properties</div><div class="line">canal.zkServers=1.1.1.1:2181,1.1.1.2:2181,1.1.1.3:2181</div><div class="line">canal.instance.global.spring.xml = classpath:spring/default-instance.xml</div><div class="line"></div><div class="line">vi /root/canal/conf/example/instance.properties</div><div class="line">canal.instance.mysql.slaveId = 1234  另外一个机器改成1235与1234不同即可</div></pre></td></tr></table></figure>
+<p>分别在两台机器上启动，发现只有一台机器logs下面有example目录，并且显示启动成功</p>
 <h4 id="3-进入到zkClient查看状态"><a href="#3-进入到zkClient查看状态" class="headerlink" title="3.进入到zkClient查看状态"></a>3.进入到zkClient查看状态</h4><h5 id="获取正在运行的canal-server"><a href="#获取正在运行的canal-server" class="headerlink" title="获取正在运行的canal server"></a>获取正在运行的canal server</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get /otter/canal/destinations/example/running</div></pre></td></tr></table></figure>
 <h5 id="获取正在连接的canal-client"><a href="#获取正在连接的canal-client" class="headerlink" title="获取正在连接的canal client"></a>获取正在连接的canal client</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get /otter/canal/destinations/example/1001/running</div></pre></td></tr></table></figure>
 <h5 id="获取当前最后一次消费车成功的binlog"><a href="#获取当前最后一次消费车成功的binlog" class="headerlink" title="获取当前最后一次消费车成功的binlog"></a>获取当前最后一次消费车成功的binlog</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get /otter/canal/destinations/example/1001/cursor</div></pre></td></tr></table></figure>
-<h4 id="4-客户端代码"><a href="#4-客户端代码" class="headerlink" title="4.客户端代码"></a>4.客户端代码</h4><p>修改如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CanalConnector connector = CanalConnectors.newClusterConnector(<span class="string">"192.168.213.44:4180,192.168.213.45:4180,192.168.213.46:4180"</span>, <span class="string">"example"</span>, <span class="string">""</span>, <span class="string">""</span>);</div></pre></td></tr></table></figure></p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/zookeeper_canal.png" alt="此处输入图片的描述"></p>
+<h4 id="4-客户端代码"><a href="#4-客户端代码" class="headerlink" title="4.客户端代码"></a>4.客户端代码</h4><p>修改如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CanalConnector connector = CanalConnectors.newClusterConnector(<span class="string">"1.1.1.1:2181,1.1.1.2:2181,1.1.1.3:2181"</span>, <span class="string">"example"</span>, <span class="string">""</span>, <span class="string">""</span>);</div></pre></td></tr></table></figure></p>
+<p>代码启动<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%90%AF%E5%8A%A8.png" alt="此处输入图片的描述"></p>
+<p>停止一个canal<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%81%9C%E6%AD%A2%E4%B8%80%E4%B8%AAcanal.png" alt="此处输入图片的描述"></p>
+<p>全部停止canal<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E9%83%A8%E5%81%9C%E6%AD%A2.png" alt="此处输入图片的描述"></p>
 
           
         
@@ -896,151 +901,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/Python春节祝福语自动回复/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Hexo">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/27/Python春节祝福语自动回复/" itemprop="url">
-                  Python春节祝福语自动回复
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-27T20:00:00+08:00">
-                2017-01-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/01/27/Python春节祝福语自动回复/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/Python春节祝福语自动回复/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>首先安装两个库<br>pip install itchat pillow</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
-<p>运行后，扫描生成的二维码即可</p>
-<p>登录成功有以下提示<br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD2.png" alt="此处输入图片的描述"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/storm基础知识/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1191,6 +1051,151 @@
 <h2 id="storm架构"><a href="#storm架构" class="headerlink" title="storm架构"></a>storm架构</h2><p><img src="http://oh6ybr0jg.bkt.clouddn.com/storm%E6%9E%B6%E6%9E%84.png" alt="此处输入图片的描述"></p>
 <p>Storm的主线主要包括4条：nimbus, supervisor, worker和task。</p>
 <p>对于storm0.9.6的配置文件nimbus配置参数还是nimbus.hosts 现在新版本1.0.2已经修改为nimbus.seeds,已经可以支持HA<br>此处之一配置nimbus.seeds: XX。此处nimbus.seeds:后面要有一个空格，否则启动报错<br>storm启动nimbus的时候jps会有一个进程config_value然后变成nimbus。<br>其他启动同上</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/Python春节祝福语自动回复/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/27/Python春节祝福语自动回复/" itemprop="url">
+                  Python春节祝福语自动回复
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-27T20:00:00+08:00">
+                2017-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/01/27/Python春节祝福语自动回复/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/Python春节祝福语自动回复/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先安装两个库<br>pip install itchat pillow</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
+<p>运行后，扫描生成的二维码即可</p>
+<p>登录成功有以下提示<br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD2.png" alt="此处输入图片的描述"></p>
 
           
         
