@@ -1039,13 +1039,12 @@
 </tr>
 </tbody>
 </table>
-<h2 id="编程模型"><a href="#编程模型" class="headerlink" title="编程模型"></a>编程模型</h2><p>###Topology<br>一个实时计算应用程序逻辑被封装在Topology对象中， 类似Hadoop中的job， Topology会一直运行直到你显式杀死它</p>
+<h2 id="编程模型"><a href="#编程模型" class="headerlink" title="编程模型"></a>编程模型</h2><h3 id="Topology"><a href="#Topology" class="headerlink" title="Topology"></a>Topology</h3><p>一个实时计算应用程序逻辑被封装在Topology对象中， 类似Hadoop中的job， Topology会一直运行直到你显式杀死它</p>
 <p>###DataSource<br>外部数据源</p>
-<p>###Spout<br>接受外部数据源的组件，将外部数据源转化成Storm内部的数据，以Tuple为基本的传输单元下发给Bolt</p>
-<p>###Bolt<br>接受Spout发送的数据，或上游的bolt的发送的数据。根据业务逻辑进行处理。发送给下一个Bolt或者是存储到某种介质上。介质可以是Redis可以是mysql，或者其他。</p>
-<p>###Tuple<br>Storm内部中数据传输的基本单元，里面封装了一个List对象，用来保存数据。</p>
-<p>##StreamGrouping:</p>
-<p>####数据分组策略7种：<br>shuffleGrouping(Random函数),<br>NonGrouping(Random函数,目前和shuffleGrouping一样),<br>FieldGrouping(Hash取模),<br>Local or ShuffleGrouping （本地或随机，优先本地）,<br>Fields grouping（根据Tuple中的某一个Filed或者多个Filed的是值来划分。 比如<br>Stream根据Field为user-id来grouping， 相同user-id值的Tuple会被分<br>发到相同的Task中）,<br>Global grouping（整个Stream会选择一个Task作为分发的目的地， 通常是最新的那<br>个id的Task）<br>Direct grouping（产生数据的Spout/Bolt自己明确决定这个Tuple被Bolt的那些Task所<br>消费）</p>
+<h3 id="Spout"><a href="#Spout" class="headerlink" title="Spout"></a>Spout</h3><p>接受外部数据源的组件，将外部数据源转化成Storm内部的数据，以Tuple为基本的传输单元下发给Bolt</p>
+<h3 id="Bolt"><a href="#Bolt" class="headerlink" title="Bolt"></a>Bolt</h3><p>接受Spout发送的数据，或上游的bolt的发送的数据。根据业务逻辑进行处理。发送给下一个Bolt或者是存储到某种介质上。介质可以是Redis可以是mysql，或者其他。</p>
+<h3 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h3><p>Storm内部中数据传输的基本单元，里面封装了一个List对象，用来保存数据。</p>
+<h2 id="StreamGrouping"><a href="#StreamGrouping" class="headerlink" title="StreamGrouping:"></a>StreamGrouping:</h2><h4 id="数据分组策略7种："><a href="#数据分组策略7种：" class="headerlink" title="数据分组策略7种："></a>数据分组策略7种：</h4><p>shuffleGrouping(Random函数),<br>NonGrouping(Random函数,目前和shuffleGrouping一样),<br>FieldGrouping(Hash取模),<br>Local or ShuffleGrouping （本地或随机，优先本地）,<br>Fields grouping（根据Tuple中的某一个Filed或者多个Filed的是值来划分。 比如<br>Stream根据Field为user-id来grouping， 相同user-id值的Tuple会被分<br>发到相同的Task中）,<br>Global grouping（整个Stream会选择一个Task作为分发的目的地， 通常是最新的那<br>个id的Task）<br>Direct grouping（产生数据的Spout/Bolt自己明确决定这个Tuple被Bolt的那些Task所<br>消费）</p>
 <h2 id="Storm优点"><a href="#Storm优点" class="headerlink" title="Storm优点"></a>Storm优点</h2><h4 id="健壮性"><a href="#健壮性" class="headerlink" title="健壮性"></a>健壮性</h4><p>当Worker失效或机器出现故障时， 自动分配新的Worker替换失<br>效Worker</p>
 <h4 id="准确性"><a href="#准确性" class="headerlink" title="准确性"></a>准确性</h4><p>采用Acker机制，保证数据不丢失<br>采用事务机制，保证数据准确性</p>
 <h2 id="storm架构"><a href="#storm架构" class="headerlink" title="storm架构"></a>storm架构</h2><p><img src="http://oh6ybr0jg.bkt.clouddn.com/storm%E6%9E%B6%E6%9E%84.png" alt="此处输入图片的描述"></p>
