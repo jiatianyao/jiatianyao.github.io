@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="算法," />
+  <meta name="keywords" content="cloudera," />
 
 
 
@@ -84,31 +84,19 @@
 
 
 
-<meta name="description" content="条件概率事件A在另外一个事件B已经发生条件下的发生概率。条件概率表示为P（A|B），读作“在B条件下A的概率”。
-设A，B 是两个事件，且A不是不可能事件，则称为在事件A发生的条件下，事件B发生的条件概率。一般地，，且它满足以下三条件：（1）非负性；（2）规范性；（3）可列可加性。
-如上图求：红球来自A的概率P（A|红） =  P（A红）/P（红）
-全概率公式全概率公式为概率论中的重要公式，它将">
+<meta name="description" content="安装Kudu的要求：1.操作系统和版本支持Cloudera。2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。
+通过">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法推演">
-<meta property="og:url" content="http://yoursite.com/2017/01/10/算法推演/index.html">
+<meta property="og:title" content="CDH Kudu安装及介绍">
+<meta property="og:url" content="http://yoursite.com/2017/03/01/CDH Kudu安装及介绍/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="条件概率事件A在另外一个事件B已经发生条件下的发生概率。条件概率表示为P（A|B），读作“在B条件下A的概率”。
-设A，B 是两个事件，且A不是不可能事件，则称为在事件A发生的条件下，事件B发生的条件概率。一般地，，且它满足以下三条件：（1）非负性；（2）规范性；（3）可列可加性。
-如上图求：红球来自A的概率P（A|红） =  P（A红）/P（红）
-全概率公式全概率公式为概率论中的重要公式，它将">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%872.jpg">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%BC%94.png">
-<meta property="og:updated_time" content="2017-01-22T01:18:47.906Z">
+<meta property="og:description" content="安装Kudu的要求：1.操作系统和版本支持Cloudera。2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。
+通过">
+<meta property="og:updated_time" content="2017-03-02T12:05:41.781Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法推演">
-<meta name="twitter:description" content="条件概率事件A在另外一个事件B已经发生条件下的发生概率。条件概率表示为P（A|B），读作“在B条件下A的概率”。
-设A，B 是两个事件，且A不是不可能事件，则称为在事件A发生的条件下，事件B发生的条件概率。一般地，，且它满足以下三条件：（1）非负性；（2）规范性；（3）可列可加性。
-如上图求：红球来自A的概率P（A|红） =  P（A红）/P（红）
-全概率公式全概率公式为概率论中的重要公式，它将">
-<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png">
+<meta name="twitter:title" content="CDH Kudu安装及介绍">
+<meta name="twitter:description" content="安装Kudu的要求：1.操作系统和版本支持Cloudera。2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。
+通过">
 
 
 
@@ -136,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/01/10/算法推演/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/01/CDH Kudu安装及介绍/"/>
 
 
 
 
 
-  <title> 算法推演 | Hexo </title>
+  <title> CDH Kudu安装及介绍 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -321,7 +309,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/10/算法推演/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/01/CDH Kudu安装及介绍/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -345,7 +333,7 @@
             
             
               
-                算法推演
+                CDH Kudu安装及介绍
               
             
           </h1>
@@ -358,8 +346,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-10T21:13:30+08:00">
-                2017-01-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-01T14:00:00+08:00">
+                2017-03-01
               </time>
             
 
@@ -377,8 +365,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/cloudera/" itemprop="url" rel="index">
+                    <span itemprop="name">cloudera</span>
                   </a>
                 </span>
 
@@ -392,8 +380,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/01/10/算法推演/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/10/算法推演/" itemprop="commentCount"></span>
+                <a href="/2017/03/01/CDH Kudu安装及介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/01/CDH Kudu安装及介绍/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -419,18 +407,43 @@
       
 
       
-        <p><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" alt="此处输入图片的描述"></p>
-<h2 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h2><p>事件A在另外一个事件B已经发生条件下的发生概率。条件概率表示为P（A|B），读作“在B条件下A的概率”。</p>
-<p>设A，B 是两个事件，且A不是不可能事件，则称<img src="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" alt="此处输入图片的描述"><br>为在事件A发生的条件下，事件B发生的条件概率。一般地，<img src="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%872.jpg" alt="此处输入图片的描述"><br>，且它满足以下三条件：<br>（1）非负性；（2）规范性；（3）可列可加性。</p>
-<p>如上图<br>求：红球来自A的概率<br>P（A|红） =  P（A红）/P（红）</p>
-<h2 id="全概率公式"><a href="#全概率公式" class="headerlink" title="全概率公式"></a>全概率公式</h2><p>全概率公式为概率论中的重要公式，它将对一复杂事件A的概率求解问题转化为了在不同情况下发生的简单事件的概率的求和问题。</p>
-<p>公式表示若事件A1，A2，…，An构成一个完备事件组且都有正概率，则对任意一个事件B都有公式成立。</p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F.png" alt="此处输入图片的描述"></p>
-<p>如上图<br>求：红球的概率<br>P（红） =  P（A红）+P（B红）</p>
-<h2 id="贝叶斯定理"><a href="#贝叶斯定理" class="headerlink" title="贝叶斯定理"></a>贝叶斯定理</h2><p>贝叶斯定理是关于随机事件A和B的条件概率（或边缘概率）的一则定理。<br>其中P(A|B)是在B发生的情况下A发生的可能性。</p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%BC%94.png" alt="此处输入图片的描述"></p>
-<h2 id="欧几里得定理"><a href="#欧几里得定理" class="headerlink" title="欧几里得定理"></a>欧几里得定理</h2><p>二维空间的公式<br>0ρ = sqrt( (x1-x2)^2+(y1-y2)^2 )　|x| = √( x2 + y2 )<br>三维空间的公式<br>0ρ = √( (x1-x2)^2+(y1-y2)^2+(z1-z2)^2 )　|x| = √( x2 + y2 + z2 )<br>n维空间的公式<br>n维欧氏空间是一个点集,它的每个点 X 或向量 x 可以表示为 (x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>，x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>，…，x[n]) ，其中 x<a href="i = 1，2，…，n">i</a> 是实数，称为 X 的第i个坐标。<br>两个点 A = (a<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>，a<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>，…，a[n]) 和 B = (b<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>，b<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>，…，b[n]) 之间的距离 ρ(A，B) 定义为下面的公式：<br>ρ(A，B) =√ [ ∑( a[i] - b[i] )^2 ] (i = 1，2，…，n)<br>向量 x = (x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>，x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>，…，x[n]) 的自然长度 |x| 定义为下面的公式：<br>|x| = √( x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>^2 + x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>^2 + … + x[n]^2 )</p>
-<h2 id="线性方程"><a href="#线性方程" class="headerlink" title="线性方程"></a>线性方程</h2><p>线性方程也称一次方程。指未知数都是一次的方程。其一般的形式是ax+by+…+cz+d=0。线性方程的本质是等式两边乘以任何相同的非零数，方程的本质都不受影响。<br>ax + by = c<br>机器学习里面用逼近论来算</p>
+        <h2 id="安装Kudu的要求："><a href="#安装Kudu的要求：" class="headerlink" title="安装Kudu的要求："></a>安装Kudu的要求：</h2><p>1.操作系统和版本支持Cloudera。<br>2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。<br>3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。</p>
+<h2 id="通过Cloudera-Manager安装Kudu"><a href="#通过Cloudera-Manager安装Kudu" class="headerlink" title="通过Cloudera Manager安装Kudu"></a>通过Cloudera Manager安装Kudu</h2><p>首先通过Cloudera Manager服务下载Kudu的定制服务描述符（CSD）文件并上传到/opt/cloudera/csd/<br>用以下操作系统命令重启Cloudera管理服务器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo service cloudera-scm-server restart</div></pre></td></tr></table></figure>
+<p>接下来可以通过以下两种方式安装</p>
+<h3 id="Using-Parcels"><a href="#Using-Parcels" class="headerlink" title="Using Parcels"></a>Using Parcels</h3><p>1.Hosts &gt; Parcels &gt; Kudu &gt; Download<br>2.Locations &gt; Distribute &gt; Activate<br>3.重启集群<br>4.Actions &gt; Add a Service. &gt; Kudu (Beta) &gt; Continue<br>5.选择一个主机作为master，一些主机作为tablet 服务角色。一个主机即可以是master又可以是tablet，但是对于大集群来说会造成性能问题。Kudu的master不是一个资源密集型的，被其他相似的处理例如：HDFS的namenode，YARN的ResourceManager收集。选择完主机点击Continue<br>6.在masters 和 tablet配置Kudu的存储位置和预写日志（WAL）文件，Cloudera Manager将会创建文件夹。<br>6.1 你可以使用相同的目录存储数据和WALs<br>6.2 你不可以将WALs 目录设置为数据的子目录<br>6.3 如果你的主机及是master又是tablet，配置不同的master和tablet服务，例如 /data/kudu/master and /data/kudu/tserver.</p>
+<p>6.4 如果你选择的文件系统不支持打洞技术;服务启动失败<br>6.4.1 退出配置向导，点击Cloudera Manager 接口上的Cloudera 图标<br>6.4.2 到 Kudu (Beta) 服务<br>6.4.3 Configuration &gt;  Kudu (Beta) Service Advanced Configuration Snippet (Safety Valve) &gt; gflagfile<br>5.4.4 添加如下内容并保存改变<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--block_manager=file</div></pre></td></tr></table></figure></p>
+<p>Note: The file block manager does not perform well at scale and should only be used for small-scale development and testing.</p>
+<p>7.如果你不需要退出，点击Continue。Kudu的master和tablet服务已经启动。否则点击<br> Kudu (Beta) &gt; Actions &gt; Start.<br>8.使用其中一种方法验证服务：<br>8.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>8.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/<br>9.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>10.管理角色。Kudu (Beta) 服务 使用 Actions 来停止，启动，重启或者其他管理服务</_host_name_></_host_name_></p>
+<h3 id="Using-Packages"><a href="#Using-Packages" class="headerlink" title="Using Packages"></a>Using Packages</h3><p>Kudu 仓库 和 Package 链接</p>
+<table>
+<thead>
+<tr>
+<th>Operating System</th>
+<th style="text-align:left">Repository Package</th>
+<th style="text-align:left">Individual Packages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RHEL</td>
+<td style="text-align:left">RHEL 6</td>
+<td style="text-align:left">RHEL 6</td>
+</tr>
+<tr>
+<td>Ubuntu</td>
+<td style="text-align:left">Trusty</td>
+<td style="text-align:left">Trusty</td>
+</tr>
+</tbody>
+</table>
+<p>1.1 下载Kudu的yum源文件到：RHEL（/etc/yum.repos.d/）  或者 Ubuntu（/etc/apt/sources.list.d/）<br>1.2 如果你需要C++客户端开发库或Kudu的SDK，RHEL kudu-client-devel 包 或 Ubuntu的 libkuduclient0 and libkuduclient-dev 包<br>1.3 如果你使用Cloudera Manager，不安装 kudu-master 和 kudu-tserver包，Cloudera Manager使用Kudu 提供操作系统启动脚本。</p>
+<p>2.群集上安装Kudu服务。去你想安装Kudu所在的集群。单击 Actions &gt; Add a Service &gt; Kudu &gt; Continue。</p>
+<p>3.选择一个主机作为master，一些主机作为tablet 服务角色。一个主机即可以是master又可以是tablet，但是对于大集群来说会造成性能问题。Kudu的master不是一个资源密集型的，被其他相似的处理例如：HDFS的namenode，YARN的ResourceManager收集。选择完主机点击Continue<br>4.在masters 和 tablet配置Kudu的存储位置和预写日志（WAL）文件，Cloudera Manager将会创建文件夹。<br>4.1 你可以使用相同的目录存储数据和WALs<br>4.2 你不可以将WALs 目录设置为数据的子目录<br>5.3 如果你的主机及是master又是tablet，配置不同的master和tablet服务，例如 /data/kudu/master and /data/kudu/tserver.</p>
+<p>5 如果你选择的文件系统不支持打洞技术;服务启动失败<br>点击 Continue &gt;  Kudu masters 和 tablet 启动。否则到Kudu的服务上点击 Actions &gt; Start.</p>
+<p>6.使用其中一种方法验证服务：<br>6.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>6.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/ </_host_name_></_host_name_></p>
+<p>7.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>8.管理角色。Kudu 服务 使用 Actions 来停止，启动，重启或者其他管理服务</p>
+<p>本文参考页面：<br><a href="https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html" target="_blank" rel="external">https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html</a></p>
 
       
     </div>
@@ -475,7 +488,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/cloudera/" rel="tag"># cloudera</a>
           
         </div>
       
@@ -484,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/10/python 初探/" rel="next" title="python 初探">
-                <i class="fa fa-chevron-left"></i> python 初探
+              <a href="/2017/02/23/canal分析binlog/" rel="next" title="canal分析binlog">
+                <i class="fa fa-chevron-left"></i> canal分析binlog
               </a>
             
           </div>
@@ -493,10 +506,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/11/机器学习-预测泰坦尼克号乘客生还率/" rel="prev" title="机器学习-预测泰坦尼克号乘客生还率">
-                机器学习-预测泰坦尼克号乘客生还率 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -528,8 +537,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/01/10/算法推演/"
-           data-title="算法推演" data-url="http://yoursite.com/2017/01/10/算法推演/">
+      <div class="ds-thread" data-thread-key="2017/03/01/CDH Kudu安装及介绍/"
+           data-title="CDH Kudu安装及介绍" data-url="http://yoursite.com/2017/03/01/CDH Kudu安装及介绍/">
       </div>
     
   </div>
@@ -626,7 +635,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#条件概率"><span class="nav-number">1.</span> <span class="nav-text">条件概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全概率公式"><span class="nav-number">2.</span> <span class="nav-text">全概率公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贝叶斯定理"><span class="nav-number">3.</span> <span class="nav-text">贝叶斯定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里得定理"><span class="nav-number">4.</span> <span class="nav-text">欧几里得定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性方程"><span class="nav-number">5.</span> <span class="nav-text">线性方程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Kudu的要求："><span class="nav-number">1.</span> <span class="nav-text">安装Kudu的要求：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过Cloudera-Manager安装Kudu"><span class="nav-number">2.</span> <span class="nav-text">通过Cloudera Manager安装Kudu</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Parcels"><span class="nav-number">2.1.</span> <span class="nav-text">Using Parcels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Packages"><span class="nav-number">2.2.</span> <span class="nav-text">Using Packages</span></a></li></ol></li></ol></div>
             
 
           </div>
