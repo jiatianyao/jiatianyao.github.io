@@ -312,7 +312,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -409,46 +409,16 @@
 
       
         
-          
-            <h2 id="安装Kudu的要求："><a href="#安装Kudu的要求：" class="headerlink" title="安装Kudu的要求："></a>安装Kudu的要求：</h2><p>1.操作系统和版本支持Cloudera。<br>2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。<br>3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。</p>
+          <h2 id="安装Kudu的要求："><a href="#安装Kudu的要求：" class="headerlink" title="安装Kudu的要求："></a>安装Kudu的要求：</h2><p>1.操作系统和版本支持Cloudera。<br>2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。<br>3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。</p>
 <h2 id="通过Cloudera-Manager安装Kudu"><a href="#通过Cloudera-Manager安装Kudu" class="headerlink" title="通过Cloudera Manager安装Kudu"></a>通过Cloudera Manager安装Kudu</h2><p>首先通过Cloudera Manager服务下载Kudu的定制服务描述符（CSD）文件并上传到/opt/cloudera/csd/<br>用以下操作系统命令重启Cloudera管理服务器。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo service cloudera-scm-server restart</div></pre></td></tr></table></figure>
-<p>接下来可以通过以下两种方式安装</p>
-<h3 id="Using-Parcels"><a href="#Using-Parcels" class="headerlink" title="Using Parcels"></a>Using Parcels</h3><p>1.Hosts &gt; Parcels &gt; Kudu &gt; Download<br>2.Locations &gt; Distribute &gt; Activate<br>3.重启集群<br>4.Actions &gt; Add a Service. &gt; Kudu (Beta) &gt; Continue<br>5.选择一个主机作为master，一些主机作为tablet 服务角色。一个主机即可以是master又可以是tablet，但是对于大集群来说会造成性能问题。Kudu的master不是一个资源密集型的，被其他相似的处理例如：HDFS的namenode，YARN的ResourceManager收集。选择完主机点击Continue<br>6.在masters 和 tablet配置Kudu的存储位置和预写日志（WAL）文件，Cloudera Manager将会创建文件夹。<br>6.1 你可以使用相同的目录存储数据和WALs<br>6.2 你不可以将WALs 目录设置为数据的子目录<br>6.3 如果你的主机及是master又是tablet，配置不同的master和tablet服务，例如 /data/kudu/master and /data/kudu/tserver.</p>
-<p>6.4 如果你选择的文件系统不支持打洞技术;服务启动失败<br>6.4.1 退出配置向导，点击Cloudera Manager 接口上的Cloudera 图标<br>6.4.2 到 Kudu (Beta) 服务<br>6.4.3 Configuration &gt;  Kudu (Beta) Service Advanced Configuration Snippet (Safety Valve) &gt; gflagfile<br>5.4.4 添加如下内容并保存改变<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--block_manager=file</div></pre></td></tr></table></figure></p>
-<p>Note: The file block manager does not perform well at scale and should only be used for small-scale development and testing.</p>
-<p>7.如果你不需要退出，点击Continue。Kudu的master和tablet服务已经启动。否则点击<br> Kudu (Beta) &gt; Actions &gt; Start.<br>8.使用其中一种方法验证服务：<br>8.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>8.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/<br>9.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>10.管理角色。Kudu (Beta) 服务 使用 Actions 来停止，启动，重启或者其他管理服务</_host_name_></_host_name_></p>
-<h3 id="Using-Packages"><a href="#Using-Packages" class="headerlink" title="Using Packages"></a>Using Packages</h3><p>Kudu 仓库 和 Package 链接</p>
-<table>
-<thead>
-<tr>
-<th>Operating System</th>
-<th style="text-align:left">Repository Package</th>
-<th style="text-align:left">Individual Packages</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RHEL</td>
-<td style="text-align:left">RHEL 6</td>
-<td style="text-align:left">RHEL 6</td>
-</tr>
-<tr>
-<td>Ubuntu</td>
-<td style="text-align:left">Trusty</td>
-<td style="text-align:left">Trusty</td>
-</tr>
-</tbody>
-</table>
-<p>1.1 下载Kudu的yum源文件到：RHEL（/etc/yum.repos.d/）  或者 Ubuntu（/etc/apt/sources.list.d/）<br>1.2 如果你需要C++客户端开发库或Kudu的SDK，RHEL kudu-client-devel 包 或 Ubuntu的 libkuduclient0 and libkuduclient-dev 包<br>1.3 如果你使用Cloudera Manager，不安装 kudu-master 和 kudu-tserver包，Cloudera Manager使用Kudu 提供操作系统启动脚本。</p>
-<p>2.群集上安装Kudu服务。去你想安装Kudu所在的集群。单击 Actions &gt; Add a Service &gt; Kudu &gt; Continue。</p>
-<p>3.选择一个主机作为master，一些主机作为tablet 服务角色。一个主机即可以是master又可以是tablet，但是对于大集群来说会造成性能问题。Kudu的master不是一个资源密集型的，被其他相似的处理例如：HDFS的namenode，YARN的ResourceManager收集。选择完主机点击Continue<br>4.在masters 和 tablet配置Kudu的存储位置和预写日志（WAL）文件，Cloudera Manager将会创建文件夹。<br>4.1 你可以使用相同的目录存储数据和WALs<br>4.2 你不可以将WALs 目录设置为数据的子目录<br>5.3 如果你的主机及是master又是tablet，配置不同的master和tablet服务，例如 /data/kudu/master and /data/kudu/tserver.</p>
-<p>5 如果你选择的文件系统不支持打洞技术;服务启动失败<br>点击 Continue &gt;  Kudu masters 和 tablet 启动。否则到Kudu的服务上点击 Actions &gt; Start.</p>
-<p>6.使用其中一种方法验证服务：<br>6.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>6.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/ </_host_name_></_host_name_></p>
-<p>7.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>8.管理角色。Kudu 服务 使用 Actions 来停止，启动，重启或者其他管理服务</p>
-<p>本文参考页面：<br><a href="https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html" target="_blank" rel="external">https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html</a></p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/01/CDH Kudu安装及介绍/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -490,7 +460,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -587,39 +557,16 @@
 
       
         
-          
-            <h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><p>linux服务器：centos7.1<br>mysql : 5.7.10<br>canal : 1.0.23</p>
+          <h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><p>linux服务器：centos7.1<br>mysql : 5.7.10<br>canal : 1.0.23</p>
 <h2 id="一-centos7下安装mysql"><a href="#一-centos7下安装mysql" class="headerlink" title="一.centos7下安装mysql"></a>一.centos7下安装mysql</h2><h4 id="1-下载mysql的repo源"><a href="#1-下载mysql的repo源" class="headerlink" title="1.下载mysql的repo源"></a>1.下载mysql的repo源</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure>
 <h4 id="2-安装mysql-community-release-el7-5-noarch-rpm包"><a href="#2-安装mysql-community-release-el7-5-noarch-rpm包" class="headerlink" title="2.安装mysql-community-release-el7-5.noarch.rpm包"></a>2.安装mysql-community-release-el7-5.noarch.rpm包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -ivh mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure>
-<h4 id="3-安装mysql"><a href="#3-安装mysql" class="headerlink" title="3.安装mysql"></a>3.安装mysql</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server</div></pre></td></tr></table></figure>
-<h4 id="4-设置用户"><a href="#4-设置用户" class="headerlink" title="4.设置用户"></a>4.设置用户</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE USER &apos;canal&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;canal&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;canal&apos;@&apos;localhost&apos; WITH GRANT OPTION;</div><div class="line">CREATE USER &apos;canal&apos;@&apos;%&apos; IDENTIFIED BY &apos;canal&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;canal&apos;@&apos;%&apos; WITH GRANT OPTION;</div><div class="line">flush privileges;</div></pre></td></tr></table></figure>
-<h4 id="5-修改配置文件"><a href="#5-修改配置文件" class="headerlink" title="5.修改配置文件"></a>5.修改配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line">log-bin=mysql-bin #添加这一行就ok</div><div class="line">binlog-format=ROW #选择row模式</div><div class="line">server_id=1 #配置mysql replaction需要定义，不能和canal的slaveId重复</div></pre></td></tr></table></figure>
-<h2 id="二-安装canal"><a href="#二-安装canal" class="headerlink" title="二.安装canal"></a>二.安装canal</h2><h4 id="1-下载canal"><a href="#1-下载canal" class="headerlink" title="1.下载canal"></a>1.下载canal</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/alibaba/canal/releases/download/v1.0.23/canal.deployer-1.0.23.tar.gz</div></pre></td></tr></table></figure>
-<h4 id="2-解压缩"><a href="#2-解压缩" class="headerlink" title="2.解压缩"></a>2.解压缩</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir /root/canal</div><div class="line">tar zxvf canal.deployer-1.0.23.tar.gz  -C /root/canal</div></pre></td></tr></table></figure>
-<h4 id="3-修改配置文件-如果是访问本机，并且用户密码都为canal则不需要修改配置文件"><a href="#3-修改配置文件-如果是访问本机，并且用户密码都为canal则不需要修改配置文件" class="headerlink" title="3.修改配置文件(如果是访问本机，并且用户密码都为canal则不需要修改配置文件)"></a>3.修改配置文件(如果是访问本机，并且用户密码都为canal则不需要修改配置文件)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /root/canal/conf/example/instance.properties</div></pre></td></tr></table></figure>
-<h4 id="4-启动"><a href="#4-启动" class="headerlink" title="4.启动"></a>4.启动</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh /root/canal/bin/startup.sh</div></pre></td></tr></table></figure>
-<h4 id="5-查看日志"><a href="#5-查看日志" class="headerlink" title="5.查看日志"></a>5.查看日志</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@zhm1 ~]# cat /root/canal/logs/canal/canal.log</div><div class="line">OpenJDK 64-Bit Server VM warning: ignoring option PermSize=96m; support was removed in 8.0</div><div class="line">OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0</div><div class="line">OpenJDK 64-Bit Server VM warning: UseCMSCompactAtFullCollection is deprecated and will likely be removed in a future release.</div><div class="line">2017-02-22 17:40:08.901 [main] INFO  com.alibaba.otter.canal.deployer.CanalLauncher - ## start the canal server.</div><div class="line">2017-02-22 17:40:09.069 [main] INFO  com.alibaba.otter.canal.deployer.CanalController - ## start the canal server[192.168.118.128:11111]</div><div class="line">2017-02-22 17:40:09.758 [main] INFO  com.alibaba.otter.canal.deployer.CanalLauncher - ## the canal server is running now ......</div></pre></td></tr></table></figure>
-<p>具体instance的日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@zhm1 ~]# cat /root/canal/logs/example/example.log</div></pre></td></tr></table></figure></p>
-<h4 id="6-关闭"><a href="#6-关闭" class="headerlink" title="6.关闭"></a>6.关闭</h4><p>sh /root/canal/bin/stop.sh</p>
-<h2 id="三-写客户端代码"><a href="#三-写客户端代码" class="headerlink" title="三.写客户端代码"></a>三.写客户端代码</h2><h4 id="1-在maven的setting-xml加入阿里的镜像"><a href="#1-在maven的setting-xml加入阿里的镜像" class="headerlink" title="1.在maven的setting.xml加入阿里的镜像"></a>1.在maven的setting.xml加入阿里的镜像</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;mirror&gt;</div><div class="line">	&lt;id&gt;alimaven&lt;/id&gt;</div><div class="line">	&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</div><div class="line">	&lt;name&gt;aliyun maven&lt;/name&gt;</div><div class="line">	&lt;url&gt;http://maven.aliyun.com/nexus/content/repositories/central/&lt;/url&gt;</div><div class="line">&lt;/mirror&gt;</div></pre></td></tr></table></figure>
-<h4 id="2-创建初始项目"><a href="#2-创建初始项目" class="headerlink" title="2.创建初始项目"></a>2.创建初始项目</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn archetype:generate -DgroupId=com.alibaba.otter -DartifactId=canal.sample</div></pre></td></tr></table></figure>
-<h4 id="3-pom文件增加"><a href="#3-pom文件增加" class="headerlink" title="3.pom文件增加"></a>3.pom文件增加</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;com.alibaba.otter&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;canal.client&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;1.0.12&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<h4 id="4-ClientSample代码"><a href="#4-ClientSample代码" class="headerlink" title="4. ClientSample代码"></a>4. ClientSample代码</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line">package com.alibaba.otter;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by Administrator on 2017/2/23.</div><div class="line"> */</div><div class="line">import java.net.InetSocketAddress;</div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">import com.alibaba.otter.canal.client.CanalConnector;</div><div class="line">import com.alibaba.otter.canal.client.CanalConnectors;</div><div class="line">import com.alibaba.otter.canal.common.utils.AddressUtils;</div><div class="line">import com.alibaba.otter.canal.protocol.Message;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.Column;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.Entry;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.EntryType;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.EventType;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.RowChange;</div><div class="line">import com.alibaba.otter.canal.protocol.CanalEntry.RowData;</div><div class="line"></div><div class="line">public class  ClientSample &#123;</div><div class="line"></div><div class="line">    public static void main(String args[]) &#123;</div><div class="line">        // 创建链接</div><div class="line">        CanalConnector connector = CanalConnectors.newSingleConnector(</div><div class="line">            new InetSocketAddress("192.168.118.128",//AddressUtils.getHostIp(),</div><div class="line">                11111), "example", "", "");</div><div class="line">        int batchSize = 1000;</div><div class="line">        int emptyCount = 0;</div><div class="line">        try &#123;</div><div class="line">            connector.connect();</div><div class="line">            connector.subscribe(".*\\..*");</div><div class="line">            connector.rollback();</div><div class="line">            int totalEmptyCount = 120;</div><div class="line">            while (emptyCount &lt; totalEmptyCount) &#123;</div><div class="line">                Message message = connector.getWithoutAck(batchSize);                            // 获取指定数量的数据</div><div class="line">                long batchId = message.getId();</div><div class="line">                int size = message.getEntries().size();</div><div class="line">                if (batchId == -1 || size == 0) &#123;</div><div class="line">                    emptyCount++;</div><div class="line">                    System.out.println("empty count : " + emptyCount);</div><div class="line">                    try &#123;</div><div class="line">                        Thread.sleep(1000);</div><div class="line">                    &#125; catch (InterruptedException e) &#123;</div><div class="line">                    &#125;</div><div class="line">                &#125; else &#123;</div><div class="line">                    emptyCount = 0;</div><div class="line">                    // System.out.printf("message[batchId=%s,size=%s] \n", batchId, size);</div><div class="line">                    printEntry(message.getEntries());</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                connector.ack(batchId); // 提交确认</div><div class="line">                // connector.rollback(batchId); // 处理失败, 回滚数据</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            System.out.println("empty too many times, exit");</div><div class="line">        &#125; finally &#123;</div><div class="line">            connector.disconnect();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static void printEntry(List&lt;Entry&gt; entrys) &#123;</div><div class="line">        for (Entry entry : entrys) &#123;</div><div class="line">            if (entry.getEntryType() == EntryType.TRANSACTIONBEGIN || </div><div class="line">                entry.getEntryType() == EntryType.TRANSACTIONEND) &#123;</div><div class="line">                continue;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            RowChange rowChage = null;</div><div class="line">            try &#123;</div><div class="line">                rowChage = RowChange.parseFrom(entry.getStoreValue());</div><div class="line">            &#125; catch (Exception e) &#123;</div><div class="line">                throw new RuntimeException("ERROR ## parser of eromanga-event has an error,</div><div class="line">                                            data:" + entry.toString(),e);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            EventType eventType = rowChage.getEventType();</div><div class="line">            System.out.println(String.format("================&gt; binlog[%s:%s] ,</div><div class="line">                                name[%s,%s] , eventType : %s",</div><div class="line">                    entry.getHeader().getLogfileName(), entry.getHeader().getLogfileOffset(),</div><div class="line">                    entry.getHeader().getSchemaName(), entry.getHeader().getTableName(),</div><div class="line">                    eventType));</div><div class="line"></div><div class="line">            for (RowData rowData : rowChage.getRowDatasList()) &#123;</div><div class="line">                if (eventType == EventType.DELETE) &#123;</div><div class="line">                    printColumn(rowData.getBeforeColumnsList());</div><div class="line">                &#125; else if (eventType == EventType.INSERT) &#123;</div><div class="line">                    printColumn(rowData.getAfterColumnsList());</div><div class="line">                &#125; else &#123;</div><div class="line">                    System.out.println("-------&gt; before");</div><div class="line">                    printColumn(rowData.getBeforeColumnsList());</div><div class="line">                    System.out.println("-------&gt; after");</div><div class="line">                    printColumn(rowData.getAfterColumnsList());</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private static void printColumn(List&lt;Column&gt; columns) &#123;</div><div class="line">        for (Column column : columns) &#123;</div><div class="line">            System.out.println(column.getName() + " : " + column.getValue() + "    update=" +                                       column.getUpdated());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="5-mysql下执行操作"><a href="#5-mysql下执行操作" class="headerlink" title="5. mysql下执行操作"></a>5. mysql下执行操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">mysql&gt; use test;</div><div class="line">Database changed</div><div class="line">mysql&gt; CREATE TABLE `xdual` (</div><div class="line">    -&gt;   `ID` int(11) NOT NULL AUTO_INCREMENT,</div><div class="line">    -&gt;   `X` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,</div><div class="line">    -&gt;   PRIMARY KEY (`ID`)</div><div class="line">    -&gt; ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ;</div><div class="line">Query OK, 0 rows affected (0.06 sec)</div><div class="line"></div><div class="line">mysql&gt; insert into xdual(id,x) values(4,now());</div><div class="line">Query OK, 1 row affected (0.06 sec)</div></pre></td></tr></table></figure>
-<p>可以从控制台中看到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">empty count : 1</div><div class="line">empty count : 2</div><div class="line">empty count : 3</div><div class="line">empty count : 4</div><div class="line">================&gt; binlog[mysql-bin.001946:313661577] , name[test,xdual] , eventType : INSERT</div><div class="line">ID : 4    update=true</div><div class="line">X : 2017-02-23 14:20:00    update=true</div></pre></td></tr></table></figure></p>
-<h2 id="四-canal集群搭建"><a href="#四-canal集群搭建" class="headerlink" title="四.canal集群搭建"></a>四.canal集群搭建</h2><h4 id="1-安装zookeeper"><a href="#1-安装zookeeper" class="headerlink" title="1.安装zookeeper"></a>1.安装zookeeper</h4><p>略</p>
-<h4 id="2-修改配置文件"><a href="#2-修改配置文件" class="headerlink" title="2.修改配置文件"></a>2.修改配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">vi /root/canal/conf/canal.properties</div><div class="line">canal.zkServers=1.1.1.1:2181,1.1.1.2:2181,1.1.1.3:2181</div><div class="line">canal.instance.global.spring.xml = classpath:spring/default-instance.xml</div><div class="line"></div><div class="line">vi /root/canal/conf/example/instance.properties</div><div class="line">canal.instance.mysql.slaveId = 1234  另外一个机器改成1235与1234不同即可</div></pre></td></tr></table></figure>
-<p>分别在两台机器上启动，发现只有一台机器logs下面有example目录，并且显示启动成功</p>
-<h4 id="3-进入到zkClient查看状态"><a href="#3-进入到zkClient查看状态" class="headerlink" title="3.进入到zkClient查看状态"></a>3.进入到zkClient查看状态</h4><h5 id="获取正在运行的canal-server"><a href="#获取正在运行的canal-server" class="headerlink" title="获取正在运行的canal server"></a>获取正在运行的canal server</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get /otter/canal/destinations/example/running</div></pre></td></tr></table></figure>
-<h5 id="获取正在连接的canal-client"><a href="#获取正在连接的canal-client" class="headerlink" title="获取正在连接的canal client"></a>获取正在连接的canal client</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get /otter/canal/destinations/example/1001/running</div></pre></td></tr></table></figure>
-<h5 id="获取当前最后一次消费车成功的binlog"><a href="#获取当前最后一次消费车成功的binlog" class="headerlink" title="获取当前最后一次消费车成功的binlog"></a>获取当前最后一次消费车成功的binlog</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">get /otter/canal/destinations/example/1001/cursor</div></pre></td></tr></table></figure>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/zookeeper_canal.png" alt="此处输入图片的描述"></p>
-<h4 id="4-客户端代码"><a href="#4-客户端代码" class="headerlink" title="4.客户端代码"></a>4.客户端代码</h4><p>修改如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CanalConnector connector = CanalConnectors.newClusterConnector(<span class="string">"1.1.1.1:2181,1.1.1.2:2181,1.1.1.3:2181"</span>, <span class="string">"example"</span>, <span class="string">""</span>, <span class="string">""</span>);</div></pre></td></tr></table></figure></p>
-<p>代码启动<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%90%AF%E5%8A%A8.png" alt="此处输入图片的描述"></p>
-<p>停止一个canal<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%81%9C%E6%AD%A2%E4%B8%80%E4%B8%AAcanal.png" alt="此处输入图片的描述"></p>
-<p>全部停止canal<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E9%83%A8%E5%81%9C%E6%AD%A2.png" alt="此处输入图片的描述"></p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/23/canal分析binlog/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -661,7 +608,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -758,27 +705,17 @@
 
       
         
-          
-            <p>昨日已经发布storm1.0.3版本，来玩一玩</p>
+          <p>昨日已经发布storm1.0.3版本，来玩一玩</p>
 <h2 id="环境："><a href="#环境：" class="headerlink" title="环境："></a>环境：</h2><p>zookeeper3.4.9节点：storm01，storm02，storm03<br>storm1.0.3 nimbus节点storm01，supervisor节点storm02，storm03</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[storm@localhost app]$ wget http://apache.fayea.com/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz</div><div class="line">[storm@localhost app]$ tar zxvf zookeeper-3.4.9.tar.gz</div><div class="line">[storm@localhost app]$ ln -s -f zookeeper-3.4.9 zookeeper</div><div class="line">[storm@localhost app]$ mkdir zookeeper/data</div><div class="line">[storm@localhost app]$ cd zookeeper/conf/</div><div class="line">[storm@localhost conf]$ cp zoo_sample.cfg zoo.cfg</div><div class="line">[storm@localhost conf]$ vi zoo.cfg</div></pre></td></tr></table></figure>
 <p>修改dataDir<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dataDir=/home/storm/app/zookeeper/data</div><div class="line">server.1=storm01:2888:3888</div><div class="line">server.2=storm02:2888:3888</div><div class="line">server.3=storm03:2888:3888</div></pre></td></tr></table></figure></p>
-<p>在storm01下执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[storm@storm01 conf]# cd /home/storm/app/zookeeper/data</div><div class="line">[storm@storm01 data]# echo 1 &gt; myid</div></pre></td></tr></table></figure></p>
-<p>在storm02下执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[storm@storm01 conf]# cd /home/storm/app/zookeeper/data</div><div class="line">[storm@storm01 data]# echo 2 &gt; myid</div></pre></td></tr></table></figure></p>
-<p>在storm03下执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[storm@storm01 conf]# cd /home/storm/app/zookeeper/data</div><div class="line">[storm@storm01 data]# echo 3 &gt; myid</div></pre></td></tr></table></figure></p>
-<h2 id="部署storm"><a href="#部署storm" class="headerlink" title="部署storm"></a>部署storm</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[storm@localhost app]$ wget https://mirrors.tuna.tsinghua.edu.cn/apache/storm/apache-storm-1.0.3/apache-storm-1.0.3.tar.gz</div><div class="line">[storm@localhost app]$ tar zxvf apache-storm-1.0.3.tar.gz</div><div class="line">[storm@localhost app]$ ln -s -f apache-storm-1.0.3 storm</div></pre></td></tr></table></figure>
-<p>修改配置文件，jdk安装此处略<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[storm@localhost app]$ su</div><div class="line">[root@localhost app]# echo &quot;export JAVA_HOME=/home/storm/app/jdk&quot;&gt;&gt; /etc/profile</div><div class="line">[root@localhost app]# echo &quot;export ZOOKEEPER_HOME=/home/storm/app/zookeeper&quot;&gt;&gt; /etc/profile</div><div class="line">[root@localhost app]# echo &quot;export STORM_HOME=/home/storm/app/storm&quot;&gt;&gt; /etc/profile</div><div class="line">[root@localhost app]# source /etc/profile</div><div class="line">[root@localhost app]# echo &quot;export PATH=$&#123;JAVA_HOME&#125;/bin:$&#123;ZOOKEEPER_HOME&#125;/bin:$&#123;STORM_HOME&#125;/bin:$PATH&quot;&gt;&gt; /etc/profile</div><div class="line">[root@localhost app]# source /etc/profile</div><div class="line">[root@localhost app]# su storm</div></pre></td></tr></table></figure></p>
-<p>修改stom配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[storm@localhost app]$ cd storm/conf</div><div class="line">[storm@localhost conf]$ vi storm.yaml</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">storm.zookeeper.servers:</div><div class="line">     - &quot;storm01&quot;</div><div class="line">     - &quot;storm02&quot;</div><div class="line">     - &quot;storm03&quot;</div><div class="line">storm.local.dir: &quot;/home/storm/app/storm/data&quot;</div><div class="line">storm.zookeeper.root: &quot;/storm&quot;  </div><div class="line">nimbus.seeds: [&quot;storm01&quot;]</div><div class="line">supervisor.slots.ports:</div><div class="line">    - 6700</div><div class="line">    - 6701</div><div class="line">    - 6702</div><div class="line">    - 6703</div></pre></td></tr></table></figure>
-<h2 id="启动zookeeper，在三个节点分别执行如下命令"><a href="#启动zookeeper，在三个节点分别执行如下命令" class="headerlink" title="启动zookeeper，在三个节点分别执行如下命令"></a>启动zookeeper，在三个节点分别执行如下命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[storm@storm01 zookeeper]$ zkServer.sh start</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[storm@storm02 zookeeper]$ zkServer.sh start</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[storm@storm03 zookeeper]$ zkServer.sh start</div></pre></td></tr></table></figure>
-<h2 id="启动storm集群"><a href="#启动storm集群" class="headerlink" title="启动storm集群"></a>启动storm集群</h2><p>在storm01节点上启动nimbus，ui，logviewer ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[storm@storm01 zookeeper]$ nohup storm nimbus &amp;</div><div class="line">[storm@storm01 zookeeper]$ nohup storm ui &amp;</div><div class="line">[storm@storm01 zookeeper]$ nohup storm logviewer &amp;</div></pre></td></tr></table></figure></p>
-<p>在stomr02，storm03节点上启动supervisor<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[storm@storm02 zookeeper]$ nohup storm supervisor &amp;</div><div class="line">[storm@storm02 zookeeper]$ nohup storm logviewer &amp;</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[storm@storm03 zookeeper]$ nohup storm supervisor &amp;</div><div class="line">[storm@storm03 zookeeper]$ nohup storm logviewer &amp;</div></pre></td></tr></table></figure>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/storm%E9%9B%86%E7%BE%A4.png" alt="此处输入图片的描述"></p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/15/storm1.0.3集群部署/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -820,7 +757,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -965,7 +902,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1062,9 +999,8 @@
 
       
         
-          
-            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>配置zookeeper略</p>
-<p>下载：<br>wget <a href="http://mirrors.cnnic.cn/apache/storm/apache-storm-1.0.2/apache-storm-1.0.2.tar.gz" target="_blank" rel="external">http://mirrors.cnnic.cn/apache/storm/apache-storm-1.0.2/apache-storm-1.0.2.tar.gz</a></p>
+          <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>配置zookeeper略</p>
+<p>下载：<br>wget <a href="http://mirrors.cnnic.cn/apache/storm/apache-storm-1.0.2/apache-storm-1.0.2.tar.gz">http://mirrors.cnnic.cn/apache/storm/apache-storm-1.0.2/apache-storm-1.0.2.tar.gz</a></p>
 <p>解压，并创建符号链接<br>修改profile配置文件<br>修改配置文件：<br>vi storm.yaml </p>
 <p>添加如下内容<br>storm.zookeeper.servers:</p>
 <pre><code>- &quot;www.hadoop01.com&quot;
@@ -1073,159 +1009,14 @@
 - 6701
 - 6702
 - 6703
-</code></pre><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>启动zookeeper<br>启动nimbus<br>./bin/storm nimbus &amp;<br>启动ui</p>
-<p>./bin/storm ui &amp;</p>
-<h2 id="登录UI："><a href="#登录UI：" class="headerlink" title="登录UI："></a>登录UI：</h2><p><a href="http://www.hadoop01.com:8080/index.html" target="_blank" rel="external">http://www.hadoop01.com:8080/index.html</a><br><img src="http://oh6ybr0jg.bkt.clouddn.com/UI1.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/UI2.png" alt="此处输入图片的描述"><br>启动supervisor<br>./bin/storm supervisor &amp;<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%90%AF%E5%8A%A8supervisor%E5%90%8E.png" alt="此处输入图片的描述"><br>启动logviewer<br>./bin/storm logviewer &amp; </p>
-<h2 id="执行demo"><a href="#执行demo" class="headerlink" title="执行demo"></a>执行demo</h2><p>cd /home/hadoop/apps/storm/storm/examples/storm-starter</p>
-<p>storm jar storm-starter-topologies-1.0.2.jar org.apache.storm.starter.WordCountTopology first-topology</p>
-<p>查看UI<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%8F%90%E4%BA%A4WordCountTopology.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%8F%90%E4%BA%A4WordCountTopology2.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%8F%90%E4%BA%A4WordCountTopology3.png" alt="此处输入图片的描述"><br>点击spout:<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E7%82%B9%E5%87%BBspout%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E8%BF%90%E8%A1%8C%E7%9A%84%E6%9C%BA%E5%99%A8.png" alt="此处输入图片的描述"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/Python春节祝福语自动回复/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Hexo">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/27/Python春节祝福语自动回复/" itemprop="url">
-                  Python春节祝福语自动回复
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-27T20:00:00+08:00">
-                2017-01-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/01/27/Python春节祝福语自动回复/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/Python春节祝福语自动回复/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>首先安装两个库<br>pip install itchat pillow</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
-<p>运行后，扫描生成的二维码即可</p>
-<p>登录成功有以下提示<br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD2.png" alt="此处输入图片的描述"></p>
-
-          
+</code></pre>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/28/storm1.0.2安装/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1267,7 +1058,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1364,8 +1155,7 @@
 
       
         
-          
-            <h2 id="Storm基本概念"><a href="#Storm基本概念" class="headerlink" title="Storm基本概念"></a>Storm基本概念</h2><p>Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。<br>Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止<br><img src="http://storm.apache.org/images/storm-flow.png" alt="此处输入图片的描述"><br>主要版本</p>
+          <h2 id="Storm基本概念"><a href="#Storm基本概念" class="headerlink" title="Storm基本概念"></a>Storm基本概念</h2><p>Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。<br>Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止<br><img src="http://storm.apache.org/images/storm-flow.png" alt="此处输入图片的描述"><br>主要版本</p>
 <table>
 <thead>
 <tr>
@@ -1400,19 +1190,160 @@
 </tr>
 </tbody>
 </table>
-<h2 id="编程模型"><a href="#编程模型" class="headerlink" title="编程模型"></a>编程模型</h2><h3 id="Topology"><a href="#Topology" class="headerlink" title="Topology"></a>Topology</h3><p>一个实时计算应用程序逻辑被封装在Topology对象中， 类似Hadoop中的job， Topology会一直运行直到你显式杀死它</p>
-<p>###DataSource<br>外部数据源</p>
-<h3 id="Spout"><a href="#Spout" class="headerlink" title="Spout"></a>Spout</h3><p>接受外部数据源的组件，将外部数据源转化成Storm内部的数据，以Tuple为基本的传输单元下发给Bolt</p>
-<h3 id="Bolt"><a href="#Bolt" class="headerlink" title="Bolt"></a>Bolt</h3><p>接受Spout发送的数据，或上游的bolt的发送的数据。根据业务逻辑进行处理。发送给下一个Bolt或者是存储到某种介质上。介质可以是Redis可以是mysql，或者其他。</p>
-<h3 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h3><p>Storm内部中数据传输的基本单元，里面封装了一个List对象，用来保存数据。</p>
-<h2 id="StreamGrouping"><a href="#StreamGrouping" class="headerlink" title="StreamGrouping:"></a>StreamGrouping:</h2><h4 id="数据分组策略7种："><a href="#数据分组策略7种：" class="headerlink" title="数据分组策略7种："></a>数据分组策略7种：</h4><p>shuffleGrouping(Random函数),<br>NonGrouping(Random函数,目前和shuffleGrouping一样),<br>FieldGrouping(Hash取模),<br>Local or ShuffleGrouping （本地或随机，优先本地）,<br>Fields grouping（根据Tuple中的某一个Filed或者多个Filed的是值来划分。 比如<br>Stream根据Field为user-id来grouping， 相同user-id值的Tuple会被分<br>发到相同的Task中）,<br>Global grouping（整个Stream会选择一个Task作为分发的目的地， 通常是最新的那<br>个id的Task）<br>Direct grouping（产生数据的Spout/Bolt自己明确决定这个Tuple被Bolt的那些Task所<br>消费）</p>
-<h2 id="Storm优点"><a href="#Storm优点" class="headerlink" title="Storm优点"></a>Storm优点</h2><h4 id="健壮性"><a href="#健壮性" class="headerlink" title="健壮性"></a>健壮性</h4><p>当Worker失效或机器出现故障时， 自动分配新的Worker替换失<br>效Worker</p>
-<h4 id="准确性"><a href="#准确性" class="headerlink" title="准确性"></a>准确性</h4><p>采用Acker机制，保证数据不丢失<br>采用事务机制，保证数据准确性</p>
-<h2 id="storm架构"><a href="#storm架构" class="headerlink" title="storm架构"></a>storm架构</h2><p><img src="http://oh6ybr0jg.bkt.clouddn.com/storm%E6%9E%B6%E6%9E%84.png" alt="此处输入图片的描述"></p>
-<p>Storm的主线主要包括4条：nimbus, supervisor, worker和task。</p>
-<p>对于storm0.9.6的配置文件nimbus配置参数还是nimbus.hosts 现在新版本1.0.2已经修改为nimbus.seeds,已经可以支持HA<br>此处之一配置nimbus.seeds: XX。此处nimbus.seeds:后面要有一个空格，否则启动报错<br>storm启动nimbus的时候jps会有一个进程config_value然后变成nimbus。<br>其他启动同上</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/27/storm基础知识/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/Python春节祝福语自动回复/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/27/Python春节祝福语自动回复/" itemprop="url">
+                  Python春节祝福语自动回复
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-27T20:00:00+08:00">
+                2017-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/01/27/Python春节祝福语自动回复/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/Python春节祝福语自动回复/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>首先安装两个库<br>pip install itchat pillow</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/27/Python春节祝福语自动回复/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1454,7 +1385,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1598,7 +1529,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1695,17 +1626,16 @@
 
       
         
-          
-            <p>需求<br>利用一个手写数字“先验数据”集，使用knn算法来实现对手写数字的自动识别；<br>先验数据（训练数据）集：<br>    数据维度比较大，样本数比较多。<br>    数据集包括数字0-9的手写体。<br>    每个数字大约有200个样本。<br>    每个样本保持在一个txt文件中。<br>    手写体图像本身的大小是32x32的二值图，转换到txt文件保存后，内容也是32x32个数字，0或者1，如下：</p>
+          <p>需求<br>利用一个手写数字“先验数据”集，使用knn算法来实现对手写数字的自动识别；<br>先验数据（训练数据）集：<br>    数据维度比较大，样本数比较多。<br>    数据集包括数字0-9的手写体。<br>    每个数字大约有200个样本。<br>    每个样本保持在一个txt文件中。<br>    手写体图像本身的大小是32x32的二值图，转换到txt文件保存后，内容也是32x32个数字，0或者1，如下：</p>
 <p><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%95%B0%E5%AD%97012.png" alt="此处输入图片的描述"></p>
-<p>首先准备测试文件:<br>1934个训练数据<br>946个测试数据</p>
-<p>分析：<br>1、手写体因为每个人，甚至每次写的字都不会完全精确一致，所以，识别手写体的关键是“相似度”<br>2、既然是要求样本之间的相似度，那么，首先需要将样本进行抽象，将每个样本变成一系列特征数据（即特征向量）<br>3、手写体在直观上就是一个个的图片，而图片是由上述图示中的像素点来描述的，样本的相似度其实就是像素的位置和颜色之间的组合的相似度<br>4、因此，将图片的像素按照固定顺序读取到一个个的向量中，即可很好地表示手写体样本<br>5、抽象出了样本向量，及相似度计算模型，即可应用KNN来实现</p>
-<p>代码：<br>1)    一个用来生成将每个样本的txt文件转换为对应的一个向量，<br>2)    一个用来加载整个数据集，<br>3)    一个实现kNN分类算法。<br>4)    最后就是实现加载、测试的函数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#########################################</span></div><div class="line"><span class="comment"># kNN: k Nearest Neighbors</span></div><div class="line"></div><div class="line"><span class="comment"># 参数:        inX: vector to compare to existing dataset (1xN)</span></div><div class="line"><span class="comment">#             dataSet: size m data set of known vectors (NxM)</span></div><div class="line"><span class="comment">#             labels: data set labels (1xM vector)</span></div><div class="line"><span class="comment">#             k: number of neighbors to use for comparison </span></div><div class="line">            </div><div class="line"><span class="comment"># 输出:     多数类</span></div><div class="line"><span class="comment">#########################################</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="keyword">import</span> operator</div><div class="line"><span class="keyword">import</span> os</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># KNN分类核心方法</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">kNNClassify</span><span class="params">(newInput, dataSet, labels, k)</span>:</span></div><div class="line">	numSamples = dataSet.shape[<span class="number">0</span>]  <span class="comment"># shape[0]代表行数</span></div><div class="line"></div><div class="line">	<span class="comment">## step 1: 计算欧式距离</span></div><div class="line">	<span class="comment"># tile(A, reps): 将A重复reps次来构造一个矩阵</span></div><div class="line">	<span class="comment"># the following copy numSamples rows for dataSet</span></div><div class="line">	diff = tile(newInput, (numSamples, <span class="number">1</span>)) - dataSet  <span class="comment"># Subtract element-wise</span></div><div class="line">	squaredDiff = diff ** <span class="number">2</span> <span class="comment"># squared for the subtract</span></div><div class="line">	squaredDist = sum(squaredDiff, axis = <span class="number">1</span>)  <span class="comment"># sum is performed by row</span></div><div class="line">	distance = squaredDist ** <span class="number">0.5</span></div><div class="line"></div><div class="line">	<span class="comment">## step 2: 对距离排序</span></div><div class="line">	<span class="comment"># argsort()返回排序后的索引</span></div><div class="line">	sortedDistIndices = argsort(distance)</div><div class="line"></div><div class="line">	classCount = &#123;&#125;  <span class="comment"># 定义一个空的字典</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(k):</div><div class="line">		<span class="comment">## step 3: 选择k个最小距离</span></div><div class="line">		voteLabel = labels[sortedDistIndices[i]]</div><div class="line"></div><div class="line">		<span class="comment">## step 4: 计算类别的出现次数</span></div><div class="line">		<span class="comment"># when the key voteLabel is not in dictionary classCount, get()</span></div><div class="line">		<span class="comment"># will return 0</span></div><div class="line">		classCount[voteLabel] = classCount.get(voteLabel, <span class="number">0</span>) + <span class="number">1</span></div><div class="line"></div><div class="line">	<span class="comment">## step 5: 返回出现次数最多的类别作为分类结果</span></div><div class="line">	maxCount = <span class="number">0</span></div><div class="line">	<span class="keyword">for</span> key, value <span class="keyword">in</span> classCount.items():</div><div class="line">		<span class="keyword">if</span> value &gt; maxCount:</div><div class="line">			maxCount = value</div><div class="line">			maxIndex = key</div><div class="line"></div><div class="line">	<span class="keyword">return</span> maxIndex	</div><div class="line"></div><div class="line"><span class="comment"># 将图片转换为向量</span></div><div class="line"><span class="function"><span class="keyword">def</span>  <span class="title">img2vector</span><span class="params">(filename)</span>:</span></div><div class="line"> 	rows = <span class="number">32</span></div><div class="line"> 	cols = <span class="number">32</span></div><div class="line"> 	imgVector = zeros((<span class="number">1</span>, rows * cols)) </div><div class="line"> 	fileIn = open(filename)</div><div class="line"> 	<span class="keyword">for</span> row <span class="keyword">in</span> xrange(rows):</div><div class="line"> 		lineStr = fileIn.readline()</div><div class="line"> 		<span class="keyword">for</span> col <span class="keyword">in</span> xrange(cols):</div><div class="line"> 			imgVector[<span class="number">0</span>, row * <span class="number">32</span> + col] = int(lineStr[col])</div><div class="line"></div><div class="line"> 	<span class="keyword">return</span> imgVector</div><div class="line"></div><div class="line"><span class="comment"># 加载数据集</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadDataSet</span><span class="params">()</span>:</span></div><div class="line">	<span class="comment">## step 1: 读取训练数据集</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"---Getting training set..."</span></div><div class="line">	dataSetDir = <span class="string">'E:/Python/ml/knn/'</span></div><div class="line">	trainingFileList = os.listdir(dataSetDir + <span class="string">'trainingDigits'</span>)  <span class="comment"># 加载测试数据</span></div><div class="line">	numSamples = len(trainingFileList)</div><div class="line"></div><div class="line">	train_x = zeros((numSamples, <span class="number">1024</span>))</div><div class="line">	train_y = []</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(numSamples):</div><div class="line">		filename = trainingFileList[i]</div><div class="line"></div><div class="line">		<span class="comment"># get train_x</span></div><div class="line">		train_x[i, :] = img2vector(dataSetDir + <span class="string">'trainingDigits/%s'</span> % filename) </div><div class="line"></div><div class="line">		<span class="comment"># get label from file name such as "1_18.txt"</span></div><div class="line">		label = int(filename.split(<span class="string">'_'</span>)[<span class="number">0</span>]) <span class="comment"># return 1</span></div><div class="line">		train_y.append(label)</div><div class="line"></div><div class="line">	<span class="comment">## step 2:读取测试数据集</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"---Getting testing set..."</span></div><div class="line">	testingFileList = os.listdir(dataSetDir + <span class="string">'testDigits'</span>) <span class="comment"># load the testing set</span></div><div class="line">	numSamples = len(testingFileList)</div><div class="line">	test_x = zeros((numSamples, <span class="number">1024</span>))</div><div class="line">	test_y = []</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(numSamples):</div><div class="line">		filename = testingFileList[i]</div><div class="line"></div><div class="line">		<span class="comment"># get train_x</span></div><div class="line">		test_x[i, :] = img2vector(dataSetDir + <span class="string">'testDigits/%s'</span> % filename) </div><div class="line"></div><div class="line">		<span class="comment"># get label from file name such as "1_18.txt"</span></div><div class="line">		label = int(filename.split(<span class="string">'_'</span>)[<span class="number">0</span>]) <span class="comment"># return 1</span></div><div class="line">		test_y.append(label)</div><div class="line"></div><div class="line">	<span class="keyword">return</span> train_x, train_y, test_x, test_y</div><div class="line"></div><div class="line"><span class="comment"># 手写识别主流程</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">testHandWritingClass</span><span class="params">()</span>:</span></div><div class="line">	<span class="comment">## step 1: 加载数据</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"step 1: load data..."</span></div><div class="line">	train_x, train_y, test_x, test_y = loadDataSet()</div><div class="line"></div><div class="line">	<span class="comment">## step 2: 模型训练.</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"step 2: training..."</span></div><div class="line">	<span class="keyword">pass</span></div><div class="line"></div><div class="line">	<span class="comment">## step 3: 测试</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"step 3: testing..."</span></div><div class="line">	numTestSamples = test_x.shape[<span class="number">0</span>]</div><div class="line">	matchCount = <span class="number">0</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(numTestSamples):</div><div class="line">		predict = kNNClassify(test_x[i], train_x, train_y, <span class="number">3</span>)</div><div class="line">		<span class="keyword">if</span> predict == test_y[i]:</div><div class="line">			matchCount += <span class="number">1</span></div><div class="line">	accuracy = float(matchCount) / numTestSamples</div><div class="line"></div><div class="line">	<span class="comment">## step 4: 输出结果</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"step 4: show the result..."</span></div><div class="line">	<span class="keyword">print</span> <span class="string">'The classify accuracy is: %.2f%%'</span> % (accuracy * <span class="number">100</span>)</div></pre></td></tr></table></figure>
-<p>测试<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> kNN</div><div class="line">kNN.testHandWritingClass()</div></pre></td></tr></table></figure></p>
-<p>执行结果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tep <span class="number">1</span>: load data...</div><div class="line">---Getting training set...</div><div class="line">---Getting testing set...</div><div class="line">step <span class="number">2</span>: training...</div><div class="line">step <span class="number">3</span>: testing...</div><div class="line">step <span class="number">4</span>: show the result...</div><div class="line">The classify accuracy <span class="keyword">is</span>: <span class="number">98.84</span>%</div></pre></td></tr></table></figure></p>
-
-          
+<p>首先准备测试文件:<br>1934个训练数据<br>946个测试数据<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/25/kNN实现手写数字识别/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1747,7 +1677,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1969,7 +1899,7 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg"
                alt="张洪铭" />
           <p class="site-author-name" itemprop="name">张洪铭</p>
           <p class="site-description motion-element" itemprop="description">人生在勤 勤则不匮</p>

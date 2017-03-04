@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/migrate-slots3.jpg">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/migrate-slots4.jpg">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/migrate-slots5.jpg">
-<meta property="og:updated_time" content="2017-01-22T01:20:25.811Z">
+<meta property="og:updated_time" content="2017-03-04T13:06:59.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="codis 集群">
 <meta name="twitter:description" content="安装go语言http://www.golangtc.com/download
@@ -341,7 +341,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -439,6 +439,7 @@
 <p>下载jdk和zookeeper并解压</p>
 <p>配置zookeeper</p>
 <p>创建文件夹 zkData和zkLog<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cp zoo_sample.cfg zoo.cfg</div><div class="line"></div><div class="line">vi zoo.cfg </div><div class="line">dataDir=<span class="regexp">/root/</span>zookeeper/zookeeper<span class="number">-3.4</span><span class="number">.6</span>/zkData</div><div class="line">dataLogDir=<span class="regexp">/usr/</span>bigdata/zookeeper<span class="number">-3.4</span><span class="number">.6</span>/zkLog</div><div class="line">server<span class="number">.1</span>=master:<span class="number">2888</span>:<span class="number">3888</span></div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>进入zkData<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo <span class="number">1</span> &gt; myid</div></pre></td></tr></table></figure></p>
 <p>– 配置环境变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> JAVA_HOME=<span class="regexp">/root/</span>java/jdk1<span class="number">.8</span><span class="number">.0</span>_111</div><div class="line"><span class="keyword">export</span> GOROOT=<span class="regexp">/usr/</span>local/go</div><div class="line"><span class="keyword">export</span> GOPATH=<span class="regexp">/usr/</span>local/codis</div><div class="line"><span class="keyword">export</span> ZOOKEEPER_HOME=<span class="regexp">/root/</span>zookeeper/zookeeper<span class="number">-3.4</span><span class="number">.6</span></div><div class="line"><span class="keyword">export</span> PATH=$PATH:$JAVA_HOME/bin:$GOROOT/bin:$GOPATH/bin:$ZOOKEEPER_HOME/bin</div></pre></td></tr></table></figure></p>
 <p>下载codis<br><a href="https://github.com/CodisLabs/codis/releases" target="_blank" rel="external">https://github.com/CodisLabs/codis/releases</a><br>选择与go版本一样的codis版本<br><img src="http://oh6ybr0jg.bkt.clouddn.com/codis3.1.0-go1.7.3.png" alt="codis3.1.0-go1.7.1"></p>
@@ -524,8 +525,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/01/RegionServer/" rel="next" title="Hbase region处理">
-                <i class="fa fa-chevron-left"></i> Hbase region处理
+              <a href="/2016/12/02/KafkaStream/" rel="next" title="Kafka Stream">
+                <i class="fa fa-chevron-left"></i> Kafka Stream
               </a>
             
           </div>
@@ -534,8 +535,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/02/KafkaStream/" rel="prev" title="Kafka Stream">
-                Kafka Stream <i class="fa fa-chevron-right"></i>
+              <a href="/2016/12/02/redis集群/" rel="prev" title="Redis 集群">
+                Redis 集群 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -597,7 +598,7 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg"
                alt="张洪铭" />
           <p class="site-author-name" itemprop="name">张洪铭</p>
           <p class="site-description motion-element" itemprop="description">人生在勤 勤则不匮</p>

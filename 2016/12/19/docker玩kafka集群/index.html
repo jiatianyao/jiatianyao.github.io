@@ -96,7 +96,7 @@
 选择DVD ISO
 找到地址并下载http://101.96.8.151/isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso
 安装参考：http://blog.csdn.net/alex_my">
-<meta property="og:updated_time" content="2017-01-22T01:20:04.051Z">
+<meta property="og:updated_time" content="2017-03-04T13:06:36.598Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker版Kafka集群">
 <meta name="twitter:description" content="入手centos7首先打开centos 官网下载https://www.centos.org/download/
@@ -320,7 +320,7 @@
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -417,8 +417,7 @@
 <p>选择DVD ISO</p>
 <p>找到地址并下载<br><a href="http://101.96.8.151/isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso" target="_blank" rel="external">http://101.96.8.151/isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso</a></p>
 <p>安装参考：<br><a href="http://blog.csdn.net/alex_my/article/details/38142229" target="_blank" rel="external">http://blog.csdn.net/alex_my/article/details/38142229</a></p>
-<h3 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h3><p>安装详情可参考官网<br><a href="https://docs.docker.com/engine/installation/linux/centos/" target="_blank" rel="external">https://docs.docker.com/engine/installation/linux/centos/</a></p>
-<p>博主使用另外一种简单方式安装<br>安装docker<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install docker</div></pre></td></tr></table></figure></p>
+<h3 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h3><p>安装详情可参考官网<br><a href="https://docs.docker.com/engine/installation/linux/centos/" target="_blank" rel="external">https://docs.docker.com/engine/installation/linux/centos/</a><br><a id="more"></a><br>博主使用另外一种简单方式安装<br>安装docker<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install docker</div></pre></td></tr></table></figure></p>
 <p>启动服务（CENTOS7之前的版本）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service docker start</div><div class="line">chkconfig docker on</div></pre></td></tr></table></figure></p>
 <p>Centos之后的：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl  start docker.service</div><div class="line">systemctl  enable docker.service</div></pre></td></tr></table></figure></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">docker version</div><div class="line">Client:</div><div class="line"> Version:         <span class="number">1.10</span><span class="number">.3</span></div><div class="line"> API version:     <span class="number">1.22</span></div><div class="line"> Package version: docker-common<span class="number">-1.10</span><span class="number">.3</span><span class="number">-59.</span>el7.centos.x86_64</div><div class="line"> Go version:      go1<span class="number">.6</span><span class="number">.3</span></div><div class="line"> Git commit:      <span class="number">3999</span>ccb-unsupported</div><div class="line"> Built:           Thu Dec <span class="number">15</span> <span class="number">17</span>:<span class="number">24</span>:<span class="number">43</span> <span class="number">2016</span></div><div class="line"> OS/Arch:         linux/amd64</div><div class="line"></div><div class="line">Server:</div><div class="line"> Version:         <span class="number">1.10</span><span class="number">.3</span></div><div class="line"> API version:     <span class="number">1.22</span></div><div class="line"> Package version: docker-common<span class="number">-1.10</span><span class="number">.3</span><span class="number">-59.</span>el7.centos.x86_64</div><div class="line"> Go version:      go1<span class="number">.6</span><span class="number">.3</span></div><div class="line"> Git commit:      <span class="number">3999</span>ccb-unsupported</div><div class="line"> Built:           Thu Dec <span class="number">15</span> <span class="number">17</span>:<span class="number">24</span>:<span class="number">43</span> <span class="number">2016</span></div><div class="line"> OS/Arch:         linux/amd64</div></pre></td></tr></table></figure>
@@ -573,7 +572,7 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg"
                alt="张洪铭" />
           <p class="site-author-name" itemprop="name">张洪铭</p>
           <p class="site-description motion-element" itemprop="description">人生在勤 勤则不匮</p>

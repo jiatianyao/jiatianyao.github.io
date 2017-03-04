@@ -94,7 +94,7 @@ of方法通过工厂方法创建Optional类。需要注意的是，创建对象�
 <meta property="og:description" content="java 8 Optional1.of方法：为非null的值创建一个Optional。
 of方法通过工厂方法创建Optional类。需要注意的是，创建对象时传入的参数不能为null。如果传入参数为null，则抛出NullPointerException 。
 //调用工厂方法创建Optional实例Optional name = Optional.of(“Sanaulla”);//ok//传入参数为">
-<meta property="og:updated_time" content="2017-02-01T12:43:03.488Z">
+<meta property="og:updated_time" content="2017-03-04T13:07:48.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jdk8 Optional">
 <meta name="twitter:description" content="java 8 Optional1.of方法：为非null的值创建一个Optional。
@@ -317,7 +317,7 @@ of方法通过工厂方法创建Optional类。需要注意的是，创建对象�
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -415,8 +415,7 @@ of方法通过工厂方法创建Optional类。需要注意的是，创建对象�
 <p>//调用工厂方法创建Optional实例<br>Optional<string> name = Optional.of(“Sanaulla”);//ok<br>//传入参数为null，抛出NullPointerException.<br>Optional<string> someNull = Optional.of(null);//java.lang.NullPointerException</string></string></p>
 <p>ofNullable<br>为指定的值创建一个Optional，如果指定的值为null，则返回一个空的Optional。</p>
 <p>ofNullable与of方法相似，唯一的区别是可以接受参数为null的情况。示例如下：</p>
-<p>Optional empty = Optional.ofNullable(null);</p>
-<p>isPresent<br>如果值存在返回true，否则返回false。</p>
+<p>Optional empty = Optional.ofNullable(null);<br><a id="more"></a><br>isPresent<br>如果值存在返回true，否则返回false。</p>
 <p>Optional name = Optional.of(“name”);<br>Optional name2 = Optional.ofNullable(null);<br>if (name.isPresent()) {<br>  //在Optional实例内调用get()返回已存在的值<br>  System.out.println(name.get());//names<br>}</p>
 <p>orElse<br>如果有值则将其返回，否则返回指定的其它值。</p>
 <p>Optional name = Optional.ofNullable(null);<br>System.out.println(name.orElse(“There is some value!”));</p>
@@ -551,7 +550,7 @@ of方法通过工厂方法创建Optional类。需要注意的是，创建对象�
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg"
                alt="张洪铭" />
           <p class="site-author-name" itemprop="name">张洪铭</p>
           <p class="site-description motion-element" itemprop="description">人生在勤 勤则不匮</p>

@@ -93,7 +93,7 @@ Use Kafka Streams to process dataKafka Streams is a client library of Kafka for 
 <meta property="og:description" content="以下内容摘自官网，熟悉的同学可跳过
 Use Kafka Streams to process dataKafka Streams is a client library of Kafka for real-time stream processing and analyzing data stored in Kafka brokers. This quickstart example will d">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/kafka-stream%E7%9A%84%E6%97%B6%E9%97%B4%E6%88%B3.png">
-<meta property="og:updated_time" content="2017-01-22T01:19:32.071Z">
+<meta property="og:updated_time" content="2017-03-04T13:05:50.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka Stream">
 <meta name="twitter:description" content="以下内容摘自官网，熟悉的同学可跳过
@@ -316,7 +316,7 @@ Use Kafka Streams to process dataKafka Streams is a client library of Kafka for 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
     <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -412,6 +412,7 @@ Use Kafka Streams to process dataKafka Streams is a client library of Kafka for 
         <p>以下内容摘自官网，熟悉的同学可跳过</p>
 <h2 id="Use-Kafka-Streams-to-process-data"><a href="#Use-Kafka-Streams-to-process-data" class="headerlink" title="Use Kafka Streams to process data"></a>Use Kafka Streams to process data</h2><p>Kafka Streams is a client library of Kafka for real-time stream processing and analyzing data stored in Kafka brokers. This quickstart example will demonstrate how to run a streaming application coded in this library. Here is the gist of the WordCountDemo example code (converted to use Java 8 lambda expressions for easy reading).<br>Kafka Streams是Kafka中用于客户端的库，主要用于获取实时流处理以及分析Kafka brokers中存储的数据。这个例子将会展示如何使用这个库来运行一个流式处理应用。这里有一个WordCountDemo的主要代码（转换成Java8 lambda表达式更易读）：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">KTable wordCounts = textLines</div><div class="line">    <span class="comment">// Split each text line, by whitespace, into words.</span></div><div class="line">    .flatMapValues(value -&gt; Arrays.asList(value.toLowerCase().split(<span class="string">"\\W+"</span>)))</div><div class="line"></div><div class="line">    <span class="comment">// Ensure the words are available as record keys for the next aggregate operation.</span></div><div class="line">    .map((key, value) -&gt; <span class="keyword">new</span> KeyValue&lt;&gt;(value, value))</div><div class="line"></div><div class="line">    <span class="comment">// Count the occurrences of each word (record key) and store the results into a table named "Counts".</span></div><div class="line">    .countByKey(<span class="string">"Counts"</span>)</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <p> It implements the WordCount algorithm, which computes a word occurrence histogram from the input text. However, unlike other WordCount examples you might have seen before that operate on bounded data, the WordCount demo application behaves slightly differently because it is designed to operate on an infinite, unbounded stream of data. Similar to the bounded variant, it is a stateful algorithm that tracks and updates the counts of words. However, since it must assume potentially unbounded input data, it will periodically output its current state and results while continuing to process more data because it cannot know when it has processed “all” the input data.</p>
 <p>它实现了WordCount算法，计算了输入文本中的词频。然而，并不像其他的WordCount的例子，都是计算固定大小的数据，这个WordCount demo应用稍微有点不同，它是基于不会终止的数据流计算的。和计算固定数据的模型比较形似的是，它也会不停的更新词频计算结果。然而，由于它是基于永不停止的数据流，所以会周期性的输出当前的计算结果，他会不停的处理更多的数据，因为它也不知道何时它处理过“所有”的输入数据。</p>
 <p>We will now prepare input data to a Kafka topic, which will subsequently be processed by a Kafka Streams application.<br>现在我们将输入数据导入Kafka topic，这些数据将会被Kafka Streams应用处理</p>
@@ -596,8 +597,8 @@ Use Kafka Streams to process dataKafka Streams is a client library of Kafka for 
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/02/codis 集群/" rel="next" title="codis 集群">
-                <i class="fa fa-chevron-left"></i> codis 集群
+              <a href="/2016/12/01/RegionServer/" rel="next" title="Hbase region处理">
+                <i class="fa fa-chevron-left"></i> Hbase region处理
               </a>
             
           </div>
@@ -606,8 +607,8 @@ Use Kafka Streams to process dataKafka Streams is a client library of Kafka for 
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/02/redis集群/" rel="prev" title="Redis 集群">
-                Redis 集群 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/12/02/codis 集群/" rel="prev" title="codis 集群">
+                codis 集群 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -678,7 +679,7 @@ Use Kafka Streams to process dataKafka Streams is a client library of Kafka for 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg"
                alt="张洪铭" />
           <p class="site-author-name" itemprop="name">张洪铭</p>
           <p class="site-description motion-element" itemprop="description">人生在勤 勤则不匮</p>
