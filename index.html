@@ -409,16 +409,48 @@
 
       
         
-          <h2 id="安装Kudu的要求："><a href="#安装Kudu的要求：" class="headerlink" title="安装Kudu的要求："></a>安装Kudu的要求：</h2><p>1.操作系统和版本支持Cloudera。<br>2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。<br>3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。</p>
-<h2 id="通过Cloudera-Manager安装Kudu"><a href="#通过Cloudera-Manager安装Kudu" class="headerlink" title="通过Cloudera Manager安装Kudu"></a>通过Cloudera Manager安装Kudu</h2><p>首先通过Cloudera Manager服务下载Kudu的定制服务描述符（CSD）文件并上传到/opt/cloudera/csd/<br>用以下操作系统命令重启Cloudera管理服务器。</p>
+          
+            <h2 id="安装Kudu的要求："><a href="#安装Kudu的要求：" class="headerlink" title="安装Kudu的要求："></a>安装Kudu的要求：</h2><p>1.操作系统和版本支持Cloudera。<br>2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。<br>3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。</p>
+<h2 id="通过Cloudera-Manager安装Kudu"><a href="#通过Cloudera-Manager安装Kudu" class="headerlink" title="通过Cloudera Manager安装Kudu"></a>通过Cloudera Manager安装Kudu</h2><p>想要通过Cloudera Manager安装Kudu，首先下载Kudu的定制服务描述符（CSD）文件<br><a href="http://archive.cloudera.com/kudu/csd/KUDU-5.10.0.jar?_ga=1.154711740.507225699.1488251539" target="_blank" rel="external">http://archive.cloudera.com/kudu/csd/KUDU-5.10.0.jar?_ga=1.154711740.507225699.1488251539</a><br>并上传到/opt/cloudera/csd/<br>用以下操作系统命令重启Cloudera管理服务器。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo service cloudera-scm-server restart</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/01/CDH Kudu安装及介绍/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<p>从<a href="http://archive.cloudera.com/kudu/parcels/网站找到相应的Kudu" target="_blank" rel="external">http://archive.cloudera.com/kudu/parcels/网站找到相应的Kudu</a> parcel，<br><img src="http://oh6ybr0jg.bkt.clouddn.com/kudu_version.png" alt="此处输入图片的描述"></p>
+<p>并添加到 Parcel Settings &gt; 远程 Parcel 存储库 URL<br><img src="http://oh6ybr0jg.bkt.clouddn.com/parcel_kudu.png" alt="此处输入图片的描述"></p>
+<p>接下来可以通过以下两种方式安装</p>
+<h3 id="Using-Parcels"><a href="#Using-Parcels" class="headerlink" title="Using Parcels"></a>Using Parcels</h3><p>1.Hosts &gt; Parcels &gt; Kudu &gt; Download<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E4%B8%8B%E8%BD%BDKudu.png" alt="此处输入图片的描述"><br>2.Locations &gt; Distribute &gt; Activate<br>3.重启集群<br>4.Actions &gt; Add a Service. &gt; Kudu (Beta) &gt; Continue<br>5.选择一个主机作为master，一些主机作为tablet 服务角色。一个主机即可以是master又可以是tablet，但是对于大集群来说会造成性能问题。Kudu的master不是一个资源密集型的，被其他相似的处理例如：HDFS的namenode，YARN的ResourceManager收集。选择完主机点击Continue<br>6.在masters 和 tablet配置Kudu的存储位置和预写日志（WAL）文件，Cloudera Manager将会创建文件夹。<br>6.1 你可以使用相同的目录存储数据和WALs<br>6.2 你不可以将WALs 目录设置为数据的子目录<br>6.3 如果你的主机及是master又是tablet，配置不同的master和tablet服务，例如 /data/kudu/master and /data/kudu/tserver.</p>
+<p>6.4 如果你选择的文件系统不支持打洞技术;服务启动失败<br>6.4.1 退出配置向导，点击Cloudera Manager 接口上的Cloudera 图标<br>6.4.2 到 Kudu (Beta) 服务<br>6.4.3 Configuration &gt;  Kudu (Beta) Service Advanced Configuration Snippet (Safety Valve) &gt; gflagfile<br>5.4.4 添加如下内容并保存改变<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--block_manager=file</div></pre></td></tr></table></figure></p>
+<p>Note: The file block manager does not perform well at scale and should only be used for small-scale development and testing.</p>
+<p>7.如果你不需要退出，点击Continue。Kudu的master和tablet服务已经启动。否则点击<br> Kudu (Beta) &gt; Actions &gt; Start.<br>8.使用其中一种方法验证服务：<br>8.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>8.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/<br>9.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>10.管理角色。Kudu (Beta) 服务 使用 Actions 来停止，启动，重启或者其他管理服务</_host_name_></_host_name_></p>
+<h3 id="Using-Packages"><a href="#Using-Packages" class="headerlink" title="Using Packages"></a>Using Packages</h3><p>Kudu 仓库 和 Package 链接</p>
+<table>
+<thead>
+<tr>
+<th>Operating System</th>
+<th style="text-align:left">Repository Package</th>
+<th style="text-align:left">Individual Packages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RHEL</td>
+<td style="text-align:left">RHEL 6</td>
+<td style="text-align:left">RHEL 6</td>
+</tr>
+<tr>
+<td>Ubuntu</td>
+<td style="text-align:left">Trusty</td>
+<td style="text-align:left">Trusty</td>
+</tr>
+</tbody>
+</table>
+<p>1.1 下载Kudu的yum源文件到：RHEL（/etc/yum.repos.d/）  或者 Ubuntu（/etc/apt/sources.list.d/）<br>1.2 如果你需要C++客户端开发库或Kudu的SDK，RHEL kudu-client-devel 包 或 Ubuntu的 libkuduclient0 and libkuduclient-dev 包<br>1.3 如果你使用Cloudera Manager，不安装 kudu-master 和 kudu-tserver包，Cloudera Manager使用Kudu 提供操作系统启动脚本。</p>
+<p>2.群集上安装Kudu服务。去你想安装Kudu所在的集群。单击 Actions &gt; Add a Service &gt; Kudu &gt; Continue。</p>
+<p>3.选择一个主机作为master，一些主机作为tablet 服务角色。一个主机即可以是master又可以是tablet，但是对于大集群来说会造成性能问题。Kudu的master不是一个资源密集型的，被其他相似的处理例如：HDFS的namenode，YARN的ResourceManager收集。选择完主机点击Continue<br>4.在masters 和 tablet配置Kudu的存储位置和预写日志（WAL）文件，Cloudera Manager将会创建文件夹。<br>4.1 你可以使用相同的目录存储数据和WALs<br>4.2 你不可以将WALs 目录设置为数据的子目录<br>5.3 如果你的主机及是master又是tablet，配置不同的master和tablet服务，例如 /data/kudu/master and /data/kudu/tserver.</p>
+<p>5 如果你选择的文件系统不支持打洞技术;服务启动失败<br>点击 Continue &gt;  Kudu masters 和 tablet 启动。否则到Kudu的服务上点击 Actions &gt; Start.</p>
+<p>6.使用其中一种方法验证服务：<br>6.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>6.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/ </_host_name_></_host_name_></p>
+<p>7.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>8.管理角色。Kudu 服务 使用 Actions 来停止，启动，重启或者其他管理服务</p>
+<p>本文参考页面：<br><a href="https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html" target="_blank" rel="external">https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html</a></p>
+
+          
         
       
     </div>
