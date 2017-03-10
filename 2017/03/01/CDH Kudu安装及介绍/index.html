@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/kudu_version.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/parcel_kudu.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E4%B8%8B%E8%BD%BDKudu.png">
-<meta property="og:updated_time" content="2017-03-09T00:36:36.189Z">
+<meta property="og:updated_time" content="2017-03-10T00:56:44.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH Kudu安装及介绍">
 <meta name="twitter:description" content="安装Kudu的要求：1.操作系统和版本支持Cloudera。2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。
@@ -449,6 +449,7 @@
 <p>5 如果你选择的文件系统不支持打洞技术;服务启动失败<br>点击 Continue &gt;  Kudu masters 和 tablet 启动。否则到Kudu的服务上点击 Actions &gt; Start.</p>
 <p>6.使用其中一种方法验证服务：<br>6.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>6.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/ </_host_name_></_host_name_></p>
 <p>7.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>8.管理角色。Kudu 服务 使用 Actions 来停止，启动，重启或者其他管理服务</p>
+<p>此乃官方推荐，方法1，博主亲试没有成功，安装完不显示服务</p>
 <p>本文参考页面：<br><a href="https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html" target="_blank" rel="external">https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html</a></p>
 
       
