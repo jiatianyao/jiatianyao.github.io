@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/coids-group3.jpg">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/codis-slot5.jpg">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/codis-group4.jpg">
-<meta property="og:updated_time" content="2017-03-04T13:06:45.219Z">
+<meta property="og:updated_time" content="2017-03-11T13:52:26.482Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="codis ha">
 <meta name="twitter:description" content="启动多个实例：cd /usr/local/codis/src/github.com/CodisLabs/codis[root@zhm1 codis]# ./bin/codis-server /etc/codis/redis6379.conf –protected-mode no[root@zhm1 codis]# ./bin/codis-server /etc/codis/redis6380.co">
@@ -408,12 +408,12 @@
       
 
       
-        <p>启动多个实例：<br>cd /usr/local/codis/src/github.com/CodisLabs/codis<br>[root@zhm1 codis]# ./bin/codis-server /etc/codis/redis6379.conf –protected-mode no<br>[root@zhm1 codis]# ./bin/codis-server /etc/codis/redis6380.conf –protected-mode no<br>[root@zhm1 codis]# ./bin/codis-server /etc/codis/redis6381.conf –protected-mode no<br>[root@zhm1 codis]# ./bin/codis-server /etc/codis/redis6382.conf –protected-mode no</p>
-<p>启动zookeeper<br>[root@zhm1 codis]# zkServer.sh start</p>
-<p>启动dashboard<br>[root@zhm1 codis]# zkServer.sh startnohup bin/codis-dashboard –ncpu=2 –config=dashboard.conf –log=dashboard.log –log-level=WARN &amp;</p>
+        <h4 id="启动多个实例："><a href="#启动多个实例：" class="headerlink" title="启动多个实例："></a>启动多个实例：</h4><p>cd /usr/local/codis/src/github.com/CodisLabs/codis<br>[root@zhm1 codis]# ./bin/codis-server /etc/codis/redis6379.conf –protected-mode no<br>[root@zhm1 codis]# ./bin/codis-server /etc/codis/redis6380.conf –protected-mode no<br>[root@zhm1 codis]# ./bin/codis-server /etc/codis/redis6381.conf –protected-mode no<br>[root@zhm1 codis]# ./bin/codis-server /etc/codis/redis6382.conf –protected-mode no</p>
+<h4 id="启动zookeeper"><a href="#启动zookeeper" class="headerlink" title="启动zookeeper"></a>启动zookeeper</h4><p>[root@zhm1 codis]# zkServer.sh start</p>
+<h4 id="启动dashboard"><a href="#启动dashboard" class="headerlink" title="启动dashboard"></a>启动dashboard</h4><p>[root@zhm1 codis]# zkServer.sh startnohup bin/codis-dashboard –ncpu=2 –config=dashboard.conf –log=dashboard.log –log-level=WARN &amp;</p>
 <a id="more"></a>
 <p>启动codis-proxy<br>[root@zhm1 codis]# nohup bin/codis-proxy –ncpu=2 –config=proxy.conf –log =proxy.log –log-level=WARN &amp;</p>
-<p>启动codis-fe<br>[root@zhm1 codis]# ./bin/codis-fe –ncpu=2 –log=fe.log –log-level=WARN –dashboard-list=conf/codis.json –listen=192.168.110.129:18090 &amp;</p>
+<h4 id="启动codis-fe"><a href="#启动codis-fe" class="headerlink" title="启动codis-fe"></a>启动codis-fe</h4><p>[root@zhm1 codis]# ./bin/codis-fe –ncpu=2 –log=fe.log –log-level=WARN –dashboard-list=conf/codis.json –listen=192.168.110.129:18090 &amp;</p>
 <p>将实例添加到group<br><img src="http://oh6ybr0jg.bkt.clouddn.com/coids-group3.jpg" alt="codis-group"></p>
 <p>分配slot<br><img src="http://oh6ybr0jg.bkt.clouddn.com/codis-slot5.jpg" alt="codis-slot5"></p>
 <p>启动codis-ha<br>nohup ./bin/codis-ha –log=ha.log –log-level=WARN –dashboard=127.0.0.1:18080 &amp;</p>
@@ -472,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/02/KafkaStream/" rel="next" title="Kafka Stream">
-                <i class="fa fa-chevron-left"></i> Kafka Stream
+              <a href="/2016/12/02/codis 集群/" rel="next" title="codis 集群">
+                <i class="fa fa-chevron-left"></i> codis 集群
               </a>
             
           </div>
@@ -541,8 +541,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg"
@@ -595,6 +604,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#启动多个实例："><span class="nav-number">1.</span> <span class="nav-text">启动多个实例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动zookeeper"><span class="nav-number">2.</span> <span class="nav-text">启动zookeeper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动dashboard"><span class="nav-number">3.</span> <span class="nav-text">启动dashboard</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动codis-fe"><span class="nav-number">4.</span> <span class="nav-text">启动codis-fe</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
