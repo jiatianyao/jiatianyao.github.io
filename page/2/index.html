@@ -307,6 +307,184 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/21/机器学习之KNN算法推演/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/21/机器学习之KNN算法推演/" itemprop="url">
+                  机器学习之KNN算法推演
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T21:06:30+08:00">
+                2017-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/01/21/机器学习之KNN算法推演/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/21/机器学习之KNN算法推演/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。"><a href="#从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。" class="headerlink" title="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。"></a>从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。</h4><h5 id="算法涉及3个主要因素："><a href="#算法涉及3个主要因素：" class="headerlink" title="算法涉及3个主要因素："></a>算法涉及3个主要因素：</h5><p>1)    训练数据集<br>2)    距离或相似度的计算衡量<br>3)    k的大小<br><img src="http://oh6ybr0jg.bkt.clouddn.com/KNN%E7%AE%97%E6%B3%95.jpg" alt="此处输入图片的描述"><br>绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。</p>
+<h2 id="KNN分类算法Python实战"><a href="#KNN分类算法Python实战" class="headerlink" title="KNN分类算法Python实战"></a>KNN分类算法Python实战</h2><p>有以下先验数据，使用knn算法对未知类别数据分类</p>
+<table>
+<thead>
+<tr>
+<th>x轴</th>
+<th style="text-align:center">y轴</th>
+<th style="text-align:right">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td style="text-align:center">0.9</td>
+<td style="text-align:right">A</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:right">A</td>
+</tr>
+<tr>
+<td>0.0</td>
+<td style="text-align:center">0.1</td>
+<td style="text-align:right">B</td>
+</tr>
+<tr>
+<td>0.1</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:right">B</td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/21/机器学习之KNN算法推演/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/18/Apache Kylin/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1637,157 +1815,6 @@ Query with ANSI-SQL and get results in sub-second, via ODBC, JDBC or RESTful API
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/13/码云操作/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Hexo">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/13/码云操作/" itemprop="url">
-                  用git上传代码到码云
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-13T10:33:30+08:00">
-                2016-12-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/12/13/码云操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/13/码云操作/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>用git上传代码到码云</p>
-<p>下载git客户端<br>Window 下的安装<br>从 <a href="http://git-scm.com/download">http://git-scm.com/download</a> 上下载window版的客户端，然后一直下一步下一步安装git即可，请注意，如果你不熟悉每个选项的意思，请保持默认的选项</p>
-<p>git config –global user.name Jenick<br>git config –global user.email 258409707@qq.com</p>
-<p>以下内容Wie转载：<br>1.先在远程库创建项目，然后复制远程库里面的项目的地址；</p>
-<p>2.打开命令行（电脑上用windows+R键），创建一个文件夹用于从远程库里克</p>
-<p>隆所要更改的文件：命令为：mkdir + “目录名”；<br>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/13/码云操作/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1833,7 +1860,7 @@ Query with ANSI-SQL and get results in sub-second, via ODBC, JDBC or RESTful API
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1841,7 +1868,7 @@ Query with ANSI-SQL and get results in sub-second, via ODBC, JDBC or RESTful API
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1850,7 +1877,7 @@ Query with ANSI-SQL and get results in sub-second, via ODBC, JDBC or RESTful API
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

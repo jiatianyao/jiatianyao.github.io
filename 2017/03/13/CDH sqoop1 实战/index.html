@@ -1,0 +1,806 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  ﻿<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CDH," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="下载sqlserver的jdbc驱动包https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599解压将sqljdbc4.jar放在：/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib
+下载SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CDH sqoop1 实战">
+<meta property="og:url" content="http://yoursite.com/2017/03/13/CDH sqoop1 实战/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="下载sqlserver的jdbc驱动包https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599解压将sqljdbc4.jar放在：/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib
+下载SQL">
+<meta property="og:updated_time" content="2017-03-13T15:16:41.977Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CDH sqoop1 实战">
+<meta name="twitter:description" content="下载sqlserver的jdbc驱动包https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599解压将sqljdbc4.jar放在：/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib
+下载SQL">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'OFEOJRRO4R',
+      apiKey: 'e45796ccb3eeae1fd05f26434d457fb4',
+      indexName: 'hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索...","hits_empty":"未发现与 「${query}」相关的内容","hits_stats":"${hits} 条相关条目，使用了 ${time} 毫秒"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战/"/>
+
+
+
+
+
+  <title> CDH sqoop1 实战 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7429985a9690d626019a4aae76bf7702";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+             <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CDH sqoop1 实战
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T09:30:00+08:00">
+                2017-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/13/CDH sqoop1 实战/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/CDH sqoop1 实战/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>下载sqlserver的jdbc驱动包<br><a href="https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599" target="_blank" rel="external">https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599</a><br>解压<br>将sqljdbc4.jar放在：<br>/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib</p>
+<p>下载SQL Server-Hadoop Connector：sqoop-sqlserver-1.0.tar.gz<br>             <a href="http://www.microsoft.com/en-us/download/details.aspx?id=27584" target="_blank" rel="external">http://www.microsoft.com/en-us/download/details.aspx?id=27584</a></p>
+<p>导入数据：<br>[root@slave3 sqoop]# ./bin/sqoop import –connect ‘jdbc: server://10.105.32.246 username=sa password=123456 database=Baidu –table=stat_order –target-dir /bigdata/data/hdfs<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/bin/../../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>+======================================================================+<br>|                    Error: JAVA_HOME is not set                       |<br>+———————————————————————-+<br>| Please download the latest Sun JDK from the Sun Java web site        |<br>|     &gt; <a href="http://www.oracle.com/technetwork/java/javase/downloads" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads</a>        |<br>|                                                                      |<br>| HBase requires Java 1.7 or later.                                    |<br>+======================================================================+<br>Error: JAVA_HOME is not set and could not be found.</p>
+<p>报错解决方法：<br>修改bin下的<br>configure-sqoop</p>
+<p>注释以下代码：</p>
+<p>#if [ -z “${HCAT_HOME}” ]; then</p>
+<h1 id="if-d-“-usr-lib-hive-hcatalog”-then"><a href="#if-d-“-usr-lib-hive-hcatalog”-then" class="headerlink" title="if [ -d “/usr/lib/hive-hcatalog” ]; then"></a>if [ -d “/usr/lib/hive-hcatalog” ]; then</h1><h1 id="HCAT-HOME-usr-lib-hive-hcatalog"><a href="#HCAT-HOME-usr-lib-hive-hcatalog" class="headerlink" title="HCAT_HOME=/usr/lib/hive-hcatalog"></a>HCAT_HOME=/usr/lib/hive-hcatalog</h1><h1 id="elif-d-“-usr-lib-hcatalog”-then"><a href="#elif-d-“-usr-lib-hcatalog”-then" class="headerlink" title="elif [ -d “/usr/lib/hcatalog” ]; then"></a>elif [ -d “/usr/lib/hcatalog” ]; then</h1><h1 id="HCAT-HOME-usr-lib-hcatalog"><a href="#HCAT-HOME-usr-lib-hcatalog" class="headerlink" title="HCAT_HOME=/usr/lib/hcatalog"></a>HCAT_HOME=/usr/lib/hcatalog</h1><h1 id="else"><a href="#else" class="headerlink" title="else"></a>else</h1><h1 id="HCAT-HOME-SQOOP-HOME-hive-hcatalog"><a href="#HCAT-HOME-SQOOP-HOME-hive-hcatalog" class="headerlink" title="HCAT_HOME=${SQOOP_HOME}/../hive-hcatalog"></a>HCAT_HOME=${SQOOP_HOME}/../hive-hcatalog</h1><h1 id="if-d-HCAT-HOME-then"><a href="#if-d-HCAT-HOME-then" class="headerlink" title="if [ ! -d ${HCAT_HOME} ]; then"></a>if [ ! -d ${HCAT_HOME} ]; then</h1><h1 id="HCAT-HOME-SQOOP-HOME-hcatalog"><a href="#HCAT-HOME-SQOOP-HOME-hcatalog" class="headerlink" title="HCAT_HOME=${SQOOP_HOME}/../hcatalog"></a>HCAT_HOME=${SQOOP_HOME}/../hcatalog</h1><h1 id="fi"><a href="#fi" class="headerlink" title="fi"></a>fi</h1><h1 id="fi-1"><a href="#fi-1" class="headerlink" title="fi"></a>fi</h1><p>#fi</p>
+<p>#if [ -z “${ACCUMULO_HOME}” ]; then</p>
+<h1 id="if-d-“-usr-lib-accumulo”-then"><a href="#if-d-“-usr-lib-accumulo”-then" class="headerlink" title="if [ -d “/usr/lib/accumulo” ]; then"></a>if [ -d “/usr/lib/accumulo” ]; then</h1><h1 id="ACCUMULO-HOME-usr-lib-accumulo"><a href="#ACCUMULO-HOME-usr-lib-accumulo" class="headerlink" title="ACCUMULO_HOME=/usr/lib/accumulo"></a>ACCUMULO_HOME=/usr/lib/accumulo</h1><h1 id="else-1"><a href="#else-1" class="headerlink" title="else"></a>else</h1><h1 id="ACCUMULO-HOME-SQOOP-HOME-accumulo"><a href="#ACCUMULO-HOME-SQOOP-HOME-accumulo" class="headerlink" title="ACCUMULO_HOME=${SQOOP_HOME}/../accumulo"></a>ACCUMULO_HOME=${SQOOP_HOME}/../accumulo</h1><h1 id="fi-2"><a href="#fi-2" class="headerlink" title="fi"></a>fi</h1><p>#fi</p>
+<p>#if [ -z “${HCAT_HOME}” ]; then</p>
+<h1 id="if-d-“-usr-lib-hive-hcatalog”-then-1"><a href="#if-d-“-usr-lib-hive-hcatalog”-then-1" class="headerlink" title="if [ -d “/usr/lib/hive-hcatalog” ]; then"></a>if [ -d “/usr/lib/hive-hcatalog” ]; then</h1><h1 id="HCAT-HOME-usr-lib-hive-hcatalog-1"><a href="#HCAT-HOME-usr-lib-hive-hcatalog-1" class="headerlink" title="HCAT_HOME=/usr/lib/hive-hcatalog"></a>HCAT_HOME=/usr/lib/hive-hcatalog</h1><h1 id="elif-d-“-usr-lib-hcatalog”-then-1"><a href="#elif-d-“-usr-lib-hcatalog”-then-1" class="headerlink" title="elif [ -d “/usr/lib/hcatalog” ]; then"></a>elif [ -d “/usr/lib/hcatalog” ]; then</h1><h1 id="HCAT-HOME-usr-lib-hcatalog-1"><a href="#HCAT-HOME-usr-lib-hcatalog-1" class="headerlink" title="HCAT_HOME=/usr/lib/hcatalog"></a>HCAT_HOME=/usr/lib/hcatalog</h1><h1 id="else-2"><a href="#else-2" class="headerlink" title="else"></a>else</h1><h1 id="HCAT-HOME-SQOOP-HOME-hive-hcatalog-1"><a href="#HCAT-HOME-SQOOP-HOME-hive-hcatalog-1" class="headerlink" title="HCAT_HOME=${SQOOP_HOME}/../hive-hcatalog"></a>HCAT_HOME=${SQOOP_HOME}/../hive-hcatalog</h1><h1 id="if-d-HCAT-HOME-then-1"><a href="#if-d-HCAT-HOME-then-1" class="headerlink" title="if [ ! -d ${HCAT_HOME} ]; then"></a>if [ ! -d ${HCAT_HOME} ]; then</h1><h1 id="HCAT-HOME-SQOOP-HOME-hcatalog-1"><a href="#HCAT-HOME-SQOOP-HOME-hcatalog-1" class="headerlink" title="HCAT_HOME=${SQOOP_HOME}/../hcatalog"></a>HCAT_HOME=${SQOOP_HOME}/../hcatalog</h1><h1 id="fi-3"><a href="#fi-3" class="headerlink" title="fi"></a>fi</h1><h1 id="fi-4"><a href="#fi-4" class="headerlink" title="fi"></a>fi</h1><p>#fi</p>
+<p>#if [ -z “${ACCUMULO_HOME}” ]; then</p>
+<h1 id="if-d-“-usr-lib-accumulo”-then-1"><a href="#if-d-“-usr-lib-accumulo”-then-1" class="headerlink" title="if [ -d “/usr/lib/accumulo” ]; then"></a>if [ -d “/usr/lib/accumulo” ]; then</h1><h1 id="ACCUMULO-HOME-usr-lib-accumulo-1"><a href="#ACCUMULO-HOME-usr-lib-accumulo-1" class="headerlink" title="ACCUMULO_HOME=/usr/lib/accumulo"></a>ACCUMULO_HOME=/usr/lib/accumulo</h1><h1 id="else-3"><a href="#else-3" class="headerlink" title="else"></a>else</h1><h1 id="ACCUMULO-HOME-SQOOP-HOME-accumulo-1"><a href="#ACCUMULO-HOME-SQOOP-HOME-accumulo-1" class="headerlink" title="ACCUMULO_HOME=${SQOOP_HOME}/../accumulo"></a>ACCUMULO_HOME=${SQOOP_HOME}/../accumulo</h1><h1 id="fi-5"><a href="#fi-5" class="headerlink" title="fi"></a>fi</h1><p>#fi</p>
+<p>在执行如果提示JAVA_HOME不存在，手动执行一下export JAVA_HOME=/usr/java/jdk1.8.0_121</p>
+<p>再执行提示：<br>ERROR tool.BaseSqoopTool: Error parsing arguments for import:</p>
+<p>./bin/sqoop import –connect ‘jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=Baidu’ –table=stat_order –target-dir /bigdata/data/hdfs –split-by order_id –fields-terminated-by ‘\t’  –m 3</p>
+<p>需要下载sqoop-sqlserver<br>下载地址已经失效，在CSDN上找到：<br><a href="https://passport.csdn.net/account/login?from=http://download.csdn.net/download/nma_123456/9405343" target="_blank" rel="external">https://passport.csdn.net/account/login?from=http://download.csdn.net/download/nma_123456/9405343</a></p>
+<p>解压进入目录执行：<br>[root@slave3 sqoop-sqlserver-1.0]# export SQOOP_HOME=/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop<br>[root@slave3 sqoop-sqlserver-1.0]# ./install.sh </p>
+<p>再次执行：报如下错误<br>Exception in thread “main” java.lang.NoClassDefFoundError: org/json/JSONObject<br>        at org.apache.sqoop.util.SqoopJsonUtil.getJsonStringforMap(SqoopJsonUtil.java:43)<br>        at org.apache.sqoop.SqoopOptions.writeProperties(SqoopOptions.java:767)<br>        at org.apache.sqoop.mapreduce.JobBase.putSqoopOptionsToConfiguration(JobBase.java:388)<br>        at org.apache.sqoop.mapreduce.JobBase.createJob(JobBase.java:374)<br>        at org.apache.sqoop.mapreduce.ImportJobBase.runImport(ImportJobBase.java:256)<br>        at org.apache.sqoop.manager.SqlManager.importTable(SqlManager.java:692)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:507)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)<br>Caused by: java.lang.ClassNotFoundException: org.json.JSONObject<br>        at java.net.URLClassLoader.findClass(URLClassLoader.java:381)<br>        at java.lang.ClassLoader.loadClass(ClassLoader.java:424)<br>        at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)<br>        at java.lang.ClassLoader.loadClass(ClassLoader.java:357)</p>
+<p>分析原因缺少org/json/JSONObject，上网下载一个json.jar<br>地址：<a href="http://download.csdn.net/download/haixia_12/8462933" target="_blank" rel="external">http://download.csdn.net/download/haixia_12/8462933</a></p>
+<p>扔进去重新执行就OK了</p>
+<p>最终命令：<br>sqoop import –driver com.microsoft.sqlserver.jdbc.SQLServerDriver  –connect ‘jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=Baidu’ –table=stat_order –target-dir /bigdata/data/hdfs/cards –split-by order_id -m 3</p>
+<p>查看sqlserver上有什么数据：<br> sqoop list-tables –driver com.microsoft.sqlserver.jdbc.SQLServerDriver  –connect ‘jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=Baidu’</p>
+<p> sqlserver如果连接失败，要看是否开启了远程访问和TCP/UDP端口映射</p>
+<p>报错<br>17/03/13 17:20:01 ERROR hive.HiveConfig: Could not load org.apache.hadoop.hive.conf.HiveConf. Make sure HIVE_CONF_DIR is set correctly.<br>17/03/13 17:20:01 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: java.lang.ClassNotFoundException: org.apache.hadoop.hive.conf.HiveConf</p>
+<p>增加：<br>export HADOOP_HOME=/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hadoop<br>export HIVE_HOME=/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hive</p>
+<p>export HIVE_CONF_DIR=/etc/hive/conf<br>export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hive/lib/*</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/wechat-reward-image.jpg" alt="张洪铭 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/alipay-reward-image.jpg" alt="张洪铭 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CDH/" rel="tag"># CDH</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/01/CDH Kudu安装及介绍/" rel="next" title="CDH Kudu安装及介绍">
+                <i class="fa fa-chevron-left"></i> CDH Kudu安装及介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/13/CDH sqoop1 实战/"
+           data-title="CDH sqoop1 实战" data-url="http://yoursite.com/2017/03/13/CDH sqoop1 实战/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg"
+               alt="张洪铭" />
+          <p class="site-author-name" itemprop="name">张洪铭</p>
+          <p class="site-description motion-element" itemprop="description">人生在勤 勤则不匮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#if-d-“-usr-lib-hive-hcatalog”-then"><span class="nav-number">1.</span> <span class="nav-text">if [ -d “/usr/lib/hive-hcatalog” ]; then</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HCAT-HOME-usr-lib-hive-hcatalog"><span class="nav-number">2.</span> <span class="nav-text">HCAT_HOME=/usr/lib/hive-hcatalog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#elif-d-“-usr-lib-hcatalog”-then"><span class="nav-number">3.</span> <span class="nav-text">elif [ -d “/usr/lib/hcatalog” ]; then</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HCAT-HOME-usr-lib-hcatalog"><span class="nav-number">4.</span> <span class="nav-text">HCAT_HOME=/usr/lib/hcatalog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#else"><span class="nav-number">5.</span> <span class="nav-text">else</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HCAT-HOME-SQOOP-HOME-hive-hcatalog"><span class="nav-number">6.</span> <span class="nav-text">HCAT_HOME=${SQOOP_HOME}/../hive-hcatalog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#if-d-HCAT-HOME-then"><span class="nav-number">7.</span> <span class="nav-text">if [ ! -d ${HCAT_HOME} ]; then</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HCAT-HOME-SQOOP-HOME-hcatalog"><span class="nav-number">8.</span> <span class="nav-text">HCAT_HOME=${SQOOP_HOME}/../hcatalog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fi"><span class="nav-number">9.</span> <span class="nav-text">fi</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fi-1"><span class="nav-number">10.</span> <span class="nav-text">fi</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#if-d-“-usr-lib-accumulo”-then"><span class="nav-number">11.</span> <span class="nav-text">if [ -d “/usr/lib/accumulo” ]; then</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ACCUMULO-HOME-usr-lib-accumulo"><span class="nav-number">12.</span> <span class="nav-text">ACCUMULO_HOME=/usr/lib/accumulo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#else-1"><span class="nav-number">13.</span> <span class="nav-text">else</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ACCUMULO-HOME-SQOOP-HOME-accumulo"><span class="nav-number">14.</span> <span class="nav-text">ACCUMULO_HOME=${SQOOP_HOME}/../accumulo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fi-2"><span class="nav-number">15.</span> <span class="nav-text">fi</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#if-d-“-usr-lib-hive-hcatalog”-then-1"><span class="nav-number">16.</span> <span class="nav-text">if [ -d “/usr/lib/hive-hcatalog” ]; then</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HCAT-HOME-usr-lib-hive-hcatalog-1"><span class="nav-number">17.</span> <span class="nav-text">HCAT_HOME=/usr/lib/hive-hcatalog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#elif-d-“-usr-lib-hcatalog”-then-1"><span class="nav-number">18.</span> <span class="nav-text">elif [ -d “/usr/lib/hcatalog” ]; then</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HCAT-HOME-usr-lib-hcatalog-1"><span class="nav-number">19.</span> <span class="nav-text">HCAT_HOME=/usr/lib/hcatalog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#else-2"><span class="nav-number">20.</span> <span class="nav-text">else</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HCAT-HOME-SQOOP-HOME-hive-hcatalog-1"><span class="nav-number">21.</span> <span class="nav-text">HCAT_HOME=${SQOOP_HOME}/../hive-hcatalog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#if-d-HCAT-HOME-then-1"><span class="nav-number">22.</span> <span class="nav-text">if [ ! -d ${HCAT_HOME} ]; then</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HCAT-HOME-SQOOP-HOME-hcatalog-1"><span class="nav-number">23.</span> <span class="nav-text">HCAT_HOME=${SQOOP_HOME}/../hcatalog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fi-3"><span class="nav-number">24.</span> <span class="nav-text">fi</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fi-4"><span class="nav-number">25.</span> <span class="nav-text">fi</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#if-d-“-usr-lib-accumulo”-then-1"><span class="nav-number">26.</span> <span class="nav-text">if [ -d “/usr/lib/accumulo” ]; then</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ACCUMULO-HOME-usr-lib-accumulo-1"><span class="nav-number">27.</span> <span class="nav-text">ACCUMULO_HOME=/usr/lib/accumulo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#else-3"><span class="nav-number">28.</span> <span class="nav-text">else</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ACCUMULO-HOME-SQOOP-HOME-accumulo-1"><span class="nav-number">29.</span> <span class="nav-text">ACCUMULO_HOME=${SQOOP_HOME}/../accumulo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fi-5"><span class="nav-number">30.</span> <span class="nav-text">fi</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张洪铭</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhm8"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.0"></script>
+
+
+  
+ 
+
+</body>
+</html>
