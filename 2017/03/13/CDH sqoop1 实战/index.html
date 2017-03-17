@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="下载sqlserver的jdbc驱动包https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599解压将sqljdbc4.jar放在：/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib
 下载SQL">
-<meta property="og:updated_time" content="2017-03-13T15:16:41.977Z">
+<meta property="og:updated_time" content="2017-03-17T14:31:33.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH sqoop1 实战">
 <meta name="twitter:description" content="下载sqlserver的jdbc驱动包https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599解压将sqljdbc4.jar放在：/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib
@@ -409,7 +409,7 @@
       
         <p>下载sqlserver的jdbc驱动包<br><a href="https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599" target="_blank" rel="external">https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599</a><br>解压<br>将sqljdbc4.jar放在：<br>/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib</p>
 <p>下载SQL Server-Hadoop Connector：sqoop-sqlserver-1.0.tar.gz<br>             <a href="http://www.microsoft.com/en-us/download/details.aspx?id=27584" target="_blank" rel="external">http://www.microsoft.com/en-us/download/details.aspx?id=27584</a></p>
-<p>导入数据：<br>[root@slave3 sqoop]# ./bin/sqoop import –connect ‘jdbc: server://10.105.32.246 username=sa password=123456 database=Baidu –table=stat_order –target-dir /bigdata/data/hdfs<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/bin/../../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>+======================================================================+<br>|                    Error: JAVA_HOME is not set                       |<br>+———————————————————————-+<br>| Please download the latest Sun JDK from the Sun Java web site        |<br>|     &gt; <a href="http://www.oracle.com/technetwork/java/javase/downloads" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads</a>        |<br>|                                                                      |<br>| HBase requires Java 1.7 or later.                                    |<br>+======================================================================+<br>Error: JAVA_HOME is not set and could not be found.</p>
+<p>导入数据：<br>[root@slave3 sqoop]# ./bin/sqoop import –connect ‘jdbc: server://10.105.32.246 username=sa password=123456 database=databaseName –table=tableName –target-dir /bigdata/data/hdfs<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/bin/../../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>+======================================================================+<br>|                    Error: JAVA_HOME is not set                       |<br>+———————————————————————-+<br>| Please download the latest Sun JDK from the Sun Java web site        |<br>|     &gt; <a href="http://www.oracle.com/technetwork/java/javase/downloads" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads</a>        |<br>|                                                                      |<br>| HBase requires Java 1.7 or later.                                    |<br>+======================================================================+<br>Error: JAVA_HOME is not set and could not be found.</p>
 <p>报错解决方法：<br>修改bin下的<br>configure-sqoop</p>
 <p>注释以下代码：</p>
 <p>#if [ -z “${HCAT_HOME}” ]; then</p>
@@ -422,14 +422,14 @@
 <h1 id="if-d-“-usr-lib-accumulo”-then-1"><a href="#if-d-“-usr-lib-accumulo”-then-1" class="headerlink" title="if [ -d “/usr/lib/accumulo” ]; then"></a>if [ -d “/usr/lib/accumulo” ]; then</h1><h1 id="ACCUMULO-HOME-usr-lib-accumulo-1"><a href="#ACCUMULO-HOME-usr-lib-accumulo-1" class="headerlink" title="ACCUMULO_HOME=/usr/lib/accumulo"></a>ACCUMULO_HOME=/usr/lib/accumulo</h1><h1 id="else-3"><a href="#else-3" class="headerlink" title="else"></a>else</h1><h1 id="ACCUMULO-HOME-SQOOP-HOME-accumulo-1"><a href="#ACCUMULO-HOME-SQOOP-HOME-accumulo-1" class="headerlink" title="ACCUMULO_HOME=${SQOOP_HOME}/../accumulo"></a>ACCUMULO_HOME=${SQOOP_HOME}/../accumulo</h1><h1 id="fi-5"><a href="#fi-5" class="headerlink" title="fi"></a>fi</h1><p>#fi</p>
 <p>在执行如果提示JAVA_HOME不存在，手动执行一下export JAVA_HOME=/usr/java/jdk1.8.0_121</p>
 <p>再执行提示：<br>ERROR tool.BaseSqoopTool: Error parsing arguments for import:</p>
-<p>./bin/sqoop import –connect ‘jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=Baidu’ –table=stat_order –target-dir /bigdata/data/hdfs –split-by order_id –fields-terminated-by ‘\t’  –m 3</p>
+<p>./bin/sqoop import –connect ‘jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=databaseName’ –table=tableName –target-dir /bigdata/data/hdfs –split-by order_id –fields-terminated-by ‘\t’  –m 3</p>
 <p>需要下载sqoop-sqlserver<br>下载地址已经失效，在CSDN上找到：<br><a href="https://passport.csdn.net/account/login?from=http://download.csdn.net/download/nma_123456/9405343" target="_blank" rel="external">https://passport.csdn.net/account/login?from=http://download.csdn.net/download/nma_123456/9405343</a></p>
 <p>解压进入目录执行：<br>[root@slave3 sqoop-sqlserver-1.0]# export SQOOP_HOME=/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop<br>[root@slave3 sqoop-sqlserver-1.0]# ./install.sh </p>
 <p>再次执行：报如下错误<br>Exception in thread “main” java.lang.NoClassDefFoundError: org/json/JSONObject<br>        at org.apache.sqoop.util.SqoopJsonUtil.getJsonStringforMap(SqoopJsonUtil.java:43)<br>        at org.apache.sqoop.SqoopOptions.writeProperties(SqoopOptions.java:767)<br>        at org.apache.sqoop.mapreduce.JobBase.putSqoopOptionsToConfiguration(JobBase.java:388)<br>        at org.apache.sqoop.mapreduce.JobBase.createJob(JobBase.java:374)<br>        at org.apache.sqoop.mapreduce.ImportJobBase.runImport(ImportJobBase.java:256)<br>        at org.apache.sqoop.manager.SqlManager.importTable(SqlManager.java:692)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:507)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)<br>Caused by: java.lang.ClassNotFoundException: org.json.JSONObject<br>        at java.net.URLClassLoader.findClass(URLClassLoader.java:381)<br>        at java.lang.ClassLoader.loadClass(ClassLoader.java:424)<br>        at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)<br>        at java.lang.ClassLoader.loadClass(ClassLoader.java:357)</p>
 <p>分析原因缺少org/json/JSONObject，上网下载一个json.jar<br>地址：<a href="http://download.csdn.net/download/haixia_12/8462933" target="_blank" rel="external">http://download.csdn.net/download/haixia_12/8462933</a></p>
 <p>扔进去重新执行就OK了</p>
-<p>最终命令：<br>sqoop import –driver com.microsoft.sqlserver.jdbc.SQLServerDriver  –connect ‘jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=Baidu’ –table=stat_order –target-dir /bigdata/data/hdfs/cards –split-by order_id -m 3</p>
-<p>查看sqlserver上有什么数据：<br> sqoop list-tables –driver com.microsoft.sqlserver.jdbc.SQLServerDriver  –connect ‘jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=Baidu’</p>
+<p>最终命令：<br>sqoop import –driver com.microsoft.sqlserver.jdbc.SQLServerDriver  –connect ‘jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=databaseName’ –table=tableName –target-dir /bigdata/data/hdfs/cards –split-by order_id -m 3</p>
+<p>查看sqlserver上有什么数据：<br> sqoop list-tables –driver com.microsoft.sqlserver.jdbc.SQLServerDriver  –connect ‘jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=databaseName’</p>
 <p> sqlserver如果连接失败，要看是否开启了远程访问和TCP/UDP端口映射</p>
 <p>报错<br>17/03/13 17:20:01 ERROR hive.HiveConfig: Could not load org.apache.hadoop.hive.conf.HiveConf. Make sure HIVE_CONF_DIR is set correctly.<br>17/03/13 17:20:01 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: java.lang.ClassNotFoundException: org.apache.hadoop.hive.conf.HiveConf</p>
 <p>增加：<br>export HADOOP_HOME=/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hadoop<br>export HIVE_HOME=/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hive</p>
@@ -497,8 +497,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/14/CDH hive 实战/" rel="prev" title="CDH hive 实战">
-                CDH hive 实战 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/13/CDH sqoop1 实战-带条件的导入/" rel="prev" title="CDH sqoop1 实战-带条件的导入">
+                CDH sqoop1 实战-带条件的导入 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -577,7 +577,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-count">39</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
