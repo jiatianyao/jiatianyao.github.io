@@ -1034,7 +1034,7 @@
 
       
         
-          <p>运行环境：<br>   <table><br>        <tr><br>            <th>主机IP </th><br>            <th>主机名</th><br>            <th>内存</th><br>        </tr><br>        <tr><br>            <th>1.1.1.147</th><br>            <th>po-master1</th><br>            <th>16G</th><br>        </tr><br>        <tr><br>            <th>1.1.1.127</th><br>            <th>po-master2</th><br>            <th>8G</th><br>        </tr><br>        <tr><br>            <th>1.1.1.118</th><br>            <th>po-slave1</th><br>             <th>8G</th><br>        </tr><br>        <tr><br>            <th>1.1.1.92</th><br>            <th>po-slave2</th><br>             <th>8G</th><br>        </tr><br>        <tr><br>            <th>1.1.1.230</th><br>            <th>po-slave3</th><br>            <th>8G</th><br>        </tr><br>    </table></p>
+          <p>运行环境：</p>
 <h2 id="配置主机名-分别在五台机器上执行"><a href="#配置主机名-分别在五台机器上执行" class="headerlink" title="配置主机名(分别在五台机器上执行)"></a>配置主机名(分别在五台机器上执行)</h2><p>vi /etc/sysconfig/network<br>hostname +主机名<br>例如： hostname po-master1</p>
 <h2 id="配置映射关系-把以下五条命令在五台机器上执行"><a href="#配置映射关系-把以下五条命令在五台机器上执行" class="headerlink" title="配置映射关系(把以下五条命令在五台机器上执行)"></a>配置映射关系(把以下五条命令在五台机器上执行)</h2><p>echo “1.1.1.147   po-master1”&gt;&gt;/etc/hosts<br>echo “1.1.1.127   po-master2”&gt;&gt;/etc/hosts<br>echo “1.1.1.118  po-slave1”&gt;&gt;/etc/hosts<br>echo “1.1.1.92   po-slave2”&gt;&gt;/etc/hosts<br>echo “1.1.1.230  po-slave3”&gt;&gt;/etc/hosts<br>
           <!--noindex-->

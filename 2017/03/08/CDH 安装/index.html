@@ -84,12 +84,16 @@
 
 
 
-<meta name="description" content="运行环境：                       主机IP             主机名            内存                            1.1.1.147            po-master1            16G                            1.1.1.127            po-master2">
+<meta name="description" content="运行环境：
+配置主机名(分别在五台机器上执行)vi /etc/sysconfig/networkhostname +主机名例如： hostname po-master1
+配置映射关系(把以下五条命令在五台机器上执行)echo “1.1.1.147   po-master1”&amp;gt;&amp;gt;/etc/hostsecho “1.1.1.127   po-master2”&amp;gt;&amp;gt;/etc/hos">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CDH 安装">
 <meta property="og:url" content="http://yoursite.com/2017/03/08/CDH 安装/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="运行环境：                       主机IP             主机名            内存                            1.1.1.147            po-master1            16G                            1.1.1.127            po-master2">
+<meta property="og:description" content="运行环境：
+配置主机名(分别在五台机器上执行)vi /etc/sysconfig/networkhostname +主机名例如： hostname po-master1
+配置映射关系(把以下五条命令在五台机器上执行)echo “1.1.1.147   po-master1”&amp;gt;&amp;gt;/etc/hostsecho “1.1.1.127   po-master2”&amp;gt;&amp;gt;/etc/hos">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/CDH%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%99%BB%E9%99%86%E9%A1%B5%E9%9D%A2.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%862.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%863.png">
@@ -108,10 +112,12 @@
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/HDFS%E5%90%AF%E7%94%A8HA.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/HDFS%E5%90%AF%E7%94%A8HA2.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/hadoop%E9%A1%B5%E9%9D%A2.png">
-<meta property="og:updated_time" content="2017-03-21T13:56:31.492Z">
+<meta property="og:updated_time" content="2017-03-21T14:47:56.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH 安装">
-<meta name="twitter:description" content="运行环境：                       主机IP             主机名            内存                            1.1.1.147            po-master1            16G                            1.1.1.127            po-master2">
+<meta name="twitter:description" content="运行环境：
+配置主机名(分别在五台机器上执行)vi /etc/sysconfig/networkhostname +主机名例如： hostname po-master1
+配置映射关系(把以下五条命令在五台机器上执行)echo “1.1.1.147   po-master1”&amp;gt;&amp;gt;/etc/hostsecho “1.1.1.127   po-master2”&amp;gt;&amp;gt;/etc/hos">
 <meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/CDH%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%99%BB%E9%99%86%E9%A1%B5%E9%9D%A2.png">
 
 
@@ -423,7 +429,7 @@
       
 
       
-        <p>运行环境：<br>   <table><br>        <tr><br>            <th>主机IP </th><br>            <th>主机名</th><br>            <th>内存</th><br>        </tr><br>        <tr><br>            <th>1.1.1.147</th><br>            <th>po-master1</th><br>            <th>16G</th><br>        </tr><br>        <tr><br>            <th>1.1.1.127</th><br>            <th>po-master2</th><br>            <th>8G</th><br>        </tr><br>        <tr><br>            <th>1.1.1.118</th><br>            <th>po-slave1</th><br>             <th>8G</th><br>        </tr><br>        <tr><br>            <th>1.1.1.92</th><br>            <th>po-slave2</th><br>             <th>8G</th><br>        </tr><br>        <tr><br>            <th>1.1.1.230</th><br>            <th>po-slave3</th><br>            <th>8G</th><br>        </tr><br>    </table></p>
+        <p>运行环境：</p>
 <h2 id="配置主机名-分别在五台机器上执行"><a href="#配置主机名-分别在五台机器上执行" class="headerlink" title="配置主机名(分别在五台机器上执行)"></a>配置主机名(分别在五台机器上执行)</h2><p>vi /etc/sysconfig/network<br>hostname +主机名<br>例如： hostname po-master1</p>
 <h2 id="配置映射关系-把以下五条命令在五台机器上执行"><a href="#配置映射关系-把以下五条命令在五台机器上执行" class="headerlink" title="配置映射关系(把以下五条命令在五台机器上执行)"></a>配置映射关系(把以下五条命令在五台机器上执行)</h2><p>echo “1.1.1.147   po-master1”&gt;&gt;/etc/hosts<br>echo “1.1.1.127   po-master2”&gt;&gt;/etc/hosts<br>echo “1.1.1.118  po-slave1”&gt;&gt;/etc/hosts<br>echo “1.1.1.92   po-slave2”&gt;&gt;/etc/hosts<br>echo “1.1.1.230  po-slave3”&gt;&gt;/etc/hosts<br><a id="more"></a></p>
 <h2 id="安装JDK（在po-master1上执行）"><a href="#安装JDK（在po-master1上执行）" class="headerlink" title="安装JDK（在po-master1上执行）"></a>安装JDK（在po-master1上执行）</h2><p>1.下载JDK安装包：jdk-8u102-linux-x64.tar.gz<br>注：作者放到/soft/java具体位置可自行安排</p>
