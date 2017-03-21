@@ -617,6 +617,153 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战-带条件的导入/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/13/CDH sqoop1 实战-带条件的导入/" itemprop="url">
+                  CDH sqoop1 实战-带条件的导入
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T09:30:00+08:00">
+                2017-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/13/CDH sqoop1 实战-带条件的导入/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/CDH sqoop1 实战-带条件的导入/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
+<p>修改为：<br>sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming</p>
+<p>在执行，发现报错说我database不存在，并在目录下生成了一个metastore_db，原来是执行sqoop的机器不对，换了一台机器执行没有问题，很奇怪明明是分布式的为什么会出现这个问题呢</p>
+<p>最终的具体日志：</p>
+<p>[hdfs@master1 root]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming –hive-database shuju<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>17/03/15 14:32:53 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 14:32:53 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 14:32:53 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 14:32:53 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../hadoop-mapreduce<br>Note: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.java uses or overrides a deprecated API.<br>Note: Recompile with -Xlint:deprecation for details.<br>17/03/15 14:33:00 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.jar<br>17/03/15 14:33:00 INFO mapreduce.ImportJobBase: Beginning query import.<br>17/03/15 14:33:00 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar<br>17/03/15 14:33:01 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps<br>17/03/15 14:33:01 INFO client.RMProxy: Connecting to ResourceManager at master2/10.105.10.122:8032<br>17/03/15 14:33:02 INFO db.DBInputFormat: Using read commited transaction isolation<br>17/03/15 14:33:02 INFO db.DataDrivenDBInputFormat: BoundingValsQuery: SELECT MIN(id), MAX(id) FROM (SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 1) ) AS t1<br>17/03/15 14:33:03 INFO db.IntegerSplitter: Split size: 7508318; Num splits: 4 from: 20079 to: 30053354<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: number of splits:4<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1488970234114_0057<br>17/03/15 14:33:03 INFO impl.YarnClientImpl: Submitted application application_1488970234114_0057<br>17/03/15 14:33:03 INFO mapreduce.Job: The url to track the job: <a href="http://master2:8088/proxy/application_1488970234114_0057/" target="_blank" rel="external">http://master2:8088/proxy/application_1488970234114_0057/</a><br>17/03/15 14:33:03 INFO mapreduce.Job: Running job: job_1488970234114_0057<br>17/03/15 14:33:08 INFO mapreduce.Job: Job job_1488970234114_0057 running in uber mode : false<br>17/03/15 14:33:08 INFO mapreduce.Job:  map 0% reduce 0%<br>17/03/15 14:33:15 INFO mapreduce.Job:  map 75% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job:  map 100% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job: Job job_1488970234114_0057 completed successfully<br>17/03/15 14:33:16 INFO mapreduce.Job: Counters: 30<br>        File System Counters<br>                FILE: Number of bytes read=0<br>                FILE: Number of bytes written=608160<br>                FILE: Number of read operations=0<br>                FILE: Number of large read operations=0<br>                FILE: Number of write operations=0<br>                HDFS: Number of bytes read=428<br>                HDFS: Number of bytes written=17645206<br>                HDFS: Number of read operations=16<br>                HDFS: Number of large read operations=0<br>                HDFS: Number of write operations=8<br>        Job Counters<br>                Launched map tasks=4<br>                Other local map tasks=4<br>                Total time spent by all maps in occupied slots (ms)=17968<br>                Total time spent by all reduces in occupied slots (ms)=0<br>                Total time spent by all map tasks (ms)=17968<br>                Total vcore-seconds taken by all map tasks=17968<br>                Total megabyte-seconds taken by all map tasks=18399232<br>        Map-Reduce Framework<br>                Map input records=283659<br>                Map output records=283659<br>                Input split bytes=428<br>                Spilled Records=0<br>                Failed Shuffles=0<br>                Merged Map outputs=0<br>                GC time elapsed (ms)=268<br>                CPU time spent (ms)=12960<br>                Physical memory (bytes) snapshot=1151381504<br>                Virtual memory (bytes) snapshot=11157348352<br>                Total committed heap usage (bytes)=1045954560<br>        File Input Format Counters<br>                Bytes Read=0<br>        File Output Format Counters<br>                Bytes Written=17645206<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Transferred 16.8278 MB in 15.7965 seconds (1.0653 MB/sec)<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Retrieved 283659 records.<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 WARN hive.TableDefWriter: Column update_time had to be cast to a less precise type in Hive<br>17/03/15 14:33:16 INFO hive.HiveImport: Loading uploaded data into Hive</p>
+<p>Logging initialized using configuration in jar:file:/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/jars/hive-common-1.1.0-cdh5.10.0.jar!/hive-log4j.properties<br>OK<br>Time taken: 1.874 seconds<br>Loading data to table shuju.card_record<br>Table shuju.card_record stats: [numFiles=4, totalSize=17645206]<br>OK<br>Time taken: 0.367 seconds</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -785,7 +932,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战-带条件的导入/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/08/CDH 安装/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -810,8 +957,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/13/CDH sqoop1 实战-带条件的导入/" itemprop="url">
-                  CDH sqoop1 实战-带条件的导入
+                <a class="post-title-link" href="/2017/03/08/CDH 安装/" itemprop="url">
+                  CDH 安装
                 </a>
               
             
@@ -825,8 +972,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T09:30:00+08:00">
-                2017-03-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T09:30:00+08:00">
+                2017-03-08
               </time>
             
 
@@ -859,8 +1006,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/13/CDH sqoop1 实战-带条件的导入/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/CDH sqoop1 实战-带条件的导入/" itemprop="commentCount"></span>
+                <a href="/2017/03/08/CDH 安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/08/CDH 安装/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -888,12 +1035,105 @@
       
         
           
-            <p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
-<p>修改为：<br>sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming</p>
-<p>在执行，发现报错说我database不存在，并在目录下生成了一个metastore_db，原来是执行sqoop的机器不对，换了一台机器执行没有问题，很奇怪明明是分布式的为什么会出现这个问题呢</p>
-<p>最终的具体日志：</p>
-<p>[hdfs@master1 root]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming –hive-database shuju<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>17/03/15 14:32:53 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 14:32:53 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 14:32:53 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 14:32:53 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../hadoop-mapreduce<br>Note: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.java uses or overrides a deprecated API.<br>Note: Recompile with -Xlint:deprecation for details.<br>17/03/15 14:33:00 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.jar<br>17/03/15 14:33:00 INFO mapreduce.ImportJobBase: Beginning query import.<br>17/03/15 14:33:00 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar<br>17/03/15 14:33:01 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps<br>17/03/15 14:33:01 INFO client.RMProxy: Connecting to ResourceManager at master2/10.105.10.122:8032<br>17/03/15 14:33:02 INFO db.DBInputFormat: Using read commited transaction isolation<br>17/03/15 14:33:02 INFO db.DataDrivenDBInputFormat: BoundingValsQuery: SELECT MIN(id), MAX(id) FROM (SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 1) ) AS t1<br>17/03/15 14:33:03 INFO db.IntegerSplitter: Split size: 7508318; Num splits: 4 from: 20079 to: 30053354<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: number of splits:4<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1488970234114_0057<br>17/03/15 14:33:03 INFO impl.YarnClientImpl: Submitted application application_1488970234114_0057<br>17/03/15 14:33:03 INFO mapreduce.Job: The url to track the job: <a href="http://master2:8088/proxy/application_1488970234114_0057/" target="_blank" rel="external">http://master2:8088/proxy/application_1488970234114_0057/</a><br>17/03/15 14:33:03 INFO mapreduce.Job: Running job: job_1488970234114_0057<br>17/03/15 14:33:08 INFO mapreduce.Job: Job job_1488970234114_0057 running in uber mode : false<br>17/03/15 14:33:08 INFO mapreduce.Job:  map 0% reduce 0%<br>17/03/15 14:33:15 INFO mapreduce.Job:  map 75% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job:  map 100% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job: Job job_1488970234114_0057 completed successfully<br>17/03/15 14:33:16 INFO mapreduce.Job: Counters: 30<br>        File System Counters<br>                FILE: Number of bytes read=0<br>                FILE: Number of bytes written=608160<br>                FILE: Number of read operations=0<br>                FILE: Number of large read operations=0<br>                FILE: Number of write operations=0<br>                HDFS: Number of bytes read=428<br>                HDFS: Number of bytes written=17645206<br>                HDFS: Number of read operations=16<br>                HDFS: Number of large read operations=0<br>                HDFS: Number of write operations=8<br>        Job Counters<br>                Launched map tasks=4<br>                Other local map tasks=4<br>                Total time spent by all maps in occupied slots (ms)=17968<br>                Total time spent by all reduces in occupied slots (ms)=0<br>                Total time spent by all map tasks (ms)=17968<br>                Total vcore-seconds taken by all map tasks=17968<br>                Total megabyte-seconds taken by all map tasks=18399232<br>        Map-Reduce Framework<br>                Map input records=283659<br>                Map output records=283659<br>                Input split bytes=428<br>                Spilled Records=0<br>                Failed Shuffles=0<br>                Merged Map outputs=0<br>                GC time elapsed (ms)=268<br>                CPU time spent (ms)=12960<br>                Physical memory (bytes) snapshot=1151381504<br>                Virtual memory (bytes) snapshot=11157348352<br>                Total committed heap usage (bytes)=1045954560<br>        File Input Format Counters<br>                Bytes Read=0<br>        File Output Format Counters<br>                Bytes Written=17645206<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Transferred 16.8278 MB in 15.7965 seconds (1.0653 MB/sec)<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Retrieved 283659 records.<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 WARN hive.TableDefWriter: Column update_time had to be cast to a less precise type in Hive<br>17/03/15 14:33:16 INFO hive.HiveImport: Loading uploaded data into Hive</p>
-<p>Logging initialized using configuration in jar:file:/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/jars/hive-common-1.1.0-cdh5.10.0.jar!/hive-log4j.properties<br>OK<br>Time taken: 1.874 seconds<br>Loading data to table shuju.card_record<br>Table shuju.card_record stats: [numFiles=4, totalSize=17645206]<br>OK<br>Time taken: 0.367 seconds</p>
+            <p>运行环境：</p>
+<table><br>        <tr><br>            <th>主机IP </th><br>            <th>主机名</th><br>            <th>内存</th><br>        </tr><br>        <tr><br>            <th>1.1.1.147</th><br>            <th>po-master1</th><br>            <th>16G</th><br>        </tr><br>        <tr><br>            <th>1.1.1.127</th><br>            <th>po-master2</th><br>            <th>8G</th><br>        </tr><br>        <tr><br>            <th>1.1.1.118</th><br>            <th>po-slave1</th><br>             <th>8G</th><br>        </tr><br>        <tr><br>            <th>1.1.1.92</th><br>            <th>po-slave2</th><br>             <th>8G</th><br>        </tr><br>        <tr><br>            <th>1.1.1.230</th><br>            <th>po-slave3</th><br>            <th>8G</th><br>        </tr><br>    </table>
+
+
+<h2 id="配置主机名-分别在五台机器上执行"><a href="#配置主机名-分别在五台机器上执行" class="headerlink" title="配置主机名(分别在五台机器上执行)"></a>配置主机名(分别在五台机器上执行)</h2><p>vi /etc/sysconfig/network<br>hostname +主机名<br>例如： hostname po-master1</p>
+<h2 id="配置映射关系-把以下五条命令在五台机器上执行"><a href="#配置映射关系-把以下五条命令在五台机器上执行" class="headerlink" title="配置映射关系(把以下五条命令在五台机器上执行)"></a>配置映射关系(把以下五条命令在五台机器上执行)</h2><p>echo “1.1.1.147   po-master1”&gt;&gt;/etc/hosts<br>echo “1.1.1.127   po-master2”&gt;&gt;/etc/hosts<br>echo “1.1.1.118  po-slave1”&gt;&gt;/etc/hosts<br>echo “1.1.1.92   po-slave2”&gt;&gt;/etc/hosts<br>echo “1.1.1.230  po-slave3”&gt;&gt;/etc/hosts</p>
+<h2 id="安装JDK（在po-master1上执行）"><a href="#安装JDK（在po-master1上执行）" class="headerlink" title="安装JDK（在po-master1上执行）"></a>安装JDK（在po-master1上执行）</h2><p>1.下载JDK安装包：jdk-8u102-linux-x64.tar.gz<br>注：作者放到/soft/java具体位置可自行安排</p>
+<ol>
+<li><p>安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /soft/java</div><div class="line">mkdir jdk1.8.0_121</div><div class="line">rpm -ivh jdk-7u76-linux-x64.rpm --prefix=/soft/java</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建连接</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ln <span class="_">-s</span> <span class="_">-f</span> jdk1.8.0_121/ jdk</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="开放端口（五台机器上都需要配置）"><a href="#开放端口（五台机器上都需要配置）" class="headerlink" title="开放端口（五台机器上都需要配置）"></a>开放端口（五台机器上都需要配置）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEP</div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> 0.0.0.0/0 -p tcp --dport 22	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 22	  -j ACCEPT</div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50010	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 1004	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50075	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 1006	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50020	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8020	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50070	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50470	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50090	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50495	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8485	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8480	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8032	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8030	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8031	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8033	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8088	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8040	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8042	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8041	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 10020	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 13562	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 19888	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 60000	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 60010	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 60020	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 60030	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 2181	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 2888	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 3888	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8080	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8085	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 9090	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 9095	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 9090	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 9083	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 10000	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 16000	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 2181	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 2888	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 3888	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 3181	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 4181	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8019	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 9010	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 11000	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 11001	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 14000	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 14001	  -j ACCEPT </div><div class="line">/etc/rc.d/init.d/iptables save</div></pre></td></tr></table></figure>
+<p>关闭端口详解-参考CDH官网<br><a href="https://www.cloudera.com/documentation/cdh/5-1-x/CDH5-Installation-Guide/cdh5ig_ports_cdh5.html" target="_blank" rel="external">https://www.cloudera.com/documentation/cdh/5-1-x/CDH5-Installation-Guide/cdh5ig_ports_cdh5.html</a></p>
+<p>测试（可忽略）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/iptables status</div></pre></td></tr></table></figure></p>
+<h2 id="五台机器配置互相免秘钥登陆"><a href="#五台机器配置互相免秘钥登陆" class="headerlink" title="五台机器配置互相免秘钥登陆"></a>五台机器配置互相免秘钥登陆</h2><p>1.创建ssh文件<br>如果已经创建不要覆盖<br>cat ~/.ssh/id_rsa.pub &gt;&gt;~/.ssh/authorized_keys<br>分别把五台机器的公钥加载到authorized_keys</p>
+<p>2.<br>vi /etc/ssh/sshd_config<br>打开如下内容<br>HostKey /etc/ssh/ssh_host_rsa_key<br>RSAAuthentication yes<br>PubkeyAuthentication yes<br>AuthorizedKeysFile      .ssh/authorized_keys</p>
+<p>3.重启<br>/etc/init.d/sshd restart</p>
+<p>4.测试ssh<br>ssh po-master1<br>ssh po-master2<br>ssh po-slave1<br>ssh po-slave2<br>ssh po-slave3</p>
+<h2 id="向其他机器分发jdk"><a href="#向其他机器分发jdk" class="headerlink" title="向其他机器分发jdk"></a>向其他机器分发jdk</h2><p>scp -rp /soft/java/ root@po-master2:/soft/java<br>scp -rp /soft/java/ root@po-salve1:/soft/java<br>scp -rp /soft/java/ root@po-salve2:/soft/java<br>scp -rp /soft/java/ root@po-salve3:/soft/java</p>
+<h2 id="配置环境变量-分别在五台机器上执行"><a href="#配置环境变量-分别在五台机器上执行" class="headerlink" title="配置环境变量(分别在五台机器上执行)"></a>配置环境变量(分别在五台机器上执行)</h2><p>执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">"export JAVA_HOME=/soft/java/jdk"</span>  &gt;&gt; /etc/profile</div><div class="line"><span class="built_in">echo</span> <span class="string">"export PATH=<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/bin:<span class="variable">$JAVA_HOME</span>:<span class="variable">$JAVA_HOME</span>/bin:/usr/bin/"</span>  &gt;&gt; /etc/profile</div><div class="line"><span class="built_in">echo</span> <span class="string">"export CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib"</span>  &gt;&gt; /etc/profile</div><div class="line">. /etc/profile</div></pre></td></tr></table></figure></p>
+<h2 id="测试（可忽略）"><a href="#测试（可忽略）" class="headerlink" title="测试（可忽略）"></a>测试（可忽略）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@po-master1 java]<span class="comment"># java -version</span></div><div class="line">java version <span class="string">"1.8.0_121"</span></div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_121-b13)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)</div></pre></td></tr></table></figure>
+<h2 id="配置NTP服务器和客户端（因为使用阿里云此处省略）"><a href="#配置NTP服务器和客户端（因为使用阿里云此处省略）" class="headerlink" title="配置NTP服务器和客户端（因为使用阿里云此处省略）"></a>配置NTP服务器和客户端（因为使用阿里云此处省略）</h2><h2 id="配置mysql"><a href="#配置mysql" class="headerlink" title="配置mysql"></a>配置mysql</h2><p>1.上传mysql文件（博主放到/soft/mysql目录下）<br>2.解压<br>cd /soft/mysql<br>tar -zxvf mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz -C /usr/local<br>3.将目录重命名<br>cd /usr/local<br>mv mysql-5.7.17-linux-glibc2.5-x86_64/ mysql<br>4.创建data目录</p>
+<p>mkdir /usr/local/mysql/data</p>
+<p>5.安装插件（网上有人说不安装提示libiao错误，博主用阿里云libaio已经是最新版本，所以不用安装，也不知道没安装有什么坏处）<br> yum install libaio</p>
+<p>6.安装mysql<br>cd /usr/local/mysql/bin<br>./mysql_install_db –user=root –basedir=/usr/local/mysql –datadir=//usr/local/mysql/data</p>
+<p>1.官网下载yum源<br><a href="https://dev.mysql.com/downloads/repo/yum/" target="_blank" rel="external">https://dev.mysql.com/downloads/repo/yum/</a><br>2.安装yum源<br>yum localinstall  mysql57-community-release-el6-9.noarch.rpm<br>3.安装mysql<br>yum install mysql-community-server</p>
+<p>4.创建组和用户<br>groupadd mysql<br>useradd mysql -g mysql</p>
+<p>5.修改配置文件开启二进制日志<br>vi /etc/my.cnf  （在[mysqld]下面添加如下内容）<br>server-id=1<br>log-bin=/home/mysql/log/logbin.log</p>
+<p>6.开启服务<br>service mysqld start</p>
+<p>7.查看mysql默认的密码<br>grep ‘temporary password’ /var/log/mysqld.log</p>
+<p>8.根据密码进入mysql<br>mysql -u root -p<br>ALTER USER ‘root’@’localhost’ IDENTIFIED BY ‘MyNewPass4!’;</p>
+<p>例如：<br>ALTER USER ‘root’@’localhost’ IDENTIFIED BY ‘/Zwjf-2016’;<br>Query OK, 0 rows affected (0.01 sec)</p>
+<p>注：MySQL’s validate_password plugin is installed by default. This will require that passwords contain at least one upper case letter, one lower case letter, one digit, and one special character, and that the total password length is at least 8 characters. </p>
+<p>9.授权（给其他四台机器授权）<br>grant all privileges on oozie.<em> to ‘oozie’@’localhost’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION;<br>grant all privileges on oozie.</em> to ‘oozie’@’10.28.92.19’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION;<br>grant all privileges on oozie.<em> to ‘oozie’@’10.28.100.108’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION;<br>grant all privileges on oozie.</em> to ‘oozie’@’10.28.100.212’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION;<br>grant all privileges on oozie.* to ‘oozie’@’10.28.100.254’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION; </p>
+<p>GRANT all privileges on <em>.</em> to ‘root’@’localhost’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION;<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’10.28.92.19’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION;<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’10.28.100.108’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION;<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’10.28.100.212’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION;<br>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’10.28.100.254’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION; </p>
+<p>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’182.48.105.23’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION; </p>
+<p>grant all privileges on hive.<em> to ‘hive’@’localhost’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION;<br>grant all privileges on hive.</em> to ‘hive’@’10.28.92.19’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION;<br>grant all privileges on hive.<em> to ‘hive’@’10.28.100.108’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION;<br>grant all privileges on hive.</em> to ‘hive’@’10.28.100.212’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION;<br>grant all privileges on hive.* to ‘hive’@’10.28.100.254’ IDENTIFIED BY ‘/Zwjf-2016’ WITH GRANT OPTION; </p>
+<p>flush privileges;</p>
+<p>关于新版本的账户说明：<br><a href="https://dev.mysql.com/doc/refman/5.7/en/adding-users.html" target="_blank" rel="external">https://dev.mysql.com/doc/refman/5.7/en/adding-users.html</a></p>
+<p>10.创建数据库<br>create database hive DEFAULT CHARSET utf8 COLLATE utf8_general_ci;<br>create database oozie DEFAULT CHARSET utf8 COLLATE utf8_general_ci;</p>
+<p>##安装cloudera manager<br>1.下载<br>地址：<a href="http://archive-primary.cloudera.com/cm5/cm/5/" target="_blank" rel="external">http://archive-primary.cloudera.com/cm5/cm/5/</a><br>（博主下载的是cloudera-manager-wheezy-cm5.10.0_amd64.tar.gz 放在/soft/bigdata/clouderamanager下）<br>cd /soft/bigdata/clouderamanager<br>tar -xvf cloudera-manager-wheezy-cm5.10.0_amd64.tar.gz</p>
+<p>测试：（可选）<br>cat /etc/passwd</p>
+<h2 id="创建用户（所有节点）"><a href="#创建用户（所有节点）" class="headerlink" title="创建用户（所有节点）"></a>创建用户（所有节点）</h2><p>useradd –system –home=/soft/bigdata/clouderamanager/cm-5.10.0/run/cloudera-scm-server –no-create-home –shell=/bin/false –comment “Cloudera SCM User” cloudera-scm</p>
+<p>测试（可选）<br>[root@master1 cloudera-scm-server]# cat /etc/passwd<br>….<br>cloudera-scm:x:498:498:Cloudera SCM User:/soft/bigdata/clouderamanager/cm-5.10.0/run/cloudera-scm-server:/bin/false</p>
+<h2 id="修改主机名和端口号"><a href="#修改主机名和端口号" class="headerlink" title="修改主机名和端口号"></a>修改主机名和端口号</h2><p>cd /soft/bigdata/clouderamanager/cm-5.10.0/etc/cloudera-scm-agent<br>vi config.ini </p>
+<h1 id="Hostname-of-the-CM-server"><a href="#Hostname-of-the-CM-server" class="headerlink" title="Hostname of the CM server."></a>Hostname of the CM server.</h1><p>server_host=po-master1</p>
+<h1 id="Port-that-the-CM-server-is-listening-on"><a href="#Port-that-the-CM-server-is-listening-on" class="headerlink" title="Port that the CM server is listening on."></a>Port that the CM server is listening on.</h1><p>server_port=7182</p>
+<h2 id="下载驱动包"><a href="#下载驱动包" class="headerlink" title="下载驱动包"></a>下载驱动包</h2><p>下载mysql-connector-java-*.jar（博主下载的mysql-connector-java-5.1.7-bin.jar）放到<br>/soft/bigdata/clouderamanager/cm-5.10.0/share/cmf/lib  目录下</p>
+<h2 id="为Cloudera-Manager-5建立数据库："><a href="#为Cloudera-Manager-5建立数据库：" class="headerlink" title="为Cloudera Manager 5建立数据库："></a>为Cloudera Manager 5建立数据库：</h2><p>/soft/bigdata/clouderamanager/cm-5.10.0/share/cmf/schema/scm_prepare_database.sh mysql scm -hlocalhost -uroot -p/Zwjf-2016 –scm-host localhost scm /Zwjf-2016 scm<br>格式是:scm_prepare_database.sh 数据库类型  数据库 服务器 用户名 密码  –scm-host  Cloudera_Manager_Server所在的机器，后面那三个不知道代表什么，直接照抄官网的了。 </p>
+<p>开启Cloudera Manager 5 Server端：</p>
+<h2 id="向其他机器分发CDH"><a href="#向其他机器分发CDH" class="headerlink" title="向其他机器分发CDH"></a>向其他机器分发CDH</h2><p>scp -rp /soft/bigdata/clouderamanager root@po-master2:/soft/bigdata<br>scp -rp /soft/bigdata/clouderamanager root@po-slave1:/soft/bigdata<br>scp -rp /soft/bigdata/clouderamanager root@po-slave2:/soft/bigdata<br>scp -rp /soft/bigdata/clouderamanager root@po-slave3:/soft/bigdata</p>
+<h2 id="准备Parcels，用以安装CDH5-（博主放在-soft-bigdata-clouderamanager-cloudera-parcel-repo，路径必须包含cloudera-parcel-repo）"><a href="#准备Parcels，用以安装CDH5-（博主放在-soft-bigdata-clouderamanager-cloudera-parcel-repo，路径必须包含cloudera-parcel-repo）" class="headerlink" title="准备Parcels，用以安装CDH5 （博主放在:/soft/bigdata/clouderamanager/cloudera/parcel-repo，路径必须包含cloudera/parcel-repo）"></a>准备Parcels，用以安装CDH5 （博主放在:/soft/bigdata/clouderamanager/cloudera/parcel-repo，路径必须包含cloudera/parcel-repo）</h2><p>官方地址：<br><a href="http://archive.cloudera.com/cdh5/parcels" target="_blank" rel="external">http://archive.cloudera.com/cdh5/parcels</a><br>博主选择的<br><a href="http://archive.cloudera.com/cdh5/parcels/latest/" target="_blank" rel="external">http://archive.cloudera.com/cdh5/parcels/latest/</a></p>
+<p>需要下载以下两个文件<br>•    CDH-5.10.0-1.cdh5.10.0.p0.41-el6.parcel<br>•    manifest.json</p>
+<p>打开 manifest.json找到CDH-5.10.0-1.cdh5.10.0.p0.41-el6.parcel的hash值里的内容<br>“hash”: “52f95da433f203a05c2fd33eb0f144e6a5c9d558”<br>echo ‘52f95da433f203a05c2fd33eb0f144e6a5c9d558’ &gt;&gt; CDH-5.10.0-1.cdh5.10.0.p0.41-el6.parcel.sha</p>
+<p>测试（可选）<br>[root@master1 parcel-repo]# ll<br>total 1466572<br>-rw-r–r– 1 root root 1501694035 Mar  6 14:24 CDH-5.10.0-1.cdh5.10.0.p0.41-el6.parcel<br>-rw-r–r– 1 root root         41 Mar 20 15:26 CDH-5.10.0-1.cdh5.10.0.p0.41-el6.parcel.sha<br>-rw-r–r– 1 root root      64807 Mar 17 17:07 manifest.json</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server start（主节点启动）<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent start（所有节点上启动）  </p>
+<p>测试<br>netstat -an | grep 7182<br>netstat -an | grep 7180 </p>
+<h2 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h2><p><a href="http://po-master1:7180" target="_blank" rel="external">http://po-master1:7180</a><br>默认用户密码都是admin</p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/CDH%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%99%BB%E9%99%86%E9%A1%B5%E9%9D%A2.png" alt="此处输入图片的描述"><br>点击继续<br><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%862.png" alt="此处输入图片的描述"><br>选择免费的点击继续<br><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%863.png" alt="此处输入图片的描述"></p>
+<p>勾选机器<br><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%864.png" alt="此处输入图片的描述"></p>
+<p>点击更多选项修改parcel路径<br>/soft/bigdata/clouderamanager/cloudera/parcel-repo<br>插入图5<br><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%865.png" alt="此处输入图片的描述"></p>
+<p>需要重启所有节点的服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server restart（主节点启动）<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent restart（所有节点上启动） </p>
+<p>选择如下内容点击继续<br><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%866.png" alt="此处输入图片的描述"></p>
+<p>等待安装…<br><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%867.png" alt="此处输入图片的描述"></p>
+<p>安装完成，点击继续</p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%868.png" alt="此处输入图片的描述"><br>安装过程有个小提示：<br>已启用透明大页面压缩，可能会导致重大性能问题。请运行“echo never &gt; /sys/kernel/mm/transparent_hugepage/defrag”以禁用此设置，然后将同一命令添加到 /etc/rc.local 等初始脚本中，以便在系统重启时予以设置。以下主机将受到影响： </p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%869.png" alt="此处输入图片的描述"><br>选择自定义服务，选择自己需要的服务<br><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%8610.png" alt="此处输入图片的描述"></p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%8611.png" alt="节点设置"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%8612.png" alt="节点设置"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%8613.png" alt="数据库设置设置"></p>
+<p>等待安装<br><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%8614.png" alt="等待安装"></p>
+<p>安装过程中会遇到错误：</p>
+<p>是缺少jdbc驱动把文件考入到lib下即可<br><img src="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%8615.png" alt="此处输入图片的描述"></p>
+<p>配置NameNode HA<br>进入HDFS界面，点击“启用High Availability”<br><img src="http://oh6ybr0jg.bkt.clouddn.com/HDFS%E5%90%AF%E7%94%A8HA.png" alt="此处输入图片的描述"><br>输入NameService名称，这里设置为：nameservice1，点击继续按钮。<br><img src="http://oh6ybr0jg.bkt.clouddn.com/HDFS%E5%90%AF%E7%94%A8HA2.png" alt="此处输入图片的描述"><br>配置JourNode的路径，(博主修改为/opt/dfs/jn)</p>
+<p>错误整理;<br>Fatal error during KafkaServer startup. Prepare to shutdown<br>kafka.common.InconsistentBrokerIdException: Configured broker.id 52 doesn’t match stored broker.id 102 in meta.properties. If you moved your data, make sure your configured broker.id matches. If you intend to create a new broker, you should remove all data in your data directories (log.dirs).<br>    at kafka.server.KafkaServer.getBrokerId(KafkaServer.scala:648)<br>    at kafka.server.KafkaServer.startup(KafkaServer.scala:187)<br>    at kafka.server.KafkaServerStartable.startup(KafkaServerStartable.scala:37)<br>    at kafka.Kafka$.main(Kafka.scala:67)<br>    at com.cloudera.kafka.wrap.Kafka$.main(Kafka.scala:76)<br>    at com.cloudera.kafka.wrap.Kafka.main(Kafka.scala)</p>
+<p>进入到/var/local/kafka/data目录查看meta.propertie里面的kakfa 的broker id是什么</p>
+<p>[main]: Metastore Thrift Server threw an exception…<br>javax.jdo.JDOFatalInternalException: Error creating transactional connection factory<br>    at org.datanucleus.api.jdo.NucleusJDOHelper.getJDOExceptionForNucleusException(NucleusJDOHelper.java:587)<br>    at org.datanucleus.api.jdo.JDOPersistenceManagerFactory.freezeConfiguration(JDOPersistenceManagerFactory.java:788)<br>    at org.datanucleus.api.jdo.JDOPersistenceManagerFactory.createPersistenceManagerFactory(JDOPersistenceManagerFactory.java:333)<br>    at org.datanucleus.api.jdo.JDOPersistenceManagerFactory.getPersistenceManagerFactory(JDOPersistenceManagerFactory.java:202)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>    at java.lang.reflect.Method.invoke(Method.java:498)<br>    at javax.jdo.JDOHelper$16.run(JDOHelper.java:1965)<br>    at java.security.AccessController.doPrivileged(Native Method)<br>    at javax.jdo.JDOHelper.invoke(JDOHelper.java:1960)<br>    at javax.jdo.JDOHelper.invokeGetPersistenceManagerFactoryOnImplementation(JDOHelper.java:1166)<br>    at javax.jdo.JDOHelper.getPersistenceManagerFactory(JDOHelper.java:808)<br>    at javax.jdo.JDOHelper.getPersistenceManagerFactory(JDOHelper.java:701)<br>    at org.apache.hadoop.hive.metastore.ObjectStore.getPMF(ObjectStore.java:411)<br>    at org.apache.hadoop.hive.metastore.ObjectStore.getPersistenceManager(ObjectStore.java:440)<br>    at org.apache.hadoop.hive.metastore.ObjectStore.initialize(ObjectStore.java:335)<br>    at org.apache.hadoop.hive.metastore.ObjectStore.setConf(ObjectStore.java:291)<br>    at org.apache.hadoop.util.ReflectionUtils.setConf(ReflectionUtils.java:73)<br>    at org.apache.hadoop.util.ReflectionUtils.newInstance(ReflectionUtils.java:133)<br>    at org.apache.hadoop.hive.metastore.RawStoreProxy.<init>(RawStoreProxy.java:57)<br>    at org.apache.hadoop.hive.metastore.RawStoreProxy.getProxy(RawStoreProxy.java:66)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.newRawStore(HiveMetaStore.java:648)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.getMS(HiveMetaStore.java:626)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.createDefaultDB(HiveMetaStore.java:679)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.init(HiveMetaStore.java:484)<br>    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.<init>(RetryingHMSHandler.java:78)<br>    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.getProxy(RetryingHMSHandler.java:84)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore.newRetryingHMSHandler(HiveMetaStore.java:5989)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore.newRetryingHMSHandler(HiveMetaStore.java:5984)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore.startMetaStore(HiveMetaStore.java:6236)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore.main(HiveMetaStore.java:6161)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>    at java.lang.reflect.Method.invoke(Method.java:498)<br>    at org.apache.hadoop.util.RunJar.run(RunJar.java:221)<br>    at org.apache.hadoop.util.RunJar.main(RunJar.java:136)<br>NestedThrowablesStackTrace:<br>java.lang.reflect.InvocationTargetException<br>    at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)<br>    at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)<br>    at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)<br>    at java.lang.reflect.Constructor.newInstance(Constructor.java:423)<br>    at org.datanucleus.plugin.NonManagedPluginRegistry.createExecutableExtension(NonManagedPluginRegistry.java:631)<br>    at org.datanucleus.plugin.PluginManager.createExecutableExtension(PluginManager.java:325)<br>    at org.datanucleus.store.AbstractStoreManager.registerConnectionFactory(AbstractStoreManager.java:282)<br>    at org.datanucleus.store.AbstractStoreManager.<init>(AbstractStoreManager.java:240)<br>    at org.datanucleus.store.rdbms.RDBMSStoreManager.<init>(RDBMSStoreManager.java:286)<br>    at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)<br>    at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)<br>    at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)<br>    at java.lang.reflect.Constructor.newInstance(Constructor.java:423)<br>    at org.datanucleus.plugin.NonManagedPluginRegistry.createExecutableExtension(NonManagedPluginRegistry.java:631)<br>    at org.datanucleus.plugin.PluginManager.createExecutableExtension(PluginManager.java:301)<br>    at org.datanucleus.NucleusContext.createStoreManagerForProperties(NucleusContext.java:1187)<br>    at org.datanucleus.NucleusContext.initialise(NucleusContext.java:356)<br>    at org.datanucleus.api.jdo.JDOPersistenceManagerFactory.freezeConfiguration(JDOPersistenceManagerFactory.java:775)<br>    at org.datanucleus.api.jdo.JDOPersistenceManagerFactory.createPersistenceManagerFactory(JDOPersistenceManagerFactory.java:333)<br>    at org.datanucleus.api.jdo.JDOPersistenceManagerFactory.getPersistenceManagerFactory(JDOPersistenceManagerFactory.java:202)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>    at java.lang.reflect.Method.invoke(Method.java:498)<br>    at javax.jdo.JDOHelper$16.run(JDOHelper.java:1965)<br>    at java.security.AccessController.doPrivileged(Native Method)<br>    at javax.jdo.JDOHelper.invoke(JDOHelper.java:1960)<br>    at javax.jdo.JDOHelper.invokeGetPersistenceManagerFactoryOnImplementation(JDOHelper.java:1166)<br>    at javax.jdo.JDOHelper.getPersistenceManagerFactory(JDOHelper.java:808)<br>    at javax.jdo.JDOHelper.getPersistenceManagerFactory(JDOHelper.java:701)<br>    at org.apache.hadoop.hive.metastore.ObjectStore.getPMF(ObjectStore.java:411)<br>    at org.apache.hadoop.hive.metastore.ObjectStore.getPersistenceManager(ObjectStore.java:440)<br>    at org.apache.hadoop.hive.metastore.ObjectStore.initialize(ObjectStore.java:335)<br>    at org.apache.hadoop.hive.metastore.ObjectStore.setConf(ObjectStore.java:291)<br>    at org.apache.hadoop.util.ReflectionUtils.setConf(ReflectionUtils.java:73)<br>    at org.apache.hadoop.util.ReflectionUtils.newInstance(ReflectionUtils.java:133)<br>    at org.apache.hadoop.hive.metastore.RawStoreProxy.<init>(RawStoreProxy.java:57)<br>    at org.apache.hadoop.hive.metastore.RawStoreProxy.getProxy(RawStoreProxy.java:66)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.newRawStore(HiveMetaStore.java:648)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.getMS(HiveMetaStore.java:626)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.createDefaultDB(HiveMetaStore.java:679)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.init(HiveMetaStore.java:484)<br>    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.<init>(RetryingHMSHandler.java:78)<br>    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.getProxy(RetryingHMSHandler.java:84)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore.newRetryingHMSHandler(HiveMetaStore.java:5989)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore.newRetryingHMSHandler(HiveMetaStore.java:5984)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore.startMetaStore(HiveMetaStore.java:6236)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore.main(HiveMetaStore.java:6161)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>    at java.lang.reflect.Method.invoke(Method.java:498)<br>    at org.apache.hadoop.util.RunJar.run(RunJar.java:221)<br>    at org.apache.hadoop.util.RunJar.main(RunJar.java:136)<br>Caused by: org.datanucleus.exceptions.NucleusException: Attempt to invoke the “BONECP” plugin to create a ConnectionPool gave an error : The specified datastore driver (“com.mysql.jdbc.Driver”) was not found in the CLASSPATH. Please check your CLASSPATH specification, and the name of the driver.<br>    at org.datanucleus.store.rdbms.ConnectionFactoryImpl.generateDataSources(ConnectionFactoryImpl.java:259)<br>    at org.datanucleus.store.rdbms.ConnectionFactoryImpl.initialiseDataSources(ConnectionFactoryImpl.java:131)<br>    at org.datanucleus.store.rdbms.ConnectionFactoryImpl.<init>(ConnectionFactoryImpl.java:85)<br>    … 54 more<br>Caused by: org.datanucleus.store.rdbms.connectionpool.DatastoreDriverNotFoundException: The specified datastore driver (“com.mysql.jdbc.Driver”) was not found in the CLASSPATH. Please check your CLASSPATH specification, and the name of the driver.<br>    at org.datanucleus.store.rdbms.connectionpool.AbstractConnectionPoolFactory.loadDriver(AbstractConnectionPoolFactory.java:58)<br>    at org.datanucleus.store.rdbms.connectionpool.BoneCPConnectionPoolFactory.createConnectionPool(BoneCPConnectionPoolFactory.java:54)<br>    at org.datanucleus.store.rdbms.ConnectionFactoryImpl.generateDataSources(ConnectionFactoryImpl.java:238)<br>    … 56 more</init></init></init></init></init></init></init></p>
+<p>把驱动程序放在<br>/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hive/lib</p>
+<p>SERVER[po-master1] E0103: Could not load service classes, Cannot load JDBC driver class ‘com.mysql.jdbc.Driver’<br>org.apache.oozie.service.ServiceException: E0103: Could not load service classes, Cannot load JDBC driver class ‘com.mysql.jdbc.Driver’<br>    at org.apache.oozie.service.Services.loadServices(Services.java:309)<br>    at org.apache.oozie.service.Services.init(Services.java:213)<br>    at org.apache.oozie.servlet.ServicesLoader.contextInitialized(ServicesLoader.java:46)<br>    at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4236)<br>    at org.apache.catalina.core.StandardContext.start(StandardContext.java:4739)<br>    at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:803)<br>    at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:780)<br>    at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:583)<br>    at org.apache.catalina.startup.HostConfig.deployWAR(HostConfig.java:944)<br>    at org.apache.catalina.startup.HostConfig.deployWARs(HostConfig.java:779)<br>    at org.apache.catalina.startup.HostConfig.deployApps(HostConfig.java:505)<br>    at org.apache.catalina.startup.HostConfig.start(HostConfig.java:1322)<br>    at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:325)<br>    at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:142)<br>    at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1069)<br>    at org.apache.catalina.core.StandardHost.start(StandardHost.java:822)<br>    at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1061)<br>    at org.apache.catalina.core.StandardEngine.start(StandardEngine.java:463)<br>    at org.apache.catalina.core.StandardService.start(StandardService.java:525)<br>    at org.apache.catalina.core.StandardServer.start(StandardServer.java:759)<br>    at org.apache.catalina.startup.Catalina.start(Catalina.java:595)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>    at java.lang.reflect.Method.invoke(Method.java:498)<br>    at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:289)<br>    at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:414)<br>Caused by: <openjpa-2.2.2-r422266:1468616 fatal="" general="" error=""> org.apache.openjpa.persistence.PersistenceException: Cannot load JDBC driver class ‘com.mysql.jdbc.Driver’<br>    at org.apache.openjpa.jdbc.sql.DBDictionaryFactory.newDBDictionary(DBDictionaryFactory.java:102)<br>    at org.apache.openjpa.jdbc.conf.JDBCConfigurationImpl.getDBDictionaryInstance(JDBCConfigurationImpl.java:603)<br>    at org.apache.openjpa.jdbc.meta.MappingRepository.endConfiguration(MappingRepository.java:1518)<br>    at org.apache.openjpa.lib.conf.Configurations.configureInstance(Configurations.java:531)<br>    at org.apache.openjpa.lib.conf.Configurations.configureInstance(Configurations.java:456)<br>    at org.apache.openjpa.lib.conf.PluginValue.instantiate(PluginValue.java:120)<br>    at org.apache.openjpa.conf.MetaDataRepositoryValue.instantiate(MetaDataRepositoryValue.java:68)<br>    at org.apache.openjpa.lib.conf.ObjectValue.instantiate(ObjectValue.java:83)<br>    at org.apache.openjpa.conf.OpenJPAConfigurationImpl.newMetaDataRepositoryInstance(OpenJPAConfigurationImpl.java:967)<br>    at org.apache.openjpa.conf.OpenJPAConfigurationImpl.getMetaDataRepositoryInstance(OpenJPAConfigurationImpl.java:958)<br>    at org.apache.openjpa.kernel.AbstractBrokerFactory.makeReadOnly(AbstractBrokerFactory.java:644)<br>    at org.apache.openjpa.kernel.AbstractBrokerFactory.newBroker(AbstractBrokerFactory.java:203)<br>    at org.apache.openjpa.kernel.DelegatingBrokerFactory.newBroker(DelegatingBrokerFactory.java:156)<br>    at org.apache.openjpa.persistence.EntityManagerFactoryImpl.createEntityManager(EntityManagerFactoryImpl.java:227)<br>    at org.apache.openjpa.persistence.EntityManagerFactoryImpl.createEntityManager(EntityManagerFactoryImpl.java:154)<br>    at org.apache.openjpa.persistence.EntityManagerFactoryImpl.createEntityManager(EntityManagerFactoryImpl.java:60)<br>    at org.apache.oozie.service.JPAService.getEntityManager(JPAService.java:514)<br>    at org.apache.oozie.service.JPAService.init(JPAService.java:215)<br>    at org.apache.oozie.service.Services.setServiceInternal(Services.java:386)<br>    at org.apache.oozie.service.Services.setService(Services.java:372)<br>    at org.apache.oozie.service.Services.loadServices(Services.java:305)<br>    … 26 more<br>Caused by: org.apache.commons.dbcp.SQLNestedException: Cannot load JDBC driver class ‘com.mysql.jdbc.Driver’<br>    at org.apache.commons.dbcp.BasicDataSource.createConnectionFactory(BasicDataSource.java:1429)<br>    at org.apache.commons.dbcp.BasicDataSource.createDataSource(BasicDataSource.java:1371)<br>    at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044)<br>    at org.apache.openjpa.lib.jdbc.DelegatingDataSource.getConnection(DelegatingDataSource.java:110)<br>    at org.apache.openjpa.lib.jdbc.DecoratingDataSource.getConnection(DecoratingDataSource.java:87)<br>    at org.apache.openjpa.jdbc.sql.DBDictionaryFactory.newDBDictionary(DBDictionaryFactory.java:91)<br>    … 46 more<br>Caused by: java.lang.ClassNotFoundException: com.mysql.jdbc.Driver<br>    at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1680)<br>    at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1526)<br>    at org.apache.commons.dbcp.BasicDataSource.createConnectionFactory(BasicDataSource.java:1420)<br>    … 51 more</openjpa-2.2.2-r422266:1468616></p>
+<p>把mysql-connector-java.jar，mysql-connector-java-5.1.39.jar驱动程序放在：<br>/var/lib/oozie</p>
+<p>[main]: Query for candidates of org.apache.hadoop.hive.metastore.model.MDatabase and subclasses resulted in no possible candidates<br>Required table missing : “<code>DBS</code>“ in Catalog “” Schema “”. DataNucleus requires this table to perform its persistence operations. Either your MetaData is incorrect, or you need to enable “datanucleus.autoCreateTables”<br>org.datanucleus.store.rdbms.exceptions.MissingTableException: Required table missing : “<code>DBS</code>“ in Catalog “” Schema “”. DataNucleus requires this table to perform its persistence operations. Either your MetaData is incorrect, or you need to enable “datanucleus.autoCreateTables”<br>    at org.datanucleus.store.rdbms.table.AbstractTable.exists(AbstractTable.java:485)<br>    at org.datanucleus.store.rdbms.RDBMSStoreManager$ClassAdder.performTablesValidation(RDBMSStoreManager.java:3380)<br>    at org.datanucleus.store.rdbms.RDBMSStoreManager$ClassAdder.addClassTablesAndValidate(RDBMSStoreManager.java:3190)<br>    at org.datanucleus.store.rdbms.RDBMSStoreManager$ClassAdder.run(RDBMSStoreManager.java:2841)<br>    at org.datanucleus.store.rdbms.AbstractSchemaTransaction.execute(AbstractSchemaTransaction.java:122)<br>    at org.datanucleus.store.rdbms.RDBMSStoreManager.addClasses(RDBMSStoreManager.java:1605)<br>    at org.datanucleus.store.AbstractStoreManager.addClass(AbstractStoreManager.java:954)<br>    at org.datanucleus.store.rdbms.RDBMSStoreManager.getDatastoreClass(RDBMSStoreManager.java:679)<br>    at org.datanucleus.store.rdbms.query.RDBMSQueryUtils.getStatementForCandidates(RDBMSQueryUtils.java:408)<br>    at org.datanucleus.store.rdbms.query.JDOQLQuery.compileQueryFull(JDOQLQuery.java:947)<br>    at org.datanucleus.store.rdbms.query.JDOQLQuery.compileInternal(JDOQLQuery.java:370)<br>    at org.datanucleus.store.query.Query.executeQuery(Query.java:1744)<br>    at org.datanucleus.store.query.Query.executeWithArray(Query.java:1672)<br>    at org.datanucleus.store.query.Query.execute(Query.java:1654)<br>    at org.datanucleus.api.jdo.JDOQuery.execute(JDOQuery.java:221)<br>    at org.apache.hadoop.hive.metastore.MetaStoreDirectSql.ensureDbInit(MetaStoreDirectSql.java:185)<br>    at org.apache.hadoop.hive.metastore.MetaStoreDirectSql.<init>(MetaStoreDirectSql.java:136)<br>    at org.apache.hadoop.hive.metastore.ObjectStore.initialize(ObjectStore.java:340)<br>    at org.apache.hadoop.hive.metastore.ObjectStore.setConf(ObjectStore.java:291)<br>    at org.apache.hadoop.util.ReflectionUtils.setConf(ReflectionUtils.java:73)<br>    at org.apache.hadoop.util.ReflectionUtils.newInstance(ReflectionUtils.java:133)<br>    at org.apache.hadoop.hive.metastore.RawStoreProxy.<init>(RawStoreProxy.java:57)<br>    at org.apache.hadoop.hive.metastore.RawStoreProxy.getProxy(RawStoreProxy.java:66)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.newRawStore(HiveMetaStore.java:648)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.getMS(HiveMetaStore.java:626)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.createDefaultDB(HiveMetaStore.java:679)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.init(HiveMetaStore.java:484)<br>    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.<init>(RetryingHMSHandler.java:78)<br>    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.getProxy(RetryingHMSHandler.java:84)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore.newRetryingHMSHandler(HiveMetaStore.java:5989)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore.newRetryingHMSHandler(HiveMetaStore.java:5984)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore.startMetaStore(HiveMetaStore.java:6236)<br>    at org.apache.hadoop.hive.metastore.HiveMetaStore.main(HiveMetaStore.java:6161)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>    at java.lang.reflect.Method.invoke(Method.java:498)<br>    at org.apache.hadoop.util.RunJar.run(RunJar.java:221)<br>    at org.apache.hadoop.util.RunJar.main(RunJar.java:136)</init></init></init></p>
+<pre><code>SERVER[po-master1] E0103: Could not load service classes, Cannot create PoolableConnectionFactory (Table &apos;oozie.VALIDATE_CONN&apos; doesn&apos;t exist)
+</code></pre><p>org.apache.oozie.service.ServiceException: E0103: Could not load service classes, Cannot create PoolableConnectionFactory (Table ‘oozie.VALIDATE_CONN’ doesn’t exist)<br>    at org.apache.oozie.service.Services.loadServices(Services.java:309)<br>    at org.apache.oozie.service.Services.init(Services.java:213)<br>    at org.apache.oozie.servlet.ServicesLoader.contextInitialized(ServicesLoader.java:46)<br>    at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4236)<br>    at org.apache.catalina.core.StandardContext.start(StandardContext.java:4739)<br>    at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:803)<br>    at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:780)<br>    at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:583)<br>    at org.apache.catalina.startup.HostConfig.deployWAR(HostConfig.java:944)<br>    at org.apache.catalina.startup.HostConfig.deployWARs(HostConfig.java:779)<br>    at org.apache.catalina.startup.HostConfig.deployApps(HostConfig.java:505)<br>    at org.apache.catalina.startup.HostConfig.start(HostConfig.java:1322)<br>    at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:325)<br>    at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:142)<br>    at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1069)<br>    at org.apache.catalina.core.StandardHost.start(StandardHost.java:822)<br>    at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1061)<br>    at org.apache.catalina.core.StandardEngine.start(StandardEngine.java:463)<br>    at org.apache.catalina.core.StandardService.start(StandardService.java:525)<br>    at org.apache.catalina.core.StandardServer.start(StandardServer.java:759)<br>    at org.apache.catalina.startup.Catalina.start(Catalina.java:595)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>    at java.lang.reflect.Method.invoke(Method.java:498)<br>    at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:289)<br>    at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:414)</p>
+<p>报这个错误需要修改hive的配置。搜索autoCreateSchema 改为true</p>
+<p>SERVER[po-master1] E0103: Could not load service classes, Cannot create PoolableConnectionFactory (Table ‘oozie.VALIDATE_CONN’ doesn’t exist)<br>org.apache.oozie.service.ServiceException: E0103: Could not load service classes, Cannot create PoolableConnectionFactory (Table ‘oozie.VALIDATE_CONN’ doesn’t exist)<br>    at org.apache.oozie.service.Services.loadServices(Services.java:309)<br>    at org.apache.oozie.service.Services.init(Services.java:213)<br>    at org.apache.oozie.servlet.ServicesLoader.contextInitialized(ServicesLoader.java:46)<br>    at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4236)<br>    at org.apache.catalina.core.StandardContext.start(StandardContext.java:4739)<br>    at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:803)<br>    at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:780)<br>    at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:583)<br>    at org.apache.catalina.startup.HostConfig.deployWAR(HostConfig.java:944)<br>    at org.apache.catalina.startup.HostConfig.deployWARs(HostConfig.java:779)<br>    at org.apache.catalina.startup.HostConfig.deployApps(HostConfig.java:505)<br>    at org.apache.catalina.startup.HostConfig.start(HostConfig.java:1322)<br>    at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:325)<br>    at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:142)<br>    at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1069)<br>    at org.apache.catalina.core.StandardHost.start(StandardHost.java:822)<br>    at org.apache.catalina.core.ContainerBase.start(ContainerBase.java:1061)<br>    at org.apache.catalina.core.StandardEngine.start(StandardEngine.java:463)<br>    at org.apache.catalina.core.StandardService.start(StandardService.java:525)<br>    at org.apache.catalina.core.StandardServer.start(StandardServer.java:759)<br>    at org.apache.catalina.startup.Catalina.start(Catalina.java:595)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>    at java.lang.reflect.Method.invoke(Method.java:498)<br>    at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:289)<br>    at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:414)</p>
+<p>点击界面上的Oozie 点击操作，创建Oozie数据库表</p>
+<p>最后导入环境变量就可以测试了<br>export ZK_HOME=/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/<br>export HBASE_HOME=/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hbase/<br>export HADOOP_HOME=/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/<br>export HIVE_HOME=/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hive/<br>export SQOOP_HOME=/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/<br>export OOZIE_HOME=/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/oozie/<br>export PATH=$PATH:$HOME/bin:$JAVA_HOME:$JAVA_HOME/bin:/usr/bin/:$HADOOP_HOME/bin:$HIVE_HOME/bin:$SQOOP_HOME/bin:$OOZIE_HOME/bin:$ZK_HOME/bin:$HBASE_HOME/bin</p>
+<h2 id="最后测试阶段，可忽略，本文完。"><a href="#最后测试阶段，可忽略，本文完。" class="headerlink" title="最后测试阶段，可忽略，本文完。"></a>最后测试阶段，可忽略，本文完。</h2><h4 id="测试zookeeper：在po-slave1，po-slave2，po-slave3上执行（）："><a href="#测试zookeeper：在po-slave1，po-slave2，po-slave3上执行（）：" class="headerlink" title="测试zookeeper：在po-slave1，po-slave2，po-slave3上执行（）："></a>测试zookeeper：在po-slave1，po-slave2，po-slave3上执行（）：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@po-slave1 data]<span class="comment"># zkServer.sh status</span></div><div class="line">JMX enabled by default</div><div class="line">Using config: /opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../conf/zoo.cfg</div><div class="line">Mode: leader</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@po-slave2 data]<span class="comment"># zkServer.sh status</span></div><div class="line">JMX enabled by default</div><div class="line">Using config: /opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../conf/zoo.cfg</div><div class="line">Mode: follower</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@po-slave3 dfs]<span class="comment"># zkServer.sh status</span></div><div class="line">JMX enabled by default</div><div class="line">Using config: /opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../conf/zoo.cfg</div><div class="line">Mode: follower</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">[root@po-slave3 dfs]<span class="comment"># zkServer.sh status</span></div><div class="line">JMX enabled by default</div><div class="line">Using config: /opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../conf/zoo.cfg</div><div class="line">Mode: follower</div><div class="line">[root@po-slave3 dfs]<span class="comment"># zkCli.sh </span></div><div class="line">Connecting to localhost:2181</div><div class="line">2017-03-21 16:05:56,829 [myid:] - INFO  [main:Environment@100] - Client environment:zookeeper.version=3.4.5-cdh5.10.0--1, built on 01/20/2017 20:10 GMT</div><div class="line">2017-03-21 16:05:56,832 [myid:] - INFO  [main:Environment@100] - Client environment:host.name=po-slave3</div><div class="line">2017-03-21 16:05:56,832 [myid:] - INFO  [main:Environment@100] - Client environment:java.version=1.8.0_121</div><div class="line">2017-03-21 16:05:56,834 [myid:] - INFO  [main:Environment@100] - Client environment:java.vendor=Oracle Corporation</div><div class="line">2017-03-21 16:05:56,834 [myid:] - INFO  [main:Environment@100] - Client environment:java.home=/soft/java/jdk/jre</div><div class="line">2017-03-21 16:05:56,834 [myid:] - INFO  [main:Environment@100] - Client environment:java.class.path=/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../build/classes:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../build/lib/*.jar:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../lib/slf4j-log4j12.jar:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../lib/slf4j-log4j12-1.7.5.jar:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../lib/slf4j-api-1.7.5.jar:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../lib/netty-3.10.5.Final.jar:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../lib/<span class="built_in">log</span>4j-1.2.16.jar:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../lib/jline-2.11.jar:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../zookeeper-3.4.5-cdh5.10.0.jar:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../src/java/lib/*.jar:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/zookeeper/bin/../conf:.:/soft/java/jdk/lib</div><div class="line">2017-03-21 16:05:56,835 [myid:] - INFO  [main:Environment@100] - Client environment:java.library.path=/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib</div><div class="line">2017-03-21 16:05:56,835 [myid:] - INFO  [main:Environment@100] - Client environment:java.io.tmpdir=/tmp</div><div class="line">2017-03-21 16:05:56,835 [myid:] - INFO  [main:Environment@100] - Client environment:java.compiler=&lt;NA&gt;</div><div class="line">2017-03-21 16:05:56,835 [myid:] - INFO  [main:Environment@100] - Client environment:os.name=Linux</div><div class="line">2017-03-21 16:05:56,835 [myid:] - INFO  [main:Environment@100] - Client environment:os.arch=amd64</div><div class="line">2017-03-21 16:05:56,835 [myid:] - INFO  [main:Environment@100] - Client environment:os.version=2.6.32-642.13.1.el6.x86_64</div><div class="line">2017-03-21 16:05:56,835 [myid:] - INFO  [main:Environment@100] - Client environment:user.name=root</div><div class="line">2017-03-21 16:05:56,835 [myid:] - INFO  [main:Environment@100] - Client environment:user.home=/root</div><div class="line">2017-03-21 16:05:56,835 [myid:] - INFO  [main:Environment@100] - Client environment:user.dir=/opt/dfs</div><div class="line">2017-03-21 16:05:56,836 [myid:] - INFO  [main:ZooKeeper@438] - Initiating client connection, connectString=localhost:2181 sessionTimeout=30000 watcher=org.apache.zookeeper.ZooKeeperMain<span class="variable">$MyWatcher</span>@506c589e</div><div class="line">Welcome to ZooKeeper!</div><div class="line">2017-03-21 16:05:56,873 [myid:] - INFO  [main-SendThread(localhost:2181):ClientCnxn<span class="variable">$SendThread</span>@975] - Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)</div><div class="line">JLine support is enabled</div><div class="line">2017-03-21 16:05:56,935 [myid:] - INFO  [main-SendThread(localhost:2181):ClientCnxn<span class="variable">$SendThread</span>@852] - Socket connection established, initiating session, client: /127.0.0.1:42694, server: localhost/127.0.0.1:2181</div><div class="line">2017-03-21 16:05:56,941 [myid:] - INFO  [main-SendThread(localhost:2181):ClientCnxn<span class="variable">$SendThread</span>@1235] - Session establishment complete on server localhost/127.0.0.1:2181, sessionid = 0x15aeb7f0edb054c, negotiated timeout = 30000</div><div class="line"></div><div class="line">WATCHER::</div><div class="line"></div><div class="line">WatchedEvent state:SyncConnected <span class="built_in">type</span>:None path:null</div><div class="line">[zk: localhost:2181(CONNECTED) 0] ls /</div><div class="line">[controller_epoch, controller, brokers, zookeeper, admin, isr_change_notification, consumers, config, hbase]</div><div class="line">[zk: localhost:2181(CONNECTED) 1]</div></pre></td></tr></table></figure>
+<h4 id="测试hdfs"><a href="#测试hdfs" class="headerlink" title="测试hdfs"></a>测试hdfs</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[root@po-master1 ~]<span class="comment"># hadoop dfs -ls /</span></div><div class="line">DEPRECATED: Use of this script to execute hdfs <span class="built_in">command</span> is deprecated.</div><div class="line">Instead use the hdfs <span class="built_in">command</span> <span class="keyword">for</span> it.</div><div class="line"></div><div class="line">Found 3 items</div><div class="line">drwxr-xr-x   - hbase hbase               0 2017-03-21 10:30 /hbase</div><div class="line">drwxrwxrwt   - hdfs  supergroup          0 2017-03-20 17:06 /tmp</div><div class="line">drwxr-xr-x   - hdfs  supergroup          0 2017-03-20 17:06 /user</div><div class="line"></div><div class="line">[hdfs@po-master1 hadoop-hdfs]$ hadoop fs -mkdir /data2</div><div class="line">[hdfs@po-master1 hadoop-hdfs]$ hadoop fs -put hdfs-audit.log /data2/hdfs-audit.log</div><div class="line">[hdfs@po-master1 hadoop-hdfs]$ hadoop fs -ls /data2</div><div class="line">Found 1 items</div><div class="line">-rw-r--r--   3 hdfs supergroup    2908825 2017-03-21 17:28 /data2/hdfs-audit.log</div></pre></td></tr></table></figure>
+<p>测试网页</p>
+<h4 id="测试hadoop页面"><a href="#测试hadoop页面" class="headerlink" title="测试hadoop页面"></a>测试hadoop页面</h4><p><a href="http://po-master1:50030/jobtracker.jsp" target="_blank" rel="external">http://po-master1:50030/jobtracker.jsp</a><br><img src="http://oh6ybr0jg.bkt.clouddn.com/hadoop%E9%A1%B5%E9%9D%A2.png" alt="此处输入图片的描述"></p>
+<h4 id="测试hive"><a href="#测试hive" class="headerlink" title="测试hive"></a>测试hive</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">[root@po-master1 ~]<span class="comment"># hive</span></div><div class="line">Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=512M; support was removed <span class="keyword">in</span> 8.0</div><div class="line">Java HotSpot(TM) 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed <span class="keyword">in</span> a future release</div><div class="line">Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=512M; support was removed <span class="keyword">in</span> 8.0</div><div class="line"></div><div class="line">Logging initialized using configuration <span class="keyword">in</span> jar:file:/opt/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/jars/hive-common-1.1.0-cdh5.10.0.jar!/hive-log4j.properties</div><div class="line">WARNING: Hive CLI is deprecated and migration to Beeline is recommended.</div><div class="line">hive&gt; show databases;</div><div class="line">OK</div><div class="line">default</div><div class="line">Time taken: 1.836 seconds, Fetched: 1 row(s)</div><div class="line">hive&gt; create database <span class="built_in">test</span>;</div><div class="line">OK</div><div class="line">Time taken: 0.06 seconds</div><div class="line">hive&gt; drop database <span class="built_in">test</span>;</div><div class="line">OK</div><div class="line">Time taken: 0.184 seconds</div></pre></td></tr></table></figure>
+<h4 id="测试hbase"><a href="#测试hbase" class="headerlink" title="测试hbase"></a>测试hbase</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[root@po-master1 ~]<span class="comment"># hbase shell</span></div><div class="line">Java HotSpot(TM) 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed <span class="keyword">in</span> a future release</div><div class="line">17/03/21 16:20:23 INFO Configuration.deprecation: hadoop.native.lib is deprecated. Instead, use io.native.lib.available</div><div class="line">HBase Shell; enter <span class="string">'help&lt;RETURN&gt;'</span> <span class="keyword">for</span> list of supported commands.</div><div class="line">Type <span class="string">"exit&lt;RETURN&gt;"</span> to leave the HBase Shell</div><div class="line">Version 1.2.0-cdh5.10.0, rUnknown, Fri Jan 20 12:13:18 PST 2017</div><div class="line">hbase(main):001:0&gt; list</div><div class="line">TABLE                                                                                                           0 row(s) <span class="keyword">in</span> 0.2020 seconds</div><div class="line">=&gt; []</div><div class="line">hbase(main):002:0&gt; create <span class="string">'t1'</span>,<span class="string">'id'</span>,<span class="string">'name'</span></div><div class="line">0 row(s) <span class="keyword">in</span> 2.3540 seconds</div><div class="line">=&gt; Hbase::Table - t1</div><div class="line">hbase(main):003:0&gt; list</div><div class="line">TABLE                                                                                                           t1                                                                                                              1 row(s) <span class="keyword">in</span> 0.0100 seconds</div><div class="line">=&gt; [<span class="string">"t1"</span>]</div><div class="line">hbase(main):004:0&gt;</div></pre></td></tr></table></figure>
+<p>卸载安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">umount /soft/bigdata/clouderamanager/cm-5.10.0/run/cloudera-scm-agent/process</div></pre></td></tr></table></figure></p>
 
           
         
@@ -1715,191 +1955,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/storm基础知识/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Hexo">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/27/storm基础知识/" itemprop="url">
-                  storm基础知识
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-27T20:00:00+08:00">
-                2017-01-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/storm/" itemprop="url" rel="index">
-                    <span itemprop="name">storm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/01/27/storm基础知识/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/storm基础知识/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Storm基本概念"><a href="#Storm基本概念" class="headerlink" title="Storm基本概念"></a>Storm基本概念</h2><p>Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。<br>Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止<br><img src="http://storm.apache.org/images/storm-flow.png" alt="此处输入图片的描述"><br>主要版本</p>
-<table>
-<thead>
-<tr>
-<th>版本</th>
-<th>发布日期</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0.9.0.1</td>
-<td>2013年12月8日</td>
-</tr>
-<tr>
-<td>0.9.0</td>
-<td>2013年12月8日</td>
-</tr>
-<tr>
-<td>0.8.0</td>
-<td>2012年8月2日</td>
-</tr>
-<tr>
-<td>0.7.0</td>
-<td>2012年2月28日</td>
-</tr>
-<tr>
-<td>0.6.0</td>
-<td>2011年12月15日</td>
-</tr>
-<tr>
-<td>0.5.0</td>
-<td>2011年9月19日</td>
-</tr>
-</tbody>
-</table>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/27/storm基础知识/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1940,7 +2000,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-count">41</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
