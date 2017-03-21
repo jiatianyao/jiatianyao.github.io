@@ -1644,7 +1644,7 @@
   
 
   <article class="post post-type-kafka " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/codis 集群/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/KafkaStream/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -1669,8 +1669,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/02/codis 集群/" itemprop="url">
-                  codis 集群
+                <a class="post-title-link" href="/2016/12/02/KafkaStream/" itemprop="url">
+                  Kafka Stream
                 </a>
               
             
@@ -1718,8 +1718,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/12/02/codis 集群/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/codis 集群/" itemprop="commentCount"></span>
+                <a href="/2016/12/02/KafkaStream/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/KafkaStream/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1746,14 +1746,12 @@
 
       
         
-          <p>安装go语言<br><a href="http://www.golangtc.com/download">http://www.golangtc.com/download</a></p>
-<p>选择1.7.3下载<br><img src="http://oh6ybr0jg.bkt.clouddn.com/go1.7.3.jpg" alt="go1.7.3"><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf go1<span class="number">.7</span><span class="number">.3</span>.linux-amd64.tar.gz -C /usr/local/</div></pre></td></tr></table></figure></p>
-<p>下载jdk和zookeeper并解压</p>
-<p>配置zookeeper</p>
-<p>创建文件夹 zkData和zkLog<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cp zoo_sample.cfg zoo.cfg</div><div class="line"></div><div class="line">vi zoo.cfg </div><div class="line">dataDir=<span class="regexp">/root/</span>zookeeper/zookeeper<span class="number">-3.4</span><span class="number">.6</span>/zkData</div><div class="line">dataLogDir=<span class="regexp">/usr/</span>bigdata/zookeeper<span class="number">-3.4</span><span class="number">.6</span>/zkLog</div><div class="line">server<span class="number">.1</span>=master:<span class="number">2888</span>:<span class="number">3888</span></div></pre></td></tr></table></figure></p>
+          <p>以下内容摘自官网，熟悉的同学可跳过</p>
+<h2 id="Use-Kafka-Streams-to-process-data"><a href="#Use-Kafka-Streams-to-process-data" class="headerlink" title="Use Kafka Streams to process data"></a>Use Kafka Streams to process data</h2><p>Kafka Streams is a client library of Kafka for real-time stream processing and analyzing data stored in Kafka brokers. This quickstart example will demonstrate how to run a streaming application coded in this library. Here is the gist of the WordCountDemo example code (converted to use Java 8 lambda expressions for easy reading).<br>Kafka Streams是Kafka中用于客户端的库，主要用于获取实时流处理以及分析Kafka brokers中存储的数据。这个例子将会展示如何使用这个库来运行一个流式处理应用。这里有一个WordCountDemo的主要代码（转换成Java8 lambda表达式更易读）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">KTable wordCounts = textLines</div><div class="line">    <span class="comment">// Split each text line, by whitespace, into words.</span></div><div class="line">    .flatMapValues(value -&gt; Arrays.asList(value.toLowerCase().split(<span class="string">"\\W+"</span>)))</div><div class="line"></div><div class="line">    <span class="comment">// Ensure the words are available as record keys for the next aggregate operation.</span></div><div class="line">    .map((key, value) -&gt; <span class="keyword">new</span> KeyValue&lt;&gt;(value, value))</div><div class="line"></div><div class="line">    <span class="comment">// Count the occurrences of each word (record key) and store the results into a table named "Counts".</span></div><div class="line">    .countByKey(<span class="string">"Counts"</span>)</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/02/codis 集群/#more" rel="contents">
+            <a class="btn" href="/2016/12/02/KafkaStream/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
