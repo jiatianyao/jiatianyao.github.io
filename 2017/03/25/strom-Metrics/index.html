@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="cloudera," />
+  <meta name="keywords" content="storm," />
 
 
 
@@ -84,23 +84,19 @@
 
 
 
-<meta name="description" content="安装Kudu的要求：1.操作系统和版本支持Cloudera。2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。
-通过">
+<meta name="description" content="Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。
+使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CDH Kudu安装及介绍">
-<meta property="og:url" content="http://yoursite.com/2017/03/01/CDH Kudu安装及介绍/index.html">
+<meta property="og:title" content="strom-Metrics">
+<meta property="og:url" content="http://yoursite.com/2017/03/25/strom-Metrics/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="安装Kudu的要求：1.操作系统和版本支持Cloudera。2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。
-通过">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/kudu_version.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/parcel_kudu.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E4%B8%8B%E8%BD%BDKudu.png">
-<meta property="og:updated_time" content="2017-03-10T00:56:44.096Z">
+<meta property="og:description" content="Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。
+使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复">
+<meta property="og:updated_time" content="2017-03-24T16:28:28.530Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CDH Kudu安装及介绍">
-<meta name="twitter:description" content="安装Kudu的要求：1.操作系统和版本支持Cloudera。2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。
-通过">
-<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/kudu_version.png">
+<meta name="twitter:title" content="strom-Metrics">
+<meta name="twitter:description" content="Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。
+使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复">
 
 
 
@@ -128,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/01/CDH Kudu安装及介绍/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/25/strom-Metrics/"/>
 
 
 
 
 
-  <title> CDH Kudu安装及介绍 | Hexo </title>
+  <title> strom-Metrics | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -313,7 +309,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/01/CDH Kudu安装及介绍/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/25/strom-Metrics/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -337,7 +333,7 @@
             
             
               
-                CDH Kudu安装及介绍
+                strom-Metrics
               
             
           </h1>
@@ -350,8 +346,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-01T14:00:00+08:00">
-                2017-03-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-25T00:30:00+08:00">
+                2017-03-25
               </time>
             
 
@@ -369,8 +365,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cloudera/" itemprop="url" rel="index">
-                    <span itemprop="name">cloudera</span>
+                  <a href="/categories/storm/" itemprop="url" rel="index">
+                    <span itemprop="name">storm</span>
                   </a>
                 </span>
 
@@ -384,8 +380,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/01/CDH Kudu安装及介绍/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/01/CDH Kudu安装及介绍/" itemprop="commentCount"></span>
+                <a href="/2017/03/25/strom-Metrics/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/25/strom-Metrics/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -411,46 +407,19 @@
       
 
       
-        <h2 id="安装Kudu的要求："><a href="#安装Kudu的要求：" class="headerlink" title="安装Kudu的要求："></a>安装Kudu的要求：</h2><p>1.操作系统和版本支持Cloudera。<br>2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。<br>3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。</p>
-<h2 id="通过Cloudera-Manager安装Kudu"><a href="#通过Cloudera-Manager安装Kudu" class="headerlink" title="通过Cloudera Manager安装Kudu"></a>通过Cloudera Manager安装Kudu</h2><p>想要通过Cloudera Manager安装Kudu，首先下载Kudu的定制服务描述符（CSD）文件<br><a href="http://archive.cloudera.com/kudu/csd/KUDU-5.10.0.jar?_ga=1.154711740.507225699.1488251539" target="_blank" rel="external">http://archive.cloudera.com/kudu/csd/KUDU-5.10.0.jar?_ga=1.154711740.507225699.1488251539</a><br>并上传到/opt/cloudera/csd/<br>用以下操作系统命令重启Cloudera管理服务器。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo service cloudera-scm-server restart</div></pre></td></tr></table></figure>
-<p>从<a href="http://archive.cloudera.com/kudu/parcels/网站找到相应的Kudu" target="_blank" rel="external">http://archive.cloudera.com/kudu/parcels/网站找到相应的Kudu</a> parcel，<br><img src="http://oh6ybr0jg.bkt.clouddn.com/kudu_version.png" alt="此处输入图片的描述"></p>
-<p>并添加到 Parcel Settings &gt; 远程 Parcel 存储库 URL<br><img src="http://oh6ybr0jg.bkt.clouddn.com/parcel_kudu.png" alt="此处输入图片的描述"></p>
-<p>接下来可以通过以下两种方式安装</p>
-<h3 id="Using-Parcels"><a href="#Using-Parcels" class="headerlink" title="Using Parcels"></a>Using Parcels</h3><p>1.Hosts &gt; Parcels &gt; Kudu &gt; Download<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E4%B8%8B%E8%BD%BDKudu.png" alt="此处输入图片的描述"><br>2.Locations &gt; Distribute &gt; Activate<br>3.重启集群<br>4.Actions &gt; Add a Service. &gt; Kudu (Beta) &gt; Continue<br>5.选择一个主机作为master，一些主机作为tablet 服务角色。一个主机即可以是master又可以是tablet，但是对于大集群来说会造成性能问题。Kudu的master不是一个资源密集型的，被其他相似的处理例如：HDFS的namenode，YARN的ResourceManager收集。选择完主机点击Continue<br>6.在masters 和 tablet配置Kudu的存储位置和预写日志（WAL）文件，Cloudera Manager将会创建文件夹。<br>6.1 你可以使用相同的目录存储数据和WALs<br>6.2 你不可以将WALs 目录设置为数据的子目录<br>6.3 如果你的主机及是master又是tablet，配置不同的master和tablet服务，例如 /data/kudu/master and /data/kudu/tserver.</p>
-<p>6.4 如果你选择的文件系统不支持打洞技术;服务启动失败<br>6.4.1 退出配置向导，点击Cloudera Manager 接口上的Cloudera 图标<br>6.4.2 到 Kudu (Beta) 服务<br>6.4.3 Configuration &gt;  Kudu (Beta) Service Advanced Configuration Snippet (Safety Valve) &gt; gflagfile<br>5.4.4 添加如下内容并保存改变<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--block_manager=file</div></pre></td></tr></table></figure></p>
-<p>Note: The file block manager does not perform well at scale and should only be used for small-scale development and testing.</p>
-<p>7.如果你不需要退出，点击Continue。Kudu的master和tablet服务已经启动。否则点击<br> Kudu (Beta) &gt; Actions &gt; Start.<br>8.使用其中一种方法验证服务：<br>8.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>8.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/<br>9.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>10.管理角色。Kudu (Beta) 服务 使用 Actions 来停止，启动，重启或者其他管理服务</_host_name_></_host_name_></p>
-<h3 id="Using-Packages"><a href="#Using-Packages" class="headerlink" title="Using Packages"></a>Using Packages</h3><p>Kudu 仓库 和 Package 链接</p>
-<table>
-<thead>
-<tr>
-<th>Operating System</th>
-<th style="text-align:left">Repository Package</th>
-<th style="text-align:left">Individual Packages</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RHEL</td>
-<td style="text-align:left">RHEL 6</td>
-<td style="text-align:left">RHEL 6</td>
-</tr>
-<tr>
-<td>Ubuntu</td>
-<td style="text-align:left">Trusty</td>
-<td style="text-align:left">Trusty</td>
-</tr>
-</tbody>
-</table>
-<p>1.1 下载Kudu的yum源文件到：RHEL（/etc/yum.repos.d/）  或者 Ubuntu（/etc/apt/sources.list.d/）<br>1.2 如果你需要C++客户端开发库或Kudu的SDK，RHEL kudu-client-devel 包 或 Ubuntu的 libkuduclient0 and libkuduclient-dev 包<br>1.3 如果你使用Cloudera Manager，不安装 kudu-master 和 kudu-tserver包，Cloudera Manager使用Kudu 提供操作系统启动脚本。</p>
-<p>2.群集上安装Kudu服务。去你想安装Kudu所在的集群。单击 Actions &gt; Add a Service &gt; Kudu &gt; Continue。</p>
-<p>3.选择一个主机作为master，一些主机作为tablet 服务角色。一个主机即可以是master又可以是tablet，但是对于大集群来说会造成性能问题。Kudu的master不是一个资源密集型的，被其他相似的处理例如：HDFS的namenode，YARN的ResourceManager收集。选择完主机点击Continue<br>4.在masters 和 tablet配置Kudu的存储位置和预写日志（WAL）文件，Cloudera Manager将会创建文件夹。<br>4.1 你可以使用相同的目录存储数据和WALs<br>4.2 你不可以将WALs 目录设置为数据的子目录<br>5.3 如果你的主机及是master又是tablet，配置不同的master和tablet服务，例如 /data/kudu/master and /data/kudu/tserver.</p>
-<p>5 如果你选择的文件系统不支持打洞技术;服务启动失败<br>点击 Continue &gt;  Kudu masters 和 tablet 启动。否则到Kudu的服务上点击 Actions &gt; Start.</p>
-<p>6.使用其中一种方法验证服务：<br>6.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>6.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/ </_host_name_></_host_name_></p>
-<p>7.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>8.管理角色。Kudu 服务 使用 Actions 来停止，启动，重启或者其他管理服务</p>
-<p>此乃官方推荐，方法1，博主亲试没有成功，安装完不显示服务</p>
-<p>本文参考页面：<br><a href="https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html" target="_blank" rel="external">https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html</a></p>
+        <p>Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。</p>
+<p>使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复位为初始值。例如，在 MeanReducer 中就实现了通过运行总数除以对应的运行计数的方式来求取均值，然后将两个值都重新设置为 0。</p>
+<p>Storm 提供了以下几种 metric 类型：</p>
+<h4 id="AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。"><a href="#AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。" class="headerlink" title="AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。"></a>AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。</h4><h4 id="CombinedMetric-–-可以对-metric-进行关联更新的通用接口。"><a href="#CombinedMetric-–-可以对-metric-进行关联更新的通用接口。" class="headerlink" title="CombinedMetric – 可以对 metric 进行关联更新的通用接口。"></a>CombinedMetric – 可以对 metric 进行关联更新的通用接口。</h4><h4 id="CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。"><a href="#CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。" class="headerlink" title="CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。"></a>CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。</h4><h4 id="MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap"><a href="#MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap" class="headerlink" title="MultiCountMetric – 返回包含一组 CountMetric 的 HashMap"></a>MultiCountMetric – 返回包含一组 CountMetric 的 HashMap</h4><h4 id="ReducedMetric"><a href="#ReducedMetric" class="headerlink" title="ReducedMetric"></a>ReducedMetric</h4><h6 id="MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。"><a href="#MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。" class="headerlink" title="MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。"></a>MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。</h6><h6 id="MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap"><a href="#MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap" class="headerlink" title="MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap"></a>MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap</h6><p>自定义Metric：<br>代码注册：<br>conf.registerMetricsConsumer(org.apache.storm.metric.LoggingMetricsConsumer.class, 1);<br>或者修改配置文件<br>topology.metrics.consumer.register:</p>
+<ul>
+<li>class: “org.apache.storm.metric.LoggingMetricsConsumer”<br>parallelism.hint: 1</li>
+<li>class: “org.apache.storm.metric.HttpForwardingMetricsConsumer”<br>parallelism.hint: 1<br>argument: “<a href="http://example.com:8080/metrics/my-topology/" target="_blank" rel="external">http://example.com:8080/metrics/my-topology/</a>“</li>
+</ul>
+<p>构建自己的Metric<br>定义不可被序列号类型transient<br>private transient CountMetric countMetric;</p>
+<p>重写prepare<br>@Override<br>public void prepare(Map conf, TopologyContext context, OutputCollector collector) {<br>    // other intialization here.<br>    countMetric = new CountMetric();<br>    context.registerMetric(“execute_count”, countMetric, 60);<br>}</p>
+<p>bolt的execute</p>
+<p>public void execute(Tuple input) {<br>    countMetric.incr();<br>    // handle tuple here.<br>}</p>
+<p>builtin_metrics.clj 为内部的 metrics 设置了数据结构，以及其他框架组件可以用于更新的虚拟方法。metrics 本身是在回调代码中实现计算的 – 请参考 clj/b/s/daemon/daemon/executor.clj 中的 ack-spout-msg 的例子。</p>
 
       
     </div>
@@ -495,7 +464,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/cloudera/" rel="tag"># cloudera</a>
+            <a href="/tags/storm/" rel="tag"># storm</a>
           
         </div>
       
@@ -504,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/23/canal分析binlog/" rel="next" title="canal分析binlog">
-                <i class="fa fa-chevron-left"></i> canal分析binlog
+              <a href="/2017/03/19/bash脚本实战/" rel="next" title="bash脚本实战">
+                <i class="fa fa-chevron-left"></i> bash脚本实战
               </a>
             
           </div>
@@ -513,10 +482,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/08/CDH 安装/" rel="prev" title="CDH 安装">
-                CDH 安装 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -548,8 +513,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/01/CDH Kudu安装及介绍/"
-           data-title="CDH Kudu安装及介绍" data-url="http://yoursite.com/2017/03/01/CDH Kudu安装及介绍/">
+      <div class="ds-thread" data-thread-key="2017/03/25/strom-Metrics/"
+           data-title="strom-Metrics" data-url="http://yoursite.com/2017/03/25/strom-Metrics/">
       </div>
     
   </div>
@@ -646,7 +611,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Kudu的要求："><span class="nav-number">1.</span> <span class="nav-text">安装Kudu的要求：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过Cloudera-Manager安装Kudu"><span class="nav-number">2.</span> <span class="nav-text">通过Cloudera Manager安装Kudu</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Parcels"><span class="nav-number">2.1.</span> <span class="nav-text">Using Parcels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Packages"><span class="nav-number">2.2.</span> <span class="nav-text">Using Packages</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。"><span class="nav-number">1.</span> <span class="nav-text">AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CombinedMetric-–-可以对-metric-进行关联更新的通用接口。"><span class="nav-number">2.</span> <span class="nav-text">CombinedMetric – 可以对 metric 进行关联更新的通用接口。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。"><span class="nav-number">3.</span> <span class="nav-text">CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap"><span class="nav-number">4.</span> <span class="nav-text">MultiCountMetric – 返回包含一组 CountMetric 的 HashMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ReducedMetric"><span class="nav-number">5.</span> <span class="nav-text">ReducedMetric</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。"><span class="nav-number">5.0.1.</span> <span class="nav-text">MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap"><span class="nav-number">5.0.2.</span> <span class="nav-text">MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
