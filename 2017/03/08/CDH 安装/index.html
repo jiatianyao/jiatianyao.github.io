@@ -84,12 +84,84 @@
 
 
 
-<meta name="description" content="运行环境：| 主机IP       | 主机名           | 内存 || ————- |————-| —–|| 1.1.1.147      | po-master1| 16G || 1.1.1.127      | po-master2      |   8G || 1.1.1.118 | po-slave1     |    8G || 1.1.1.92 | po-slave2">
+<meta name="description" content="运行环境：
+
+
+主机IP
+主机名
+内存
+
+
+
+
+1.1.1.147
+po-master1
+16G
+
+
+1.1.1.127
+po-master2
+8G
+
+
+1.1.1.118
+po-slave1
+8G
+
+
+1.1.1.92
+po-slave2
+8G
+
+
+1.1.1.230
+po-slave3
+8G
+
+
+
+配置主机名(分别在五台机器上执行)vi /etc/sysconfig/networkhostna">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CDH 安装">
 <meta property="og:url" content="http://yoursite.com/2017/03/08/CDH 安装/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="运行环境：| 主机IP       | 主机名           | 内存 || ————- |————-| —–|| 1.1.1.147      | po-master1| 16G || 1.1.1.127      | po-master2      |   8G || 1.1.1.118 | po-slave1     |    8G || 1.1.1.92 | po-slave2">
+<meta property="og:description" content="运行环境：
+
+
+主机IP
+主机名
+内存
+
+
+
+
+1.1.1.147
+po-master1
+16G
+
+
+1.1.1.127
+po-master2
+8G
+
+
+1.1.1.118
+po-slave1
+8G
+
+
+1.1.1.92
+po-slave2
+8G
+
+
+1.1.1.230
+po-slave3
+8G
+
+
+
+配置主机名(分别在五台机器上执行)vi /etc/sysconfig/networkhostna">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/CDH%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%99%BB%E9%99%86%E9%A1%B5%E9%9D%A2.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%862.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/CHD%E7%99%BB%E9%99%863.png">
@@ -108,10 +180,46 @@
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/HDFS%E5%90%AF%E7%94%A8HA.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/HDFS%E5%90%AF%E7%94%A8HA2.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/hadoop%E9%A1%B5%E9%9D%A2.png">
-<meta property="og:updated_time" content="2017-03-23T14:54:51.116Z">
+<meta property="og:updated_time" content="2017-03-24T15:22:02.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH 安装">
-<meta name="twitter:description" content="运行环境：| 主机IP       | 主机名           | 内存 || ————- |————-| —–|| 1.1.1.147      | po-master1| 16G || 1.1.1.127      | po-master2      |   8G || 1.1.1.118 | po-slave1     |    8G || 1.1.1.92 | po-slave2">
+<meta name="twitter:description" content="运行环境：
+
+
+主机IP
+主机名
+内存
+
+
+
+
+1.1.1.147
+po-master1
+16G
+
+
+1.1.1.127
+po-master2
+8G
+
+
+1.1.1.118
+po-slave1
+8G
+
+
+1.1.1.92
+po-slave2
+8G
+
+
+1.1.1.230
+po-slave3
+8G
+
+
+
+配置主机名(分别在五台机器上执行)vi /etc/sysconfig/networkhostna">
 <meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/CDH%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%99%BB%E9%99%86%E9%A1%B5%E9%9D%A2.png">
 
 
@@ -423,7 +531,42 @@
       
 
       
-        <p>运行环境：<br>| 主机IP       | 主机名           | 内存 |<br>| ————- |————-| —–|<br>| 1.1.1.147      | po-master1| 16G |<br>| 1.1.1.127      | po-master2      |   8G |<br>| 1.1.1.118 | po-slave1     |    8G |<br>| 1.1.1.92 | po-slave2     |    8G |<br>| 1.1.1.230 | po-slave3     |    8G |</p>
+        <h2 id="运行环境："><a href="#运行环境：" class="headerlink" title="运行环境："></a>运行环境：</h2><table>
+<thead>
+<tr>
+<th>主机IP</th>
+<th>主机名</th>
+<th>内存</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1.1.147</td>
+<td>po-master1</td>
+<td>16G</td>
+</tr>
+<tr>
+<td>1.1.1.127</td>
+<td>po-master2</td>
+<td>8G</td>
+</tr>
+<tr>
+<td>1.1.1.118</td>
+<td>po-slave1</td>
+<td>8G</td>
+</tr>
+<tr>
+<td>1.1.1.92</td>
+<td>po-slave2</td>
+<td>8G</td>
+</tr>
+<tr>
+<td>1.1.1.230</td>
+<td>po-slave3</td>
+<td>8G</td>
+</tr>
+</tbody>
+</table>
 <h2 id="配置主机名-分别在五台机器上执行"><a href="#配置主机名-分别在五台机器上执行" class="headerlink" title="配置主机名(分别在五台机器上执行)"></a>配置主机名(分别在五台机器上执行)</h2><p>vi /etc/sysconfig/network<br>hostname +主机名<br>例如： hostname po-master1</p>
 <h2 id="配置映射关系-把以下五条命令在五台机器上执行"><a href="#配置映射关系-把以下五条命令在五台机器上执行" class="headerlink" title="配置映射关系(把以下五条命令在五台机器上执行)"></a>配置映射关系(把以下五条命令在五台机器上执行)</h2><p>echo “1.1.1.147   po-master1”&gt;&gt;/etc/hosts<br>echo “1.1.1.127   po-master2”&gt;&gt;/etc/hosts<br>echo “1.1.1.118  po-slave1”&gt;&gt;/etc/hosts<br>echo “1.1.1.92   po-slave2”&gt;&gt;/etc/hosts<br>echo “1.1.1.230  po-slave3”&gt;&gt;/etc/hosts<br><a id="more"></a></p>
 <h2 id="安装JDK（在po-master1上执行）"><a href="#安装JDK（在po-master1上执行）" class="headerlink" title="安装JDK（在po-master1上执行）"></a>安装JDK（在po-master1上执行）</h2><p>1.下载JDK安装包：jdk-8u102-linux-x64.tar.gz<br>注：作者放到/soft/java具体位置可自行安排</p>
@@ -714,7 +857,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置主机名-分别在五台机器上执行"><span class="nav-number">1.</span> <span class="nav-text">配置主机名(分别在五台机器上执行)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置映射关系-把以下五条命令在五台机器上执行"><span class="nav-number">2.</span> <span class="nav-text">配置映射关系(把以下五条命令在五台机器上执行)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装JDK（在po-master1上执行）"><span class="nav-number">3.</span> <span class="nav-text">安装JDK（在po-master1上执行）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开放端口（五台机器上都需要配置）"><span class="nav-number">4.</span> <span class="nav-text">开放端口（五台机器上都需要配置）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五台机器配置互相免秘钥登陆"><span class="nav-number">5.</span> <span class="nav-text">五台机器配置互相免秘钥登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向其他机器分发jdk"><span class="nav-number">6.</span> <span class="nav-text">向其他机器分发jdk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置环境变量-分别在五台机器上执行"><span class="nav-number">7.</span> <span class="nav-text">配置环境变量(分别在五台机器上执行)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试（可忽略）"><span class="nav-number">8.</span> <span class="nav-text">测试（可忽略）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置NTP服务器和客户端（因为使用阿里云此处省略）"><span class="nav-number">9.</span> <span class="nav-text">配置NTP服务器和客户端（因为使用阿里云此处省略）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置mysql"><span class="nav-number">10.</span> <span class="nav-text">配置mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建用户（所有节点）"><span class="nav-number">11.</span> <span class="nav-text">创建用户（所有节点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改主机名和端口号"><span class="nav-number">12.</span> <span class="nav-text">修改主机名和端口号</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hostname-of-the-CM-server"><span class="nav-number"></span> <span class="nav-text">Hostname of the CM server.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Port-that-the-CM-server-is-listening-on"><span class="nav-number"></span> <span class="nav-text">Port that the CM server is listening on.</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载驱动包"><span class="nav-number">1.</span> <span class="nav-text">下载驱动包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为Cloudera-Manager-5建立数据库："><span class="nav-number">2.</span> <span class="nav-text">为Cloudera Manager 5建立数据库：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向其他机器分发CDH"><span class="nav-number">3.</span> <span class="nav-text">向其他机器分发CDH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备Parcels，用以安装CDH5-（博主放在-soft-bigdata-clouderamanager-cloudera-parcel-repo，路径必须包含cloudera-parcel-repo）"><span class="nav-number">4.</span> <span class="nav-text">准备Parcels，用以安装CDH5 （博主放在:/soft/bigdata/clouderamanager/cloudera/parcel-repo，路径必须包含cloudera/parcel-repo）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-number">5.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登陆"><span class="nav-number">6.</span> <span class="nav-text">登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后测试阶段，可忽略，本文完。"><span class="nav-number">7.</span> <span class="nav-text">最后测试阶段，可忽略，本文完。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试zookeeper：在po-slave1，po-slave2，po-slave3上执行（）："><span class="nav-number">7.0.1.</span> <span class="nav-text">测试zookeeper：在po-slave1，po-slave2，po-slave3上执行（）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试hdfs"><span class="nav-number">7.0.2.</span> <span class="nav-text">测试hdfs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试hadoop页面"><span class="nav-number">7.0.3.</span> <span class="nav-text">测试hadoop页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试hive"><span class="nav-number">7.0.4.</span> <span class="nav-text">测试hive</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试hbase"><span class="nav-number">7.0.5.</span> <span class="nav-text">测试hbase</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行环境："><span class="nav-number">1.</span> <span class="nav-text">运行环境：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置主机名-分别在五台机器上执行"><span class="nav-number">2.</span> <span class="nav-text">配置主机名(分别在五台机器上执行)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置映射关系-把以下五条命令在五台机器上执行"><span class="nav-number">3.</span> <span class="nav-text">配置映射关系(把以下五条命令在五台机器上执行)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装JDK（在po-master1上执行）"><span class="nav-number">4.</span> <span class="nav-text">安装JDK（在po-master1上执行）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开放端口（五台机器上都需要配置）"><span class="nav-number">5.</span> <span class="nav-text">开放端口（五台机器上都需要配置）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五台机器配置互相免秘钥登陆"><span class="nav-number">6.</span> <span class="nav-text">五台机器配置互相免秘钥登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向其他机器分发jdk"><span class="nav-number">7.</span> <span class="nav-text">向其他机器分发jdk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置环境变量-分别在五台机器上执行"><span class="nav-number">8.</span> <span class="nav-text">配置环境变量(分别在五台机器上执行)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试（可忽略）"><span class="nav-number">9.</span> <span class="nav-text">测试（可忽略）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置NTP服务器和客户端（因为使用阿里云此处省略）"><span class="nav-number">10.</span> <span class="nav-text">配置NTP服务器和客户端（因为使用阿里云此处省略）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置mysql"><span class="nav-number">11.</span> <span class="nav-text">配置mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建用户（所有节点）"><span class="nav-number">12.</span> <span class="nav-text">创建用户（所有节点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改主机名和端口号"><span class="nav-number">13.</span> <span class="nav-text">修改主机名和端口号</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hostname-of-the-CM-server"><span class="nav-number"></span> <span class="nav-text">Hostname of the CM server.</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Port-that-the-CM-server-is-listening-on"><span class="nav-number"></span> <span class="nav-text">Port that the CM server is listening on.</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载驱动包"><span class="nav-number">1.</span> <span class="nav-text">下载驱动包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为Cloudera-Manager-5建立数据库："><span class="nav-number">2.</span> <span class="nav-text">为Cloudera Manager 5建立数据库：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向其他机器分发CDH"><span class="nav-number">3.</span> <span class="nav-text">向其他机器分发CDH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备Parcels，用以安装CDH5-（博主放在-soft-bigdata-clouderamanager-cloudera-parcel-repo，路径必须包含cloudera-parcel-repo）"><span class="nav-number">4.</span> <span class="nav-text">准备Parcels，用以安装CDH5 （博主放在:/soft/bigdata/clouderamanager/cloudera/parcel-repo，路径必须包含cloudera/parcel-repo）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-number">5.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登陆"><span class="nav-number">6.</span> <span class="nav-text">登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后测试阶段，可忽略，本文完。"><span class="nav-number">7.</span> <span class="nav-text">最后测试阶段，可忽略，本文完。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试zookeeper：在po-slave1，po-slave2，po-slave3上执行（）："><span class="nav-number">7.0.1.</span> <span class="nav-text">测试zookeeper：在po-slave1，po-slave2，po-slave3上执行（）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试hdfs"><span class="nav-number">7.0.2.</span> <span class="nav-text">测试hdfs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试hadoop页面"><span class="nav-number">7.0.3.</span> <span class="nav-text">测试hadoop页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试hive"><span class="nav-number">7.0.4.</span> <span class="nav-text">测试hive</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试hbase"><span class="nav-number">7.0.5.</span> <span class="nav-text">测试hbase</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

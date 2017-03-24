@@ -1034,7 +1034,42 @@
 
       
         
-          <p>运行环境：<br>| 主机IP       | 主机名           | 内存 |<br>| ————- |————-| —–|<br>| 1.1.1.147      | po-master1| 16G |<br>| 1.1.1.127      | po-master2      |   8G |<br>| 1.1.1.118 | po-slave1     |    8G |<br>| 1.1.1.92 | po-slave2     |    8G |<br>| 1.1.1.230 | po-slave3     |    8G |</p>
+          <h2 id="运行环境："><a href="#运行环境：" class="headerlink" title="运行环境："></a>运行环境：</h2><table>
+<thead>
+<tr>
+<th>主机IP</th>
+<th>主机名</th>
+<th>内存</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.1.1.147</td>
+<td>po-master1</td>
+<td>16G</td>
+</tr>
+<tr>
+<td>1.1.1.127</td>
+<td>po-master2</td>
+<td>8G</td>
+</tr>
+<tr>
+<td>1.1.1.118</td>
+<td>po-slave1</td>
+<td>8G</td>
+</tr>
+<tr>
+<td>1.1.1.92</td>
+<td>po-slave2</td>
+<td>8G</td>
+</tr>
+<tr>
+<td>1.1.1.230</td>
+<td>po-slave3</td>
+<td>8G</td>
+</tr>
+</tbody>
+</table>
 <h2 id="配置主机名-分别在五台机器上执行"><a href="#配置主机名-分别在五台机器上执行" class="headerlink" title="配置主机名(分别在五台机器上执行)"></a>配置主机名(分别在五台机器上执行)</h2><p>vi /etc/sysconfig/network<br>hostname +主机名<br>例如： hostname po-master1</p>
 <h2 id="配置映射关系-把以下五条命令在五台机器上执行"><a href="#配置映射关系-把以下五条命令在五台机器上执行" class="headerlink" title="配置映射关系(把以下五条命令在五台机器上执行)"></a>配置映射关系(把以下五条命令在五台机器上执行)</h2><p>echo “1.1.1.147   po-master1”&gt;&gt;/etc/hosts<br>echo “1.1.1.127   po-master2”&gt;&gt;/etc/hosts<br>echo “1.1.1.118  po-slave1”&gt;&gt;/etc/hosts<br>echo “1.1.1.92   po-slave2”&gt;&gt;/etc/hosts<br>echo “1.1.1.230  po-slave3”&gt;&gt;/etc/hosts<br>
           <!--noindex-->
