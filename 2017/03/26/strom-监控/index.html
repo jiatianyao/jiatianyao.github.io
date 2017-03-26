@@ -84,16 +84,25 @@
 
 
 
-<meta name="description" content="Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复位">
+<meta name="description" content="看当前GC的情况jstat -gcutil 端口号 1000
+看wait的是否过高top -p 端口号
+把某个端口当前的堆栈信息dump到某个文件jstack 端口号 &amp;gt; 文件
+看磁盘iostat -x 1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="strom-Metrics">
-<meta property="og:url" content="http://yoursite.com/2017/03/25/strom-Metrics/index.html">
+<meta property="og:title" content="strom 监控">
+<meta property="og:url" content="http://yoursite.com/2017/03/26/strom-监控/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复位">
-<meta property="og:updated_time" content="2017-03-25T15:50:07.425Z">
+<meta property="og:description" content="看当前GC的情况jstat -gcutil 端口号 1000
+看wait的是否过高top -p 端口号
+把某个端口当前的堆栈信息dump到某个文件jstack 端口号 &amp;gt; 文件
+看磁盘iostat -x 1">
+<meta property="og:updated_time" content="2017-03-26T06:52:17.259Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="strom-Metrics">
-<meta name="twitter:description" content="Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复位">
+<meta name="twitter:title" content="strom 监控">
+<meta name="twitter:description" content="看当前GC的情况jstat -gcutil 端口号 1000
+看wait的是否过高top -p 端口号
+把某个端口当前的堆栈信息dump到某个文件jstack 端口号 &amp;gt; 文件
+看磁盘iostat -x 1">
 
 
 
@@ -121,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/25/strom-Metrics/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/26/strom-监控/"/>
 
 
 
 
 
-  <title> strom-Metrics | Hexo </title>
+  <title> strom 监控 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -306,7 +315,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/25/strom-Metrics/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/26/strom-监控/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -330,7 +339,7 @@
             
             
               
-                strom-Metrics
+                strom 监控
               
             
           </h1>
@@ -343,8 +352,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-25T00:30:00+08:00">
-                2017-03-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-26T09:30:00+08:00">
+                2017-03-26
               </time>
             
 
@@ -377,8 +386,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/25/strom-Metrics/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/25/strom-Metrics/" itemprop="commentCount"></span>
+                <a href="/2017/03/26/strom-监控/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/26/strom-监控/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -404,19 +413,10 @@
       
 
       
-        <h2 id="Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。"><a href="#Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。" class="headerlink" title="Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。"></a>Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。</h2><p>使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复位为初始值。例如，在 MeanReducer 中就实现了通过运行总数除以对应的运行计数的方式来求取均值，然后将两个值都重新设置为 0。</p>
-<p>Storm 提供了以下几种 metric 类型：</p>
-<h4 id="AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。"><a href="#AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。" class="headerlink" title="AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。"></a>AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。</h4><h4 id="CombinedMetric-–-可以对-metric-进行关联更新的通用接口。"><a href="#CombinedMetric-–-可以对-metric-进行关联更新的通用接口。" class="headerlink" title="CombinedMetric – 可以对 metric 进行关联更新的通用接口。"></a>CombinedMetric – 可以对 metric 进行关联更新的通用接口。</h4><h4 id="CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。"><a href="#CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。" class="headerlink" title="CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。"></a>CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。</h4><h4 id="MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap"><a href="#MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap" class="headerlink" title="MultiCountMetric – 返回包含一组 CountMetric 的 HashMap"></a>MultiCountMetric – 返回包含一组 CountMetric 的 HashMap</h4><h4 id="ReducedMetric"><a href="#ReducedMetric" class="headerlink" title="ReducedMetric"></a>ReducedMetric</h4><h6 id="MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。"><a href="#MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。" class="headerlink" title="MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。"></a>MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。</h6><h6 id="MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap"><a href="#MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap" class="headerlink" title="MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap"></a>MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap</h6><p>自定义Metric：<br>代码注册：<br>conf.registerMetricsConsumer(org.apache.storm.metric.LoggingMetricsConsumer.class, 1);<br>或者修改配置文件<br>topology.metrics.consumer.register:</p>
-<ul>
-<li>class: “org.apache.storm.metric.LoggingMetricsConsumer”<br>parallelism.hint: 1</li>
-<li>class: “org.apache.storm.metric.HttpForwardingMetricsConsumer”<br>parallelism.hint: 1<br>argument: “<a href="http://example.com:8080/metrics/my-topology/" target="_blank" rel="external">http://example.com:8080/metrics/my-topology/</a>“</li>
-</ul>
-<p>构建自己的Metric<br>定义不可被序列号类型transient<br>private transient CountMetric countMetric;</p>
-<p>重写prepare<br>@Override<br>public void prepare(Map conf, TopologyContext context, OutputCollector collector) {<br>    // other intialization here.<br>    countMetric = new CountMetric();<br>    context.registerMetric(“execute_count”, countMetric, 60);<br>}</p>
-<p>bolt的execute</p>
-<p>public void execute(Tuple input) {<br>    countMetric.incr();<br>    // handle tuple here.<br>}</p>
-<p>builtin_metrics.clj 为内部的 metrics 设置了数据结构，以及其他框架组件可以用于更新的虚拟方法。metrics 本身是在回调代码中实现计算的 – 请参考 clj/b/s/daemon/daemon/executor.clj 中的 ack-spout-msg 的例子。</p>
-<p>LoggingMetricsConsumer,统计指标值将输出到metric.log日志文件中。</p>
+        <p>看当前GC的情况<br>jstat -gcutil 端口号 1000</p>
+<p>看wait的是否过高<br>top -p 端口号</p>
+<p>把某个端口当前的堆栈信息dump到某个文件<br>jstack 端口号 &gt; 文件</p>
+<p>看磁盘<br>iostat -x 1</p>
 
       
     </div>
@@ -470,8 +470,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/19/bash脚本实战/" rel="next" title="bash脚本实战">
-                <i class="fa fa-chevron-left"></i> bash脚本实战
+              <a href="/2017/03/25/strom-Metrics/" rel="next" title="strom-Metrics">
+                <i class="fa fa-chevron-left"></i> strom-Metrics
               </a>
             
           </div>
@@ -479,10 +479,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/26/strom-监控/" rel="prev" title="strom 监控">
-                strom 监控 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -514,8 +510,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/25/strom-Metrics/"
-           data-title="strom-Metrics" data-url="http://yoursite.com/2017/03/25/strom-Metrics/">
+      <div class="ds-thread" data-thread-key="2017/03/26/strom-监控/"
+           data-title="strom 监控" data-url="http://yoursite.com/2017/03/26/strom-监控/">
       </div>
     
   </div>
@@ -539,17 +535,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg"
@@ -602,22 +589,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。"><span class="nav-number">1.</span> <span class="nav-text">Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。"><span class="nav-number">1.0.1.</span> <span class="nav-text">AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CombinedMetric-–-可以对-metric-进行关联更新的通用接口。"><span class="nav-number">1.0.2.</span> <span class="nav-text">CombinedMetric – 可以对 metric 进行关联更新的通用接口。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。"><span class="nav-number">1.0.3.</span> <span class="nav-text">CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap"><span class="nav-number">1.0.4.</span> <span class="nav-text">MultiCountMetric – 返回包含一组 CountMetric 的 HashMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ReducedMetric"><span class="nav-number">1.0.5.</span> <span class="nav-text">ReducedMetric</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。"><span class="nav-number">1.0.5.0.1.</span> <span class="nav-text">MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap"><span class="nav-number">1.0.5.0.2.</span> <span class="nav-text">MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>
