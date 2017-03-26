@@ -414,6 +414,10 @@
 <p>看wait的是否过高<br>top -p 端口号</p>
 <p>把某个端口当前的堆栈信息dump到某个文件<br>jstack 端口号 &gt; 文件</p>
 <p>看磁盘<br>iostat -x 1</p>
+<p>如果发现分配不均匀，例如FiledGrouping userid=1特别多，导致下游nolt或execute搞死了，重新启动也很快就死掉。可以对userid 做hash或md5或者组成更多条件，让下游Bolt分布更均匀</p>
+<p>complete latency(这里主要针对spout)是一个tuple从发出, 到经过bolt处理完成, 最终调用spout的ack这个完整的过程所花的时间.complete latency和吞吐量可以认为是互斥的, 二者不可兼得, 要提高吞吐量, 必然会增加complete latency, 反之亦然. 所以我们需要根据具体的场景, 在二者之间找到一个平衡.<br>complete latency受到两个因素的影响:<br>bolt的处理时间<br>spout的parallelism数量</p>
+<p>官网对并行度等的设置方式：<br>storm.apache.org/releases/1.0.3/Understanding-the-parallelism-of-a-Storm-topology.html</p>
+<p>如果executors总是挂就需要关注</p>
 
           
         
