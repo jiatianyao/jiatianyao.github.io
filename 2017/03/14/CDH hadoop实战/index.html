@@ -1,0 +1,765 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  ﻿<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CDH," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="解决问题：因为数据手机号一项包含为NULL的数据，需要清洗。
+创建工程，添加如下依赖123456789101112131415161718192021222324&amp;lt;dependencies&amp;gt;        &amp;lt;dependency&amp;gt;            &amp;lt;groupId&amp;gt;org.apache.hadoop&amp;lt;/groupId&amp;gt;            &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CDH hadoop实战">
+<meta property="og:url" content="http://yoursite.com/2017/03/14/CDH hadoop实战/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="解决问题：因为数据手机号一项包含为NULL的数据，需要清洗。
+创建工程，添加如下依赖123456789101112131415161718192021222324&amp;lt;dependencies&amp;gt;        &amp;lt;dependency&amp;gt;            &amp;lt;groupId&amp;gt;org.apache.hadoop&amp;lt;/groupId&amp;gt;            &amp;">
+<meta property="og:updated_time" content="2017-03-27T14:08:06.255Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CDH hadoop实战">
+<meta name="twitter:description" content="解决问题：因为数据手机号一项包含为NULL的数据，需要清洗。
+创建工程，添加如下依赖123456789101112131415161718192021222324&amp;lt;dependencies&amp;gt;        &amp;lt;dependency&amp;gt;            &amp;lt;groupId&amp;gt;org.apache.hadoop&amp;lt;/groupId&amp;gt;            &amp;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'OFEOJRRO4R',
+      apiKey: 'e45796ccb3eeae1fd05f26434d457fb4',
+      indexName: 'hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索...","hits_empty":"未发现与 「${query}」相关的内容","hits_stats":"${hits} 条相关条目，使用了 ${time} 毫秒"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/14/CDH hadoop实战/"/>
+
+
+
+
+
+  <title> CDH hadoop实战 | Hexo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7429985a9690d626019a4aae76bf7702";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Hexo</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+             <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/14/CDH hadoop实战/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CDH hadoop实战
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T14:30:00+08:00">
+                2017-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/14/CDH hadoop实战/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/14/CDH hadoop实战/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>解决问题：<br>因为数据手机号一项包含为NULL的数据，需要清洗。</p>
+<p>创建工程，添加如下依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;dependencies&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;hadoop-common&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;2.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;hadoop-hdfs&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;2.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;2.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;junit&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;junit&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;3.8.1&lt;/version&gt;</div><div class="line">            &lt;scope&gt;test&lt;/scope&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">    &lt;/dependencies&gt;</div></pre></td></tr></table></figure></p>
+<p>编写mapper类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> map;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.LongWritable;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Mapper;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by Administrator on 2017/3/14.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UidPhoneMapper</span> <span class="keyword">extends</span> <span class="title">Mapper</span>&lt;<span class="title">Text</span>, <span class="title">Text</span>, <span class="title">Text</span>, <span class="title">Text</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">map</span><span class="params">(Text key, Text value, Context context)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</div><div class="line">        String arr[] = key.toString().split(<span class="string">","</span>);</div><div class="line">        <span class="keyword">if</span> (arr.length != <span class="number">2</span>) &#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(arr[<span class="number">1</span>] == <span class="keyword">null</span>)&#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        context.write(<span class="keyword">new</span> Text(arr[<span class="number">0</span>]), <span class="keyword">new</span> Text(arr[<span class="number">1</span>]));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main;</div><div class="line"></div><div class="line"><span class="keyword">import</span> map.UidPhoneMapper;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Job;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.util.GenericOptionsParser;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by Administrator on 2017/3/14.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UidPhoneDropNull</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, InterruptedException </span>&#123;</div><div class="line"></div><div class="line">        Configuration conf = <span class="keyword">new</span> Configuration();</div><div class="line">        GenericOptionsParser parser = <span class="keyword">new</span> GenericOptionsParser(conf, args);</div><div class="line">        String[] otherArgs = parser.getRemainingArgs();</div><div class="line">        <span class="keyword">if</span> (args.length != <span class="number">2</span>) &#123;</div><div class="line">            System.err.println(<span class="string">"Usage: NewlyJoin &lt;inpath&gt; &lt;output&gt;"</span>);</div><div class="line">            System.exit(<span class="number">2</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Job job = <span class="keyword">new</span> Job(conf, <span class="string">"UidPhoneDropNull"</span>);</div><div class="line">        <span class="comment">// 设置运行的job</span></div><div class="line">        job.setJarByClass(UidPhoneDropNull.class);</div><div class="line">        <span class="comment">// 设置Map相关内容</span></div><div class="line">        job.setMapperClass(UidPhoneMapper.class);</div><div class="line">        job.setMapOutputKeyClass(Text.class);</div><div class="line">        job.setMapOutputValueClass(Text.class);</div><div class="line">        job.setInputFormatClass(KeyValueTextInputFormat.class); <span class="comment">//设置文件输入格式</span></div><div class="line">        job.setNumReduceTasks(<span class="number">0</span>); <span class="comment">//设置Reduce个数为0</span></div><div class="line"></div><div class="line">        job.setOutputKeyClass(Text.class);</div><div class="line">        job.setOutputValueClass(Text.class);</div><div class="line">        <span class="comment">// 设置输入和输出的目录</span></div><div class="line">        FileInputFormat.addInputPath(job, <span class="keyword">new</span> Path(otherArgs[<span class="number">0</span>]));</div><div class="line">        FileOutputFormat.setOutputPath(job, <span class="keyword">new</span> Path(otherArgs[<span class="number">1</span>]));</div><div class="line">        <span class="comment">// 执行，直到结束就退出</span></div><div class="line">        System.exit(job.waitForCompletion(<span class="keyword">true</span>) ? <span class="number">0</span> : <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行上面的程序<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">[hdfs@slave3 jar]$ hadoop jar bigdataMR.jar main.UidPhoneDropNull /bigdata/data/hdfs/BD/UP/* /bigdata/data/hdfs/BD/UP2 </div><div class="line">17/03/14 17:37:54 INFO client.RMProxy: Connecting to ResourceManager at master2/10.105.10.122:8032</div><div class="line">17/03/14 17:37:55 INFO input.FileInputFormat: Total input paths to process : 3</div><div class="line">17/03/14 17:37:55 INFO mapreduce.JobSubmitter: number of splits:3</div><div class="line">17/03/14 17:37:55 INFO mapreduce.JobSubmitter: Submitting tokens <span class="keyword">for</span> job: job_1488970234114_0044</div><div class="line">17/03/14 17:37:55 INFO impl.YarnClientImpl: Submitted application application_1488970234114_0044</div><div class="line">17/03/14 17:37:55 INFO mapreduce.Job: The url to track the job: http://master2:8088/proxy/application_1488970234114_0044/</div><div class="line">17/03/14 17:37:55 INFO mapreduce.Job: Running job: job_1488970234114_0044</div><div class="line">17/03/14 17:38:00 INFO mapreduce.Job: Job job_1488970234114_0044 running <span class="keyword">in</span> uber mode : <span class="literal">false</span></div><div class="line">17/03/14 17:38:00 INFO mapreduce.Job:  map 0% reduce 0%</div><div class="line">17/03/14 17:38:04 INFO mapreduce.Job:  map 33% reduce 0%</div><div class="line">17/03/14 17:38:05 INFO mapreduce.Job:  map 100% reduce 0%</div><div class="line">17/03/14 17:38:05 INFO mapreduce.Job: Job job_1488970234114_0044 completed successfully</div><div class="line">17/03/14 17:38:05 INFO mapreduce.Job: Counters: 30</div><div class="line">        File System Counters</div><div class="line">                FILE: Number of bytes <span class="built_in">read</span>=0</div><div class="line">                FILE: Number of bytes written=378748</div><div class="line">                FILE: Number of <span class="built_in">read</span> operations=0</div><div class="line">                FILE: Number of large <span class="built_in">read</span> operations=0</div><div class="line">                FILE: Number of write operations=0</div><div class="line">                HDFS: Number of bytes <span class="built_in">read</span>=13514456</div><div class="line">                HDFS: Number of bytes written=10824901</div><div class="line">                HDFS: Number of <span class="built_in">read</span> operations=15</div><div class="line">                HDFS: Number of large <span class="built_in">read</span> operations=0</div><div class="line">                HDFS: Number of write operations=6</div><div class="line">        Job Counters </div><div class="line">                Launched map tasks=3</div><div class="line">                Data-local map tasks=3</div><div class="line">                Total time spent by all maps <span class="keyword">in</span> occupied slots (ms)=8240</div><div class="line">                Total time spent by all reduces <span class="keyword">in</span> occupied slots (ms)=0</div><div class="line">                Total time spent by all map tasks (ms)=8240</div><div class="line">                Total vcore-seconds taken by all map tasks=8240</div><div class="line">                Total megabyte-seconds taken by all map tasks=8437760</div><div class="line">        Map-Reduce Framework</div><div class="line">                Map input records=661590</div><div class="line">                Map output records=485478</div><div class="line">                Input split bytes=393</div><div class="line">                Spilled Records=0</div><div class="line">                Failed Shuffles=0</div><div class="line">                Merged Map outputs=0</div><div class="line">                GC time elapsed (ms)=175</div><div class="line">                CPU time spent (ms)=3730</div><div class="line">                Physical memory (bytes) snapshot=712597504</div><div class="line">                Virtual memory (bytes) snapshot=8316772352</div><div class="line">                Total committed heap usage (bytes)=814743552</div><div class="line">        File Input Format Counters </div><div class="line">                Bytes Read=13514063</div><div class="line">        File Output Format Counters </div><div class="line">                Bytes Written=10824901</div><div class="line">[hdfs@slave3 jar]$ hadoop fs -ls /bigdata/data/hdfs/BD/UP2</div><div class="line">Found 4 items</div><div class="line">-rw-r--r--   3 hdfs supergroup          0 2017-03-14 17:38 /bigdata/data/hdfs/BD/UP2/_SUCCESS</div><div class="line">-rw-r--r--   3 hdfs supergroup    7609438 2017-03-14 17:38 /bigdata/data/hdfs/BD/UP2/part-m-00000</div><div class="line">-rw-r--r--   3 hdfs supergroup    3215441 2017-03-14 17:38 /bigdata/data/hdfs/BD/UP2/part-m-00001</div><div class="line">-rw-r--r--   3 hdfs supergroup         22 2017-03-14 17:38 /bigdata/data/hdfs/BD/UP2/part-m-00002</div></pre></td></tr></table></figure></p>
+<p>最后将数据导入到hive<br>hive&gt; create EXTERNAL table IF NOT EXISTS UP2 (uid STRING,phone STRING) row format delimited fields terminated by ‘,’ location ‘/bigdata/data/hdfs/BD/UP2/‘;<br>OK<br>Time taken: 0.026 seconds<br>hive&gt; select count(1) from UP2;<br>Query ID = hdfs_20170314174141_1b60d560-2036-44e6-ab65-19f17efc5b1b<br>Total jobs = 1<br>Launching Job 1 out of 1<br>Number of reduce tasks determined at compile time: 1<br>In order to change the average load for a reducer (in bytes):<br>  set hive.exec.reducers.bytes.per.reducer=<number><br>In order to limit the maximum number of reducers:<br>  set hive.exec.reducers.max=<number><br>In order to set a constant number of reducers:<br>  set mapreduce.job.reduces=<number><br>Starting Job = job_1488970234114_0045, Tracking URL = <a href="http://master2:8088/proxy/application_1488970234114_0045/" target="_blank" rel="external">http://master2:8088/proxy/application_1488970234114_0045/</a><br>Kill Command = /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hadoop/bin/hadoop job  -kill job_1488970234114_0045<br>Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1<br>2017-03-14 17:41:33,200 Stage-1 map = 0%,  reduce = 0%<br>2017-03-14 17:41:38,371 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 2.54 sec<br>2017-03-14 17:41:43,486 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 4.38 sec<br>MapReduce Total cumulative CPU time: 4 seconds 380 msec<br>Ended Job = job_1488970234114_0045<br>MapReduce Jobs Launched:<br>Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 4.38 sec   HDFS Read: 10831709 HDFS Write: 7 SUCCESS<br>Total MapReduce CPU Time Spent: 4 seconds 380 msec<br>OK<br>485478<br>Time taken: 16.267 seconds, Fetched: 1 row(s)</number></number></number></p>
+<p>比清洗前数据661590少了176112条</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/wechat-reward-image.jpg" alt="张洪铭 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/alipay-reward-image.jpg" alt="张洪铭 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CDH/" rel="tag"># CDH</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/14/CDH hive 实战/" rel="next" title="CDH hive 实战">
+                <i class="fa fa-chevron-left"></i> CDH hive 实战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/19/bash脚本实战/" rel="prev" title="bash脚本实战">
+                bash脚本实战 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/14/CDH hadoop实战/"
+           data-title="CDH hadoop实战" data-url="http://yoursite.com/2017/03/14/CDH hadoop实战/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg"
+               alt="张洪铭" />
+          <p class="site-author-name" itemprop="name">张洪铭</p>
+          <p class="site-description motion-element" itemprop="description">人生在勤 勤则不匮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张洪铭</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhm8"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.0"></script>
+
+
+  
+ 
+
+</body>
+</html>
