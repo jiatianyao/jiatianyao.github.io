@@ -98,7 +98,7 @@
 把某个端口当前的堆栈信息dump到某个文件jstack 端口号 &amp;gt; 文件
 看磁盘iostat -x 1
 如果发现分配不均匀，例如FiledGrouping userid=1特别多，导致下游nolt或execute搞死了，重新启动也很快就死掉。可以对userid 做hash或md5或者组成更">
-<meta property="og:updated_time" content="2017-03-26T15:10:09.267Z">
+<meta property="og:updated_time" content="2017-03-31T13:27:13.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="strom 监控">
 <meta name="twitter:description" content="看当前GC的情况jstat -gcutil 端口号 1000
@@ -421,7 +421,7 @@
 <p>把某个端口当前的堆栈信息dump到某个文件<br>jstack 端口号 &gt; 文件</p>
 <p>看磁盘<br>iostat -x 1</p>
 <p>如果发现分配不均匀，例如FiledGrouping userid=1特别多，导致下游nolt或execute搞死了，重新启动也很快就死掉。可以对userid 做hash或md5或者组成更多条件，让下游Bolt分布更均匀</p>
-<p>complete latency(这里主要针对spout)是一个tuple从发出, 到经过bolt处理完成, 最终调用spout的ack这个完整的过程所花的时间.complete latency和吞吐量可以认为是互斥的, 二者不可兼得, 要提高吞吐量, 必然会增加complete latency, 反之亦然. 所以我们需要根据具体的场景, 在二者之间找到一个平衡.<br>complete latency受到两个因素的影响:<br>bolt的处理时间<br>spout的parallelism数量</p>
+<p>complete latency(这里主要针对spout)是一个tuple从发出, 到经过bolt处理完成, 最终调用spout的ack这个完整的过程所花的时间.complete latency和吞吐量可以认为是互斥的, 二者不可兼得, 要提高吞吐量, 必然会增加complete latency, 反之亦然. 所以我们需要根据具体的场景, 在二者之间找到一个平衡.<br>complete latency受到两个因素的影响:<br>bolt的处理时间<br>spout的parallelism数量<br><a id="more"></a></p>
 <p>官网对并行度等的设置方式：<br>storm.apache.org/releases/1.0.3/Understanding-the-parallelism-of-a-Storm-topology.html</p>
 <p>如果executors总是挂就需要关注</p>
 

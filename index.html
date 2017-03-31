@@ -409,21 +409,18 @@
 
       
         
-          
-            <p>添加服务选择spark on yarn<br>安装的时候会选择history server，博主选择的是slave1，后续可以通过这个地址看spark的UI</p>
+          <p>添加服务选择spark on yarn<br>安装的时候会选择history server，博主选择的是slave1，后续可以通过这个地址看spark的UI</p>
 <p>博主安装的是：<br>scala     version 2.10.5（后续再UI上看到的）<br>spark   version 1.6.0（执行spark-shell时看到的）</p>
 <p>安装完后测试：</p>
 <p>su hdfs<br>spark-submit –class org.apache.spark.examples.SparkPi –executor-memory 1G –total-executor-cores 2 /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/spark/examples/lib/spark-examples-1.6.0-cdh5.10.0-hadoop2.6.0-cdh5.10.0.jar 100</p>
-<p>查看UI：<br><a href="http://slave1:18088/" target="_blank" rel="external">http://slave1:18088/</a></p>
-<p>编写代码测试离线功能：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</div><div class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</div><div class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</div><div class="line"></div><div class="line">    &lt;groupId&gt;cn.zwjf.spark&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;SpakrZwujf&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</div><div class="line"></div><div class="line"></div><div class="line">    &lt;properties&gt;</div><div class="line">        &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;</div><div class="line">        &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;</div><div class="line">        &lt;encoding&gt;UTF-8&lt;/encoding&gt;</div><div class="line">        &lt;scala.version&gt;2.10.5&lt;/scala.version&gt;</div><div class="line">        &lt;scala.compat.version&gt;2.10&lt;/scala.compat.version&gt;</div><div class="line">    &lt;/properties&gt;</div><div class="line"></div><div class="line">    &lt;dependencies&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.scala-lang&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;scala-library&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;$&#123;scala.version&#125;&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;spark-core_2.10&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;1.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;spark-streaming_2.10&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;1.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;2.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">    &lt;/dependencies&gt;</div><div class="line"></div><div class="line">    &lt;build&gt;</div><div class="line">        &lt;sourceDirectory&gt;src/main/scala&lt;/sourceDirectory&gt;</div><div class="line">        &lt;testSourceDirectory&gt;src/test/scala&lt;/testSourceDirectory&gt;</div><div class="line">        &lt;plugins&gt;</div><div class="line">            &lt;plugin&gt;</div><div class="line">                &lt;groupId&gt;net.alchim31.maven&lt;/groupId&gt;</div><div class="line">                &lt;artifactId&gt;scala-maven-plugin&lt;/artifactId&gt;</div><div class="line">                &lt;version&gt;3.2.0&lt;/version&gt;</div><div class="line">                &lt;executions&gt;</div><div class="line">                    &lt;execution&gt;</div><div class="line">                        &lt;goals&gt;</div><div class="line">                            &lt;goal&gt;compile&lt;/goal&gt;</div><div class="line">                            &lt;goal&gt;testCompile&lt;/goal&gt;</div><div class="line">                        &lt;/goals&gt;</div><div class="line">                        &lt;configuration&gt;</div><div class="line">                            &lt;args&gt;</div><div class="line">                                &lt;arg&gt;-make:transitive&lt;/arg&gt;</div><div class="line">                                &lt;arg&gt;-dependencyfile&lt;/arg&gt;</div><div class="line">                                &lt;arg&gt;$&#123;project.build.directory&#125;/.scala_dependencies&lt;/arg&gt;</div><div class="line">                            &lt;/args&gt;</div><div class="line">                        &lt;/configuration&gt;</div><div class="line">                    &lt;/execution&gt;</div><div class="line">                &lt;/executions&gt;</div><div class="line">            &lt;/plugin&gt;</div><div class="line">            &lt;plugin&gt;</div><div class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</div><div class="line">                &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;</div><div class="line">                &lt;version&gt;2.18.1&lt;/version&gt;</div><div class="line">                &lt;configuration&gt;</div><div class="line">                    &lt;useFile&gt;false&lt;/useFile&gt;</div><div class="line">                    &lt;disableXmlReport&gt;true&lt;/disableXmlReport&gt;</div><div class="line">                    &lt;includes&gt;</div><div class="line">                        &lt;include&gt;**/*Test.*&lt;/include&gt;</div><div class="line">                        &lt;include&gt;**/*Suite.*&lt;/include&gt;</div><div class="line">                    &lt;/includes&gt;</div><div class="line">                &lt;/configuration&gt;</div><div class="line">            &lt;/plugin&gt;</div><div class="line"></div><div class="line">            &lt;plugin&gt;</div><div class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</div><div class="line">                &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;</div><div class="line">                &lt;version&gt;2.3&lt;/version&gt;</div><div class="line">                &lt;executions&gt;</div><div class="line">                    &lt;execution&gt;</div><div class="line">                        &lt;phase&gt;package&lt;/phase&gt;</div><div class="line">                        &lt;goals&gt;</div><div class="line">                            &lt;goal&gt;shade&lt;/goal&gt;</div><div class="line">                        &lt;/goals&gt;</div><div class="line">                        &lt;configuration&gt;</div><div class="line">                            &lt;filters&gt;</div><div class="line">                                &lt;filter&gt;</div><div class="line">                                    &lt;artifact&gt;*:*&lt;/artifact&gt;</div><div class="line">                                    &lt;excludes&gt;</div><div class="line">                                        &lt;exclude&gt;META-INF/*.SF&lt;/exclude&gt;</div><div class="line">                                        &lt;exclude&gt;META-INF/*.DSA&lt;/exclude&gt;</div><div class="line">                                        &lt;exclude&gt;META-INF/*.RSA&lt;/exclude&gt;</div><div class="line">                                    &lt;/excludes&gt;</div><div class="line">                                &lt;/filter&gt;</div><div class="line">                            &lt;/filters&gt;</div><div class="line">                            &lt;transformers&gt;</div><div class="line">                                &lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;</div><div class="line">                                    &lt;mainClass&gt;cn.zwjf.uidPhone&lt;/mainClass&gt;</div><div class="line">                                &lt;/transformer&gt;</div><div class="line">                            &lt;/transformers&gt;</div><div class="line">                        &lt;/configuration&gt;</div><div class="line">                    &lt;/execution&gt;</div><div class="line">                &lt;/executions&gt;</div><div class="line">            &lt;/plugin&gt;</div><div class="line">        &lt;/plugins&gt;</div><div class="line">    &lt;/build&gt;</div><div class="line">&lt;/project&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> cn.zwjf</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">  * Created by Administrator on 2017/3/29.</div><div class="line">  */</div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">uidPhone</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</div><div class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"uid_phone_etl"</span>)</div><div class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line">    sc.textFile(args(<span class="number">0</span>)).map(line =&gt; &#123;</div><div class="line">      <span class="keyword">val</span> arr = line.split(<span class="string">","</span>)</div><div class="line">      <span class="keyword">if</span>(arr.length &gt; <span class="number">1</span> &amp;&amp; !arr(<span class="number">1</span>).equals(<span class="string">"null"</span>))&#123;</div><div class="line">        arr(<span class="number">0</span>)+<span class="string">","</span>+arr(<span class="number">1</span>)</div><div class="line">      &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="string">"null"</span></div><div class="line">      &#125;</div><div class="line"></div><div class="line">    &#125;).filter(!_.equals(<span class="string">"null"</span>)).saveAsTextFile(args(<span class="number">1</span>))</div><div class="line">    sc.stop()</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>打包提交到服务器</p>
-<p>spark-submit \<br>–class cn.zwjf.uidPhone –executor-memory 2G –total-executor-cores 4 \<br>/var/lib/hadoop-hdfs/data/spark/SpakrZwujf-1.0-SNAPSHOT.jar \<br>/bigdata/data/hdfs/Baidu/uid_phone/* \<br>/bigdata/data/hdfs/Baidu/uid_phone3</p>
-<p>/bigdata/data/hdfs/Baidu/uid_phone/* /bigdata/data/hdfs/Baidu/uid_phone2</p>
-<p>本地调试方法：、<br><a href="http://www.jianshu.com/p/c801761ce088" target="_blank" rel="external">http://www.jianshu.com/p/c801761ce088</a></p>
-
-          
+<p>查看UI：<br><a href="http://slave1:18088/">http://slave1:18088/</a></p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/29/CDH-spark/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -562,17 +559,19 @@
 
       
         
-          
-            <p>看当前GC的情况<br>jstat -gcutil 端口号 1000</p>
+          <p>看当前GC的情况<br>jstat -gcutil 端口号 1000</p>
 <p>看wait的是否过高<br>top -p 端口号</p>
 <p>把某个端口当前的堆栈信息dump到某个文件<br>jstack 端口号 &gt; 文件</p>
 <p>看磁盘<br>iostat -x 1</p>
 <p>如果发现分配不均匀，例如FiledGrouping userid=1特别多，导致下游nolt或execute搞死了，重新启动也很快就死掉。可以对userid 做hash或md5或者组成更多条件，让下游Bolt分布更均匀</p>
-<p>complete latency(这里主要针对spout)是一个tuple从发出, 到经过bolt处理完成, 最终调用spout的ack这个完整的过程所花的时间.complete latency和吞吐量可以认为是互斥的, 二者不可兼得, 要提高吞吐量, 必然会增加complete latency, 反之亦然. 所以我们需要根据具体的场景, 在二者之间找到一个平衡.<br>complete latency受到两个因素的影响:<br>bolt的处理时间<br>spout的parallelism数量</p>
-<p>官网对并行度等的设置方式：<br>storm.apache.org/releases/1.0.3/Understanding-the-parallelism-of-a-Storm-topology.html</p>
-<p>如果executors总是挂就需要关注</p>
-
-          
+<p>complete latency(这里主要针对spout)是一个tuple从发出, 到经过bolt处理完成, 最终调用spout的ack这个完整的过程所花的时间.complete latency和吞吐量可以认为是互斥的, 二者不可兼得, 要提高吞吐量, 必然会增加complete latency, 反之亦然. 所以我们需要根据具体的场景, 在二者之间找到一个平衡.<br>complete latency受到两个因素的影响:<br>bolt的处理时间<br>spout的parallelism数量<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/26/strom-监控/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -711,22 +710,16 @@
 
       
         
-          
-            <h2 id="Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。"><a href="#Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。" class="headerlink" title="Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。"></a>Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。</h2><p>使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复位为初始值。例如，在 MeanReducer 中就实现了通过运行总数除以对应的运行计数的方式来求取均值，然后将两个值都重新设置为 0。</p>
+          <h2 id="Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。"><a href="#Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。" class="headerlink" title="Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。"></a>Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。</h2><p>使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复位为初始值。例如，在 MeanReducer 中就实现了通过运行总数除以对应的运行计数的方式来求取均值，然后将两个值都重新设置为 0。</p>
 <p>Storm 提供了以下几种 metric 类型：</p>
-<h4 id="AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。"><a href="#AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。" class="headerlink" title="AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。"></a>AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。</h4><h4 id="CombinedMetric-–-可以对-metric-进行关联更新的通用接口。"><a href="#CombinedMetric-–-可以对-metric-进行关联更新的通用接口。" class="headerlink" title="CombinedMetric – 可以对 metric 进行关联更新的通用接口。"></a>CombinedMetric – 可以对 metric 进行关联更新的通用接口。</h4><h4 id="CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。"><a href="#CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。" class="headerlink" title="CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。"></a>CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。</h4><h4 id="MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap"><a href="#MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap" class="headerlink" title="MultiCountMetric – 返回包含一组 CountMetric 的 HashMap"></a>MultiCountMetric – 返回包含一组 CountMetric 的 HashMap</h4><h4 id="ReducedMetric"><a href="#ReducedMetric" class="headerlink" title="ReducedMetric"></a>ReducedMetric</h4><h6 id="MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。"><a href="#MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。" class="headerlink" title="MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。"></a>MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。</h6><h6 id="MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap"><a href="#MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap" class="headerlink" title="MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap"></a>MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap</h6><p>自定义Metric：<br>代码注册：<br>conf.registerMetricsConsumer(org.apache.storm.metric.LoggingMetricsConsumer.class, 1);<br>或者修改配置文件<br>topology.metrics.consumer.register:</p>
-<ul>
-<li>class: “org.apache.storm.metric.LoggingMetricsConsumer”<br>parallelism.hint: 1</li>
-<li>class: “org.apache.storm.metric.HttpForwardingMetricsConsumer”<br>parallelism.hint: 1<br>argument: “<a href="http://example.com:8080/metrics/my-topology/" target="_blank" rel="external">http://example.com:8080/metrics/my-topology/</a>“</li>
-</ul>
-<p>构建自己的Metric<br>定义不可被序列号类型transient<br>private transient CountMetric countMetric;</p>
-<p>重写prepare<br>@Override<br>public void prepare(Map conf, TopologyContext context, OutputCollector collector) {<br>    // other intialization here.<br>    countMetric = new CountMetric();<br>    context.registerMetric(“execute_count”, countMetric, 60);<br>}</p>
-<p>bolt的execute</p>
-<p>public void execute(Tuple input) {<br>    countMetric.incr();<br>    // handle tuple here.<br>}</p>
-<p>builtin_metrics.clj 为内部的 metrics 设置了数据结构，以及其他框架组件可以用于更新的虚拟方法。metrics 本身是在回调代码中实现计算的 – 请参考 clj/b/s/daemon/daemon/executor.clj 中的 ack-spout-msg 的例子。</p>
-<p>LoggingMetricsConsumer,统计指标值将输出到metric.log日志文件中。</p>
-
-          
+<h4 id="AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。"><a href="#AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。" class="headerlink" title="AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。"></a>AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。</h4><h4 id="CombinedMetric-–-可以对-metric-进行关联更新的通用接口。"><a href="#CombinedMetric-–-可以对-metric-进行关联更新的通用接口。" class="headerlink" title="CombinedMetric – 可以对 metric 进行关联更新的通用接口。"></a>CombinedMetric – 可以对 metric 进行关联更新的通用接口。</h4><h4 id="CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。"><a href="#CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。" class="headerlink" title="CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。"></a>CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。</h4><h4 id="MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap"><a href="#MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap" class="headerlink" title="MultiCountMetric – 返回包含一组 CountMetric 的 HashMap"></a>MultiCountMetric – 返回包含一组 CountMetric 的 HashMap</h4><h4 id="ReducedMetric"><a href="#ReducedMetric" class="headerlink" title="ReducedMetric"></a>ReducedMetric</h4><h6 id="MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。"><a href="#MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。" class="headerlink" title="MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。"></a>MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。</h6><h6 id="MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap"><a href="#MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap" class="headerlink" title="MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap"></a>MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap</h6>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/25/strom-Metrics/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -865,19 +858,15 @@
 
       
         
-          
-            <h3 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h3><p>写一个脚本getinterface.sh，脚本可以接受参数(i,I,a)，完成以下任务：<br>   (1)使用以下形式：getinterface.sh [-i interface|-I IP|-a]<br>   (2)当用户使用-i选项时，显示其指定网卡的IP地址；<br>   (3)当用户使用-I选项时，显示其后面的IP地址所属的网络接口；（如 192.168.199.183：eth0）<br>   (4)当用户单独使用-a选项时，显示所有网络接口及其IP地址（lo除外）</p>
+          <h3 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h3><p>写一个脚本getinterface.sh，脚本可以接受参数(i,I,a)，完成以下任务：<br>   (1)使用以下形式：getinterface.sh [-i interface|-I IP|-a]<br>   (2)当用户使用-i选项时，显示其指定网卡的IP地址；<br>   (3)当用户使用-I选项时，显示其后面的IP地址所属的网络接口；（如 192.168.199.183：eth0）<br>   (4)当用户单独使用-a选项时，显示所有网络接口及其IP地址（lo除外）</p>
 <p>分析<br>参数1为param1 参数2位param2<br>（1）利用CAT &lt;&lt; EOF  <em>*</em> EOF打印信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat &lt;&lt; EOF</div><div class="line">    getinterface.sh [-i interface|-I IP|<span class="_">-a</span>]</div><div class="line">    -i interface) show ip of the interface</div><div class="line">    -I IP) show interface of the IP and IP with :;</div><div class="line">    <span class="_">-a</span>) list all interfaces and their IPs except lo;</div><div class="line">    *) quit</div><div class="line">=================================================================</div><div class="line">EOF</div></pre></td></tr></table></figure></p>
-<p>（2）校验接口是否存在（参数2）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ifconfig <span class="variable">$interface</span> &gt;/dev/null </div><div class="line">$? <span class="_">-ne</span> 1  </div><div class="line"><span class="comment">#如果存在打印网卡的IP</span></div><div class="line">ifconfig <span class="variable">$parma2</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span></div></pre></td></tr></table></figure></p>
-<p>（3）先打印所有接口<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -i | sed -n <span class="string">'3,65535p'</span>|awk -F<span class="string">" "</span> <span class="string">'&#123;print $1&#125;</span></div></pre></td></tr></table></figure></p>
-<p>并存在一个变量中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list=`netstat -i | sed -n <span class="string">'3,65535p'</span>|awk -F<span class="string">" "</span> <span class="string">'&#123;print $1&#125;'</span>`</div></pre></td></tr></table></figure>
-<p>遍历集合，查看和输入IP相同的打印IP和接口<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> inter <span class="keyword">in</span> <span class="variable">$list</span>;  </div><div class="line"><span class="keyword">do</span>  </div><div class="line">    ip_temp=`ifconfig <span class="variable">$param2</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span></div><div class="line">    <span class="keyword">if</span> [ <span class="variable">$IP</span> == <span class="variable">$ip_temp</span> ];<span class="keyword">then</span>  </div><div class="line">	<span class="built_in">echo</span> <span class="string">"<span class="variable">$IP</span> : <span class="variable">$inter</span>"</span>  </div><div class="line">	<span class="built_in">exit</span> 0  </div><div class="line">    <span class="keyword">fi</span>  </div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure></p>
-<p>（4）遍历集合，过滤接口为lo的，打印IP和接口<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> inter <span class="keyword">in</span> <span class="variable">$list</span>;  </div><div class="line"><span class="keyword">do</span>  </div><div class="line">    ip_temp=`ifconfig <span class="variable">$param2</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span></div><div class="line">    <span class="keyword">if</span> [ <span class="variable">$inter</span> != <span class="string">"lo"</span> ];<span class="keyword">then</span>  </div><div class="line">	<span class="built_in">echo</span> <span class="string">"<span class="variable">$IP</span> : <span class="variable">$inter</span>"</span>  </div><div class="line">	<span class="built_in">exit</span> 0  </div><div class="line">    <span class="keyword">fi</span>  </div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure></p>
-<p>最终的脚本如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">cat &lt;&lt; EOF</div><div class="line">    getinterface.sh [-i interface|-I IP|<span class="_">-a</span>]</div><div class="line">    -i interface) show ip of the interface</div><div class="line">    -I IP) show interface of the IP and IP with :;</div><div class="line">    <span class="_">-a</span>) list all interfaces and their IPs except lo;</div><div class="line">    *) quit</div><div class="line">=================================================================</div><div class="line">EOF</div><div class="line"></div><div class="line"><span class="built_in">read</span> -p <span class="string">"please choice "</span> param1 param2</div><div class="line">list=`netstat -i | sed -n <span class="string">'3,65535p'</span>|awk -F<span class="string">" "</span> <span class="string">'&#123;print $1&#125;'</span>`</div><div class="line"></div><div class="line"><span class="keyword">if</span> [[ <span class="string">"<span class="variable">$param1</span>"</span> == <span class="string">'-i'</span> ]]; <span class="keyword">then</span></div><div class="line">    ifconfig <span class="variable">$interface</span> &gt;/dev/null</div><div class="line">    flag=$?</div><div class="line">    <span class="keyword">if</span> [ <span class="variable">$flag</span> <span class="_">-ne</span> 1 ];<span class="keyword">then</span></div><div class="line">        ip=`ifconfig <span class="variable">$param2</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span>`</div><div class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$param2</span> <span class="variable">$ip</span>"</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$parma2</span> is not exist"</span> </div><div class="line">    <span class="keyword">fi</span></div><div class="line"><span class="keyword">elif</span> [[ <span class="string">"<span class="variable">$param1</span>"</span> == <span class="string">'-I'</span> ]]; <span class="keyword">then</span></div><div class="line"><span class="keyword">for</span> lt <span class="keyword">in</span> <span class="variable">$list</span>;</div><div class="line">  <span class="keyword">do</span></div><div class="line">     ip =$(ifconfig <span class="variable">$lt</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span>)</div><div class="line">     <span class="comment">#ip=$(ifconfig $lt | awk -F" " '/inet.*Mask/&#123;print $2&#125;' | awk -F: '&#123;print $2&#125;')</span></div><div class="line">     <span class="keyword">if</span> [ <span class="variable">$param2</span> == <span class="variable">$ip</span> ];<span class="keyword">then</span></div><div class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$lt</span> : <span class="variable">$ip</span>"</span></div><div class="line">     <span class="keyword">fi</span></div><div class="line">  <span class="keyword">done</span></div><div class="line"><span class="keyword">elif</span> [[ <span class="string">"<span class="variable">$param1</span>"</span> == <span class="string">'-a'</span> ]]; <span class="keyword">then</span></div><div class="line"> <span class="keyword">for</span> lt <span class="keyword">in</span> <span class="variable">$list</span>;</div><div class="line">  <span class="keyword">do</span></div><div class="line">     ip=$(ifconfig <span class="variable">$lt</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span>)</div><div class="line">     <span class="comment">#ip=$(ifconfig $lt | awk -F" " '/inet.*Mask/&#123;print $2&#125;' | awk -F: '&#123;print $2&#125;')</span></div><div class="line">     <span class="keyword">if</span> [ <span class="variable">$lt</span> != <span class="string">"lo"</span> ];<span class="keyword">then</span></div><div class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$lt</span> : <span class="variable">$ip</span>"</span></div><div class="line">        <span class="built_in">exit</span> 0</div><div class="line">     <span class="keyword">fi</span></div><div class="line">  <span class="keyword">done</span></div><div class="line"><span class="keyword">else</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">"quit"</span></div><div class="line">    <span class="built_in">exit</span> 0</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure></p>
-<p>注意如上内容根据你个人机器显示情况而定，如果是显示<br> inet addr:127.0.0.1  Mask:255.0.0.0<br> 就要把正则改成<br> ip=$(ifconfig $lt | awk -F” “ ‘/inet.*Mask/{print $2}’ | awk -F: ‘{print $2}’)</p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/19/bash脚本实战/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1016,16 +1005,15 @@
 
       
         
-          
-            <h5 id="解决问题："><a href="#解决问题：" class="headerlink" title="解决问题："></a>解决问题：</h5><p>因为数据手机号一项包含为NULL的数据，需要清洗。</p>
+          <h5 id="解决问题："><a href="#解决问题：" class="headerlink" title="解决问题："></a>解决问题：</h5><p>因为数据手机号一项包含为NULL的数据，需要清洗。</p>
 <p>创建工程，添加如下依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;dependencies&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;hadoop-common&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;2.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;hadoop-hdfs&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;2.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;2.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;junit&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;junit&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;3.8.1&lt;/version&gt;</div><div class="line">            &lt;scope&gt;test&lt;/scope&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">    &lt;/dependencies&gt;</div></pre></td></tr></table></figure></p>
-<p>编写mapper类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> map;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.LongWritable;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Mapper;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by Administrator on 2017/3/14.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UidPhoneMapper</span> <span class="keyword">extends</span> <span class="title">Mapper</span>&lt;<span class="title">Text</span>, <span class="title">Text</span>, <span class="title">Text</span>, <span class="title">Text</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">map</span><span class="params">(Text key, Text value, Context context)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</div><div class="line">        String arr[] = key.toString().split(<span class="string">","</span>);</div><div class="line">        <span class="keyword">if</span> (arr.length != <span class="number">2</span>) &#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(arr[<span class="number">1</span>] == <span class="keyword">null</span>)&#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        context.write(<span class="keyword">new</span> Text(arr[<span class="number">0</span>]), <span class="keyword">new</span> Text(arr[<span class="number">1</span>]));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main;</div><div class="line"></div><div class="line"><span class="keyword">import</span> map.UidPhoneMapper;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Job;</div><div class="line"><span class="keyword">import</span> org.apache.hadoop.util.GenericOptionsParser;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by Administrator on 2017/3/14.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UidPhoneDropNull</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, InterruptedException </span>&#123;</div><div class="line"></div><div class="line">        Configuration conf = <span class="keyword">new</span> Configuration();</div><div class="line">        GenericOptionsParser parser = <span class="keyword">new</span> GenericOptionsParser(conf, args);</div><div class="line">        String[] otherArgs = parser.getRemainingArgs();</div><div class="line">        <span class="keyword">if</span> (args.length != <span class="number">2</span>) &#123;</div><div class="line">            System.err.println(<span class="string">"Usage: NewlyJoin &lt;inpath&gt; &lt;output&gt;"</span>);</div><div class="line">            System.exit(<span class="number">2</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Job job = <span class="keyword">new</span> Job(conf, <span class="string">"UidPhoneDropNull"</span>);</div><div class="line">        <span class="comment">// 设置运行的job</span></div><div class="line">        job.setJarByClass(UidPhoneDropNull.class);</div><div class="line">        <span class="comment">// 设置Map相关内容</span></div><div class="line">        job.setMapperClass(UidPhoneMapper.class);</div><div class="line">        job.setMapOutputKeyClass(Text.class);</div><div class="line">        job.setMapOutputValueClass(Text.class);</div><div class="line">        job.setInputFormatClass(KeyValueTextInputFormat.class); <span class="comment">//设置文件输入格式</span></div><div class="line">        job.setNumReduceTasks(<span class="number">0</span>); <span class="comment">//设置Reduce个数为0</span></div><div class="line"></div><div class="line">        job.setOutputKeyClass(Text.class);</div><div class="line">        job.setOutputValueClass(Text.class);</div><div class="line">        <span class="comment">// 设置输入和输出的目录</span></div><div class="line">        FileInputFormat.addInputPath(job, <span class="keyword">new</span> Path(otherArgs[<span class="number">0</span>]));</div><div class="line">        FileOutputFormat.setOutputPath(job, <span class="keyword">new</span> Path(otherArgs[<span class="number">1</span>]));</div><div class="line">        <span class="comment">// 执行，直到结束就退出</span></div><div class="line">        System.exit(job.waitForCompletion(<span class="keyword">true</span>) ? <span class="number">0</span> : <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行上面的程序<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">[hdfs@slave3 jar]$ hadoop jar bigdataMR.jar main.UidPhoneDropNull /bigdata/data/hdfs/BD/UP/* /bigdata/data/hdfs/BD/UP2 </div><div class="line">17/03/14 17:37:54 INFO client.RMProxy: Connecting to ResourceManager at master2/10.105.10.122:8032</div><div class="line">17/03/14 17:37:55 INFO input.FileInputFormat: Total input paths to process : 3</div><div class="line">17/03/14 17:37:55 INFO mapreduce.JobSubmitter: number of splits:3</div><div class="line">17/03/14 17:37:55 INFO mapreduce.JobSubmitter: Submitting tokens <span class="keyword">for</span> job: job_1488970234114_0044</div><div class="line">17/03/14 17:37:55 INFO impl.YarnClientImpl: Submitted application application_1488970234114_0044</div><div class="line">17/03/14 17:37:55 INFO mapreduce.Job: The url to track the job: http://master2:8088/proxy/application_1488970234114_0044/</div><div class="line">17/03/14 17:37:55 INFO mapreduce.Job: Running job: job_1488970234114_0044</div><div class="line">17/03/14 17:38:00 INFO mapreduce.Job: Job job_1488970234114_0044 running <span class="keyword">in</span> uber mode : <span class="literal">false</span></div><div class="line">17/03/14 17:38:00 INFO mapreduce.Job:  map 0% reduce 0%</div><div class="line">17/03/14 17:38:04 INFO mapreduce.Job:  map 33% reduce 0%</div><div class="line">17/03/14 17:38:05 INFO mapreduce.Job:  map 100% reduce 0%</div><div class="line">17/03/14 17:38:05 INFO mapreduce.Job: Job job_1488970234114_0044 completed successfully</div><div class="line">17/03/14 17:38:05 INFO mapreduce.Job: Counters: 30</div><div class="line">        File System Counters</div><div class="line">                FILE: Number of bytes <span class="built_in">read</span>=0</div><div class="line">                FILE: Number of bytes written=378748</div><div class="line">                FILE: Number of <span class="built_in">read</span> operations=0</div><div class="line">                FILE: Number of large <span class="built_in">read</span> operations=0</div><div class="line">                FILE: Number of write operations=0</div><div class="line">                HDFS: Number of bytes <span class="built_in">read</span>=13514456</div><div class="line">                HDFS: Number of bytes written=10824901</div><div class="line">                HDFS: Number of <span class="built_in">read</span> operations=15</div><div class="line">                HDFS: Number of large <span class="built_in">read</span> operations=0</div><div class="line">                HDFS: Number of write operations=6</div><div class="line">        Job Counters </div><div class="line">                Launched map tasks=3</div><div class="line">                Data-local map tasks=3</div><div class="line">                Total time spent by all maps <span class="keyword">in</span> occupied slots (ms)=8240</div><div class="line">                Total time spent by all reduces <span class="keyword">in</span> occupied slots (ms)=0</div><div class="line">                Total time spent by all map tasks (ms)=8240</div><div class="line">                Total vcore-seconds taken by all map tasks=8240</div><div class="line">                Total megabyte-seconds taken by all map tasks=8437760</div><div class="line">        Map-Reduce Framework</div><div class="line">                Map input records=661590</div><div class="line">                Map output records=485478</div><div class="line">                Input split bytes=393</div><div class="line">                Spilled Records=0</div><div class="line">                Failed Shuffles=0</div><div class="line">                Merged Map outputs=0</div><div class="line">                GC time elapsed (ms)=175</div><div class="line">                CPU time spent (ms)=3730</div><div class="line">                Physical memory (bytes) snapshot=712597504</div><div class="line">                Virtual memory (bytes) snapshot=8316772352</div><div class="line">                Total committed heap usage (bytes)=814743552</div><div class="line">        File Input Format Counters </div><div class="line">                Bytes Read=13514063</div><div class="line">        File Output Format Counters </div><div class="line">                Bytes Written=10824901</div><div class="line">[hdfs@slave3 jar]$ hadoop fs -ls /bigdata/data/hdfs/BD/UP2</div><div class="line">Found 4 items</div><div class="line">-rw-r--r--   3 hdfs supergroup          0 2017-03-14 17:38 /bigdata/data/hdfs/BD/UP2/_SUCCESS</div><div class="line">-rw-r--r--   3 hdfs supergroup    7609438 2017-03-14 17:38 /bigdata/data/hdfs/BD/UP2/part-m-00000</div><div class="line">-rw-r--r--   3 hdfs supergroup    3215441 2017-03-14 17:38 /bigdata/data/hdfs/BD/UP2/part-m-00001</div><div class="line">-rw-r--r--   3 hdfs supergroup         22 2017-03-14 17:38 /bigdata/data/hdfs/BD/UP2/part-m-00002</div></pre></td></tr></table></figure></p>
-<p>最后将数据导入到hive<br>hive&gt; create EXTERNAL table IF NOT EXISTS UP2 (uid STRING,phone STRING) row format delimited fields terminated by ‘,’ location ‘/bigdata/data/hdfs/BD/UP2/‘;<br>OK<br>Time taken: 0.026 seconds<br>hive&gt; select count(1) from UP2;<br>Query ID = hdfs_20170314174141_1b60d560-2036-44e6-ab65-19f17efc5b1b<br>Total jobs = 1<br>Launching Job 1 out of 1<br>Number of reduce tasks determined at compile time: 1<br>In order to change the average load for a reducer (in bytes):<br>  set hive.exec.reducers.bytes.per.reducer=<number><br>In order to limit the maximum number of reducers:<br>  set hive.exec.reducers.max=<number><br>In order to set a constant number of reducers:<br>  set mapreduce.job.reduces=<number><br>Starting Job = job_1488970234114_0045, Tracking URL = <a href="http://master2:8088/proxy/application_1488970234114_0045/" target="_blank" rel="external">http://master2:8088/proxy/application_1488970234114_0045/</a><br>Kill Command = /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hadoop/bin/hadoop job  -kill job_1488970234114_0045<br>Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 1<br>2017-03-14 17:41:33,200 Stage-1 map = 0%,  reduce = 0%<br>2017-03-14 17:41:38,371 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 2.54 sec<br>2017-03-14 17:41:43,486 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 4.38 sec<br>MapReduce Total cumulative CPU time: 4 seconds 380 msec<br>Ended Job = job_1488970234114_0045<br>MapReduce Jobs Launched:<br>Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 4.38 sec   HDFS Read: 10831709 HDFS Write: 7 SUCCESS<br>Total MapReduce CPU Time Spent: 4 seconds 380 msec<br>OK<br>485478<br>Time taken: 16.267 seconds, Fetched: 1 row(s)</number></number></number></p>
-<p>比清洗前数据661590少了176112条</p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/14/CDH hadoop实战/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1164,195 +1152,15 @@
 
       
         
-          
-            <p>创建数据库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">hive&gt; create database BD;</div><div class="line">OK</div><div class="line">Time taken: 0.161 seconds</div><div class="line">hive&gt; use BD;</div><div class="line">OK</div><div class="line">Time taken: 0.013 seconds</div></pre></td></tr></table></figure></p>
+          <p>创建数据库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">hive&gt; create database BD;</div><div class="line">OK</div><div class="line">Time taken: 0.161 seconds</div><div class="line">hive&gt; use BD;</div><div class="line">OK</div><div class="line">Time taken: 0.013 seconds</div></pre></td></tr></table></figure></p>
 <p>创建表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">hive&gt; create table UP(uid STRING,phone STRING) row format delimited fields terminated by <span class="string">','</span> ;</div><div class="line">OK</div><div class="line">Time taken: 0.211 seconds</div><div class="line">hive&gt; load data inpath <span class="string">'/bigdata/data/hdfs/shuju/SO/part-m-00000'</span> into table UP;</div><div class="line">Loading data to table BD.UP</div><div class="line">Table BD.UP stats: [numFiles=1, totalSize=898611236]</div><div class="line">OK</div><div class="line">Time taken: 0.317 seconds</div></pre></td></tr></table></figure></p>
-<p>查询表数据<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">hive&gt; select count(1) from UP;</div><div class="line">Query ID = hdfs_20170314111111_d29152a3-56b3-42f9-b17b-1ddaf7451117</div><div class="line">Total <span class="built_in">jobs</span> = 1</div><div class="line">Launching Job 1 out of 1</div><div class="line">Number of reduce tasks determined at compile time: 1</div><div class="line">In order to change the average load <span class="keyword">for</span> a reducer (<span class="keyword">in</span> bytes):</div><div class="line">  <span class="built_in">set</span> hive.exec.reducers.bytes.per.reducer=&lt;number&gt;</div><div class="line">In order to <span class="built_in">limit</span> the maximum number of reducers:</div><div class="line">  <span class="built_in">set</span> hive.exec.reducers.max=&lt;number&gt;</div><div class="line">In order to <span class="built_in">set</span> a constant number of reducers:</div><div class="line">  <span class="built_in">set</span> mapreduce.job.reduces=&lt;number&gt;</div><div class="line">Starting Job = job_1488970234114_0025, Tracking URL = http://master2:8088/proxy/application_1488970234114_0025/</div><div class="line">Kill Command = /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hadoop/bin/hadoop job  -kill job_1488970234114_0025</div><div class="line">Hadoop job information <span class="keyword">for</span> Stage-1: number of mappers: 4; number of reducers: 1</div><div class="line">2017-03-14 11:11:49,267 Stage-1 map = 0%,  reduce = 0%</div><div class="line">2017-03-14 11:11:55,519 Stage-1 map = 25%,  reduce = 0%, Cumulative CPU 3.31 sec</div><div class="line">2017-03-14 11:11:56,542 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 16.57 sec</div><div class="line">2017-03-14 11:12:01,655 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 18.41 sec</div><div class="line">MapReduce Total cumulative CPU time: 18 seconds 410 msec</div><div class="line">Ended Job = job_1488970234114_0025</div><div class="line">MapReduce Jobs Launched: </div><div class="line">Stage-Stage-1: Map: 4  Reduce: 1   Cumulative CPU: 18.41 sec   HDFS Read: 899021344 HDFS Write: 8 SUCCESS</div><div class="line">Total MapReduce CPU Time Spent: 18 seconds 410 msec</div><div class="line">OK</div><div class="line">5674200</div><div class="line">Time taken: 19.429 seconds, Fetched: 1 row(s)</div></pre></td></tr></table></figure></p>
-<p>删除表：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hive&gt; DROP TABLE IF EXISTS UP;</div><div class="line">OK</div><div class="line">Time taken: 0.088 seconds</div></pre></td></tr></table></figure></p>
-<p>查看hdfs上的数据，发现数据被删除<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@slave3 data]<span class="comment"># hadoop fs -ls /bigdata/data/hdfs/shuju/SO</span></div><div class="line">Found 1 items</div><div class="line">-rw-r--r--   3 hdfs supergroup          0 2017-03-13 19:16 /bigdata/data/hdfs/shuju/SO/_SUCCESS</div></pre></td></tr></table></figure></p>
-<h2 id="测试2："><a href="#测试2：" class="headerlink" title="测试2："></a>测试2：</h2><p>首先查询，发现biaoming数据存在<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@slave3 data]<span class="comment"># hadoop fs -ls /bigdata/data/hdfs/shuju/biaoming</span></div><div class="line">Found 2 items</div><div class="line">-rw-r--r--   3 hdfs supergroup          0 2017-03-14 10:36 /bigdata/data/hdfs/shuju/biaoming/_SUCCESS</div><div class="line">-rw-r--r--   3 hdfs supergroup   13514063 2017-03-14 10:36 /bigdata/data/hdfs/shuju/biaoming/part-m-00000</div></pre></td></tr></table></figure></p>
-<p>创建外部表：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hive&gt; create EXTERNAL table IF NOT EXISTS UP (uid STRING,phone STRING) row format delimited fields terminated by <span class="string">','</span> ;</div><div class="line">OK</div><div class="line">Time taken: 0.033 seconds</div></pre></td></tr></table></figure></p>
-<p>加载数据<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hive&gt; load data inpath <span class="string">'/bigdata/data/hdfs/shuju/biaoming/part-m-00000'</span> into table UP;</div><div class="line">Loading data to table BD.UP</div><div class="line">Table BD.UP stats: [numFiles=1, totalSize=13514063]</div><div class="line">OK</div><div class="line">Time taken: 0.201 seconds</div></pre></td></tr></table></figure></p>
-<p>查询数据：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">hive&gt; select count(1) from UP;</div><div class="line">Query ID = hdfs_20170314115959_6004ef81-913b-4d38-99dc-1199cc6e73f2</div><div class="line">Total <span class="built_in">jobs</span> = 1</div><div class="line">Launching Job 1 out of 1</div><div class="line">Number of reduce tasks determined at compile time: 1</div><div class="line">In order to change the average load <span class="keyword">for</span> a reducer (<span class="keyword">in</span> bytes):</div><div class="line">  <span class="built_in">set</span> hive.exec.reducers.bytes.per.reducer=&lt;number&gt;</div><div class="line">In order to <span class="built_in">limit</span> the maximum number of reducers:</div><div class="line">  <span class="built_in">set</span> hive.exec.reducers.max=&lt;number&gt;</div><div class="line">In order to <span class="built_in">set</span> a constant number of reducers:</div><div class="line">  <span class="built_in">set</span> mapreduce.job.reduces=&lt;number&gt;</div><div class="line">Starting Job = job_1488970234114_0027, Tracking URL = http://master2:8088/proxy/application_1488970234114_0027/</div><div class="line">Kill Command = /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hadoop/bin/hadoop job  -kill job_1488970234114_0027</div><div class="line">Hadoop job information <span class="keyword">for</span> Stage-1: number of mappers: 1; number of reducers: 1</div><div class="line">2017-03-14 11:59:09,331 Stage-1 map = 0%,  reduce = 0%</div><div class="line">2017-03-14 11:59:14,463 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 3.06 sec</div><div class="line">2017-03-14 11:59:19,587 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 4.9 sec</div><div class="line">MapReduce Total cumulative CPU time: 4 seconds 900 msec</div><div class="line">Ended Job = job_1488970234114_0027</div><div class="line">MapReduce Jobs Launched: </div><div class="line">Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 4.9 sec   HDFS Read: 13520683 HDFS Write: 7 SUCCESS</div><div class="line">Total MapReduce CPU Time Spent: 4 seconds 900 msec</div><div class="line">OK</div><div class="line">661590</div><div class="line">Time taken: 17.707 seconds, Fetched: 1 row(s)</div></pre></td></tr></table></figure></p>
-<p>删除数据<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hive&gt; DROP TABLE IF EXISTS UP;</div><div class="line">OK</div><div class="line">Time taken: 0.037 seconds</div></pre></td></tr></table></figure></p>
-<p>再查看元数据，发现依然被删除了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@slave3 data]<span class="comment"># hadoop fs -ls /bigdata/data/hdfs/shuju/biaoming</span></div><div class="line">Found 1 items</div><div class="line">-rw-r--r--   3 hdfs supergroup          0 2017-03-14 10:36 /bigdata/data/hdfs/shuju/biaoming/_SUCCESS</div></pre></td></tr></table></figure></p>
-<h2 id="测试3："><a href="#测试3：" class="headerlink" title="测试3："></a>测试3：</h2><p>重新上传数据：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sqoop import --driver com.microsoft.sqlserver.jdbc.SQLServerDriver  --connect <span class="string">'jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=BD'</span> --table=UP --target-dir /bigdata/data/hdfs/BD/UP --split-by uid -m 3</div></pre></td></tr></table></figure></p>
-<p>查看数据：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[hdfs@slave3 data]$ hadoop fs -ls /bigdata/data/hdfs/BD/UP</div><div class="line">Found 5 items</div><div class="line">-rw-r--r--   3 hdfs supergroup          0 2017-03-14 14:06 /bigdata/data/hdfs/BD/UP/_SUCCESS</div><div class="line">-rw-r--r--   3 hdfs supergroup    7959628 2017-03-14 14:06 /bigdata/data/hdfs/BD/UP/part-m-00000</div><div class="line">-rw-r--r--   3 hdfs supergroup    2125416 2017-03-14 14:06 /bigdata/data/hdfs/BD/UP/part-m-00001</div><div class="line">-rw-r--r--   3 hdfs supergroup    3428997 2017-03-14 14:06 /bigdata/data/hdfs/BD/UP/part-m-00002</div><div class="line">-rw-r--r--   3 hdfs supergroup         22 2017-03-14 14:06 /bigdata/data/hdfs/BD/UP/part-m-00003</div></pre></td></tr></table></figure></p>
-<p>创建外部表数据：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">hive&gt; select count(1) from UP;</div><div class="line">FAILED: SemanticException [Error 10001]: Line 1:21 Table not found <span class="string">'UP'</span></div><div class="line">hive&gt; create EXTERNAL table IF NOT EXISTS UP (uid STRING,phone STRING) row format delimited fields terminated by <span class="string">','</span> location <span class="string">'/bigdata/data/hdfs/BD/UP/'</span>;</div><div class="line">OK</div><div class="line">Time taken: 0.03 seconds</div><div class="line">hive&gt; select count(1) from UP;</div><div class="line">Query ID = hdfs_20170314141111_5be2c701-ad6a-4717-8801-513f38d64928</div><div class="line">Total <span class="built_in">jobs</span> = 1</div><div class="line">Launching Job 1 out of 1</div><div class="line">Number of reduce tasks determined at compile time: 1</div><div class="line">In order to change the average load <span class="keyword">for</span> a reducer (<span class="keyword">in</span> bytes):</div><div class="line">  <span class="built_in">set</span> hive.exec.reducers.bytes.per.reducer=&lt;number&gt;</div><div class="line">In order to <span class="built_in">limit</span> the maximum number of reducers:</div><div class="line">  <span class="built_in">set</span> hive.exec.reducers.max=&lt;number&gt;</div><div class="line">In order to <span class="built_in">set</span> a constant number of reducers:</div><div class="line">  <span class="built_in">set</span> mapreduce.job.reduces=&lt;number&gt;</div><div class="line">Starting Job = job_1488970234114_0031, Tracking URL = http://master2:8088/proxy/application_1488970234114_0031/</div><div class="line">Kill Command = /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hadoop/bin/hadoop job  -kill job_1488970234114_0031</div><div class="line">Hadoop job information <span class="keyword">for</span> Stage-1: number of mappers: 1; number of reducers: 1</div><div class="line">2017-03-14 14:11:48,608 Stage-1 map = 0%,  reduce = 0%</div><div class="line">2017-03-14 14:11:54,743 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 3.26 sec</div><div class="line">2017-03-14 14:11:58,833 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 5.08 sec</div><div class="line">MapReduce Total cumulative CPU time: 5 seconds 80 msec</div><div class="line">Ended Job = job_1488970234114_0031</div><div class="line">MapReduce Jobs Launched: </div><div class="line">Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 5.08 sec   HDFS Read: 13520952 HDFS Write: 7 SUCCESS</div><div class="line">Total MapReduce CPU Time Spent: 5 seconds 80 msec</div><div class="line">OK</div><div class="line">661590</div><div class="line">Time taken: 16.253 seconds, Fetched: 1 row(s)</div></pre></td></tr></table></figure></p>
-<p>此时再删除表后数据还存在。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">hive&gt; DROP TABLE IF EXISTS UP;</div><div class="line">OK</div><div class="line">Time taken: 0.037 seconds</div><div class="line">[hdfs@slave3 data]$ hadoop fs -ls /bigdata/data/hdfs/BD/UP</div><div class="line">Found 5 items</div><div class="line">-rw-r--r--   3 hdfs supergroup          0 2017-03-14 14:06 /bigdata/data/hdfs/BD/UP/_SUCCESS</div><div class="line">-rw-r--r--   3 hdfs supergroup    7959628 2017-03-14 14:06 /bigdata/data/hdfs/BD/UP/part-m-00000</div><div class="line">-rw-r--r--   3 hdfs supergroup    2125416 2017-03-14 14:06 /bigdata/data/hdfs/BD/UP/part-m-00001</div><div class="line">-rw-r--r--   3 hdfs supergroup    3428997 2017-03-14 14:06 /bigdata/data/hdfs/BD/UP/part-m-00002</div></pre></td></tr></table></figure></p>
-<p>创建普通表：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hive&gt; create table IF NOT EXISTS UP (uid STRING,phone STRING) row format delimited fields terminated by <span class="string">','</span> location <span class="string">'/bigdata/data/hdfs/BD/UP/'</span>;</div><div class="line">OK</div><div class="line">Time taken: 0.029 seconds</div></pre></td></tr></table></figure></p>
-<p>删除表后数据不存在<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hive&gt; DROP TABLE IF EXISTS UP;</div><div class="line">OK</div><div class="line">Time taken: 0.046 seconds</div><div class="line">[hdfs@slave3 data]$ hadoop fs -ls /bigdata/data/hdfs/BD/UP</div><div class="line">ls: `/bigdata/data/hdfs/BD/UP<span class="string">': No such file or directory</span></div></pre></td></tr></table></figure></p>
-<p>总结<br>用load方式无论外部表还是内部表数据都会删除，用location方式，外部表不会删除数据，内部表会删除数据</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Hexo">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/13/CDH sqoop1 实战/" itemprop="url">
-                  CDH sqoop1 实战
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T09:30:00+08:00">
-                2017-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CDH/" itemprop="url" rel="index">
-                    <span itemprop="name">CDH</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/13/CDH sqoop1 实战/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/CDH sqoop1 实战/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="下载sqlserver的jdbc驱动包"><a href="#下载sqlserver的jdbc驱动包" class="headerlink" title="下载sqlserver的jdbc驱动包"></a>下载sqlserver的jdbc驱动包</h2><p><a href="https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599" target="_blank" rel="external">https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599</a><br>解压<br>将sqljdbc4.jar放在：<br>/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib</p>
-<p>下载SQL Server-Hadoop Connector：sqoop-sqlserver-1.0.tar.gz<br>             <a href="http://www.microsoft.com/en-us/download/details.aspx?id=27584" target="_blank" rel="external">http://www.microsoft.com/en-us/download/details.aspx?id=27584</a></p>
-<h2 id="导入数据："><a href="#导入数据：" class="headerlink" title="导入数据："></a>导入数据：</h2><p>[root@slave3 sqoop]# ./bin/sqoop import –connect ‘jdbc: server://10.105.32.246 username=sa password=123456 database=databaseName –table=tableName –target-dir /bigdata/data/hdfs<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/bin/../../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>+======================================================================+<br>|                    Error: JAVA_HOME is not set                       |<br>+———————————————————————-+<br>| Please download the latest Sun JDK from the Sun Java web site        |<br>|     &gt; <a href="http://www.oracle.com/technetwork/java/javase/downloads" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads</a>        |<br>|                                                                      |<br>| HBase requires Java 1.7 or later.                                    |<br>+======================================================================+<br>Error: JAVA_HOME is not set and could not be found.</p>
-<p>报错解决方法：<br>修改bin下的<br>configure-sqoop</p>
-<p>注释以下代码：</p>
-<p>#if [ -z “${HCAT_HOME}” ]; then</p>
-<h1 id="if-d-“-usr-lib-hive-hcatalog”-then"><a href="#if-d-“-usr-lib-hive-hcatalog”-then" class="headerlink" title="if [ -d “/usr/lib/hive-hcatalog” ]; then"></a>if [ -d “/usr/lib/hive-hcatalog” ]; then</h1><h1 id="HCAT-HOME-usr-lib-hive-hcatalog"><a href="#HCAT-HOME-usr-lib-hive-hcatalog" class="headerlink" title="HCAT_HOME=/usr/lib/hive-hcatalog"></a>HCAT_HOME=/usr/lib/hive-hcatalog</h1><h1 id="elif-d-“-usr-lib-hcatalog”-then"><a href="#elif-d-“-usr-lib-hcatalog”-then" class="headerlink" title="elif [ -d “/usr/lib/hcatalog” ]; then"></a>elif [ -d “/usr/lib/hcatalog” ]; then</h1><h1 id="HCAT-HOME-usr-lib-hcatalog"><a href="#HCAT-HOME-usr-lib-hcatalog" class="headerlink" title="HCAT_HOME=/usr/lib/hcatalog"></a>HCAT_HOME=/usr/lib/hcatalog</h1><h1 id="else"><a href="#else" class="headerlink" title="else"></a>else</h1><h1 id="HCAT-HOME-SQOOP-HOME-hive-hcatalog"><a href="#HCAT-HOME-SQOOP-HOME-hive-hcatalog" class="headerlink" title="HCAT_HOME=${SQOOP_HOME}/../hive-hcatalog"></a>HCAT_HOME=${SQOOP_HOME}/../hive-hcatalog</h1><h1 id="if-d-HCAT-HOME-then"><a href="#if-d-HCAT-HOME-then" class="headerlink" title="if [ ! -d ${HCAT_HOME} ]; then"></a>if [ ! -d ${HCAT_HOME} ]; then</h1><h1 id="HCAT-HOME-SQOOP-HOME-hcatalog"><a href="#HCAT-HOME-SQOOP-HOME-hcatalog" class="headerlink" title="HCAT_HOME=${SQOOP_HOME}/../hcatalog"></a>HCAT_HOME=${SQOOP_HOME}/../hcatalog</h1><h1 id="fi"><a href="#fi" class="headerlink" title="fi"></a>fi</h1><h1 id="fi-1"><a href="#fi-1" class="headerlink" title="fi"></a>fi</h1><p>#fi</p>
-<p>#if [ -z “${ACCUMULO_HOME}” ]; then</p>
-<h1 id="if-d-“-usr-lib-accumulo”-then"><a href="#if-d-“-usr-lib-accumulo”-then" class="headerlink" title="if [ -d “/usr/lib/accumulo” ]; then"></a>if [ -d “/usr/lib/accumulo” ]; then</h1><h1 id="ACCUMULO-HOME-usr-lib-accumulo"><a href="#ACCUMULO-HOME-usr-lib-accumulo" class="headerlink" title="ACCUMULO_HOME=/usr/lib/accumulo"></a>ACCUMULO_HOME=/usr/lib/accumulo</h1><h1 id="else-1"><a href="#else-1" class="headerlink" title="else"></a>else</h1><h1 id="ACCUMULO-HOME-SQOOP-HOME-accumulo"><a href="#ACCUMULO-HOME-SQOOP-HOME-accumulo" class="headerlink" title="ACCUMULO_HOME=${SQOOP_HOME}/../accumulo"></a>ACCUMULO_HOME=${SQOOP_HOME}/../accumulo</h1><h1 id="fi-2"><a href="#fi-2" class="headerlink" title="fi"></a>fi</h1><p>#fi</p>
-<p>#if [ -z “${HCAT_HOME}” ]; then</p>
-<h1 id="if-d-“-usr-lib-hive-hcatalog”-then-1"><a href="#if-d-“-usr-lib-hive-hcatalog”-then-1" class="headerlink" title="if [ -d “/usr/lib/hive-hcatalog” ]; then"></a>if [ -d “/usr/lib/hive-hcatalog” ]; then</h1><h1 id="HCAT-HOME-usr-lib-hive-hcatalog-1"><a href="#HCAT-HOME-usr-lib-hive-hcatalog-1" class="headerlink" title="HCAT_HOME=/usr/lib/hive-hcatalog"></a>HCAT_HOME=/usr/lib/hive-hcatalog</h1><h1 id="elif-d-“-usr-lib-hcatalog”-then-1"><a href="#elif-d-“-usr-lib-hcatalog”-then-1" class="headerlink" title="elif [ -d “/usr/lib/hcatalog” ]; then"></a>elif [ -d “/usr/lib/hcatalog” ]; then</h1><h1 id="HCAT-HOME-usr-lib-hcatalog-1"><a href="#HCAT-HOME-usr-lib-hcatalog-1" class="headerlink" title="HCAT_HOME=/usr/lib/hcatalog"></a>HCAT_HOME=/usr/lib/hcatalog</h1><h1 id="else-2"><a href="#else-2" class="headerlink" title="else"></a>else</h1><h1 id="HCAT-HOME-SQOOP-HOME-hive-hcatalog-1"><a href="#HCAT-HOME-SQOOP-HOME-hive-hcatalog-1" class="headerlink" title="HCAT_HOME=${SQOOP_HOME}/../hive-hcatalog"></a>HCAT_HOME=${SQOOP_HOME}/../hive-hcatalog</h1><h1 id="if-d-HCAT-HOME-then-1"><a href="#if-d-HCAT-HOME-then-1" class="headerlink" title="if [ ! -d ${HCAT_HOME} ]; then"></a>if [ ! -d ${HCAT_HOME} ]; then</h1><h1 id="HCAT-HOME-SQOOP-HOME-hcatalog-1"><a href="#HCAT-HOME-SQOOP-HOME-hcatalog-1" class="headerlink" title="HCAT_HOME=${SQOOP_HOME}/../hcatalog"></a>HCAT_HOME=${SQOOP_HOME}/../hcatalog</h1><h1 id="fi-3"><a href="#fi-3" class="headerlink" title="fi"></a>fi</h1><h1 id="fi-4"><a href="#fi-4" class="headerlink" title="fi"></a>fi</h1><p>#fi</p>
-<p>#if [ -z “${ACCUMULO_HOME}” ]; then</p>
-<h1 id="if-d-“-usr-lib-accumulo”-then-1"><a href="#if-d-“-usr-lib-accumulo”-then-1" class="headerlink" title="if [ -d “/usr/lib/accumulo” ]; then"></a>if [ -d “/usr/lib/accumulo” ]; then</h1><h1 id="ACCUMULO-HOME-usr-lib-accumulo-1"><a href="#ACCUMULO-HOME-usr-lib-accumulo-1" class="headerlink" title="ACCUMULO_HOME=/usr/lib/accumulo"></a>ACCUMULO_HOME=/usr/lib/accumulo</h1><h1 id="else-3"><a href="#else-3" class="headerlink" title="else"></a>else</h1><h1 id="ACCUMULO-HOME-SQOOP-HOME-accumulo-1"><a href="#ACCUMULO-HOME-SQOOP-HOME-accumulo-1" class="headerlink" title="ACCUMULO_HOME=${SQOOP_HOME}/../accumulo"></a>ACCUMULO_HOME=${SQOOP_HOME}/../accumulo</h1><h1 id="fi-5"><a href="#fi-5" class="headerlink" title="fi"></a>fi</h1><p>#fi</p>
-<p>在执行如果提示JAVA_HOME不存在，手动执行一下export JAVA_HOME=/usr/java/jdk1.8.0_121</p>
-<p>再执行提示：<br>ERROR tool.BaseSqoopTool: Error parsing arguments for import:</p>
-<p>./bin/sqoop import –connect ‘jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=databaseName’ –table=tableName –target-dir /bigdata/data/hdfs –split-by order_id –fields-terminated-by ‘\t’  –m 3</p>
-<p>需要下载sqoop-sqlserver<br>下载地址已经失效，在CSDN上找到：<br><a href="https://passport.csdn.net/account/login?from=http://download.csdn.net/download/nma_123456/9405343" target="_blank" rel="external">https://passport.csdn.net/account/login?from=http://download.csdn.net/download/nma_123456/9405343</a></p>
-<p>解压进入目录执行：<br>[root@slave3 sqoop-sqlserver-1.0]# export SQOOP_HOME=/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop<br>[root@slave3 sqoop-sqlserver-1.0]# ./install.sh </p>
-<p>再次执行：报如下错误<br>Exception in thread “main” java.lang.NoClassDefFoundError: org/json/JSONObject<br>        at org.apache.sqoop.util.SqoopJsonUtil.getJsonStringforMap(SqoopJsonUtil.java:43)<br>        at org.apache.sqoop.SqoopOptions.writeProperties(SqoopOptions.java:767)<br>        at org.apache.sqoop.mapreduce.JobBase.putSqoopOptionsToConfiguration(JobBase.java:388)<br>        at org.apache.sqoop.mapreduce.JobBase.createJob(JobBase.java:374)<br>        at org.apache.sqoop.mapreduce.ImportJobBase.runImport(ImportJobBase.java:256)<br>        at org.apache.sqoop.manager.SqlManager.importTable(SqlManager.java:692)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:507)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)<br>Caused by: java.lang.ClassNotFoundException: org.json.JSONObject<br>        at java.net.URLClassLoader.findClass(URLClassLoader.java:381)<br>        at java.lang.ClassLoader.loadClass(ClassLoader.java:424)<br>        at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)<br>        at java.lang.ClassLoader.loadClass(ClassLoader.java:357)</p>
-<p>分析原因缺少org/json/JSONObject，上网下载一个json.jar<br>地址：<a href="http://download.csdn.net/download/haixia_12/8462933" target="_blank" rel="external">http://download.csdn.net/download/haixia_12/8462933</a></p>
-<p>扔进去重新执行就OK了</p>
-<p>最终命令：<br>sqoop import –driver com.microsoft.sqlserver.jdbc.SQLServerDriver  –connect ‘jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=databaseName’ –table=tableName –target-dir /bigdata/data/hdfs/cards –split-by order_id -m 3</p>
-<p>查看sqlserver上有什么数据：<br> sqoop list-tables –driver com.microsoft.sqlserver.jdbc.SQLServerDriver  –connect ‘jdbc:sqlserver://10.105.32.246;username=sa;password=123456;database=databaseName’</p>
-<p> sqlserver如果连接失败，要看是否开启了远程访问和TCP/UDP端口映射</p>
-<p>报错<br>17/03/13 17:20:01 ERROR hive.HiveConfig: Could not load org.apache.hadoop.hive.conf.HiveConf. Make sure HIVE_CONF_DIR is set correctly.<br>17/03/13 17:20:01 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: java.lang.ClassNotFoundException: org.apache.hadoop.hive.conf.HiveConf</p>
-<p>增加：<br>export HADOOP_HOME=/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hadoop<br>export HIVE_HOME=/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hive</p>
-<p>export HIVE_CONF_DIR=/etc/hive/conf<br>export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hive/lib/*</p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/14/CDH hive 实战/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1491,15 +1299,163 @@
 
       
         
-          
-            <p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
+          <p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
 <p>修改为：<br>sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming</p>
-<p>在执行，发现报错说我database不存在，并在目录下生成了一个metastore_db，原来是执行sqoop的机器不对，换了一台机器执行没有问题，很奇怪明明是分布式的为什么会出现这个问题呢</p>
-<p>最终的具体日志：</p>
-<p>[hdfs@master1 root]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming –hive-database shuju<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>17/03/15 14:32:53 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 14:32:53 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 14:32:53 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 14:32:53 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../hadoop-mapreduce<br>Note: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.java uses or overrides a deprecated API.<br>Note: Recompile with -Xlint:deprecation for details.<br>17/03/15 14:33:00 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.jar<br>17/03/15 14:33:00 INFO mapreduce.ImportJobBase: Beginning query import.<br>17/03/15 14:33:00 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar<br>17/03/15 14:33:01 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps<br>17/03/15 14:33:01 INFO client.RMProxy: Connecting to ResourceManager at master2/10.105.10.122:8032<br>17/03/15 14:33:02 INFO db.DBInputFormat: Using read commited transaction isolation<br>17/03/15 14:33:02 INFO db.DataDrivenDBInputFormat: BoundingValsQuery: SELECT MIN(id), MAX(id) FROM (SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 1) ) AS t1<br>17/03/15 14:33:03 INFO db.IntegerSplitter: Split size: 7508318; Num splits: 4 from: 20079 to: 30053354<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: number of splits:4<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1488970234114_0057<br>17/03/15 14:33:03 INFO impl.YarnClientImpl: Submitted application application_1488970234114_0057<br>17/03/15 14:33:03 INFO mapreduce.Job: The url to track the job: <a href="http://master2:8088/proxy/application_1488970234114_0057/" target="_blank" rel="external">http://master2:8088/proxy/application_1488970234114_0057/</a><br>17/03/15 14:33:03 INFO mapreduce.Job: Running job: job_1488970234114_0057<br>17/03/15 14:33:08 INFO mapreduce.Job: Job job_1488970234114_0057 running in uber mode : false<br>17/03/15 14:33:08 INFO mapreduce.Job:  map 0% reduce 0%<br>17/03/15 14:33:15 INFO mapreduce.Job:  map 75% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job:  map 100% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job: Job job_1488970234114_0057 completed successfully<br>17/03/15 14:33:16 INFO mapreduce.Job: Counters: 30<br>        File System Counters<br>                FILE: Number of bytes read=0<br>                FILE: Number of bytes written=608160<br>                FILE: Number of read operations=0<br>                FILE: Number of large read operations=0<br>                FILE: Number of write operations=0<br>                HDFS: Number of bytes read=428<br>                HDFS: Number of bytes written=17645206<br>                HDFS: Number of read operations=16<br>                HDFS: Number of large read operations=0<br>                HDFS: Number of write operations=8<br>        Job Counters<br>                Launched map tasks=4<br>                Other local map tasks=4<br>                Total time spent by all maps in occupied slots (ms)=17968<br>                Total time spent by all reduces in occupied slots (ms)=0<br>                Total time spent by all map tasks (ms)=17968<br>                Total vcore-seconds taken by all map tasks=17968<br>                Total megabyte-seconds taken by all map tasks=18399232<br>        Map-Reduce Framework<br>                Map input records=283659<br>                Map output records=283659<br>                Input split bytes=428<br>                Spilled Records=0<br>                Failed Shuffles=0<br>                Merged Map outputs=0<br>                GC time elapsed (ms)=268<br>                CPU time spent (ms)=12960<br>                Physical memory (bytes) snapshot=1151381504<br>                Virtual memory (bytes) snapshot=11157348352<br>                Total committed heap usage (bytes)=1045954560<br>        File Input Format Counters<br>                Bytes Read=0<br>        File Output Format Counters<br>                Bytes Written=17645206<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Transferred 16.8278 MB in 15.7965 seconds (1.0653 MB/sec)<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Retrieved 283659 records.<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 WARN hive.TableDefWriter: Column update_time had to be cast to a less precise type in Hive<br>17/03/15 14:33:16 INFO hive.HiveImport: Loading uploaded data into Hive</p>
-<p>Logging initialized using configuration in jar:file:/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/jars/hive-common-1.1.0-cdh5.10.0.jar!/hive-log4j.properties<br>OK<br>Time taken: 1.874 seconds<br>Loading data to table shuju.card_record<br>Table shuju.card_record stats: [numFiles=4, totalSize=17645206]<br>OK<br>Time taken: 0.367 seconds</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/13/CDH sqoop1 实战-带条件的导入/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://oh6ybr0jg.bkt.clouddn.com/tx.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Hexo" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/13/CDH sqoop1 实战/" itemprop="url">
+                  CDH sqoop1 实战
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T09:30:00+08:00">
+                2017-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/13/CDH sqoop1 实战/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/CDH sqoop1 实战/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="下载sqlserver的jdbc驱动包"><a href="#下载sqlserver的jdbc驱动包" class="headerlink" title="下载sqlserver的jdbc驱动包"></a>下载sqlserver的jdbc驱动包</h2><p><a href="https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599">https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599</a><br>解压<br>将sqljdbc4.jar放在：<br>/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib</p>
+<p>下载SQL Server-Hadoop Connector：sqoop-sqlserver-1.0.tar.gz<br>             <a href="http://www.microsoft.com/en-us/download/details.aspx?id=27584">http://www.microsoft.com/en-us/download/details.aspx?id=27584</a></p>
+<h2 id="导入数据："><a href="#导入数据：" class="headerlink" title="导入数据："></a>导入数据：</h2><p>[root@slave3 sqoop]# ./bin/sqoop import –connect ‘jdbc: server://10.105.32.246 username=sa password=123456 database=databaseName –table=tableName –target-dir /bigdata/data/hdfs<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/bin/../../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>+======================================================================+<br>|                    Error: JAVA_HOME is not set                       |<br>+———————————————————————-+<br>| Please download the latest Sun JDK from the Sun Java web site        |<br>|     &gt; <a href="http://www.oracle.com/technetwork/java/javase/downloads">http://www.oracle.com/technetwork/java/javase/downloads</a>        |<br>|                                                                      |<br>| HBase requires Java 1.7 or later.                                    |<br>+======================================================================+<br>Error: JAVA_HOME is not set and could not be found.<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/13/CDH sqoop1 实战/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1821,49 +1777,16 @@
 
       
         
-          
-            <h2 id="安装Kudu的要求："><a href="#安装Kudu的要求：" class="headerlink" title="安装Kudu的要求："></a>安装Kudu的要求：</h2><p>1.操作系统和版本支持Cloudera。<br>2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。<br>3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。</p>
-<h2 id="通过Cloudera-Manager安装Kudu"><a href="#通过Cloudera-Manager安装Kudu" class="headerlink" title="通过Cloudera Manager安装Kudu"></a>通过Cloudera Manager安装Kudu</h2><p>想要通过Cloudera Manager安装Kudu，首先下载Kudu的定制服务描述符（CSD）文件<br><a href="http://archive.cloudera.com/kudu/csd/KUDU-5.10.0.jar?_ga=1.154711740.507225699.1488251539" target="_blank" rel="external">http://archive.cloudera.com/kudu/csd/KUDU-5.10.0.jar?_ga=1.154711740.507225699.1488251539</a><br>并上传到/opt/cloudera/csd/<br>用以下操作系统命令重启Cloudera管理服务器。</p>
+          <h2 id="安装Kudu的要求："><a href="#安装Kudu的要求：" class="headerlink" title="安装Kudu的要求："></a>安装Kudu的要求：</h2><p>1.操作系统和版本支持Cloudera。<br>2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。<br>3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。</p>
+<h2 id="通过Cloudera-Manager安装Kudu"><a href="#通过Cloudera-Manager安装Kudu" class="headerlink" title="通过Cloudera Manager安装Kudu"></a>通过Cloudera Manager安装Kudu</h2><p>想要通过Cloudera Manager安装Kudu，首先下载Kudu的定制服务描述符（CSD）文件<br><a href="http://archive.cloudera.com/kudu/csd/KUDU-5.10.0.jar?_ga=1.154711740.507225699.1488251539">http://archive.cloudera.com/kudu/csd/KUDU-5.10.0.jar?_ga=1.154711740.507225699.1488251539</a><br>并上传到/opt/cloudera/csd/<br>用以下操作系统命令重启Cloudera管理服务器。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo service cloudera-scm-server restart</div></pre></td></tr></table></figure>
-<p>从<a href="http://archive.cloudera.com/kudu/parcels/网站找到相应的Kudu" target="_blank" rel="external">http://archive.cloudera.com/kudu/parcels/网站找到相应的Kudu</a> parcel，<br><img src="http://oh6ybr0jg.bkt.clouddn.com/kudu_version.png" alt="此处输入图片的描述"></p>
-<p>并添加到 Parcel Settings &gt; 远程 Parcel 存储库 URL<br><img src="http://oh6ybr0jg.bkt.clouddn.com/parcel_kudu.png" alt="此处输入图片的描述"></p>
-<p>接下来可以通过以下两种方式安装</p>
-<h3 id="Using-Parcels"><a href="#Using-Parcels" class="headerlink" title="Using Parcels"></a>Using Parcels</h3><p>1.Hosts &gt; Parcels &gt; Kudu &gt; Download<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E4%B8%8B%E8%BD%BDKudu.png" alt="此处输入图片的描述"><br>2.Locations &gt; Distribute &gt; Activate<br>3.重启集群<br>4.Actions &gt; Add a Service. &gt; Kudu (Beta) &gt; Continue<br>5.选择一个主机作为master，一些主机作为tablet 服务角色。一个主机即可以是master又可以是tablet，但是对于大集群来说会造成性能问题。Kudu的master不是一个资源密集型的，被其他相似的处理例如：HDFS的namenode，YARN的ResourceManager收集。选择完主机点击Continue<br>6.在masters 和 tablet配置Kudu的存储位置和预写日志（WAL）文件，Cloudera Manager将会创建文件夹。<br>6.1 你可以使用相同的目录存储数据和WALs<br>6.2 你不可以将WALs 目录设置为数据的子目录<br>6.3 如果你的主机及是master又是tablet，配置不同的master和tablet服务，例如 /data/kudu/master and /data/kudu/tserver.</p>
-<p>6.4 如果你选择的文件系统不支持打洞技术;服务启动失败<br>6.4.1 退出配置向导，点击Cloudera Manager 接口上的Cloudera 图标<br>6.4.2 到 Kudu (Beta) 服务<br>6.4.3 Configuration &gt;  Kudu (Beta) Service Advanced Configuration Snippet (Safety Valve) &gt; gflagfile<br>5.4.4 添加如下内容并保存改变<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--block_manager=file</div></pre></td></tr></table></figure></p>
-<p>Note: The file block manager does not perform well at scale and should only be used for small-scale development and testing.</p>
-<p>7.如果你不需要退出，点击Continue。Kudu的master和tablet服务已经启动。否则点击<br> Kudu (Beta) &gt; Actions &gt; Start.<br>8.使用其中一种方法验证服务：<br>8.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>8.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/<br>9.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>10.管理角色。Kudu (Beta) 服务 使用 Actions 来停止，启动，重启或者其他管理服务</_host_name_></_host_name_></p>
-<h3 id="Using-Packages"><a href="#Using-Packages" class="headerlink" title="Using Packages"></a>Using Packages</h3><p>Kudu 仓库 和 Package 链接</p>
-<table>
-<thead>
-<tr>
-<th>Operating System</th>
-<th style="text-align:left">Repository Package</th>
-<th style="text-align:left">Individual Packages</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RHEL</td>
-<td style="text-align:left">RHEL 6</td>
-<td style="text-align:left">RHEL 6</td>
-</tr>
-<tr>
-<td>Ubuntu</td>
-<td style="text-align:left">Trusty</td>
-<td style="text-align:left">Trusty</td>
-</tr>
-</tbody>
-</table>
-<p>1.1 下载Kudu的yum源文件到：RHEL（/etc/yum.repos.d/）  或者 Ubuntu（/etc/apt/sources.list.d/）<br>1.2 如果你需要C++客户端开发库或Kudu的SDK，RHEL kudu-client-devel 包 或 Ubuntu的 libkuduclient0 and libkuduclient-dev 包<br>1.3 如果你使用Cloudera Manager，不安装 kudu-master 和 kudu-tserver包，Cloudera Manager使用Kudu 提供操作系统启动脚本。</p>
-<p>2.群集上安装Kudu服务。去你想安装Kudu所在的集群。单击 Actions &gt; Add a Service &gt; Kudu &gt; Continue。</p>
-<p>3.选择一个主机作为master，一些主机作为tablet 服务角色。一个主机即可以是master又可以是tablet，但是对于大集群来说会造成性能问题。Kudu的master不是一个资源密集型的，被其他相似的处理例如：HDFS的namenode，YARN的ResourceManager收集。选择完主机点击Continue<br>4.在masters 和 tablet配置Kudu的存储位置和预写日志（WAL）文件，Cloudera Manager将会创建文件夹。<br>4.1 你可以使用相同的目录存储数据和WALs<br>4.2 你不可以将WALs 目录设置为数据的子目录<br>5.3 如果你的主机及是master又是tablet，配置不同的master和tablet服务，例如 /data/kudu/master and /data/kudu/tserver.</p>
-<p>5 如果你选择的文件系统不支持打洞技术;服务启动失败<br>点击 Continue &gt;  Kudu masters 和 tablet 启动。否则到Kudu的服务上点击 Actions &gt; Start.</p>
-<p>6.使用其中一种方法验证服务：<br>6.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>6.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/ </_host_name_></_host_name_></p>
-<p>7.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>8.管理角色。Kudu 服务 使用 Actions 来停止，启动，重启或者其他管理服务</p>
-<p>此乃官方推荐，方法1，博主亲试没有成功，安装完不显示服务</p>
-<p>本文参考页面：<br><a href="https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html" target="_blank" rel="external">https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html</a></p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/01/CDH Kudu安装及介绍/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
