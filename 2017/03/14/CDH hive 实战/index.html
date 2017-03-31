@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="张洪铭的个人博客">
 <meta property="og:description" content="创建数据库123456hive&amp;gt; create database BD;OKTime taken: 0.161 secondshive&amp;gt; use BD;OKTime taken: 0.013 seconds
 创建表12345678hive&amp;gt; create table UP(uid STRING,phone STRING) row format delimited fields t">
-<meta property="og:updated_time" content="2017-03-31T13:27:38.212Z">
+<meta property="og:updated_time" content="2017-03-31T16:13:09.590Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH hive 实战">
 <meta name="twitter:description" content="创建数据库123456hive&amp;gt; create database BD;OKTime taken: 0.161 secondshive&amp;gt; use BD;OKTime taken: 0.013 seconds
@@ -409,7 +409,7 @@
       
 
       
-        <p>创建数据库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">hive&gt; create database BD;</div><div class="line">OK</div><div class="line">Time taken: 0.161 seconds</div><div class="line">hive&gt; use BD;</div><div class="line">OK</div><div class="line">Time taken: 0.013 seconds</div></pre></td></tr></table></figure></p>
+        <h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">hive&gt; create database BD;</div><div class="line">OK</div><div class="line">Time taken: 0.161 seconds</div><div class="line">hive&gt; use BD;</div><div class="line">OK</div><div class="line">Time taken: 0.013 seconds</div></pre></td></tr></table></figure>
 <p>创建表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">hive&gt; create table UP(uid STRING,phone STRING) row format delimited fields terminated by <span class="string">','</span> ;</div><div class="line">OK</div><div class="line">Time taken: 0.211 seconds</div><div class="line">hive&gt; load data inpath <span class="string">'/bigdata/data/hdfs/shuju/SO/part-m-00000'</span> into table UP;</div><div class="line">Loading data to table BD.UP</div><div class="line">Table BD.UP stats: [numFiles=1, totalSize=898611236]</div><div class="line">OK</div><div class="line">Time taken: 0.317 seconds</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>查询表数据<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">hive&gt; select count(1) from UP;</div><div class="line">Query ID = hdfs_20170314111111_d29152a3-56b3-42f9-b17b-1ddaf7451117</div><div class="line">Total <span class="built_in">jobs</span> = 1</div><div class="line">Launching Job 1 out of 1</div><div class="line">Number of reduce tasks determined at compile time: 1</div><div class="line">In order to change the average load <span class="keyword">for</span> a reducer (<span class="keyword">in</span> bytes):</div><div class="line">  <span class="built_in">set</span> hive.exec.reducers.bytes.per.reducer=&lt;number&gt;</div><div class="line">In order to <span class="built_in">limit</span> the maximum number of reducers:</div><div class="line">  <span class="built_in">set</span> hive.exec.reducers.max=&lt;number&gt;</div><div class="line">In order to <span class="built_in">set</span> a constant number of reducers:</div><div class="line">  <span class="built_in">set</span> mapreduce.job.reduces=&lt;number&gt;</div><div class="line">Starting Job = job_1488970234114_0025, Tracking URL = http://master2:8088/proxy/application_1488970234114_0025/</div><div class="line">Kill Command = /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/hadoop/bin/hadoop job  -kill job_1488970234114_0025</div><div class="line">Hadoop job information <span class="keyword">for</span> Stage-1: number of mappers: 4; number of reducers: 1</div><div class="line">2017-03-14 11:11:49,267 Stage-1 map = 0%,  reduce = 0%</div><div class="line">2017-03-14 11:11:55,519 Stage-1 map = 25%,  reduce = 0%, Cumulative CPU 3.31 sec</div><div class="line">2017-03-14 11:11:56,542 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 16.57 sec</div><div class="line">2017-03-14 11:12:01,655 Stage-1 map = 100%,  reduce = 100%, Cumulative CPU 18.41 sec</div><div class="line">MapReduce Total cumulative CPU time: 18 seconds 410 msec</div><div class="line">Ended Job = job_1488970234114_0025</div><div class="line">MapReduce Jobs Launched: </div><div class="line">Stage-Stage-1: Map: 4  Reduce: 1   Cumulative CPU: 18.41 sec   HDFS Read: 899021344 HDFS Write: 8 SUCCESS</div><div class="line">Total MapReduce CPU Time Spent: 18 seconds 410 msec</div><div class="line">OK</div><div class="line">5674200</div><div class="line">Time taken: 19.429 seconds, Fetched: 1 row(s)</div></pre></td></tr></table></figure></p>
@@ -481,8 +481,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/13/CDH sqoop1 实战-带条件的导入/" rel="next" title="CDH sqoop1 实战-带条件的导入">
-                <i class="fa fa-chevron-left"></i> CDH sqoop1 实战-带条件的导入
+              <a href="/2017/03/13/CDH sqoop1 实战/" rel="next" title="CDH sqoop1 实战">
+                <i class="fa fa-chevron-left"></i> CDH sqoop1 实战
               </a>
             
           </div>
@@ -641,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试2："><span class="nav-number">1.</span> <span class="nav-text">测试2：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试3："><span class="nav-number">2.</span> <span class="nav-text">测试3：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建数据库"><span class="nav-number">1.</span> <span class="nav-text">创建数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试2："><span class="nav-number"></span> <span class="nav-text">测试2：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试3："><span class="nav-number"></span> <span class="nav-text">测试3：</span></a></div>
             
 
           </div>
