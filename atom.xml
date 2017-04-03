@@ -759,34 +759,6 @@
   </entry>
   
   <entry>
-    <title>Python春节祝福语自动回复</title>
-    <link href="http://yoursite.com/2017/01/27/Python%E6%98%A5%E8%8A%82%E7%A5%9D%E7%A6%8F%E8%AF%AD%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/"/>
-    <id>http://yoursite.com/2017/01/27/Python春节祝福语自动回复/</id>
-    <published>2017-01-27T12:00:00.000Z</published>
-    <updated>2017-03-04T13:07:31.345Z</updated>
-    
-    <content type="html"><![CDATA[<p>首先安装两个库<br>pip install itchat pillow</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>运行后，扫描生成的二维码即可</p>
-<p>登录成功有以下提示<br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD2.png" alt="此处输入图片的描述"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;首先安装两个库&lt;br&gt;pip install itchat pillow&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;环境win7，pyython3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;编写py文件输入以下内容&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; itchat, time, re&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; itchat.content &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; *&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@itchat.msg_register([TEXT])&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;text_reply&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(msg)&lt;/span&gt;:&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    match = re.search(&lt;span class=&quot;string&quot;&gt;&#39;年&#39;&lt;/span&gt;, msg[&lt;span class=&quot;string&quot;&gt;&#39;Text&#39;&lt;/span&gt;]).span()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; match:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      itchat.send((&lt;span class=&quot;string&quot;&gt;&#39;鸡年大吉&#39;&lt;/span&gt;), msg[&lt;span class=&quot;string&quot;&gt;&#39;FromUserName&#39;&lt;/span&gt;])&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;other_reply&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(msg)&lt;/span&gt;:&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    itchat.send((&lt;span class=&quot;string&quot;&gt;&#39;鸡年大吉&#39;&lt;/span&gt;), msg[&lt;span class=&quot;string&quot;&gt;&#39;FromUserName&#39;&lt;/span&gt;])&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;itchat.auto_login(enableCmdQR=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;,hotReload=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;itchat.run()&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
     <title>storm基础知识</title>
     <link href="http://yoursite.com/2017/01/27/storm%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <id>http://yoursite.com/2017/01/27/storm基础知识/</id>
@@ -853,6 +825,34 @@
     
     
       <category term="storm" scheme="http://yoursite.com/tags/storm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python春节祝福语自动回复</title>
+    <link href="http://yoursite.com/2017/01/27/Python%E6%98%A5%E8%8A%82%E7%A5%9D%E7%A6%8F%E8%AF%AD%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/"/>
+    <id>http://yoursite.com/2017/01/27/Python春节祝福语自动回复/</id>
+    <published>2017-01-27T12:00:00.000Z</published>
+    <updated>2017-03-04T13:07:31.345Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先安装两个库<br>pip install itchat pillow</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>运行后，扫描生成的二维码即可</p>
+<p>登录成功有以下提示<br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD2.png" alt="此处输入图片的描述"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;首先安装两个库&lt;br&gt;pip install itchat pillow&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;环境win7，pyython3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;编写py文件输入以下内容&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; itchat, time, re&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; itchat.content &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; *&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@itchat.msg_register([TEXT])&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;text_reply&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(msg)&lt;/span&gt;:&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    match = re.search(&lt;span class=&quot;string&quot;&gt;&#39;年&#39;&lt;/span&gt;, msg[&lt;span class=&quot;string&quot;&gt;&#39;Text&#39;&lt;/span&gt;]).span()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; match:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      itchat.send((&lt;span class=&quot;string&quot;&gt;&#39;鸡年大吉&#39;&lt;/span&gt;), msg[&lt;span class=&quot;string&quot;&gt;&#39;FromUserName&#39;&lt;/span&gt;])&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;other_reply&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(msg)&lt;/span&gt;:&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    itchat.send((&lt;span class=&quot;string&quot;&gt;&#39;鸡年大吉&#39;&lt;/span&gt;), msg[&lt;span class=&quot;string&quot;&gt;&#39;FromUserName&#39;&lt;/span&gt;])&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;itchat.auto_login(enableCmdQR=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;,hotReload=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;itchat.run()&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
   </entry>
   
