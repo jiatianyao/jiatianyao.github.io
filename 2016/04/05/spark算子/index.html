@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="cloudera," />
+  <meta name="keywords" content="大数据," />
 
 
 
@@ -86,23 +86,28 @@
 
 
 
-<meta name="description" content="安装Kudu的要求1.操作系统和版本支持Cloudera。2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。
-通过C">
+<meta name="description" content="spark的算子分为两大类Transformations和Actions
+Transformations：
+map(func) :返回一个新的分布式数据集，由每个原元素经过func函数转换后组成
+filter(func) : 返回一个新的数据集，由经过func函数后返回值为true的原元素组成
+flatMap(func) : 类似于map，但是每一个输入元素，会被映射为0到多个输出元素（因此，fu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CDH Kudu安装及介绍">
-<meta property="og:url" content="http://yoursite.com/2017/03/01/CDH Kudu安装及介绍/index.html">
+<meta property="og:title" content="spark算子">
+<meta property="og:url" content="http://yoursite.com/2016/04/05/spark算子/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
-<meta property="og:description" content="安装Kudu的要求1.操作系统和版本支持Cloudera。2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。
-通过C">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/kudu_version.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/parcel_kudu.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E4%B8%8B%E8%BD%BDKudu.png">
-<meta property="og:updated_time" content="2017-04-04T15:14:40.917Z">
+<meta property="og:description" content="spark的算子分为两大类Transformations和Actions
+Transformations：
+map(func) :返回一个新的分布式数据集，由每个原元素经过func函数转换后组成
+filter(func) : 返回一个新的数据集，由经过func函数后返回值为true的原元素组成
+flatMap(func) : 类似于map，但是每一个输入元素，会被映射为0到多个输出元素（因此，fu">
+<meta property="og:updated_time" content="2017-04-06T16:06:10.011Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CDH Kudu安装及介绍">
-<meta name="twitter:description" content="安装Kudu的要求1.操作系统和版本支持Cloudera。2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。
-通过C">
-<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/kudu_version.png">
+<meta name="twitter:title" content="spark算子">
+<meta name="twitter:description" content="spark的算子分为两大类Transformations和Actions
+Transformations：
+map(func) :返回一个新的分布式数据集，由每个原元素经过func函数转换后组成
+filter(func) : 返回一个新的数据集，由经过func函数后返回值为true的原元素组成
+flatMap(func) : 类似于map，但是每一个输入元素，会被映射为0到多个输出元素（因此，fu">
 
 
 
@@ -130,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/01/CDH Kudu安装及介绍/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/04/05/spark算子/"/>
 
 
 
 
 
-  <title> CDH Kudu安装及介绍 | 张洪铭的个人博客 </title>
+  <title> spark算子 | 张洪铭的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -315,7 +320,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/01/CDH Kudu安装及介绍/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/05/spark算子/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -339,7 +344,7 @@
             
             
               
-                CDH Kudu安装及介绍
+                spark算子
               
             
           </h1>
@@ -352,8 +357,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-01T14:00:00+08:00">
-                2017-03-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-05T14:30:00+08:00">
+                2016-04-05
               </time>
             
 
@@ -371,8 +376,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cloudera/" itemprop="url" rel="index">
-                    <span itemprop="name">cloudera</span>
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
                   </a>
                 </span>
 
@@ -386,8 +391,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/01/CDH Kudu安装及介绍/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/01/CDH Kudu安装及介绍/" itemprop="commentCount"></span>
+                <a href="/2016/04/05/spark算子/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/05/spark算子/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -413,46 +418,46 @@
       
 
       
-        <h2 id="安装Kudu的要求"><a href="#安装Kudu的要求" class="headerlink" title="安装Kudu的要求"></a>安装Kudu的要求</h2><p>1.操作系统和版本支持Cloudera。<br>2.通过Cloudera Manager管理Kudu，要求Cloudera Manager5.4.3或更改的版本。CDH 5.4或更高版本的要求。推荐Cloudera Manager5.4.7，因为它增加了Kudu采集的指标支持。<br>3.如果固态存储是可用的，在这种高性能的媒体存储Kudu WALs可以显著改善时的Kudu配置高耐用性。</p>
-<h2 id="通过Cloudera-Manager安装Kudu"><a href="#通过Cloudera-Manager安装Kudu" class="headerlink" title="通过Cloudera Manager安装Kudu"></a>通过Cloudera Manager安装Kudu</h2><p>想要通过Cloudera Manager安装Kudu，首先下载Kudu的定制服务描述符（CSD）文件<br><a href="http://archive.cloudera.com/kudu/csd/KUDU-5.10.0.jar?_ga=1.154711740.507225699.1488251539" target="_blank" rel="external">http://archive.cloudera.com/kudu/csd/KUDU-5.10.0.jar?_ga=1.154711740.507225699.1488251539</a><br>并上传到/opt/cloudera/csd/<br>用以下操作系统命令重启Cloudera管理服务器。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo service cloudera-scm-server restart</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>从<a href="http://archive.cloudera.com/kudu/parcels/网站找到相应的Kudu" target="_blank" rel="external">http://archive.cloudera.com/kudu/parcels/网站找到相应的Kudu</a> parcel，<br><img src="http://oh6ybr0jg.bkt.clouddn.com/kudu_version.png" alt="此处输入图片的描述"></p>
-<p>并添加到 Parcel Settings &gt; 远程 Parcel 存储库 URL<br><img src="http://oh6ybr0jg.bkt.clouddn.com/parcel_kudu.png" alt="此处输入图片的描述"></p>
-<h2 id="接下来可以通过以下两种方式安装"><a href="#接下来可以通过以下两种方式安装" class="headerlink" title="接下来可以通过以下两种方式安装"></a>接下来可以通过以下两种方式安装</h2><h3 id="Using-Parcels"><a href="#Using-Parcels" class="headerlink" title="Using Parcels"></a>Using Parcels</h3><p>1.Hosts &gt; Parcels &gt; Kudu &gt; Download<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E4%B8%8B%E8%BD%BDKudu.png" alt="此处输入图片的描述"><br>2.Locations &gt; Distribute &gt; Activate<br>3.重启集群<br>4.Actions &gt; Add a Service. &gt; Kudu (Beta) &gt; Continue<br>5.选择一个主机作为master，一些主机作为tablet 服务角色。一个主机即可以是master又可以是tablet，但是对于大集群来说会造成性能问题。Kudu的master不是一个资源密集型的，被其他相似的处理例如：HDFS的namenode，YARN的ResourceManager收集。选择完主机点击Continue<br>6.在masters 和 tablet配置Kudu的存储位置和预写日志（WAL）文件，Cloudera Manager将会创建文件夹。<br>6.1 你可以使用相同的目录存储数据和WALs<br>6.2 你不可以将WALs 目录设置为数据的子目录<br>6.3 如果你的主机及是master又是tablet，配置不同的master和tablet服务，例如 /data/kudu/master and /data/kudu/tserver.</p>
-<p>6.4 如果你选择的文件系统不支持打洞技术;服务启动失败<br>6.4.1 退出配置向导，点击Cloudera Manager 接口上的Cloudera 图标<br>6.4.2 到 Kudu (Beta) 服务<br>6.4.3 Configuration &gt;  Kudu (Beta) Service Advanced Configuration Snippet (Safety Valve) &gt; gflagfile<br>5.4.4 添加如下内容并保存改变<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--block_manager=file</div></pre></td></tr></table></figure></p>
-<p>Note: The file block manager does not perform well at scale and should only be used for small-scale development and testing.</p>
-<p>7.如果你不需要退出，点击Continue。Kudu的master和tablet服务已经启动。否则点击<br> Kudu (Beta) &gt; Actions &gt; Start.<br>8.使用其中一种方法验证服务：<br>8.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>8.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/<br>9.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>10.管理角色。Kudu (Beta) 服务 使用 Actions 来停止，启动，重启或者其他管理服务</_host_name_></_host_name_></p>
-<h3 id="Using-Packages"><a href="#Using-Packages" class="headerlink" title="Using Packages"></a>Using Packages</h3><p>Kudu 仓库 和 Package 链接</p>
-<table>
-<thead>
-<tr>
-<th>Operating System</th>
-<th style="text-align:left">Repository Package</th>
-<th style="text-align:left">Individual Packages</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RHEL</td>
-<td style="text-align:left">RHEL 6</td>
-<td style="text-align:left">RHEL 6</td>
-</tr>
-<tr>
-<td>Ubuntu</td>
-<td style="text-align:left">Trusty</td>
-<td style="text-align:left">Trusty</td>
-</tr>
-</tbody>
-</table>
-<p>1.1 下载Kudu的yum源文件到：RHEL（/etc/yum.repos.d/）  或者 Ubuntu（/etc/apt/sources.list.d/）<br>1.2 如果你需要C++客户端开发库或Kudu的SDK，RHEL kudu-client-devel 包 或 Ubuntu的 libkuduclient0 and libkuduclient-dev 包<br>1.3 如果你使用Cloudera Manager，不安装 kudu-master 和 kudu-tserver包，Cloudera Manager使用Kudu 提供操作系统启动脚本。</p>
-<p>2.群集上安装Kudu服务。去你想安装Kudu所在的集群。单击 Actions &gt; Add a Service &gt; Kudu &gt; Continue。</p>
-<p>3.选择一个主机作为master，一些主机作为tablet 服务角色。一个主机即可以是master又可以是tablet，但是对于大集群来说会造成性能问题。Kudu的master不是一个资源密集型的，被其他相似的处理例如：HDFS的namenode，YARN的ResourceManager收集。选择完主机点击Continue<br>4.在masters 和 tablet配置Kudu的存储位置和预写日志（WAL）文件，Cloudera Manager将会创建文件夹。<br>4.1 你可以使用相同的目录存储数据和WALs<br>4.2 你不可以将WALs 目录设置为数据的子目录<br>5.3 如果你的主机及是master又是tablet，配置不同的master和tablet服务，例如 /data/kudu/master and /data/kudu/tserver.</p>
-<p>5 如果你选择的文件系统不支持打洞技术;服务启动失败<br>点击 Continue &gt;  Kudu masters 和 tablet 启动。否则到Kudu的服务上点击 Actions &gt; Start.</p>
-<p>6.使用其中一种方法验证服务：<br>6.1 通过ps命令验证一个或全部kudu-master或kudu-tserver程序是否运行<br>6.2 通过打开Web浏览器中的URL访问master或者tablet。<br>master的URL： http://<_host_name_>:8051/<br>tablet的URL： http://<_host_name_>:8050/ </_host_name_></_host_name_></p>
-<p>7.重启监控服务并检查Kudu的图表，到Cloudera Manager服务点击Service Monitor &gt;  Actions &gt; Restart<br>8.管理角色。Kudu 服务 使用 Actions 来停止，启动，重启或者其他管理服务</p>
-<p>此乃官方推荐，方法1，博主亲试没有成功，安装完不显示服务</p>
-<p>本文参考页面：<br><a href="https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html" target="_blank" rel="external">https://www.cloudera.com/documentation/enterprise/latest/topics/kudu_install_cm.html</a></p>
+        <p>spark的算子分为两大类Transformations和Actions</p>
+<h4 id="Transformations："><a href="#Transformations：" class="headerlink" title="Transformations："></a>Transformations：</h4><ul>
+<li>map(func) :返回一个新的分布式数据集，由每个原元素经过func函数转换后组成</li>
+<li>filter(func) : 返回一个新的数据集，由经过func函数后返回值为true的原元素组成</li>
+<li>flatMap(func) : 类似于map，但是每一个输入元素，会被映射为0到多个输出元素（因此，func函数的返回值是一个Seq，而不是单一元素）</li>
+<li>mapPartitions(func)     类似于map，但是运行在不同的RDD分区，func函数运行在一个RDD上必须是 Iterator<t> =&gt; Iterator<u> 类</u></t></li>
+<li>mapPartitionsWithIndex(func)     类似于mapPartitions, 而且还提供了一个表示分区索引的整数值, func函数运行在一个RDD上必须是 (Int, Iterator<t>) =&gt; Iterator<u> 类型. <a id="more"></a></u></t></li>
+<li>sample(withReplacement, frac, seed) :<br> 根据给定的随机种子seed，随机抽样出数量为frac的数据</li>
+<li>union(otherDataset) : 返回一个新的数据集，由原数据集和参数联合而成</li>
+<li>intersection(otherDataset)     Return a new RDD that contains the intersection of elements in the source dataset and the argument.</li>
+<li>distinct([numTasks]))     Return a new dataset that contains the distinct elements of the source dataset.</li>
+<li>groupByKey([numTasks]) :<br> 在一个由（K,V）对组成的数据集上调用，返回一个（K，Seq[V])对的数据集。注意：默认情况下，使用8个并行任务进行分组，你可以传入numTask可选参数，根据数据量设置不同数目的Task</li>
+<li>reduceByKey(func, [numTasks]) : 在一个（K，V)对的数据集上使用，返回一个（K，V）对的数据集，key相同的值，都被使用指定的reduce函数聚合到一起。和groupbykey类似，任务的个数是可以通过第二个可选参数来配置的。</li>
+<li>aggregateByKey(zeroValue)(seqOp, combOp, [numTasks])     When called on a dataset of (K, V) pairs, returns a dataset of (K, U) pairs where the values for each key are aggregated using the given combine functions and a neutral “zero” value. Allows an aggregated value type that is different than the input value type, while avoiding unnecessary allocations. Like in groupByKey, the number of reduce tasks is configurable through an optional second argument.</li>
+<li>sortByKey([ascending], [numTasks])     When called on a dataset of (K, V) pairs where K implements Ordered, returns a dataset of (K, V) pairs sorted by keys in ascending or descending order, as specified in the boolean ascending argument.<br>-join(otherDataset, [numTasks]) :<br> 在类型为（K,V)和（K,W)类型的数据集上调用，返回一个（K,(V,W))对，每个key中的所有元素都在一起的数据集</li>
+<li>groupWith(otherDataset, [numTasks]) : 在类型为（K,V)和(K,W)类型的数据集上调用，返回一个数据集，组成元素为（K, Seq[V], Seq[W]) Tuples。这个操作在其它框架，称为CoGroup</li>
+<li>cogroup(otherDataset, [numTasks])     When called on datasets of type (K, V) and (K, W), returns a dataset of (K, (Iterable<v>, Iterable<w>)) tuples. This operation is also called groupWith. </w></v></li>
+<li>cartesian(otherDataset) : 笛卡尔积。但在数据集T和U上调用时，返回一个(T，U）对的数据集，所有元素交互进行笛卡尔积。</li>
+<li>pipe(command, [envVars])     Pipe each partition of the RDD through a shell command, e.g. a Perl or bash script. RDD elements are written to the process’s stdin and lines output to its stdout are returned as an RDD of strings.</li>
+<li>coalesce(numPartitions)     Decrease the number of partitions in the RDD to numPartitions. Useful for running operations more efficiently after filtering down a large dataset.</li>
+<li>repartition(numPartitions)     Reshuffle the data in the RDD randomly to create either more or fewer partitions and balance it across them. This always shuffles all data over the network.</li>
+<li>repartitionAndSortWithinPartitions(partitioner)     Repartition the RDD according to the given partitioner and, within each resulting partition, sort records by their keys. This is more efficient than calling repartition and then sorting within each partition because it can push the sorting down into the shuffle machinery. </li>
+</ul>
+<h4 id="以上Transformation算子详细又分为如下两类："><a href="#以上Transformation算子详细又分为如下两类：" class="headerlink" title="以上Transformation算子详细又分为如下两类："></a>以上Transformation算子详细又分为如下两类：</h4><p>1.Value数据类型的Transformation算子。<br>输入分区与输出分区一对一型     map、flatMap、mapPartitions<br>输入分区与输出分区多对一型     union、cartesian<br>输入分区与输出分区多对多型     groupBy<br>输出分区为输入分区子集型     filter、distinct、subtract、sample、takeSample<br>Cache型     cache、persist</p>
+<p>2.Key-Value数据类型的Transfromation算子。<br>类型     算子<br>输入分区与输出分区一对一     mapValues<br>对单个RDD     combineByKey、reduceByKey、partitionBy<br>两个RDD聚集     Cogroup<br>连接     join、leftOutJoin、rightOutJoin</p>
+<h4 id="Actions："><a href="#Actions：" class="headerlink" title="Actions："></a>Actions：</h4><ul>
+<li>reduce(func) : 通过函数func聚集数据集中的所有元素。Func函数接受2个参数，返回一个值。这个函数必须是关联性的，确保可以被正确的并发执行</li>
+<li>collect() : 在Driver的程序中，以数组的形式，返回数据集的所有元素。这通常会在使用filter或者其它操作后，返回一个足够小的数据子集再使用，直接将整个RDD集Collect返回，很可能会让Driver程序OOM</li>
+<li>count() : 返回数据集的元素个数</li>
+<li>take(n) : 返回一个数组，由数据集的前n个元素组成。注意，这个操作目前并非在多个节点上，并行执行，而是Driver程序所在机器，单机计算所有的元素(Gateway的内存压力会增大，需要谨慎使用）</li>
+<li>first() : 返回数据集的第一个元素（类似于take(1)）</li>
+<li>take(n)     Return an array with the first n elements of the dataset. </li>
+<li>takeSample(withReplacement, num, [seed])     Return an array with a random sample of num elements of the dataset, with or without replacement, optionally pre-specifying a random number generator seed.</li>
+<li>takeOrdered(n, [ordering])     Return the first n elements of the RDD using either their natural order or a custom comparator. </li>
+<li>saveAsTextFile(path) : 将数据集的元素，以textfile的形式，保存到本地文件系统，hdfs或者任何其它hadoop支持的文件系统。Spark将会调用每个元素的toString方法，并将它转换为文件中的一行文本</li>
+<li>saveAsSequenceFile(path) : 将数据集的元素，以sequencefile的格式，保存到指定的目录下，本地系统，hdfs或者任何其它hadoop支持的文件系统。RDD的元素必须由key-value对组成，并都实现了Hadoop的Writable接口，或隐式可以转换为Writable（Spark包括了基本类型的转换，例如Int，Double，String等等）</li>
+<li>saveAsObjectFile(path)<br>(Java and Scala)     Write the elements of the dataset in a simple format using Java serialization, which can then be loaded using SparkContext.objectFile().</li>
+<li>countByKey()     Only available on RDDs of type (K, V). Returns a hashmap of (K, Int) pairs with the count of each key. </li>
+<li>foreach(func) : 在数据集的每一个元素上，运行函数func。这通常用于更新一个累加器变量，或者和外部存储系统做交互</li>
+</ul>
 
       
     </div>
@@ -497,7 +502,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/cloudera/" rel="tag"># cloudera</a>
+            <a href="/tags/大数据/" rel="tag"># 大数据</a>
           
         </div>
       
@@ -506,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/23/canal分析binlog/" rel="next" title="canal分析binlog">
-                <i class="fa fa-chevron-left"></i> canal分析binlog
+              <a href="/2016/04/02/windwos下启动spark/" rel="next" title="windwos下启动spark">
+                <i class="fa fa-chevron-left"></i> windwos下启动spark
               </a>
             
           </div>
@@ -516,8 +521,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/08/CDH 安装/" rel="prev" title="CDH 安装">
-                CDH 安装 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/11/25/kafka_high_level_api/" rel="prev" title="Kafka_high_level_api测试">
+                Kafka_high_level_api测试 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -550,8 +555,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/01/CDH Kudu安装及介绍/"
-           data-title="CDH Kudu安装及介绍" data-url="http://yoursite.com/2017/03/01/CDH Kudu安装及介绍/">
+      <div class="ds-thread" data-thread-key="2016/04/05/spark算子/"
+           data-title="spark算子" data-url="http://yoursite.com/2016/04/05/spark算子/">
       </div>
     
   </div>
@@ -666,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Kudu的要求"><span class="nav-number">1.</span> <span class="nav-text">安装Kudu的要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过Cloudera-Manager安装Kudu"><span class="nav-number">2.</span> <span class="nav-text">通过Cloudera Manager安装Kudu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接下来可以通过以下两种方式安装"><span class="nav-number">3.</span> <span class="nav-text">接下来可以通过以下两种方式安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Parcels"><span class="nav-number">3.1.</span> <span class="nav-text">Using Parcels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Packages"><span class="nav-number">3.2.</span> <span class="nav-text">Using Packages</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Transformations："><span class="nav-number">1.</span> <span class="nav-text">Transformations：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以上Transformation算子详细又分为如下两类："><span class="nav-number">2.</span> <span class="nav-text">以上Transformation算子详细又分为如下两类：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Actions："><span class="nav-number">3.</span> <span class="nav-text">Actions：</span></a></li></ol></div>
             
 
           </div>
