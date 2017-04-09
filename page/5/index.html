@@ -860,33 +860,18 @@
 
       
         
-          
-            <h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a><strong>开闭原则</strong></h2><p>Software entities should be open for extension,but closed for modification<br>from 《Object Oriented Software Construction》 by Bertrand Meyer at 1988</p>
+          <h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a><strong>开闭原则</strong></h2><p>Software entities should be open for extension,but closed for modification<br>from 《Object Oriented Software Construction》 by Bertrand Meyer at 1988</p>
 <p>通俗来讲在设计一个模块的时候,应当使这个模块可以在不被修改的前提下被扩展<br>例如：spring在装载一个类后，想要增加新功能扩展一个类，spring就会自动装载这个类</p>
 <p>和面向接口编程统一起来</p>
 <h2 id="合成-聚合复用原则"><a href="#合成-聚合复用原则" class="headerlink" title="合成/聚合复用原则"></a><strong>合成/聚合复用原则</strong></h2><p>使用聚合，组合代替继承</p>
-<p>but， what is 聚合组合？<br>e.g.<br>class Driver {<br>    //使用成员变量形式实现聚合关系<br>    Car mycar;<br>    public void drive(){<br>        mycar.run();<br>    }<br>} </p>
-<p>spring 装配即是这个原则</p>
-<p>but, when use 继承？<br>当子类是父类的一种特例，从语义来说是一个单独的父类，而不是为了复用代码</p>
-<blockquote>
-<p>23种设计模式引用：代理模式：真实主题作为代理类的一部分。例如日志，安全，缓存可以放在代理类里，需要调用真实主题的时候才会去调用<br>spring 的AOP就是代理模式</p>
-</blockquote>
-<h2 id="里氏代换原则"><a href="#里氏代换原则" class="headerlink" title="里氏代换原则"></a><strong>里氏代换原则</strong></h2><p>子类可以在所有场合代替父类<br>通俗来讲：子类可以扩展父类的功能，但不能改变父类原有的功能</p>
-<blockquote>
-<p>23种设计模式引用：模板方法：do not call us,we will call you</p>
-</blockquote>
-<h2 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a><strong>依赖倒置原则</strong></h2><p>Abstractions should not depend upon details. Details should depend upon abstractions.<br>抽象不应当依赖于细节,细节应当依赖于抽象</p>
-<p>e.g.  客户端依赖接口，接口有不同的实现。客户端不依赖实现<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE.jpg" alt="此处输入图片的描述"></p>
-<h2 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a><strong>接口隔离原则</strong></h2><p>Clients should not be forced to depend upon interfaces that they don’t use<br>——客户端不应该依赖它不需用的接口。<br>The dependency of one class to another one should depend on the smallest possible interface<br>——类间的依赖关系应该建立在最小的接口上</p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB.jpg" alt="此处输入图片的描述"></p>
-<h2 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a><strong>迪米特法则</strong></h2><p>1）只与你直接的朋友们通信。<br>2）不要跟“陌生人”说话。<br>3）每一个软件单位对其他的单位都只有最少的知识，而且局限于那些与本单位密切相关的软件单位。 </p>
-<p>但并不是绝对的例如StringBuffer 的append方法可以一直append下去，但是每次返回的都是它本身，这样不会造成空指针等异常</p>
-<blockquote>
-<p>23种设计模式引用：门面（外观）模式和调停者（中介者）模式实际上就是迪米特法则的具体应用。</p>
-</blockquote>
-<h2 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a><strong>单一职责原则</strong></h2><p>一个类，应该只有一个职责。每一个职责都是变化的一个轴线，如果一个类有一个以上的职责，这些职责就耦合在了一起。这会导致脆弱的设计。当一个职责发生变化时，可能会影响其它的职责。另外，多个职责耦合在一起，会影响复用性。我们可能只需要复用该类的某一个职责，但这个职责跟其它职责耦合在了一起，很难分离出来</p>
-
-          
+<p>but， what is 聚合组合？<br>e.g.<br>class Driver {<br>    //使用成员变量形式实现聚合关系<br>    Car mycar;<br>    public void drive(){<br>        mycar.run();<br>    }<br>}<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/30/设计模式-软件设计原则(1)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

@@ -96,7 +96,7 @@
 通俗来讲在设计一个模块的时候,应当使这个模块可以在不被修改的前提下被扩展例如：spring在装载一个类">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE.jpg">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB.jpg">
-<meta property="og:updated_time" content="2017-04-08T00:52:25.370Z">
+<meta property="og:updated_time" content="2017-04-09T08:08:14.968Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设置模式-软件设计原则">
 <meta name="twitter:description" content="开闭原则Software entities should be open for extension,but closed for modificationfrom 《Object Oriented Software Construction》 by Bertrand Meyer at 1988
@@ -416,8 +416,7 @@
 <p>通俗来讲在设计一个模块的时候,应当使这个模块可以在不被修改的前提下被扩展<br>例如：spring在装载一个类后，想要增加新功能扩展一个类，spring就会自动装载这个类</p>
 <p>和面向接口编程统一起来</p>
 <h2 id="合成-聚合复用原则"><a href="#合成-聚合复用原则" class="headerlink" title="合成/聚合复用原则"></a><strong>合成/聚合复用原则</strong></h2><p>使用聚合，组合代替继承</p>
-<p>but， what is 聚合组合？<br>e.g.<br>class Driver {<br>    //使用成员变量形式实现聚合关系<br>    Car mycar;<br>    public void drive(){<br>        mycar.run();<br>    }<br>} </p>
-<p>spring 装配即是这个原则</p>
+<p>but， what is 聚合组合？<br>e.g.<br>class Driver {<br>    //使用成员变量形式实现聚合关系<br>    Car mycar;<br>    public void drive(){<br>        mycar.run();<br>    }<br>}<br><a id="more"></a><br>spring 装配即是这个原则</p>
 <p>but, when use 继承？<br>当子类是父类的一种特例，从语义来说是一个单独的父类，而不是为了复用代码</p>
 <blockquote>
 <p>23种设计模式引用：代理模式：真实主题作为代理类的一部分。例如日志，安全，缓存可以放在代理类里，需要调用真实主题的时候才会去调用<br>spring 的AOP就是代理模式</p>
