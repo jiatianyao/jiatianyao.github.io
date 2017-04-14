@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E5%90%AF%E5%8A%A8.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E5%81%9C%E6%AD%A2%E4%B8%80%E4%B8%AAcanal.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E9%83%A8%E5%81%9C%E6%AD%A2.png">
-<meta property="og:updated_time" content="2017-03-04T13:08:10.691Z">
+<meta property="og:updated_time" content="2017-04-13T12:45:04.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="canal分析binlog">
 <meta name="twitter:description" content="环境介绍linux服务器：centos7.1mysql : 5.7.10canal : 1.0.23
@@ -423,6 +423,7 @@
 <a id="more"></a>
 <h4 id="3-安装mysql"><a href="#3-安装mysql" class="headerlink" title="3.安装mysql"></a>3.安装mysql</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install mysql-server</div></pre></td></tr></table></figure>
 <h4 id="4-设置用户"><a href="#4-设置用户" class="headerlink" title="4.设置用户"></a>4.设置用户</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE USER &apos;canal&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;canal&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;canal&apos;@&apos;localhost&apos; WITH GRANT OPTION;</div><div class="line">CREATE USER &apos;canal&apos;@&apos;%&apos; IDENTIFIED BY &apos;canal&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;canal&apos;@&apos;%&apos; WITH GRANT OPTION;</div><div class="line">flush privileges;</div></pre></td></tr></table></figure>
+<p>注：canal的原理是模拟自己为mysql slave，所以这里一定需要做为mysql slave的相关权限.<br>CREATE USER canal IDENTIFIED BY ‘canal’;<br>GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON <em>.</em> TO ‘canal’@’%’;<br>– GRANT ALL PRIVILEGES ON <em>.</em> TO ‘canal’@’%’ ;<br>FLUSH PRIVILEGES;</p>
 <h4 id="5-修改配置文件"><a href="#5-修改配置文件" class="headerlink" title="5.修改配置文件"></a>5.修改配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line">log-bin=mysql-bin #添加这一行就ok</div><div class="line">binlog-format=ROW #选择row模式</div><div class="line">server_id=1 #配置mysql replaction需要定义，不能和canal的slaveId重复</div></pre></td></tr></table></figure>
 <h2 id="二-安装canal"><a href="#二-安装canal" class="headerlink" title="二.安装canal"></a>二.安装canal</h2><h4 id="1-下载canal"><a href="#1-下载canal" class="headerlink" title="1.下载canal"></a>1.下载canal</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://github.com/alibaba/canal/releases/download/v1.0.23/canal.deployer-1.0.23.tar.gz</div></pre></td></tr></table></figure>
 <h4 id="2-解压缩"><a href="#2-解压缩" class="headerlink" title="2.解压缩"></a>2.解压缩</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir /root/canal</div><div class="line">tar zxvf canal.deployer-1.0.23.tar.gz  -C /root/canal</div></pre></td></tr></table></figure>
@@ -448,6 +449,8 @@
 <p>代码启动<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%90%AF%E5%8A%A8.png" alt="此处输入图片的描述"></p>
 <p>停止一个canal<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%81%9C%E6%AD%A2%E4%B8%80%E4%B8%AAcanal.png" alt="此处输入图片的描述"></p>
 <p>全部停止canal<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E9%83%A8%E5%81%9C%E6%AD%A2.png" alt="此处输入图片的描述"></p>
+<p> 查看当前canal消费到哪个position<br>[zk: localhost:2181(CONNECTED) 15] get /otter/canal/destinations/example/1001/cursor<br>{“@type”:”com.alibaba.otter.canal.protocol.position.LogPosition”,”identity”:{“slaveId”:-1,”sourceAddress”:{“address”:”po-master1”,”port”:3306}},”postion”:{“included”:false,”journalName”:”logbin.000004”,”position”:6897322,”serverId”:1,”timestamp”:1492065268000}}</p>
+<p>如果提示：<br>找不到日志的位置<br>在mysql下执行<br>set global binlog_checksum=’NONE’ </p>
 
       
     </div>
