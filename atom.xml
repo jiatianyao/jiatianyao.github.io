@@ -575,7 +575,7 @@
     <link href="http://yoursite.com/2017/02/23/canal%E5%88%86%E6%9E%90binlog/"/>
     <id>http://yoursite.com/2017/02/23/canal分析binlog/</id>
     <published>2017-02-23T06:00:00.000Z</published>
-    <updated>2017-04-13T12:45:04.451Z</updated>
+    <updated>2017-04-15T13:49:47.021Z</updated>
     
     <content type="html"><![CDATA[<h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><p>linux服务器：centos7.1<br>mysql : 5.7.10<br>canal : 1.0.23</p>
 <h2 id="一-centos7下安装mysql"><a href="#一-centos7下安装mysql" class="headerlink" title="一.centos7下安装mysql"></a>一.centos7下安装mysql</h2><h4 id="1-下载mysql的repo源"><a href="#1-下载mysql的repo源" class="headerlink" title="1.下载mysql的repo源"></a>1.下载mysql的repo源</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm</div></pre></td></tr></table></figure>
@@ -610,7 +610,7 @@
 <p>停止一个canal<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%81%9C%E6%AD%A2%E4%B8%80%E4%B8%AAcanal.png" alt="此处输入图片的描述"></p>
 <p>全部停止canal<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E9%83%A8%E5%81%9C%E6%AD%A2.png" alt="此处输入图片的描述"></p>
 <p> 查看当前canal消费到哪个position<br>[zk: localhost:2181(CONNECTED) 15] get /otter/canal/destinations/example/1001/cursor<br>{“@type”:”com.alibaba.otter.canal.protocol.position.LogPosition”,”identity”:{“slaveId”:-1,”sourceAddress”:{“address”:”po-master1”,”port”:3306}},”postion”:{“included”:false,”journalName”:”logbin.000004”,”position”:6897322,”serverId”:1,”timestamp”:1492065268000}}</p>
-<p>如果提示：<br>找不到日志的位置<br>在mysql下执行<br>set global binlog_checksum=’NONE’ </p>
+<p>如果提示：<br>找不到日志的位置<br>在mysql下执行(可能是设置完格式，格式不对)<br>set global binlog_checksum=’NONE’ </p>
 ]]></content>
     
     <summary type="html">
@@ -790,6 +790,34 @@
   </entry>
   
   <entry>
+    <title>Python机器学习准备</title>
+    <link href="http://yoursite.com/2017/01/27/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/"/>
+    <id>http://yoursite.com/2017/01/27/Python机器学习准备/</id>
+    <published>2017-01-27T12:00:00.000Z</published>
+    <updated>2017-04-03T15:49:35.522Z</updated>
+    
+    <content type="html"><![CDATA[<p>下载NumPy<br><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
+<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
+<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
+<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
+<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
+<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下载NumPy&lt;br&gt;&lt;a href=&quot;http://download.csdn.net/download/z1137730824/8384347（numpy&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://download.csdn.net/
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>storm基础知识</title>
     <link href="http://yoursite.com/2017/01/27/storm%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <id>http://yoursite.com/2017/01/27/storm基础知识/</id>
@@ -856,34 +884,6 @@
     
     
       <category term="storm" scheme="http://yoursite.com/tags/storm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python机器学习准备</title>
-    <link href="http://yoursite.com/2017/01/27/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/"/>
-    <id>http://yoursite.com/2017/01/27/Python机器学习准备/</id>
-    <published>2017-01-27T12:00:00.000Z</published>
-    <updated>2017-04-03T15:49:35.522Z</updated>
-    
-    <content type="html"><![CDATA[<p>下载NumPy<br><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
-<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
-<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
-<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
-<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
-<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;下载NumPy&lt;br&gt;&lt;a href=&quot;http://download.csdn.net/download/z1137730824/8384347（numpy&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://download.csdn.net/
-    
-    </summary>
-    
-      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
