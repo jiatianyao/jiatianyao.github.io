@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="storm," />
+  <meta name="keywords" content="CDH," />
 
 
 
@@ -86,19 +86,25 @@
 
 
 
-<meta name="description" content="Storm基本概念Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提">
+<meta name="description" content="首先下载jdk 略安装maven
+下载yum源wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+安装maven：yum -y install apache-maven
+编译phoenix找到最新版本">
 <meta property="og:type" content="article">
-<meta property="og:title" content="storm基础知识">
-<meta property="og:url" content="http://yoursite.com/2017/01/27/storm基础知识/index.html">
+<meta property="og:title" content="CDH phoenix安装">
+<meta property="og:url" content="http://yoursite.com/2016/04/18/CDH phoenix安装/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
-<meta property="og:description" content="Storm基本概念Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提">
-<meta property="og:image" content="http://storm.apache.org/images/storm-flow.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/storm%E6%9E%B6%E6%9E%84.png">
-<meta property="og:updated_time" content="2017-04-02T15:23:59.750Z">
+<meta property="og:description" content="首先下载jdk 略安装maven
+下载yum源wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+安装maven：yum -y install apache-maven
+编译phoenix找到最新版本">
+<meta property="og:updated_time" content="2017-04-18T13:55:09.427Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="storm基础知识">
-<meta name="twitter:description" content="Storm基本概念Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提">
-<meta name="twitter:image" content="http://storm.apache.org/images/storm-flow.png">
+<meta name="twitter:title" content="CDH phoenix安装">
+<meta name="twitter:description" content="首先下载jdk 略安装maven
+下载yum源wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+安装maven：yum -y install apache-maven
+编译phoenix找到最新版本">
 
 
 
@@ -126,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/01/27/storm基础知识/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/04/18/CDH phoenix安装/"/>
 
 
 
 
 
-  <title> storm基础知识 | 张洪铭的个人博客 </title>
+  <title> CDH phoenix安装 | 张洪铭的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -311,7 +317,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/storm基础知识/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/18/CDH phoenix安装/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -335,7 +341,7 @@
             
             
               
-                storm基础知识
+                CDH phoenix安装
               
             
           </h1>
@@ -348,8 +354,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-27T20:00:00+08:00">
-                2017-01-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-18T11:30:00+08:00">
+                2016-04-18
               </time>
             
 
@@ -367,8 +373,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/storm/" itemprop="url" rel="index">
-                    <span itemprop="name">storm</span>
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
                   </a>
                 </span>
 
@@ -382,8 +388,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/01/27/storm基础知识/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/storm基础知识/" itemprop="commentCount"></span>
+                <a href="/2016/04/18/CDH phoenix安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/18/CDH phoenix安装/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -409,54 +415,20 @@
       
 
       
-        <h2 id="Storm基本概念"><a href="#Storm基本概念" class="headerlink" title="Storm基本概念"></a>Storm基本概念</h2><p>Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。<br>Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止</p>
-<a id="more"></a>
-<p><img src="http://storm.apache.org/images/storm-flow.png" alt="此处输入图片的描述"><br>主要版本</p>
-<table>
-<thead>
-<tr>
-<th>版本</th>
-<th>发布日期</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0.9.0.1</td>
-<td>2013年12月8日</td>
-</tr>
-<tr>
-<td>0.9.0</td>
-<td>2013年12月8日</td>
-</tr>
-<tr>
-<td>0.8.0</td>
-<td>2012年8月2日</td>
-</tr>
-<tr>
-<td>0.7.0</td>
-<td>2012年2月28日</td>
-</tr>
-<tr>
-<td>0.6.0</td>
-<td>2011年12月15日</td>
-</tr>
-<tr>
-<td>0.5.0</td>
-<td>2011年9月19日</td>
-</tr>
-</tbody>
-</table>
-<h2 id="编程模型"><a href="#编程模型" class="headerlink" title="编程模型"></a>编程模型</h2><h3 id="Topology"><a href="#Topology" class="headerlink" title="Topology"></a>Topology</h3><p>一个实时计算应用程序逻辑被封装在Topology对象中， 类似Hadoop中的job， Topology会一直运行直到你显式杀死它</p>
-<p>###DataSource<br>外部数据源</p>
-<h3 id="Spout"><a href="#Spout" class="headerlink" title="Spout"></a>Spout</h3><p>接受外部数据源的组件，将外部数据源转化成Storm内部的数据，以Tuple为基本的传输单元下发给Bolt</p>
-<h3 id="Bolt"><a href="#Bolt" class="headerlink" title="Bolt"></a>Bolt</h3><p>接受Spout发送的数据，或上游的bolt的发送的数据。根据业务逻辑进行处理。发送给下一个Bolt或者是存储到某种介质上。介质可以是Redis可以是mysql，或者其他。</p>
-<h3 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h3><p>Storm内部中数据传输的基本单元，里面封装了一个List对象，用来保存数据。</p>
-<h2 id="StreamGrouping"><a href="#StreamGrouping" class="headerlink" title="StreamGrouping:"></a>StreamGrouping:</h2><h4 id="数据分组策略7种："><a href="#数据分组策略7种：" class="headerlink" title="数据分组策略7种："></a>数据分组策略7种：</h4><p>shuffleGrouping(Random函数),<br>NonGrouping(Random函数,目前和shuffleGrouping一样),<br>FieldGrouping(Hash取模),<br>Local or ShuffleGrouping （本地或随机，优先本地）,<br>Fields grouping（根据Tuple中的某一个Filed或者多个Filed的是值来划分。 比如<br>Stream根据Field为user-id来grouping， 相同user-id值的Tuple会被分<br>发到相同的Task中）,<br>Global grouping（整个Stream会选择一个Task作为分发的目的地， 通常是最新的那<br>个id的Task）<br>Direct grouping（产生数据的Spout/Bolt自己明确决定这个Tuple被Bolt的那些Task所<br>消费）</p>
-<h2 id="Storm优点"><a href="#Storm优点" class="headerlink" title="Storm优点"></a>Storm优点</h2><h4 id="健壮性"><a href="#健壮性" class="headerlink" title="健壮性"></a>健壮性</h4><p>当Worker失效或机器出现故障时， 自动分配新的Worker替换失<br>效Worker</p>
-<h4 id="准确性"><a href="#准确性" class="headerlink" title="准确性"></a>准确性</h4><p>采用Acker机制，保证数据不丢失<br>采用事务机制，保证数据准确性</p>
-<h2 id="storm架构"><a href="#storm架构" class="headerlink" title="storm架构"></a>storm架构</h2><p><img src="http://oh6ybr0jg.bkt.clouddn.com/storm%E6%9E%B6%E6%9E%84.png" alt="此处输入图片的描述"></p>
-<p>Storm的主线主要包括4条：nimbus, supervisor, worker和task。</p>
-<p>对于storm0.9.6的配置文件nimbus配置参数还是nimbus.hosts 现在新版本1.0.2已经修改为nimbus.seeds,已经可以支持HA<br>此处之一配置nimbus.seeds: XX。此处nimbus.seeds:后面要有一个空格，否则启动报错<br>storm启动nimbus的时候jps会有一个进程config_value然后变成nimbus。<br>其他启动同上</p>
+        <p>首先下载jdk 略<br>安装maven</p>
+<p>下载yum源<br>wget <a href="http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo" target="_blank" rel="external">http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo</a> -O /etc/yum.repos.d/epel-apache-maven.repo</p>
+<p>安装maven：<br>yum -y install apache-maven</p>
+<p>编译phoenix<br>找到最新版本的phoenix<br><a href="https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8" target="_blank" rel="external">https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8</a></p>
+<p>下载（博主下载到/soft下）<br>并编译<br>mvn clean package -DskipTests -Dcdh.flume.version=1.6.0</p>
+<p>打开路径：<br>/soft/phoenix-for-cloudera-4.8-HBase-1.2-cdh5.8/phoenix-assembly/target</p>
+<p>找到phoenix-4.8.0-cdh5.8.0.tar.gz<br>将phoenix-4.8.0-cdh5.8.0中的phoenix-4.8.0-cdh5.8.0-server.jar拷贝到每一个RegionServer下/opt/cloudera/parcels/CDH/lib/hbase/lib</p>
+<p>启动：<br>./sqlline.py slave1:2181/hbase</p>
+<p>如果报错：<br>Error: org.apache.hadoop.hbase.DoNotRetryIOException: Class org.apache.phoenix.coprocessor.MetaDataEndpointImpl cannot be loaded Set hbase.table.sanity.checks to false at conf or table descriptor if you want to bypass sanity checks<br>        at org.apache.hadoop.hbase.master.HMaster.warnOrThrowExceptionForFailure(HMaster.java:1741)<br>        at org.apache.hadoop.hbase.master.HMaster.sanityCheckTableDescriptor(HMaster.java:1602)<br>        at org.apache.hadoop.hbase.master.HMaster.createTable(HMaster.java:1531)<br>        at org.apache.hadoop.hbase.master.MasterRpcServices.createTable(MasterRpcServices.java:469)<br>        at org.apache.hadoop.hbase.protobuf.generated.MasterProtos$MasterService$2.callBlockingMethod(MasterProtos.java:55682)<br>        at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:2170)<br>        at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:109)<br>        at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:185)<br>        at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:165) (state=08000,code=101)</p>
+<p>需要点击<br>CDH-&gt;hbase -&gt;配置-&gt;高级<br>hbase-site.xml 的 HBase 服务高级配置代码段（安全阀）<br>添加<br>hbase.table.sanity.checks<br>false</p>
+<p>重启即可</p>
+<p>如果想要安装phonenix<br>先下载<br><a href="http://squirrel-sql.sourceforge.net/#installation" target="_blank" rel="external">http://squirrel-sql.sourceforge.net/#installation</a></p>
+<p>安装（安装的时候勾选imort-data和mysql）<br>注：下载后直接安装jar包即可，不要解压缩<br>由于是CDH 我拷贝了如下jar防盗lib下面<br>phoenix-core-4.8.0-cdh5.8.0.jar<br>phoenix-4.8.0-cdh5.8.0-client.jar<br>phoenix-pherf-4.8.0-cdh5.8.0-minimal.jar</p>
+<p>连接参考;<br><a href="http://www.cnblogs.com/raphael5200/p/5260198.html" target="_blank" rel="external">http://www.cnblogs.com/raphael5200/p/5260198.html</a><br>有图</p>
 
       
     </div>
@@ -501,7 +473,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/storm/" rel="tag"># storm</a>
+            <a href="/tags/CDH/" rel="tag"># CDH</a>
           
         </div>
       
@@ -510,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/27/Python机器学习准备/" rel="next" title="Python机器学习准备">
-                <i class="fa fa-chevron-left"></i> Python机器学习准备
+              <a href="/2016/04/05/spark算子/" rel="next" title="spark算子">
+                <i class="fa fa-chevron-left"></i> spark算子
               </a>
             
           </div>
@@ -520,8 +492,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/28/storm1.0.2安装/" rel="prev" title="storm1.0.2安装">
-                storm1.0.2安装 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/11/25/kafka_high_level_api/" rel="prev" title="Kafka_high_level_api测试">
+                Kafka_high_level_api测试 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -554,8 +526,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/01/27/storm基础知识/"
-           data-title="storm基础知识" data-url="http://yoursite.com/2017/01/27/storm基础知识/">
+      <div class="ds-thread" data-thread-key="2016/04/18/CDH phoenix安装/"
+           data-title="CDH phoenix安装" data-url="http://yoursite.com/2016/04/18/CDH phoenix安装/">
       </div>
     
   </div>
@@ -579,17 +551,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/agns.gif"
@@ -660,22 +623,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Storm基本概念"><span class="nav-number">1.</span> <span class="nav-text">Storm基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程模型"><span class="nav-number">2.</span> <span class="nav-text">编程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Topology"><span class="nav-number">2.1.</span> <span class="nav-text">Topology</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spout"><span class="nav-number">2.2.</span> <span class="nav-text">Spout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bolt"><span class="nav-number">2.3.</span> <span class="nav-text">Bolt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tuple"><span class="nav-number">2.4.</span> <span class="nav-text">Tuple</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StreamGrouping"><span class="nav-number">3.</span> <span class="nav-text">StreamGrouping:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据分组策略7种："><span class="nav-number">3.0.1.</span> <span class="nav-text">数据分组策略7种：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Storm优点"><span class="nav-number">4.</span> <span class="nav-text">Storm优点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#健壮性"><span class="nav-number">4.0.1.</span> <span class="nav-text">健壮性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#准确性"><span class="nav-number">4.0.2.</span> <span class="nav-text">准确性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#storm架构"><span class="nav-number">5.</span> <span class="nav-text">storm架构</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>
