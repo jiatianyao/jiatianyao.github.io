@@ -411,23 +411,16 @@
 
       
         
-          
-            <p>首先下载jdk 略<br>安装maven</p>
-<p>下载yum源<br>wget <a href="http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo" target="_blank" rel="external">http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo</a> -O /etc/yum.repos.d/epel-apache-maven.repo</p>
+          <p>首先下载jdk 略<br>安装maven</p>
+<p>下载yum源<br>wget <a href="http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo">http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo</a> -O /etc/yum.repos.d/epel-apache-maven.repo</p>
 <p>安装maven：<br>yum -y install apache-maven</p>
-<p>编译phoenix<br>找到最新版本的phoenix<br><a href="https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8" target="_blank" rel="external">https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8</a></p>
-<p>下载（博主下载到/soft下）<br>并编译<br>mvn clean package -DskipTests -Dcdh.flume.version=1.6.0</p>
-<p>打开路径：<br>/soft/phoenix-for-cloudera-4.8-HBase-1.2-cdh5.8/phoenix-assembly/target</p>
-<p>找到phoenix-4.8.0-cdh5.8.0.tar.gz<br>将phoenix-4.8.0-cdh5.8.0中的phoenix-4.8.0-cdh5.8.0-server.jar拷贝到每一个RegionServer下/opt/cloudera/parcels/CDH/lib/hbase/lib</p>
-<p>启动：<br>./sqlline.py slave1:2181/hbase</p>
-<p>如果报错：<br>Error: org.apache.hadoop.hbase.DoNotRetryIOException: Class org.apache.phoenix.coprocessor.MetaDataEndpointImpl cannot be loaded Set hbase.table.sanity.checks to false at conf or table descriptor if you want to bypass sanity checks<br>        at org.apache.hadoop.hbase.master.HMaster.warnOrThrowExceptionForFailure(HMaster.java:1741)<br>        at org.apache.hadoop.hbase.master.HMaster.sanityCheckTableDescriptor(HMaster.java:1602)<br>        at org.apache.hadoop.hbase.master.HMaster.createTable(HMaster.java:1531)<br>        at org.apache.hadoop.hbase.master.MasterRpcServices.createTable(MasterRpcServices.java:469)<br>        at org.apache.hadoop.hbase.protobuf.generated.MasterProtos$MasterService$2.callBlockingMethod(MasterProtos.java:55682)<br>        at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:2170)<br>        at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:109)<br>        at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:185)<br>        at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:165) (state=08000,code=101)</p>
-<p>需要点击<br>CDH-&gt;hbase -&gt;配置-&gt;高级<br>hbase-site.xml 的 HBase 服务高级配置代码段（安全阀）<br>添加<br>hbase.table.sanity.checks<br>false</p>
-<p>重启即可</p>
-<p>如果想要安装phonenix<br>先下载<br><a href="http://squirrel-sql.sourceforge.net/#installation" target="_blank" rel="external">http://squirrel-sql.sourceforge.net/#installation</a></p>
-<p>安装（安装的时候勾选imort-data和mysql）<br>注：下载后直接安装jar包即可，不要解压缩<br>由于是CDH 我拷贝了如下jar防盗lib下面<br>phoenix-core-4.8.0-cdh5.8.0.jar<br>phoenix-4.8.0-cdh5.8.0-client.jar<br>phoenix-pherf-4.8.0-cdh5.8.0-minimal.jar</p>
-<p>连接参考;<br><a href="http://www.cnblogs.com/raphael5200/p/5260198.html" target="_blank" rel="external">http://www.cnblogs.com/raphael5200/p/5260198.html</a><br>有图</p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/18/CDH phoenix安装/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
