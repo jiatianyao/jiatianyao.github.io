@@ -96,7 +96,7 @@
 <meta property="og:description" content="首先下载jdk 略安装maven
 下载yum源wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
 安装maven：yum -y install apache-maven">
-<meta property="og:updated_time" content="2017-04-23T05:21:23.267Z">
+<meta property="og:updated_time" content="2017-04-24T14:18:02.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH phoenix安装">
 <meta name="twitter:description" content="首先下载jdk 略安装maven
@@ -417,7 +417,7 @@
 <h2 id="安装maven："><a href="#安装maven：" class="headerlink" title="安装maven："></a>安装maven：</h2><p>yum -y install apache-maven</p>
 <a id="more"></a>
 <h2 id="编译phoenix"><a href="#编译phoenix" class="headerlink" title="编译phoenix"></a>编译phoenix</h2><p>找到最新版本的phoenix<br><a href="https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8" target="_blank" rel="external">https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8</a></p>
-<p>下载（博主下载到/soft下）<br>并编译<br>mvn clean package -DskipTests -Dcdh.flume.version=1.6.0</p>
+<h2 id="下载（博主下载到-soft下）"><a href="#下载（博主下载到-soft下）" class="headerlink" title="下载（博主下载到/soft下）"></a>下载（博主下载到/soft下）</h2><p>并编译<br>mvn clean package -DskipTests -Dcdh.flume.version=1.6.0</p>
 <p>打开路径：<br>/soft/phoenix-for-cloudera-4.8-HBase-1.2-cdh5.8/phoenix-assembly/target</p>
 <p>找到phoenix-4.8.0-cdh5.8.0.tar.gz<br>将phoenix-4.8.0-cdh5.8.0中的phoenix-4.8.0-cdh5.8.0-server.jar拷贝到每一个RegionServer下/opt/cloudera/parcels/CDH/lib/hbase/lib</p>
 <p>启动：<br>./sqlline.py slave1:2181/hbase</p>
@@ -640,7 +640,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先下载jdk-略"><span class="nav-number">1.</span> <span class="nav-text">首先下载jdk 略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载yum源"><span class="nav-number">2.</span> <span class="nav-text">下载yum源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装maven："><span class="nav-number">3.</span> <span class="nav-text">安装maven：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译phoenix"><span class="nav-number">4.</span> <span class="nav-text">编译phoenix</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先下载jdk-略"><span class="nav-number">1.</span> <span class="nav-text">首先下载jdk 略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载yum源"><span class="nav-number">2.</span> <span class="nav-text">下载yum源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装maven："><span class="nav-number">3.</span> <span class="nav-text">安装maven：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译phoenix"><span class="nav-number">4.</span> <span class="nav-text">编译phoenix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载（博主下载到-soft下）"><span class="nav-number">5.</span> <span class="nav-text">下载（博主下载到/soft下）</span></a></li></ol></div>
             
 
           </div>
