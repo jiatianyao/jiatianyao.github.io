@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-31T13:27:02.808Z</updated>
+  <updated>2017-05-03T14:14:25.051Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CDH phoenix安装</title>
+    <link href="http://yoursite.com/2017/04/18/CDH%20phoenix%E5%AE%89%E8%A3%85/"/>
+    <id>http://yoursite.com/2017/04/18/CDH phoenix安装/</id>
+    <published>2017-04-18T03:30:00.000Z</published>
+    <updated>2017-05-03T14:14:25.051Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="首先下载jdk-略"><a href="#首先下载jdk-略" class="headerlink" title="首先下载jdk 略"></a>首先下载jdk 略</h2><p>安装maven</p>
+<h2 id="下载yum源"><a href="#下载yum源" class="headerlink" title="下载yum源"></a>下载yum源</h2><p>wget <a href="http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo" target="_blank" rel="external">http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo</a> -O /etc/yum.repos.d/epel-apache-maven.repo</p>
+<h2 id="安装maven："><a href="#安装maven：" class="headerlink" title="安装maven："></a>安装maven：</h2><p>yum -y install apache-maven</p>
+<a id="more"></a>
+<h2 id="编译phoenix"><a href="#编译phoenix" class="headerlink" title="编译phoenix"></a>编译phoenix</h2><p>找到最新版本的phoenix<br><a href="https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8" target="_blank" rel="external">https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8</a></p>
+<h2 id="下载（博主下载到-soft下）"><a href="#下载（博主下载到-soft下）" class="headerlink" title="下载（博主下载到/soft下）"></a>下载（博主下载到/soft下）</h2><p>并编译<br>mvn clean package -DskipTests -Dcdh.flume.version=1.6.0</p>
+<h2 id="打开路径："><a href="#打开路径：" class="headerlink" title="打开路径："></a>打开路径：</h2><p>/soft/phoenix-for-cloudera-4.8-HBase-1.2-cdh5.8/phoenix-assembly/target</p>
+<p>找到phoenix-4.8.0-cdh5.8.0.tar.gz<br>将phoenix-4.8.0-cdh5.8.0中的phoenix-4.8.0-cdh5.8.0-server.jar拷贝到每一个RegionServer下/opt/cloudera/parcels/CDH/lib/hbase/lib</p>
+<h2 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h2><p>./sqlline.py slave1:2181/hbase</p>
+<h2 id="如果报错："><a href="#如果报错：" class="headerlink" title="如果报错："></a>如果报错：</h2><p>Error: org.apache.hadoop.hbase.DoNotRetryIOException: Class org.apache.phoenix.coprocessor.MetaDataEndpointImpl cannot be loaded Set hbase.table.sanity.checks to false at conf or table descriptor if you want to bypass sanity checks<br>        at org.apache.hadoop.hbase.master.HMaster.warnOrThrowExceptionForFailure(HMaster.java:1741)<br>        at org.apache.hadoop.hbase.master.HMaster.sanityCheckTableDescriptor(HMaster.java:1602)<br>        at org.apache.hadoop.hbase.master.HMaster.createTable(HMaster.java:1531)<br>        at org.apache.hadoop.hbase.master.MasterRpcServices.createTable(MasterRpcServices.java:469)<br>        at org.apache.hadoop.hbase.protobuf.generated.MasterProtos$MasterService$2.callBlockingMethod(MasterProtos.java:55682)<br>        at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:2170)<br>        at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:109)<br>        at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:185)<br>        at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:165) (state=08000,code=101)</p>
+<p>需要点击<br>CDH-&gt;hbase -&gt;配置-&gt;高级<br>hbase-site.xml 的 HBase 服务高级配置代码段（安全阀）<br>添加<br>hbase.table.sanity.checks<br>false</p>
+<h2 id="重启即可"><a href="#重启即可" class="headerlink" title="重启即可"></a>重启即可</h2><h2 id="如果想要安装phonenix"><a href="#如果想要安装phonenix" class="headerlink" title="如果想要安装phonenix"></a>如果想要安装phonenix</h2><p>先下载<br><a href="http://squirrel-sql.sourceforge.net/#installation" target="_blank" rel="external">http://squirrel-sql.sourceforge.net/#installation</a></p>
+<h2 id="安装（安装的时候勾选imort-data和mysql）"><a href="#安装（安装的时候勾选imort-data和mysql）" class="headerlink" title="安装（安装的时候勾选imort-data和mysql）"></a>安装（安装的时候勾选imort-data和mysql）</h2><p>注：下载后直接安装jar包即可，不要解压缩<br>由于是CDH 我拷贝了如下jar防盗lib下面<br>phoenix-core-4.8.0-cdh5.8.0.jar<br>phoenix-4.8.0-cdh5.8.0-client.jar<br>phoenix-pherf-4.8.0-cdh5.8.0-minimal.jar</p>
+<p>连接参考;<br><a href="http://www.cnblogs.com/raphael5200/p/5260198.html" target="_blank" rel="external">http://www.cnblogs.com/raphael5200/p/5260198.html</a><br>有图</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;首先下载jdk-略&quot;&gt;&lt;a href=&quot;#首先下载jdk-略&quot; class=&quot;headerlink&quot; title=&quot;首先下载jdk 略&quot;&gt;&lt;/a&gt;首先下载jdk 略&lt;/h2&gt;&lt;p&gt;安装maven&lt;/p&gt;
+&lt;h2 id=&quot;下载yum源&quot;&gt;&lt;a href=&quot;#下载yum源&quot; class=&quot;headerlink&quot; title=&quot;下载yum源&quot;&gt;&lt;/a&gt;下载yum源&lt;/h2&gt;&lt;p&gt;wget &lt;a href=&quot;http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo&quot;&gt;http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo&lt;/a&gt; -O /etc/yum.repos.d/epel-apache-maven.repo&lt;/p&gt;
+&lt;h2 id=&quot;安装maven：&quot;&gt;&lt;a href=&quot;#安装maven：&quot; class=&quot;headerlink&quot; title=&quot;安装maven：&quot;&gt;&lt;/a&gt;安装maven：&lt;/h2&gt;&lt;p&gt;yum -y install apache-maven&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
+    
+    
+      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
+    
+  </entry>
   
   <entry>
     <title>CDH-spark</title>
@@ -235,36 +273,6 @@
   </entry>
   
   <entry>
-    <title>CDH sqoop1 实战-带条件的导入</title>
-    <link href="http://yoursite.com/2017/03/13/CDH%20sqoop1%20%E5%AE%9E%E6%88%98-%E5%B8%A6%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%AF%BC%E5%85%A5/"/>
-    <id>http://yoursite.com/2017/03/13/CDH sqoop1 实战-带条件的导入/</id>
-    <published>2017-03-13T01:30:00.000Z</published>
-    <updated>2017-03-31T13:27:41.442Z</updated>
-    
-    <content type="html"><![CDATA[<p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
-<p>修改为：<br>sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming</p>
-<a id="more"></a>
-<p>在执行，发现报错说我database不存在，并在目录下生成了一个metastore_db，原来是执行sqoop的机器不对，换了一台机器执行没有问题，很奇怪明明是分布式的为什么会出现这个问题呢</p>
-<p>最终的具体日志：</p>
-<p>[hdfs@master1 root]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming –hive-database shuju<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>17/03/15 14:32:53 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 14:32:53 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 14:32:53 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 14:32:53 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../hadoop-mapreduce<br>Note: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.java uses or overrides a deprecated API.<br>Note: Recompile with -Xlint:deprecation for details.<br>17/03/15 14:33:00 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.jar<br>17/03/15 14:33:00 INFO mapreduce.ImportJobBase: Beginning query import.<br>17/03/15 14:33:00 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar<br>17/03/15 14:33:01 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps<br>17/03/15 14:33:01 INFO client.RMProxy: Connecting to ResourceManager at master2/10.105.10.122:8032<br>17/03/15 14:33:02 INFO db.DBInputFormat: Using read commited transaction isolation<br>17/03/15 14:33:02 INFO db.DataDrivenDBInputFormat: BoundingValsQuery: SELECT MIN(id), MAX(id) FROM (SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 1) ) AS t1<br>17/03/15 14:33:03 INFO db.IntegerSplitter: Split size: 7508318; Num splits: 4 from: 20079 to: 30053354<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: number of splits:4<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1488970234114_0057<br>17/03/15 14:33:03 INFO impl.YarnClientImpl: Submitted application application_1488970234114_0057<br>17/03/15 14:33:03 INFO mapreduce.Job: The url to track the job: <a href="http://master2:8088/proxy/application_1488970234114_0057/" target="_blank" rel="external">http://master2:8088/proxy/application_1488970234114_0057/</a><br>17/03/15 14:33:03 INFO mapreduce.Job: Running job: job_1488970234114_0057<br>17/03/15 14:33:08 INFO mapreduce.Job: Job job_1488970234114_0057 running in uber mode : false<br>17/03/15 14:33:08 INFO mapreduce.Job:  map 0% reduce 0%<br>17/03/15 14:33:15 INFO mapreduce.Job:  map 75% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job:  map 100% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job: Job job_1488970234114_0057 completed successfully<br>17/03/15 14:33:16 INFO mapreduce.Job: Counters: 30<br>        File System Counters<br>                FILE: Number of bytes read=0<br>                FILE: Number of bytes written=608160<br>                FILE: Number of read operations=0<br>                FILE: Number of large read operations=0<br>                FILE: Number of write operations=0<br>                HDFS: Number of bytes read=428<br>                HDFS: Number of bytes written=17645206<br>                HDFS: Number of read operations=16<br>                HDFS: Number of large read operations=0<br>                HDFS: Number of write operations=8<br>        Job Counters<br>                Launched map tasks=4<br>                Other local map tasks=4<br>                Total time spent by all maps in occupied slots (ms)=17968<br>                Total time spent by all reduces in occupied slots (ms)=0<br>                Total time spent by all map tasks (ms)=17968<br>                Total vcore-seconds taken by all map tasks=17968<br>                Total megabyte-seconds taken by all map tasks=18399232<br>        Map-Reduce Framework<br>                Map input records=283659<br>                Map output records=283659<br>                Input split bytes=428<br>                Spilled Records=0<br>                Failed Shuffles=0<br>                Merged Map outputs=0<br>                GC time elapsed (ms)=268<br>                CPU time spent (ms)=12960<br>                Physical memory (bytes) snapshot=1151381504<br>                Virtual memory (bytes) snapshot=11157348352<br>                Total committed heap usage (bytes)=1045954560<br>        File Input Format Counters<br>                Bytes Read=0<br>        File Output Format Counters<br>                Bytes Written=17645206<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Transferred 16.8278 MB in 15.7965 seconds (1.0653 MB/sec)<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Retrieved 283659 records.<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 WARN hive.TableDefWriter: Column update_time had to be cast to a less precise type in Hive<br>17/03/15 14:33:16 INFO hive.HiveImport: Loading uploaded data into Hive</p>
-<p>Logging initialized using configuration in jar:file:/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/jars/hive-common-1.1.0-cdh5.10.0.jar!/hive-log4j.properties<br>OK<br>Time taken: 1.874 seconds<br>Loading data to table shuju.card_record<br>Table shuju.card_record stats: [numFiles=4, totalSize=17645206]<br>OK<br>Time taken: 0.367 seconds</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming&lt;br&gt;17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0&lt;br&gt;17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.&lt;br&gt;17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.&lt;br&gt;17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation&lt;br&gt;17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.&lt;br&gt;        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)&lt;br&gt;        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)&lt;br&gt;        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)&lt;br&gt;        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)&lt;br&gt;        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)&lt;br&gt;        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)&lt;br&gt;        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)&lt;br&gt;        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)&lt;br&gt;        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)&lt;br&gt;        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)&lt;br&gt;        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)&lt;br&gt;        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)&lt;/p&gt;
-&lt;p&gt;修改为：&lt;br&gt;sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
-    
-    
-      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
-    
-  </entry>
-  
-  <entry>
     <title>CDH sqoop1 实战</title>
     <link href="http://yoursite.com/2017/03/13/CDH%20sqoop1%20%E5%AE%9E%E6%88%98/"/>
     <id>http://yoursite.com/2017/03/13/CDH sqoop1 实战/</id>
@@ -305,6 +313,36 @@
     
       &lt;h2 id=&quot;下载sqlserver的jdbc驱动包&quot;&gt;&lt;a href=&quot;#下载sqlserver的jdbc驱动包&quot; class=&quot;headerlink&quot; title=&quot;下载sqlserver的jdbc驱动包&quot;&gt;&lt;/a&gt;下载sqlserver的jdbc驱动包&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599&quot;&gt;https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599&lt;/a&gt;&lt;br&gt;解压&lt;br&gt;将sqljdbc4.jar放在：&lt;br&gt;/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib&lt;/p&gt;
 &lt;p&gt;下载SQL Server-Hadoop Connector：sqoop-sqlserver-1.0.tar.gz&lt;br&gt;             &lt;a href=&quot;http://www.microsoft.com/en-us/download/details.aspx?id=27584&quot;&gt;http://www.microsoft.com/en-us/download/details.aspx?id=27584&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
+    
+    
+      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CDH sqoop1 实战-带条件的导入</title>
+    <link href="http://yoursite.com/2017/03/13/CDH%20sqoop1%20%E5%AE%9E%E6%88%98-%E5%B8%A6%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%AF%BC%E5%85%A5/"/>
+    <id>http://yoursite.com/2017/03/13/CDH sqoop1 实战-带条件的导入/</id>
+    <published>2017-03-13T01:30:00.000Z</published>
+    <updated>2017-03-31T13:27:41.442Z</updated>
+    
+    <content type="html"><![CDATA[<p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
+<p>修改为：<br>sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming</p>
+<a id="more"></a>
+<p>在执行，发现报错说我database不存在，并在目录下生成了一个metastore_db，原来是执行sqoop的机器不对，换了一台机器执行没有问题，很奇怪明明是分布式的为什么会出现这个问题呢</p>
+<p>最终的具体日志：</p>
+<p>[hdfs@master1 root]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming –hive-database shuju<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>17/03/15 14:32:53 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 14:32:53 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 14:32:53 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 14:32:53 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../hadoop-mapreduce<br>Note: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.java uses or overrides a deprecated API.<br>Note: Recompile with -Xlint:deprecation for details.<br>17/03/15 14:33:00 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.jar<br>17/03/15 14:33:00 INFO mapreduce.ImportJobBase: Beginning query import.<br>17/03/15 14:33:00 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar<br>17/03/15 14:33:01 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps<br>17/03/15 14:33:01 INFO client.RMProxy: Connecting to ResourceManager at master2/10.105.10.122:8032<br>17/03/15 14:33:02 INFO db.DBInputFormat: Using read commited transaction isolation<br>17/03/15 14:33:02 INFO db.DataDrivenDBInputFormat: BoundingValsQuery: SELECT MIN(id), MAX(id) FROM (SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 1) ) AS t1<br>17/03/15 14:33:03 INFO db.IntegerSplitter: Split size: 7508318; Num splits: 4 from: 20079 to: 30053354<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: number of splits:4<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1488970234114_0057<br>17/03/15 14:33:03 INFO impl.YarnClientImpl: Submitted application application_1488970234114_0057<br>17/03/15 14:33:03 INFO mapreduce.Job: The url to track the job: <a href="http://master2:8088/proxy/application_1488970234114_0057/" target="_blank" rel="external">http://master2:8088/proxy/application_1488970234114_0057/</a><br>17/03/15 14:33:03 INFO mapreduce.Job: Running job: job_1488970234114_0057<br>17/03/15 14:33:08 INFO mapreduce.Job: Job job_1488970234114_0057 running in uber mode : false<br>17/03/15 14:33:08 INFO mapreduce.Job:  map 0% reduce 0%<br>17/03/15 14:33:15 INFO mapreduce.Job:  map 75% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job:  map 100% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job: Job job_1488970234114_0057 completed successfully<br>17/03/15 14:33:16 INFO mapreduce.Job: Counters: 30<br>        File System Counters<br>                FILE: Number of bytes read=0<br>                FILE: Number of bytes written=608160<br>                FILE: Number of read operations=0<br>                FILE: Number of large read operations=0<br>                FILE: Number of write operations=0<br>                HDFS: Number of bytes read=428<br>                HDFS: Number of bytes written=17645206<br>                HDFS: Number of read operations=16<br>                HDFS: Number of large read operations=0<br>                HDFS: Number of write operations=8<br>        Job Counters<br>                Launched map tasks=4<br>                Other local map tasks=4<br>                Total time spent by all maps in occupied slots (ms)=17968<br>                Total time spent by all reduces in occupied slots (ms)=0<br>                Total time spent by all map tasks (ms)=17968<br>                Total vcore-seconds taken by all map tasks=17968<br>                Total megabyte-seconds taken by all map tasks=18399232<br>        Map-Reduce Framework<br>                Map input records=283659<br>                Map output records=283659<br>                Input split bytes=428<br>                Spilled Records=0<br>                Failed Shuffles=0<br>                Merged Map outputs=0<br>                GC time elapsed (ms)=268<br>                CPU time spent (ms)=12960<br>                Physical memory (bytes) snapshot=1151381504<br>                Virtual memory (bytes) snapshot=11157348352<br>                Total committed heap usage (bytes)=1045954560<br>        File Input Format Counters<br>                Bytes Read=0<br>        File Output Format Counters<br>                Bytes Written=17645206<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Transferred 16.8278 MB in 15.7965 seconds (1.0653 MB/sec)<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Retrieved 283659 records.<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 WARN hive.TableDefWriter: Column update_time had to be cast to a less precise type in Hive<br>17/03/15 14:33:16 INFO hive.HiveImport: Loading uploaded data into Hive</p>
+<p>Logging initialized using configuration in jar:file:/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/jars/hive-common-1.1.0-cdh5.10.0.jar!/hive-log4j.properties<br>OK<br>Time taken: 1.874 seconds<br>Loading data to table shuju.card_record<br>Table shuju.card_record stats: [numFiles=4, totalSize=17645206]<br>OK<br>Time taken: 0.367 seconds</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming&lt;br&gt;17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0&lt;br&gt;17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.&lt;br&gt;17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.&lt;br&gt;17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation&lt;br&gt;17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.&lt;br&gt;        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)&lt;br&gt;        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)&lt;br&gt;        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)&lt;br&gt;        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)&lt;br&gt;        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)&lt;br&gt;        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)&lt;br&gt;        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)&lt;br&gt;        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)&lt;br&gt;        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)&lt;br&gt;        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)&lt;br&gt;        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)&lt;br&gt;        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)&lt;/p&gt;
+&lt;p&gt;修改为：&lt;br&gt;sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming&lt;/p&gt;
     
     </summary>
     
@@ -936,119 +974,6 @@
     </summary>
     
       <category term="python" scheme="http://yoursite.com/categories/python/"/>
-    
-    
-      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习之KNN算法推演</title>
-    <link href="http://yoursite.com/2017/01/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BKNN%E7%AE%97%E6%B3%95%E6%8E%A8%E6%BC%94/"/>
-    <id>http://yoursite.com/2017/01/21/机器学习之KNN算法推演/</id>
-    <published>2017-01-21T13:06:30.000Z</published>
-    <updated>2017-03-04T13:22:46.475Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。"><a href="#从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。" class="headerlink" title="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。"></a>从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。</h4><h5 id="算法涉及3个主要因素："><a href="#算法涉及3个主要因素：" class="headerlink" title="算法涉及3个主要因素："></a>算法涉及3个主要因素：</h5><p>1)    训练数据集<br>2)    距离或相似度的计算衡量<br>3)    k的大小<br><img src="http://oh6ybr0jg.bkt.clouddn.com/KNN%E7%AE%97%E6%B3%95.jpg" alt="此处输入图片的描述"><br>绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。</p>
-<h2 id="KNN分类算法Python实战"><a href="#KNN分类算法Python实战" class="headerlink" title="KNN分类算法Python实战"></a>KNN分类算法Python实战</h2><p>有以下先验数据，使用knn算法对未知类别数据分类</p>
-<table>
-<thead>
-<tr>
-<th>x轴</th>
-<th style="text-align:center">y轴</th>
-<th style="text-align:right">类型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1.0</td>
-<td style="text-align:center">0.9</td>
-<td style="text-align:right">A</td>
-</tr>
-<tr>
-<td>1.0</td>
-<td style="text-align:center">1.0</td>
-<td style="text-align:right">A</td>
-</tr>
-<tr>
-<td>0.0</td>
-<td style="text-align:center">0.1</td>
-<td style="text-align:right">B</td>
-</tr>
-<tr>
-<td>0.1</td>
-<td style="text-align:center">0.2</td>
-<td style="text-align:right">B</td>
-</tr>
-</tbody>
-</table>
-<a id="more"></a>
-<p>未知类别数据</p>
-<table>
-<thead>
-<tr>
-<th>x轴</th>
-<th style="text-align:center">y轴</th>
-<th style="text-align:right">类型</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1.2</td>
-<td style="text-align:center">1.0</td>
-<td style="text-align:right">？</td>
-</tr>
-<tr>
-<td>0.1</td>
-<td style="text-align:center">0.3</td>
-<td style="text-align:right">？</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#########################################</span></div><div class="line"><span class="comment"># kNN: k Nearest Neighbors</span></div><div class="line"></div><div class="line"><span class="comment"># 输入:      newInput:  (1xN)的待分类向量</span></div><div class="line"><span class="comment">#             dataSet:   (NxM)的训练数据集</span></div><div class="line"><span class="comment">#             labels: 	训练数据集的类别标签向量</span></div><div class="line"><span class="comment">#             k: 		近邻数 </span></div><div class="line">            </div><div class="line"><span class="comment"># 输出:     可能性最大的分类标签</span></div><div class="line"><span class="comment">#########################################</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="keyword">import</span> operator</div><div class="line"></div><div class="line"><span class="comment">#创建一个数据集，包含2个类别共4个样本</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></div><div class="line">	<span class="comment"># 生成一个矩阵，每行表示一个样本</span></div><div class="line">	group = array([[<span class="number">1.0</span>, <span class="number">0.9</span>], [<span class="number">1.0</span>, <span class="number">1.0</span>], [<span class="number">0.1</span>, <span class="number">0.2</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>]])</div><div class="line">	<span class="comment"># 4个样本分别所属的类别</span></div><div class="line">	labels = [<span class="string">'A'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>]</div><div class="line">	<span class="keyword">return</span> group, labels</div><div class="line"></div><div class="line"><span class="comment"># KNN分类算法函数定义</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">kNNClassify</span><span class="params">(newInput, dataSet, labels, k)</span>:</span></div><div class="line">	numSamples = dataSet.shape[<span class="number">0</span>]   <span class="comment"># shape[0]表示行数</span></div><div class="line"></div><div class="line">	<span class="comment">## step 1: 计算距离</span></div><div class="line">	<span class="comment"># tile(A, reps): 构造一个矩阵，通过A重复reps次得到(tile(A, （repsX，repsY）)此处在行的方向重复repsX次，在Y的方向重复repsY次)</span></div><div class="line">	<span class="comment"># the following copy numSamples rows for dataSet</span></div><div class="line">	diff = tile(newInput, (numSamples, <span class="number">1</span>)) - dataSet  <span class="comment"># 按元素求差值</span></div><div class="line">	squaredDiff = diff ** <span class="number">2</span>  <span class="comment">#将差值平方</span></div><div class="line">	squaredDist = sum(squaredDiff, axis = <span class="number">1</span>)   <span class="comment"># 按行累加</span></div><div class="line">	distance = squaredDist ** <span class="number">0.5</span>  <span class="comment">#将差值平方和求开方，即得距离</span></div><div class="line"></div><div class="line">	<span class="comment">## step 2: 对距离排序</span></div><div class="line">	<span class="comment">## 此处排序需要注意样本标签的顺序。排序后存的是角标号。后续直接从排序后的标签序列找下标是排序内容的数据</span></div><div class="line">	<span class="comment"># argsort() 返回排序后的索引值</span></div><div class="line">	sortedDistIndices = argsort(distance)  <span class="comment">#或distance.argsort()</span></div><div class="line">	classCount = &#123;&#125; <span class="comment"># define a dictionary (can be append element)</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(k):</div><div class="line">		<span class="comment">## step 3: 选择k个最近邻</span></div><div class="line">		voteLabel = labels[sortedDistIndices[i]]</div><div class="line"></div><div class="line">		<span class="comment">## step 4: 计算k个最近邻中各类别出现的次数</span></div><div class="line">		<span class="comment"># when the key voteLabel is not in dictionary classCount, get()</span></div><div class="line">		<span class="comment"># will return 0</span></div><div class="line">		classCount[voteLabel] = classCount.get(voteLabel, <span class="number">0</span>) + <span class="number">1</span></div><div class="line"></div><div class="line">	<span class="comment">## step 5: 返回出现次数最多的类别标签</span></div><div class="line">	maxCount = <span class="number">0</span></div><div class="line">	<span class="keyword">for</span> key, value <span class="keyword">in</span> classCount.items():</div><div class="line">		<span class="keyword">if</span> value &gt; maxCount:</div><div class="line">			maxCount = value</div><div class="line">			maxIndex = key</div><div class="line"></div><div class="line">	<span class="keyword">return</span> maxIndex	</div><div class="line">	</div><div class="line">	<span class="comment">##step 5 可以改成：</span></div><div class="line">	<span class="comment"># sortedClassCount = sorted(classCount.iteritems(),key=operator.itemgetter(1),reverse=True)</span></div><div class="line">	<span class="comment">#return sortedClassCount[0][0]</span></div></pre></td></tr></table></figure>
-<p>然后调用算法进行测试：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> kNN</div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> * </div><div class="line"><span class="comment">#生成数据集和类别标签</span></div><div class="line">dataSet, labels = kNN.createDataSet()</div><div class="line"><span class="comment">#定义一个未知类别的数据</span></div><div class="line">testX = array([<span class="number">1.2</span>, <span class="number">1.0</span>])</div><div class="line">k = <span class="number">3</span></div><div class="line"><span class="comment">#调用分类函数对未知数据分类</span></div><div class="line">outputLabel = kNN.kNNClassify(testX, dataSet, labels, <span class="number">3</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">"Your input is:"</span>, testX, <span class="string">"and classified to class: "</span>, outputLabel</div><div class="line"></div><div class="line">testX = array([<span class="number">0.1</span>, <span class="number">0.3</span>])</div><div class="line">outputLabel = kNN.kNNClassify(testX, dataSet, labels, <span class="number">3</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">"Your input is:"</span>, testX, <span class="string">"and classified to class: "</span>, outputLabel</div></pre></td></tr></table></figure></p>
-<p>这时候会输出<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Your input <span class="keyword">is</span>: [ <span class="number">1.2</span>  <span class="number">1.0</span>] <span class="keyword">and</span> classified to <span class="class"><span class="keyword">class</span>:</span>  A</div><div class="line">Your input <span class="keyword">is</span>: [ <span class="number">0.1</span>  <span class="number">0.3</span>] <span class="keyword">and</span> classified to <span class="class"><span class="keyword">class</span>:</span>  B</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。&quot;&gt;&lt;a href=&quot;#从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。&quot; class=&quot;headerlink&quot; title=&quot;从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。&quot;&gt;&lt;/a&gt;从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。&lt;/h4&gt;&lt;h5 id=&quot;算法涉及3个主要因素：&quot;&gt;&lt;a href=&quot;#算法涉及3个主要因素：&quot; class=&quot;headerlink&quot; title=&quot;算法涉及3个主要因素：&quot;&gt;&lt;/a&gt;算法涉及3个主要因素：&lt;/h5&gt;&lt;p&gt;1)    训练数据集&lt;br&gt;2)    距离或相似度的计算衡量&lt;br&gt;3)    k的大小&lt;br&gt;&lt;img src=&quot;http://oh6ybr0jg.bkt.clouddn.com/KNN%E7%AE%97%E6%B3%95.jpg&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;br&gt;绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。&lt;/p&gt;
-&lt;h2 id=&quot;KNN分类算法Python实战&quot;&gt;&lt;a href=&quot;#KNN分类算法Python实战&quot; class=&quot;headerlink&quot; title=&quot;KNN分类算法Python实战&quot;&gt;&lt;/a&gt;KNN分类算法Python实战&lt;/h2&gt;&lt;p&gt;有以下先验数据，使用knn算法对未知类别数据分类&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;x轴&lt;/th&gt;
-&lt;th style=&quot;text-align:center&quot;&gt;y轴&lt;/th&gt;
-&lt;th style=&quot;text-align:right&quot;&gt;类型&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;1.0&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;0.9&lt;/td&gt;
-&lt;td style=&quot;text-align:right&quot;&gt;A&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;1.0&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;1.0&lt;/td&gt;
-&lt;td style=&quot;text-align:right&quot;&gt;A&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;0.0&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;0.1&lt;/td&gt;
-&lt;td style=&quot;text-align:right&quot;&gt;B&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;0.1&lt;/td&gt;
-&lt;td style=&quot;text-align:center&quot;&gt;0.2&lt;/td&gt;
-&lt;td style=&quot;text-align:right&quot;&gt;B&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-    
-    </summary>
-    
-      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
       <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>

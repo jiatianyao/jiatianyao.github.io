@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="CDH," />
 
 
 
@@ -86,19 +86,22 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="description" content="首先下载jdk 略安装maven
+下载yum源wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+安装maven：yum -y install apache-maven">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2014/11/25/hello-world/index.html">
+<meta property="og:title" content="CDH phoenix安装">
+<meta property="og:url" content="http://yoursite.com/2017/04/18/CDH phoenix安装/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2017-02-01T13:08:55.725Z">
+<meta property="og:description" content="首先下载jdk 略安装maven
+下载yum源wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+安装maven：yum -y install apache-maven">
+<meta property="og:updated_time" content="2017-05-03T14:14:25.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="CDH phoenix安装">
+<meta name="twitter:description" content="首先下载jdk 略安装maven
+下载yum源wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+安装maven：yum -y install apache-maven">
 
 
 
@@ -126,13 +129,13 @@ Quick">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2014/11/25/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/18/CDH phoenix安装/"/>
 
 
 
 
 
-  <title> Hello World | 张洪铭的个人博客 </title>
+  <title> CDH phoenix安装 | 张洪铭的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -310,8 +313,8 @@ Quick">
   
   
 
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/25/hello-world/">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/18/CDH phoenix安装/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -335,7 +338,7 @@ Quick">
             
             
               
-                Hello World
+                CDH phoenix安装
               
             
           </h1>
@@ -348,8 +351,8 @@ Quick">
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-11-25T19:10:33+08:00">
-                2014-11-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-18T11:30:00+08:00">
+                2017-04-18
               </time>
             
 
@@ -367,8 +370,8 @@ Quick">
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/其他/" itemprop="url" rel="index">
-                    <span itemprop="name">其他</span>
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
                   </a>
                 </span>
 
@@ -382,8 +385,8 @@ Quick">
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2014/11/25/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/25/hello-world/" itemprop="commentCount"></span>
+                <a href="/2017/04/18/CDH phoenix安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/18/CDH phoenix安装/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -409,16 +412,20 @@ Quick">
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>欢迎大家来到我的博客</p>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h2 id="首先下载jdk-略"><a href="#首先下载jdk-略" class="headerlink" title="首先下载jdk 略"></a>首先下载jdk 略</h2><p>安装maven</p>
+<h2 id="下载yum源"><a href="#下载yum源" class="headerlink" title="下载yum源"></a>下载yum源</h2><p>wget <a href="http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo" target="_blank" rel="external">http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo</a> -O /etc/yum.repos.d/epel-apache-maven.repo</p>
+<h2 id="安装maven："><a href="#安装maven：" class="headerlink" title="安装maven："></a>安装maven：</h2><p>yum -y install apache-maven</p>
+<a id="more"></a>
+<h2 id="编译phoenix"><a href="#编译phoenix" class="headerlink" title="编译phoenix"></a>编译phoenix</h2><p>找到最新版本的phoenix<br><a href="https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8" target="_blank" rel="external">https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8</a></p>
+<h2 id="下载（博主下载到-soft下）"><a href="#下载（博主下载到-soft下）" class="headerlink" title="下载（博主下载到/soft下）"></a>下载（博主下载到/soft下）</h2><p>并编译<br>mvn clean package -DskipTests -Dcdh.flume.version=1.6.0</p>
+<h2 id="打开路径："><a href="#打开路径：" class="headerlink" title="打开路径："></a>打开路径：</h2><p>/soft/phoenix-for-cloudera-4.8-HBase-1.2-cdh5.8/phoenix-assembly/target</p>
+<p>找到phoenix-4.8.0-cdh5.8.0.tar.gz<br>将phoenix-4.8.0-cdh5.8.0中的phoenix-4.8.0-cdh5.8.0-server.jar拷贝到每一个RegionServer下/opt/cloudera/parcels/CDH/lib/hbase/lib</p>
+<h2 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h2><p>./sqlline.py slave1:2181/hbase</p>
+<h2 id="如果报错："><a href="#如果报错：" class="headerlink" title="如果报错："></a>如果报错：</h2><p>Error: org.apache.hadoop.hbase.DoNotRetryIOException: Class org.apache.phoenix.coprocessor.MetaDataEndpointImpl cannot be loaded Set hbase.table.sanity.checks to false at conf or table descriptor if you want to bypass sanity checks<br>        at org.apache.hadoop.hbase.master.HMaster.warnOrThrowExceptionForFailure(HMaster.java:1741)<br>        at org.apache.hadoop.hbase.master.HMaster.sanityCheckTableDescriptor(HMaster.java:1602)<br>        at org.apache.hadoop.hbase.master.HMaster.createTable(HMaster.java:1531)<br>        at org.apache.hadoop.hbase.master.MasterRpcServices.createTable(MasterRpcServices.java:469)<br>        at org.apache.hadoop.hbase.protobuf.generated.MasterProtos$MasterService$2.callBlockingMethod(MasterProtos.java:55682)<br>        at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:2170)<br>        at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:109)<br>        at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:185)<br>        at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:165) (state=08000,code=101)</p>
+<p>需要点击<br>CDH-&gt;hbase -&gt;配置-&gt;高级<br>hbase-site.xml 的 HBase 服务高级配置代码段（安全阀）<br>添加<br>hbase.table.sanity.checks<br>false</p>
+<h2 id="重启即可"><a href="#重启即可" class="headerlink" title="重启即可"></a>重启即可</h2><h2 id="如果想要安装phonenix"><a href="#如果想要安装phonenix" class="headerlink" title="如果想要安装phonenix"></a>如果想要安装phonenix</h2><p>先下载<br><a href="http://squirrel-sql.sourceforge.net/#installation" target="_blank" rel="external">http://squirrel-sql.sourceforge.net/#installation</a></p>
+<h2 id="安装（安装的时候勾选imort-data和mysql）"><a href="#安装（安装的时候勾选imort-data和mysql）" class="headerlink" title="安装（安装的时候勾选imort-data和mysql）"></a>安装（安装的时候勾选imort-data和mysql）</h2><p>注：下载后直接安装jar包即可，不要解压缩<br>由于是CDH 我拷贝了如下jar防盗lib下面<br>phoenix-core-4.8.0-cdh5.8.0.jar<br>phoenix-4.8.0-cdh5.8.0-client.jar<br>phoenix-pherf-4.8.0-cdh5.8.0-minimal.jar</p>
+<p>连接参考;<br><a href="http://www.cnblogs.com/raphael5200/p/5260198.html" target="_blank" rel="external">http://www.cnblogs.com/raphael5200/p/5260198.html</a><br>有图</p>
 
       
     </div>
@@ -461,20 +468,26 @@ Quick">
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/CDH/" rel="tag"># CDH</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/29/CDH-spark/" rel="next" title="CDH-spark">
+                <i class="fa fa-chevron-left"></i> CDH-spark
+              </a>
             
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2014/12/02/jdk8-enum/" rel="prev" title="解密JDK8 枚举">
-                解密JDK8 枚举 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -506,8 +519,8 @@ Quick">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2014/11/25/hello-world/"
-           data-title="Hello World" data-url="http://yoursite.com/2014/11/25/hello-world/">
+      <div class="ds-thread" data-thread-key="2017/04/18/CDH phoenix安装/"
+           data-title="CDH phoenix安装" data-url="http://yoursite.com/2017/04/18/CDH phoenix安装/">
       </div>
     
   </div>
@@ -622,7 +635,7 @@ Quick">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先下载jdk-略"><span class="nav-number">1.</span> <span class="nav-text">首先下载jdk 略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载yum源"><span class="nav-number">2.</span> <span class="nav-text">下载yum源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装maven："><span class="nav-number">3.</span> <span class="nav-text">安装maven：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译phoenix"><span class="nav-number">4.</span> <span class="nav-text">编译phoenix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载（博主下载到-soft下）"><span class="nav-number">5.</span> <span class="nav-text">下载（博主下载到/soft下）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开路径："><span class="nav-number">6.</span> <span class="nav-text">打开路径：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动："><span class="nav-number">7.</span> <span class="nav-text">启动：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果报错："><span class="nav-number">8.</span> <span class="nav-text">如果报错：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启即可"><span class="nav-number">9.</span> <span class="nav-text">重启即可</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果想要安装phonenix"><span class="nav-number">10.</span> <span class="nav-text">如果想要安装phonenix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装（安装的时候勾选imort-data和mysql）"><span class="nav-number">11.</span> <span class="nav-text">安装（安装的时候勾选imort-data和mysql）</span></a></li></ol></div>
             
 
           </div>
