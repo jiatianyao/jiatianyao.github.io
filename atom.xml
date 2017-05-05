@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-03T14:14:25.051Z</updated>
+  <updated>2017-05-05T11:23:01.462Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>kafka源码阅读</title>
+    <link href="http://yoursite.com/2017/05/02/kafka%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
+    <id>http://yoursite.com/2017/05/02/kafka源码阅读/</id>
+    <published>2017-05-02T03:30:00.000Z</published>
+    <updated>2017-05-05T11:23:01.462Z</updated>
+    
+    <content type="html"><![CDATA[<p>下载kafka的源码包：<br><a href="http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz" target="_blank" rel="external">http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz</a></p>
+<p>安装<br>gradle </p>
+<p>1.官网下载<br><a href="https://gradle.org/releases" target="_blank" rel="external">https://gradle.org/releases</a><br>选择当时最新版本：<br><a href="https://downloads.gradle.org/distributions/gradle-3.5-all.zip" target="_blank" rel="external">https://downloads.gradle.org/distributions/gradle-3.5-all.zip</a></p>
+<p>2.解压<br>解压到D:\tool\gradle-3.5</p>
+<p>3.配置环境变量<br>GRADLE_HOME<br>D:\tool\gradle-3.5</p>
+<p>Path追加;%GRADLE_HOME%\BIN;</p>
+<p>4.测试：<br>gradle -v<br><img src="http://oh6ybr0jg.bkt.clouddn.com/gradle.jpg" alt="此处输入图片的描述"></p>
+<p>安装参考:<br><a href="http://blog.csdn.net/lizhitao/article/details/26875463" target="_blank" rel="external">http://blog.csdn.net/lizhitao/article/details/26875463</a></p>
+<p>编译：（此处博主用某云主机编译的，很快）<br>gradle idea</p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170427134226.jpg" alt="此处输入图片的描述"></p>
+<p>（编译完把/root/.gradle/caches/modules-2下下载的文件放到我们的环境中C:\Users\Administrator.gradle\caches\modules-2 再windows上编译 ）<br><img src="http://oh6ybr0jg.bkt.clouddn.com/windows%E7%BC%96%E8%AF%91kafka.jpg" alt="此处输入图片的描述"></p>
+<p>用IDEA工具打开<br><img src="http://oh6ybr0jg.bkt.clouddn.com/kafka_src_emv.jpg" alt="此处输入图片的描述"></p>
+<p>目录介绍：<br>| 模块名        |  含义         |<br>| ————- |  ————-|<br>|admin            |管理员模块，操作和管理topic，paritions相关，包含create/delete topic,扩展patitions        |<br>|api            |主要负责交互数据的组装，客户端与服务端交互数据编解码        |<br>|client            |Producer读取kafka broker元数据信息，topic和partitions，以及leader        |<br>|cluster        |包含几个实体类，Broker,Cluster,Partition,Replica,解释他们之间关系：          Cluster由多个broker组成，一个Broker包含多个partition，一个topic的所有partitions分布在不同broker的中，一个Replica包含多个Partition。        |<br>|common            |异常类和错误验证        |<br>|consumer        |负责所有客户端消费者数据和逻辑处理        |<br>|controller        |负责中央控制器选举，partition的leader选举，副本分配，副本重新分配，partition和replica扩容。|<br>|coordinator    |partition分配机制        |<br>|javaapi        |提供java的producer和consumer接口api        |<br>|log            |Kafka文件存储模块，负责读写所有kafka的topic消息数据。        |<br>|message        |封装多个消息组成一个“消息集”或压缩消息集。        |<br>|metrics        |内部状态的监控模块        |<br>|network        |网络事件处理模块，负责处理和接收客户端连接        |<br>|producer        |producer实现模块，包括同步和异步发送消息。        |<br>|security        |安全        |<br>|serializer        |序列化或反序列化当前消息        |<br>|server            |    |<br>|tools            |工具模块，    包含a.导出对应consumer的offset值.b.导出LogSegments信息，当前topic的log写的位置信息.c.导出zk上所有consumer的offset值.d.修改注册在zk的consumer的offset值.f.producer和consumer的使用例子.            |<br>|utils            |Json工具类，Zkutils工具类，Utils创建线程工具类，KafkaScheduler公共调度器类，公共日志类等等。|</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下载kafka的源码包：&lt;br&gt;&lt;a href=&quot;http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://arch
+    
+    </summary>
+    
+      <category term="kafka" scheme="http://yoursite.com/categories/kafka/"/>
+    
+    
+      <category term="kafka" scheme="http://yoursite.com/tags/kafka/"/>
+    
+  </entry>
   
   <entry>
     <title>CDH phoenix安装</title>
@@ -828,34 +863,6 @@
   </entry>
   
   <entry>
-    <title>Python机器学习准备</title>
-    <link href="http://yoursite.com/2017/01/27/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/"/>
-    <id>http://yoursite.com/2017/01/27/Python机器学习准备/</id>
-    <published>2017-01-27T12:00:00.000Z</published>
-    <updated>2017-04-03T15:49:35.522Z</updated>
-    
-    <content type="html"><![CDATA[<p>下载NumPy<br><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
-<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
-<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
-<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
-<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
-<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;下载NumPy&lt;br&gt;&lt;a href=&quot;http://download.csdn.net/download/z1137730824/8384347（numpy&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://download.csdn.net/
-    
-    </summary>
-    
-      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>storm基础知识</title>
     <link href="http://yoursite.com/2017/01/27/storm%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <id>http://yoursite.com/2017/01/27/storm基础知识/</id>
@@ -926,6 +933,34 @@
   </entry>
   
   <entry>
+    <title>Python机器学习准备</title>
+    <link href="http://yoursite.com/2017/01/27/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/"/>
+    <id>http://yoursite.com/2017/01/27/Python机器学习准备/</id>
+    <published>2017-01-27T12:00:00.000Z</published>
+    <updated>2017-04-03T15:49:35.522Z</updated>
+    
+    <content type="html"><![CDATA[<p>下载NumPy<br><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
+<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
+<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
+<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
+<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
+<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下载NumPy&lt;br&gt;&lt;a href=&quot;http://download.csdn.net/download/z1137730824/8384347（numpy&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://download.csdn.net/
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python网络爬虫</title>
     <link href="http://yoursite.com/2017/01/26/Python%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/"/>
     <id>http://yoursite.com/2017/01/26/Python网络爬虫/</id>
@@ -948,35 +983,6 @@
     
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>kNN实现手写数字识别</title>
-    <link href="http://yoursite.com/2017/01/25/kNN%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/"/>
-    <id>http://yoursite.com/2017/01/25/kNN实现手写数字识别/</id>
-    <published>2017-01-25T10:42:30.000Z</published>
-    <updated>2017-04-02T15:23:35.133Z</updated>
-    
-    <content type="html"><![CDATA[<p>需求<br>利用一个手写数字“先验数据”集，使用knn算法来实现对手写数字的自动识别；<br>先验数据（训练数据）集：<br>    数据维度比较大，样本数比较多。<br>    数据集包括数字0-9的手写体。<br>    每个数字大约有200个样本。<br>    每个样本保持在一个txt文件中。<br>    手写体图像本身的大小是32x32的二值图，转换到txt文件保存后，内容也是32x32个数字，0或者1，如下：<br><a id="more"></a><br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%95%B0%E5%AD%97012.png" alt="此处输入图片的描述"></p>
-<p>首先准备测试文件:<br>1934个训练数据<br>946个测试数据</p>
-<p>分析：<br>1、手写体因为每个人，甚至每次写的字都不会完全精确一致，所以，识别手写体的关键是“相似度”<br>2、既然是要求样本之间的相似度，那么，首先需要将样本进行抽象，将每个样本变成一系列特征数据（即特征向量）<br>3、手写体在直观上就是一个个的图片，而图片是由上述图示中的像素点来描述的，样本的相似度其实就是像素的位置和颜色之间的组合的相似度<br>4、因此，将图片的像素按照固定顺序读取到一个个的向量中，即可很好地表示手写体样本<br>5、抽象出了样本向量，及相似度计算模型，即可应用KNN来实现</p>
-<p>代码：<br>1)    一个用来生成将每个样本的txt文件转换为对应的一个向量，<br>2)    一个用来加载整个数据集，<br>3)    一个实现kNN分类算法。<br>4)    最后就是实现加载、测试的函数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#########################################</span></div><div class="line"><span class="comment"># kNN: k Nearest Neighbors</span></div><div class="line"></div><div class="line"><span class="comment"># 参数:        inX: vector to compare to existing dataset (1xN)</span></div><div class="line"><span class="comment">#             dataSet: size m data set of known vectors (NxM)</span></div><div class="line"><span class="comment">#             labels: data set labels (1xM vector)</span></div><div class="line"><span class="comment">#             k: number of neighbors to use for comparison </span></div><div class="line">            </div><div class="line"><span class="comment"># 输出:     多数类</span></div><div class="line"><span class="comment">#########################################</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="keyword">import</span> operator</div><div class="line"><span class="keyword">import</span> os</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># KNN分类核心方法</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">kNNClassify</span><span class="params">(newInput, dataSet, labels, k)</span>:</span></div><div class="line">	numSamples = dataSet.shape[<span class="number">0</span>]  <span class="comment"># shape[0]代表行数</span></div><div class="line"></div><div class="line">	<span class="comment">## step 1: 计算欧式距离</span></div><div class="line">	<span class="comment"># tile(A, reps): 将A重复reps次来构造一个矩阵</span></div><div class="line">	<span class="comment"># the following copy numSamples rows for dataSet</span></div><div class="line">	diff = tile(newInput, (numSamples, <span class="number">1</span>)) - dataSet  <span class="comment"># Subtract element-wise</span></div><div class="line">	squaredDiff = diff ** <span class="number">2</span> <span class="comment"># squared for the subtract</span></div><div class="line">	squaredDist = sum(squaredDiff, axis = <span class="number">1</span>)  <span class="comment"># sum is performed by row</span></div><div class="line">	distance = squaredDist ** <span class="number">0.5</span></div><div class="line"></div><div class="line">	<span class="comment">## step 2: 对距离排序</span></div><div class="line">	<span class="comment"># argsort()返回排序后的索引</span></div><div class="line">	sortedDistIndices = argsort(distance)</div><div class="line"></div><div class="line">	classCount = &#123;&#125;  <span class="comment"># 定义一个空的字典</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(k):</div><div class="line">		<span class="comment">## step 3: 选择k个最小距离</span></div><div class="line">		voteLabel = labels[sortedDistIndices[i]]</div><div class="line"></div><div class="line">		<span class="comment">## step 4: 计算类别的出现次数</span></div><div class="line">		<span class="comment"># when the key voteLabel is not in dictionary classCount, get()</span></div><div class="line">		<span class="comment"># will return 0</span></div><div class="line">		classCount[voteLabel] = classCount.get(voteLabel, <span class="number">0</span>) + <span class="number">1</span></div><div class="line"></div><div class="line">	<span class="comment">## step 5: 返回出现次数最多的类别作为分类结果</span></div><div class="line">	maxCount = <span class="number">0</span></div><div class="line">	<span class="keyword">for</span> key, value <span class="keyword">in</span> classCount.items():</div><div class="line">		<span class="keyword">if</span> value &gt; maxCount:</div><div class="line">			maxCount = value</div><div class="line">			maxIndex = key</div><div class="line"></div><div class="line">	<span class="keyword">return</span> maxIndex	</div><div class="line"></div><div class="line"><span class="comment"># 将图片转换为向量</span></div><div class="line"><span class="function"><span class="keyword">def</span>  <span class="title">img2vector</span><span class="params">(filename)</span>:</span></div><div class="line"> 	rows = <span class="number">32</span></div><div class="line"> 	cols = <span class="number">32</span></div><div class="line"> 	imgVector = zeros((<span class="number">1</span>, rows * cols)) </div><div class="line"> 	fileIn = open(filename)</div><div class="line"> 	<span class="keyword">for</span> row <span class="keyword">in</span> xrange(rows):</div><div class="line"> 		lineStr = fileIn.readline()</div><div class="line"> 		<span class="keyword">for</span> col <span class="keyword">in</span> xrange(cols):</div><div class="line"> 			imgVector[<span class="number">0</span>, row * <span class="number">32</span> + col] = int(lineStr[col])</div><div class="line"></div><div class="line"> 	<span class="keyword">return</span> imgVector</div><div class="line"></div><div class="line"><span class="comment"># 加载数据集</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadDataSet</span><span class="params">()</span>:</span></div><div class="line">	<span class="comment">## step 1: 读取训练数据集</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"---Getting training set..."</span></div><div class="line">	dataSetDir = <span class="string">'E:/Python/ml/knn/'</span></div><div class="line">	trainingFileList = os.listdir(dataSetDir + <span class="string">'trainingDigits'</span>)  <span class="comment"># 加载测试数据</span></div><div class="line">	numSamples = len(trainingFileList)</div><div class="line"></div><div class="line">	train_x = zeros((numSamples, <span class="number">1024</span>))</div><div class="line">	train_y = []</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(numSamples):</div><div class="line">		filename = trainingFileList[i]</div><div class="line"></div><div class="line">		<span class="comment"># get train_x</span></div><div class="line">		train_x[i, :] = img2vector(dataSetDir + <span class="string">'trainingDigits/%s'</span> % filename) </div><div class="line"></div><div class="line">		<span class="comment"># get label from file name such as "1_18.txt"</span></div><div class="line">		label = int(filename.split(<span class="string">'_'</span>)[<span class="number">0</span>]) <span class="comment"># return 1</span></div><div class="line">		train_y.append(label)</div><div class="line"></div><div class="line">	<span class="comment">## step 2:读取测试数据集</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"---Getting testing set..."</span></div><div class="line">	testingFileList = os.listdir(dataSetDir + <span class="string">'testDigits'</span>) <span class="comment"># load the testing set</span></div><div class="line">	numSamples = len(testingFileList)</div><div class="line">	test_x = zeros((numSamples, <span class="number">1024</span>))</div><div class="line">	test_y = []</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(numSamples):</div><div class="line">		filename = testingFileList[i]</div><div class="line"></div><div class="line">		<span class="comment"># get train_x</span></div><div class="line">		test_x[i, :] = img2vector(dataSetDir + <span class="string">'testDigits/%s'</span> % filename) </div><div class="line"></div><div class="line">		<span class="comment"># get label from file name such as "1_18.txt"</span></div><div class="line">		label = int(filename.split(<span class="string">'_'</span>)[<span class="number">0</span>]) <span class="comment"># return 1</span></div><div class="line">		test_y.append(label)</div><div class="line"></div><div class="line">	<span class="keyword">return</span> train_x, train_y, test_x, test_y</div><div class="line"></div><div class="line"><span class="comment"># 手写识别主流程</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">testHandWritingClass</span><span class="params">()</span>:</span></div><div class="line">	<span class="comment">## step 1: 加载数据</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"step 1: load data..."</span></div><div class="line">	train_x, train_y, test_x, test_y = loadDataSet()</div><div class="line"></div><div class="line">	<span class="comment">## step 2: 模型训练.</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"step 2: training..."</span></div><div class="line">	<span class="keyword">pass</span></div><div class="line"></div><div class="line">	<span class="comment">## step 3: 测试</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"step 3: testing..."</span></div><div class="line">	numTestSamples = test_x.shape[<span class="number">0</span>]</div><div class="line">	matchCount = <span class="number">0</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(numTestSamples):</div><div class="line">		predict = kNNClassify(test_x[i], train_x, train_y, <span class="number">3</span>)</div><div class="line">		<span class="keyword">if</span> predict == test_y[i]:</div><div class="line">			matchCount += <span class="number">1</span></div><div class="line">	accuracy = float(matchCount) / numTestSamples</div><div class="line"></div><div class="line">	<span class="comment">## step 4: 输出结果</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"step 4: show the result..."</span></div><div class="line">	<span class="keyword">print</span> <span class="string">'The classify accuracy is: %.2f%%'</span> % (accuracy * <span class="number">100</span>)</div></pre></td></tr></table></figure>
-<p>测试<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> kNN</div><div class="line">kNN.testHandWritingClass()</div></pre></td></tr></table></figure></p>
-<p>执行结果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tep <span class="number">1</span>: load data...</div><div class="line">---Getting training set...</div><div class="line">---Getting testing set...</div><div class="line">step <span class="number">2</span>: training...</div><div class="line">step <span class="number">3</span>: testing...</div><div class="line">step <span class="number">4</span>: show the result...</div><div class="line">The classify accuracy <span class="keyword">is</span>: <span class="number">98.84</span>%</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;需求&lt;br&gt;利用一个手写数字“先验数据”集，使用knn算法来实现对手写数字的自动识别；&lt;br&gt;先验数据（训练数据）集：&lt;br&gt;    数据维度比较大，样本数比较多。&lt;br&gt;    数据集包括数字0-9的手写体。&lt;br&gt;    每个数字大约有200个样本。&lt;br&gt;    每个样本保持在一个txt文件中。&lt;br&gt;    手写体图像本身的大小是32x32的二值图，转换到txt文件保存后，内容也是32x32个数字，0或者1，如下：&lt;br&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
-    
-    
-      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
