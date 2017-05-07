@@ -411,22 +411,19 @@
 
       
         
-          
-            <p>下载kafka的源码包：<br><a href="http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz" target="_blank" rel="external">http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz</a></p>
+          <p>下载kafka的源码包：<br><a href="http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz">http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz</a></p>
 <p>安装<br>gradle </p>
-<p>1.官网下载<br><a href="https://gradle.org/releases" target="_blank" rel="external">https://gradle.org/releases</a><br>选择当时最新版本：<br><a href="https://downloads.gradle.org/distributions/gradle-3.5-all.zip" target="_blank" rel="external">https://downloads.gradle.org/distributions/gradle-3.5-all.zip</a></p>
+<p>1.官网下载<br><a href="https://gradle.org/releases">https://gradle.org/releases</a><br>选择当时最新版本：<br><a href="https://downloads.gradle.org/distributions/gradle-3.5-all.zip">https://downloads.gradle.org/distributions/gradle-3.5-all.zip</a></p>
 <p>2.解压<br>解压到D:\tool\gradle-3.5</p>
 <p>3.配置环境变量<br>GRADLE_HOME<br>D:\tool\gradle-3.5</p>
-<p>Path追加;%GRADLE_HOME%\BIN;</p>
-<p>4.测试：<br>gradle -v<br><img src="http://oh6ybr0jg.bkt.clouddn.com/gradle.jpg" alt="此处输入图片的描述"></p>
-<p>安装参考:<br><a href="http://blog.csdn.net/lizhitao/article/details/26875463" target="_blank" rel="external">http://blog.csdn.net/lizhitao/article/details/26875463</a></p>
-<p>编译：（此处博主用某云主机编译的，很快）<br>gradle idea</p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170427134226.jpg" alt="此处输入图片的描述"></p>
-<p>（编译完把/root/.gradle/caches/modules-2下下载的文件放到我们的环境中C:\Users\Administrator.gradle\caches\modules-2 再windows上编译 ）<br><img src="http://oh6ybr0jg.bkt.clouddn.com/windows%E7%BC%96%E8%AF%91kafka.jpg" alt="此处输入图片的描述"></p>
-<p>用IDEA工具打开<br><img src="http://oh6ybr0jg.bkt.clouddn.com/kafka_src_emv.jpg" alt="此处输入图片的描述"></p>
-<p>目录介绍：<br>| 模块名        |  含义         |<br>| ————- |  ————-|<br>|admin            |管理员模块，操作和管理topic，paritions相关，包含create/delete topic,扩展patitions        |<br>|api            |主要负责交互数据的组装，客户端与服务端交互数据编解码        |<br>|client            |Producer读取kafka broker元数据信息，topic和partitions，以及leader        |<br>|cluster        |包含几个实体类，Broker,Cluster,Partition,Replica,解释他们之间关系：          Cluster由多个broker组成，一个Broker包含多个partition，一个topic的所有partitions分布在不同broker的中，一个Replica包含多个Partition。        |<br>|common            |异常类和错误验证        |<br>|consumer        |负责所有客户端消费者数据和逻辑处理        |<br>|controller        |负责中央控制器选举，partition的leader选举，副本分配，副本重新分配，partition和replica扩容。|<br>|coordinator    |partition分配机制        |<br>|javaapi        |提供java的producer和consumer接口api        |<br>|log            |Kafka文件存储模块，负责读写所有kafka的topic消息数据。        |<br>|message        |封装多个消息组成一个“消息集”或压缩消息集。        |<br>|metrics        |内部状态的监控模块        |<br>|network        |网络事件处理模块，负责处理和接收客户端连接        |<br>|producer        |producer实现模块，包括同步和异步发送消息。        |<br>|security        |安全        |<br>|serializer        |序列化或反序列化当前消息        |<br>|server            |    |<br>|tools            |工具模块，    包含a.导出对应consumer的offset值.b.导出LogSegments信息，当前topic的log写的位置信息.c.导出zk上所有consumer的offset值.d.修改注册在zk的consumer的offset值.f.producer和consumer的使用例子.            |<br>|utils            |Json工具类，Zkutils工具类，Utils创建线程工具类，KafkaScheduler公共调度器类，公共日志类等等。|</p>
-
-          
+<p>Path追加;%GRADLE_HOME%\BIN;<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/02/kafka源码阅读/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1501,153 +1498,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/13/CDH sqoop1 实战/" itemprop="url">
-                  CDH sqoop1 实战
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T09:30:00+08:00">
-                2017-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CDH/" itemprop="url" rel="index">
-                    <span itemprop="name">CDH</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/13/CDH sqoop1 实战/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/CDH sqoop1 实战/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="下载sqlserver的jdbc驱动包"><a href="#下载sqlserver的jdbc驱动包" class="headerlink" title="下载sqlserver的jdbc驱动包"></a>下载sqlserver的jdbc驱动包</h2><p><a href="https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599">https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599</a><br>解压<br>将sqljdbc4.jar放在：<br>/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib</p>
-<p>下载SQL Server-Hadoop Connector：sqoop-sqlserver-1.0.tar.gz<br>             <a href="http://www.microsoft.com/en-us/download/details.aspx?id=27584">http://www.microsoft.com/en-us/download/details.aspx?id=27584</a></p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/13/CDH sqoop1 实战/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战-带条件的导入/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1755,6 +1605,153 @@
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/03/13/CDH sqoop1 实战-带条件的导入/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/13/CDH sqoop1 实战/" itemprop="url">
+                  CDH sqoop1 实战
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T09:30:00+08:00">
+                2017-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/13/CDH sqoop1 实战/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/CDH sqoop1 实战/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="下载sqlserver的jdbc驱动包"><a href="#下载sqlserver的jdbc驱动包" class="headerlink" title="下载sqlserver的jdbc驱动包"></a>下载sqlserver的jdbc驱动包</h2><p><a href="https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599">https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599</a><br>解压<br>将sqljdbc4.jar放在：<br>/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib</p>
+<p>下载SQL Server-Hadoop Connector：sqoop-sqlserver-1.0.tar.gz<br>             <a href="http://www.microsoft.com/en-us/download/details.aspx?id=27584">http://www.microsoft.com/en-us/download/details.aspx?id=27584</a></p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/13/CDH sqoop1 实战/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
