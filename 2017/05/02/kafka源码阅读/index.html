@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170427134226.jpg">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/windows%E7%BC%96%E8%AF%91kafka.jpg">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/kafka_src_emv.jpg">
-<meta property="og:updated_time" content="2017-05-07T14:44:52.662Z">
+<meta property="og:updated_time" content="2017-05-08T00:36:39.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kafka源码阅读">
 <meta name="twitter:description" content="下载kafka的源码包：http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz
@@ -420,7 +420,7 @@
       
 
       
-        <p>下载kafka的源码包：<br><a href="http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz" target="_blank" rel="external">http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz</a></p>
+        <h3 id="下载kafka的源码包："><a href="#下载kafka的源码包：" class="headerlink" title="下载kafka的源码包："></a>下载kafka的源码包：</h3><p><a href="http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz" target="_blank" rel="external">http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz</a></p>
 <p>安装<br>gradle </p>
 <p>1.官网下载<br><a href="https://gradle.org/releases" target="_blank" rel="external">https://gradle.org/releases</a><br>选择当时最新版本：<br><a href="https://downloads.gradle.org/distributions/gradle-3.5-all.zip" target="_blank" rel="external">https://downloads.gradle.org/distributions/gradle-3.5-all.zip</a></p>
 <p>2.解压<br>解压到D:\tool\gradle-3.5</p>
@@ -431,7 +431,92 @@
 <p><img src="http://oh6ybr0jg.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170427134226.jpg" alt="此处输入图片的描述"></p>
 <p>（编译完把/root/.gradle/caches/modules-2下下载的文件放到我们的环境中C:\Users\Administrator.gradle\caches\modules-2 再windows上编译 ）<br><img src="http://oh6ybr0jg.bkt.clouddn.com/windows%E7%BC%96%E8%AF%91kafka.jpg" alt="此处输入图片的描述"></p>
 <p>用IDEA工具打开<br><img src="http://oh6ybr0jg.bkt.clouddn.com/kafka_src_emv.jpg" alt="此处输入图片的描述"></p>
-<p>目录介绍：<br>| 模块名        |  含义         |<br>| ————- |  ————-|<br>|admin            |管理员模块，操作和管理topic，paritions相关，包含create/delete topic,扩展patitions        |<br>|api            |主要负责交互数据的组装，客户端与服务端交互数据编解码        |<br>|client            |Producer读取kafka broker元数据信息，topic和partitions，以及leader        |<br>|cluster        |包含几个实体类，Broker,Cluster,Partition,Replica,解释他们之间关系：          Cluster由多个broker组成，一个Broker包含多个partition，一个topic的所有partitions分布在不同broker的中，一个Replica包含多个Partition。        |<br>|common            |异常类和错误验证        |<br>|consumer        |负责所有客户端消费者数据和逻辑处理        |<br>|controller        |负责中央控制器选举，partition的leader选举，副本分配，副本重新分配，partition和replica扩容。|<br>|coordinator    |partition分配机制        |<br>|javaapi        |提供java的producer和consumer接口api        |<br>|log            |Kafka文件存储模块，负责读写所有kafka的topic消息数据。        |<br>|message        |封装多个消息组成一个“消息集”或压缩消息集。        |<br>|metrics        |内部状态的监控模块        |<br>|network        |网络事件处理模块，负责处理和接收客户端连接        |<br>|producer        |producer实现模块，包括同步和异步发送消息。        |<br>|security        |安全        |<br>|serializer        |序列化或反序列化当前消息        |<br>|server            |    |<br>|tools            |工具模块，    包含a.导出对应consumer的offset值.b.导出LogSegments信息，当前topic的log写的位置信息.c.导出zk上所有consumer的offset值.d.修改注册在zk的consumer的offset值.f.producer和consumer的使用例子.            |<br>|utils            |Json工具类，Zkutils工具类，Utils创建线程工具类，KafkaScheduler公共调度器类，公共日志类等等。|</p>
+<h3 id="目录介绍："><a href="#目录介绍：" class="headerlink" title="目录介绍："></a>目录介绍：</h3><table>
+<thead>
+<tr>
+<th>模块名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>admin</td>
+<td>管理员模块，操作和管理topic，paritions相关，包含create/delete topic,扩展patitions</td>
+</tr>
+<tr>
+<td>api</td>
+<td>主要负责交互数据的组装，客户端与服务端交互数据编解码</td>
+</tr>
+<tr>
+<td>client</td>
+<td>Producer读取kafka broker元数据信息，topic和partitions，以及leader</td>
+</tr>
+<tr>
+<td>cluster</td>
+<td>包含几个实体类，Broker,Cluster,Partition,Replica,解释他们之间关系：          Cluster由多个broker组成，一个Broker包含多个partition，一个topic的所有partitions分布在不同broker的中，一个Replica包含多个Partition。</td>
+</tr>
+<tr>
+<td>common</td>
+<td>异常类和错误验证</td>
+</tr>
+<tr>
+<td>consumer</td>
+<td>负责所有客户端消费者数据和逻辑处理</td>
+</tr>
+<tr>
+<td>controller</td>
+<td>负责中央控制器选举，partition的leader选举，副本分配，副本重新分配，partition和replica扩容。</td>
+</tr>
+<tr>
+<td>coordinator</td>
+<td>partition分配机制</td>
+</tr>
+<tr>
+<td>javaapi</td>
+<td>提供java的producer和consumer接口api</td>
+</tr>
+<tr>
+<td>log</td>
+<td>Kafka文件存储模块，负责读写所有kafka的topic消息数据。</td>
+</tr>
+<tr>
+<td>message</td>
+<td>封装多个消息组成一个“消息集”或压缩消息集。</td>
+</tr>
+<tr>
+<td>metrics</td>
+<td>内部状态的监控模块</td>
+</tr>
+<tr>
+<td>network</td>
+<td>网络事件处理模块，负责处理和接收客户端连接</td>
+</tr>
+<tr>
+<td>producer</td>
+<td>producer实现模块，包括同步和异步发送消息。</td>
+</tr>
+<tr>
+<td>security</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>serializer</td>
+<td>序列化或反序列化当前消息</td>
+</tr>
+<tr>
+<td>server</td>
+<td></td>
+</tr>
+<tr>
+<td>tools</td>
+<td>工具模块，    包含a.导出对应consumer的offset值.b.导出LogSegments信息，当前topic的log写的位置信息.c.导出zk上所有consumer的offset值.d.修改注册在zk的consumer的offset值.f.producer和consumer的使用例子.</td>
+</tr>
+<tr>
+<td>utils</td>
+<td>Json工具类，Zkutils工具类，Utils创建线程工具类，KafkaScheduler公共调度器类，公共日志类等等。</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -550,8 +635,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/agns.gif"
@@ -622,6 +716,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载kafka的源码包："><span class="nav-number">1.</span> <span class="nav-text">下载kafka的源码包：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录介绍："><span class="nav-number">2.</span> <span class="nav-text">目录介绍：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
