@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-08T15:18:10.188Z</updated>
+  <updated>2017-05-10T01:11:01.768Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,13 +20,13 @@
     <link href="http://yoursite.com/2017/05/08/kafka%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2/"/>
     <id>http://yoursite.com/2017/05/08/kafka源码阅读2/</id>
     <published>2017-05-08T03:30:00.000Z</published>
-    <updated>2017-05-08T15:18:10.188Z</updated>
+    <updated>2017-05-10T01:11:01.768Z</updated>
     
     <content type="html"><![CDATA[<p>导入IDEA即可看kafka源码：</p>
 <p>启动之前需要安装zookeeper</p>
 <p>地址：<br><a href="http://apache.fayea.com/zookeeper/" target="_blank" rel="external">http://apache.fayea.com/zookeeper/</a><br><a href="http://apache.fayea.com/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz" target="_blank" rel="external">http://apache.fayea.com/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz</a></p>
 <p>解压后再当前目录增加<br>dataLogDir和data目录<br>复制一份配置文件<br>改名为zoo.cfg<br>修改配置文件：<br>zoo.cfg<br>修改并增加<br>dataDir=D:\tool\zookeeper-3.4.6\data<br>dataLogDir=D:\tool\zookeeper-3.4.6\dataLogDir</p>
-<p>启动zkServer.cmd<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%90%AF%E5%8A%A8zk.jpg" alt="此处输入图片的描述"></p>
+<p>启动zkServer.cmd<br><a id="more"></a><br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%90%AF%E5%8A%A8zk.jpg" alt="此处输入图片的描述"></p>
 <p>启动ZkCli.cmd<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%90%AF%E5%8A%A8zkCli.jpg" alt="此处输入图片的描述"></p>
 <p>kafka启动。在配置文件修改<br>Program arguments：config/server.properties</p>
 <p>然后修改server.properties里面的参数即可。</p>
@@ -71,7 +71,9 @@
     
       &lt;p&gt;导入IDEA即可看kafka源码：&lt;/p&gt;
 &lt;p&gt;启动之前需要安装zookeeper&lt;/p&gt;
-&lt;p&gt;地址：&lt;br&gt;&lt;a href=&quot;http://apache.fayea.com/zookeeper/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http
+&lt;p&gt;地址：&lt;br&gt;&lt;a href=&quot;http://apache.fayea.com/zookeeper/&quot;&gt;http://apache.fayea.com/zookeeper/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://apache.fayea.com/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz&quot;&gt;http://apache.fayea.com/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;解压后再当前目录增加&lt;br&gt;dataLogDir和data目录&lt;br&gt;复制一份配置文件&lt;br&gt;改名为zoo.cfg&lt;br&gt;修改配置文件：&lt;br&gt;zoo.cfg&lt;br&gt;修改并增加&lt;br&gt;dataDir=D:\tool\zookeeper-3.4.6\data&lt;br&gt;dataLogDir=D:\tool\zookeeper-3.4.6\dataLogDir&lt;/p&gt;
+&lt;p&gt;启动zkServer.cmd&lt;br&gt;
     
     </summary>
     
@@ -1061,34 +1063,6 @@
   </entry>
   
   <entry>
-    <title>Python机器学习准备</title>
-    <link href="http://yoursite.com/2017/01/27/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/"/>
-    <id>http://yoursite.com/2017/01/27/Python机器学习准备/</id>
-    <published>2017-01-27T12:00:00.000Z</published>
-    <updated>2017-04-03T15:49:35.522Z</updated>
-    
-    <content type="html"><![CDATA[<p>下载NumPy<br><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
-<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
-<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
-<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
-<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
-<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;下载NumPy&lt;br&gt;&lt;a href=&quot;http://download.csdn.net/download/z1137730824/8384347（numpy&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://download.csdn.net/
-    
-    </summary>
-    
-      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Python春节祝福语自动回复</title>
     <link href="http://yoursite.com/2017/01/27/Python%E6%98%A5%E8%8A%82%E7%A5%9D%E7%A6%8F%E8%AF%AD%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/"/>
     <id>http://yoursite.com/2017/01/27/Python春节祝福语自动回复/</id>
@@ -1113,6 +1087,34 @@
     
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python机器学习准备</title>
+    <link href="http://yoursite.com/2017/01/27/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/"/>
+    <id>http://yoursite.com/2017/01/27/Python机器学习准备/</id>
+    <published>2017-01-27T12:00:00.000Z</published>
+    <updated>2017-04-03T15:49:35.522Z</updated>
+    
+    <content type="html"><![CDATA[<p>下载NumPy<br><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
+<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
+<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
+<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
+<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
+<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下载NumPy&lt;br&gt;&lt;a href=&quot;http://download.csdn.net/download/z1137730824/8384347（numpy&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://download.csdn.net/
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
