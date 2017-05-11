@@ -551,7 +551,7 @@
     <link href="http://yoursite.com/2017/03/08/CDH%20%E5%AE%89%E8%A3%85/"/>
     <id>http://yoursite.com/2017/03/08/CDH 安装/</id>
     <published>2017-03-08T01:30:00.000Z</published>
-    <updated>2017-05-03T00:35:59.826Z</updated>
+    <updated>2017-05-11T14:24:52.914Z</updated>
     
     <content type="html"><![CDATA[<h2 id="运行环境："><a href="#运行环境：" class="headerlink" title="运行环境："></a>运行环境：</h2><table>
 <thead>
@@ -640,6 +640,7 @@
 <h2 id="下载驱动包"><a href="#下载驱动包" class="headerlink" title="下载驱动包"></a>下载驱动包</h2><p>下载mysql-connector-java-*.jar（博主下载的mysql-connector-java-5.1.7-bin.jar）放到<br>/soft/bigdata/clouderamanager/cm-5.10.0/share/cmf/lib  目录下</p>
 <h2 id="为Cloudera-Manager-5建立数据库："><a href="#为Cloudera-Manager-5建立数据库：" class="headerlink" title="为Cloudera Manager 5建立数据库："></a>为Cloudera Manager 5建立数据库：</h2><p>/soft/bigdata/clouderamanager/cm-5.10.0/share/cmf/schema/scm_prepare_database.sh mysql scm -hlocalhost -uroot -ppassword –scm-host localhost scm password scm<br>格式是:scm_prepare_database.sh 数据库类型  数据库 服务器 用户名 密码  –scm-host  Cloudera_Manager_Server所在的机器，后面那三个不知道代表什么，直接照抄官网的了。 </p>
 <p>开启Cloudera Manager 5 Server端：</p>
+<p>注意scm见面是两个-，因为博客关系不能全部显示</p>
 <h2 id="向其他机器分发CDH"><a href="#向其他机器分发CDH" class="headerlink" title="向其他机器分发CDH"></a>向其他机器分发CDH</h2><p>scp -rp /soft/bigdata/clouderamanager root@po-master2:/soft/bigdata<br>scp -rp /soft/bigdata/clouderamanager root@po-slave1:/soft/bigdata<br>scp -rp /soft/bigdata/clouderamanager root@po-slave2:/soft/bigdata<br>scp -rp /soft/bigdata/clouderamanager root@po-slave3:/soft/bigdata</p>
 <h2 id="准备Parcels，用以安装CDH5-（博主放在-soft-bigdata-clouderamanager-cloudera-parcel-repo，路径必须包含cloudera-parcel-repo）"><a href="#准备Parcels，用以安装CDH5-（博主放在-soft-bigdata-clouderamanager-cloudera-parcel-repo，路径必须包含cloudera-parcel-repo）" class="headerlink" title="准备Parcels，用以安装CDH5 （博主放在:/soft/bigdata/clouderamanager/cloudera/parcel-repo，路径必须包含cloudera/parcel-repo）"></a>准备Parcels，用以安装CDH5 （博主放在:/soft/bigdata/clouderamanager/cloudera/parcel-repo，路径必须包含cloudera/parcel-repo）</h2><p>官方地址：<br><a href="http://archive.cloudera.com/cdh5/parcels" target="_blank" rel="external">http://archive.cloudera.com/cdh5/parcels</a><br>博主选择的<br><a href="http://archive.cloudera.com/cdh5/parcels/latest/" target="_blank" rel="external">http://archive.cloudera.com/cdh5/parcels/latest/</a></p>
 <p>需要下载以下两个文件<br>•    CDH-5.10.0-1.cdh5.10.0.p0.41-el6.parcel<br>•    manifest.json</p>
@@ -993,6 +994,62 @@
   </entry>
   
   <entry>
+    <title>Python春节祝福语自动回复</title>
+    <link href="http://yoursite.com/2017/01/27/Python%E6%98%A5%E8%8A%82%E7%A5%9D%E7%A6%8F%E8%AF%AD%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/"/>
+    <id>http://yoursite.com/2017/01/27/Python春节祝福语自动回复/</id>
+    <published>2017-01-27T12:00:00.000Z</published>
+    <updated>2017-03-04T13:07:31.345Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先安装两个库<br>pip install itchat pillow</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>运行后，扫描生成的二维码即可</p>
+<p>登录成功有以下提示<br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD2.png" alt="此处输入图片的描述"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;首先安装两个库&lt;br&gt;pip install itchat pillow&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;环境win7，pyython3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;编写py文件输入以下内容&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; itchat, time, re&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; itchat.content &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; *&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@itchat.msg_register([TEXT])&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;text_reply&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(msg)&lt;/span&gt;:&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    match = re.search(&lt;span class=&quot;string&quot;&gt;&#39;年&#39;&lt;/span&gt;, msg[&lt;span class=&quot;string&quot;&gt;&#39;Text&#39;&lt;/span&gt;]).span()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; match:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      itchat.send((&lt;span class=&quot;string&quot;&gt;&#39;鸡年大吉&#39;&lt;/span&gt;), msg[&lt;span class=&quot;string&quot;&gt;&#39;FromUserName&#39;&lt;/span&gt;])&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;other_reply&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(msg)&lt;/span&gt;:&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    itchat.send((&lt;span class=&quot;string&quot;&gt;&#39;鸡年大吉&#39;&lt;/span&gt;), msg[&lt;span class=&quot;string&quot;&gt;&#39;FromUserName&#39;&lt;/span&gt;])&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;itchat.auto_login(enableCmdQR=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;,hotReload=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;itchat.run()&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python机器学习准备</title>
+    <link href="http://yoursite.com/2017/01/27/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/"/>
+    <id>http://yoursite.com/2017/01/27/Python机器学习准备/</id>
+    <published>2017-01-27T12:00:00.000Z</published>
+    <updated>2017-04-03T15:49:35.522Z</updated>
+    
+    <content type="html"><![CDATA[<p>下载NumPy<br><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
+<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
+<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
+<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
+<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
+<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下载NumPy&lt;br&gt;&lt;a href=&quot;http://download.csdn.net/download/z1137730824/8384347（numpy&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://download.csdn.net/
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>storm基础知识</title>
     <link href="http://yoursite.com/2017/01/27/storm%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <id>http://yoursite.com/2017/01/27/storm基础知识/</id>
@@ -1059,62 +1116,6 @@
     
     
       <category term="storm" scheme="http://yoursite.com/tags/storm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python春节祝福语自动回复</title>
-    <link href="http://yoursite.com/2017/01/27/Python%E6%98%A5%E8%8A%82%E7%A5%9D%E7%A6%8F%E8%AF%AD%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/"/>
-    <id>http://yoursite.com/2017/01/27/Python春节祝福语自动回复/</id>
-    <published>2017-01-27T12:00:00.000Z</published>
-    <updated>2017-03-04T13:07:31.345Z</updated>
-    
-    <content type="html"><![CDATA[<p>首先安装两个库<br>pip install itchat pillow</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>运行后，扫描生成的二维码即可</p>
-<p>登录成功有以下提示<br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD2.png" alt="此处输入图片的描述"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;首先安装两个库&lt;br&gt;pip install itchat pillow&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;环境win7，pyython3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;编写py文件输入以下内容&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; itchat, time, re&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; itchat.content &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; *&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@itchat.msg_register([TEXT])&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;text_reply&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(msg)&lt;/span&gt;:&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    match = re.search(&lt;span class=&quot;string&quot;&gt;&#39;年&#39;&lt;/span&gt;, msg[&lt;span class=&quot;string&quot;&gt;&#39;Text&#39;&lt;/span&gt;]).span()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; match:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      itchat.send((&lt;span class=&quot;string&quot;&gt;&#39;鸡年大吉&#39;&lt;/span&gt;), msg[&lt;span class=&quot;string&quot;&gt;&#39;FromUserName&#39;&lt;/span&gt;])&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;other_reply&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(msg)&lt;/span&gt;:&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    itchat.send((&lt;span class=&quot;string&quot;&gt;&#39;鸡年大吉&#39;&lt;/span&gt;), msg[&lt;span class=&quot;string&quot;&gt;&#39;FromUserName&#39;&lt;/span&gt;])&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;itchat.auto_login(enableCmdQR=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;,hotReload=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;itchat.run()&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python机器学习准备</title>
-    <link href="http://yoursite.com/2017/01/27/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/"/>
-    <id>http://yoursite.com/2017/01/27/Python机器学习准备/</id>
-    <published>2017-01-27T12:00:00.000Z</published>
-    <updated>2017-04-03T15:49:35.522Z</updated>
-    
-    <content type="html"><![CDATA[<p>下载NumPy<br><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
-<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
-<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
-<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
-<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
-<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;下载NumPy&lt;br&gt;&lt;a href=&quot;http://download.csdn.net/download/z1137730824/8384347（numpy&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://download.csdn.net/
-    
-    </summary>
-    
-      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

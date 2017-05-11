@@ -182,7 +182,7 @@ po-slave3
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/HDFS%E5%90%AF%E7%94%A8HA.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/HDFS%E5%90%AF%E7%94%A8HA2.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/hadoop%E9%A1%B5%E9%9D%A2.png">
-<meta property="og:updated_time" content="2017-05-03T00:35:59.826Z">
+<meta property="og:updated_time" content="2017-05-11T14:24:52.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH 安装">
 <meta name="twitter:description" content="运行环境：
@@ -620,6 +620,7 @@ po-slave3
 <h2 id="下载驱动包"><a href="#下载驱动包" class="headerlink" title="下载驱动包"></a>下载驱动包</h2><p>下载mysql-connector-java-*.jar（博主下载的mysql-connector-java-5.1.7-bin.jar）放到<br>/soft/bigdata/clouderamanager/cm-5.10.0/share/cmf/lib  目录下</p>
 <h2 id="为Cloudera-Manager-5建立数据库："><a href="#为Cloudera-Manager-5建立数据库：" class="headerlink" title="为Cloudera Manager 5建立数据库："></a>为Cloudera Manager 5建立数据库：</h2><p>/soft/bigdata/clouderamanager/cm-5.10.0/share/cmf/schema/scm_prepare_database.sh mysql scm -hlocalhost -uroot -ppassword –scm-host localhost scm password scm<br>格式是:scm_prepare_database.sh 数据库类型  数据库 服务器 用户名 密码  –scm-host  Cloudera_Manager_Server所在的机器，后面那三个不知道代表什么，直接照抄官网的了。 </p>
 <p>开启Cloudera Manager 5 Server端：</p>
+<p>注意scm见面是两个-，因为博客关系不能全部显示</p>
 <h2 id="向其他机器分发CDH"><a href="#向其他机器分发CDH" class="headerlink" title="向其他机器分发CDH"></a>向其他机器分发CDH</h2><p>scp -rp /soft/bigdata/clouderamanager root@po-master2:/soft/bigdata<br>scp -rp /soft/bigdata/clouderamanager root@po-slave1:/soft/bigdata<br>scp -rp /soft/bigdata/clouderamanager root@po-slave2:/soft/bigdata<br>scp -rp /soft/bigdata/clouderamanager root@po-slave3:/soft/bigdata</p>
 <h2 id="准备Parcels，用以安装CDH5-（博主放在-soft-bigdata-clouderamanager-cloudera-parcel-repo，路径必须包含cloudera-parcel-repo）"><a href="#准备Parcels，用以安装CDH5-（博主放在-soft-bigdata-clouderamanager-cloudera-parcel-repo，路径必须包含cloudera-parcel-repo）" class="headerlink" title="准备Parcels，用以安装CDH5 （博主放在:/soft/bigdata/clouderamanager/cloudera/parcel-repo，路径必须包含cloudera/parcel-repo）"></a>准备Parcels，用以安装CDH5 （博主放在:/soft/bigdata/clouderamanager/cloudera/parcel-repo，路径必须包含cloudera/parcel-repo）</h2><p>官方地址：<br><a href="http://archive.cloudera.com/cdh5/parcels" target="_blank" rel="external">http://archive.cloudera.com/cdh5/parcels</a><br>博主选择的<br><a href="http://archive.cloudera.com/cdh5/parcels/latest/" target="_blank" rel="external">http://archive.cloudera.com/cdh5/parcels/latest/</a></p>
 <p>需要下载以下两个文件<br>•    CDH-5.10.0-1.cdh5.10.0.p0.41-el6.parcel<br>•    manifest.json</p>
