@@ -551,7 +551,7 @@
     <link href="http://yoursite.com/2017/03/08/CDH%20%E5%AE%89%E8%A3%85/"/>
     <id>http://yoursite.com/2017/03/08/CDH 安装/</id>
     <published>2017-03-08T01:30:00.000Z</published>
-    <updated>2017-05-11T14:24:52.914Z</updated>
+    <updated>2017-05-12T00:56:17.422Z</updated>
     
     <content type="html"><![CDATA[<h2 id="运行环境："><a href="#运行环境：" class="headerlink" title="运行环境："></a>运行环境：</h2><table>
 <thead>
@@ -603,14 +603,14 @@
 <!-- more -->
 <h2 id="开放端口（五台机器上都需要配置）"><a href="#开放端口（五台机器上都需要配置）" class="headerlink" title="开放端口（五台机器上都需要配置）"></a>开放端口（五台机器上都需要配置）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">/sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEP</div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> 0.0.0.0/0 -p tcp --dport 22	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 22	  -j ACCEPT</div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50010	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 1004	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50075	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 1006	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50020	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8020	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50070	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50470	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50090	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 50495	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8485	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8480	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8032	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8030	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8031	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8033	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8088	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8040	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8042	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8041	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 10020	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 13562	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 19888	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 60000	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 60010	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 60020	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 60030	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 2181	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 2888	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 3888	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8080	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8085	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 9090	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 9095	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 9090	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 9083	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 10000	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 16000	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 2181	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 2888	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 3888	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 3181	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 4181	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 8019	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 9010	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 11000	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 11001	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 14000	  -j ACCEPT </div><div class="line">/sbin/iptables -A INPUT <span class="_">-s</span> x.x.x.x -p tcp --dport 14001	  -j ACCEPT </div><div class="line">/etc/rc.d/init.d/iptables save</div></pre></td></tr></table></figure>
 <p>关闭端口详解-参考CDH官网<br><a href="https://www.cloudera.com/documentation/cdh/5-1-x/CDH5-Installation-Guide/cdh5ig_ports_cdh5.html" target="_blank" rel="external">https://www.cloudera.com/documentation/cdh/5-1-x/CDH5-Installation-Guide/cdh5ig_ports_cdh5.html</a></p>
-<p>测试（可忽略）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/iptables status</div></pre></td></tr></table></figure></p>
+<h2 id="测试（可忽略）"><a href="#测试（可忽略）" class="headerlink" title="测试（可忽略）"></a>测试（可忽略）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/iptables status</div></pre></td></tr></table></figure>
 <h2 id="五台机器配置互相免秘钥登陆"><a href="#五台机器配置互相免秘钥登陆" class="headerlink" title="五台机器配置互相免秘钥登陆"></a>五台机器配置互相免秘钥登陆</h2><p>1.创建ssh文件<br>如果已经创建不要覆盖<br>cat ~/.ssh/id_rsa.pub &gt;&gt;~/.ssh/authorized_keys<br>分别把五台机器的公钥加载到authorized_keys</p>
 <p>2.<br>vi /etc/ssh/sshd_config<br>打开如下内容<br>HostKey /etc/ssh/ssh_host_rsa_key<br>RSAAuthentication yes<br>PubkeyAuthentication yes<br>AuthorizedKeysFile      .ssh/authorized_keys</p>
 <p>3.重启<br>/etc/init.d/sshd restart</p>
 <p>4.测试ssh<br>ssh po-master1<br>ssh po-master2<br>ssh po-slave1<br>ssh po-slave2<br>ssh po-slave3</p>
 <h2 id="向其他机器分发jdk"><a href="#向其他机器分发jdk" class="headerlink" title="向其他机器分发jdk"></a>向其他机器分发jdk</h2><p>scp -rp /soft/java/ root@po-master2:/soft/java<br>scp -rp /soft/java/ root@po-salve1:/soft/java<br>scp -rp /soft/java/ root@po-salve2:/soft/java<br>scp -rp /soft/java/ root@po-salve3:/soft/java</p>
 <h2 id="配置环境变量-分别在五台机器上执行"><a href="#配置环境变量-分别在五台机器上执行" class="headerlink" title="配置环境变量(分别在五台机器上执行)"></a>配置环境变量(分别在五台机器上执行)</h2><p>执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">"export JAVA_HOME=/soft/java/jdk"</span>  &gt;&gt; /etc/profile</div><div class="line"><span class="built_in">echo</span> <span class="string">"export PATH=<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/bin:<span class="variable">$JAVA_HOME</span>:<span class="variable">$JAVA_HOME</span>/bin:/usr/bin/"</span>  &gt;&gt; /etc/profile</div><div class="line"><span class="built_in">echo</span> <span class="string">"export CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib"</span>  &gt;&gt; /etc/profile</div><div class="line">. /etc/profile</div></pre></td></tr></table></figure></p>
-<h2 id="测试（可忽略）"><a href="#测试（可忽略）" class="headerlink" title="测试（可忽略）"></a>测试（可忽略）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@po-master1 java]<span class="comment"># java -version</span></div><div class="line">java version <span class="string">"1.8.0_121"</span></div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_121-b13)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)</div></pre></td></tr></table></figure>
+<h2 id="测试（可忽略）-1"><a href="#测试（可忽略）-1" class="headerlink" title="测试（可忽略）"></a>测试（可忽略）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@po-master1 java]<span class="comment"># java -version</span></div><div class="line">java version <span class="string">"1.8.0_121"</span></div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_121-b13)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)</div></pre></td></tr></table></figure>
 <h2 id="配置NTP服务器和客户端（因为使用阿里云此处省略）"><a href="#配置NTP服务器和客户端（因为使用阿里云此处省略）" class="headerlink" title="配置NTP服务器和客户端（因为使用阿里云此处省略）"></a>配置NTP服务器和客户端（因为使用阿里云此处省略）</h2><h2 id="配置mysql"><a href="#配置mysql" class="headerlink" title="配置mysql"></a>配置mysql</h2><p>1.上传mysql文件（博主放到/soft/mysql目录下）<br>2.解压<br>cd /soft/mysql<br>tar -zxvf mysql-5.7.17-linux-glibc2.5-x86_64.tar.gz -C /usr/local<br>3.将目录重命名<br>cd /usr/local<br>mv mysql-5.7.17-linux-glibc2.5-x86_64/ mysql<br>4.创建data目录</p>
 <p>mkdir /usr/local/mysql/data</p>
 <p>5.安装插件（网上有人说不安装提示libiao错误，博主用阿里云libaio已经是最新版本，所以不用安装，也不知道没安装有什么坏处）<br> yum install libaio</p>
@@ -1022,34 +1022,6 @@
   </entry>
   
   <entry>
-    <title>Python机器学习准备</title>
-    <link href="http://yoursite.com/2017/01/27/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/"/>
-    <id>http://yoursite.com/2017/01/27/Python机器学习准备/</id>
-    <published>2017-01-27T12:00:00.000Z</published>
-    <updated>2017-04-03T15:49:35.522Z</updated>
-    
-    <content type="html"><![CDATA[<p>下载NumPy<br><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
-<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
-<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
-<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
-<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
-<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;下载NumPy&lt;br&gt;&lt;a href=&quot;http://download.csdn.net/download/z1137730824/8384347（numpy&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://download.csdn.net/
-    
-    </summary>
-    
-      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>storm基础知识</title>
     <link href="http://yoursite.com/2017/01/27/storm%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <id>http://yoursite.com/2017/01/27/storm基础知识/</id>
@@ -1116,6 +1088,34 @@
     
     
       <category term="storm" scheme="http://yoursite.com/tags/storm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python机器学习准备</title>
+    <link href="http://yoursite.com/2017/01/27/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/"/>
+    <id>http://yoursite.com/2017/01/27/Python机器学习准备/</id>
+    <published>2017-01-27T12:00:00.000Z</published>
+    <updated>2017-04-03T15:49:35.522Z</updated>
+    
+    <content type="html"><![CDATA[<p>下载NumPy<br><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
+<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
+<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
+<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
+<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
+<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下载NumPy&lt;br&gt;&lt;a href=&quot;http://download.csdn.net/download/z1137730824/8384347（numpy&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://download.csdn.net/
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
