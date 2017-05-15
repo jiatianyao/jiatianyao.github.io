@@ -412,7 +412,7 @@
       
         
           <h2 id="导入IDEA即可看kafka源码："><a href="#导入IDEA即可看kafka源码：" class="headerlink" title="导入IDEA即可看kafka源码："></a>导入IDEA即可看kafka源码：</h2><h2 id="启动之前需要安装zookeeper"><a href="#启动之前需要安装zookeeper" class="headerlink" title="启动之前需要安装zookeeper"></a>启动之前需要安装zookeeper</h2><p>地址：<br><a href="http://apache.fayea.com/zookeeper/">http://apache.fayea.com/zookeeper/</a><br><a href="http://apache.fayea.com/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz">http://apache.fayea.com/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz</a></p>
-<p>解压后再当前目录增加<br>dataLogDir和data目录<br>复制一份配置文件<br>改名为zoo.cfg<br>修改配置文件：<br>zoo.cfg<br>修改并增加<br>dataDir=D:\tool\zookeeper-3.4.6\data<br>dataLogDir=D:\tool\zookeeper-3.4.6\dataLogDir</p>
+<h2 id="解压后再当前目录增加"><a href="#解压后再当前目录增加" class="headerlink" title="解压后再当前目录增加"></a>解压后再当前目录增加</h2><p>dataLogDir和data目录<br>复制一份配置文件<br>改名为zoo.cfg<br>修改配置文件：<br>zoo.cfg<br>修改并增加<br>dataDir=D:\tool\zookeeper-3.4.6\data<br>dataLogDir=D:\tool\zookeeper-3.4.6\dataLogDir</p>
 <p>启动zkServer.cmd<br>
           <!--noindex-->
           <div class="post-more-link text-center">
@@ -1646,7 +1646,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战-带条件的导入/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -1671,8 +1671,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/03/13/CDH sqoop1 实战-带条件的导入/" itemprop="url">
-                  CDH sqoop1 实战-带条件的导入
+                <a class="post-title-link" href="/2017/03/13/CDH sqoop1 实战/" itemprop="url">
+                  CDH sqoop1 实战
                 </a>
               
             
@@ -1720,8 +1720,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/03/13/CDH sqoop1 实战-带条件的导入/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/CDH sqoop1 实战-带条件的导入/" itemprop="commentCount"></span>
+                <a href="/2017/03/13/CDH sqoop1 实战/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/CDH sqoop1 实战/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1748,11 +1748,11 @@
 
       
         
-          <p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
-<p>修改为：<br>sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming</p>
+          <h2 id="下载sqlserver的jdbc驱动包"><a href="#下载sqlserver的jdbc驱动包" class="headerlink" title="下载sqlserver的jdbc驱动包"></a>下载sqlserver的jdbc驱动包</h2><p><a href="https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599">https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599</a><br>解压<br>将sqljdbc4.jar放在：<br>/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib</p>
+<p>下载SQL Server-Hadoop Connector：sqoop-sqlserver-1.0.tar.gz<br>             <a href="http://www.microsoft.com/en-us/download/details.aspx?id=27584">http://www.microsoft.com/en-us/download/details.aspx?id=27584</a></p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/13/CDH sqoop1 实战-带条件的导入/#more" rel="contents">
+            <a class="btn" href="/2017/03/13/CDH sqoop1 实战/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
