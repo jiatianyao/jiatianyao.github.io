@@ -88,23 +88,20 @@
 
 <meta name="description" content="安装完oozie，打开UI:http://master1:11000/oozie/
 显示Oozie web console is disabled.解决方案;原因是oozie的/var/lib/oozie目录里缺少EXT的包
-点击Documentation链接里quickstart给出了解决方案Download ExtJS library (it must be version 2.2)
-下载地址">
+点击Documentation链接里quickstart给出了解决方案Download ExtJS library (it must be version 2.2)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CDH oozie">
 <meta property="og:url" content="http://yoursite.com/2017/05/18/categories - -CDH-/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
 <meta property="og:description" content="安装完oozie，打开UI:http://master1:11000/oozie/
 显示Oozie web console is disabled.解决方案;原因是oozie的/var/lib/oozie目录里缺少EXT的包
-点击Documentation链接里quickstart给出了解决方案Download ExtJS library (it must be version 2.2)
-下载地址">
-<meta property="og:updated_time" content="2017-05-22T01:07:06.663Z">
+点击Documentation链接里quickstart给出了解决方案Download ExtJS library (it must be version 2.2)">
+<meta property="og:updated_time" content="2017-05-23T00:33:39.690Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH oozie">
 <meta name="twitter:description" content="安装完oozie，打开UI:http://master1:11000/oozie/
 显示Oozie web console is disabled.解决方案;原因是oozie的/var/lib/oozie目录里缺少EXT的包
-点击Documentation链接里quickstart给出了解决方案Download ExtJS library (it must be version 2.2)
-下载地址">
+点击Documentation链接里quickstart给出了解决方案Download ExtJS library (it must be version 2.2)">
 
 
 
@@ -417,8 +414,7 @@
       
         <p>安装完oozie，打开UI:<br><a href="http://master1:11000/oozie/" target="_blank" rel="external">http://master1:11000/oozie/</a></p>
 <p>显示Oozie web console is disabled.<br>解决方案;<br>原因是oozie的/var/lib/oozie目录里缺少EXT的包</p>
-<p>点击Documentation链接里quickstart给出了解决方案<br>Download ExtJS library (it must be version 2.2)</p>
-<p>下载地址<br><a href="http://dev.sencha.com/deploy/ext-2.2.zip" target="_blank" rel="external">http://dev.sencha.com/deploy/ext-2.2.zip</a></p>
+<p>点击Documentation链接里quickstart给出了解决方案<br>Download ExtJS library (it must be version 2.2)<br><a id="more"></a><br>下载地址<br><a href="http://dev.sencha.com/deploy/ext-2.2.zip" target="_blank" rel="external">http://dev.sencha.com/deploy/ext-2.2.zip</a></p>
 <p>如果下载不下来可以试试CSDN<br><a href="http://download.csdn.net/download/start_baby/6280675" target="_blank" rel="external">http://download.csdn.net/download/start_baby/6280675</a><br>或者：<br><a href="http://archive.cloudera.com/gplextras/misc/ext-2.2.zip" target="_blank" rel="external">http://archive.cloudera.com/gplextras/misc/ext-2.2.zip</a></p>
 <p>unzip解压<br>然后刷新页面成功进入oozie的web界面</p>
 <p>编写job.properties（nameNode要当时active的）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">nameNode=hdfs://master2:8020</div><div class="line">jobTracker=master2:8032</div><div class="line">queueName=default</div><div class="line">examplesRoot=user/oozie/my-apps/shell</div><div class="line">oozie.wf.application.path=$&#123;nameNode&#125;/$&#123;examplesRoot&#125;/workflow.xml</div><div class="line">EXEC=emp-join-demp.sh</div></pre></td></tr></table></figure></p>
