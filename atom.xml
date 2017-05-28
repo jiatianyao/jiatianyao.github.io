@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-27T00:23:03.166Z</updated>
+  <updated>2017-05-28T01:09:13.988Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/05/18/categories%20-%20-CDH-/"/>
     <id>http://yoursite.com/2017/05/18/categories - -CDH-/</id>
     <published>2017-05-18T03:30:00.000Z</published>
-    <updated>2017-05-27T00:23:03.166Z</updated>
+    <updated>2017-05-28T01:09:13.988Z</updated>
     
     <content type="html"><![CDATA[<h2 id="安装完oozie，打开UI"><a href="#安装完oozie，打开UI" class="headerlink" title="安装完oozie，打开UI:"></a>安装完oozie，打开UI:</h2><p><a href="http://master1:11000/oozie/" target="_blank" rel="external">http://master1:11000/oozie/</a></p>
 <p>显示Oozie web console is disabled.<br>解决方案;<br>原因是oozie的/var/lib/oozie目录里缺少EXT的包</p>
@@ -33,7 +33,7 @@
 <p>[hdfs@master1 data]$ hadoop fs -mkdir -p /user/oozie/my-apps/shell<br>[hdfs@master1 data]$ hadoop fs -put workflow.xml /user/oozie/my-apps/shell<br>[hdfs@master1 data]$ hadoop fs -put emp-join-demp.sh /user/oozie/my-apps/shell</p>
 <p>上传我shell脚本里执行的jar包，你们根据自己的shell决定如何操作<br>hadoop fs -put PhoenixAPI-1.0-SNAPSHOT.jar /user/oozie/my-apps/shell</p>
 <p>[hdfs@master1 data]$ /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/oozie  job -oozie <a href="http://master1:11000/oozie" target="_blank" rel="external">http://master1:11000/oozie</a>  -config /soft/data/job.properties -run </p>
-<p>提交出错：<br>去历史服务器查看问题<br><a href="http://master2:19888/jobhistory" target="_blank" rel="external">http://master2:19888/jobhistory</a></p>
+<h2 id="提交出错："><a href="#提交出错：" class="headerlink" title="提交出错："></a>提交出错：</h2><p>去历史服务器查看问题<br><a href="http://master2:19888/jobhistory" target="_blank" rel="external">http://master2:19888/jobhistory</a></p>
 <p>报错：<br>Launcher ERROR, reason: Main class [org.apache.oozie.action.hadoop.ShellMain], exit code [1]</p>
 <p>是因为分发的时候找不到用户的jar包，在workflow.xml的</p>
 <file>${nameNode}/${examplesRoot}/${EXEC}#${EXEC}</file><br>添加你的jar包并上传hdfs就可以<br>例如：<br><file>${nameNode}/${examplesRoot}/PhoenixAPI-1.0-SNAPSHOT.jar#PhoenixAPI-1.0-SNAPSHOT.jar</file>
