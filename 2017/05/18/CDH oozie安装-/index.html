@@ -96,7 +96,7 @@
 <meta property="og:description" content="安装完oozie，打开UI:http://master1:11000/oozie/
 显示Oozie web console is disabled.解决方案;原因是oozie的/var/lib/oozie目录里缺少EXT的包
 点击Documentation链接里quickstart给出了解决方案Download ExtJS library (it must be version 2.2)">
-<meta property="og:updated_time" content="2017-05-30T01:14:13.641Z">
+<meta property="og:updated_time" content="2017-05-30T23:33:39.182Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH oozie">
 <meta name="twitter:description" content="安装完oozie，打开UI:http://master1:11000/oozie/
@@ -351,7 +351,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2017-05-18T11:30:00+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-18T11:30:00+08:00">
                 2017-05-18
               </time>
             
@@ -414,7 +414,8 @@
       
         <h2 id="安装完oozie，打开UI"><a href="#安装完oozie，打开UI" class="headerlink" title="安装完oozie，打开UI:"></a>安装完oozie，打开UI:</h2><p><a href="http://master1:11000/oozie/" target="_blank" rel="external">http://master1:11000/oozie/</a></p>
 <p>显示Oozie web console is disabled.<br>解决方案;<br>原因是oozie的/var/lib/oozie目录里缺少EXT的包</p>
-<p>点击Documentation链接里quickstart给出了解决方案<br>Download ExtJS library (it must be version 2.2)<br><a id="more"></a><br>下载地址<br><a href="http://dev.sencha.com/deploy/ext-2.2.zip" target="_blank" rel="external">http://dev.sencha.com/deploy/ext-2.2.zip</a></p>
+<p>点击Documentation链接里quickstart给出了解决方案<br>Download ExtJS library (it must be version 2.2)<br><a id="more"></a></p>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p><a href="http://dev.sencha.com/deploy/ext-2.2.zip" target="_blank" rel="external">http://dev.sencha.com/deploy/ext-2.2.zip</a></p>
 <p>如果下载不下来可以试试CSDN<br><a href="http://download.csdn.net/download/start_baby/6280675" target="_blank" rel="external">http://download.csdn.net/download/start_baby/6280675</a><br>或者：<br><a href="http://archive.cloudera.com/gplextras/misc/ext-2.2.zip" target="_blank" rel="external">http://archive.cloudera.com/gplextras/misc/ext-2.2.zip</a></p>
 <p>unzip解压<br>然后刷新页面成功进入oozie的web界面</p>
 <h2 id="编写job-properties（nameNode要当时active的）"><a href="#编写job-properties（nameNode要当时active的）" class="headerlink" title="编写job.properties（nameNode要当时active的）"></a>编写job.properties（nameNode要当时active的）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">nameNode=hdfs://master2:8020</div><div class="line">jobTracker=master2:8032</div><div class="line">queueName=default</div><div class="line">examplesRoot=user/oozie/my-apps/shell</div><div class="line">oozie.wf.application.path=$&#123;nameNode&#125;/$&#123;examplesRoot&#125;/workflow.xml</div><div class="line">EXEC=emp-join-demp.sh</div></pre></td></tr></table></figure>
@@ -646,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装完oozie，打开UI"><span class="nav-number">1.</span> <span class="nav-text">安装完oozie，打开UI:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写job-properties（nameNode要当时active的）"><span class="nav-number">2.</span> <span class="nav-text">编写job.properties（nameNode要当时active的）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写workflow-xml"><span class="nav-number">3.</span> <span class="nav-text">编写workflow.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写emp-join-demp-sh"><span class="nav-number">4.</span> <span class="nav-text">编写emp-join-demp.sh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交出错："><span class="nav-number">5.</span> <span class="nav-text">提交出错：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装完oozie，打开UI"><span class="nav-number">1.</span> <span class="nav-text">安装完oozie，打开UI:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载地址"><span class="nav-number">2.</span> <span class="nav-text">下载地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写job-properties（nameNode要当时active的）"><span class="nav-number">3.</span> <span class="nav-text">编写job.properties（nameNode要当时active的）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写workflow-xml"><span class="nav-number">4.</span> <span class="nav-text">编写workflow.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写emp-join-demp-sh"><span class="nav-number">5.</span> <span class="nav-text">编写emp-join-demp.sh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交出错："><span class="nav-number">6.</span> <span class="nav-text">提交出错：</span></a></li></ol></div>
             
 
           </div>
