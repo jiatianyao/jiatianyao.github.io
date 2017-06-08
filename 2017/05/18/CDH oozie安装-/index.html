@@ -96,7 +96,7 @@
 <meta property="og:description" content="安装完oozie，打开UI:http://master1:11000/oozie/
 显示Oozie web console is disabled.解决方案;原因是oozie的/var/lib/oozie目录里缺少EXT的包
 点击Documentation链接里quickstart给出了解决方案Download ExtJS library (it must be version 2.2)">
-<meta property="og:updated_time" content="2017-06-07T00:58:39.664Z">
+<meta property="og:updated_time" content="2017-06-08T11:12:33.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH oozie">
 <meta name="twitter:description" content="安装完oozie，打开UI:http://master1:11000/oozie/
@@ -427,7 +427,7 @@
 <h2 id="提交出错："><a href="#提交出错：" class="headerlink" title="提交出错："></a>提交出错：</h2><p>去历史服务器查看问题<br><a href="http://master2:19888/jobhistory" target="_blank" rel="external">http://master2:19888/jobhistory</a></p>
 <h2 id="报错："><a href="#报错：" class="headerlink" title="报错："></a>报错：</h2><p>Launcher ERROR, reason: Main class [org.apache.oozie.action.hadoop.ShellMain], exit code [1]</p>
 <p>是因为分发的时候找不到用户的jar包，在workflow.xml的</p>
-<file>${nameNode}/${examplesRoot}/${EXEC}#${EXEC}</file><br>添加你的jar包并上传hdfs就可以<br>例如：<br><file>${nameNode}/${examplesRoot}/PhoenixAPI-1.0-SNAPSHOT.jar#PhoenixAPI-1.0-SNAPSHOT.jar</file>
+<file>${nameNode}/${examplesRoot}/${EXEC}#${EXEC}</file><br>添加你的jar包并上传hdfs就可以<br>## 例如：<br><file>${nameNode}/${examplesRoot}/PhoenixAPI-1.0-SNAPSHOT.jar#PhoenixAPI-1.0-SNAPSHOT.jar</file>
 
 
 <h2 id="可参考如下文章"><a href="#可参考如下文章" class="headerlink" title="可参考如下文章"></a>可参考如下文章</h2><p><a href="http://blog.sina.com.cn/s/blog_e699b42b0102xh3o.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_e699b42b0102xh3o.html</a></p>
