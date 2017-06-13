@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E5%90%AF%E5%8A%A8.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E5%81%9C%E6%AD%A2%E4%B8%80%E4%B8%AAcanal.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E9%83%A8%E5%81%9C%E6%AD%A2.png">
-<meta property="og:updated_time" content="2017-04-15T13:49:47.021Z">
+<meta property="og:updated_time" content="2017-06-13T00:49:27.882Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="canal分析binlog">
 <meta name="twitter:description" content="环境介绍linux服务器：centos7.1mysql : 5.7.10canal : 1.0.23
@@ -450,6 +450,9 @@
 <p>停止一个canal<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%81%9C%E6%AD%A2%E4%B8%80%E4%B8%AAcanal.png" alt="此处输入图片的描述"></p>
 <p>全部停止canal<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E9%83%A8%E5%81%9C%E6%AD%A2.png" alt="此处输入图片的描述"></p>
 <p> 查看当前canal消费到哪个position<br>[zk: localhost:2181(CONNECTED) 15] get /otter/canal/destinations/example/1001/cursor<br>{“@type”:”com.alibaba.otter.canal.protocol.position.LogPosition”,”identity”:{“slaveId”:-1,”sourceAddress”:{“address”:”po-master1”,”port”:3306}},”postion”:{“included”:false,”journalName”:”logbin.000004”,”position”:6897322,”serverId”:1,”timestamp”:1492065268000}}</p>
+<p>查看mysql的模式<br>show global variables like ‘%binlog_format%’;<br>查看binlog位置<br>show master status</p>
+<p>错误整理：<br>启动发现错误：<br>[root@slave1 canal]# cat logs/borrow/borrow.log<br>2017-06-12 03:57:25.931 [main] INFO  c.a.o.c.i.spring.support.PropertyPlaceholderConfigurer - Loading properties file from class path resource [canal.properties]<br>2017-06-12 03:57:25.938 [main] INFO  c.a.o.c.i.spring.support.PropertyPlaceholderConfigurer - Loading properties file from class path resource [borrow/instance.properties]<br>2017-06-12 03:57:25.946 [main] WARN  org.springframework.beans.TypeConverterDelegate - PropertyEditor [com.sun.beans.editors.EnumEditor] found through deprecated global PropertyEditorManager fallback - consider using a more isolated form of registration, e.g. on the BeanWrapper/BeanFactory!<br>2017-06-12 03:57:25.951 [main] INFO  c.a.otter.canal.instance.spring.CanalInstanceWithSpring - start CannalInstance for 1-borrow<br>2017-06-12 03:57:25.953 [main] INFO  c.a.otter.canal.instance.core.AbstractCanalInstance - subscribe filter change to test_ydxsb..*<br>2017-06-12 03:57:25.953 [main] INFO  c.a.otter.canal.instance.core.AbstractCanalInstance - start successful….<br>2017-06-12 03:57:25.971 [destination = borrow , address = /10.105.0.191:3306 , EventParser] WARN  c.a.otter.canal.parse.inbound.mysql.MysqlEventParser - prepare to find start position by switch ::1496967301000<br>2017-06-12 03:57:26.047 [destination = borrow , address = /10.105.0.191:3306 , EventParser] WARN  c.a.otter.canal.parse.inbound.mysql.MysqlEventParser - Didn’t find the corresponding binlog files from mysql-bin.000001 to mysql-bin.000001<br>2017-06-12 03:57:26.050 [destination = borrow , address = /10.105.0.191:3306 , EventParser] ERROR c.a.otter.canal.parse.inbound.mysql.MysqlEventParser - dump address /10.105.0.191:3306 has an error, retrying. caused by<br>com.alibaba.otter.canal.parse.exception.CanalParseException: can’t find start position for borrow<br>2017-06-12 03:57:26.052 [destination = borrow , address = /10.105.0.191:3306 , EventParser] ERROR com.alibaba.otter.canal.common.alarm.LogAlarmHandler - destination:borrow[com.alibaba.otter.canal.parse.exception.CanalParseException: can’t find start position for borrow</p>
+<p>需要删掉borrow目录下的meta.dat  </p>
 <p>如果提示：<br>找不到日志的位置<br>在mysql下执行(可能是设置完格式，格式不对)<br>set global binlog_checksum=’NONE’ </p>
 
       
