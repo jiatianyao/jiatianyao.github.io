@@ -86,16 +86,16 @@
 
 
 
-<meta name="description" content="[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobi">
+<meta name="description" content="导入[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CDH sqoop1 实战-带条件的导入">
 <meta property="og:url" content="http://yoursite.com/2017/03/13/CDH sqoop1 实战-带条件的导入/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
-<meta property="og:description" content="[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobi">
-<meta property="og:updated_time" content="2017-03-31T13:27:41.442Z">
+<meta property="og:description" content="导入[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mo">
+<meta property="og:updated_time" content="2017-06-25T00:50:06.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH sqoop1 实战-带条件的导入">
-<meta name="twitter:description" content="[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobi">
+<meta name="twitter:description" content="导入[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mo">
 
 
 
@@ -406,7 +406,7 @@
       
 
       
-        <p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
+        <h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
 <p>修改为：<br>sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming</p>
 <a id="more"></a>
 <p>在执行，发现报错说我database不存在，并在目录下生成了一个metastore_db，原来是执行sqoop的机器不对，换了一台机器执行没有问题，很奇怪明明是分布式的为什么会出现这个问题呢</p>
@@ -466,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/13/CDH sqoop1 实战/" rel="next" title="CDH sqoop1 实战">
-                <i class="fa fa-chevron-left"></i> CDH sqoop1 实战
+              <a href="/2017/03/08/CDH 安装/" rel="next" title="CDH 安装">
+                <i class="fa fa-chevron-left"></i> CDH 安装
               </a>
             
           </div>
@@ -476,8 +476,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/14/CDH hive 实战/" rel="prev" title="CDH hive 实战">
-                CDH hive 实战 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/13/CDH sqoop1 实战/" rel="prev" title="CDH sqoop1 实战">
+                CDH sqoop1 实战 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -535,8 +535,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/agns.gif"
@@ -607,6 +616,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入"><span class="nav-number">1.</span> <span class="nav-text">导入</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
