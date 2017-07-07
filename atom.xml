@@ -295,10 +295,10 @@
     <link href="http://yoursite.com/2017/04/18/CDH%20phoenix%E5%AE%89%E8%A3%85/"/>
     <id>http://yoursite.com/2017/04/18/CDH phoenix安装/</id>
     <published>2017-04-18T03:30:00.000Z</published>
-    <updated>2017-07-03T00:45:17.696Z</updated>
+    <updated>2017-07-07T13:21:40.609Z</updated>
     
     <content type="html"><![CDATA[<h2 id="首先下载jdk-略"><a href="#首先下载jdk-略" class="headerlink" title="首先下载jdk 略"></a>首先下载jdk 略</h2><p>安装maven</p>
-<h2 id="下载yum源"><a href="#下载yum源" class="headerlink" title="下载yum源"></a>下载yum源</h2><p>wget <a href="http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo" target="_blank" rel="external">http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo</a> -O /etc/yum.repos.d/epel-apache-maven.repo</p>
+<h3 id="下载yum源"><a href="#下载yum源" class="headerlink" title="下载yum源"></a>下载yum源</h3><p>wget <a href="http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo" target="_blank" rel="external">http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo</a> -O /etc/yum.repos.d/epel-apache-maven.repo</p>
 <h2 id="安装maven："><a href="#安装maven：" class="headerlink" title="安装maven："></a>安装maven：</h2><p>yum -y install apache-maven</p>
 <a id="more"></a>
 <h2 id="编译phoenix"><a href="#编译phoenix" class="headerlink" title="编译phoenix"></a>编译phoenix</h2><p>找到最新版本的phoenix<br><a href="https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8" target="_blank" rel="external">https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8</a></p>
@@ -316,7 +316,7 @@
     <summary type="html">
     
       &lt;h2 id=&quot;首先下载jdk-略&quot;&gt;&lt;a href=&quot;#首先下载jdk-略&quot; class=&quot;headerlink&quot; title=&quot;首先下载jdk 略&quot;&gt;&lt;/a&gt;首先下载jdk 略&lt;/h2&gt;&lt;p&gt;安装maven&lt;/p&gt;
-&lt;h2 id=&quot;下载yum源&quot;&gt;&lt;a href=&quot;#下载yum源&quot; class=&quot;headerlink&quot; title=&quot;下载yum源&quot;&gt;&lt;/a&gt;下载yum源&lt;/h2&gt;&lt;p&gt;wget &lt;a href=&quot;http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo&quot;&gt;http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo&lt;/a&gt; -O /etc/yum.repos.d/epel-apache-maven.repo&lt;/p&gt;
+&lt;h3 id=&quot;下载yum源&quot;&gt;&lt;a href=&quot;#下载yum源&quot; class=&quot;headerlink&quot; title=&quot;下载yum源&quot;&gt;&lt;/a&gt;下载yum源&lt;/h3&gt;&lt;p&gt;wget &lt;a href=&quot;http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo&quot;&gt;http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo&lt;/a&gt; -O /etc/yum.repos.d/epel-apache-maven.repo&lt;/p&gt;
 &lt;h2 id=&quot;安装maven：&quot;&gt;&lt;a href=&quot;#安装maven：&quot; class=&quot;headerlink&quot; title=&quot;安装maven：&quot;&gt;&lt;/a&gt;安装maven：&lt;/h2&gt;&lt;p&gt;yum -y install apache-maven&lt;/p&gt;
     
     </summary>
@@ -548,36 +548,6 @@
   </entry>
   
   <entry>
-    <title>CDH sqoop1 实战-带条件的导入</title>
-    <link href="http://yoursite.com/2017/03/13/CDH%20sqoop1%20%E5%AE%9E%E6%88%98-%E5%B8%A6%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%AF%BC%E5%85%A5/"/>
-    <id>http://yoursite.com/2017/03/13/CDH sqoop1 实战-带条件的导入/</id>
-    <published>2017-03-13T01:30:00.000Z</published>
-    <updated>2017-06-25T00:50:06.600Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
-<p>修改为：<br>sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming</p>
-<a id="more"></a>
-<p>在执行，发现报错说我database不存在，并在目录下生成了一个metastore_db，原来是执行sqoop的机器不对，换了一台机器执行没有问题，很奇怪明明是分布式的为什么会出现这个问题呢</p>
-<p>最终的具体日志：</p>
-<p>[hdfs@master1 root]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming –hive-database shuju<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>17/03/15 14:32:53 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 14:32:53 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 14:32:53 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 14:32:53 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../hadoop-mapreduce<br>Note: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.java uses or overrides a deprecated API.<br>Note: Recompile with -Xlint:deprecation for details.<br>17/03/15 14:33:00 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.jar<br>17/03/15 14:33:00 INFO mapreduce.ImportJobBase: Beginning query import.<br>17/03/15 14:33:00 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar<br>17/03/15 14:33:01 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps<br>17/03/15 14:33:01 INFO client.RMProxy: Connecting to ResourceManager at master2/10.105.10.122:8032<br>17/03/15 14:33:02 INFO db.DBInputFormat: Using read commited transaction isolation<br>17/03/15 14:33:02 INFO db.DataDrivenDBInputFormat: BoundingValsQuery: SELECT MIN(id), MAX(id) FROM (SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 1) ) AS t1<br>17/03/15 14:33:03 INFO db.IntegerSplitter: Split size: 7508318; Num splits: 4 from: 20079 to: 30053354<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: number of splits:4<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1488970234114_0057<br>17/03/15 14:33:03 INFO impl.YarnClientImpl: Submitted application application_1488970234114_0057<br>17/03/15 14:33:03 INFO mapreduce.Job: The url to track the job: <a href="http://master2:8088/proxy/application_1488970234114_0057/" target="_blank" rel="external">http://master2:8088/proxy/application_1488970234114_0057/</a><br>17/03/15 14:33:03 INFO mapreduce.Job: Running job: job_1488970234114_0057<br>17/03/15 14:33:08 INFO mapreduce.Job: Job job_1488970234114_0057 running in uber mode : false<br>17/03/15 14:33:08 INFO mapreduce.Job:  map 0% reduce 0%<br>17/03/15 14:33:15 INFO mapreduce.Job:  map 75% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job:  map 100% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job: Job job_1488970234114_0057 completed successfully<br>17/03/15 14:33:16 INFO mapreduce.Job: Counters: 30<br>        File System Counters<br>                FILE: Number of bytes read=0<br>                FILE: Number of bytes written=608160<br>                FILE: Number of read operations=0<br>                FILE: Number of large read operations=0<br>                FILE: Number of write operations=0<br>                HDFS: Number of bytes read=428<br>                HDFS: Number of bytes written=17645206<br>                HDFS: Number of read operations=16<br>                HDFS: Number of large read operations=0<br>                HDFS: Number of write operations=8<br>        Job Counters<br>                Launched map tasks=4<br>                Other local map tasks=4<br>                Total time spent by all maps in occupied slots (ms)=17968<br>                Total time spent by all reduces in occupied slots (ms)=0<br>                Total time spent by all map tasks (ms)=17968<br>                Total vcore-seconds taken by all map tasks=17968<br>                Total megabyte-seconds taken by all map tasks=18399232<br>        Map-Reduce Framework<br>                Map input records=283659<br>                Map output records=283659<br>                Input split bytes=428<br>                Spilled Records=0<br>                Failed Shuffles=0<br>                Merged Map outputs=0<br>                GC time elapsed (ms)=268<br>                CPU time spent (ms)=12960<br>                Physical memory (bytes) snapshot=1151381504<br>                Virtual memory (bytes) snapshot=11157348352<br>                Total committed heap usage (bytes)=1045954560<br>        File Input Format Counters<br>                Bytes Read=0<br>        File Output Format Counters<br>                Bytes Written=17645206<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Transferred 16.8278 MB in 15.7965 seconds (1.0653 MB/sec)<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Retrieved 283659 records.<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 WARN hive.TableDefWriter: Column update_time had to be cast to a less precise type in Hive<br>17/03/15 14:33:16 INFO hive.HiveImport: Loading uploaded data into Hive</p>
-<p>Logging initialized using configuration in jar:file:/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/jars/hive-common-1.1.0-cdh5.10.0.jar!/hive-log4j.properties<br>OK<br>Time taken: 1.874 seconds<br>Loading data to table shuju.card_record<br>Table shuju.card_record stats: [numFiles=4, totalSize=17645206]<br>OK<br>Time taken: 0.367 seconds</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;导入&quot;&gt;&lt;a href=&quot;#导入&quot; class=&quot;headerlink&quot; title=&quot;导入&quot;&gt;&lt;/a&gt;导入&lt;/h2&gt;&lt;p&gt;[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming&lt;br&gt;17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0&lt;br&gt;17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.&lt;br&gt;17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.&lt;br&gt;17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation&lt;br&gt;17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.&lt;br&gt;        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)&lt;br&gt;        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)&lt;br&gt;        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)&lt;br&gt;        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)&lt;br&gt;        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)&lt;br&gt;        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)&lt;br&gt;        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)&lt;br&gt;        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)&lt;br&gt;        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)&lt;br&gt;        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)&lt;br&gt;        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)&lt;br&gt;        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)&lt;/p&gt;
-&lt;p&gt;修改为：&lt;br&gt;sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
-    
-    
-      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
-    
-  </entry>
-  
-  <entry>
     <title>CDH sqoop1 实战</title>
     <link href="http://yoursite.com/2017/03/13/CDH%20sqoop1%20%E5%AE%9E%E6%88%98/"/>
     <id>http://yoursite.com/2017/03/13/CDH sqoop1 实战/</id>
@@ -621,13 +591,43 @@
   </entry>
   
   <entry>
+    <title>CDH sqoop1 实战-带条件的导入</title>
+    <link href="http://yoursite.com/2017/03/13/CDH%20sqoop1%20%E5%AE%9E%E6%88%98-%E5%B8%A6%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%AF%BC%E5%85%A5/"/>
+    <id>http://yoursite.com/2017/03/13/CDH sqoop1 实战-带条件的导入/</id>
+    <published>2017-03-13T01:30:00.000Z</published>
+    <updated>2017-06-25T00:50:06.600Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
+<p>修改为：<br>sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming</p>
+<a id="more"></a>
+<p>在执行，发现报错说我database不存在，并在目录下生成了一个metastore_db，原来是执行sqoop的机器不对，换了一台机器执行没有问题，很奇怪明明是分布式的为什么会出现这个问题呢</p>
+<p>最终的具体日志：</p>
+<p>[hdfs@master1 root]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming –hive-database shuju<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>17/03/15 14:32:53 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 14:32:53 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 14:32:53 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 14:32:53 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../hadoop-mapreduce<br>Note: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.java uses or overrides a deprecated API.<br>Note: Recompile with -Xlint:deprecation for details.<br>17/03/15 14:33:00 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.jar<br>17/03/15 14:33:00 INFO mapreduce.ImportJobBase: Beginning query import.<br>17/03/15 14:33:00 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar<br>17/03/15 14:33:01 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps<br>17/03/15 14:33:01 INFO client.RMProxy: Connecting to ResourceManager at master2/10.105.10.122:8032<br>17/03/15 14:33:02 INFO db.DBInputFormat: Using read commited transaction isolation<br>17/03/15 14:33:02 INFO db.DataDrivenDBInputFormat: BoundingValsQuery: SELECT MIN(id), MAX(id) FROM (SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 1) ) AS t1<br>17/03/15 14:33:03 INFO db.IntegerSplitter: Split size: 7508318; Num splits: 4 from: 20079 to: 30053354<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: number of splits:4<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1488970234114_0057<br>17/03/15 14:33:03 INFO impl.YarnClientImpl: Submitted application application_1488970234114_0057<br>17/03/15 14:33:03 INFO mapreduce.Job: The url to track the job: <a href="http://master2:8088/proxy/application_1488970234114_0057/" target="_blank" rel="external">http://master2:8088/proxy/application_1488970234114_0057/</a><br>17/03/15 14:33:03 INFO mapreduce.Job: Running job: job_1488970234114_0057<br>17/03/15 14:33:08 INFO mapreduce.Job: Job job_1488970234114_0057 running in uber mode : false<br>17/03/15 14:33:08 INFO mapreduce.Job:  map 0% reduce 0%<br>17/03/15 14:33:15 INFO mapreduce.Job:  map 75% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job:  map 100% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job: Job job_1488970234114_0057 completed successfully<br>17/03/15 14:33:16 INFO mapreduce.Job: Counters: 30<br>        File System Counters<br>                FILE: Number of bytes read=0<br>                FILE: Number of bytes written=608160<br>                FILE: Number of read operations=0<br>                FILE: Number of large read operations=0<br>                FILE: Number of write operations=0<br>                HDFS: Number of bytes read=428<br>                HDFS: Number of bytes written=17645206<br>                HDFS: Number of read operations=16<br>                HDFS: Number of large read operations=0<br>                HDFS: Number of write operations=8<br>        Job Counters<br>                Launched map tasks=4<br>                Other local map tasks=4<br>                Total time spent by all maps in occupied slots (ms)=17968<br>                Total time spent by all reduces in occupied slots (ms)=0<br>                Total time spent by all map tasks (ms)=17968<br>                Total vcore-seconds taken by all map tasks=17968<br>                Total megabyte-seconds taken by all map tasks=18399232<br>        Map-Reduce Framework<br>                Map input records=283659<br>                Map output records=283659<br>                Input split bytes=428<br>                Spilled Records=0<br>                Failed Shuffles=0<br>                Merged Map outputs=0<br>                GC time elapsed (ms)=268<br>                CPU time spent (ms)=12960<br>                Physical memory (bytes) snapshot=1151381504<br>                Virtual memory (bytes) snapshot=11157348352<br>                Total committed heap usage (bytes)=1045954560<br>        File Input Format Counters<br>                Bytes Read=0<br>        File Output Format Counters<br>                Bytes Written=17645206<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Transferred 16.8278 MB in 15.7965 seconds (1.0653 MB/sec)<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Retrieved 283659 records.<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 WARN hive.TableDefWriter: Column update_time had to be cast to a less precise type in Hive<br>17/03/15 14:33:16 INFO hive.HiveImport: Loading uploaded data into Hive</p>
+<p>Logging initialized using configuration in jar:file:/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/jars/hive-common-1.1.0-cdh5.10.0.jar!/hive-log4j.properties<br>OK<br>Time taken: 1.874 seconds<br>Loading data to table shuju.card_record<br>Table shuju.card_record stats: [numFiles=4, totalSize=17645206]<br>OK<br>Time taken: 0.367 seconds</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;导入&quot;&gt;&lt;a href=&quot;#导入&quot; class=&quot;headerlink&quot; title=&quot;导入&quot;&gt;&lt;/a&gt;导入&lt;/h2&gt;&lt;p&gt;[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming&lt;br&gt;17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0&lt;br&gt;17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.&lt;br&gt;17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.&lt;br&gt;17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation&lt;br&gt;17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.&lt;br&gt;        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)&lt;br&gt;        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)&lt;br&gt;        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)&lt;br&gt;        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)&lt;br&gt;        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)&lt;br&gt;        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)&lt;br&gt;        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)&lt;br&gt;        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)&lt;br&gt;        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)&lt;br&gt;        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)&lt;br&gt;        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)&lt;br&gt;        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)&lt;/p&gt;
+&lt;p&gt;修改为：&lt;br&gt;sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
+    
+    
+      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CDH 安装</title>
     <link href="http://yoursite.com/2017/03/08/CDH%20%E5%AE%89%E8%A3%85/"/>
     <id>http://yoursite.com/2017/03/08/CDH 安装/</id>
     <published>2017-03-08T01:30:00.000Z</published>
-    <updated>2017-07-06T01:09:24.806Z</updated>
+    <updated>2017-07-06T01:17:23.929Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="运行环境："><a href="#运行环境：" class="headerlink" title="运行环境："></a>运行环境：</h4><table>
+    <content type="html"><![CDATA[<h2 id="运行环境："><a href="#运行环境：" class="headerlink" title="运行环境："></a>运行环境：</h2><table>
 <thead>
 <tr>
 <th>主机IP</th>
@@ -766,7 +766,7 @@
     
     <summary type="html">
     
-      &lt;h4 id=&quot;运行环境：&quot;&gt;&lt;a href=&quot;#运行环境：&quot; class=&quot;headerlink&quot; title=&quot;运行环境：&quot;&gt;&lt;/a&gt;运行环境：&lt;/h4&gt;&lt;table&gt;
+      &lt;h2 id=&quot;运行环境：&quot;&gt;&lt;a href=&quot;#运行环境：&quot; class=&quot;headerlink&quot; title=&quot;运行环境：&quot;&gt;&lt;/a&gt;运行环境：&lt;/h2&gt;&lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;主机IP&lt;/th&gt;
@@ -1101,30 +1101,72 @@
   </entry>
   
   <entry>
-    <title>Python机器学习准备</title>
-    <link href="http://yoursite.com/2017/01/27/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87/"/>
-    <id>http://yoursite.com/2017/01/27/Python机器学习准备/</id>
+    <title>storm基础知识</title>
+    <link href="http://yoursite.com/2017/01/27/storm%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://yoursite.com/2017/01/27/storm基础知识/</id>
     <published>2017-01-27T12:00:00.000Z</published>
-    <updated>2017-06-26T12:22:22.000Z</updated>
+    <updated>2017-04-02T15:23:59.750Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="下载NumPy"><a href="#下载NumPy" class="headerlink" title="下载NumPy"></a>下载NumPy</h2><p><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
-<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
-<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
-<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
-<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
-<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
+    <content type="html"><![CDATA[<h2 id="Storm基本概念"><a href="#Storm基本概念" class="headerlink" title="Storm基本概念"></a>Storm基本概念</h2><p>Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。<br>Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止</p>
+<a id="more"></a>
+<p><img src="http://storm.apache.org/images/storm-flow.png" alt="此处输入图片的描述"><br>主要版本</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>发布日期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.9.0.1</td>
+<td>2013年12月8日</td>
+</tr>
+<tr>
+<td>0.9.0</td>
+<td>2013年12月8日</td>
+</tr>
+<tr>
+<td>0.8.0</td>
+<td>2012年8月2日</td>
+</tr>
+<tr>
+<td>0.7.0</td>
+<td>2012年2月28日</td>
+</tr>
+<tr>
+<td>0.6.0</td>
+<td>2011年12月15日</td>
+</tr>
+<tr>
+<td>0.5.0</td>
+<td>2011年9月19日</td>
+</tr>
+</tbody>
+</table>
+<h2 id="编程模型"><a href="#编程模型" class="headerlink" title="编程模型"></a>编程模型</h2><h3 id="Topology"><a href="#Topology" class="headerlink" title="Topology"></a>Topology</h3><p>一个实时计算应用程序逻辑被封装在Topology对象中， 类似Hadoop中的job， Topology会一直运行直到你显式杀死它</p>
+<p>###DataSource<br>外部数据源</p>
+<h3 id="Spout"><a href="#Spout" class="headerlink" title="Spout"></a>Spout</h3><p>接受外部数据源的组件，将外部数据源转化成Storm内部的数据，以Tuple为基本的传输单元下发给Bolt</p>
+<h3 id="Bolt"><a href="#Bolt" class="headerlink" title="Bolt"></a>Bolt</h3><p>接受Spout发送的数据，或上游的bolt的发送的数据。根据业务逻辑进行处理。发送给下一个Bolt或者是存储到某种介质上。介质可以是Redis可以是mysql，或者其他。</p>
+<h3 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h3><p>Storm内部中数据传输的基本单元，里面封装了一个List对象，用来保存数据。</p>
+<h2 id="StreamGrouping"><a href="#StreamGrouping" class="headerlink" title="StreamGrouping:"></a>StreamGrouping:</h2><h4 id="数据分组策略7种："><a href="#数据分组策略7种：" class="headerlink" title="数据分组策略7种："></a>数据分组策略7种：</h4><p>shuffleGrouping(Random函数),<br>NonGrouping(Random函数,目前和shuffleGrouping一样),<br>FieldGrouping(Hash取模),<br>Local or ShuffleGrouping （本地或随机，优先本地）,<br>Fields grouping（根据Tuple中的某一个Filed或者多个Filed的是值来划分。 比如<br>Stream根据Field为user-id来grouping， 相同user-id值的Tuple会被分<br>发到相同的Task中）,<br>Global grouping（整个Stream会选择一个Task作为分发的目的地， 通常是最新的那<br>个id的Task）<br>Direct grouping（产生数据的Spout/Bolt自己明确决定这个Tuple被Bolt的那些Task所<br>消费）</p>
+<h2 id="Storm优点"><a href="#Storm优点" class="headerlink" title="Storm优点"></a>Storm优点</h2><h4 id="健壮性"><a href="#健壮性" class="headerlink" title="健壮性"></a>健壮性</h4><p>当Worker失效或机器出现故障时， 自动分配新的Worker替换失<br>效Worker</p>
+<h4 id="准确性"><a href="#准确性" class="headerlink" title="准确性"></a>准确性</h4><p>采用Acker机制，保证数据不丢失<br>采用事务机制，保证数据准确性</p>
+<h2 id="storm架构"><a href="#storm架构" class="headerlink" title="storm架构"></a>storm架构</h2><p><img src="http://oh6ybr0jg.bkt.clouddn.com/storm%E6%9E%B6%E6%9E%84.png" alt="此处输入图片的描述"></p>
+<p>Storm的主线主要包括4条：nimbus, supervisor, worker和task。</p>
+<p>对于storm0.9.6的配置文件nimbus配置参数还是nimbus.hosts 现在新版本1.0.2已经修改为nimbus.seeds,已经可以支持HA<br>此处之一配置nimbus.seeds: XX。此处nimbus.seeds:后面要有一个空格，否则启动报错<br>storm启动nimbus的时候jps会有一个进程config_value然后变成nimbus。<br>其他启动同上</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;下载NumPy&quot;&gt;&lt;a href=&quot;#下载NumPy&quot; class=&quot;headerlink&quot; title=&quot;下载NumPy&quot;&gt;&lt;/a&gt;下载NumPy&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://download.csdn.net/download/z113773
+      &lt;h2 id=&quot;Storm基本概念&quot;&gt;&lt;a href=&quot;#Storm基本概念&quot; class=&quot;headerlink&quot; title=&quot;Storm基本概念&quot;&gt;&lt;/a&gt;Storm基本概念&lt;/h2&gt;&lt;p&gt;Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。&lt;br&gt;Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止&lt;/p&gt;
     
     </summary>
     
-      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="storm" scheme="http://yoursite.com/categories/storm/"/>
     
     
-      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="storm" scheme="http://yoursite.com/tags/storm/"/>
     
   </entry>
   
