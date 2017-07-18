@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="张洪铭的个人博客">
 <meta property="og:description" content="下载sqlserver的jdbc驱动包https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599解压将sqljdbc4.jar放在：/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib
 下载SQL">
-<meta property="og:updated_time" content="2017-07-17T12:57:36.092Z">
+<meta property="og:updated_time" content="2017-07-18T00:20:47.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH sqoop1 实战">
 <meta name="twitter:description" content="下载sqlserver的jdbc驱动包https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599解压将sqljdbc4.jar放在：/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib
@@ -409,7 +409,7 @@
       
 
       
-        <h3 id="下载sqlserver的jdbc驱动包"><a href="#下载sqlserver的jdbc驱动包" class="headerlink" title="下载sqlserver的jdbc驱动包"></a>下载sqlserver的jdbc驱动包</h3><p><a href="https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599" target="_blank" rel="external">https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599</a><br>解压<br>将sqljdbc4.jar放在：<br>/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib</p>
+        <h2 id="下载sqlserver的jdbc驱动包"><a href="#下载sqlserver的jdbc驱动包" class="headerlink" title="下载sqlserver的jdbc驱动包"></a>下载sqlserver的jdbc驱动包</h2><p><a href="https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599" target="_blank" rel="external">https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599</a><br>解压<br>将sqljdbc4.jar放在：<br>/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib</p>
 <p>下载SQL Server-Hadoop Connector：sqoop-sqlserver-1.0.tar.gz<br>             <a href="http://www.microsoft.com/en-us/download/details.aspx?id=27584" target="_blank" rel="external">http://www.microsoft.com/en-us/download/details.aspx?id=27584</a></p>
 <a id="more"></a>
 <h2 id="导入数据："><a href="#导入数据：" class="headerlink" title="导入数据："></a>导入数据：</h2><p>[root@slave3 sqoop]# ./bin/sqoop import –connect ‘jdbc: server://10.105.32.246 username=sa password=123456 database=databaseName –table=tableName –target-dir /bigdata/data/hdfs<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/bin/../../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>+======================================================================+<br>|                    Error: JAVA_HOME is not set                       |<br>+———————————————————————-+<br>| Please download the latest Sun JDK from the Sun Java web site        |<br>|     &gt; <a href="http://www.oracle.com/technetwork/java/javase/downloads" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads</a>        |<br>|                                                                      |<br>| HBase requires Java 1.7 or later.                                    |<br>+======================================================================+<br>Error: JAVA_HOME is not set and could not be found.</p>
@@ -482,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/08/CDH 安装/" rel="next" title="CDH 安装">
-                <i class="fa fa-chevron-left"></i> CDH 安装
+              <a href="/2017/03/13/CDH sqoop1 实战-带条件的导入/" rel="next" title="CDH sqoop1 实战-带条件的导入">
+                <i class="fa fa-chevron-left"></i> CDH sqoop1 实战-带条件的导入
               </a>
             
           </div>
@@ -492,8 +492,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/13/CDH sqoop1 实战-带条件的导入/" rel="prev" title="CDH sqoop1 实战-带条件的导入">
-                CDH sqoop1 实战-带条件的导入 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/14/CDH hive 实战/" rel="prev" title="CDH hive 实战">
+                CDH hive 实战 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -642,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载sqlserver的jdbc驱动包"><span class="nav-number">1.</span> <span class="nav-text">下载sqlserver的jdbc驱动包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据："><span class="nav-number"></span> <span class="nav-text">导入数据：</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载sqlserver的jdbc驱动包"><span class="nav-number">1.</span> <span class="nav-text">下载sqlserver的jdbc驱动包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入数据："><span class="nav-number">2.</span> <span class="nav-text">导入数据：</span></a></li></ol></div>
             
 
           </div>
