@@ -1455,7 +1455,7 @@
 
       
         
-          <h2 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h2><p>写一个脚本getinterface.sh，脚本可以接受参数(i,I,a)，完成以下任务：<br>   (1)使用以下形式：getinterface.sh [-i interface|-I IP|-a]<br>   (2)当用户使用-i选项时，显示其指定网卡的IP地址；<br>   (3)当用户使用-I选项时，显示其后面的IP地址所属的网络接口；（如 192.168.199.183：eth0）<br>   (4)当用户单独使用-a选项时，显示所有网络接口及其IP地址（lo除外）</p>
+          <h3 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h3><p>写一个脚本getinterface.sh，脚本可以接受参数(i,I,a)，完成以下任务：<br>   (1)使用以下形式：getinterface.sh [-i interface|-I IP|-a]<br>   (2)当用户使用-i选项时，显示其指定网卡的IP地址；<br>   (3)当用户使用-I选项时，显示其后面的IP地址所属的网络接口；（如 192.168.199.183：eth0）<br>   (4)当用户单独使用-a选项时，显示所有网络接口及其IP地址（lo除外）</p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>参数1为param1 参数2位param2<br>（1）利用CAT &lt;&lt; EOF  <em>*</em> EOF打印信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat &lt;&lt; EOF</div><div class="line">    getinterface.sh [-i interface|-I IP|<span class="_">-a</span>]</div><div class="line">    -i interface) show ip of the interface</div><div class="line">    -I IP) show interface of the IP and IP with :;</div><div class="line">    <span class="_">-a</span>) list all interfaces and their IPs except lo;</div><div class="line">    *) quit</div><div class="line">=================================================================</div><div class="line">EOF</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-more-link text-center">
