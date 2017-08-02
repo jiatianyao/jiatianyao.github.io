@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="算法," />
+  <meta name="keywords" content="spark," />
 
 
 
@@ -86,47 +86,34 @@
 
 
 
-<meta name="description" content="火柴棍游戏
-移动两根火柴得到的最大值是多少？
-一般人的第一反应是：
-如果我们想到了位数越多，数字越大，就会想到：
-此时如果想到了平方计算
-那么你需要的是继续发散四位，想到科学计数法
-但是此时并不是最大的
-只有当你想到了以下的数据，那么恭喜你成功了
-思路决定出路">
+<meta name="description" content="进入官网，选择产品里面的下载页面或者直接登录https://hortonworks.com/downloads/选择HDP® 2.6: Ready for the enterprise下面的Automated Install Guide
+因为博主是CENTOS 7在这个页面直接选择：RHEL/CentOS/Oracle Linux 7
+wget  http://public-repo-1.hort">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法思维">
-<meta property="og:url" content="http://yoursite.com/2017/01/04/算法思维/index.html">
+<meta property="og:title" content="使用Ambari安装部署Spark集群">
+<meta property="og:url" content="http://yoursite.com/2017/06/30/使用Ambari安装部署Spark集群/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
-<meta property="og:description" content="火柴棍游戏
-移动两根火柴得到的最大值是多少？
-一般人的第一反应是：
-如果我们想到了位数越多，数字越大，就会想到：
-此时如果想到了平方计算
-那么你需要的是继续发散四位，想到科学计数法
-但是此时并不是最大的
-只有当你想到了以下的数据，那么恭喜你成功了
-思路决定出路">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/6008.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/9809.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/61008.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/500~9.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/6e80.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/6ee8.png">
-<meta property="og:updated_time" content="2017-03-06T14:50:19.315Z">
+<meta property="og:description" content="进入官网，选择产品里面的下载页面或者直接登录https://hortonworks.com/downloads/选择HDP® 2.6: Ready for the enterprise下面的Automated Install Guide
+因为博主是CENTOS 7在这个页面直接选择：RHEL/CentOS/Oracle Linux 7
+wget  http://public-repo-1.hort">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariInstallOptions.png">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariConfirmHostsing.png">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariConfirmHosts.png">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariChooseServices1.png">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariChooseServices2.png">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariAssignMasters.png">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariAssignSlavesandClients.png">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariCustomize1.png">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariCustomize2.png">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariCustomize3.png">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariInstallSuccess.png">
+<meta property="og:updated_time" content="2017-08-02T10:49:03.523Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法思维">
-<meta name="twitter:description" content="火柴棍游戏
-移动两根火柴得到的最大值是多少？
-一般人的第一反应是：
-如果我们想到了位数越多，数字越大，就会想到：
-此时如果想到了平方计算
-那么你需要的是继续发散四位，想到科学计数法
-但是此时并不是最大的
-只有当你想到了以下的数据，那么恭喜你成功了
-思路决定出路">
-<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/6008.png">
+<meta name="twitter:title" content="使用Ambari安装部署Spark集群">
+<meta name="twitter:description" content="进入官网，选择产品里面的下载页面或者直接登录https://hortonworks.com/downloads/选择HDP® 2.6: Ready for the enterprise下面的Automated Install Guide
+因为博主是CENTOS 7在这个页面直接选择：RHEL/CentOS/Oracle Linux 7
+wget  http://public-repo-1.hort">
+<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariInstallOptions.png">
 
 
 
@@ -154,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/01/04/算法思维/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/30/使用Ambari安装部署Spark集群/"/>
 
 
 
 
 
-  <title> 算法思维 | 张洪铭的个人博客 </title>
+  <title> 使用Ambari安装部署Spark集群 | 张洪铭的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -339,7 +326,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/04/算法思维/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/30/使用Ambari安装部署Spark集群/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -363,7 +350,7 @@
             
             
               
-                算法思维
+                使用Ambari安装部署Spark集群
               
             
           </h1>
@@ -376,8 +363,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-04T20:36:47+08:00">
-                2017-01-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-30T11:30:00+08:00">
+                2017-06-30
               </time>
             
 
@@ -395,8 +382,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
                   </a>
                 </span>
 
@@ -410,8 +397,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/01/04/算法思维/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/04/算法思维/" itemprop="commentCount"></span>
+                <a href="/2017/06/30/使用Ambari安装部署Spark集群/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/30/使用Ambari安装部署Spark集群/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -437,15 +424,37 @@
       
 
       
-        <h2 id="火柴棍游戏"><a href="#火柴棍游戏" class="headerlink" title="火柴棍游戏"></a>火柴棍游戏</h2><p><img src="http://oh6ybr0jg.bkt.clouddn.com/6008.png" alt="此处输入图片的描述"></p>
-<p>移动两根火柴得到的最大值是多少？</p>
-<p>一般人的第一反应是：<br><img src="http://oh6ybr0jg.bkt.clouddn.com/9809.png" alt="此处输入图片的描述"></p>
-<p>如果我们想到了位数越多，数字越大，就会想到：<br><img src="http://oh6ybr0jg.bkt.clouddn.com/61008.png" alt="此处输入图片的描述"></p>
-<p>此时如果想到了平方计算<br><img src="http://oh6ybr0jg.bkt.clouddn.com/500~9.png" alt="此处输入图片的描述"></p>
-<p>那么你需要的是继续发散四位，想到科学计数法<br><img src="http://oh6ybr0jg.bkt.clouddn.com/6e80.png" alt="此处输入图片的描述"></p>
-<p>但是此时并不是最大的</p>
-<p>只有当你想到了以下的数据，那么恭喜你成功了<br><img src="http://oh6ybr0jg.bkt.clouddn.com/6ee8.png" alt="此处输入图片的描述"></p>
-<p>思路决定出路</p>
+        <p>进入官网，选择产品里面的下载页面或者直接登录<br><a href="https://hortonworks.com/downloads/" target="_blank" rel="external">https://hortonworks.com/downloads/</a><br>选择<br>HDP® 2.6: Ready for the enterprise<br>下面的<br>Automated Install Guide</p>
+<p>因为博主是CENTOS 7<br>在这个页面直接选择：<br>RHEL/CentOS/Oracle Linux 7</p>
+<p>wget  <a href="http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo" target="_blank" rel="external">http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo</a> -O /etc/yum.repos.d/ambari.repo<br>yum repolist</p>
+<p>yum install ambari-server</p>
+<p>进入​Setup Options<br>ambari-server setup –j /usr/java/default<br>提示参数只能是一个，看来jdk要后设置</p>
+<p>ambari-server setup<br>各种回车，jdk的时候选择安装1.8的<br>如果输入自定义的jdk要注意权限问题</p>
+<p>启动：<br>ambari-server start</p>
+<p>查看：<br>[root@storm01 storm]# lsof -i:8080<br>COMMAND  PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME<br>java    7648 storm 1438u  IPv6 124470      0t0  TCP *:webcache (LISTEN)</p>
+<p>关闭防火墙<br>systemctl disable firewalld.service<br>systemctl stop firewalld.service    </p>
+<p>在浏览器输入<a href="http://storm01:8080即可进入UI" target="_blank" rel="external">http://storm01:8080即可进入UI</a><br>用户密码都为admin</p>
+<p>在每个机器上安装agent<br>yum install -y ambari-agent</p>
+<p>修改配置文件<br> vi /etc/ambari-agent/conf/ambari-agent.ini<br> hostname=localhost更改为<br> hostname=storm01</p>
+<p> 启动agent<br> service ambari-agent start</p>
+<p>设置hive</p>
+<p>用户密码都为hive</p>
+<p>需要PostgreSQL支持远程连接<br>find / -name pg_hba.conf</p>
+<p>vi /var/lib/pgsql/data/pg_hba.conf<br>将<br>local   all   postgres                                     peer改成<br>local   all   postgres                                     trust<br>host    all   postgres             127.0.0.1/32            ident改成<br>host    all   postgres             127.0.0.1/32            trust<br>local  all  ambari,mapred md5改成<br>local  all  ambari,mapred,hive trust<br>host  all   ambari,mapred 0.0.0.0/0  md5改成<br>host  all   ambari,mapred,hive 0.0.0.0/0  md5<br>host  all   ambari,mapred ::/0 md5改成<br>host  all   ambari,mapred,hive ::/0 md5</p>
+<p>重启数据库<br>service postgresql restart</p>
+<p>检查<br>lsof -i:5432</p>
+<p>去仓库下载postgresql</p>
+<p><a href="http://mvnrepository.com/" target="_blank" rel="external">http://mvnrepository.com/</a></p>
+<p>下载</p>
+<p>PostgreSQL JDBC Driver JDBC 4.2<br>的<br>9.2-1002-jdbc4</p>
+<p>或者直接输入：<br>wget <a href="http://central.maven.org/maven2/org/postgresql/postgresql/9.2-1002-jdbc4/postgresql-9.2-1002-jdbc4.jar" target="_blank" rel="external">http://central.maven.org/maven2/org/postgresql/postgresql/9.2-1002-jdbc4/postgresql-9.2-1002-jdbc4.jar</a></p>
+<p>ambari-server setup –jdbc-db=postgres –jdbc-driver=/root/postgresql-9.2-1002-jdbc4.jar</p>
+<p>创建用户<br>psql -U postgres -d postgres<br>create user hive;<br>alter user hive password ‘hive’;<br>create database hive;<br>grant all on database hive to hive;<br>alter database hive owner to hive;</p>
+<p>此时test ConnectionConnection 就可以测试成功</p>
+<p>设置Ambari Metrics和Smart Sense用户密码都为admin</p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariInstallOptions.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariConfirmHostsing.png" alt="此处输入图片的描述"><br>如果发现失败，需要设置/etc/hosts文件<br>192.168.247.180    spark01<br>192.168.247.181    spark02<br>192.168.247.182    spark03</p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariConfirmHosts.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariChooseServices1.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariChooseServices2.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariAssignMasters.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariAssignSlavesandClients.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariCustomize1.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariCustomize2.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariCustomize3.png" alt="此处输入图片的描述"></p>
+<p>安装完成<br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariInstallSuccess.png" alt="此处输入图片的描述"></p>
 
       
     </div>
@@ -490,7 +499,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/spark/" rel="tag"># spark</a>
           
         </div>
       
@@ -499,8 +508,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/28/spring boot solr/" rel="next" title="spring boot solr">
-                <i class="fa fa-chevron-left"></i> spring boot solr
+              <a href="/2017/05/18/CDH oozie安装/" rel="next" title="CDH oozie">
+                <i class="fa fa-chevron-left"></i> CDH oozie
               </a>
             
           </div>
@@ -508,10 +517,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/10/python 初探/" rel="prev" title="python 初探">
-                python 初探 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -543,8 +548,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/01/04/算法思维/"
-           data-title="算法思维" data-url="http://yoursite.com/2017/01/04/算法思维/">
+      <div class="ds-thread" data-thread-key="2017/06/30/使用Ambari安装部署Spark集群/"
+           data-title="使用Ambari安装部署Spark集群" data-url="http://yoursite.com/2017/06/30/使用Ambari安装部署Spark集群/">
       </div>
     
   </div>
@@ -568,17 +573,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/agns.gif"
@@ -649,22 +645,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#火柴棍游戏"><span class="nav-number">1.</span> <span class="nav-text">火柴棍游戏</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>
