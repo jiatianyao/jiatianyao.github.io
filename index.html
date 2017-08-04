@@ -415,8 +415,7 @@
             <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>进入官网，选择产品里面的下载页面或者直接登录<br><a href="https://hortonworks.com/downloads/" target="_blank" rel="external">https://hortonworks.com/downloads/</a><br>选择<br>HDP® 2.6: Ready for the enterprise<br>下面的<br>Automated Install Guide</p>
 <p>因为博主是CENTOS 7<br>在这个页面直接选择：<br>RHEL/CentOS/Oracle Linux 7</p>
 <p>wget  <a href="http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo" target="_blank" rel="external">http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo</a> -O /etc/yum.repos.d/ambari.repo<br>yum repolist</p>
-<p>yum install ambari-server</p>
-<p>进入​Setup Options<br>ambari-server setup –j /usr/java/default<br>提示参数只能是一个，看来jdk要后设置</p>
+<h2 id="yum-install-ambari-server"><a href="#yum-install-ambari-server" class="headerlink" title="yum install ambari-server"></a>yum install ambari-server</h2><p>进入​Setup Options<br>ambari-server setup –j /usr/java/default<br>提示参数只能是一个，看来jdk要后设置</p>
 <p>ambari-server setup<br>各种回车，jdk的时候选择安装1.8的<br>如果输入自定义的jdk要注意权限问题</p>
 <p>启动：<br>ambari-server start</p>
 <p>查看：<br>[root@storm01 storm]# lsof -i:8080<br>COMMAND  PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME<br>java    7648 storm 1438u  IPv6 124470      0t0  TCP *:webcache (LISTEN)</p>

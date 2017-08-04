@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-08-03T00:52:01.936Z</updated>
+  <updated>2017-08-03T00:57:06.915Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,13 +20,12 @@
     <link href="http://yoursite.com/2017/06/30/%E4%BD%BF%E7%94%A8Ambari%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2Spark%E9%9B%86%E7%BE%A4/"/>
     <id>http://yoursite.com/2017/06/30/使用Ambari安装部署Spark集群/</id>
     <published>2017-06-30T03:30:00.000Z</published>
-    <updated>2017-08-03T00:52:01.936Z</updated>
+    <updated>2017-08-03T00:57:06.915Z</updated>
     
     <content type="html"><![CDATA[<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>进入官网，选择产品里面的下载页面或者直接登录<br><a href="https://hortonworks.com/downloads/" target="_blank" rel="external">https://hortonworks.com/downloads/</a><br>选择<br>HDP® 2.6: Ready for the enterprise<br>下面的<br>Automated Install Guide</p>
 <p>因为博主是CENTOS 7<br>在这个页面直接选择：<br>RHEL/CentOS/Oracle Linux 7</p>
 <p>wget  <a href="http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo" target="_blank" rel="external">http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo</a> -O /etc/yum.repos.d/ambari.repo<br>yum repolist</p>
-<p>yum install ambari-server</p>
-<p>进入​Setup Options<br>ambari-server setup –j /usr/java/default<br>提示参数只能是一个，看来jdk要后设置</p>
+<h2 id="yum-install-ambari-server"><a href="#yum-install-ambari-server" class="headerlink" title="yum install ambari-server"></a>yum install ambari-server</h2><p>进入​Setup Options<br>ambari-server setup –j /usr/java/default<br>提示参数只能是一个，看来jdk要后设置</p>
 <p>ambari-server setup<br>各种回车，jdk的时候选择安装1.8的<br>如果输入自定义的jdk要注意权限问题</p>
 <p>启动：<br>ambari-server start</p>
 <p>查看：<br>[root@storm01 storm]# lsof -i:8080<br>COMMAND  PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME<br>java    7648 storm 1438u  IPv6 124470      0t0  TCP *:webcache (LISTEN)</p>
@@ -1126,30 +1125,72 @@
   </entry>
   
   <entry>
-    <title>Python春节祝福语自动回复</title>
-    <link href="http://yoursite.com/2017/01/27/Python%E6%98%A5%E8%8A%82%E7%A5%9D%E7%A6%8F%E8%AF%AD%E8%87%AA%E5%8A%A8%E5%9B%9E%E5%A4%8D/"/>
-    <id>http://yoursite.com/2017/01/27/Python春节祝福语自动回复/</id>
+    <title>storm基础知识</title>
+    <link href="http://yoursite.com/2017/01/27/storm%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://yoursite.com/2017/01/27/storm基础知识/</id>
     <published>2017-01-27T12:00:00.000Z</published>
-    <updated>2017-03-04T13:07:31.345Z</updated>
+    <updated>2017-04-02T15:23:59.750Z</updated>
     
-    <content type="html"><![CDATA[<p>首先安装两个库<br>pip install itchat pillow</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
+    <content type="html"><![CDATA[<h2 id="Storm基本概念"><a href="#Storm基本概念" class="headerlink" title="Storm基本概念"></a>Storm基本概念</h2><p>Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。<br>Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止</p>
 <a id="more"></a>
-<p>运行后，扫描生成的二维码即可</p>
-<p>登录成功有以下提示<br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/python%E5%8F%91%E9%80%81%E7%A5%9D%E7%A6%8F%E8%AF%AD2.png" alt="此处输入图片的描述"></p>
+<p><img src="http://storm.apache.org/images/storm-flow.png" alt="此处输入图片的描述"><br>主要版本</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>发布日期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.9.0.1</td>
+<td>2013年12月8日</td>
+</tr>
+<tr>
+<td>0.9.0</td>
+<td>2013年12月8日</td>
+</tr>
+<tr>
+<td>0.8.0</td>
+<td>2012年8月2日</td>
+</tr>
+<tr>
+<td>0.7.0</td>
+<td>2012年2月28日</td>
+</tr>
+<tr>
+<td>0.6.0</td>
+<td>2011年12月15日</td>
+</tr>
+<tr>
+<td>0.5.0</td>
+<td>2011年9月19日</td>
+</tr>
+</tbody>
+</table>
+<h2 id="编程模型"><a href="#编程模型" class="headerlink" title="编程模型"></a>编程模型</h2><h3 id="Topology"><a href="#Topology" class="headerlink" title="Topology"></a>Topology</h3><p>一个实时计算应用程序逻辑被封装在Topology对象中， 类似Hadoop中的job， Topology会一直运行直到你显式杀死它</p>
+<p>###DataSource<br>外部数据源</p>
+<h3 id="Spout"><a href="#Spout" class="headerlink" title="Spout"></a>Spout</h3><p>接受外部数据源的组件，将外部数据源转化成Storm内部的数据，以Tuple为基本的传输单元下发给Bolt</p>
+<h3 id="Bolt"><a href="#Bolt" class="headerlink" title="Bolt"></a>Bolt</h3><p>接受Spout发送的数据，或上游的bolt的发送的数据。根据业务逻辑进行处理。发送给下一个Bolt或者是存储到某种介质上。介质可以是Redis可以是mysql，或者其他。</p>
+<h3 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h3><p>Storm内部中数据传输的基本单元，里面封装了一个List对象，用来保存数据。</p>
+<h2 id="StreamGrouping"><a href="#StreamGrouping" class="headerlink" title="StreamGrouping:"></a>StreamGrouping:</h2><h4 id="数据分组策略7种："><a href="#数据分组策略7种：" class="headerlink" title="数据分组策略7种："></a>数据分组策略7种：</h4><p>shuffleGrouping(Random函数),<br>NonGrouping(Random函数,目前和shuffleGrouping一样),<br>FieldGrouping(Hash取模),<br>Local or ShuffleGrouping （本地或随机，优先本地）,<br>Fields grouping（根据Tuple中的某一个Filed或者多个Filed的是值来划分。 比如<br>Stream根据Field为user-id来grouping， 相同user-id值的Tuple会被分<br>发到相同的Task中）,<br>Global grouping（整个Stream会选择一个Task作为分发的目的地， 通常是最新的那<br>个id的Task）<br>Direct grouping（产生数据的Spout/Bolt自己明确决定这个Tuple被Bolt的那些Task所<br>消费）</p>
+<h2 id="Storm优点"><a href="#Storm优点" class="headerlink" title="Storm优点"></a>Storm优点</h2><h4 id="健壮性"><a href="#健壮性" class="headerlink" title="健壮性"></a>健壮性</h4><p>当Worker失效或机器出现故障时， 自动分配新的Worker替换失<br>效Worker</p>
+<h4 id="准确性"><a href="#准确性" class="headerlink" title="准确性"></a>准确性</h4><p>采用Acker机制，保证数据不丢失<br>采用事务机制，保证数据准确性</p>
+<h2 id="storm架构"><a href="#storm架构" class="headerlink" title="storm架构"></a>storm架构</h2><p><img src="http://oh6ybr0jg.bkt.clouddn.com/storm%E6%9E%B6%E6%9E%84.png" alt="此处输入图片的描述"></p>
+<p>Storm的主线主要包括4条：nimbus, supervisor, worker和task。</p>
+<p>对于storm0.9.6的配置文件nimbus配置参数还是nimbus.hosts 现在新版本1.0.2已经修改为nimbus.seeds,已经可以支持HA<br>此处之一配置nimbus.seeds: XX。此处nimbus.seeds:后面要有一个空格，否则启动报错<br>storm启动nimbus的时候jps会有一个进程config_value然后变成nimbus。<br>其他启动同上</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;首先安装两个库&lt;br&gt;pip install itchat pillow&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;环境win7，pyython3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;编写py文件输入以下内容&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; itchat, time, re&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; itchat.content &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; *&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@itchat.msg_register([TEXT])&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;text_reply&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(msg)&lt;/span&gt;:&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    match = re.search(&lt;span class=&quot;string&quot;&gt;&#39;年&#39;&lt;/span&gt;, msg[&lt;span class=&quot;string&quot;&gt;&#39;Text&#39;&lt;/span&gt;]).span()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; match:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      itchat.send((&lt;span class=&quot;string&quot;&gt;&#39;鸡年大吉&#39;&lt;/span&gt;), msg[&lt;span class=&quot;string&quot;&gt;&#39;FromUserName&#39;&lt;/span&gt;])&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;other_reply&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(msg)&lt;/span&gt;:&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    itchat.send((&lt;span class=&quot;string&quot;&gt;&#39;鸡年大吉&#39;&lt;/span&gt;), msg[&lt;span class=&quot;string&quot;&gt;&#39;FromUserName&#39;&lt;/span&gt;])&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;itchat.auto_login(enableCmdQR=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;,hotReload=&lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;itchat.run()&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+      &lt;h2 id=&quot;Storm基本概念&quot;&gt;&lt;a href=&quot;#Storm基本概念&quot; class=&quot;headerlink&quot; title=&quot;Storm基本概念&quot;&gt;&lt;/a&gt;Storm基本概念&lt;/h2&gt;&lt;p&gt;Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。&lt;br&gt;Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止&lt;/p&gt;
     
     </summary>
     
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+      <category term="storm" scheme="http://yoursite.com/categories/storm/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="storm" scheme="http://yoursite.com/tags/storm/"/>
     
   </entry>
   
