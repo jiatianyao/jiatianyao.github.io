@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/19/bash脚本实战/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
 <meta property="og:description" content="练习题目写一个脚本getinterface.sh，脚本可以接受参数(i,I,a)，完成以下任务：   (1)使用以下形式：getinterface.sh [-i interface|-I IP|-a]   (2)当用户使用-i选项时，显示其指定网卡的IP地址；   (3)当用户使用-I选项时，显示其后面的IP地址所属的网络接口；（如 192.168.199.183：eth0）   (4)当用户单独">
-<meta property="og:updated_time" content="2017-08-01T00:49:40.701Z">
+<meta property="og:updated_time" content="2017-08-12T01:05:48.413Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bash脚本实战">
 <meta name="twitter:description" content="练习题目写一个脚本getinterface.sh，脚本可以接受参数(i,I,a)，完成以下任务：   (1)使用以下形式：getinterface.sh [-i interface|-I IP|-a]   (2)当用户使用-i选项时，显示其指定网卡的IP地址；   (3)当用户使用-I选项时，显示其后面的IP地址所属的网络接口；（如 192.168.199.183：eth0）   (4)当用户单独">
@@ -406,7 +406,7 @@
       
 
       
-        <h3 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h3><p>写一个脚本getinterface.sh，脚本可以接受参数(i,I,a)，完成以下任务：<br>   (1)使用以下形式：getinterface.sh [-i interface|-I IP|-a]<br>   (2)当用户使用-i选项时，显示其指定网卡的IP地址；<br>   (3)当用户使用-I选项时，显示其后面的IP地址所属的网络接口；（如 192.168.199.183：eth0）<br>   (4)当用户单独使用-a选项时，显示所有网络接口及其IP地址（lo除外）</p>
+        <h2 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h2><p>写一个脚本getinterface.sh，脚本可以接受参数(i,I,a)，完成以下任务：<br>   (1)使用以下形式：getinterface.sh [-i interface|-I IP|-a]<br>   (2)当用户使用-i选项时，显示其指定网卡的IP地址；<br>   (3)当用户使用-I选项时，显示其后面的IP地址所属的网络接口；（如 192.168.199.183：eth0）<br>   (4)当用户单独使用-a选项时，显示所有网络接口及其IP地址（lo除外）</p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>参数1为param1 参数2位param2<br>（1）利用CAT &lt;&lt; EOF  <em>*</em> EOF打印信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat &lt;&lt; EOF</div><div class="line">    getinterface.sh [-i interface|-I IP|<span class="_">-a</span>]</div><div class="line">    -i interface) show ip of the interface</div><div class="line">    -I IP) show interface of the IP and IP with :;</div><div class="line">    <span class="_">-a</span>) list all interfaces and their IPs except lo;</div><div class="line">    *) quit</div><div class="line">=================================================================</div><div class="line">EOF</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>（2）校验接口是否存在（参数2）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ifconfig <span class="variable">$interface</span> &gt;/dev/null </div><div class="line">$? <span class="_">-ne</span> 1  </div><div class="line"><span class="comment">#如果存在打印网卡的IP</span></div><div class="line">ifconfig <span class="variable">$parma2</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span></div></pre></td></tr></table></figure></p>
@@ -630,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#练习题目"><span class="nav-number">1.</span> <span class="nav-text">练习题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终的脚本如下："><span class="nav-number"></span> <span class="nav-text">最终的脚本如下：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意如上内容根据你个人机器显示情况而定，如果是显示"><span class="nav-number">1.</span> <span class="nav-text">注意如上内容根据你个人机器显示情况而定，如果是显示</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#练习题目"><span class="nav-number">1.</span> <span class="nav-text">练习题目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">1.1.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最终的脚本如下："><span class="nav-number">2.</span> <span class="nav-text">最终的脚本如下：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意如上内容根据你个人机器显示情况而定，如果是显示"><span class="nav-number">2.1.</span> <span class="nav-text">注意如上内容根据你个人机器显示情况而定，如果是显示</span></a></li></ol></li></ol></div>
             
 
           </div>
