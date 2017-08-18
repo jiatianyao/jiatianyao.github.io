@@ -308,8 +308,8 @@
   
   
 
-  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/redis集群/">
+  <article class="post post-type-kafka " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/codis 集群/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -334,8 +334,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/02/redis集群/" itemprop="url">
-                  Redis 集群
+                <a class="post-title-link" href="/2016/12/02/codis 集群/" itemprop="url">
+                  codis 集群
                 </a>
               
             
@@ -383,8 +383,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/12/02/redis集群/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/redis集群/" itemprop="commentCount"></span>
+                <a href="/2016/12/02/codis 集群/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/codis 集群/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -411,19 +411,14 @@
 
       
         
-          <p>同时在每台机器配置如下内容：<br>创建一个空的集群文件</p>
-<pre><code>vi nodes-6379.conf
-:wq
-</code></pre><p>修改配置文件，开启集群模式</p>
-<pre><code>vi redis.conf
-cluster-enabled yes
-cluster-config-file nodes-6379.conf
-</code></pre><p>启动：</p>
-<pre><code>./src/redis-server redis.conf
-</code></pre><p>然后输入查看命令<br>
+          <p>安装go语言<br><a href="http://www.golangtc.com/download">http://www.golangtc.com/download</a></p>
+<p>选择1.7.3下载<br><img src="http://oh6ybr0jg.bkt.clouddn.com/go1.7.3.jpg" alt="go1.7.3"><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf go1<span class="number">.7</span><span class="number">.3</span>.linux-amd64.tar.gz -C /usr/local/</div></pre></td></tr></table></figure></p>
+<p>下载jdk和zookeeper并解压</p>
+<p>配置zookeeper</p>
+<p>创建文件夹 zkData和zkLog<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cp zoo_sample.cfg zoo.cfg</div><div class="line"></div><div class="line">vi zoo.cfg </div><div class="line">dataDir=<span class="regexp">/root/</span>zookeeper/zookeeper<span class="number">-3.4</span><span class="number">.6</span>/zkData</div><div class="line">dataLogDir=<span class="regexp">/usr/</span>bigdata/zookeeper<span class="number">-3.4</span><span class="number">.6</span>/zkLog</div><div class="line">server<span class="number">.1</span>=master:<span class="number">2888</span>:<span class="number">3888</span></div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/02/redis集群/#more" rel="contents">
+            <a class="btn" href="/2016/12/02/codis 集群/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -611,8 +606,8 @@ cluster-config-file nodes-6379.conf
   
   
 
-  <article class="post post-type-kafka " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/codis 集群/">
+  <article class="post post-type-tags " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/redis集群/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -637,8 +632,8 @@ cluster-config-file nodes-6379.conf
             
               
                 
-                <a class="post-title-link" href="/2016/12/02/codis 集群/" itemprop="url">
-                  codis 集群
+                <a class="post-title-link" href="/2016/12/02/redis集群/" itemprop="url">
+                  Redis 集群
                 </a>
               
             
@@ -686,8 +681,8 @@ cluster-config-file nodes-6379.conf
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/12/02/codis 集群/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/codis 集群/" itemprop="commentCount"></span>
+                <a href="/2016/12/02/redis集群/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/redis集群/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -714,14 +709,19 @@ cluster-config-file nodes-6379.conf
 
       
         
-          <p>安装go语言<br><a href="http://www.golangtc.com/download">http://www.golangtc.com/download</a></p>
-<p>选择1.7.3下载<br><img src="http://oh6ybr0jg.bkt.clouddn.com/go1.7.3.jpg" alt="go1.7.3"><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf go1<span class="number">.7</span><span class="number">.3</span>.linux-amd64.tar.gz -C /usr/local/</div></pre></td></tr></table></figure></p>
-<p>下载jdk和zookeeper并解压</p>
-<p>配置zookeeper</p>
-<p>创建文件夹 zkData和zkLog<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cp zoo_sample.cfg zoo.cfg</div><div class="line"></div><div class="line">vi zoo.cfg </div><div class="line">dataDir=<span class="regexp">/root/</span>zookeeper/zookeeper<span class="number">-3.4</span><span class="number">.6</span>/zkData</div><div class="line">dataLogDir=<span class="regexp">/usr/</span>bigdata/zookeeper<span class="number">-3.4</span><span class="number">.6</span>/zkLog</div><div class="line">server<span class="number">.1</span>=master:<span class="number">2888</span>:<span class="number">3888</span></div></pre></td></tr></table></figure></p>
+          <p>同时在每台机器配置如下内容：<br>创建一个空的集群文件</p>
+<pre><code>vi nodes-6379.conf
+:wq
+</code></pre><p>修改配置文件，开启集群模式</p>
+<pre><code>vi redis.conf
+cluster-enabled yes
+cluster-config-file nodes-6379.conf
+</code></pre><p>启动：</p>
+<pre><code>./src/redis-server redis.conf
+</code></pre><p>然后输入查看命令<br>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/02/codis 集群/#more" rel="contents">
+            <a class="btn" href="/2016/12/02/redis集群/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1654,7 +1654,7 @@ cluster-config-file nodes-6379.conf
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/30/spark-MLlib-数据类型实战/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/30/设计模式-软件设计原则(1)/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -1679,8 +1679,8 @@ cluster-config-file nodes-6379.conf
             
               
                 
-                <a class="post-title-link" href="/2016/03/30/spark-MLlib-数据类型实战/" itemprop="url">
-                  spark-MLlib-数据类型实战
+                <a class="post-title-link" href="/2016/03/30/设计模式-软件设计原则(1)/" itemprop="url">
+                  设置模式-软件设计原则
                 </a>
               
             
@@ -1713,8 +1713,8 @@ cluster-config-file nodes-6379.conf
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index">
-                    <span itemprop="name">spark</span>
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
                   </a>
                 </span>
 
@@ -1728,8 +1728,8 @@ cluster-config-file nodes-6379.conf
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/03/30/spark-MLlib-数据类型实战/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/30/spark-MLlib-数据类型实战/" itemprop="commentCount"></span>
+                <a href="/2016/03/30/设计模式-软件设计原则(1)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/30/设计模式-软件设计原则(1)/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1756,13 +1756,14 @@ cluster-config-file nodes-6379.conf
 
       
         
-          <h2 id="监督学习："><a href="#监督学习：" class="headerlink" title="监督学习："></a>监督学习：</h2><p>给定数据集，知道要预测什么</p>
-<h2 id="非监督学习："><a href="#非监督学习：" class="headerlink" title="非监督学习："></a>非监督学习：</h2><p>不告诉计算机要做什么，让他自己去发现数据的内部机构</p>
-<h2 id="半监督学习："><a href="#半监督学习：" class="headerlink" title="半监督学习："></a>半监督学习：</h2><p>考虑如何用少量的标注样本和大量的未标注样本进行训练和分类</p>
-<h2 id="强化学习："><a href="#强化学习：" class="headerlink" title="强化学习："></a>强化学习：</h2><p>强化学习通过观察来学习动作的完成，每个动作都会对环境有所影响，学习对象根据观察到的周围环境的反馈来做出判断。在这种学习模式下，输入数据作为对模型的反馈</p>
+          <h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a><strong>开闭原则</strong></h2><p>Software entities should be open for extension,but closed for modification<br>from 《Object Oriented Software Construction》 by Bertrand Meyer at 1988</p>
+<p>通俗来讲在设计一个模块的时候,应当使这个模块可以在不被修改的前提下被扩展<br>例如：spring在装载一个类后，想要增加新功能扩展一个类，spring就会自动装载这个类</p>
+<p>和面向接口编程统一起来</p>
+<h2 id="合成-聚合复用原则"><a href="#合成-聚合复用原则" class="headerlink" title="合成/聚合复用原则"></a><strong>合成/聚合复用原则</strong></h2><p>使用聚合，组合代替继承</p>
+<p>but， what is 聚合组合？<br>e.g.<br>class Driver {<br>    //使用成员变量形式实现聚合关系<br>    Car mycar;<br>    public void drive(){<br>        mycar.run();<br>    }<br>}<br>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/30/spark-MLlib-数据类型实战/#more" rel="contents">
+            <a class="btn" href="/2016/03/30/设计模式-软件设计原则(1)/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
