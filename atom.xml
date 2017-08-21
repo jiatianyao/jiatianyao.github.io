@@ -48,7 +48,7 @@
     <link href="http://yoursite.com/2017/06/30/%E4%BD%BF%E7%94%A8Ambari%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2Spark%E9%9B%86%E7%BE%A4/"/>
     <id>http://yoursite.com/2017/06/30/使用Ambari安装部署Spark集群/</id>
     <published>2017-06-30T03:30:00.000Z</published>
-    <updated>2017-08-19T01:59:39.367Z</updated>
+    <updated>2017-08-21T01:24:56.481Z</updated>
     
     <content type="html"><![CDATA[<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>进入官网，选择产品里面的下载页面或者直接登录<br><a href="https://hortonworks.com/downloads/" target="_blank" rel="external">https://hortonworks.com/downloads/</a><br>选择<br>HDP® 2.6: Ready for the enterprise<br>下面的<br>Automated Install Guide</p>
 <p>因为博主是CENTOS 7<br>在这个页面直接选择：<br>RHEL/CentOS/Oracle Linux 7</p>
@@ -66,7 +66,7 @@
 <h2 id="设置hive"><a href="#设置hive" class="headerlink" title="设置hive"></a>设置hive</h2><p>用户密码都为hive<br><a id="more"></a><br>需要PostgreSQL支持远程连接<br>find / -name pg_hba.conf</p>
 <p>vi /var/lib/pgsql/data/pg_hba.conf<br>将<br>local   all   postgres                                     peer改成<br>local   all   postgres                                     trust<br>host    all   postgres             127.0.0.1/32            ident改成<br>host    all   postgres             127.0.0.1/32            trust<br>local  all  ambari,mapred md5改成<br>local  all  ambari,mapred,hive trust<br>host  all   ambari,mapred 0.0.0.0/0  md5改成<br>host  all   ambari,mapred,hive 0.0.0.0/0  md5<br>host  all   ambari,mapred ::/0 md5改成<br>host  all   ambari,mapred,hive ::/0 md5</p>
 <p>重启数据库<br>service postgresql restart</p>
-<p>检查<br>lsof -i:5432</p>
+<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p>lsof -i:5432</p>
 <p>去仓库下载postgresql</p>
 <p><a href="http://mvnrepository.com/" target="_blank" rel="external">http://mvnrepository.com/</a></p>
 <p>下载</p>
