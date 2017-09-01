@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-08-13T05:14:38.067Z</updated>
+  <updated>2017-08-31T13:25:34.356Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,66 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>spark shuffle 调优</title>
+    <link href="http://yoursite.com/2017/08/30/spark%20shuffle%20%E8%B0%83%E4%BC%98/"/>
+    <id>http://yoursite.com/2017/08/30/spark shuffle 调优/</id>
+    <published>2017-08-30T03:30:00.000Z</published>
+    <updated>2017-08-31T13:25:34.356Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="shuffle实现的具体过程"><a href="#shuffle实现的具体过程" class="headerlink" title="shuffle实现的具体过程"></a>shuffle实现的具体过程</h2><p>1.Spark系统在运行含shuffle过程的应用时，Executor进程除了运行task，还要负责写shuffle 数据，给其他Executor提供shuffle数据。<br>    当Executor进程任务过重，导致GC而不能为其 他Executor提供shuffle数据时，会影响任务运行。<br>    这里实际上是利用External Shuffle Service 来提升性能，External shuffle Service是长期存在于NodeManager进程中的一个辅助服务。<br>    通过该服务 来抓取shuffle数据，减少了Executor的压力，在Executor GC的时候也不会影响其他 Executor的任务运行。</p>
+<p>启用方法：</p>
+<h3 id="一-在NodeManager中启动External-shuffle-Service。"><a href="#一-在NodeManager中启动External-shuffle-Service。" class="headerlink" title="一. 在NodeManager中启动External shuffle Service。"></a>一. 在NodeManager中启动External shuffle Service。</h3><pre><code>a. 在“yarn-site.xml”中添加如下配置项：
+&lt;property&gt;
+&lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+&lt;value&gt;spark_shuffle&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+&lt;name&gt;yarn.nodemanager.aux-services.spark_shuffle.class&lt;/name&gt;
+&lt;value&gt;org.apache.spark.network.yarn.YarnShuffleService&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+&lt;name&gt;spark.shuffle.service.port&lt;/name&gt;
+&lt;value&gt;7337&lt;/value&gt;
+&lt;/property&gt;
+配置参数描述
+yarn.nodemanager.aux-services  ：NodeManager中一个长期运行的辅助服务，用于提升Shuffle计算性能。
+yarn.nodemanager.auxservices.spark_shuffle.class ：NodeManager中辅助服务对应的类。
+spark.shuffle.service.port ：Shuffle服务监听数据获取请求的端口。可选配置，默认值为“7337”。
+b. 添加依赖的jar包
+拷贝“${SPARK_HOME}/lib/spark-1.3.0-yarn-shuffle.jar”到“${HADOOP_HOME}/share/hadoop/yarn/lib/”目录下。
+c. 重启NodeManager进程，也就启动了External shuffle Service。
+</code></pre><h3 id="二-Spark应用使用External-shuffle-Service。"><a href="#二-Spark应用使用External-shuffle-Service。" class="headerlink" title="二. Spark应用使用External shuffle Service。"></a>二. Spark应用使用External shuffle Service。</h3><pre><code>在“spark-defaults.conf”中必须添加如下配置项： 
+    spark.shuffle.service.enabled true 
+    spark.shuffle.service.port 7337 
+说明 
+1.如果1.如果“yarn.nodemanager.aux-services”配置项已存在，则在value中添加 “spark_shuffle”，且用逗号和其他值分开。 
+2.“spark.shuffle.service.port”的值需要和上面“yarn-site.xml”中的值一样。 
+配置参数描述 
+spark.shuffle.service.enabled   ：NodeManager中一个长期运行的辅助服务，用于提升Shuffle 计算性能。默认为false，表示不启用该功能。 
+spark.shuffle.service.port   ：Shuffle服务监听数据获取请求的端口。可选配置，默认值 为“7337”。
+</code></pre><p>Hash Shuffle不足<br>map task会根据reduce的数量（partition） 生成相应的bucket 写shuffle blockFile</p>
+<p>如果map 和reduce数量过多，会写很多blockFile，造成问题1：超过操作系统所能打开最大文件数，问题2：大量随机写随机读</p>
+<p>解决方案：</p>
+<p>1.shuffle 参数：<br>spark.shuffle.consolidateFiles  默认为false<br>如果设置为”true”，在shuffle期间，合并的中间文件将会被创建。创建更少的文件可以提供文件系统的shuffle的效 率。这些shuffle都伴随着大量递归任务。当用ext4和dfs文件系统时，推荐设置为”true”。在ext3中，因为文件系统的限制，这个选项可 能机器（大于8核）降低效率</p>
+<p>2.sort shuffle<br>每个map只写到一个文件，和上面的写到reduce个数个文件不同</p>
+<h2 id="不同算子影响shuffle表现形式不同"><a href="#不同算子影响shuffle表现形式不同" class="headerlink" title="不同算子影响shuffle表现形式不同"></a>不同算子影响shuffle表现形式不同</h2><p>reduceByKey(func, numPartitions=None)<br>也就是，reduceByKey用于对每个key对应的多个value进行merge操作，最重要的是它能够在本地先进行merge操作，并且merge操作可以通过函数自定义。<br><img src="http://oh6ybr0jg.bkt.clouddn.com/reduceByKey.png" alt="此处输入图片的描述"></p>
+<p>groupByKey(numPartitions=None)<br>也就是，groupByKey也是对每个key进行操作，但只生成一个sequence。需要特别注意“Note”中的话，它告诉我们：如果需要对sequence进行aggregation操作（注意，groupByKey本身不能自定义操作函数），那么，选择reduceByKey/aggregateByKey更好。这是因为groupByKey不能自定义函数，我们需要先用groupByKey生成RDD，然后才能对此RDD通过map进行自定义函数操作。<br><img src="http://oh6ybr0jg.bkt.clouddn.com/groupByKey.png" alt="此处输入图片的描述"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;shuffle实现的具体过程&quot;&gt;&lt;a href=&quot;#shuffle实现的具体过程&quot; class=&quot;headerlink&quot; title=&quot;shuffle实现的具体过程&quot;&gt;&lt;/a&gt;shuffle实现的具体过程&lt;/h2&gt;&lt;p&gt;1.Spark系统在运行含shuffle过程
+    
+    </summary>
+    
+      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
+    
+    
+      <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
+    
+  </entry>
   
   <entry>
     <title>spark 2.2.0源码编译</title>
@@ -1112,55 +1172,6 @@
     
     
       <category term="学习" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>storm1.0.2安装</title>
-    <link href="http://yoursite.com/2017/01/28/storm1.0.2%E5%AE%89%E8%A3%85/"/>
-    <id>http://yoursite.com/2017/01/28/storm1.0.2安装/</id>
-    <published>2017-01-28T12:00:00.000Z</published>
-    <updated>2017-03-04T13:08:03.471Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>配置zookeeper略</p>
-<p>下载：<br>wget <a href="http://mirrors.cnnic.cn/apache/storm/apache-storm-1.0.2/apache-storm-1.0.2.tar.gz" target="_blank" rel="external">http://mirrors.cnnic.cn/apache/storm/apache-storm-1.0.2/apache-storm-1.0.2.tar.gz</a></p>
-<p>解压，并创建符号链接<br>修改profile配置文件<br>修改配置文件：<br>vi storm.yaml </p>
-<p>添加如下内容<br>storm.zookeeper.servers:</p>
-<pre><code>- &quot;www.hadoop01.com&quot;
-</code></pre><p>storm.zookeeper.root: “/storm_1.0.2”<br>nimbus.seeds: [“www.hadoop01.com”]<br>supervisor.slots.ports:</p>
-<pre><code>- 6700
-- 6701
-- 6702
-- 6703
-</code></pre><a id="more"></a>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>启动zookeeper<br>启动nimbus<br>./bin/storm nimbus &amp;<br>启动ui</p>
-<p>./bin/storm ui &amp;</p>
-<h2 id="登录UI："><a href="#登录UI：" class="headerlink" title="登录UI："></a>登录UI：</h2><p><a href="http://www.hadoop01.com:8080/index.html" target="_blank" rel="external">http://www.hadoop01.com:8080/index.html</a><br><img src="http://oh6ybr0jg.bkt.clouddn.com/UI1.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/UI2.png" alt="此处输入图片的描述"><br>启动supervisor<br>./bin/storm supervisor &amp;<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%90%AF%E5%8A%A8supervisor%E5%90%8E.png" alt="此处输入图片的描述"><br>启动logviewer<br>./bin/storm logviewer &amp; </p>
-<h2 id="执行demo"><a href="#执行demo" class="headerlink" title="执行demo"></a>执行demo</h2><p>cd /home/hadoop/apps/storm/storm/examples/storm-starter</p>
-<p>storm jar storm-starter-topologies-1.0.2.jar org.apache.storm.starter.WordCountTopology first-topology</p>
-<p>查看UI<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%8F%90%E4%BA%A4WordCountTopology.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%8F%90%E4%BA%A4WordCountTopology2.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%8F%90%E4%BA%A4WordCountTopology3.png" alt="此处输入图片的描述"><br>点击spout:<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E7%82%B9%E5%87%BBspout%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E8%BF%90%E8%A1%8C%E7%9A%84%E6%9C%BA%E5%99%A8.png" alt="此处输入图片的描述"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;p&gt;配置zookeeper略&lt;/p&gt;
-&lt;p&gt;下载：&lt;br&gt;wget &lt;a href=&quot;http://mirrors.cnnic.cn/apache/storm/apache-storm-1.0.2/apache-storm-1.0.2.tar.gz&quot;&gt;http://mirrors.cnnic.cn/apache/storm/apache-storm-1.0.2/apache-storm-1.0.2.tar.gz&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;解压，并创建符号链接&lt;br&gt;修改profile配置文件&lt;br&gt;修改配置文件：&lt;br&gt;vi storm.yaml &lt;/p&gt;
-&lt;p&gt;添加如下内容&lt;br&gt;storm.zookeeper.servers:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;- &amp;quot;www.hadoop01.com&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;storm.zookeeper.root: “/storm_1.0.2”&lt;br&gt;nimbus.seeds: [“www.hadoop01.com”]&lt;br&gt;supervisor.slots.ports:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;- 6700
-- 6701
-- 6702
-- 6703
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="storm" scheme="http://yoursite.com/categories/storm/"/>
-    
-    
-      <category term="storm" scheme="http://yoursite.com/tags/storm/"/>
     
   </entry>
   

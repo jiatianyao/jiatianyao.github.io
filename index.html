@@ -309,6 +309,185 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/spark shuffle 调优/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/30/spark shuffle 调优/" itemprop="url">
+                  spark shuffle 调优
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-30T11:30:00+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/08/30/spark shuffle 调优/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/30/spark shuffle 调优/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="shuffle实现的具体过程"><a href="#shuffle实现的具体过程" class="headerlink" title="shuffle实现的具体过程"></a>shuffle实现的具体过程</h2><p>1.Spark系统在运行含shuffle过程的应用时，Executor进程除了运行task，还要负责写shuffle 数据，给其他Executor提供shuffle数据。<br>    当Executor进程任务过重，导致GC而不能为其 他Executor提供shuffle数据时，会影响任务运行。<br>    这里实际上是利用External Shuffle Service 来提升性能，External shuffle Service是长期存在于NodeManager进程中的一个辅助服务。<br>    通过该服务 来抓取shuffle数据，减少了Executor的压力，在Executor GC的时候也不会影响其他 Executor的任务运行。</p>
+<p>启用方法：</p>
+<h3 id="一-在NodeManager中启动External-shuffle-Service。"><a href="#一-在NodeManager中启动External-shuffle-Service。" class="headerlink" title="一. 在NodeManager中启动External shuffle Service。"></a>一. 在NodeManager中启动External shuffle Service。</h3><pre><code>a. 在“yarn-site.xml”中添加如下配置项：
+&lt;property&gt;
+&lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+&lt;value&gt;spark_shuffle&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+&lt;name&gt;yarn.nodemanager.aux-services.spark_shuffle.class&lt;/name&gt;
+&lt;value&gt;org.apache.spark.network.yarn.YarnShuffleService&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+&lt;name&gt;spark.shuffle.service.port&lt;/name&gt;
+&lt;value&gt;7337&lt;/value&gt;
+&lt;/property&gt;
+配置参数描述
+yarn.nodemanager.aux-services  ：NodeManager中一个长期运行的辅助服务，用于提升Shuffle计算性能。
+yarn.nodemanager.auxservices.spark_shuffle.class ：NodeManager中辅助服务对应的类。
+spark.shuffle.service.port ：Shuffle服务监听数据获取请求的端口。可选配置，默认值为“7337”。
+b. 添加依赖的jar包
+拷贝“${SPARK_HOME}/lib/spark-1.3.0-yarn-shuffle.jar”到“${HADOOP_HOME}/share/hadoop/yarn/lib/”目录下。
+c. 重启NodeManager进程，也就启动了External shuffle Service。
+</code></pre><h3 id="二-Spark应用使用External-shuffle-Service。"><a href="#二-Spark应用使用External-shuffle-Service。" class="headerlink" title="二. Spark应用使用External shuffle Service。"></a>二. Spark应用使用External shuffle Service。</h3><pre><code>在“spark-defaults.conf”中必须添加如下配置项： 
+    spark.shuffle.service.enabled true 
+    spark.shuffle.service.port 7337 
+说明 
+1.如果1.如果“yarn.nodemanager.aux-services”配置项已存在，则在value中添加 “spark_shuffle”，且用逗号和其他值分开。 
+2.“spark.shuffle.service.port”的值需要和上面“yarn-site.xml”中的值一样。 
+配置参数描述 
+spark.shuffle.service.enabled   ：NodeManager中一个长期运行的辅助服务，用于提升Shuffle 计算性能。默认为false，表示不启用该功能。 
+spark.shuffle.service.port   ：Shuffle服务监听数据获取请求的端口。可选配置，默认值 为“7337”。
+</code></pre><p>Hash Shuffle不足<br>map task会根据reduce的数量（partition） 生成相应的bucket 写shuffle blockFile</p>
+<p>如果map 和reduce数量过多，会写很多blockFile，造成问题1：超过操作系统所能打开最大文件数，问题2：大量随机写随机读</p>
+<p>解决方案：</p>
+<p>1.shuffle 参数：<br>spark.shuffle.consolidateFiles  默认为false<br>如果设置为”true”，在shuffle期间，合并的中间文件将会被创建。创建更少的文件可以提供文件系统的shuffle的效 率。这些shuffle都伴随着大量递归任务。当用ext4和dfs文件系统时，推荐设置为”true”。在ext3中，因为文件系统的限制，这个选项可 能机器（大于8核）降低效率</p>
+<p>2.sort shuffle<br>每个map只写到一个文件，和上面的写到reduce个数个文件不同</p>
+<h2 id="不同算子影响shuffle表现形式不同"><a href="#不同算子影响shuffle表现形式不同" class="headerlink" title="不同算子影响shuffle表现形式不同"></a>不同算子影响shuffle表现形式不同</h2><p>reduceByKey(func, numPartitions=None)<br>也就是，reduceByKey用于对每个key对应的多个value进行merge操作，最重要的是它能够在本地先进行merge操作，并且merge操作可以通过函数自定义。<br><img src="http://oh6ybr0jg.bkt.clouddn.com/reduceByKey.png" alt="此处输入图片的描述"></p>
+<p>groupByKey(numPartitions=None)<br>也就是，groupByKey也是对每个key进行操作，但只生成一个sequence。需要特别注意“Note”中的话，它告诉我们：如果需要对sequence进行aggregation操作（注意，groupByKey本身不能自定义操作函数），那么，选择reduceByKey/aggregateByKey更好。这是因为groupByKey不能自定义函数，我们需要先用groupByKey生成RDD，然后才能对此RDD通过map进行自定义函数操作。<br><img src="http://oh6ybr0jg.bkt.clouddn.com/groupByKey.png" alt="此处输入图片的描述"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/spark 2.2.0源码编译/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1650,153 +1829,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/19/bash脚本实战/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/19/bash脚本实战/" itemprop="url">
-                  bash脚本实战
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T23:30:00+08:00">
-                2017-03-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bash/" itemprop="url" rel="index">
-                    <span itemprop="name">bash</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/19/bash脚本实战/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/19/bash脚本实战/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h2><p>写一个脚本getinterface.sh，脚本可以接受参数(i,I,a)，完成以下任务：<br>   (1)使用以下形式：getinterface.sh [-i interface|-I IP|-a]<br>   (2)当用户使用-i选项时，显示其指定网卡的IP地址；<br>   (3)当用户使用-I选项时，显示其后面的IP地址所属的网络接口；（如 192.168.199.183：eth0）<br>   (4)当用户单独使用-a选项时，显示所有网络接口及其IP地址（lo除外）</p>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>参数1为param1 参数2位param2<br>（1）利用CAT &lt;&lt; EOF  <em>*</em> EOF打印信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat &lt;&lt; EOF</div><div class="line">    getinterface.sh [-i interface|-I IP|<span class="_">-a</span>]</div><div class="line">    -i interface) show ip of the interface</div><div class="line">    -I IP) show interface of the IP and IP with :;</div><div class="line">    <span class="_">-a</span>) list all interfaces and their IPs except lo;</div><div class="line">    *) quit</div><div class="line">=================================================================</div><div class="line">EOF</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/19/bash脚本实战/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1842,7 +1874,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
