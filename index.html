@@ -411,7 +411,29 @@
 
       
         
-          <h2 id="shuffle实现的具体过程"><a href="#shuffle实现的具体过程" class="headerlink" title="shuffle实现的具体过程"></a>shuffle实现的具体过程</h2><p>1.Spark系统在运行含shuffle过程的应用时，Executor进程除了运行task，还要负责写shuffle 数据，给其他Executor提供shuffle数据。<br>    当Executor进程任务过重，导致GC而不能为其 他Executor提供shuffle数据时，会影响任务运行。<br>    这里实际上是利用External Shuffle Service 来提升性能，External shuffle Service是长期存在于NodeManager进程中的一个辅助服务。<br>    通过该服务 来抓取shuffle数据，减少了Executor的压力，在Executor GC的时候也不会影响其他 Executor的任务运行。<br>
+          <h2 id="shuffle实现的具体过程"><a href="#shuffle实现的具体过程" class="headerlink" title="shuffle实现的具体过程"></a>shuffle实现的具体过程</h2><p>1.Spark系统在运行含shuffle过程的应用时，Executor进程除了运行task，还要负责写shuffle 数据，给其他Executor提供shuffle数据。<br>    当Executor进程任务过重，导致GC而不能为其 他Executor提供shuffle数据时，会影响任务运行。<br>    这里实际上是利用External Shuffle Service 来提升性能，External shuffle Service是长期存在于NodeManager进程中的一个辅助服务。<br>    通过该服务 来抓取shuffle数据，减少了Executor的压力，在Executor GC的时候也不会影响其他 Executor的任务运行。</p>
+<p>启用方法：</p>
+<h3 id="一-在NodeManager中启动External-shuffle-Service。"><a href="#一-在NodeManager中启动External-shuffle-Service。" class="headerlink" title="一. 在NodeManager中启动External shuffle Service。"></a>一. 在NodeManager中启动External shuffle Service。</h3><pre><code>a. 在“yarn-site.xml”中添加如下配置项：
+&lt;property&gt;
+&lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+&lt;value&gt;spark_shuffle&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+&lt;name&gt;yarn.nodemanager.aux-services.spark_shuffle.class&lt;/name&gt;
+&lt;value&gt;org.apache.spark.network.yarn.YarnShuffleService&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+&lt;name&gt;spark.shuffle.service.port&lt;/name&gt;
+&lt;value&gt;7337&lt;/value&gt;
+&lt;/property&gt;
+配置参数描述
+yarn.nodemanager.aux-services  ：NodeManager中一个长期运行的辅助服务，用于提升Shuffle计算性能。
+yarn.nodemanager.auxservices.spark_shuffle.class ：NodeManager中辅助服务对应的类。
+spark.shuffle.service.port ：Shuffle服务监听数据获取请求的端口。可选配置，默认值为“7337”。
+b. 添加依赖的jar包
+拷贝“${SPARK_HOME}/lib/spark-1.3.0-yarn-shuffle.jar”到“${HADOOP_HOME}/share/hadoop/yarn/lib/”目录下。
+c. 重启NodeManager进程，也就启动了External shuffle Service。
+</code></pre>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/08/30/spark shuffle 调优/#more" rel="contents">
