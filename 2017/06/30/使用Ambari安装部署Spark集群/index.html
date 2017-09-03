@@ -107,7 +107,7 @@ wget  http://public-repo-1.ho">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariCustomize2.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariCustomize3.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/AmbariInstallSuccess.png">
-<meta property="og:updated_time" content="2017-08-29T01:28:02.126Z">
+<meta property="og:updated_time" content="2017-09-03T09:42:14.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Ambari安装部署Spark集群">
 <meta name="twitter:description" content="下载进入官网，选择产品里面的下载页面或者直接登录https://hortonworks.com/downloads/选择HDP® 2.6: Ready for the enterprise下面的Automated Install Guide
@@ -433,11 +433,13 @@ wget  http://public-repo-1.ho">
 <h2 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h2><p>ambari-server start</p>
 <p>查看：<br>[root@storm01 storm]# lsof -i:8080<br>COMMAND  PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME<br>java    7648 storm 1438u  IPv6 124470      0t0  TCP *:webcache (LISTEN)</p>
 <p>关闭防火墙<br>systemctl disable firewalld.service<br>systemctl stop firewalld.service    </p>
+<a id="more"></a>
 <h2 id="在浏览器输入http-storm01-8080即可进入UI"><a href="#在浏览器输入http-storm01-8080即可进入UI" class="headerlink" title="在浏览器输入http://storm01:8080即可进入UI"></a>在浏览器输入<a href="http://storm01:8080即可进入UI" target="_blank" rel="external">http://storm01:8080即可进入UI</a></h2><p>用户密码都为admin</p>
 <p>在每个机器上安装agent<br>yum install -y ambari-agent</p>
 <p>修改配置文件<br> vi /etc/ambari-agent/conf/ambari-agent.ini<br> hostname=localhost更改为<br> hostname=storm01</p>
 <p> 启动agent<br> service ambari-agent start</p>
-<h2 id="设置hive"><a href="#设置hive" class="headerlink" title="设置hive"></a>设置hive</h2><p>用户密码都为hive<br><a id="more"></a><br>需要PostgreSQL支持远程连接<br>find / -name pg_hba.conf</p>
+<h2 id="设置hive"><a href="#设置hive" class="headerlink" title="设置hive"></a>设置hive</h2><p>用户密码都为hive</p>
+<p>需要PostgreSQL支持远程连接<br>find / -name pg_hba.conf</p>
 <p>vi /var/lib/pgsql/data/pg_hba.conf<br>将<br>local   all   postgres                                     peer改成<br>local   all   postgres                                     trust<br>host    all   postgres             127.0.0.1/32            ident改成<br>host    all   postgres             127.0.0.1/32            trust<br>local  all  ambari,mapred md5改成<br>local  all  ambari,mapred,hive trust<br>host  all   ambari,mapred 0.0.0.0/0  md5改成<br>host  all   ambari,mapred,hive 0.0.0.0/0  md5<br>host  all   ambari,mapred ::/0 md5改成<br>host  all   ambari,mapred,hive ::/0 md5</p>
 <p>重启数据库<br>service postgresql restart</p>
 <h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p>lsof -i:5432</p>
