@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-11T16:03:50.648Z</updated>
+  <updated>2017-09-11T16:08:24.263Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://yoursite.com/2017/08/30/spark%20shuffle%20%E8%B0%83%E4%BC%98/"/>
     <id>http://yoursite.com/2017/08/30/spark shuffle 调优/</id>
     <published>2017-08-30T03:30:00.000Z</published>
-    <updated>2017-09-11T16:03:50.648Z</updated>
+    <updated>2017-09-11T16:08:24.263Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="shuffle实现的具体过程"><a href="#shuffle实现的具体过程" class="headerlink" title="shuffle实现的具体过程"></a>shuffle实现的具体过程</h3><p>1.Spark系统在运行含shuffle过程的应用时，Executor进程除了运行task，还要负责写shuffle 数据，给其他Executor提供shuffle数据。<br>    当Executor进程任务过重，导致GC而不能为其 他Executor提供shuffle数据时，会影响任务运行。<br>    这里实际上是利用External Shuffle Service 来提升性能，External shuffle Service是长期存在于NodeManager进程中的一个辅助服务。<br>    通过该服务 来抓取shuffle数据，减少了Executor的压力，在Executor GC的时候也不会影响其他 Executor的任务运行。</p>
+    <content type="html"><![CDATA[<h2 id="shuffle实现的具体过程"><a href="#shuffle实现的具体过程" class="headerlink" title="shuffle实现的具体过程"></a>shuffle实现的具体过程</h2><p>1.Spark系统在运行含shuffle过程的应用时，Executor进程除了运行task，还要负责写shuffle 数据，给其他Executor提供shuffle数据。<br>    当Executor进程任务过重，导致GC而不能为其 他Executor提供shuffle数据时，会影响任务运行。<br>    这里实际上是利用External Shuffle Service 来提升性能，External shuffle Service是长期存在于NodeManager进程中的一个辅助服务。<br>    通过该服务 来抓取shuffle数据，减少了Executor的压力，在Executor GC的时候也不会影响其他 Executor的任务运行。</p>
 <p>启用方法：</p>
 <h3 id="一-在NodeManager中启动External-shuffle-Service。"><a href="#一-在NodeManager中启动External-shuffle-Service。" class="headerlink" title="一. 在NodeManager中启动External shuffle Service。"></a>一. 在NodeManager中启动External shuffle Service。</h3><pre><code>a. 在“yarn-site.xml”中添加如下配置项：
 &lt;property&gt;
@@ -65,7 +65,7 @@ spark.shuffle.service.port   ：Shuffle服务监听数据获取请求的端口�
     
     <summary type="html">
     
-      &lt;h3 id=&quot;shuffle实现的具体过程&quot;&gt;&lt;a href=&quot;#shuffle实现的具体过程&quot; class=&quot;headerlink&quot; title=&quot;shuffle实现的具体过程&quot;&gt;&lt;/a&gt;shuffle实现的具体过程&lt;/h3&gt;&lt;p&gt;1.Spark系统在运行含shuffle过程的应用时，Executor进程除了运行task，还要负责写shuffle 数据，给其他Executor提供shuffle数据。&lt;br&gt;    当Executor进程任务过重，导致GC而不能为其 他Executor提供shuffle数据时，会影响任务运行。&lt;br&gt;    这里实际上是利用External Shuffle Service 来提升性能，External shuffle Service是长期存在于NodeManager进程中的一个辅助服务。&lt;br&gt;    通过该服务 来抓取shuffle数据，减少了Executor的压力，在Executor GC的时候也不会影响其他 Executor的任务运行。&lt;/p&gt;
+      &lt;h2 id=&quot;shuffle实现的具体过程&quot;&gt;&lt;a href=&quot;#shuffle实现的具体过程&quot; class=&quot;headerlink&quot; title=&quot;shuffle实现的具体过程&quot;&gt;&lt;/a&gt;shuffle实现的具体过程&lt;/h2&gt;&lt;p&gt;1.Spark系统在运行含shuffle过程的应用时，Executor进程除了运行task，还要负责写shuffle 数据，给其他Executor提供shuffle数据。&lt;br&gt;    当Executor进程任务过重，导致GC而不能为其 他Executor提供shuffle数据时，会影响任务运行。&lt;br&gt;    这里实际上是利用External Shuffle Service 来提升性能，External shuffle Service是长期存在于NodeManager进程中的一个辅助服务。&lt;br&gt;    通过该服务 来抓取shuffle数据，减少了Executor的压力，在Executor GC的时候也不会影响其他 Executor的任务运行。&lt;/p&gt;
 &lt;p&gt;启用方法：&lt;/p&gt;
 &lt;h3 id=&quot;一-在NodeManager中启动External-shuffle-Service。&quot;&gt;&lt;a href=&quot;#一-在NodeManager中启动External-shuffle-Service。&quot; class=&quot;headerlink&quot; title=&quot;一. 在NodeManager中启动External shuffle Service。&quot;&gt;&lt;/a&gt;一. 在NodeManager中启动External shuffle Service。&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;a. 在“yarn-site.xml”中添加如下配置项：
 &amp;lt;property&amp;gt;
