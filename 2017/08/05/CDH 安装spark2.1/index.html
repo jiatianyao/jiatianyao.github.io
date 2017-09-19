@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="kafka," />
+  <meta name="keywords" content="CDH," />
 
 
 
@@ -86,30 +86,22 @@
 
 
 
-<meta name="description" content="下载kafka的源码包：http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz
-安装gradle 
-1.官网下载https://gradle.org/releases选择当时最新版本：https://downloads.gradle.org/distributions/gradle-3.5-all.zip
-2.解压解">
+<meta name="description" content="官方链接https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html
+1.下载Spark2 CSDhttps://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging
+1.1.1 C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kafka源码阅读">
-<meta property="og:url" content="http://yoursite.com/2017/05/02/kafka源码阅读/index.html">
+<meta property="og:title" content="CDH 安装spark2.1">
+<meta property="og:url" content="http://yoursite.com/2017/08/05/CDH 安装spark2.1/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
-<meta property="og:description" content="下载kafka的源码包：http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz
-安装gradle 
-1.官网下载https://gradle.org/releases选择当时最新版本：https://downloads.gradle.org/distributions/gradle-3.5-all.zip
-2.解压解">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/gradle.jpg">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170427134226.jpg">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/windows%E7%BC%96%E8%AF%91kafka.jpg">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/kafka_src_emv.jpg">
-<meta property="og:updated_time" content="2017-05-18T00:58:23.538Z">
+<meta property="og:description" content="官方链接https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html
+1.下载Spark2 CSDhttps://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging
+1.1.1 C">
+<meta property="og:updated_time" content="2017-09-19T11:12:47.691Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kafka源码阅读">
-<meta name="twitter:description" content="下载kafka的源码包：http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz
-安装gradle 
-1.官网下载https://gradle.org/releases选择当时最新版本：https://downloads.gradle.org/distributions/gradle-3.5-all.zip
-2.解压解">
-<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/gradle.jpg">
+<meta name="twitter:title" content="CDH 安装spark2.1">
+<meta name="twitter:description" content="官方链接https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html
+1.下载Spark2 CSDhttps://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging
+1.1.1 C">
 
 
 
@@ -137,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/02/kafka源码阅读/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/05/CDH 安装spark2.1/"/>
 
 
 
 
 
-  <title> kafka源码阅读 | 张洪铭的个人博客 </title>
+  <title> CDH 安装spark2.1 | 张洪铭的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -322,7 +314,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/02/kafka源码阅读/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/05/CDH 安装spark2.1/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -346,7 +338,7 @@
             
             
               
-                kafka源码阅读
+                CDH 安装spark2.1
               
             
           </h1>
@@ -359,8 +351,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-02T11:30:00+08:00">
-                2017-05-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-05T11:30:00+08:00">
+                2017-08-05
               </time>
             
 
@@ -378,8 +370,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/kafka/" itemprop="url" rel="index">
-                    <span itemprop="name">kafka</span>
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
                   </a>
                 </span>
 
@@ -393,8 +385,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/05/02/kafka源码阅读/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/02/kafka源码阅读/" itemprop="commentCount"></span>
+                <a href="/2017/08/05/CDH 安装spark2.1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/05/CDH 安装spark2.1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -420,103 +412,21 @@
       
 
       
-        <h3 id="下载kafka的源码包："><a href="#下载kafka的源码包：" class="headerlink" title="下载kafka的源码包："></a>下载kafka的源码包：</h3><p><a href="http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz" target="_blank" rel="external">http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz</a></p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>gradle </p>
-<p>1.官网下载<br><a href="https://gradle.org/releases" target="_blank" rel="external">https://gradle.org/releases</a><br>选择当时最新版本：<br><a href="https://downloads.gradle.org/distributions/gradle-3.5-all.zip" target="_blank" rel="external">https://downloads.gradle.org/distributions/gradle-3.5-all.zip</a></p>
-<p>2.解压<br>解压到D:\tool\gradle-3.5</p>
-<p>3.配置环境变量<br>GRADLE_HOME<br>D:\tool\gradle-3.5</p>
-<p>Path追加;%GRADLE_HOME%\BIN;<br><a id="more"></a><br>4.测试：<br>gradle -v<br><img src="http://oh6ybr0jg.bkt.clouddn.com/gradle.jpg" alt="此处输入图片的描述"></p>
-<p>安装参考:<br><a href="http://blog.csdn.net/lizhitao/article/details/26875463" target="_blank" rel="external">http://blog.csdn.net/lizhitao/article/details/26875463</a></p>
-<h3 id="编译：（此处博主用某云主机编译的，很快）"><a href="#编译：（此处博主用某云主机编译的，很快）" class="headerlink" title="编译：（此处博主用某云主机编译的，很快）"></a>编译：（此处博主用某云主机编译的，很快）</h3><p>gradle idea</p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170427134226.jpg" alt="此处输入图片的描述"></p>
-<p>（编译完把/root/.gradle/caches/modules-2下下载的文件放到我们的环境中C:\Users\Administrator.gradle\caches\modules-2 再windows上编译 ）<br><img src="http://oh6ybr0jg.bkt.clouddn.com/windows%E7%BC%96%E8%AF%91kafka.jpg" alt="此处输入图片的描述"></p>
-<p>用IDEA工具打开<br><img src="http://oh6ybr0jg.bkt.clouddn.com/kafka_src_emv.jpg" alt="此处输入图片的描述"></p>
-<h3 id="目录介绍："><a href="#目录介绍：" class="headerlink" title="目录介绍："></a>目录介绍：</h3><table>
-<thead>
-<tr>
-<th>模块名</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>admin</td>
-<td>管理员模块，操作和管理topic，paritions相关，包含create/delete topic,扩展patitions</td>
-</tr>
-<tr>
-<td>api</td>
-<td>主要负责交互数据的组装，客户端与服务端交互数据编解码</td>
-</tr>
-<tr>
-<td>client</td>
-<td>Producer读取kafka broker元数据信息，topic和partitions，以及leader</td>
-</tr>
-<tr>
-<td>cluster</td>
-<td>包含几个实体类，Broker,Cluster,Partition,Replica,解释他们之间关系：          Cluster由多个broker组成，一个Broker包含多个partition，一个topic的所有partitions分布在不同broker的中，一个Replica包含多个Partition。</td>
-</tr>
-<tr>
-<td>common</td>
-<td>异常类和错误验证</td>
-</tr>
-<tr>
-<td>consumer</td>
-<td>负责所有客户端消费者数据和逻辑处理</td>
-</tr>
-<tr>
-<td>controller</td>
-<td>负责中央控制器选举，partition的leader选举，副本分配，副本重新分配，partition和replica扩容。</td>
-</tr>
-<tr>
-<td>coordinator</td>
-<td>partition分配机制</td>
-</tr>
-<tr>
-<td>javaapi</td>
-<td>提供java的producer和consumer接口api</td>
-</tr>
-<tr>
-<td>log</td>
-<td>Kafka文件存储模块，负责读写所有kafka的topic消息数据。</td>
-</tr>
-<tr>
-<td>message</td>
-<td>封装多个消息组成一个“消息集”或压缩消息集。</td>
-</tr>
-<tr>
-<td>metrics</td>
-<td>内部状态的监控模块</td>
-</tr>
-<tr>
-<td>network</td>
-<td>网络事件处理模块，负责处理和接收客户端连接</td>
-</tr>
-<tr>
-<td>producer</td>
-<td>producer实现模块，包括同步和异步发送消息。</td>
-</tr>
-<tr>
-<td>security</td>
-<td>安全</td>
-</tr>
-<tr>
-<td>serializer</td>
-<td>序列化或反序列化当前消息</td>
-</tr>
-<tr>
-<td>server</td>
-<td></td>
-</tr>
-<tr>
-<td>tools</td>
-<td>工具模块，    包含a.导出对应consumer的offset值.b.导出LogSegments信息，当前topic的log写的位置信息.c.导出zk上所有consumer的offset值.d.修改注册在zk的consumer的offset值.f.producer和consumer的使用例子.</td>
-</tr>
-<tr>
-<td>utils</td>
-<td>Json工具类，Zkutils工具类，Utils创建线程工具类，KafkaScheduler公共调度器类，公共日志类等等。</td>
-</tr>
-</tbody>
-</table>
+        <h2 id="官方链接"><a href="#官方链接" class="headerlink" title="官方链接"></a>官方链接</h2><p><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html</a></p>
+<p>1.下载Spark2 CSD<br><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging</a></p>
+<p>1.1.1 CSD<br>笔者下载2.2版本<br><a href="http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar" target="_blank" rel="external">http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar</a></p>
+<p>1.1.2 Parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/</a></p>
+<p>1.1.2.1 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel</a></p>
+<p>1.1.2.2 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1</a><br>然后将SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1改名为<br>SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha</p>
+<p>1.1.2.3 manifest.json<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json</a></p>
+<p>停止服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server stop<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent stop</p>
+<p>将csd文件放到<br>/soft/bigdata/clouderamanager/cloudera/csd</p>
+<p>将parcel文件放到<br>/soft/bigdata/clouderamanager/cloudera/parcel-repo</p>
+<p>修改权限<br>chgrp cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar<br>chown cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar </p>
+<p>开启服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server start<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent start</p>
+<p>主机-&gt; Parcel就能看到spark2了</p>
+<p>分配，激活。然后就可以添加服务了</p>
+<p>如果添加服务不成功需要把jar文件放到/opt/cloudera/csd</p>
 
       
     </div>
@@ -561,7 +471,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/kafka/" rel="tag"># kafka</a>
+            <a href="/tags/CDH/" rel="tag"># CDH</a>
           
         </div>
       
@@ -570,8 +480,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/18/CDH phoenix安装/" rel="next" title="CDH phoenix安装">
-                <i class="fa fa-chevron-left"></i> CDH phoenix安装
+              <a href="/2017/08/02/spark 2.2.0源码编译/" rel="next" title="spark 2.2.0源码编译">
+                <i class="fa fa-chevron-left"></i> spark 2.2.0源码编译
               </a>
             
           </div>
@@ -580,8 +490,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/08/kafka源码阅读2/" rel="prev" title="kafka源码阅读2">
-                kafka源码阅读2 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/30/spark shuffle 调优/" rel="prev" title="spark shuffle 调优">
+                spark shuffle 调优 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -614,8 +524,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/05/02/kafka源码阅读/"
-           data-title="kafka源码阅读" data-url="http://yoursite.com/2017/05/02/kafka源码阅读/">
+      <div class="ds-thread" data-thread-key="2017/08/05/CDH 安装spark2.1/"
+           data-title="CDH 安装spark2.1" data-url="http://yoursite.com/2017/08/05/CDH 安装spark2.1/">
       </div>
     
   </div>
@@ -730,7 +640,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载kafka的源码包："><span class="nav-number">1.</span> <span class="nav-text">下载kafka的源码包：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译：（此处博主用某云主机编译的，很快）"><span class="nav-number">3.</span> <span class="nav-text">编译：（此处博主用某云主机编译的，很快）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录介绍："><span class="nav-number">4.</span> <span class="nav-text">目录介绍：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#官方链接"><span class="nav-number">1.</span> <span class="nav-text">官方链接</span></a></li></ol></div>
             
 
           </div>
