@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="spark," />
+  <meta name="keywords" content="CDH," />
 
 
 
@@ -86,29 +86,22 @@
 
 
 
-<meta name="description" content="官网下载spark源码https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0.tgz
-然后在idea中导入spark源码项目(idea maven配置正确)，然后对spark项目build。Build成功后在进行编译。Build过程中遇到问题：
-找不到org.apache.spark.streaming.flume.sink.SparkFlumeProt">
+<meta name="description" content="官方链接https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html
+1.下载Spark2 CSDhttps://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging
+1.1.1 C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spark 2.2.0源码编译">
-<meta property="og:url" content="http://yoursite.com/2017/08/02/spark 2.2.0源码编译/index.html">
+<meta property="og:title" content="CDH 安装spark2.2">
+<meta property="og:url" content="http://yoursite.com/2017/08/05/CDH 安装spark2.2/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
-<meta property="og:description" content="官网下载spark源码https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0.tgz
-然后在idea中导入spark源码项目(idea maven配置正确)，然后对spark项目build。Build成功后在进行编译。Build过程中遇到问题：
-找不到org.apache.spark.streaming.flume.sink.SparkFlumeProt">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/spark-source-download.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem2.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem3.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem4.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-success.png">
-<meta property="og:updated_time" content="2017-08-13T05:14:38.067Z">
+<meta property="og:description" content="官方链接https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html
+1.下载Spark2 CSDhttps://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging
+1.1.1 C">
+<meta property="og:updated_time" content="2017-09-20T11:44:14.670Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spark 2.2.0源码编译">
-<meta name="twitter:description" content="官网下载spark源码https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0.tgz
-然后在idea中导入spark源码项目(idea maven配置正确)，然后对spark项目build。Build成功后在进行编译。Build过程中遇到问题：
-找不到org.apache.spark.streaming.flume.sink.SparkFlumeProt">
-<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/spark-source-download.png">
+<meta name="twitter:title" content="CDH 安装spark2.2">
+<meta name="twitter:description" content="官方链接https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html
+1.下载Spark2 CSDhttps://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging
+1.1.1 C">
 
 
 
@@ -136,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/02/spark 2.2.0源码编译/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/05/CDH 安装spark2.2/"/>
 
 
 
 
 
-  <title> spark 2.2.0源码编译 | 张洪铭的个人博客 </title>
+  <title> CDH 安装spark2.2 | 张洪铭的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -321,7 +314,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/spark 2.2.0源码编译/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/05/CDH 安装spark2.2/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -345,7 +338,7 @@
             
             
               
-                spark 2.2.0源码编译
+                CDH 安装spark2.2
               
             
           </h1>
@@ -358,8 +351,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T11:30:00+08:00">
-                2017-08-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-05T11:30:00+08:00">
+                2017-08-05
               </time>
             
 
@@ -377,8 +370,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index">
-                    <span itemprop="name">spark</span>
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
                   </a>
                 </span>
 
@@ -392,8 +385,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/08/02/spark 2.2.0源码编译/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/02/spark 2.2.0源码编译/" itemprop="commentCount"></span>
+                <a href="/2017/08/05/CDH 安装spark2.2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/05/CDH 安装spark2.2/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -419,12 +412,20 @@
       
 
       
-        <p>官网下载spark源码<br><a href="https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0.tgz" target="_blank" rel="external">https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0.tgz</a><br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-source-download.png" alt="此处输入图片的描述"></p>
-<p>然后在idea中导入spark源码项目(idea maven配置正确)，然后对spark项目build。Build成功后在进行编译。<br>Build过程中遇到问题：</p>
-<p>找不到org.apache.spark.streaming.flume.sink.SparkFlumeProtocol<br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem2.png" alt="此处输入图片的描述"><br>找不到org.apache.spark.sql.catalyst.parser.SqlBaseParser<br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem3.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem4.png" alt="此处输入图片的描述"></p>
-<p>设置maven的参数，否则一直出现outofMemory<br>在apache-maven-3.3.9-bin\bin下面的mvn.cmd文件里的：<br>@REM set MAVEN_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000<br>下面添加<br>set MAVEN_OPTS= -Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m</p>
-<p>在git bash 里编译<br>进入spark源码目录<br>mvn -Pyarn -Phadoop-2.7 -Dhadoop.version=2.7.3 -DskipTests clean package</p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-success.png" alt="此处输入图片的描述"></p>
+        <h2 id="官方链接"><a href="#官方链接" class="headerlink" title="官方链接"></a>官方链接</h2><p><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html</a></p>
+<p>1.下载Spark2 CSD<br><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging</a></p>
+<p>1.1.1 CSD<br>笔者下载2.2版本<br><a href="http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar" target="_blank" rel="external">http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar</a><br><a id="more"></a><br>1.1.2 Parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/</a></p>
+<p>1.1.2.1 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel</a></p>
+<p>1.1.2.2 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1</a><br>然后将SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1改名为<br>SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha</p>
+<p>1.1.2.3 manifest.json<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json</a></p>
+<p>停止服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server stop<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent stop</p>
+<p>将csd文件放到<br>/soft/bigdata/clouderamanager/cloudera/csd</p>
+<p>将parcel文件放到<br>/soft/bigdata/clouderamanager/cloudera/parcel-repo</p>
+<p>修改权限<br>chgrp cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar<br>chown cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar </p>
+<p>开启服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server start<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent start</p>
+<p>主机-&gt; Parcel就能看到spark2了</p>
+<p>分配，激活。然后就可以添加服务了</p>
+<p>如果添加服务不成功需要把jar文件放到/opt/cloudera/csd</p>
 
       
     </div>
@@ -469,7 +470,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spark/" rel="tag"># spark</a>
+            <a href="/tags/CDH/" rel="tag"># CDH</a>
           
         </div>
       
@@ -478,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/30/使用Ambari安装部署Spark集群/" rel="next" title="使用Ambari安装部署Spark集群">
-                <i class="fa fa-chevron-left"></i> 使用Ambari安装部署Spark集群
+              <a href="/2017/08/02/spark 2.2.0源码编译/" rel="next" title="spark 2.2.0源码编译">
+                <i class="fa fa-chevron-left"></i> spark 2.2.0源码编译
               </a>
             
           </div>
@@ -488,8 +489,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/05/CDH 安装spark2.2/" rel="prev" title="CDH 安装spark2.2">
-                CDH 安装spark2.2 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/30/spark shuffle 调优/" rel="prev" title="spark shuffle 调优">
+                spark shuffle 调优 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -522,8 +523,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/08/02/spark 2.2.0源码编译/"
-           data-title="spark 2.2.0源码编译" data-url="http://yoursite.com/2017/08/02/spark 2.2.0源码编译/">
+      <div class="ds-thread" data-thread-key="2017/08/05/CDH 安装spark2.2/"
+           data-title="CDH 安装spark2.2" data-url="http://yoursite.com/2017/08/05/CDH 安装spark2.2/">
       </div>
     
   </div>
@@ -547,8 +548,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/agns.gif"
@@ -619,6 +629,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#官方链接"><span class="nav-number">1.</span> <span class="nav-text">官方链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
