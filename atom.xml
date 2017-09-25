@@ -103,9 +103,9 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
     <link href="http://yoursite.com/2017/08/05/CDH%20%E5%AE%89%E8%A3%85spark2.2/"/>
     <id>http://yoursite.com/2017/08/05/CDH 安装spark2.2/</id>
     <published>2017-08-05T03:30:00.000Z</published>
-    <updated>2017-09-23T09:51:25.032Z</updated>
+    <updated>2017-09-25T12:11:12.333Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="官方链接"><a href="#官方链接" class="headerlink" title="官方链接"></a>官方链接</h2><p><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html</a></p>
+    <content type="html"><![CDATA[<h3 id="官方链接"><a href="#官方链接" class="headerlink" title="官方链接"></a>官方链接</h3><p><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html</a></p>
 <p>1.下载Spark2 CSD<br><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging</a></p>
 <p>1.1.1 CSD<br>笔者下载2.2版本<br><a href="http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar" target="_blank" rel="external">http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar</a><br><a id="more"></a><br>1.1.2 Parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/</a></p>
 <p>1.1.2.1 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel</a></p>
@@ -123,7 +123,7 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
     
     <summary type="html">
     
-      &lt;h2 id=&quot;官方链接&quot;&gt;&lt;a href=&quot;#官方链接&quot; class=&quot;headerlink&quot; title=&quot;官方链接&quot;&gt;&lt;/a&gt;官方链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&lt;/a&gt;&lt;/p&gt;
+      &lt;h3 id=&quot;官方链接&quot;&gt;&lt;a href=&quot;#官方链接&quot; class=&quot;headerlink&quot; title=&quot;官方链接&quot;&gt;&lt;/a&gt;官方链接&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;1.下载Spark2 CSD&lt;br&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;1.1.1 CSD&lt;br&gt;笔者下载2.2版本&lt;br&gt;&lt;a href=&quot;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&quot;&gt;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&lt;/a&gt;&lt;br&gt;
     
