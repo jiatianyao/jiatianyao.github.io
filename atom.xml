@@ -103,13 +103,13 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
     <link href="http://yoursite.com/2017/08/05/%E5%BC%80%E6%BA%90%E7%88%AC%E8%99%AB%E4%BB%8B%E7%BB%8D/"/>
     <id>http://yoursite.com/2017/08/05/开源爬虫介绍/</id>
     <published>2017-08-05T03:30:00.000Z</published>
-    <updated>2017-10-11T13:28:37.498Z</updated>
+    <updated>2017-10-11T13:40:05.348Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://github.com/Chyroc/WechatSogou" target="_blank" rel="external">https://github.com/Chyroc/WechatSogou</a></p>
 <p> 微信公众号爬虫。基于搜狗微信搜索的微信公众号爬虫接口，可以扩展成基于搜狗搜索的爬虫，返回结果是列表，每一项均是公众号具体信息字典。</p>
 <p> <a href="https://github.com/lanbing510/DouBanSpider" target="_blank" rel="external">https://github.com/lanbing510/DouBanSpider</a><br> 豆瓣读书爬虫。可以爬下豆瓣读书标签下的所有图书，按评分排名依次存储，存储到Excel中，可方便大家筛选搜罗，比如筛选评价人数&gt;1000的高分书籍；可依据不同的主题存储到Excel不同的Sheet ，采用User Agent伪装为浏览器进行爬取，并加入随机延时来更好的模仿浏览器行为，避免爬虫被封。</p>
 <p><a href="https://github.com/LiuRoy/zhihu_spider" target="_blank" rel="external">https://github.com/LiuRoy/zhihu_spider</a><br>知乎爬虫。此项目的功能是爬取知乎用户信息以及人际拓扑关系，爬虫框架使用scrapy，数据存储使用mongo</p>
-<p><a href="https://github.com/airingursb/bilibili-user" target="_blank" rel="external">https://github.com/airingursb/bilibili-user</a><br>Bilibili用户爬虫。总数据数：20119918，抓取字段：用户id，昵称，性别，头像，等级，经验值，粉丝数，生日，地址，注册时间，签名，等级与经验值等。抓取之后生成B站用户数据报告。</p>
+<p><a href="https://github.com/airingursb/bilibili-user" target="_blank" rel="external">https://github.com/airingursb/bilibili-user</a><br>Bilibili用户爬虫。总数据数：20119918，抓取字段：用户id，昵称，性别，头像，等级，经验值，粉丝数，生日，地址，注册时间，签名，等级与经验值等。抓取之后生成B站用户数据报告。<br><a id="more"></a></p>
 <p><a href="https://github.com/LiuXingMing/SinaSpider" target="_blank" rel="external">https://github.com/LiuXingMing/SinaSpider</a><br>新浪微博爬虫。主要爬取新浪微博用户的个人信息、微博信息、粉丝和关注。代码获取新浪微博Cookie进行登录，可通过多账号登录来防止新浪的反扒。主要使用 scrapy 爬虫框架</p>
 <p><a href="https://github.com/gnemoug/distribute_crawler" target="_blank" rel="external">https://github.com/gnemoug/distribute_crawler</a><br>小说下载分布式爬虫。使用scrapy,Redis, MongoDB,graphite实现的一个分布式网络爬虫,底层存储mongodb集群,分布式使用redis实现,爬虫状态显示使用graphite实现，主要针对一个小说站点。</p>
 <p><a href="https://github.com/yanzhou/CnkiSpider" target="_blank" rel="external">https://github.com/yanzhou/CnkiSpider</a><br>中国知网爬虫。设置检索条件后，执行src/CnkiSpider.py抓取数据，抓取数据存储在/data目录下，每个数据文件的第一行为字段名称。</p>
@@ -129,8 +129,11 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
     
     <summary type="html">
     
-      &lt;p&gt;&lt;a href=&quot;https://github.com/Chyroc/WechatSogou&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/Chyroc/WechatSogou&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt; 微信公众号爬虫。
+      &lt;p&gt;&lt;a href=&quot;https://github.com/Chyroc/WechatSogou&quot;&gt;https://github.com/Chyroc/WechatSogou&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; 微信公众号爬虫。基于搜狗微信搜索的微信公众号爬虫接口，可以扩展成基于搜狗搜索的爬虫，返回结果是列表，每一项均是公众号具体信息字典。&lt;/p&gt;
+&lt;p&gt; &lt;a href=&quot;https://github.com/lanbing510/DouBanSpider&quot;&gt;https://github.com/lanbing510/DouBanSpider&lt;/a&gt;&lt;br&gt; 豆瓣读书爬虫。可以爬下豆瓣读书标签下的所有图书，按评分排名依次存储，存储到Excel中，可方便大家筛选搜罗，比如筛选评价人数&amp;gt;1000的高分书籍；可依据不同的主题存储到Excel不同的Sheet ，采用User Agent伪装为浏览器进行爬取，并加入随机延时来更好的模仿浏览器行为，避免爬虫被封。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/LiuRoy/zhihu_spider&quot;&gt;https://github.com/LiuRoy/zhihu_spider&lt;/a&gt;&lt;br&gt;知乎爬虫。此项目的功能是爬取知乎用户信息以及人际拓扑关系，爬虫框架使用scrapy，数据存储使用mongo&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/airingursb/bilibili-user&quot;&gt;https://github.com/airingursb/bilibili-user&lt;/a&gt;&lt;br&gt;Bilibili用户爬虫。总数据数：20119918，抓取字段：用户id，昵称，性别，头像，等级，经验值，粉丝数，生日，地址，注册时间，签名，等级与经验值等。抓取之后生成B站用户数据报告。&lt;br&gt;
     
     </summary>
     
