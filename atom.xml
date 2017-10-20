@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-10-18T13:18:56.774Z</updated>
+  <updated>2017-10-20T13:56:29.891Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,13 +20,12 @@
     <link href="http://yoursite.com/2017/10/18/spark%20ml1/"/>
     <id>http://yoursite.com/2017/10/18/spark ml1/</id>
     <published>2017-10-18T03:30:00.000Z</published>
-    <updated>2017-10-18T13:18:56.774Z</updated>
+    <updated>2017-10-20T13:56:29.891Z</updated>
     
     <content type="html"><![CDATA[<p>目前基于RDD的MLlib已经进入维护莫斯。大概在spark2.3基于RDD的MLlib API将要被废弃。未来是基于DataFrame的API</p>
 <p>1.基本统计<br>计算两组数据之间的相关性</p>
 <h3 id="皮尔森相关系数（Pearson-correlation-coefficient）"><a href="#皮尔森相关系数（Pearson-correlation-coefficient）" class="headerlink" title="皮尔森相关系数（Pearson correlation coefficient）"></a>皮尔森相关系数（Pearson correlation coefficient）</h3><p>也称皮尔森积矩相关系数(Pearson product-moment correlation coefficient) ，是一种线性相关系数。皮尔森相关系数是用来反映两个变量线性相关程度的统计量。相关系数用r表示，其中n为样本量，分别为两个变量的观测值和均值。r描述的是两个变量间线性相关强弱的程度。r的绝对值越大表明相关性越强</p>
-<p><img src="http://segmentfault.com/img/cGNupC" alt="此处输入图片的描述"><br><img src="http://segmentfault.com/img/eOV3Oj" alt="此处输入图片的描述"><br><img src="http://segmentfault.com/img/lJqNL" alt="此处输入图片的描述"></p>
-<p>按照高中数学水平来理解, 它很简单, 可以看做将两组数据首先做Z分数处理之后, 然后两组数据的乘积和除以样本数</p>
+<p><img src="http://segmentfault.com/img/cGNupC" alt="此处输入图片的描述"><br><img src="http://segmentfault.com/img/eOV3Oj" alt="此处输入图片的描述"><br><img src="http://segmentfault.com/img/lJqNL" alt="此处输入图片的描述"><br><a id="more"></a><br>按照高中数学水平来理解, 它很简单, 可以看做将两组数据首先做Z分数处理之后, 然后两组数据的乘积和除以样本数</p>
 <p>Z分数一般代表正态分布中, 数据偏离中心点的距离.等于变量减掉平均数再除以标准差.(就是高考的标准分类似的处理)</p>
 <p>标准差则等于变量减掉平均数的平方和,再除以样本数,最后再开方.</p>
 <p>所以, 根据这个最朴素的理解,我们可以将公式依次精简为:</p>
@@ -44,7 +43,8 @@
     
       &lt;p&gt;目前基于RDD的MLlib已经进入维护莫斯。大概在spark2.3基于RDD的MLlib API将要被废弃。未来是基于DataFrame的API&lt;/p&gt;
 &lt;p&gt;1.基本统计&lt;br&gt;计算两组数据之间的相关性&lt;/p&gt;
-&lt;h3 id=&quot;皮尔森相关系数（Pearson-correl
+&lt;h3 id=&quot;皮尔森相关系数（Pearson-correlation-coefficient）&quot;&gt;&lt;a href=&quot;#皮尔森相关系数（Pearson-correlation-coefficient）&quot; class=&quot;headerlink&quot; title=&quot;皮尔森相关系数（Pearson correlation coefficient）&quot;&gt;&lt;/a&gt;皮尔森相关系数（Pearson correlation coefficient）&lt;/h3&gt;&lt;p&gt;也称皮尔森积矩相关系数(Pearson product-moment correlation coefficient) ，是一种线性相关系数。皮尔森相关系数是用来反映两个变量线性相关程度的统计量。相关系数用r表示，其中n为样本量，分别为两个变量的观测值和均值。r描述的是两个变量间线性相关强弱的程度。r的绝对值越大表明相关性越强&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://segmentfault.com/img/cGNupC&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://segmentfault.com/img/eOV3Oj&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://segmentfault.com/img/lJqNL&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;br&gt;
     
     </summary>
     
@@ -139,6 +139,44 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
   </entry>
   
   <entry>
+    <title>CDH 安装spark2.2</title>
+    <link href="http://yoursite.com/2017/08/05/CDH%20%E5%AE%89%E8%A3%85spark2.2/"/>
+    <id>http://yoursite.com/2017/08/05/CDH 安装spark2.2/</id>
+    <published>2017-08-05T03:30:00.000Z</published>
+    <updated>2017-10-09T12:11:28.450Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="官方链接"><a href="#官方链接" class="headerlink" title="官方链接"></a>官方链接</h2><p><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html</a></p>
+<p>1.下载Spark2 CSD<br><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging</a></p>
+<p>1.1.1 CSD<br>笔者下载2.2版本<br><a href="http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar" target="_blank" rel="external">http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar</a><br><a id="more"></a><br>1.1.2 Parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/</a></p>
+<p>1.1.2.1 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel</a></p>
+<p>1.1.2.2 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1</a><br>然后将SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1改名为<br>SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha</p>
+<p>1.1.2.3 manifest.json<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json</a></p>
+<p>停止服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server stop<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent stop</p>
+<p>将csd文件放到<br>/soft/bigdata/clouderamanager/cloudera/csd</p>
+<p>将parcel文件放到<br>/soft/bigdata/clouderamanager/cloudera/parcel-repo</p>
+<p>修改权限<br>chgrp cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar<br>chown cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar </p>
+<p>开启服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server start<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent start</p>
+<p>主机-&gt; Parcel就能看到spark2了</p>
+<p>分配，激活。然后就可以添加服务了</p>
+<p>如果添加服务不成功需要把jar文件放到/opt/cloudera/csd</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;官方链接&quot;&gt;&lt;a href=&quot;#官方链接&quot; class=&quot;headerlink&quot; title=&quot;官方链接&quot;&gt;&lt;/a&gt;官方链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1.下载Spark2 CSD&lt;br&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1.1.1 CSD&lt;br&gt;笔者下载2.2版本&lt;br&gt;&lt;a href=&quot;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&quot;&gt;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
+    
+    
+      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
+    
+  </entry>
+  
+  <entry>
     <title>开源爬虫介绍</title>
     <link href="http://yoursite.com/2017/08/05/%E5%BC%80%E6%BA%90%E7%88%AC%E8%99%AB%E4%BB%8B%E7%BB%8D/"/>
     <id>http://yoursite.com/2017/08/05/开源爬虫介绍/</id>
@@ -181,44 +219,6 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
     
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CDH 安装spark2.2</title>
-    <link href="http://yoursite.com/2017/08/05/CDH%20%E5%AE%89%E8%A3%85spark2.2/"/>
-    <id>http://yoursite.com/2017/08/05/CDH 安装spark2.2/</id>
-    <published>2017-08-05T03:30:00.000Z</published>
-    <updated>2017-10-09T12:11:28.450Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="官方链接"><a href="#官方链接" class="headerlink" title="官方链接"></a>官方链接</h2><p><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html</a></p>
-<p>1.下载Spark2 CSD<br><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging</a></p>
-<p>1.1.1 CSD<br>笔者下载2.2版本<br><a href="http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar" target="_blank" rel="external">http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar</a><br><a id="more"></a><br>1.1.2 Parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/</a></p>
-<p>1.1.2.1 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel</a></p>
-<p>1.1.2.2 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1</a><br>然后将SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1改名为<br>SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha</p>
-<p>1.1.2.3 manifest.json<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json</a></p>
-<p>停止服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server stop<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent stop</p>
-<p>将csd文件放到<br>/soft/bigdata/clouderamanager/cloudera/csd</p>
-<p>将parcel文件放到<br>/soft/bigdata/clouderamanager/cloudera/parcel-repo</p>
-<p>修改权限<br>chgrp cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar<br>chown cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar </p>
-<p>开启服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server start<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent start</p>
-<p>主机-&gt; Parcel就能看到spark2了</p>
-<p>分配，激活。然后就可以添加服务了</p>
-<p>如果添加服务不成功需要把jar文件放到/opt/cloudera/csd</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;官方链接&quot;&gt;&lt;a href=&quot;#官方链接&quot; class=&quot;headerlink&quot; title=&quot;官方链接&quot;&gt;&lt;/a&gt;官方链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;1.下载Spark2 CSD&lt;br&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;1.1.1 CSD&lt;br&gt;笔者下载2.2版本&lt;br&gt;&lt;a href=&quot;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&quot;&gt;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&lt;/a&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
-    
-    
-      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
     
   </entry>
   

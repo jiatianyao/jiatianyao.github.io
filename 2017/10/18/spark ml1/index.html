@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://segmentfault.com/img/eOV3Oj">
 <meta property="og:image" content="http://segmentfault.com/img/lJqNL">
 <meta property="og:image" content="http://segmentfault.com/img/bKDASK">
-<meta property="og:updated_time" content="2017-10-18T13:18:56.774Z">
+<meta property="og:updated_time" content="2017-10-20T13:56:29.891Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark 机器学习入门(一)">
 <meta name="twitter:description" content="目前基于RDD的MLlib已经进入维护莫斯。大概在spark2.3基于RDD的MLlib API将要被废弃。未来是基于DataFrame的API
@@ -420,8 +420,7 @@
         <p>目前基于RDD的MLlib已经进入维护莫斯。大概在spark2.3基于RDD的MLlib API将要被废弃。未来是基于DataFrame的API</p>
 <p>1.基本统计<br>计算两组数据之间的相关性</p>
 <h3 id="皮尔森相关系数（Pearson-correlation-coefficient）"><a href="#皮尔森相关系数（Pearson-correlation-coefficient）" class="headerlink" title="皮尔森相关系数（Pearson correlation coefficient）"></a>皮尔森相关系数（Pearson correlation coefficient）</h3><p>也称皮尔森积矩相关系数(Pearson product-moment correlation coefficient) ，是一种线性相关系数。皮尔森相关系数是用来反映两个变量线性相关程度的统计量。相关系数用r表示，其中n为样本量，分别为两个变量的观测值和均值。r描述的是两个变量间线性相关强弱的程度。r的绝对值越大表明相关性越强</p>
-<p><img src="http://segmentfault.com/img/cGNupC" alt="此处输入图片的描述"><br><img src="http://segmentfault.com/img/eOV3Oj" alt="此处输入图片的描述"><br><img src="http://segmentfault.com/img/lJqNL" alt="此处输入图片的描述"></p>
-<p>按照高中数学水平来理解, 它很简单, 可以看做将两组数据首先做Z分数处理之后, 然后两组数据的乘积和除以样本数</p>
+<p><img src="http://segmentfault.com/img/cGNupC" alt="此处输入图片的描述"><br><img src="http://segmentfault.com/img/eOV3Oj" alt="此处输入图片的描述"><br><img src="http://segmentfault.com/img/lJqNL" alt="此处输入图片的描述"><br><a id="more"></a><br>按照高中数学水平来理解, 它很简单, 可以看做将两组数据首先做Z分数处理之后, 然后两组数据的乘积和除以样本数</p>
 <p>Z分数一般代表正态分布中, 数据偏离中心点的距离.等于变量减掉平均数再除以标准差.(就是高考的标准分类似的处理)</p>
 <p>标准差则等于变量减掉平均数的平方和,再除以样本数,最后再开方.</p>
 <p>所以, 根据这个最朴素的理解,我们可以将公式依次精简为:</p>
