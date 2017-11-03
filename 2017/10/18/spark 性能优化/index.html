@@ -96,7 +96,7 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
 <meta property="og:description" content="部署优化：磁盘：挂载磁盘时使用noatime和nodiratime选项减少写的开销
 linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文件访问时间Modfiy：内容修改时间Change：文件名修改时间
 参数含义：磁盘下的所有文件不更新访问时间">
-<meta property="og:updated_time" content="2017-11-02T12:41:28.781Z">
+<meta property="og:updated_time" content="2017-11-02T12:49:25.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spark 机器学习入门(二)">
 <meta name="twitter:description" content="部署优化：磁盘：挂载磁盘时使用noatime和nodiratime选项减少写的开销
@@ -414,7 +414,7 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
       
         <h2 id="部署优化："><a href="#部署优化：" class="headerlink" title="部署优化："></a><strong>部署优化：</strong></h2><p>磁盘：<br>挂载磁盘时使用noatime和nodiratime选项减少写的开销</p>
 <p>linux每个文件都会保留3个时间戳<br>用stat 文件名 来查看<br>Acess：文件访问时间<br>Modfiy：内容修改时间<br>Change：文件名修改时间</p>
-<h4 id="参数含义："><a href="#参数含义：" class="headerlink" title="参数含义："></a>参数含义：</h4><p>磁盘下的所有文件不更新访问时间<br><a id="more"></a><br>内存：<br>JVM 内存不建议每个executor 超过200G</p>
+<p>参数含义：<br>磁盘下的所有文件不更新访问时间<br><a id="more"></a><br>内存：<br>JVM 内存不建议每个executor 超过200G</p>
 <p>CPU<br>每台机器的Vcore数不建议小于8</p>
 <h2 id="JOB调度："><a href="#JOB调度：" class="headerlink" title="JOB调度："></a><strong>JOB调度：</strong></h2><p>Fail Schedule 可最大程度保证各个Job都有机会获取资源</p>
 <h2 id="数据序列化："><a href="#数据序列化：" class="headerlink" title="数据序列化："></a><strong>数据序列化：</strong></h2><p>Kyro serialization序列化速度更快，结果更紧凑<br>为了更好的性能，需提前注册被序列化的类，否则会存在大量的空间浪费<br>通过spark.serializer指定</p>
@@ -630,7 +630,7 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#部署优化："><span class="nav-number">1.</span> <span class="nav-text">部署优化：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数含义："><span class="nav-number">1.0.1.</span> <span class="nav-text">参数含义：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JOB调度："><span class="nav-number">2.</span> <span class="nav-text">JOB调度：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据序列化："><span class="nav-number">3.</span> <span class="nav-text">数据序列化：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#减少内存消耗："><span class="nav-number">4.</span> <span class="nav-text">减少内存消耗：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调整并行度："><span class="nav-number">5.</span> <span class="nav-text">调整并行度：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#部署优化："><span class="nav-number">1.</span> <span class="nav-text">部署优化：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JOB调度："><span class="nav-number">2.</span> <span class="nav-text">JOB调度：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据序列化："><span class="nav-number">3.</span> <span class="nav-text">数据序列化：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#减少内存消耗："><span class="nav-number">4.</span> <span class="nav-text">减少内存消耗：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调整并行度："><span class="nav-number">5.</span> <span class="nav-text">调整并行度：</span></a></li></ol></div>
             
 
           </div>

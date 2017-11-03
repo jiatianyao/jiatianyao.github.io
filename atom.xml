@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-02T12:41:28.781Z</updated>
+  <updated>2017-11-02T12:49:25.114Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="http://yoursite.com/2017/10/18/spark%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     <id>http://yoursite.com/2017/10/18/spark 性能优化/</id>
     <published>2017-10-18T06:30:00.000Z</published>
-    <updated>2017-11-02T12:41:28.781Z</updated>
+    <updated>2017-11-02T12:49:25.114Z</updated>
     
     <content type="html"><![CDATA[<h2 id="部署优化："><a href="#部署优化：" class="headerlink" title="部署优化："></a><strong>部署优化：</strong></h2><p>磁盘：<br>挂载磁盘时使用noatime和nodiratime选项减少写的开销</p>
 <p>linux每个文件都会保留3个时间戳<br>用stat 文件名 来查看<br>Acess：文件访问时间<br>Modfiy：内容修改时间<br>Change：文件名修改时间</p>
-<h4 id="参数含义："><a href="#参数含义：" class="headerlink" title="参数含义："></a>参数含义：</h4><p>磁盘下的所有文件不更新访问时间<br><a id="more"></a><br>内存：<br>JVM 内存不建议每个executor 超过200G</p>
+<p>参数含义：<br>磁盘下的所有文件不更新访问时间<br><a id="more"></a><br>内存：<br>JVM 内存不建议每个executor 超过200G</p>
 <p>CPU<br>每台机器的Vcore数不建议小于8</p>
 <h2 id="JOB调度："><a href="#JOB调度：" class="headerlink" title="JOB调度："></a><strong>JOB调度：</strong></h2><p>Fail Schedule 可最大程度保证各个Job都有机会获取资源</p>
 <h2 id="数据序列化："><a href="#数据序列化：" class="headerlink" title="数据序列化："></a><strong>数据序列化：</strong></h2><p>Kyro serialization序列化速度更快，结果更紧凑<br>为了更好的性能，需提前注册被序列化的类，否则会存在大量的空间浪费<br>通过spark.serializer指定</p>
@@ -37,7 +37,7 @@
     
       &lt;h2 id=&quot;部署优化：&quot;&gt;&lt;a href=&quot;#部署优化：&quot; class=&quot;headerlink&quot; title=&quot;部署优化：&quot;&gt;&lt;/a&gt;&lt;strong&gt;部署优化：&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;磁盘：&lt;br&gt;挂载磁盘时使用noatime和nodiratime选项减少写的开销&lt;/p&gt;
 &lt;p&gt;linux每个文件都会保留3个时间戳&lt;br&gt;用stat 文件名 来查看&lt;br&gt;Acess：文件访问时间&lt;br&gt;Modfiy：内容修改时间&lt;br&gt;Change：文件名修改时间&lt;/p&gt;
-&lt;h4 id=&quot;参数含义：&quot;&gt;&lt;a href=&quot;#参数含义：&quot; class=&quot;headerlink&quot; title=&quot;参数含义：&quot;&gt;&lt;/a&gt;参数含义：&lt;/h4&gt;&lt;p&gt;磁盘下的所有文件不更新访问时间&lt;br&gt;
+&lt;p&gt;参数含义：&lt;br&gt;磁盘下的所有文件不更新访问时间&lt;br&gt;
     
     </summary>
     
@@ -172,44 +172,6 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
   </entry>
   
   <entry>
-    <title>CDH 安装spark2.2</title>
-    <link href="http://yoursite.com/2017/08/05/CDH%20%E5%AE%89%E8%A3%85spark2.2/"/>
-    <id>http://yoursite.com/2017/08/05/CDH 安装spark2.2/</id>
-    <published>2017-08-05T03:30:00.000Z</published>
-    <updated>2017-10-09T12:11:28.450Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="官方链接"><a href="#官方链接" class="headerlink" title="官方链接"></a>官方链接</h2><p><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html</a></p>
-<p>1.下载Spark2 CSD<br><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging</a></p>
-<p>1.1.1 CSD<br>笔者下载2.2版本<br><a href="http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar" target="_blank" rel="external">http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar</a><br><a id="more"></a><br>1.1.2 Parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/</a></p>
-<p>1.1.2.1 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel</a></p>
-<p>1.1.2.2 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1</a><br>然后将SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1改名为<br>SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha</p>
-<p>1.1.2.3 manifest.json<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json</a></p>
-<p>停止服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server stop<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent stop</p>
-<p>将csd文件放到<br>/soft/bigdata/clouderamanager/cloudera/csd</p>
-<p>将parcel文件放到<br>/soft/bigdata/clouderamanager/cloudera/parcel-repo</p>
-<p>修改权限<br>chgrp cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar<br>chown cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar </p>
-<p>开启服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server start<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent start</p>
-<p>主机-&gt; Parcel就能看到spark2了</p>
-<p>分配，激活。然后就可以添加服务了</p>
-<p>如果添加服务不成功需要把jar文件放到/opt/cloudera/csd</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;官方链接&quot;&gt;&lt;a href=&quot;#官方链接&quot; class=&quot;headerlink&quot; title=&quot;官方链接&quot;&gt;&lt;/a&gt;官方链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;1.下载Spark2 CSD&lt;br&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;1.1.1 CSD&lt;br&gt;笔者下载2.2版本&lt;br&gt;&lt;a href=&quot;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&quot;&gt;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&lt;/a&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
-    
-    
-      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
-    
-  </entry>
-  
-  <entry>
     <title>开源爬虫介绍</title>
     <link href="http://yoursite.com/2017/08/05/%E5%BC%80%E6%BA%90%E7%88%AC%E8%99%AB%E4%BB%8B%E7%BB%8D/"/>
     <id>http://yoursite.com/2017/08/05/开源爬虫介绍/</id>
@@ -252,6 +214,44 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
     
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CDH 安装spark2.2</title>
+    <link href="http://yoursite.com/2017/08/05/CDH%20%E5%AE%89%E8%A3%85spark2.2/"/>
+    <id>http://yoursite.com/2017/08/05/CDH 安装spark2.2/</id>
+    <published>2017-08-05T03:30:00.000Z</published>
+    <updated>2017-10-09T12:11:28.450Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="官方链接"><a href="#官方链接" class="headerlink" title="官方链接"></a>官方链接</h2><p><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html</a></p>
+<p>1.下载Spark2 CSD<br><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging</a></p>
+<p>1.1.1 CSD<br>笔者下载2.2版本<br><a href="http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar" target="_blank" rel="external">http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar</a><br><a id="more"></a><br>1.1.2 Parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/</a></p>
+<p>1.1.2.1 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel</a></p>
+<p>1.1.2.2 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1</a><br>然后将SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1改名为<br>SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha</p>
+<p>1.1.2.3 manifest.json<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json</a></p>
+<p>停止服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server stop<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent stop</p>
+<p>将csd文件放到<br>/soft/bigdata/clouderamanager/cloudera/csd</p>
+<p>将parcel文件放到<br>/soft/bigdata/clouderamanager/cloudera/parcel-repo</p>
+<p>修改权限<br>chgrp cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar<br>chown cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar </p>
+<p>开启服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server start<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent start</p>
+<p>主机-&gt; Parcel就能看到spark2了</p>
+<p>分配，激活。然后就可以添加服务了</p>
+<p>如果添加服务不成功需要把jar文件放到/opt/cloudera/csd</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;官方链接&quot;&gt;&lt;a href=&quot;#官方链接&quot; class=&quot;headerlink&quot; title=&quot;官方链接&quot;&gt;&lt;/a&gt;官方链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1.下载Spark2 CSD&lt;br&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1.1.1 CSD&lt;br&gt;笔者下载2.2版本&lt;br&gt;&lt;a href=&quot;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&quot;&gt;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
+    
+    
+      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
     
   </entry>
   
@@ -877,6 +877,36 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
   </entry>
   
   <entry>
+    <title>CDH sqoop1 实战-带条件的导入</title>
+    <link href="http://yoursite.com/2017/03/13/CDH%20sqoop1%20%E5%AE%9E%E6%88%98-%E5%B8%A6%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%AF%BC%E5%85%A5/"/>
+    <id>http://yoursite.com/2017/03/13/CDH sqoop1 实战-带条件的导入/</id>
+    <published>2017-03-13T01:30:00.000Z</published>
+    <updated>2017-06-25T00:50:06.600Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
+<p>修改为：<br>sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming</p>
+<a id="more"></a>
+<p>在执行，发现报错说我database不存在，并在目录下生成了一个metastore_db，原来是执行sqoop的机器不对，换了一台机器执行没有问题，很奇怪明明是分布式的为什么会出现这个问题呢</p>
+<p>最终的具体日志：</p>
+<p>[hdfs@master1 root]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming –hive-database shuju<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>17/03/15 14:32:53 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 14:32:53 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 14:32:53 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 14:32:53 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../hadoop-mapreduce<br>Note: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.java uses or overrides a deprecated API.<br>Note: Recompile with -Xlint:deprecation for details.<br>17/03/15 14:33:00 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.jar<br>17/03/15 14:33:00 INFO mapreduce.ImportJobBase: Beginning query import.<br>17/03/15 14:33:00 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar<br>17/03/15 14:33:01 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps<br>17/03/15 14:33:01 INFO client.RMProxy: Connecting to ResourceManager at master2/10.105.10.122:8032<br>17/03/15 14:33:02 INFO db.DBInputFormat: Using read commited transaction isolation<br>17/03/15 14:33:02 INFO db.DataDrivenDBInputFormat: BoundingValsQuery: SELECT MIN(id), MAX(id) FROM (SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 1) ) AS t1<br>17/03/15 14:33:03 INFO db.IntegerSplitter: Split size: 7508318; Num splits: 4 from: 20079 to: 30053354<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: number of splits:4<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1488970234114_0057<br>17/03/15 14:33:03 INFO impl.YarnClientImpl: Submitted application application_1488970234114_0057<br>17/03/15 14:33:03 INFO mapreduce.Job: The url to track the job: <a href="http://master2:8088/proxy/application_1488970234114_0057/" target="_blank" rel="external">http://master2:8088/proxy/application_1488970234114_0057/</a><br>17/03/15 14:33:03 INFO mapreduce.Job: Running job: job_1488970234114_0057<br>17/03/15 14:33:08 INFO mapreduce.Job: Job job_1488970234114_0057 running in uber mode : false<br>17/03/15 14:33:08 INFO mapreduce.Job:  map 0% reduce 0%<br>17/03/15 14:33:15 INFO mapreduce.Job:  map 75% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job:  map 100% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job: Job job_1488970234114_0057 completed successfully<br>17/03/15 14:33:16 INFO mapreduce.Job: Counters: 30<br>        File System Counters<br>                FILE: Number of bytes read=0<br>                FILE: Number of bytes written=608160<br>                FILE: Number of read operations=0<br>                FILE: Number of large read operations=0<br>                FILE: Number of write operations=0<br>                HDFS: Number of bytes read=428<br>                HDFS: Number of bytes written=17645206<br>                HDFS: Number of read operations=16<br>                HDFS: Number of large read operations=0<br>                HDFS: Number of write operations=8<br>        Job Counters<br>                Launched map tasks=4<br>                Other local map tasks=4<br>                Total time spent by all maps in occupied slots (ms)=17968<br>                Total time spent by all reduces in occupied slots (ms)=0<br>                Total time spent by all map tasks (ms)=17968<br>                Total vcore-seconds taken by all map tasks=17968<br>                Total megabyte-seconds taken by all map tasks=18399232<br>        Map-Reduce Framework<br>                Map input records=283659<br>                Map output records=283659<br>                Input split bytes=428<br>                Spilled Records=0<br>                Failed Shuffles=0<br>                Merged Map outputs=0<br>                GC time elapsed (ms)=268<br>                CPU time spent (ms)=12960<br>                Physical memory (bytes) snapshot=1151381504<br>                Virtual memory (bytes) snapshot=11157348352<br>                Total committed heap usage (bytes)=1045954560<br>        File Input Format Counters<br>                Bytes Read=0<br>        File Output Format Counters<br>                Bytes Written=17645206<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Transferred 16.8278 MB in 15.7965 seconds (1.0653 MB/sec)<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Retrieved 283659 records.<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 WARN hive.TableDefWriter: Column update_time had to be cast to a less precise type in Hive<br>17/03/15 14:33:16 INFO hive.HiveImport: Loading uploaded data into Hive</p>
+<p>Logging initialized using configuration in jar:file:/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/jars/hive-common-1.1.0-cdh5.10.0.jar!/hive-log4j.properties<br>OK<br>Time taken: 1.874 seconds<br>Loading data to table shuju.card_record<br>Table shuju.card_record stats: [numFiles=4, totalSize=17645206]<br>OK<br>Time taken: 0.367 seconds</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;导入&quot;&gt;&lt;a href=&quot;#导入&quot; class=&quot;headerlink&quot; title=&quot;导入&quot;&gt;&lt;/a&gt;导入&lt;/h2&gt;&lt;p&gt;[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming&lt;br&gt;17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0&lt;br&gt;17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.&lt;br&gt;17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.&lt;br&gt;17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation&lt;br&gt;17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.&lt;br&gt;        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)&lt;br&gt;        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)&lt;br&gt;        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)&lt;br&gt;        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)&lt;br&gt;        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)&lt;br&gt;        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)&lt;br&gt;        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)&lt;br&gt;        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)&lt;br&gt;        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)&lt;br&gt;        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)&lt;br&gt;        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)&lt;br&gt;        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)&lt;/p&gt;
+&lt;p&gt;修改为：&lt;br&gt;sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
+    
+    
+      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CDH sqoop1 实战</title>
     <link href="http://yoursite.com/2017/03/13/CDH%20sqoop1%20%E5%AE%9E%E6%88%98/"/>
     <id>http://yoursite.com/2017/03/13/CDH sqoop1 实战/</id>
@@ -909,36 +939,6 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
     
       &lt;h2 id=&quot;下载sqlserver的jdbc驱动包&quot;&gt;&lt;a href=&quot;#下载sqlserver的jdbc驱动包&quot; class=&quot;headerlink&quot; title=&quot;下载sqlserver的jdbc驱动包&quot;&gt;&lt;/a&gt;下载sqlserver的jdbc驱动包&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599&quot;&gt;https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599&lt;/a&gt;&lt;br&gt;解压&lt;br&gt;将sqljdbc4.jar放在：&lt;br&gt;/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib&lt;/p&gt;
 &lt;p&gt;下载SQL Server-Hadoop Connector：sqoop-sqlserver-1.0.tar.gz&lt;br&gt;             &lt;a href=&quot;http://www.microsoft.com/en-us/download/details.aspx?id=27584&quot;&gt;http://www.microsoft.com/en-us/download/details.aspx?id=27584&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
-    
-    
-      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CDH sqoop1 实战-带条件的导入</title>
-    <link href="http://yoursite.com/2017/03/13/CDH%20sqoop1%20%E5%AE%9E%E6%88%98-%E5%B8%A6%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%AF%BC%E5%85%A5/"/>
-    <id>http://yoursite.com/2017/03/13/CDH sqoop1 实战-带条件的导入/</id>
-    <published>2017-03-13T01:30:00.000Z</published>
-    <updated>2017-06-25T00:50:06.600Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
-<p>修改为：<br>sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming</p>
-<a id="more"></a>
-<p>在执行，发现报错说我database不存在，并在目录下生成了一个metastore_db，原来是执行sqoop的机器不对，换了一台机器执行没有问题，很奇怪明明是分布式的为什么会出现这个问题呢</p>
-<p>最终的具体日志：</p>
-<p>[hdfs@master1 root]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming –hive-database shuju<br>Warning: /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../accumulo does not exist! Accumulo imports will fail.<br>Please set $ACCUMULO_HOME to the root of your Accumulo installation.<br>17/03/15 14:32:53 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 14:32:53 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 14:32:53 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 14:32:53 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:32:59 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/bin/../lib/sqoop/../hadoop-mapreduce<br>Note: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.java uses or overrides a deprecated API.<br>Note: Recompile with -Xlint:deprecation for details.<br>17/03/15 14:33:00 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-hdfs/compile/9ff9643fb7d49c9376c7b3f92d484efe/QueryResult.jar<br>17/03/15 14:33:00 INFO mapreduce.ImportJobBase: Beginning query import.<br>17/03/15 14:33:00 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar<br>17/03/15 14:33:01 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps<br>17/03/15 14:33:01 INFO client.RMProxy: Connecting to ResourceManager at master2/10.105.10.122:8032<br>17/03/15 14:33:02 INFO db.DBInputFormat: Using read commited transaction isolation<br>17/03/15 14:33:02 INFO db.DataDrivenDBInputFormat: BoundingValsQuery: SELECT MIN(id), MAX(id) FROM (SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 1) ) AS t1<br>17/03/15 14:33:03 INFO db.IntegerSplitter: Split size: 7508318; Num splits: 4 from: 20079 to: 30053354<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: number of splits:4<br>17/03/15 14:33:03 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1488970234114_0057<br>17/03/15 14:33:03 INFO impl.YarnClientImpl: Submitted application application_1488970234114_0057<br>17/03/15 14:33:03 INFO mapreduce.Job: The url to track the job: <a href="http://master2:8088/proxy/application_1488970234114_0057/" target="_blank" rel="external">http://master2:8088/proxy/application_1488970234114_0057/</a><br>17/03/15 14:33:03 INFO mapreduce.Job: Running job: job_1488970234114_0057<br>17/03/15 14:33:08 INFO mapreduce.Job: Job job_1488970234114_0057 running in uber mode : false<br>17/03/15 14:33:08 INFO mapreduce.Job:  map 0% reduce 0%<br>17/03/15 14:33:15 INFO mapreduce.Job:  map 75% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job:  map 100% reduce 0%<br>17/03/15 14:33:16 INFO mapreduce.Job: Job job_1488970234114_0057 completed successfully<br>17/03/15 14:33:16 INFO mapreduce.Job: Counters: 30<br>        File System Counters<br>                FILE: Number of bytes read=0<br>                FILE: Number of bytes written=608160<br>                FILE: Number of read operations=0<br>                FILE: Number of large read operations=0<br>                FILE: Number of write operations=0<br>                HDFS: Number of bytes read=428<br>                HDFS: Number of bytes written=17645206<br>                HDFS: Number of read operations=16<br>                HDFS: Number of large read operations=0<br>                HDFS: Number of write operations=8<br>        Job Counters<br>                Launched map tasks=4<br>                Other local map tasks=4<br>                Total time spent by all maps in occupied slots (ms)=17968<br>                Total time spent by all reduces in occupied slots (ms)=0<br>                Total time spent by all map tasks (ms)=17968<br>                Total vcore-seconds taken by all map tasks=17968<br>                Total megabyte-seconds taken by all map tasks=18399232<br>        Map-Reduce Framework<br>                Map input records=283659<br>                Map output records=283659<br>                Input split bytes=428<br>                Spilled Records=0<br>                Failed Shuffles=0<br>                Merged Map outputs=0<br>                GC time elapsed (ms)=268<br>                CPU time spent (ms)=12960<br>                Physical memory (bytes) snapshot=1151381504<br>                Virtual memory (bytes) snapshot=11157348352<br>                Total committed heap usage (bytes)=1045954560<br>        File Input Format Counters<br>                Bytes Read=0<br>        File Output Format Counters<br>                Bytes Written=17645206<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Transferred 16.8278 MB in 15.7965 seconds (1.0653 MB/sec)<br>17/03/15 14:33:16 INFO mapreduce.ImportJobBase: Retrieved 283659 records.<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 INFO manager.SqlManager: Executing SQL statement: SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE  (1 = 0)<br>17/03/15 14:33:16 WARN hive.TableDefWriter: Column update_time had to be cast to a less precise type in Hive<br>17/03/15 14:33:16 INFO hive.HiveImport: Loading uploaded data into Hive</p>
-<p>Logging initialized using configuration in jar:file:/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/jars/hive-common-1.1.0-cdh5.10.0.jar!/hive-log4j.properties<br>OK<br>Time taken: 1.874 seconds<br>Loading data to table shuju.card_record<br>Table shuju.card_record stats: [numFiles=4, totalSize=17645206]<br>OK<br>Time taken: 0.367 seconds</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;导入&quot;&gt;&lt;a href=&quot;#导入&quot; class=&quot;headerlink&quot; title=&quot;导入&quot;&gt;&lt;/a&gt;导入&lt;/h2&gt;&lt;p&gt;[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming&lt;br&gt;17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0&lt;br&gt;17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.&lt;br&gt;17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.&lt;br&gt;17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation&lt;br&gt;17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.&lt;br&gt;        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)&lt;br&gt;        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)&lt;br&gt;        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)&lt;br&gt;        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)&lt;br&gt;        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)&lt;br&gt;        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)&lt;br&gt;        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)&lt;br&gt;        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)&lt;br&gt;        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)&lt;br&gt;        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)&lt;br&gt;        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)&lt;br&gt;        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)&lt;/p&gt;
-&lt;p&gt;修改为：&lt;br&gt;sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming&lt;/p&gt;
     
     </summary>
     
