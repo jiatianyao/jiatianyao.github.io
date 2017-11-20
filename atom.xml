@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-19T14:57:24.191Z</updated>
+  <updated>2017-11-19T15:01:38.690Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://yoursite.com/2017/10/18/spark%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     <id>http://yoursite.com/2017/10/18/spark 性能优化/</id>
     <published>2017-10-18T06:30:00.000Z</published>
-    <updated>2017-11-19T14:57:24.191Z</updated>
+    <updated>2017-11-19T15:01:38.690Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="部署优化："><a href="#部署优化：" class="headerlink" title="部署优化："></a><strong>部署优化：</strong></h2><p>磁盘：<br>挂载磁盘时使用noatime和nodiratime选项减少写的开销</p>
+    <content type="html"><![CDATA[<h4 id="部署优化："><a href="#部署优化：" class="headerlink" title="部署优化："></a><strong>部署优化：</strong></h4><p>磁盘：<br>挂载磁盘时使用noatime和nodiratime选项减少写的开销</p>
 <p>linux每个文件都会保留3个时间戳<br>用stat 文件名 来查看<br>Acess：文件访问时间<br>Modfiy：内容修改时间<br>Change：文件名修改时间</p>
 <p>参数含义：<br>磁盘下的所有文件不更新访问时间<br><a id="more"></a><br>内存：<br>JVM 内存不建议每个executor 超过200G</p>
 <p>CPU<br>每台机器的Vcore数不建议小于8</p>
@@ -35,7 +35,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;部署优化：&quot;&gt;&lt;a href=&quot;#部署优化：&quot; class=&quot;headerlink&quot; title=&quot;部署优化：&quot;&gt;&lt;/a&gt;&lt;strong&gt;部署优化：&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;磁盘：&lt;br&gt;挂载磁盘时使用noatime和nodiratime选项减少写的开销&lt;/p&gt;
+      &lt;h4 id=&quot;部署优化：&quot;&gt;&lt;a href=&quot;#部署优化：&quot; class=&quot;headerlink&quot; title=&quot;部署优化：&quot;&gt;&lt;/a&gt;&lt;strong&gt;部署优化：&lt;/strong&gt;&lt;/h4&gt;&lt;p&gt;磁盘：&lt;br&gt;挂载磁盘时使用noatime和nodiratime选项减少写的开销&lt;/p&gt;
 &lt;p&gt;linux每个文件都会保留3个时间戳&lt;br&gt;用stat 文件名 来查看&lt;br&gt;Acess：文件访问时间&lt;br&gt;Modfiy：内容修改时间&lt;br&gt;Change：文件名修改时间&lt;/p&gt;
 &lt;p&gt;参数含义：&lt;br&gt;磁盘下的所有文件不更新访问时间&lt;br&gt;
     
