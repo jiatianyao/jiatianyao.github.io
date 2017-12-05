@@ -1068,7 +1068,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/storm基础知识/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/Python春节祝福语自动回复/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -1093,8 +1093,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/27/storm基础知识/" itemprop="url">
-                  storm基础知识
+                <a class="post-title-link" href="/2017/01/27/Python春节祝福语自动回复/" itemprop="url">
+                  Python春节祝福语自动回复
                 </a>
               
             
@@ -1127,8 +1127,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/storm/" itemprop="url" rel="index">
-                    <span itemprop="name">storm</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -1142,8 +1142,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/01/27/storm基础知识/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/storm基础知识/" itemprop="commentCount"></span>
+                <a href="/2017/01/27/Python春节祝福语自动回复/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/Python春节祝福语自动回复/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1170,10 +1170,11 @@
 
       
         
-          <h2 id="Storm基本概念"><a href="#Storm基本概念" class="headerlink" title="Storm基本概念"></a>Storm基本概念</h2><p>Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。<br>Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止</p>
+          <p>首先安装两个库<br>pip install itchat pillow</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/27/storm基础知识/#more" rel="contents">
+            <a class="btn" href="/2017/01/27/Python春节祝福语自动回复/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1361,7 +1362,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/Python春节祝福语自动回复/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/storm基础知识/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -1386,8 +1387,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/27/Python春节祝福语自动回复/" itemprop="url">
-                  Python春节祝福语自动回复
+                <a class="post-title-link" href="/2017/01/27/storm基础知识/" itemprop="url">
+                  storm基础知识
                 </a>
               
             
@@ -1420,8 +1421,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/storm/" itemprop="url" rel="index">
+                    <span itemprop="name">storm</span>
                   </a>
                 </span>
 
@@ -1435,8 +1436,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/01/27/Python春节祝福语自动回复/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/Python春节祝福语自动回复/" itemprop="commentCount"></span>
+                <a href="/2017/01/27/storm基础知识/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/storm基础知识/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1463,11 +1464,10 @@
 
       
         
-          <p>首先安装两个库<br>pip install itchat pillow</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
+          <h2 id="Storm基本概念"><a href="#Storm基本概念" class="headerlink" title="Storm基本概念"></a>Storm基本概念</h2><p>Storm是一个分布式计算框架，主要由Clojure编程语言编写。最初是由Nathan Marz及其团队创建于BackType，该项目在被Twitter取得后开源。它使用用户创建的“管（spouts）”和“螺栓（bolts）”来定义信息源和操作来允许批量、分布式处理流式数据。最初的版本发布于2011年9月17日。<br>Storm应用被设计成为一个拓扑结构，其接口创建一个转换“流”。它提供与MapReduce作业类似的功能，当遇到异常时该拓扑结构理论上将不确定地运行，直到它被手动终止</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/27/Python春节祝福语自动回复/#more" rel="contents">
+            <a class="btn" href="/2017/01/27/storm基础知识/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
