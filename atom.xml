@@ -624,9 +624,9 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
     <link href="http://yoursite.com/2017/04/18/CDH%20phoenix%E5%AE%89%E8%A3%85/"/>
     <id>http://yoursite.com/2017/04/18/CDH phoenix安装/</id>
     <published>2017-04-18T03:30:00.000Z</published>
-    <updated>2018-01-08T12:28:27.689Z</updated>
+    <updated>2018-01-08T12:40:59.384Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="首先下载jdk-略"><a href="#首先下载jdk-略" class="headerlink" title="首先下载jdk 略"></a>首先下载jdk 略</h2><p>安装maven</p>
+    <content type="html"><![CDATA[<h5 id="首先下载jdk-略"><a href="#首先下载jdk-略" class="headerlink" title="首先下载jdk 略"></a>首先下载jdk 略</h5><p>安装maven</p>
 <h2 id="下载yum源"><a href="#下载yum源" class="headerlink" title="下载yum源"></a>下载yum源</h2><p>wget <a href="http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo" target="_blank" rel="external">http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo</a> -O /etc/yum.repos.d/epel-apache-maven.repo</p>
 <h2 id="安装maven："><a href="#安装maven：" class="headerlink" title="安装maven："></a>安装maven：</h2><p>yum -y install apache-maven</p>
 <a id="more"></a>
@@ -645,7 +645,7 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
     
     <summary type="html">
     
-      &lt;h2 id=&quot;首先下载jdk-略&quot;&gt;&lt;a href=&quot;#首先下载jdk-略&quot; class=&quot;headerlink&quot; title=&quot;首先下载jdk 略&quot;&gt;&lt;/a&gt;首先下载jdk 略&lt;/h2&gt;&lt;p&gt;安装maven&lt;/p&gt;
+      &lt;h5 id=&quot;首先下载jdk-略&quot;&gt;&lt;a href=&quot;#首先下载jdk-略&quot; class=&quot;headerlink&quot; title=&quot;首先下载jdk 略&quot;&gt;&lt;/a&gt;首先下载jdk 略&lt;/h5&gt;&lt;p&gt;安装maven&lt;/p&gt;
 &lt;h2 id=&quot;下载yum源&quot;&gt;&lt;a href=&quot;#下载yum源&quot; class=&quot;headerlink&quot; title=&quot;下载yum源&quot;&gt;&lt;/a&gt;下载yum源&lt;/h2&gt;&lt;p&gt;wget &lt;a href=&quot;http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo&quot;&gt;http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo&lt;/a&gt; -O /etc/yum.repos.d/epel-apache-maven.repo&lt;/p&gt;
 &lt;h2 id=&quot;安装maven：&quot;&gt;&lt;a href=&quot;#安装maven：&quot; class=&quot;headerlink&quot; title=&quot;安装maven：&quot;&gt;&lt;/a&gt;安装maven：&lt;/h2&gt;&lt;p&gt;yum -y install apache-maven&lt;/p&gt;
     
