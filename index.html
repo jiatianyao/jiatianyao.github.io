@@ -557,49 +557,16 @@
 
       
         
-          
-            <p>from pandas import Series,DataFrame<br>import pandas as pd</p>
+          <p>from pandas import Series,DataFrame<br>import pandas as pd</p>
 <h3 id="Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。-索引可重复"><a href="#Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。-索引可重复" class="headerlink" title="Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。  索引可重复"></a>Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。  索引可重复</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series,DataFrame</div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line">arr = np.array([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,np.NaN,<span class="number">10</span>])</div><div class="line">serises0=Series(arr)</div><div class="line">serises0</div></pre></td></tr></table></figure>
-<p>0     1.0<br>1     3.0<br>2     5.0<br>3     NaN<br>4    10.0<br>dtype: float64</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises0.dtype</div></pre></td></tr></table></figure>
-<p>dtype(‘float64’)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises0.index</div></pre></td></tr></table></figure>
-<p>RangeIndex(start=0, stop=5, step=1)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises0.values</div></pre></td></tr></table></figure>
-<p>array([  1.,   3.,   5.,  nan,  10.])</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">serises1=Series(data=[<span class="number">91</span>,<span class="number">92</span>,<span class="number">93</span>],dtype=np.float64,index=[<span class="string">u'数学'</span>,<span class="string">u'语文'</span>,<span class="string">u'外语'</span>])</div><div class="line">serises1</div></pre></td></tr></table></figure>
-<p>数学    91.0<br>语文    92.0<br>外语    93.0<br>dtype: float64</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dict0=&#123;<span class="string">u'数学'</span>:<span class="number">91.0</span>,<span class="string">u'语文'</span>:<span class="number">92</span>,<span class="string">u'外语'</span>:<span class="number">93</span>&#125;</div><div class="line">dict0</div></pre></td></tr></table></figure>
-<p>{u’\u5916\u8bed’: 93, u’\u6570\u5b66’: 91.0, u’\u8bed\u6587’: 92}</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">serises2=Series(dict0)</div><div class="line">serises2</div></pre></td></tr></table></figure>
-<p>外语    93.0<br>数学    91.0<br>语文    92.0<br>dtype: float64</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises2[<span class="number">0</span>]</div></pre></td></tr></table></figure>
-<p>93.0</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises2[<span class="string">u'外语'</span>]</div></pre></td></tr></table></figure>
-<p>93.0</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises2[<span class="string">'外语'</span>:<span class="string">'语文'</span>]</div></pre></td></tr></table></figure>
-<p>外语    93.0<br>数学    91.0<br>语文    92.0<br>dtype: float64</p>
-<p>Series运算，自动对齐索引<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">serises2=Series(data=[<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>],dtype=np.float64,index=[<span class="string">'p1'</span>,<span class="string">'p2'</span>,<span class="string">'p3'</span>])</div><div class="line">serises3=Series(data=[<span class="number">22</span>,<span class="number">23</span>,<span class="number">24</span>,<span class="number">25</span>],dtype=np.float64,index=[<span class="string">'p2'</span>,<span class="string">'p3'</span>,<span class="string">'p4'</span>,<span class="string">'p5'</span>])</div><div class="line">serises2 +serises3</div></pre></td></tr></table></figure></p>
-<p>p1     NaN<br>p2    34.0<br>p3    36.0<br>p4     NaN<br>p5     NaN<br>dtype: float64</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">serises1.name=<span class="string">'name'</span></div><div class="line">serises1.index.name=<span class="string">'考试科目'</span></div><div class="line">serises1</div></pre></td></tr></table></figure>
-<p>考试科目<br>数学    91.0<br>语文    92.0<br>外语    93.0<br>Name: name, dtype: float64</p>
-<h3 id="DataFrame-：-表格形式的数据结构，包含一组有序的列，每列可以是不同的值类型，DataFrame既有行索引又有列索引，可以看做是由Series组成的字典"><a href="#DataFrame-：-表格形式的数据结构，包含一组有序的列，每列可以是不同的值类型，DataFrame既有行索引又有列索引，可以看做是由Series组成的字典" class="headerlink" title="DataFrame ： 表格形式的数据结构，包含一组有序的列，每列可以是不同的值类型，DataFrame既有行索引又有列索引，可以看做是由Series组成的字典"></a>DataFrame ： 表格形式的数据结构，包含一组有序的列，每列可以是不同的值类型，DataFrame既有行索引又有列索引，可以看做是由Series组成的字典</h3><p>通过二维数组创建<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">df01=DataFrame([[<span class="string">'Tom'</span>,<span class="string">'John'</span>],[<span class="number">88</span>,<span class="number">90</span>]])</div><div class="line">df01</div></pre></td></tr></table></figure></p>
-<pre><code>0    1
-</code></pre><p>0    Tom    John<br>1    88    90</p>
-<p>通过字典创建<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">data=&#123;<span class="string">'Tom'</span>:[<span class="number">88</span>,<span class="number">55</span>],<span class="string">'John'</span>:[<span class="number">90</span>,<span class="number">22</span>]&#125;</div><div class="line">df02=DataFrame(data)</div><div class="line">df02</div></pre></td></tr></table></figure></p>
-<p>   John    Tom<br>0    90    88<br>1    22    55</p>
-<p>DataFrame 可以增加数据<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">df02.ix[<span class="string">'2'</span>]=np.NaN</div></pre></td></tr></table></figure></p>
-<pre><code>John    Tom
-</code></pre><p>0    90.0    88.0<br>1    22.0    55.0<br>2    NaN        NaN</p>
-<p>数据删除<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">df02=df02.dropna()</div><div class="line">df02</div></pre></td></tr></table></figure></p>
-<pre><code>John    Tom
-</code></pre><p>0    90.0    88.0<br>1    22.0    55.0</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">arr1=np.random.randint(<span class="number">5</span>,<span class="number">10</span>,(<span class="number">4</span>,<span class="number">4</span>))</div><div class="line">df1=pd.DataFrame(arr1)</div><div class="line">df1</div><div class="line">df1.ix[:<span class="number">2</span>,<span class="number">1</span>]=np.NAN</div><div class="line">df1.ix[:<span class="number">1</span>,<span class="number">2</span>]=np.NAN</div><div class="line">df1</div></pre></td></tr></table></figure>
-<pre><code>0    1    2    3
-</code></pre><p>0    8    NaN    NaN    7<br>1    5    NaN    NaN    9<br>2    5    NaN    5.0    5<br>3    9    8.0    7.0    5</p>
-<h3 id="loc-iloc"><a href="#loc-iloc" class="headerlink" title="loc iloc"></a>loc iloc</h3><p>iloc 对于下标进行操作<br>loc 对于索引值进行操作</p>
-
-          
+<p>0     1.0<br>1     3.0<br>2     5.0<br>3     NaN<br>4    10.0<br>dtype: float64<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/01/08/python—pandas/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

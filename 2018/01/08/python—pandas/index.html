@@ -94,7 +94,7 @@ Series：一种类似于一维数组的对象，是由一组数据（各种NumPy
 <meta property="og:site_name" content="张洪铭的个人博客">
 <meta property="og:description" content="from pandas import Series,DataFrameimport pandas as pd
 Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。  索引可重复1234567from pandas import Series,DataFrameimport pandas as pdimport numpy as n">
-<meta property="og:updated_time" content="2018-01-18T15:54:41.821Z">
+<meta property="og:updated_time" content="2018-01-19T16:02:42.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python—pandas">
 <meta name="twitter:description" content="from pandas import Series,DataFrameimport pandas as pd
@@ -411,8 +411,7 @@ Series：一种类似于一维数组的对象，是由一组数据（各种NumPy
       
         <p>from pandas import Series,DataFrame<br>import pandas as pd</p>
 <h3 id="Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。-索引可重复"><a href="#Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。-索引可重复" class="headerlink" title="Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。  索引可重复"></a>Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。  索引可重复</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series,DataFrame</div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line">arr = np.array([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,np.NaN,<span class="number">10</span>])</div><div class="line">serises0=Series(arr)</div><div class="line">serises0</div></pre></td></tr></table></figure>
-<p>0     1.0<br>1     3.0<br>2     5.0<br>3     NaN<br>4    10.0<br>dtype: float64</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises0.dtype</div></pre></td></tr></table></figure>
+<p>0     1.0<br>1     3.0<br>2     5.0<br>3     NaN<br>4    10.0<br>dtype: float64<br><a id="more"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises0.dtype</div></pre></td></tr></table></figure></p>
 <p>dtype(‘float64’)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises0.index</div></pre></td></tr></table></figure>
 <p>RangeIndex(start=0, stop=5, step=1)</p>
