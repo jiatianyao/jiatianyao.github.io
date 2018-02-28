@@ -87,20 +87,23 @@
 
 
 <meta name="description" content="开闭原则Software entities should be open for extension,but closed for modificationfrom 《Object Oriented Software Construction》 by Bertrand Meyer at 1988
-通俗来讲在设计一个模块的时候,应当使这个模块可以在不被修改的前提下被扩展例如：spring在装载一个类">
+entities:实体对像extension:扩展
+通俗来讲在设计一个模块的时候,应当使这个模块可以在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设置模式-软件设计原则">
 <meta property="og:url" content="http://yoursite.com/2016/03/30/设计模式-软件设计原则(1)/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
 <meta property="og:description" content="开闭原则Software entities should be open for extension,but closed for modificationfrom 《Object Oriented Software Construction》 by Bertrand Meyer at 1988
-通俗来讲在设计一个模块的时候,应当使这个模块可以在不被修改的前提下被扩展例如：spring在装载一个类">
+entities:实体对像extension:扩展
+通俗来讲在设计一个模块的时候,应当使这个模块可以在">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE.jpg">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB.jpg">
-<meta property="og:updated_time" content="2017-04-09T08:08:14.968Z">
+<meta property="og:updated_time" content="2018-02-21T08:12:04.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设置模式-软件设计原则">
 <meta name="twitter:description" content="开闭原则Software entities should be open for extension,but closed for modificationfrom 《Object Oriented Software Construction》 by Bertrand Meyer at 1988
-通俗来讲在设计一个模块的时候,应当使这个模块可以在不被修改的前提下被扩展例如：spring在装载一个类">
+entities:实体对像extension:扩展
+通俗来讲在设计一个模块的时候,应当使这个模块可以在">
 <meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE.jpg">
 
 
@@ -413,6 +416,7 @@
 
       
         <h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a><strong>开闭原则</strong></h2><p>Software entities should be open for extension,but closed for modification<br>from 《Object Oriented Software Construction》 by Bertrand Meyer at 1988</p>
+<p>entities:实体对像<br>extension:扩展</p>
 <p>通俗来讲在设计一个模块的时候,应当使这个模块可以在不被修改的前提下被扩展<br>例如：spring在装载一个类后，想要增加新功能扩展一个类，spring就会自动装载这个类</p>
 <p>和面向接口编程统一起来</p>
 <h2 id="合成-聚合复用原则"><a href="#合成-聚合复用原则" class="headerlink" title="合成/聚合复用原则"></a><strong>合成/聚合复用原则</strong></h2><p>使用聚合，组合代替继承</p>
@@ -426,7 +430,7 @@
 <p>23种设计模式引用：模板方法：do not call us,we will call you</p>
 </blockquote>
 <h2 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a><strong>依赖倒置原则</strong></h2><p>Abstractions should not depend upon details. Details should depend upon abstractions.<br>抽象不应当依赖于细节,细节应当依赖于抽象</p>
-<p>e.g.  客户端依赖接口，接口有不同的实现。客户端不依赖实现<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE.jpg" alt="此处输入图片的描述"></p>
+<p>e.g.  客户端依赖接口，接口有不同的实现。客户端不依赖实现<br>爱人依赖人这个借口，人借口下面有鲁国人，秦国人等实现<br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E4%BE%9D%E8%B5%96%E5%80%92%E7%BD%AE.jpg" alt="此处输入图片的描述"></p>
 <h2 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a><strong>接口隔离原则</strong></h2><p>Clients should not be forced to depend upon interfaces that they don’t use<br>——客户端不应该依赖它不需用的接口。<br>The dependency of one class to another one should depend on the smallest possible interface<br>——类间的依赖关系应该建立在最小的接口上</p>
 <p><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB.jpg" alt="此处输入图片的描述"></p>
 <h2 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a><strong>迪米特法则</strong></h2><p>1）只与你直接的朋友们通信。<br>2）不要跟“陌生人”说话。<br>3）每一个软件单位对其他的单位都只有最少的知识，而且局限于那些与本单位密切相关的软件单位。 </p>
