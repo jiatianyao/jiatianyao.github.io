@@ -79,7 +79,7 @@
     <link href="http://yoursite.com/2018/01/10/python%20numpy/"/>
     <id>http://yoursite.com/2018/01/10/python numpy/</id>
     <published>2018-01-10T03:30:00.000Z</published>
-    <updated>2018-02-28T14:02:37.797Z</updated>
+    <updated>2018-02-28T14:07:50.036Z</updated>
     
     <content type="html"><![CDATA[<p>jupyter notebook</p>
 <p>1.arange<br>生成数组<br>np.arange(10)<br>array([0,1,2,3,4,5,6,7,8,9])</p>
@@ -92,7 +92,7 @@
 <p>5.zeros<br>help(np.zeros)<br>zeros(shape, dtype=float, order=’C’)<br> Examples<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros(<span class="number">5</span>)</div><div class="line">array([ <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros((<span class="number">5</span>,), dtype=np.int)</div><div class="line">array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros((<span class="number">2</span>, <span class="number">1</span>))</div><div class="line">array([[ <span class="number">0.</span>],</div><div class="line">       [ <span class="number">0.</span>]])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = (<span class="number">2</span>,<span class="number">2</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros(s)</div><div class="line">array([[ <span class="number">0.</span>,  <span class="number">0.</span>],</div><div class="line">       [ <span class="number">0.</span>,  <span class="number">0.</span>]])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros((<span class="number">2</span>,), dtype=[(<span class="string">'x'</span>, <span class="string">'i4'</span>), (<span class="string">'y'</span>, <span class="string">'i4'</span>)]) <span class="comment"># custom dtype</span></div><div class="line">array([(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">0</span>, <span class="number">0</span>)],</div><div class="line">      dtype=[(<span class="string">'x'</span>, <span class="string">'&lt;i4'</span>), (<span class="string">'y'</span>, <span class="string">'&lt;i4'</span>)])</div></pre></td></tr></table></figure></p>
 <p>6.ones<br>类似zeros,只不过填充的是1</p>
 <p>7.empty<br>类似zeros,只不过填充的是随机值</p>
-<p>8.reshape<br>把一维数组转置为多维数组</p>
+<p>8.reshape<br>把一维数组转置为多维数组<br>reshape 不会改变原来的ndarray，但是得到新的ndarray是原数组的视图<br>对于ndarray的一些方法操作，首先要区分是否会改变原来变量，以此来判断是视图还是副本</p>
 ]]></content>
     
     <summary type="html">
