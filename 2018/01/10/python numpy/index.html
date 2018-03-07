@@ -86,25 +86,25 @@
 
 
 
-<meta name="description" content="jupyter notebook
+<meta name="description" content="jupyter notebook:
 1.arange生成数组np.arange(10)array([0,1,2,3,4,5,6,7,8,9])
 2.等差数列是指从第二项起，每一项与它的前一项的差等于同一个常数的一种数列，常用A、P表示等差数列 linspacenp.linspace(1,10,5)array([1. , 3.25 ,5.5,5.75,10])
-np.linspace(1,10,5,e">
+np.linspace(1,10,5,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python numpy">
 <meta property="og:url" content="http://yoursite.com/2018/01/10/python numpy/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
-<meta property="og:description" content="jupyter notebook
+<meta property="og:description" content="jupyter notebook:
 1.arange生成数组np.arange(10)array([0,1,2,3,4,5,6,7,8,9])
 2.等差数列是指从第二项起，每一项与它的前一项的差等于同一个常数的一种数列，常用A、P表示等差数列 linspacenp.linspace(1,10,5)array([1. , 3.25 ,5.5,5.75,10])
-np.linspace(1,10,5,e">
-<meta property="og:updated_time" content="2018-03-05T16:09:54.016Z">
+np.linspace(1,10,5,">
+<meta property="og:updated_time" content="2018-03-07T15:55:07.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python numpy">
-<meta name="twitter:description" content="jupyter notebook
+<meta name="twitter:description" content="jupyter notebook:
 1.arange生成数组np.arange(10)array([0,1,2,3,4,5,6,7,8,9])
 2.等差数列是指从第二项起，每一项与它的前一项的差等于同一个常数的一种数列，常用A、P表示等差数列 linspacenp.linspace(1,10,5)array([1. , 3.25 ,5.5,5.75,10])
-np.linspace(1,10,5,e">
+np.linspace(1,10,5,">
 
 
 
@@ -415,13 +415,12 @@ np.linspace(1,10,5,e">
       
 
       
-        <p>jupyter notebook</p>
+        <p>jupyter notebook:</p>
 <p>1.arange<br>生成数组<br>np.arange(10)<br>array([0,1,2,3,4,5,6,7,8,9])</p>
 <p>2.等差数列是指从第二项起，每一项与它的前一项的差等于同一个常数的一种数列，常用A、P表示<br>等差数列 linspace<br>np.linspace(1,10,5)<br>array([1. , 3.25 ,5.5,5.75,10])</p>
 <p>np.linspace(1,10,5,endpoint=False)  相当于生成6个数只显示前五个<br>array([1. , 2.8 ,4.6,6.5,8.2])</p>
-<p>3.等比数列是指从第二项起，每一项与它的前一项的比值等于同一个常数的一种数列<br>等比数列logspace<br>np.logspace(1,10,5)<br><a id="more"></a></p>
-<p>4.shape</p>
-<p>arr = np.array([  [1,2,3],<br>                  [2,3,4]<br>               ])</p>
+<p>3.等比数列是指从第二项起，每一项与它的前一项的比值等于同一个常数的一种数列<br>等比数列logspace<br>np.logspace(1,10,5)</p>
+<p>4.shape<br><a id="more"></a><br>arr = np.array([  [1,2,3],<br>                  [2,3,4]<br>               ])</p>
 <p>arr.shape<br>(2, 3)</p>
 <p>5.zeros<br>help(np.zeros)<br>zeros(shape, dtype=float, order=’C’)<br> Examples<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros(<span class="number">5</span>)</div><div class="line">array([ <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros((<span class="number">5</span>,), dtype=np.int)</div><div class="line">array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros((<span class="number">2</span>, <span class="number">1</span>))</div><div class="line">array([[ <span class="number">0.</span>],</div><div class="line">       [ <span class="number">0.</span>]])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = (<span class="number">2</span>,<span class="number">2</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros(s)</div><div class="line">array([[ <span class="number">0.</span>,  <span class="number">0.</span>],</div><div class="line">       [ <span class="number">0.</span>,  <span class="number">0.</span>]])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros((<span class="number">2</span>,), dtype=[(<span class="string">'x'</span>, <span class="string">'i4'</span>), (<span class="string">'y'</span>, <span class="string">'i4'</span>)]) <span class="comment"># custom dtype</span></div><div class="line">array([(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">0</span>, <span class="number">0</span>)],</div><div class="line">      dtype=[(<span class="string">'x'</span>, <span class="string">'&lt;i4'</span>), (<span class="string">'y'</span>, <span class="string">'&lt;i4'</span>)])</div></pre></td></tr></table></figure></p>
 <p>6.ones<br>类似zeros,只不过填充的是1</p>
