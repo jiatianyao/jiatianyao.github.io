@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/02/10/Design pattern behavior/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
 <meta property="og:description" content="责任链模式命令模式命令Command    ——声明执行操作的接口。具体命令ConcreteCommand    ——定义接收对象和动作之间的绑定关系。    ——通过引起接收者的相应动作来实现执行。客户Client    ——产生一个ConcreteCommand对象，并设置接收者。引发者Invoker    ——要求命令执行请求。接收者Receiver    ——知道如何执行与请求相联系的操作">
-<meta property="og:updated_time" content="2018-03-18T16:04:06.190Z">
+<meta property="og:updated_time" content="2018-03-18T16:25:19.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式-行为模式">
 <meta name="twitter:description" content="责任链模式命令模式命令Command    ——声明执行操作的接口。具体命令ConcreteCommand    ——定义接收对象和动作之间的绑定关系。    ——通过引起接收者的相应动作来实现执行。客户Client    ——产生一个ConcreteCommand对象，并设置接收者。引发者Invoker    ——要求命令执行请求。接收者Receiver    ——知道如何执行与请求相联系的操作">
@@ -407,6 +407,7 @@
 
       
         <h3 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h3><h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><p>命令Command<br>    ——声明执行操作的接口。<br>具体命令ConcreteCommand<br>    ——定义接收对象和动作之间的绑定关系。<br>    ——通过引起接收者的相应动作来实现执行。<br>客户Client<br>    ——产生一个ConcreteCommand对象，并设置接收者。<br>引发者Invoker<br>    ——要求命令执行请求。<br>接收者Receiver<br>    ——知道如何执行与请求相联系的操作。</p>
+<a id="more"></a>
 <h3 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h3><h3 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h3><p>准备一个抽象类，定义一个算法的大体框架<br>将部分逻辑以具体方法以及具体构造子的形式实现<br>剩余的逻辑通过声明一些抽象方法来描述<br>这些抽象方法要求子类实现，<br>不同的子类可以以不同的方式实现这些抽象方法，从而对剩余的逻辑有不同的实现。<br>子类不改变算法的结构而重定义算法</p>
 <h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>同一应用对象不同展示形式，如一组数据映射为表格和柱状图。用户更改表格数据，柱状图要同步修改</p>
 <p>关键对象：<br>抽象主题Subject<br>提供一个连接观察者对象和解除连接的接口。<br>知道它的观察者。可有任意数目的观察者对象观察一个主题。<br>可以增加和删除观察者对象，<br>具体主题ConcreteSubject：<br>通常用一个具体子类实现。<br>负责实现对观察者引用的聚集的管理力注。<br>将有关状态存入ConcreteObserver对象。<br>在具体主题内部状态改变时向它的观察者发送通知。</p>
@@ -464,8 +465,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/27/Design pattern catalog/" rel="next" title="设计模式目录">
-                <i class="fa fa-chevron-left"></i> 设计模式目录
+              <a href="/2018/01/27/Design pattern factory/" rel="next" title="设计模式-工厂模式">
+                <i class="fa fa-chevron-left"></i> 设计模式-工厂模式
               </a>
             
           </div>
