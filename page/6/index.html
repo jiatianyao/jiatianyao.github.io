@@ -464,6 +464,154 @@ cluster-config-file nodes-6379.conf
   
 
   <article class="post post-type-kafka " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/KafkaStream/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/02/KafkaStream/" itemprop="url">
+                  Kafka Stream
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-02T23:33:30+08:00">
+                2016-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/02/KafkaStream/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/KafkaStream/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>以下内容摘自官网，熟悉的同学可跳过</p>
+<h2 id="Use-Kafka-Streams-to-process-data"><a href="#Use-Kafka-Streams-to-process-data" class="headerlink" title="Use Kafka Streams to process data"></a>Use Kafka Streams to process data</h2><p>Kafka Streams is a client library of Kafka for real-time stream processing and analyzing data stored in Kafka brokers. This quickstart example will demonstrate how to run a streaming application coded in this library. Here is the gist of the WordCountDemo example code (converted to use Java 8 lambda expressions for easy reading).<br>Kafka Streams是Kafka中用于客户端的库，主要用于获取实时流处理以及分析Kafka brokers中存储的数据。这个例子将会展示如何使用这个库来运行一个流式处理应用。这里有一个WordCountDemo的主要代码（转换成Java8 lambda表达式更易读）：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">KTable wordCounts = textLines</div><div class="line">    <span class="comment">// Split each text line, by whitespace, into words.</span></div><div class="line">    .flatMapValues(value -&gt; Arrays.asList(value.toLowerCase().split(<span class="string">"\\W+"</span>)))</div><div class="line"></div><div class="line">    <span class="comment">// Ensure the words are available as record keys for the next aggregate operation.</span></div><div class="line">    .map((key, value) -&gt; <span class="keyword">new</span> KeyValue&lt;&gt;(value, value))</div><div class="line"></div><div class="line">    <span class="comment">// Count the occurrences of each word (record key) and store the results into a table named "Counts".</span></div><div class="line">    .countByKey(<span class="string">"Counts"</span>)</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/02/KafkaStream/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-kafka " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/codis 集群/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -574,154 +722,6 @@ cluster-config-file nodes-6379.conf
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/12/02/codis 集群/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-kafka " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/KafkaStream/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/02/KafkaStream/" itemprop="url">
-                  Kafka Stream
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-02T23:33:30+08:00">
-                2016-12-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
-                    <span itemprop="name">大数据</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/12/02/KafkaStream/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/KafkaStream/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>以下内容摘自官网，熟悉的同学可跳过</p>
-<h2 id="Use-Kafka-Streams-to-process-data"><a href="#Use-Kafka-Streams-to-process-data" class="headerlink" title="Use Kafka Streams to process data"></a>Use Kafka Streams to process data</h2><p>Kafka Streams is a client library of Kafka for real-time stream processing and analyzing data stored in Kafka brokers. This quickstart example will demonstrate how to run a streaming application coded in this library. Here is the gist of the WordCountDemo example code (converted to use Java 8 lambda expressions for easy reading).<br>Kafka Streams是Kafka中用于客户端的库，主要用于获取实时流处理以及分析Kafka brokers中存储的数据。这个例子将会展示如何使用这个库来运行一个流式处理应用。这里有一个WordCountDemo的主要代码（转换成Java8 lambda表达式更易读）：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">KTable wordCounts = textLines</div><div class="line">    <span class="comment">// Split each text line, by whitespace, into words.</span></div><div class="line">    .flatMapValues(value -&gt; Arrays.asList(value.toLowerCase().split(<span class="string">"\\W+"</span>)))</div><div class="line"></div><div class="line">    <span class="comment">// Ensure the words are available as record keys for the next aggregate operation.</span></div><div class="line">    .map((key, value) -&gt; <span class="keyword">new</span> KeyValue&lt;&gt;(value, value))</div><div class="line"></div><div class="line">    <span class="comment">// Count the occurrences of each word (record key) and store the results into a table named "Counts".</span></div><div class="line">    .countByKey(<span class="string">"Counts"</span>)</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/02/KafkaStream/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1654,7 +1654,7 @@ cluster-config-file nodes-6379.conf
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/30/设计模式-软件设计原则(1)/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/30/spark-MLlib-数据类型实战/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -1679,8 +1679,8 @@ cluster-config-file nodes-6379.conf
             
               
                 
-                <a class="post-title-link" href="/2016/03/30/设计模式-软件设计原则(1)/" itemprop="url">
-                  设置模式-软件设计原则
+                <a class="post-title-link" href="/2016/03/30/spark-MLlib-数据类型实战/" itemprop="url">
+                  spark-MLlib-数据类型实战
                 </a>
               
             
@@ -1713,8 +1713,8 @@ cluster-config-file nodes-6379.conf
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
                   </a>
                 </span>
 
@@ -1728,8 +1728,8 @@ cluster-config-file nodes-6379.conf
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/03/30/设计模式-软件设计原则(1)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/30/设计模式-软件设计原则(1)/" itemprop="commentCount"></span>
+                <a href="/2016/03/30/spark-MLlib-数据类型实战/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/30/spark-MLlib-数据类型实战/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1756,15 +1756,13 @@ cluster-config-file nodes-6379.conf
 
       
         
-          <h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a><strong>开闭原则</strong></h2><p>Software entities should be open for extension,but closed for modification<br>from 《Object Oriented Software Construction》 by Bertrand Meyer at 1988</p>
-<p>entities:实体对像<br>extension:扩展</p>
-<p>通俗来讲在设计一个模块的时候,应当使这个模块可以在不被修改的前提下被扩展<br>例如：spring在装载一个类后，想要增加新功能扩展一个类，spring就会自动装载这个类</p>
-<p>和面向接口编程统一起来</p>
-<h2 id="合成-聚合复用原则"><a href="#合成-聚合复用原则" class="headerlink" title="合成/聚合复用原则"></a><strong>合成/聚合复用原则</strong></h2><p>使用聚合，组合代替继承</p>
-<p>but， what is 聚合组合？<br>e.g.<br>class Driver {<br>    //使用成员变量形式实现聚合关系<br>    Car mycar;<br>    public void drive(){<br>        mycar.run();<br>    }<br>}<br>
+          <h2 id="监督学习："><a href="#监督学习：" class="headerlink" title="监督学习："></a>监督学习：</h2><p>给定数据集，知道要预测什么</p>
+<h2 id="非监督学习："><a href="#非监督学习：" class="headerlink" title="非监督学习："></a>非监督学习：</h2><p>不告诉计算机要做什么，让他自己去发现数据的内部机构</p>
+<h2 id="半监督学习："><a href="#半监督学习：" class="headerlink" title="半监督学习："></a>半监督学习：</h2><p>考虑如何用少量的标注样本和大量的未标注样本进行训练和分类</p>
+<h2 id="强化学习："><a href="#强化学习：" class="headerlink" title="强化学习："></a>强化学习：</h2><p>强化学习通过观察来学习动作的完成，每个动作都会对环境有所影响，学习对象根据观察到的周围环境的反馈来做出判断。在这种学习模式下，输入数据作为对模型的反馈</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/30/设计模式-软件设计原则(1)/#more" rel="contents">
+            <a class="btn" href="/2016/03/30/spark-MLlib-数据类型实战/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

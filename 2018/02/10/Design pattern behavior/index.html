@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/02/10/Design pattern behavior/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
 <meta property="og:description" content="责任链模式命令模式命令Command    ——声明执行操作的接口。具体命令ConcreteCommand    ——定义接收对象和动作之间的绑定关系。    ——通过引起接收者的相应动作来实现执行。客户Client    ——产生一个ConcreteCommand对象，并设置接收者。引发者Invoker    ——要求命令执行请求。接收者Receiver    ——知道如何执行与请求相联系的操作">
-<meta property="og:updated_time" content="2018-03-18T16:25:19.033Z">
+<meta property="og:updated_time" content="2018-03-25T08:03:07.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式-行为模式">
 <meta name="twitter:description" content="责任链模式命令模式命令Command    ——声明执行操作的接口。具体命令ConcreteCommand    ——定义接收对象和动作之间的绑定关系。    ——通过引起接收者的相应动作来实现执行。客户Client    ——产生一个ConcreteCommand对象，并设置接收者。引发者Invoker    ——要求命令执行请求。接收者Receiver    ——知道如何执行与请求相联系的操作">
@@ -412,7 +412,7 @@
 <h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>同一应用对象不同展示形式，如一组数据映射为表格和柱状图。用户更改表格数据，柱状图要同步修改</p>
 <p>关键对象：<br>抽象主题Subject<br>提供一个连接观察者对象和解除连接的接口。<br>知道它的观察者。可有任意数目的观察者对象观察一个主题。<br>可以增加和删除观察者对象，<br>具体主题ConcreteSubject：<br>通常用一个具体子类实现。<br>负责实现对观察者引用的聚集的管理力注。<br>将有关状态存入ConcreteObserver对象。<br>在具体主题内部状态改变时向它的观察者发送通知。</p>
 <p>抽象观察者Observer ：<br>一般用一个抽象类或者一个接口实现，<br>为所有的具体观察者定义一个更新接口<br>更新接口包含的方法叫更新方法。<br>具体观察者ConcreteObserver<br>通常用一个具体子类实现，<br>保存一个指向ConcreteSubject对象的引用。<br>存储要与主题一致的状态。<br>实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态相协调。</p>
-<h3 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h3><h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3><h3 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h3>
+<h3 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h3><h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3><h3 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h3><h3 id="解释器模式"><a href="#解释器模式" class="headerlink" title="解释器模式"></a>解释器模式</h3>
       
     </div>
 
@@ -465,8 +465,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/27/Design pattern factory/" rel="next" title="设计模式-工厂模式">
-                <i class="fa fa-chevron-left"></i> 设计模式-工厂模式
+              <a href="/2018/01/27/Design pattern catalog/" rel="next" title="设计模式目录">
+                <i class="fa fa-chevron-left"></i> 设计模式目录
               </a>
             
           </div>
@@ -621,7 +621,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#责任链模式"><span class="nav-number">1.</span> <span class="nav-text">责任链模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令模式"><span class="nav-number">2.</span> <span class="nav-text">命令模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代器模式"><span class="nav-number">3.</span> <span class="nav-text">迭代器模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板方法模式"><span class="nav-number">4.</span> <span class="nav-text">模板方法模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式"><span class="nav-number">5.</span> <span class="nav-text">观察者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态模式"><span class="nav-number">6.</span> <span class="nav-text">状态模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#策略模式"><span class="nav-number">7.</span> <span class="nav-text">策略模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问者模式"><span class="nav-number">8.</span> <span class="nav-text">访问者模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#责任链模式"><span class="nav-number">1.</span> <span class="nav-text">责任链模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令模式"><span class="nav-number">2.</span> <span class="nav-text">命令模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代器模式"><span class="nav-number">3.</span> <span class="nav-text">迭代器模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板方法模式"><span class="nav-number">4.</span> <span class="nav-text">模板方法模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式"><span class="nav-number">5.</span> <span class="nav-text">观察者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态模式"><span class="nav-number">6.</span> <span class="nav-text">状态模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#策略模式"><span class="nav-number">7.</span> <span class="nav-text">策略模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问者模式"><span class="nav-number">8.</span> <span class="nav-text">访问者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解释器模式"><span class="nav-number">9.</span> <span class="nav-text">解释器模式</span></a></li></ol></div>
             
 
           </div>
