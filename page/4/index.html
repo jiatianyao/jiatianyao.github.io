@@ -749,6 +749,179 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/Mathematical regression /">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/01/27/Mathematical regression /" itemprop="url">
+                  机器学习-回归算法实例
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-27T09:30:00+08:00">
+                2017-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/01/27/Mathematical regression /#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/Mathematical regression /" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="概念梳理："><a href="#概念梳理：" class="headerlink" title="概念梳理："></a>概念梳理：</h2><p>数学期望：<br>在概率论和统计学中，数学期望(mean)（或均值，亦简称期望）是试验中每次可能结果的概率乘以其结果的总和，是最基本的数学特征之一。它反映随机变量平均取值的大小</p>
+<p>方差：<br>（variance)是在概率论和统计方差衡量随机变量或一组数据时离散程度的度量。概率论中方差用来度量随机变量和其数学期望（即均值）之间的偏离程度。统计中的方差（样本方差）是每个样本值与全体样本值的平均数之差的平方值的平均数。在许多实际问题中，研究方差即偏离程度有着重要意义。</p>
+<p>概率密度函数：<br>在数学中，连续型随机变量的概率密度函数（在不至于混淆时可以简称为密度函数）是一个描述这个随机变量的输出值，在某个确定的取值点附近的可能性的函数。而随机变量的取值落在某个区域之内的概率则为概率密度函数在这个区域上的积分。当概率密度函数存在的时候，累积分布函数是概率密度函数的积分。概率密度函数一般以小写标记<br>正态分布是重要的概率分布。它的概率密度函数是：<br><img src="http://oh6ybr0jg.bkt.clouddn.com/gailvmidu.jpg" alt="此处输入图片的描述"><br>随着参数μ和σ变化，概率分布也产生变化。<br>期望：μ<br>方差：σ^2<br>中位数：μ<br>众数：μ<br>偏度：0<br>峰度：3</p>
+<p>正态分布：<br>又称为常态分布，高斯分布。<br>若随机变量X服从一个数学期望为μ、方差为σ^2的正态分布，记为N(μ，σ^2)。其概率密度函数为正态分布的期望值μ决定了其位置，其标准差σ决定了分布的幅度。当μ = 0,σ = 1时的正态分布是标准正态分布。</p>
+<p>线性回归：<br>线性回归是利用数理统计中回归分析，来确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法，运用十分广泛。其表达形式为y = w’x+e，e为误差服从均值为0的正态分布。</p>
+<p>回归数据：<br><a href="http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption" target="_blank" rel="external">http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption</a></p>
+<p>属性信息：</p>
+<p>1.date：格式dd/mm/yyyy日期<br>2.time：格式HH时间：MM：SS<br>3.global_active_power：家用全球分钟平均有功<strong>功率</strong>（千瓦）<br>4.global_reactive_power: 家用全球分钟平均无功<strong>功率</strong>（千瓦）<br>5.voltage：分钟平均<strong>电压</strong>（伏特）<br>6.global_intensity：家用全球分钟平均<strong>电流</strong>强度（安培）<br>7.sub_metering_1：能耗分项计量1号（中有功电能电能）。它与<strong>厨房</strong>相对应，主要包括洗碗机、烤箱和微波炉（热板不是电动的，而是燃气驱动的）。<br>8.sub_metering_2：能耗分项计量2号（中有功电能电能）。它对应<strong>洗衣</strong>房，包括洗衣机、滚筒烘干机、冰箱和灯。<br>9.sub_metering_3：能耗分项计量3号（中有功电能电能）。它相当于一个<strong>电热水器</strong>和一个空调。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">import</span> sklearn</div><div class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</div><div class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</div><div class="line"></div><div class="line"></div><div class="line">path=<span class="string">'C:/Users/zhanghongming/Documents/data/100.txt'</span></div><div class="line">names = [<span class="string">'Date'</span>,<span class="string">'Time'</span>,<span class="string">'Global_active_power'</span>,<span class="string">'Global_reactive_power'</span>,<span class="string">'Voltage'</span>,<span class="string">'Global_intensity'</span>,<span class="string">'Sub_metering_1'</span>,<span class="string">'Sub_metering_2'</span>,<span class="string">'Sub_metering_3'</span>]</div><div class="line"></div><div class="line"></div><div class="line">df=pd.read_csv(path,sep=<span class="string">';'</span>)</div><div class="line">print(df.head())</div></pre></td></tr></table></figure>
+<pre><code>Date      Time  Global_active_power  Global_reactive_power  Voltage  \
+</code></pre><p>0  16/12/2006  17:24:00                4.216                  0.418   234.84<br>1  16/12/2006  17:25:00                5.360                  0.436   233.63<br>2  16/12/2006  17:26:00                5.374                  0.498   233.29<br>3  16/12/2006  17:27:00                5.388                  0.502   233.74<br>4  16/12/2006  17:28:00                3.666                  0.528   235.68   </p>
+<p>   Global_intensity  Sub_metering_1  Sub_metering_2  Sub_metering_3<br>0              18.4             0.0             1.0            17.0<br>1              23.0             0.0             1.0            16.0<br>2              23.0             0.0             2.0            17.0<br>3              23.0             0.0             1.0            17.0<br>4              15.8             0.0             1.0            17.0  </p>
+<h4 id="看所有的变量值"><a href="#看所有的变量值" class="headerlink" title="看所有的变量值"></a>看所有的变量值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> df.columns:</div><div class="line">    print(df[i].value_counts())</div></pre></td></tr></table></figure>
+<p>Name: Date, dtype: int64<br>19:01:00    1<br>17:27:00    1<br>18:24:00    1<br>           ..</p>
+<p>Name: Time, Length: 99, dtype: int64<br>4.230    2<br>2.912    2<br>4.218    2<br>6.072    1<br>5.412    1<br>           ..</p>
+<p>Name: Global_active_power, Length: 96, dtype: int64<br>0.000    33<br>0.090     7<br>0.054     4<br>0.144     3<br>           ..</p>
+<p>Name: Global_reactive_power, dtype: int64<br>235.84    3<br>234.20    2<br>235.68    2<br>233.74    2<br>           ..</p>
+<p>Name: Voltage, Length: 90, dtype: int64<br>12.4    7<br>13.8    5<br>15.8    5<br>           ..<br>Name: Global_intensity, dtype: int64<br>0.0    99<br>Name: Sub_metering_1, dtype: int64<br>1.0     50<br>0.0     26<br>2.0      8</p>
+<p>Name: Sub_metering_2, dtype: int64<br>17.0    77<br>16.0    18<br>18.0     4</p>
+<p>Name: Sub_metering_3, dtype: int64</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#空值处理</span></div><div class="line">new_df= df.replace(<span class="string">'?'</span>,np.nan)</div><div class="line"></div><div class="line">datas = new_df.dropna(how=<span class="string">'any'</span>)</div><div class="line"></div><div class="line"><span class="comment">#定义时间格式化</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">datae_format</span><span class="params">(dt)</span>:</span></div><div class="line">    t = time.strptime(<span class="string">' '</span>.join(dt),<span class="string">'%d/%m/%Y %H:%M:%S'</span>)</div><div class="line">    <span class="keyword">return</span> (t.tm_year,t.tm_mon,t.tm_mday,t.tm_hour,t.tm_min,t.tm_sec)</div><div class="line"></div><div class="line"><span class="comment">##分析功率和时间的线性关系。将时间转换为连续的</span></div><div class="line"></div><div class="line">X = datas[names[<span class="number">0</span>:<span class="number">2</span>]]</div><div class="line">X = X.apply(<span class="keyword">lambda</span> x :pd.Series(datae_format(x)),axis=<span class="number">1</span>)</div><div class="line">Y = datas[names[<span class="number">2</span>]]</div><div class="line"></div><div class="line"></div><div class="line">print(X.head(<span class="number">5</span>))</div><div class="line">print(Y.head(<span class="number">5</span>))</div></pre></td></tr></table></figure>
+<pre><code>0   1   2   3   4  5
+</code></pre><p>0  2006  12  16  17  24  0<br>1  2006  12  16  17  25  0<br>2  2006  12  16  17  26  0<br>3  2006  12  16  17  27  0<br>4  2006  12  16  17  28  0<br>0    4.216<br>1    5.360<br>2    5.374<br>3    5.388<br>4    3.666<br>Name: Global_active_power, dtype: float64</p>
+<h6 id="函数讲解"><a href="#函数讲解" class="headerlink" title="函数讲解"></a>函数讲解</h6><p>sklearn.model_selection.train_test_split随机划分训练集和测试集<br>一般形式：<br>train_test_split是交叉验证中常用的函数，功能是从样本中随机的按比例选取train data和testdata，形式为：<br>X_train,X_test, y_train, y_test =<br>cross_validation.train_test_split(train_data,train_target,test_size=0.4, random_state=0)<br>参数解释：<br>train_data：所要划分的样本特征集<br>train_target：所要划分的样本结果<br>test_size：样本占比，如果是整数的话就是样本的数量<br>random_state：是随机数的种子。<br>随机数种子：其实就是该组随机数的编号，在需要重复试验的时候，保证得到一组一样的随机数。比如你每次都填1，其他参数一样的情况下你得到的随机数组是一样的。但填0或不填，每次都会不一样。<br>随机数的产生取决于种子，随机数和种子之间的关系遵从以下两个规则：<br>种子不同，产生不同的随机数；种子相同，即使实例不同也产生相同的随机数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">X_train,X_test,Y_train,Y_test = train_test_split( X, Y, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">## 数据标准换行</span></div><div class="line">ss = StandardScaler()</div><div class="line">X_train = ss.fit_transform(X_train)</div><div class="line">X_test = ss.fit_transform(X_test)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##训练数据</span></div><div class="line">lr = LinearRegression()</div><div class="line">lr.fit(X_train,Y_train)</div><div class="line"></div><div class="line">y_predict = lr.predict(X_test)</div><div class="line"></div><div class="line">print(<span class="string">"准确率:"</span>,lr.score(X_test,Y_test))</div></pre></td></tr></table></figure>
+<p>样本数据100条：<br>准确率: 0.0226499044921<br>样本数据1000条：<br>0.103073016594</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">## 解决中文问题</span></div><div class="line">mpl.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>];</div><div class="line">mpl.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="keyword">False</span></div><div class="line"></div><div class="line">t=np.arange(len(X_test))</div><div class="line">plt.figure(facecolor=<span class="string">'w'</span>)</div><div class="line">plt.plot(t,Y_test,<span class="string">'r--'</span>,linewidth=<span class="number">2</span>,label=<span class="string">u'真实值'</span>)</div><div class="line">plt.plot(t,y_predict,<span class="string">'g--'</span>,linewidth=<span class="number">2</span>,label=<span class="string">u'预测值'</span>)</div><div class="line">plt.legend(loc =<span class="string">'lower right'</span>)</div><div class="line">plt.title(<span class="string">u'线性回归时间与电压的关系'</span>,fontsize=<span class="number">20</span> )</div><div class="line">plt.grid(b=<span class="keyword">True</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p>100条数据：<br><img src="http://oh6ybr0jg.bkt.clouddn.com/linear_regression_100.png" alt="此处输入图片的描述"></p>
+<p>1000条数据：<br><img src="http://oh6ybr0jg.bkt.clouddn.com/linear_regression_1000.png" alt="此处输入图片的描述"></p>
+<h3 id="linear多项式"><a href="#linear多项式" class="headerlink" title="linear多项式"></a>linear多项式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</div><div class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> PolynomialFeatures</div><div class="line"><span class="keyword">from</span> sklearn.grid_search <span class="keyword">import</span> GridSearchCV</div><div class="line">models = [Pipeline([(<span class="string">'Poly'</span>,PolynomialFeatures()),(<span class="string">'Linear'</span>,LinearRegression())])]</div><div class="line">model = models[<span class="number">0</span>]</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##获取X，Y变量，并将时间变量转换为数值型连续的</span></div><div class="line">X = datas[names[<span class="number">0</span>:<span class="number">2</span>]]</div><div class="line">X = X.apply(<span class="keyword">lambda</span> x :pd.Series(datae_format(x)),axis=<span class="number">1</span>)</div><div class="line">Y = datas[names[<span class="number">4</span>]]</div><div class="line"></div><div class="line"><span class="comment">## 对数据集进行划分</span></div><div class="line">X_train,X_test,Y_train,Y_test = train_test_split( X, Y, test_size=<span class="number">0.2</span>, random_state=<span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="comment">## 数据标准化</span></div><div class="line">ss = StandardScaler()</div><div class="line">X_train = ss.fit_transform(X_train)</div><div class="line">X_test = ss.fit_transform(X_test)</div><div class="line"></div><div class="line"><span class="comment">## 模型训练</span></div><div class="line">t=np.arange(len(X_test))</div><div class="line">N =<span class="number">5</span></div><div class="line">d_pool= np.arange(<span class="number">1</span>,N,<span class="number">1</span>)</div><div class="line">m=d_pool.size</div><div class="line">clrs = []  <span class="comment"># 颜色</span></div><div class="line"><span class="keyword">for</span> c <span class="keyword">in</span> np.linspace(<span class="number">16711680</span>, <span class="number">255</span>, m,dtype=<span class="string">'int64'</span>):</div><div class="line">    clrs.append(<span class="string">'#%06x'</span> % c)</div><div class="line">line_width = <span class="number">3</span></div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>),facecolor=<span class="string">'w'</span>)</div><div class="line"><span class="keyword">for</span> i,d <span class="keyword">in</span> enumerate(d_pool):</div><div class="line">    plt.subplot(N<span class="number">-1</span>,<span class="number">1</span>,i+<span class="number">1</span>)</div><div class="line">    plt.plot(t,Y_test,<span class="string">'r--'</span>,label=<span class="string">u'真实值'</span>,ms=<span class="number">10</span>,zorder=N)</div><div class="line">    model.set_params(Poly__degree=d) <span class="comment"># 设置多项式的阶</span></div><div class="line">    model.fit(X_train,Y_train)</div><div class="line">    lin = model.get_params(<span class="string">'Linear'</span>)[<span class="string">'Linear'</span>]</div><div class="line">    output =<span class="string">u'%d阶，系数为：'</span>%d</div><div class="line">    print( output,lin.coef_.ravel())</div><div class="line"></div><div class="line">    y_hat = model.predict(X_test)</div><div class="line">    s = model.score(X_test,Y_test)</div><div class="line"></div><div class="line">    z=N<span class="number">-1</span> <span class="keyword">if</span> (d==<span class="number">2</span>) <span class="keyword">else</span> <span class="number">0</span></div><div class="line">    label=<span class="string">u'%d阶,准确率=%.3f'</span>%(d,s)</div><div class="line"></div><div class="line"></div><div class="line">    plt.plot(t,y_hat,color=clrs[i],lw=line_width,alpha = <span class="number">0.75</span>,label=label,zorder=z)</div><div class="line">    plt.legend(loc = <span class="string">'upper left'</span>)</div><div class="line">    plt.grid(<span class="keyword">True</span>)</div><div class="line">    plt.ylabel(<span class="string">u'%d阶结果'</span>%d,fontsize=<span class="number">12</span>)</div><div class="line"></div><div class="line"><span class="comment"># 预测值和真实值画图比较</span></div><div class="line">plt.legend(loc = <span class="string">'lower right'</span>)</div><div class="line">plt.suptitle(<span class="string">u'线性回归时间与电压之间多项式关系'</span>)</div><div class="line">plt.grid(b=<span class="keyword">True</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p>1阶，系数为： [  0.00000000e+00   5.55111512e-17   0.00000000e+00   0.00000000e+00<br>  -4.22939297e-01  -4.34494704e-01   0.00000000e+00]<br>2阶，系数为： [  2.47983335e-17   1.11022302e-16  -2.22044605e-16  -1.11022302e-16<br>  -5.05820937e-01  -3.46571423e-01   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00  -8.58357173e-01  -7.57689882e-01<br>   0.00000000e+00  -1.60364055e-01   0.00000000e+00   0.00000000e+00]<br>3阶，系数为： [ -1.69309011e-15  -2.99760217e-15   3.33066907e-16   5.55111512e-16<br>  -4.41970713e-02  -3.57278153e-01   0.00000000e+00   2.22044605e-16<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   3.43644538e-01   4.86208530e-01<br>   0.00000000e+00   3.26242425e-02   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   4.48140740e-01   6.37890832e-01<br>   0.00000000e+00  -7.45035081e-01   0.00000000e+00   0.00000000e+00<br>  -5.02511111e-01   0.00000000e+00   0.00000000e+00   0.00000000e+00]<br>4阶，系数为： [  2.22002972e-013  -8.01497757e-013   5.37209166e-014  -4.53519167e-013<br>   7.19933381e-003   2.05441337e-001   3.86510268e-013  -5.94066463e-013<br>   6.66133815e-015   6.66133815e-016  -1.88737914e-015   6.27276009e-015<br>  -5.30131494e-015  -1.01585407e-014   3.35287353e-014   8.21565038e-015<br>  -2.55351296e-015  -2.22044605e-016  -6.31088724e-030   3.02922588e-028<br>   1.00974196e-028  -5.04870979e-029  -4.89052469e-002   3.28220946e-001<br>   0.00000000e+000   6.15440583e-003   0.00000000e+000   0.00000000e+000<br>   1.26217745e-029   0.00000000e+000  -5.60519386e-044  -8.40779079e-045<br>  -7.00649232e-045  -2.24207754e-044  -5.60519386e-045   2.80259693e-045<br>   1.40129846e-045   0.00000000e+000   0.00000000e+000   4.97841222e-060<br>   1.55575382e-061  -1.24460306e-060  -2.48920611e-060   0.00000000e+000<br>  -3.11150764e-061  -1.16681536e-061  -3.11150764e-061  -4.66726146e-061<br>   2.21085915e-075  -5.52714788e-076  -1.38178697e-076   2.76357394e-076<br>  -1.38178697e-076  -3.45446742e-077   0.00000000e+000   1.34940134e-079<br>   0.00000000e+000   1.91761463e-093   1.49813643e-095  -5.99254573e-095<br>   4.49440930e-095   1.12360233e-095   0.00000000e+000   7.49068217e-096<br>  -2.34083818e-097   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000  -1.66326556e-111   4.15816391e-112<br>  -2.07908195e-112   0.00000000e+000  -6.13741990e-002  -8.70197287e-001<br>   8.39734513e-140  -1.48604949e+000   0.00000000e+000   0.00000000e+000<br>  -4.67097255e-001   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000  -2.42848401e-001<br>  -9.28403263e-001   0.00000000e+000  -8.91115491e-001   0.00000000e+000<br>   0.00000000e+000   1.33924630e-001   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   2.81909059e-001   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000]</p>
+<p>   <img src="http://oh6ybr0jg.bkt.clouddn.com/linear_regression_polynomial.png" alt="此处输入图片的描述"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/26/Python网络爬虫/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1654,154 +1827,6 @@ Query with ANSI-SQL and get results in sub-second, via ODBC, JDBC or RESTful API
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/11/机器学习-预测泰坦尼克号乘客生还率/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/11/机器学习-预测泰坦尼克号乘客生还率/" itemprop="url">
-                  机器学习-预测泰坦尼克号乘客生还率
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-11T16:02:30+08:00">
-                2017-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/01/11/机器学习-预测泰坦尼克号乘客生还率/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/11/机器学习-预测泰坦尼克号乘客生还率/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1><h2 id="项目-0-预测泰坦尼克号乘客生还率"><a href="#项目-0-预测泰坦尼克号乘客生还率" class="headerlink" title="项目 0: 预测泰坦尼克号乘客生还率"></a>项目 0: 预测泰坦尼克号乘客生还率</h2><p>1912年，泰坦尼克号在第一次航行中就与冰山相撞沉没，导致了大部分乘客和船员身亡。在这个入门项目中，我们将探索部分泰坦尼克号旅客名单，来确定哪些特征可以最好地预测一个人是否会生还。为了完成这个项目，你将需要实现几个基于条件的预测并回答下面的问题。我们将根据代码的完成度和对问题的解答来对你提交的项目的进行评估。 </p>
-<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>当我们开始处理泰坦尼克号乘客数据时，会先导入我们需要的功能模块以及将数据加载到 <code>pandas</code> DataFrame。运行下面区域中的代码加载数据，并使用 <code>.head()</code> 函数显示前几项乘客数据。 </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"></div><div class="line"><span class="comment"># RMS Titanic data visualization code </span></div><div class="line"><span class="comment"># 数据可视化代码</span></div><div class="line"><span class="keyword">from</span> titanic_visualizations <span class="keyword">import</span> survival_stats</div><div class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> display</div><div class="line">%matplotlib inline</div><div class="line"></div><div class="line"><span class="comment"># Load the dataset </span></div><div class="line"><span class="comment"># 加载数据集</span></div><div class="line">in_file = <span class="string">'titanic_data.csv'</span></div><div class="line">full_data = pd.read_csv(in_file)</div><div class="line"></div><div class="line"><span class="comment"># Print the first few entries of the RMS Titanic data </span></div><div class="line"><span class="comment"># 显示数据列表中的前几项乘客数据</span></div><div class="line">display(full_data.head())</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/11/机器学习-预测泰坦尼克号乘客生还率/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1847,7 +1872,7 @@ Query with ANSI-SQL and get results in sub-second, via ODBC, JDBC or RESTful API
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">68</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
