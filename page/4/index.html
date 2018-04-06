@@ -309,7 +309,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/Python机器学习准备/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/Python春节祝福语自动回复/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -334,8 +334,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/27/Python机器学习准备/" itemprop="url">
-                  Python机器学习准备
+                <a class="post-title-link" href="/2017/01/27/Python春节祝福语自动回复/" itemprop="url">
+                  Python春节祝福语自动回复
                 </a>
               
             
@@ -368,8 +368,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -383,8 +383,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/01/27/Python机器学习准备/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/Python机器学习准备/" itemprop="commentCount"></span>
+                <a href="/2017/01/27/Python春节祝福语自动回复/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/Python春节祝福语自动回复/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -411,15 +411,15 @@
 
       
         
-          
-            <h2 id="下载NumPy"><a href="#下载NumPy" class="headerlink" title="下载NumPy"></a>下载NumPy</h2><p><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
-<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
-<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
-<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
-<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
-<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
-
-          
+          <p>首先安装两个库<br>pip install itchat pillow</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/01/27/Python春节祝福语自动回复/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -602,7 +602,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/Python春节祝福语自动回复/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/27/Python机器学习准备/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -627,8 +627,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/01/27/Python春节祝福语自动回复/" itemprop="url">
-                  Python春节祝福语自动回复
+                <a class="post-title-link" href="/2017/01/27/Python机器学习准备/" itemprop="url">
+                  Python机器学习准备
                 </a>
               
             
@@ -661,8 +661,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -676,8 +676,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/01/27/Python春节祝福语自动回复/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/Python春节祝福语自动回复/" itemprop="commentCount"></span>
+                <a href="/2017/01/27/Python机器学习准备/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/27/Python机器学习准备/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -704,15 +704,15 @@
 
       
         
-          <p>首先安装两个库<br>pip install itchat pillow</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">环境win7，pyython3</div><div class="line">编写py文件输入以下内容</div><div class="line"><span class="keyword">import</span> itchat, time, re</div><div class="line"><span class="keyword">from</span> itchat.content <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([TEXT])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    match = re.search(<span class="string">'年'</span>, msg[<span class="string">'Text'</span>]).span()</div><div class="line">    <span class="keyword">if</span> match:</div><div class="line">      itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line"><span class="meta">@itchat.msg_register([PICTURE, RECORDING, VIDEO, SHARING])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">other_reply</span><span class="params">(msg)</span>:</span></div><div class="line">    itchat.send((<span class="string">'鸡年大吉'</span>), msg[<span class="string">'FromUserName'</span>])</div><div class="line"></div><div class="line">itchat.auto_login(enableCmdQR=<span class="keyword">True</span>,hotReload=<span class="keyword">True</span>)</div><div class="line">itchat.run()</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/27/Python春节祝福语自动回复/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <h2 id="下载NumPy"><a href="#下载NumPy" class="headerlink" title="下载NumPy"></a>下载NumPy</h2><p><a href="http://download.csdn.net/download/z1137730824/8384347（numpy" target="_blank" rel="external">http://download.csdn.net/download/z1137730824/8384347（numpy</a> 64位）<br><a href="http://download.csdn.net/detail/u010156024/9302649（numpy" target="_blank" rel="external">http://download.csdn.net/detail/u010156024/9302649（numpy</a> 32位）</p>
+<p>下载matplotlib<br><a href="https://pypi.python.org/pypi/matplotlib/" target="_blank" rel="external">https://pypi.python.org/pypi/matplotlib/</a></p>
+<p>博主选择<br>matplotlib-2.0.0-cp27-cp27m-win_amd64.whl (md5)<br>下载完把matplotlib-2.0.0-cp27-cp27m-win_amd64.whl改成matplotlib-2.0.0-cp27-cp27m-win_amd64.zip<br>解压到Python目录下的Lib文件夹下的site-packages目录</p>
+<p>安装dateutil<br>直接用pip install python-dateutil<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/python-dateutil" target="_blank" rel="external">https://pypi.python.org/pypi/python-dateutil</a></p>
+<p>安装pyparsing<br>pip install pyparsing<br>或者去网上下载<br><a href="https://pypi.python.org/pypi/pyparsing/2.0.2" target="_blank" rel="external">https://pypi.python.org/pypi/pyparsing/2.0.2</a><br><a href="http://pyparsing.wikispaces.com/Download+and+Installation" target="_blank" rel="external">http://pyparsing.wikispaces.com/Download+and+Installation</a></p>
+<p>最终安装如下安装包：numpy, setuptools, python-dateutil, pytz, pyparsing, and cycler，functools32</p>
+
+          
         
       
     </div>
@@ -876,9 +876,11 @@
 <pre><code>0   1   2   3   4  5
 </code></pre><p>0  2006  12  16  17  24  0<br>1  2006  12  16  17  25  0<br>2  2006  12  16  17  26  0<br>3  2006  12  16  17  27  0<br>4  2006  12  16  17  28  0<br>0    4.216<br>1    5.360<br>2    5.374<br>3    5.388<br>4    3.666<br>Name: Global_active_power, dtype: float64</p>
 <h6 id="函数讲解"><a href="#函数讲解" class="headerlink" title="函数讲解"></a>函数讲解</h6><p>sklearn.model_selection.train_test_split随机划分训练集和测试集<br>一般形式：<br>train_test_split是交叉验证中常用的函数，功能是从样本中随机的按比例选取train data和testdata，形式为：<br>X_train,X_test, y_train, y_test =<br>cross_validation.train_test_split(train_data,train_target,test_size=0.4, random_state=0)<br>参数解释：<br>train_data：所要划分的样本特征集<br>train_target：所要划分的样本结果<br>test_size：样本占比，如果是整数的话就是样本的数量<br>random_state：是随机数的种子。<br>随机数种子：其实就是该组随机数的编号，在需要重复试验的时候，保证得到一组一样的随机数。比如你每次都填1，其他参数一样的情况下你得到的随机数组是一样的。但填0或不填，每次都会不一样。<br>随机数的产生取决于种子，随机数和种子之间的关系遵从以下两个规则：<br>种子不同，产生不同的随机数；种子相同，即使实例不同也产生相同的随机数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">X_train,X_test,Y_train,Y_test = train_test_split( X, Y, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">## 数据标准换行</span></div><div class="line">ss = StandardScaler()</div><div class="line">X_train = ss.fit_transform(X_train)</div><div class="line">X_test = ss.fit_transform(X_test)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##训练数据</span></div><div class="line">lr = LinearRegression()</div><div class="line">lr.fit(X_train,Y_train)</div><div class="line"></div><div class="line">y_predict = lr.predict(X_test)</div><div class="line"></div><div class="line">print(<span class="string">"准确率:"</span>,lr.score(X_test,Y_test))</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">X_train,X_test,Y_train,Y_test = train_test_split( X, Y, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">## 数据标准换行</span></div><div class="line">ss = StandardScaler()</div><div class="line">X_train = ss.fit_transform(X_train)</div><div class="line">X_test = ss.fit_transform(X_test)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##训练数据</span></div><div class="line">lr = LinearRegression()</div><div class="line">lr.fit(X_train,Y_train)</div><div class="line"></div><div class="line"><span class="comment">##预测Y值</span></div><div class="line">y_predict = lr.predict(X_test)</div><div class="line"></div><div class="line">print(<span class="string">"准确率:"</span>,lr.score(X_test,Y_test))</div></pre></td></tr></table></figure>
 <p>样本数据100条：<br>准确率: 0.0226499044921<br>样本数据1000条：<br>0.103073016594</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">## 解决中文问题</span></div><div class="line">mpl.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>];</div><div class="line">mpl.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="keyword">False</span></div><div class="line"></div><div class="line">t=np.arange(len(X_test))</div><div class="line">plt.figure(facecolor=<span class="string">'w'</span>)</div><div class="line">plt.plot(t,Y_test,<span class="string">'r--'</span>,linewidth=<span class="number">2</span>,label=<span class="string">u'真实值'</span>)</div><div class="line">plt.plot(t,y_predict,<span class="string">'g--'</span>,linewidth=<span class="number">2</span>,label=<span class="string">u'预测值'</span>)</div><div class="line">plt.legend(loc =<span class="string">'lower right'</span>)</div><div class="line">plt.title(<span class="string">u'线性回归时间与电压的关系'</span>,fontsize=<span class="number">20</span> )</div><div class="line">plt.grid(b=<span class="keyword">True</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p>模型保存及加载：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.externals <span class="keyword">import</span> joblib</div><div class="line"><span class="comment">## 模型保存：</span></div><div class="line">joblib.dump(ss,<span class="string">"data_ss.model"</span>)</div><div class="line">joblib.dump(lr,<span class="string">"data_lr.model"</span>)</div><div class="line"></div><div class="line"><span class="comment">## 加载模型</span></div><div class="line">joblib,load(<span class="string">"data_ss.model"</span>)</div><div class="line">joblib,load(<span class="string">"data_lr.model"</span>)</div></pre></td></tr></table></figure></p>
+<p>plot文档：<br><a href="https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" target="_blank" rel="external">https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">## 解决中文问题</span></div><div class="line">mpl.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">u'SimHei'</span>];</div><div class="line">mpl.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="keyword">False</span></div><div class="line"></div><div class="line">t=np.arange(len(X_test))</div><div class="line">plt.figure(facecolor=<span class="string">'w'</span>)</div><div class="line">plt.plot(t,Y_test,<span class="string">'r--'</span>,linewidth=<span class="number">2</span>,label=<span class="string">u'真实值'</span>)</div><div class="line">plt.plot(t,y_predict,<span class="string">'g--'</span>,linewidth=<span class="number">2</span>,label=<span class="string">u'预测值'</span>)</div><div class="line">plt.legend(loc =<span class="string">'lower right'</span>)</div><div class="line">plt.title(<span class="string">u'线性回归时间与电压的关系'</span>,fontsize=<span class="number">20</span> )</div><div class="line">plt.grid(b=<span class="keyword">True</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
 <p>100条数据：<br><img src="http://oh6ybr0jg.bkt.clouddn.com/linear_regression_100.png" alt="此处输入图片的描述"></p>
 <p>1000条数据：<br><img src="http://oh6ybr0jg.bkt.clouddn.com/linear_regression_1000.png" alt="此处输入图片的描述"></p>
 <h3 id="linear多项式"><a href="#linear多项式" class="headerlink" title="linear多项式"></a>linear多项式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</div><div class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> PolynomialFeatures</div><div class="line"><span class="keyword">from</span> sklearn.grid_search <span class="keyword">import</span> GridSearchCV</div><div class="line">models = [Pipeline([(<span class="string">'Poly'</span>,PolynomialFeatures()),(<span class="string">'Linear'</span>,LinearRegression())])]</div><div class="line">model = models[<span class="number">0</span>]</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##获取X，Y变量，并将时间变量转换为数值型连续的</span></div><div class="line">X = datas[names[<span class="number">0</span>:<span class="number">2</span>]]</div><div class="line">X = X.apply(<span class="keyword">lambda</span> x :pd.Series(datae_format(x)),axis=<span class="number">1</span>)</div><div class="line">Y = datas[names[<span class="number">4</span>]]</div><div class="line"></div><div class="line"><span class="comment">## 对数据集进行划分</span></div><div class="line">X_train,X_test,Y_train,Y_test = train_test_split( X, Y, test_size=<span class="number">0.2</span>, random_state=<span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="comment">## 数据标准化</span></div><div class="line">ss = StandardScaler()</div><div class="line">X_train = ss.fit_transform(X_train)</div><div class="line">X_test = ss.fit_transform(X_test)</div><div class="line"></div><div class="line"><span class="comment">## 模型训练</span></div><div class="line">t=np.arange(len(X_test))</div><div class="line">N =<span class="number">5</span></div><div class="line">d_pool= np.arange(<span class="number">1</span>,N,<span class="number">1</span>)</div><div class="line">m=d_pool.size</div><div class="line">clrs = []  <span class="comment"># 颜色</span></div><div class="line"><span class="keyword">for</span> c <span class="keyword">in</span> np.linspace(<span class="number">16711680</span>, <span class="number">255</span>, m,dtype=<span class="string">'int64'</span>):</div><div class="line">    clrs.append(<span class="string">'#%06x'</span> % c)</div><div class="line">line_width = <span class="number">3</span></div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>),facecolor=<span class="string">'w'</span>)</div><div class="line"><span class="keyword">for</span> i,d <span class="keyword">in</span> enumerate(d_pool):</div><div class="line">    plt.subplot(N<span class="number">-1</span>,<span class="number">1</span>,i+<span class="number">1</span>)</div><div class="line">    plt.plot(t,Y_test,<span class="string">'r--'</span>,label=<span class="string">u'真实值'</span>,ms=<span class="number">10</span>,zorder=N)</div><div class="line">    model.set_params(Poly__degree=d) <span class="comment"># 设置多项式的阶</span></div><div class="line">    model.fit(X_train,Y_train)</div><div class="line">    lin = model.get_params(<span class="string">'Linear'</span>)[<span class="string">'Linear'</span>]</div><div class="line">    output =<span class="string">u'%d阶，系数为：'</span>%d</div><div class="line">    print( output,lin.coef_.ravel())</div><div class="line"></div><div class="line">    y_hat = model.predict(X_test)</div><div class="line">    s = model.score(X_test,Y_test)</div><div class="line"></div><div class="line">    z=N<span class="number">-1</span> <span class="keyword">if</span> (d==<span class="number">2</span>) <span class="keyword">else</span> <span class="number">0</span></div><div class="line">    label=<span class="string">u'%d阶,准确率=%.3f'</span>%(d,s)</div><div class="line"></div><div class="line"></div><div class="line">    plt.plot(t,y_hat,color=clrs[i],lw=line_width,alpha = <span class="number">0.75</span>,label=label,zorder=z)</div><div class="line">    plt.legend(loc = <span class="string">'upper left'</span>)</div><div class="line">    plt.grid(<span class="keyword">True</span>)</div><div class="line">    plt.ylabel(<span class="string">u'%d阶结果'</span>%d,fontsize=<span class="number">12</span>)</div><div class="line"></div><div class="line"><span class="comment"># 预测值和真实值画图比较</span></div><div class="line">plt.legend(loc = <span class="string">'lower right'</span>)</div><div class="line">plt.suptitle(<span class="string">u'线性回归时间与电压之间多项式关系'</span>)</div><div class="line">plt.grid(b=<span class="keyword">True</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
