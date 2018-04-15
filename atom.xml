@@ -44,6 +44,35 @@
   </entry>
   
   <entry>
+    <title>设计模式目录</title>
+    <link href="http://yoursite.com/2018/01/27/Design%20pattern%20catalog/"/>
+    <id>http://yoursite.com/2018/01/27/Design pattern catalog/</id>
+    <published>2018-01-27T01:30:00.000Z</published>
+    <updated>2018-02-06T14:27:35.863Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="创建性模式："><a href="#创建性模式：" class="headerlink" title="创建性模式："></a>创建性模式：</h3><p>1.类的创建模式——使用继承关系，把类的创建延迟到子类<br>2.对象的创建模式——把对象的创建过程动态地委派给另一个对象<br>    封装要创建的具体类（类的实例）的信息<br>    隐藏这些类（类的实例）被创建和组合的过程</p>
+<p>包含<br>抽象工厂、建造者、工厂方式、原型、单例</p>
+<h3 id="结构性模式："><a href="#结构性模式：" class="headerlink" title="结构性模式："></a>结构性模式：</h3><p>考虑如何组合类和对象构成较大的结构。<br>1.结构性类模式：使用继承来组合接口或实现<br>2.结构性对象模式：对象合成实现新功能。<br><a id="more"></a><br>包含：<br>适配器、桥接、组合、装饰着、外观、轻量、代理</p>
+<h3 id="行为模式："><a href="#行为模式：" class="headerlink" title="行为模式："></a>行为模式：</h3><p>主要解决算法和对象之间的责任分配问题。<br>对象或类的模式<br>它们之间的通信模式。<br>包含：<br>责任链、命令、解释器、迭代、中介者、备忘录、观察者、状态、策略、模板方法、观察者</p>
+<p>工厂方法主要针对一个产品等级结构<br>抽象工厂模式需要面对多个产品等级结构</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;创建性模式：&quot;&gt;&lt;a href=&quot;#创建性模式：&quot; class=&quot;headerlink&quot; title=&quot;创建性模式：&quot;&gt;&lt;/a&gt;创建性模式：&lt;/h3&gt;&lt;p&gt;1.类的创建模式——使用继承关系，把类的创建延迟到子类&lt;br&gt;2.对象的创建模式——把对象的创建过程动态地委派给另一个对象&lt;br&gt;    封装要创建的具体类（类的实例）的信息&lt;br&gt;    隐藏这些类（类的实例）被创建和组合的过程&lt;/p&gt;
+&lt;p&gt;包含&lt;br&gt;抽象工厂、建造者、工厂方式、原型、单例&lt;/p&gt;
+&lt;h3 id=&quot;结构性模式：&quot;&gt;&lt;a href=&quot;#结构性模式：&quot; class=&quot;headerlink&quot; title=&quot;结构性模式：&quot;&gt;&lt;/a&gt;结构性模式：&lt;/h3&gt;&lt;p&gt;考虑如何组合类和对象构成较大的结构。&lt;br&gt;1.结构性类模式：使用继承来组合接口或实现&lt;br&gt;2.结构性对象模式：对象合成实现新功能。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>设计模式-工厂模式</title>
     <link href="http://yoursite.com/2018/01/27/Design%20pattern%20factory/"/>
     <id>http://yoursite.com/2018/01/27/Design pattern factory/</id>
@@ -63,35 +92,6 @@
     
       &lt;p&gt;创建几个套皮肤，所有的UI控件 如按钮，滚动条，窗口 都要创建出来。现在需要红色主题，黑色主题，和蓝色主题3套皮肤。&lt;/p&gt;
 &lt;p&gt;接口类：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Button&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ScrollBar&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Window&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;SkinFactory&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; ScrollBar &lt;span class=&quot;title&quot;&gt;createScrollBar&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; Button &lt;span class=&quot;title&quot;&gt;createButton&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; Window &lt;span class=&quot;title&quot;&gt;createWindow&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-    
-      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式目录</title>
-    <link href="http://yoursite.com/2018/01/27/Design%20pattern%20catalog/"/>
-    <id>http://yoursite.com/2018/01/27/Design pattern catalog/</id>
-    <published>2018-01-27T01:30:00.000Z</published>
-    <updated>2018-02-06T14:27:35.863Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="创建性模式："><a href="#创建性模式：" class="headerlink" title="创建性模式："></a>创建性模式：</h3><p>1.类的创建模式——使用继承关系，把类的创建延迟到子类<br>2.对象的创建模式——把对象的创建过程动态地委派给另一个对象<br>    封装要创建的具体类（类的实例）的信息<br>    隐藏这些类（类的实例）被创建和组合的过程</p>
-<p>包含<br>抽象工厂、建造者、工厂方式、原型、单例</p>
-<h3 id="结构性模式："><a href="#结构性模式：" class="headerlink" title="结构性模式："></a>结构性模式：</h3><p>考虑如何组合类和对象构成较大的结构。<br>1.结构性类模式：使用继承来组合接口或实现<br>2.结构性对象模式：对象合成实现新功能。<br><a id="more"></a><br>包含：<br>适配器、桥接、组合、装饰着、外观、轻量、代理</p>
-<h3 id="行为模式："><a href="#行为模式：" class="headerlink" title="行为模式："></a>行为模式：</h3><p>主要解决算法和对象之间的责任分配问题。<br>对象或类的模式<br>它们之间的通信模式。<br>包含：<br>责任链、命令、解释器、迭代、中介者、备忘录、观察者、状态、策略、模板方法、观察者</p>
-<p>工厂方法主要针对一个产品等级结构<br>抽象工厂模式需要面对多个产品等级结构</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;创建性模式：&quot;&gt;&lt;a href=&quot;#创建性模式：&quot; class=&quot;headerlink&quot; title=&quot;创建性模式：&quot;&gt;&lt;/a&gt;创建性模式：&lt;/h3&gt;&lt;p&gt;1.类的创建模式——使用继承关系，把类的创建延迟到子类&lt;br&gt;2.对象的创建模式——把对象的创建过程动态地委派给另一个对象&lt;br&gt;    封装要创建的具体类（类的实例）的信息&lt;br&gt;    隐藏这些类（类的实例）被创建和组合的过程&lt;/p&gt;
-&lt;p&gt;包含&lt;br&gt;抽象工厂、建造者、工厂方式、原型、单例&lt;/p&gt;
-&lt;h3 id=&quot;结构性模式：&quot;&gt;&lt;a href=&quot;#结构性模式：&quot; class=&quot;headerlink&quot; title=&quot;结构性模式：&quot;&gt;&lt;/a&gt;结构性模式：&lt;/h3&gt;&lt;p&gt;考虑如何组合类和对象构成较大的结构。&lt;br&gt;1.结构性类模式：使用继承来组合接口或实现&lt;br&gt;2.结构性对象模式：对象合成实现新功能。&lt;br&gt;
     
     </summary>
     

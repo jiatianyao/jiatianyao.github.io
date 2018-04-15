@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/linear_regression_100.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/linear_regression_1000.png">
 <meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/linear_regression_polynomial.png">
-<meta property="og:updated_time" content="2018-04-06T16:46:59.884Z">
+<meta property="og:updated_time" content="2018-04-15T12:41:15.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习-回归算法实例">
 <meta name="twitter:description" content="概念梳理：数学期望：在概率论和统计学中，数学期望(mean)（或均值，亦简称期望）是试验中每次可能结果的概率乘以其结果的总和，是最基本的数学特征之一。它反映随机变量平均取值的大小
@@ -416,9 +416,8 @@
       
         <h2 id="概念梳理："><a href="#概念梳理：" class="headerlink" title="概念梳理："></a>概念梳理：</h2><p>数学期望：<br>在概率论和统计学中，数学期望(mean)（或均值，亦简称期望）是试验中每次可能结果的概率乘以其结果的总和，是最基本的数学特征之一。它反映随机变量平均取值的大小</p>
 <p>方差：<br>（variance)是在概率论和统计方差衡量随机变量或一组数据时离散程度的度量。概率论中方差用来度量随机变量和其数学期望（即均值）之间的偏离程度。统计中的方差（样本方差）是每个样本值与全体样本值的平均数之差的平方值的平均数。在许多实际问题中，研究方差即偏离程度有着重要意义。</p>
-<p>概率密度函数：<br>在数学中，连续型随机变量的概率密度函数（在不至于混淆时可以简称为密度函数）是一个描述这个随机变量的输出值，在某个确定的取值点附近的可能性的函数。而随机变量的取值落在某个区域之内的概率则为概率密度函数在这个区域上的积分。当概率密度函数存在的时候，累积分布函数是概率密度函数的积分。概率密度函数一般以小写标记<br>正态分布是重要的概率分布。它的概率密度函数是：<br><img src="http://oh6ybr0jg.bkt.clouddn.com/gailvmidu.jpg" alt="此处输入图片的描述"><br>随着参数μ和σ变化，概率分布也产生变化。<br>期望：μ<br>方差：σ^2<br>中位数：μ<br>众数：μ<br>偏度：0<br>峰度：3<br><a id="more"></a></p>
-<p>正态分布：<br>又称为常态分布，高斯分布。<br>若随机变量X服从一个数学期望为μ、方差为σ^2的正态分布，记为N(μ，σ^2)。其概率密度函数为正态分布的期望值μ决定了其位置，其标准差σ决定了分布的幅度。当μ = 0,σ = 1时的正态分布是标准正态分布。</p>
-<p>线性回归：<br>线性回归是利用数理统计中回归分析，来确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法，运用十分广泛。其表达形式为y = w’x+e，e为误差服从均值为0的正态分布。</p>
+<p>概率密度函数：<br>在数学中，连续型随机变量的概率密度函数（在不至于混淆时可以简称为密度函数）是一个描述这个随机变量的输出值，在某个确定的取值点附近的可能性的函数。而随机变量的取值落在某个区域之内的概率则为概率密度函数在这个区域上的积分。当概率密度函数存在的时候，累积分布函数是概率密度函数的积分。概率密度函数一般以小写标记<br>正态分布是重要的概率分布。它的概率密度函数是：<br><img src="http://oh6ybr0jg.bkt.clouddn.com/gailvmidu.jpg" alt="此处输入图片的描述"><br>随着参数μ和σ变化，概率分布也产生变化。<br>期望：μ<br>方差：σ^2<br>中位数：μ<br>众数：μ<br>偏度：0<br>峰度：3</p>
+<p>正态分布：<br>又称为常态分布，高斯分布。<br>若随机变量X服从一个数学期望为μ、方差为σ^2的正态分布，记为N(μ，σ^2)。其概率密度函数为正态分布的期望值μ决定了其位置，其标准差σ决定了分布的幅度。当μ = 0,σ = 1时的正态分布是标准正态分布。<br><a id="more"></a><br>线性回归：<br>线性回归是利用数理统计中回归分析，来确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法，运用十分广泛。其表达形式为y = w’x+e，e为误差服从均值为0的正态分布。</p>
 <p>回归数据：<br><a href="http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption" target="_blank" rel="external">http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption</a></p>
 <p>属性信息：</p>
 <p>1.date：格式dd/mm/yyyy日期<br>2.time：格式HH时间：MM：SS<br>3.global_active_power：家用全球分钟平均有功<strong>功率</strong>（千瓦）<br>4.global_reactive_power: 家用全球分钟平均无功<strong>功率</strong>（千瓦）<br>5.voltage：分钟平均<strong>电压</strong>（伏特）<br>6.global_intensity：家用全球分钟平均<strong>电流</strong>强度（安培）<br>7.sub_metering_1：能耗分项计量1号（中有功电能电能）。它与<strong>厨房</strong>相对应，主要包括洗碗机、烤箱和微波炉（热板不是电动的，而是燃气驱动的）。<br>8.sub_metering_2：能耗分项计量2号（中有功电能电能）。它对应<strong>洗衣</strong>房，包括洗衣机、滚筒烘干机、冰箱和灯。<br>9.sub_metering_3：能耗分项计量3号（中有功电能电能）。它相当于一个<strong>电热水器</strong>和一个空调。</p>
@@ -511,8 +510,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/27/Python春节祝福语自动回复/" rel="prev" title="Python春节祝福语自动回复">
-                Python春节祝福语自动回复 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/01/27/storm基础知识/" rel="prev" title="storm基础知识">
+                storm基础知识 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
