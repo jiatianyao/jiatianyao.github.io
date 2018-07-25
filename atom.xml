@@ -331,27 +331,21 @@
   
   <entry>
     <title>spark 机器学习入门(二)</title>
-    <link href="http://yoursite.com/2017/10/18/spark%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    <id>http://yoursite.com/2017/10/18/spark 性能优化/</id>
-    <published>2017-10-18T06:30:00.000Z</published>
-    <updated>2017-11-28T13:12:37.521Z</updated>
+    <link href="http://yoursite.com/2017/10/19/spark%20ml2/"/>
+    <id>http://yoursite.com/2017/10/19/spark ml2/</id>
+    <published>2017-10-19T06:30:00.000Z</published>
+    <updated>2018-07-25T16:43:43.579Z</updated>
     
-    <content type="html"><![CDATA[<h5 id="部署优化："><a href="#部署优化：" class="headerlink" title="部署优化："></a><strong>部署优化：</strong></h5><p>磁盘：<br>挂载磁盘时使用noatime和nodiratime选项减少写的开销</p>
-<p>linux每个文件都会保留3个时间戳<br>用stat 文件名 来查看<br>Acess：文件访问时间<br>Modfiy：内容修改时间<br>Change：文件名修改时间</p>
-<p>参数含义：<br>磁盘下的所有文件不更新访问时间<br><a id="more"></a><br>内存：<br>JVM 内存不建议每个executor 超过200G</p>
-<p>CPU<br>每台机器的Vcore数不建议小于8</p>
-<h2 id="JOB调度："><a href="#JOB调度：" class="headerlink" title="JOB调度："></a><strong>JOB调度：</strong></h2><p>Fail Schedule 可最大程度保证各个Job都有机会获取资源</p>
-<h2 id="数据序列化："><a href="#数据序列化：" class="headerlink" title="数据序列化："></a><strong>数据序列化：</strong></h2><p>Kyro serialization序列化速度更快，结果更紧凑<br>为了更好的性能，需提前注册被序列化的类，否则会存在大量的空间浪费<br>通过spark.serializer指定</p>
-<h2 id="减少内存消耗："><a href="#减少内存消耗：" class="headerlink" title="减少内存消耗："></a><strong>减少内存消耗：</strong></h2><p>尽量使用基本数据类型和数组，避免使用java集合类<br>尽量减少包含大量小对象的嵌套结构<br>Key尽量使用数值或枚举类型而不是字符串<br>RAM小于32GB时，使用-XX:+UseCompressedOops使用4字节（而非8字节）的指针</p>
-<h2 id="调整并行度："><a href="#调整并行度：" class="headerlink" title="调整并行度："></a><strong>调整并行度：</strong></h2><p>调整Map侧并行度<br>对于kafka direct stream 可通过调整Topic的Patition个数调整Spark Map侧并行度<br>对于spark.textFile，通过参数调整</p>
-<p>调整Reduce侧并行度<br>通过spark.default.parallelism设置shuffle时默认并行度</p>
+    <content type="html"><![CDATA[<p>Spark MLlib 核心组件<br>Ø DataFrame 包含不同的列，可存储文本、 图片、 标签、 特征向量、 预测值等<br>Ø Estimator 用于从训练数据算出机器学习模型，输入DataFrame输出Model<br>Ø Transformer 输入DataFrame输出DataFrame<br>• Model即为一种Transformer，用于从测试数据生成预测结果<br>• 特征转换Transformer转换一个或多个特征，并将转换后的特征列追加到输出DataFrame中<br>Ø Pipeline<br>• 将多个Transformer和Estimator链接起来形成一个机器学习workflow<br>• Pipeline也是一种Estimator，生成一个PipelineModel<br>Ø Parameter 所有的Transformer和Estimator共享该通用的API来指定参数<br>Ø PipelineModel 保证对测试数据使用与训练数据完全相同的数据转换</p>
+<p>训练模型：</p>
+<p>Tokenizer and HashingTF 是Transformers<br>LogisticRegression 是Estimator<br><img src="http://spark.apache.org/docs/latest/img/ml-Pipeline.png" alt="此处输入图片的描述"></p>
+<p>预测结果<br>Pipeline 是 Estimator<br>fit()方法会产生一个PipelineModel<br><img src="http://spark.apache.org/docs/latest/img/ml-PipelineModel.png" alt="此处输入图片的描述"><br>transform()方法Pipelines and PipelineModels帮助确保训练数据和测试数据经过相同特征的处理步骤。</p>
+<p>SparseMatrix<br>介绍推荐博主：<br><a href="http://blog.csdn.net/sinat_29508201/article/details/54089771" target="_blank" rel="external">http://blog.csdn.net/sinat_29508201/article/details/54089771</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h5 id=&quot;部署优化：&quot;&gt;&lt;a href=&quot;#部署优化：&quot; class=&quot;headerlink&quot; title=&quot;部署优化：&quot;&gt;&lt;/a&gt;&lt;strong&gt;部署优化：&lt;/strong&gt;&lt;/h5&gt;&lt;p&gt;磁盘：&lt;br&gt;挂载磁盘时使用noatime和nodiratime选项减少写的开销&lt;/p&gt;
-&lt;p&gt;linux每个文件都会保留3个时间戳&lt;br&gt;用stat 文件名 来查看&lt;br&gt;Acess：文件访问时间&lt;br&gt;Modfiy：内容修改时间&lt;br&gt;Change：文件名修改时间&lt;/p&gt;
-&lt;p&gt;参数含义：&lt;br&gt;磁盘下的所有文件不更新访问时间&lt;br&gt;
+      &lt;p&gt;Spark MLlib 核心组件&lt;br&gt;Ø DataFrame 包含不同的列，可存储文本、 图片、 标签、 特征向量、 预测值等&lt;br&gt;Ø Estimator 用于从训练数据算出机器学习模型，输入DataFrame输出Model&lt;br&gt;Ø Transformer 输入Dat
     
     </summary>
     
@@ -475,6 +469,39 @@ b. 添加依赖的jar包
 拷贝“${SPARK_HOME}/lib/spark-1.3.0-yarn-shuffle.jar”到“${HADOOP_HOME}/share/hadoop/yarn/lib/”目录下。
 c. 重启NodeManager进程，也就启动了External shuffle Service。
 &lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
+    
+    
+      <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>spark 机器学习入门(二)</title>
+    <link href="http://yoursite.com/2017/08/29/spark%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    <id>http://yoursite.com/2017/08/29/spark 性能优化/</id>
+    <published>2017-08-29T06:30:00.000Z</published>
+    <updated>2018-07-25T16:46:02.230Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="部署优化："><a href="#部署优化：" class="headerlink" title="部署优化："></a><strong>部署优化：</strong></h5><p>磁盘：<br>挂载磁盘时使用noatime和nodiratime选项减少写的开销</p>
+<p>linux每个文件都会保留3个时间戳<br>用stat 文件名 来查看<br>Acess：文件访问时间<br>Modfiy：内容修改时间<br>Change：文件名修改时间</p>
+<p>参数含义：<br>磁盘下的所有文件不更新访问时间<br><a id="more"></a><br>内存：<br>JVM 内存不建议每个executor 超过200G</p>
+<p>CPU<br>每台机器的Vcore数不建议小于8</p>
+<h2 id="JOB调度："><a href="#JOB调度：" class="headerlink" title="JOB调度："></a><strong>JOB调度：</strong></h2><p>Fail Schedule 可最大程度保证各个Job都有机会获取资源</p>
+<h2 id="数据序列化："><a href="#数据序列化：" class="headerlink" title="数据序列化："></a><strong>数据序列化：</strong></h2><p>Kyro serialization序列化速度更快，结果更紧凑<br>为了更好的性能，需提前注册被序列化的类，否则会存在大量的空间浪费<br>通过spark.serializer指定</p>
+<h2 id="减少内存消耗："><a href="#减少内存消耗：" class="headerlink" title="减少内存消耗："></a><strong>减少内存消耗：</strong></h2><p>尽量使用基本数据类型和数组，避免使用java集合类<br>尽量减少包含大量小对象的嵌套结构<br>Key尽量使用数值或枚举类型而不是字符串<br>RAM小于32GB时，使用-XX:+UseCompressedOops使用4字节（而非8字节）的指针</p>
+<h2 id="调整并行度："><a href="#调整并行度：" class="headerlink" title="调整并行度："></a><strong>调整并行度：</strong></h2><p>调整Map侧并行度<br>对于kafka direct stream 可通过调整Topic的Patition个数调整Spark Map侧并行度<br>对于spark.textFile，通过参数调整</p>
+<p>调整Reduce侧并行度<br>通过spark.default.parallelism设置shuffle时默认并行度</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h5 id=&quot;部署优化：&quot;&gt;&lt;a href=&quot;#部署优化：&quot; class=&quot;headerlink&quot; title=&quot;部署优化：&quot;&gt;&lt;/a&gt;&lt;strong&gt;部署优化：&lt;/strong&gt;&lt;/h5&gt;&lt;p&gt;磁盘：&lt;br&gt;挂载磁盘时使用noatime和nodiratime选项减少写的开销&lt;/p&gt;
+&lt;p&gt;linux每个文件都会保留3个时间戳&lt;br&gt;用stat 文件名 来查看&lt;br&gt;Acess：文件访问时间&lt;br&gt;Modfiy：内容修改时间&lt;br&gt;Change：文件名修改时间&lt;/p&gt;
+&lt;p&gt;参数含义：&lt;br&gt;磁盘下的所有文件不更新访问时间&lt;br&gt;
     
     </summary>
     
@@ -832,130 +859,6 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
       &lt;h2 id=&quot;导入IDEA即可看kafka源码：&quot;&gt;&lt;a href=&quot;#导入IDEA即可看kafka源码：&quot; class=&quot;headerlink&quot; title=&quot;导入IDEA即可看kafka源码：&quot;&gt;&lt;/a&gt;导入IDEA即可看kafka源码：&lt;/h2&gt;&lt;h2 id=&quot;启动之前需要安装zookeeper&quot;&gt;&lt;a href=&quot;#启动之前需要安装zookeeper&quot; class=&quot;headerlink&quot; title=&quot;启动之前需要安装zookeeper&quot;&gt;&lt;/a&gt;启动之前需要安装zookeeper&lt;/h2&gt;&lt;p&gt;地址：&lt;br&gt;&lt;a href=&quot;http://apache.fayea.com/zookeeper/&quot;&gt;http://apache.fayea.com/zookeeper/&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://apache.fayea.com/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz&quot;&gt;http://apache.fayea.com/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;解压后再当前目录增加&quot;&gt;&lt;a href=&quot;#解压后再当前目录增加&quot; class=&quot;headerlink&quot; title=&quot;解压后再当前目录增加&quot;&gt;&lt;/a&gt;解压后再当前目录增加&lt;/h2&gt;&lt;p&gt;dataLogDir和data目录&lt;br&gt;复制一份配置文件&lt;br&gt;改名为zoo.cfg&lt;br&gt;修改配置文件：&lt;br&gt;zoo.cfg&lt;br&gt;修改并增加&lt;br&gt;dataDir=D:\tool\zookeeper-3.4.6\data&lt;br&gt;dataLogDir=D:\tool\zookeeper-3.4.6\dataLogDir&lt;/p&gt;
 &lt;h2 id=&quot;启动zkServer-cmd&quot;&gt;&lt;a href=&quot;#启动zkServer-cmd&quot; class=&quot;headerlink&quot; title=&quot;启动zkServer.cmd&quot;&gt;&lt;/a&gt;启动zkServer.cmd&lt;/h2&gt;
-    
-    </summary>
-    
-      <category term="kafka" scheme="http://yoursite.com/categories/kafka/"/>
-    
-    
-      <category term="kafka" scheme="http://yoursite.com/tags/kafka/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>kafka源码阅读</title>
-    <link href="http://yoursite.com/2017/05/02/kafka%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/"/>
-    <id>http://yoursite.com/2017/05/02/kafka源码阅读/</id>
-    <published>2017-05-02T03:30:00.000Z</published>
-    <updated>2017-05-18T00:58:23.538Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="下载kafka的源码包："><a href="#下载kafka的源码包：" class="headerlink" title="下载kafka的源码包："></a>下载kafka的源码包：</h3><p><a href="http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz" target="_blank" rel="external">http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz</a></p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>gradle </p>
-<p>1.官网下载<br><a href="https://gradle.org/releases" target="_blank" rel="external">https://gradle.org/releases</a><br>选择当时最新版本：<br><a href="https://downloads.gradle.org/distributions/gradle-3.5-all.zip" target="_blank" rel="external">https://downloads.gradle.org/distributions/gradle-3.5-all.zip</a></p>
-<p>2.解压<br>解压到D:\tool\gradle-3.5</p>
-<p>3.配置环境变量<br>GRADLE_HOME<br>D:\tool\gradle-3.5</p>
-<p>Path追加;%GRADLE_HOME%\BIN;<br><a id="more"></a><br>4.测试：<br>gradle -v<br><img src="http://oh6ybr0jg.bkt.clouddn.com/gradle.jpg" alt="此处输入图片的描述"></p>
-<p>安装参考:<br><a href="http://blog.csdn.net/lizhitao/article/details/26875463" target="_blank" rel="external">http://blog.csdn.net/lizhitao/article/details/26875463</a></p>
-<h3 id="编译：（此处博主用某云主机编译的，很快）"><a href="#编译：（此处博主用某云主机编译的，很快）" class="headerlink" title="编译：（此处博主用某云主机编译的，很快）"></a>编译：（此处博主用某云主机编译的，很快）</h3><p>gradle idea</p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170427134226.jpg" alt="此处输入图片的描述"></p>
-<p>（编译完把/root/.gradle/caches/modules-2下下载的文件放到我们的环境中C:\Users\Administrator.gradle\caches\modules-2 再windows上编译 ）<br><img src="http://oh6ybr0jg.bkt.clouddn.com/windows%E7%BC%96%E8%AF%91kafka.jpg" alt="此处输入图片的描述"></p>
-<p>用IDEA工具打开<br><img src="http://oh6ybr0jg.bkt.clouddn.com/kafka_src_emv.jpg" alt="此处输入图片的描述"></p>
-<h3 id="目录介绍："><a href="#目录介绍：" class="headerlink" title="目录介绍："></a>目录介绍：</h3><table>
-<thead>
-<tr>
-<th>模块名</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>admin</td>
-<td>管理员模块，操作和管理topic，paritions相关，包含create/delete topic,扩展patitions</td>
-</tr>
-<tr>
-<td>api</td>
-<td>主要负责交互数据的组装，客户端与服务端交互数据编解码</td>
-</tr>
-<tr>
-<td>client</td>
-<td>Producer读取kafka broker元数据信息，topic和partitions，以及leader</td>
-</tr>
-<tr>
-<td>cluster</td>
-<td>包含几个实体类，Broker,Cluster,Partition,Replica,解释他们之间关系：          Cluster由多个broker组成，一个Broker包含多个partition，一个topic的所有partitions分布在不同broker的中，一个Replica包含多个Partition。</td>
-</tr>
-<tr>
-<td>common</td>
-<td>异常类和错误验证</td>
-</tr>
-<tr>
-<td>consumer</td>
-<td>负责所有客户端消费者数据和逻辑处理</td>
-</tr>
-<tr>
-<td>controller</td>
-<td>负责中央控制器选举，partition的leader选举，副本分配，副本重新分配，partition和replica扩容。</td>
-</tr>
-<tr>
-<td>coordinator</td>
-<td>partition分配机制</td>
-</tr>
-<tr>
-<td>javaapi</td>
-<td>提供java的producer和consumer接口api</td>
-</tr>
-<tr>
-<td>log</td>
-<td>Kafka文件存储模块，负责读写所有kafka的topic消息数据。</td>
-</tr>
-<tr>
-<td>message</td>
-<td>封装多个消息组成一个“消息集”或压缩消息集。</td>
-</tr>
-<tr>
-<td>metrics</td>
-<td>内部状态的监控模块</td>
-</tr>
-<tr>
-<td>network</td>
-<td>网络事件处理模块，负责处理和接收客户端连接</td>
-</tr>
-<tr>
-<td>producer</td>
-<td>producer实现模块，包括同步和异步发送消息。</td>
-</tr>
-<tr>
-<td>security</td>
-<td>安全</td>
-</tr>
-<tr>
-<td>serializer</td>
-<td>序列化或反序列化当前消息</td>
-</tr>
-<tr>
-<td>server</td>
-<td></td>
-</tr>
-<tr>
-<td>tools</td>
-<td>工具模块，    包含a.导出对应consumer的offset值.b.导出LogSegments信息，当前topic的log写的位置信息.c.导出zk上所有consumer的offset值.d.修改注册在zk的consumer的offset值.f.producer和consumer的使用例子.</td>
-</tr>
-<tr>
-<td>utils</td>
-<td>Json工具类，Zkutils工具类，Utils创建线程工具类，KafkaScheduler公共调度器类，公共日志类等等。</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;下载kafka的源码包：&quot;&gt;&lt;a href=&quot;#下载kafka的源码包：&quot; class=&quot;headerlink&quot; title=&quot;下载kafka的源码包：&quot;&gt;&lt;/a&gt;下载kafka的源码包：&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz&quot;&gt;http://archive.apache.org/dist/kafka/0.10.2.1/kafka-0.10.2.1-src.tgz&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h3&gt;&lt;p&gt;gradle &lt;/p&gt;
-&lt;p&gt;1.官网下载&lt;br&gt;&lt;a href=&quot;https://gradle.org/releases&quot;&gt;https://gradle.org/releases&lt;/a&gt;&lt;br&gt;选择当时最新版本：&lt;br&gt;&lt;a href=&quot;https://downloads.gradle.org/distributions/gradle-3.5-all.zip&quot;&gt;https://downloads.gradle.org/distributions/gradle-3.5-all.zip&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;2.解压&lt;br&gt;解压到D:\tool\gradle-3.5&lt;/p&gt;
-&lt;p&gt;3.配置环境变量&lt;br&gt;GRADLE_HOME&lt;br&gt;D:\tool\gradle-3.5&lt;/p&gt;
-&lt;p&gt;Path追加;%GRADLE_HOME%\BIN;&lt;br&gt;
     
     </summary>
     
