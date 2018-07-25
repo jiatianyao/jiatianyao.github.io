@@ -108,6 +108,42 @@
   </entry>
   
   <entry>
+    <title>设计模式-结构模式</title>
+    <link href="http://yoursite.com/2018/02/11/Design%20pattern%20structural/"/>
+    <id>http://yoursite.com/2018/02/11/Design pattern structural/</id>
+    <published>2018-02-11T01:30:00.000Z</published>
+    <updated>2018-07-25T16:17:19.158Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-适配器"><a href="#1-适配器" class="headerlink" title="1.适配器"></a>1.适配器</h3><p>效果及优缺点：<br>对于类适配器：</p>
+<ol>
+<li>用一个具体的Adapter类对Adaptee和Taget进行匹配。结果是当我们想要匹配一个类以及所有它的子类时，类Adapter将不能胜任工作。</li>
+<li>使得Adapter可以override（重定义） Adaptee的部分行为，因为Adapter是Adaptee的一个子类。<br>对于对象适配器：</li>
+<li>允许一个Adapter与多个Adaptee，即Adaptee本身以及它的所有子类（如果有子类的话）同时工作。Adapter也可以一次给所有的Adaptee添加功能。</li>
+<li>使得override（重定义）Adaptee的行为比较困难。如果一定要override Adaptee的方法，就只好先做一个Adaptee的子类以override Adaptee的方法，然后再把这个子类当作真正的Adaptee源进行适配。</li>
+</ol>
+<h3 id="2-桥接"><a href="#2-桥接" class="headerlink" title="2.桥接"></a>2.桥接</h3><p>继承是一种强耦合的结果，父类变，子类就必须要变。可以使用组合/继承来解耦合。将抽象和他的实现分离<br><img src="https://images.cnblogs.com/cnblogs_com/houleixx/Snap1.jpg" alt="此处输入图片的描述"></p>
+<h3 id="3-组合"><a href="#3-组合" class="headerlink" title="3.组合"></a>3.组合</h3><p>将对象组合成属性结构以表示‘部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</p>
+<p>组合模式描述了如何使用递归的组合，使客户不用区分这些类</p>
+<h3 id="4-装配器"><a href="#4-装配器" class="headerlink" title="4.装配器"></a>4.装配器</h3><h3 id="5-外观"><a href="#5-外观" class="headerlink" title="5.外观"></a>5.外观</h3><h3 id="6-享元模式"><a href="#6-享元模式" class="headerlink" title="6.享元模式"></a>6.享元模式</h3><h3 id="7-代理模式"><a href="#7-代理模式" class="headerlink" title="7.代理模式"></a>7.代理模式</h3><p>Copy-on-writedai代理：即写即复制“快照”虚拟代理的一种，把复制拖延到只有客户端需要时，才真正执行<br>保护代理：允许在访问对象时附加管理任务</p>
+<p>1.什么是代理模式：例如我们找房子找中介<br>2.为什么要使用代理：我们不需要自己找房子</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-适配器&quot;&gt;&lt;a href=&quot;#1-适配器&quot; class=&quot;headerlink&quot; title=&quot;1.适配器&quot;&gt;&lt;/a&gt;1.适配器&lt;/h3&gt;&lt;p&gt;效果及优缺点：&lt;br&gt;对于类适配器：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用一个具体的Adapter类对Adaptee和Tag
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>设计模式-行为模式</title>
     <link href="http://yoursite.com/2018/02/10/Design%20pattern%20behavior/"/>
     <id>http://yoursite.com/2018/02/10/Design pattern behavior/</id>
@@ -450,44 +486,6 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
   </entry>
   
   <entry>
-    <title>CDH 安装spark2.2</title>
-    <link href="http://yoursite.com/2017/08/05/CDH%20%E5%AE%89%E8%A3%85spark2.2/"/>
-    <id>http://yoursite.com/2017/08/05/CDH 安装spark2.2/</id>
-    <published>2017-08-05T03:30:00.000Z</published>
-    <updated>2017-10-09T12:11:28.450Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="官方链接"><a href="#官方链接" class="headerlink" title="官方链接"></a>官方链接</h2><p><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html</a></p>
-<p>1.下载Spark2 CSD<br><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging</a></p>
-<p>1.1.1 CSD<br>笔者下载2.2版本<br><a href="http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar" target="_blank" rel="external">http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar</a><br><a id="more"></a><br>1.1.2 Parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/</a></p>
-<p>1.1.2.1 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel</a></p>
-<p>1.1.2.2 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1</a><br>然后将SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1改名为<br>SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha</p>
-<p>1.1.2.3 manifest.json<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json</a></p>
-<p>停止服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server stop<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent stop</p>
-<p>将csd文件放到<br>/soft/bigdata/clouderamanager/cloudera/csd</p>
-<p>将parcel文件放到<br>/soft/bigdata/clouderamanager/cloudera/parcel-repo</p>
-<p>修改权限<br>chgrp cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar<br>chown cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar </p>
-<p>开启服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server start<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent start</p>
-<p>主机-&gt; Parcel就能看到spark2了</p>
-<p>分配，激活。然后就可以添加服务了</p>
-<p>如果添加服务不成功需要把jar文件放到/opt/cloudera/csd</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;官方链接&quot;&gt;&lt;a href=&quot;#官方链接&quot; class=&quot;headerlink&quot; title=&quot;官方链接&quot;&gt;&lt;/a&gt;官方链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;1.下载Spark2 CSD&lt;br&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;1.1.1 CSD&lt;br&gt;笔者下载2.2版本&lt;br&gt;&lt;a href=&quot;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&quot;&gt;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&lt;/a&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
-    
-    
-      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
-    
-  </entry>
-  
-  <entry>
     <title>开源爬虫介绍</title>
     <link href="http://yoursite.com/2017/08/05/%E5%BC%80%E6%BA%90%E7%88%AC%E8%99%AB%E4%BB%8B%E7%BB%8D/"/>
     <id>http://yoursite.com/2017/08/05/开源爬虫介绍/</id>
@@ -530,6 +528,44 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
     
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CDH 安装spark2.2</title>
+    <link href="http://yoursite.com/2017/08/05/CDH%20%E5%AE%89%E8%A3%85spark2.2/"/>
+    <id>http://yoursite.com/2017/08/05/CDH 安装spark2.2/</id>
+    <published>2017-08-05T03:30:00.000Z</published>
+    <updated>2017-10-09T12:11:28.450Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="官方链接"><a href="#官方链接" class="headerlink" title="官方链接"></a>官方链接</h2><p><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html</a></p>
+<p>1.下载Spark2 CSD<br><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging</a></p>
+<p>1.1.1 CSD<br>笔者下载2.2版本<br><a href="http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar" target="_blank" rel="external">http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar</a><br><a id="more"></a><br>1.1.2 Parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/</a></p>
+<p>1.1.2.1 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel</a></p>
+<p>1.1.2.2 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1</a><br>然后将SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1改名为<br>SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha</p>
+<p>1.1.2.3 manifest.json<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json</a></p>
+<p>停止服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server stop<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent stop</p>
+<p>将csd文件放到<br>/soft/bigdata/clouderamanager/cloudera/csd</p>
+<p>将parcel文件放到<br>/soft/bigdata/clouderamanager/cloudera/parcel-repo</p>
+<p>修改权限<br>chgrp cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar<br>chown cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar </p>
+<p>开启服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server start<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent start</p>
+<p>主机-&gt; Parcel就能看到spark2了</p>
+<p>分配，激活。然后就可以添加服务了</p>
+<p>如果添加服务不成功需要把jar文件放到/opt/cloudera/csd</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;官方链接&quot;&gt;&lt;a href=&quot;#官方链接&quot; class=&quot;headerlink&quot; title=&quot;官方链接&quot;&gt;&lt;/a&gt;官方链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1.下载Spark2 CSD&lt;br&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1.1.1 CSD&lt;br&gt;笔者下载2.2版本&lt;br&gt;&lt;a href=&quot;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&quot;&gt;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
+    
+    
+      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
     
   </entry>
   
@@ -927,45 +963,6 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
     
     
       <category term="kafka" scheme="http://yoursite.com/tags/kafka/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CDH phoenix安装</title>
-    <link href="http://yoursite.com/2017/04/18/CDH%20phoenix%E5%AE%89%E8%A3%85/"/>
-    <id>http://yoursite.com/2017/04/18/CDH phoenix安装/</id>
-    <published>2017-04-18T03:30:00.000Z</published>
-    <updated>2018-01-15T16:45:56.209Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="首先下载jdk-略"><a href="#首先下载jdk-略" class="headerlink" title="首先下载jdk 略"></a>首先下载jdk 略</h3><p>安装maven</p>
-<h2 id="下载yum源"><a href="#下载yum源" class="headerlink" title="下载yum源"></a>下载yum源</h2><p>wget <a href="http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo" target="_blank" rel="external">http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo</a> -O /etc/yum.repos.d/epel-apache-maven.repo</p>
-<h2 id="安装maven："><a href="#安装maven：" class="headerlink" title="安装maven："></a>安装maven：</h2><p>yum -y install apache-maven</p>
-<a id="more"></a>
-<h2 id="编译phoenix"><a href="#编译phoenix" class="headerlink" title="编译phoenix"></a>编译phoenix</h2><p>找到最新版本的phoenix<br><a href="https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8" target="_blank" rel="external">https://github.com/chiastic-security/phoenix-for-cloudera/tree/4.8-HBase-1.2-cdh5.8</a></p>
-<h2 id="下载（博主下载到-soft下）"><a href="#下载（博主下载到-soft下）" class="headerlink" title="下载（博主下载到/soft下）"></a>下载（博主下载到/soft下）</h2><p>并编译<br>mvn clean package -DskipTests -Dcdh.flume.version=1.6.0</p>
-<h2 id="打开路径："><a href="#打开路径：" class="headerlink" title="打开路径："></a>打开路径：</h2><p>/soft/phoenix-for-cloudera-4.8-HBase-1.2-cdh5.8/phoenix-assembly/target</p>
-<p>找到phoenix-4.8.0-cdh5.8.0.tar.gz<br>将phoenix-4.8.0-cdh5.8.0中的phoenix-4.8.0-cdh5.8.0-server.jar拷贝到每一个RegionServer下/opt/cloudera/parcels/CDH/lib/hbase/lib</p>
-<h2 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h2><p>./sqlline.py slave1:2181/hbase</p>
-<h3 id="如果报错："><a href="#如果报错：" class="headerlink" title="如果报错："></a>如果报错：</h3><p>Error: org.apache.hadoop.hbase.DoNotRetryIOException: Class org.apache.phoenix.coprocessor.MetaDataEndpointImpl cannot be loaded Set hbase.table.sanity.checks to false at conf or table descriptor if you want to bypass sanity checks<br>        at org.apache.hadoop.hbase.master.HMaster.warnOrThrowExceptionForFailure(HMaster.java:1741)<br>        at org.apache.hadoop.hbase.master.HMaster.sanityCheckTableDescriptor(HMaster.java:1602)<br>        at org.apache.hadoop.hbase.master.HMaster.createTable(HMaster.java:1531)<br>        at org.apache.hadoop.hbase.master.MasterRpcServices.createTable(MasterRpcServices.java:469)<br>        at org.apache.hadoop.hbase.protobuf.generated.MasterProtos$MasterService$2.callBlockingMethod(MasterProtos.java:55682)<br>        at org.apache.hadoop.hbase.ipc.RpcServer.call(RpcServer.java:2170)<br>        at org.apache.hadoop.hbase.ipc.CallRunner.run(CallRunner.java:109)<br>        at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:185)<br>        at org.apache.hadoop.hbase.ipc.RpcExecutor$Handler.run(RpcExecutor.java:165) (state=08000,code=101)</p>
-<p>需要点击<br>CDH-&gt;hbase -&gt;配置-&gt;高级<br>hbase-site.xml 的 HBase 服务高级配置代码段（安全阀）<br>添加<br>hbase.table.sanity.checks<br>false</p>
-<h2 id="重启即可"><a href="#重启即可" class="headerlink" title="重启即可"></a>重启即可</h2><h2 id="如果想要安装phonenix"><a href="#如果想要安装phonenix" class="headerlink" title="如果想要安装phonenix"></a>如果想要安装phonenix</h2><p>先下载<br><a href="http://squirrel-sql.sourceforge.net/#installation" target="_blank" rel="external">http://squirrel-sql.sourceforge.net/#installation</a></p>
-<h2 id="安装（安装的时候勾选imort-data和mysql）"><a href="#安装（安装的时候勾选imort-data和mysql）" class="headerlink" title="安装（安装的时候勾选imort-data和mysql）"></a>安装（安装的时候勾选imort-data和mysql）</h2><p>注：下载后直接安装jar包即可，不要解压缩<br>由于是CDH 我拷贝了如下jar防盗lib下面<br>phoenix-core-4.8.0-cdh5.8.0.jar<br>phoenix-4.8.0-cdh5.8.0-client.jar<br>phoenix-pherf-4.8.0-cdh5.8.0-minimal.jar</p>
-<h2 id="链接参考"><a href="#链接参考" class="headerlink" title="链接参考;"></a>链接参考;</h2><p><a href="http://www.cnblogs.com/raphael5200/p/5260198.html" target="_blank" rel="external">http://www.cnblogs.com/raphael5200/p/5260198.html</a><br>有图</p>
-<h2 id="phoenix-API"><a href="#phoenix-API" class="headerlink" title="phoenix API"></a>phoenix API</h2><p>　　<a href="http://phoenix.apache.org/language/functions.html" target="_blank" rel="external">http://phoenix.apache.org/language/functions.html</a><br>　　<a href="http://phoenix.apache.org/language/index.html" target="_blank" rel="external">http://phoenix.apache.org/language/index.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;首先下载jdk-略&quot;&gt;&lt;a href=&quot;#首先下载jdk-略&quot; class=&quot;headerlink&quot; title=&quot;首先下载jdk 略&quot;&gt;&lt;/a&gt;首先下载jdk 略&lt;/h3&gt;&lt;p&gt;安装maven&lt;/p&gt;
-&lt;h2 id=&quot;下载yum源&quot;&gt;&lt;a href=&quot;#下载yum源&quot; class=&quot;headerlink&quot; title=&quot;下载yum源&quot;&gt;&lt;/a&gt;下载yum源&lt;/h2&gt;&lt;p&gt;wget &lt;a href=&quot;http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo&quot;&gt;http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo&lt;/a&gt; -O /etc/yum.repos.d/epel-apache-maven.repo&lt;/p&gt;
-&lt;h2 id=&quot;安装maven：&quot;&gt;&lt;a href=&quot;#安装maven：&quot; class=&quot;headerlink&quot; title=&quot;安装maven：&quot;&gt;&lt;/a&gt;安装maven：&lt;/h2&gt;&lt;p&gt;yum -y install apache-maven&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
-    
-    
-      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
     
   </entry>
   
