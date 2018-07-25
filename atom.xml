@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-03-30T15:45:16.730Z</updated>
+  <updated>2018-07-25T16:09:57.310Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,98 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>机器学习-梯度下降</title>
+    <link href="http://yoursite.com/2018/04/27/Mathematical%20regression%20gradient%20descent/"/>
+    <id>http://yoursite.com/2018/04/27/Mathematical regression gradient descent/</id>
+    <published>2018-04-27T01:30:00.000Z</published>
+    <updated>2018-07-25T16:09:57.310Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="梯度下降："><a href="#梯度下降：" class="headerlink" title="梯度下降："></a>梯度下降：</h3><p>批量梯度下降法（Batch Gradient Descent，简称BGD）<br>    优点：全局最优解；易于并行实现；<br>　　缺点：当样本数目很多时，训练过程会很慢。<br>随机梯度下降法（Stochastic Gradient Descent，简称SGD）<br>    优点：训练速度快；迭代次数少<br>    缺点：准确度下降，并不是全局最优；不易于并行实现。<br>小批量梯度下降算法（MBGD）<br>如果损失函数是凸函数，梯度下降法得到的解就一定是全局最优解。</p>
+<h4 id="凸凹函数："><a href="#凸凹函数：" class="headerlink" title="凸凹函数："></a>凸凹函数：</h4><p>设f(x)在区间D上连续，如果对D上任意两点a、b恒有<br>f（（a+b）/2）&lt;(f(a)+f(b))/2<br>那么称f(x)在D上的图形是（向上）凹的（或凹弧）；如果恒有<br>f（（a+b）/2）&gt;(f(a)+f(b))/2<br>那么称f(x)在D上的图形是（向上）凸的（或凸弧）</p>
+<h3 id="梯度下降相关概念："><a href="#梯度下降相关概念：" class="headerlink" title="梯度下降相关概念："></a>梯度下降相关概念：</h3><ol>
+<li>步长（Learning rate）：步长决定了在梯度下降迭代的过程中，每一步沿梯度负方向前进的长度。用上面下山的例子，步长就是在当前这一步所在位置沿着最陡峭最易下山的位置走的那一步的长度。</li>
+</ol>
+<p>2.特征（feature）：指的是样本中输入部分，比如2个单特征的样本（x(0),y(0)）,（x(1),y(1)）（x(0),y(0)）,（x(1),y(1)）,则第一个样本特征为x(0)x(0)，第一个样本输出为y(0)y(0)。</p>
+<ol>
+<li><p>假设函数（hypothesis function）：在监督学习中，为了拟合输入样本，而使用的假设函数，记为hθ(x)hθ(x)。比如对于单个特征的m个样本（x(i),y(i)）(i=1,2,…m)（x(i),y(i)）(i=1,2,…m),可以采用拟合函数如下： hθ(x)=θ0+θ1xhθ(x)=θ0+θ1x。</p>
+</li>
+<li><p>损失函数（loss function）：为了评估模型拟合的好坏，通常用损失函数来度量拟合的程度。损失函数极小化，意味着拟合程度最好，对应的模型参数即为最优参数。在线性回归中，损失函数通常为样本输出和假设函数的差取平方。比如对于m个样本（xi,yi）(i=1,2,…m)（xi,yi）(i=1,2,…m),采用线性回归，损失函数为：</p>
+<pre><code>J(θ0,θ1)=∑i=1m(hθ(xi)−yi)2J(θ0,θ1)=∑i=1m(hθ(xi)−yi)2
+</code></pre><p>其中xixi表示第i个样本特征，yiyi表示第i个样本对应的输出，hθ(xi)hθ(xi)为假设函数。
+　　　　</p>
+</li>
+</ol>
+<h3 id="局部加权回归"><a href="#局部加权回归" class="headerlink" title="局部加权回归"></a>局部加权回归</h3><p>简单来说，这个过程其实是在先拟合出一条曲线，然后再用这个曲线去预测需要预测的点。(源自百度)<br>为什么改进要用加权回归呢？ 很简单，因为非线性拟合出直线误差会很大，这里的局部加权类似于knn算法的权重，即距离中心点越近的权重越大，对拟合曲线的影响也就越大，所以也有了局部加权这一名词</p>
+<p>参考文献：<br><a href="https://blog.csdn.net/Gentle_Guan/article/details/76586689?locationNum=8&amp;fps=1" target="_blank" rel="external">https://blog.csdn.net/Gentle_Guan/article/details/76586689?locationNum=8&amp;fps=1</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;梯度下降：&quot;&gt;&lt;a href=&quot;#梯度下降：&quot; class=&quot;headerlink&quot; title=&quot;梯度下降：&quot;&gt;&lt;/a&gt;梯度下降：&lt;/h3&gt;&lt;p&gt;批量梯度下降法（Batch Gradient Descent，简称BGD）&lt;br&gt;    优点：全局最优解；易于并行
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习-逻辑回归模型特征处理</title>
+    <link href="http://yoursite.com/2018/04/08/Mathematical%20Feature%20processing%20of%20logistic%20regression%20model/"/>
+    <id>http://yoursite.com/2018/04/08/Mathematical Feature processing of logistic regression model/</id>
+    <published>2018-04-08T01:30:00.000Z</published>
+    <updated>2018-07-25T16:10:12.622Z</updated>
+    
+    <content type="html"><![CDATA[<p>如果有异常值，使用极大-极小归一化或均值-标准差归一化，计算之前需要将极端值排除在外。<br>例如：<br>x’=x−min/ max−min<br>计算max与min时需要用P1与P99来代替。新生成的值如果超过1用1表示，如果小于0 用0表示</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如果有异常值，使用极大-极小归一化或均值-标准差归一化，计算之前需要将极端值排除在外。&lt;br&gt;例如：&lt;br&gt;x’=x−min/ max−min&lt;br&gt;计算max与min时需要用P1与P99来代替。新生成的值如果超过1用1表示，如果小于0 用0表示&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习-决策树算法实例</title>
+    <link href="http://yoursite.com/2018/02/18/Mathematical%20decision%20tree/"/>
+    <id>http://yoursite.com/2018/02/18/Mathematical decision tree/</id>
+    <published>2018-02-18T01:30:00.000Z</published>
+    <updated>2018-07-25T16:10:05.738Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="决策树："><a href="#决策树：" class="headerlink" title="决策树："></a>决策树：</h2><p>有监督学习方法<br>是一种预测模型<br>是在已知各种情况发生概率基础上，通过构建决策树来进行分析的一种方法</p>
+<h3 id="树形结构"><a href="#树形结构" class="headerlink" title="树形结构"></a>树形结构</h3><p>从跟节点开始，预测待分类项对应的特征属性，按照值选择输出分支，直到叶子节点，将叶子节点的存放类别作为树的结果</p>
+<p>决策树分为两类：<br>分类，回归<br>前者用于分类标签值，后者用于预测连续值<br>常用算法ID3，C4,5，CART</p>
+<h3 id="数据标准化："><a href="#数据标准化：" class="headerlink" title="数据标准化："></a>数据标准化：</h3><p>StandardScaler (基于特征矩阵的列，将属性值转换至服从正态分布)<br>标准化是依照特征矩阵的列处理数据，其通过求z-score的方法，将样本的特征值转换到同一量纲下<br>常用与基于正态分布的算法，比如回归<br>数据归一化<br>MinMaxScaler （区间缩放，基于最大最小值，将数据转换到0,1区间上的）<br>提升模型收敛速度，提升模型精度<br>常见用于神经网络<br>Normalizer （基于矩阵的行，将样本向量转换为单位向量）<br>其目的在于样本向量在点乘运算或其他核函数计算相似性时，拥有统一的标准<br>常见用于文本分类和聚类、logistic回归中也会使用，有效防止过拟合</p>
+<h3 id="特征选择："><a href="#特征选择：" class="headerlink" title="特征选择："></a>特征选择：</h3><p>从已有的特征中选择出影响目标值最大的特征属性</p>
+<h2 id="常用方法：-分类：F统计量、卡方系数，互信息mutual-info-classif"><a href="#常用方法：-分类：F统计量、卡方系数，互信息mutual-info-classif" class="headerlink" title="常用方法：{ 分类：F统计量、卡方系数，互信息mutual_info_classif"></a>常用方法：{ 分类：F统计量、卡方系数，互信息mutual_info_classif</h2><pre><code>{ 连续：皮尔逊相关系数 F统计量 互信息mutual_info_classif
+</code></pre><h2 id="SelectKBest（卡方系数）"><a href="#SelectKBest（卡方系数）" class="headerlink" title="SelectKBest（卡方系数）"></a>SelectKBest（卡方系数）</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;决策树：&quot;&gt;&lt;a href=&quot;#决策树：&quot; class=&quot;headerlink&quot; title=&quot;决策树：&quot;&gt;&lt;/a&gt;决策树：&lt;/h2&gt;&lt;p&gt;有监督学习方法&lt;br&gt;是一种预测模型&lt;br&gt;是在已知各种情况发生概率基础上，通过构建决策树来进行分析的一种方法&lt;/p&gt;
+&lt;h
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式-行为模式</title>
@@ -531,6 +623,39 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
   </entry>
   
   <entry>
+    <title>phoenix创建二级索引</title>
+    <link href="http://yoursite.com/2017/05/25/phoenix%E5%88%9B%E5%BB%BA%E4%BA%8C%E7%BA%A7%E7%B4%A2%E5%BC%95/"/>
+    <id>http://yoursite.com/2017/05/25/phoenix创建二级索引/</id>
+    <published>2017-05-25T03:30:00.000Z</published>
+    <updated>2018-07-25T16:09:11.784Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="索引分为两种："><a href="#索引分为两种：" class="headerlink" title="索引分为两种："></a>索引分为两种：</h3><p>Global Indexing<br>Local Indexing</p>
+<h4 id="Global-Indexing-："><a href="#Global-Indexing-：" class="headerlink" title="Global Indexing ："></a>Global Indexing ：</h4><p>使用于读多，写少的场景.select 查出来的数据必须是索引字段才能使用到索引</p>
+<h4 id="Local-Indexing-："><a href="#Local-Indexing-：" class="headerlink" title="Local Indexing ："></a>Local Indexing ：</h4><h4 id="hbase-bulk-load"><a href="#hbase-bulk-load" class="headerlink" title="hbase bulk load"></a>hbase bulk load</h4><p>数据上传到hdfs：/phoenix_data/fanpu.csv</p>
+<p>HADOOP_CLASSPATH=$(hbase classpath) hadoop jar phoenix-4.8.0-cdh5.8.0-client.jar org.apache.phoenix.mapreduce.CsvBulkLoadTool<br>-libjars /soft/phoenix/phoenix-4.8.0-cdh5.8.0/lib/commons-csv-1.0.jar,/soft/bigdata/clouderamanager/cm-5.10.0/share/cmf/lib/joda-time-2.7.jar –table fanpu –input /phoenix_data/fanpu.csv</p>
+<h4 id="我如果使用Global-Indexing："><a href="#我如果使用Global-Indexing：" class="headerlink" title="我如果使用Global Indexing："></a>我如果使用Global Indexing：</h4><p>创建索引：<br>create index fanpu_index on fanpu (“family”.”id_no”,”family”.”name”,”family”.”mobile”);</p>
+<p>select <em> from fanpu where “family”.”id_no”=’xxxx’ and “family”.”name”=’马文学’ and “family”.”mobile”=’xxxx’; 是不能使用索引的<em>*×</em></em></p>
+<p>select “family”.”id_no”,”family”.”name” from fanpu where “family”.”id_no”=’xxxx’ and “family”.”name”=’马文学’ and “family”.”mobile”=’xxxx’;  才可以<strong>√</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_LENDER_LOAN_DTL on &quot;LENDER-LEN_LENDER_LOAN_DTL&quot; (&quot;family&quot;.&quot;LOAN_RECEIPT_NO&quot;);</div><div class="line">76,392 rows affected (6.256 seconds)</div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_TRANSFER on &quot;LENDER-LEN_TRANSFER&quot; (&quot;family&quot;.&quot;LEN_LOAN_SELL_CONFIRM_ID&quot;);</div><div class="line">99,937 rows affected (6.256 seconds)</div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_TRANSFER_DTL on &quot;LENDER-LEN_TRANSFER_DTL&quot; (&quot;family&quot;.&quot;LENDERINFOID&quot;,&quot;family&quot;.&quot;LOAN_TRANSFER_MODEL_ID&quot;);</div><div class="line">153,029 rows affected (6.239 seconds)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_LENDER_LOAN_DTL2 on &quot;LENDER-LEN_LENDER_LOAN_DTL&quot; (&quot;family&quot;.&quot;LOAN_RECEIPT_NO&quot;);</div><div class="line">76,392 rows affected (6.231 seconds)</div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_LENDER_LOAN_DTL3 on &quot;LENDER-LEN_LENDER_LOAN_DTL&quot; (&quot;family&quot;.&quot;LOAN_ID&quot;);</div><div class="line">76,392 rows affected (6.234 seconds)</div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_LOAN_MAIN on &quot;LENDER-LEN_LOAN_MAIN&quot; (&quot;family&quot;.&quot;ASSUME_DEBTOR_ID&quot;);</div><div class="line">20,865 rows affected (6.233 seconds)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_LOAN_MAIN2 on &quot;LENDER-LEN_LOAN_MAIN&quot; (&quot;family&quot;.&quot;LOAN_CONTRACT_ID&quot;);</div><div class="line">20,865 rows affected (6.231 seconds)</div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_LENDER_INFO on &quot;LENDER-LEN_LENDER_INFO&quot; (&quot;family&quot;.&quot;CUSTOMER_ID&quot;);</div><div class="line">17,053 rows affected (6.235 seconds)</div></pre></td></tr></table></figure>
+<p>0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_SELL_CONFIRM on “LENDER-LEN_SELL_CONFIRM” (“ID”);<br>9,417 rows affected (6.245 seconds)</p>
+<p>0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_TRANSFER3 on “LENDER-LEN_TRANSFER” (“family”.”SELLER_LOAN_DTL_ID”);<br>99,937 rows affected (6.251 seconds)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;索引分为两种：&quot;&gt;&lt;a href=&quot;#索引分为两种：&quot; class=&quot;headerlink&quot; title=&quot;索引分为两种：&quot;&gt;&lt;/a&gt;索引分为两种：&lt;/h3&gt;&lt;p&gt;Global Indexing&lt;br&gt;Local Indexing&lt;/p&gt;
+&lt;h4 id=&quot;Glob
+    
+    </summary>
+    
+      <category term="phoenix" scheme="http://yoursite.com/categories/phoenix/"/>
+    
+    
+      <category term="phoenix" scheme="http://yoursite.com/tags/phoenix/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CDH oozie</title>
     <link href="http://yoursite.com/2017/05/18/CDH%20oozie%E5%AE%89%E8%A3%85/"/>
     <id>http://yoursite.com/2017/05/18/CDH oozie安装/</id>
@@ -841,152 +966,6 @@ c. 重启NodeManager进程，也就启动了External shuffle Service。
     
     
       <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CDH-spark</title>
-    <link href="http://yoursite.com/2017/03/29/CDH-spark/"/>
-    <id>http://yoursite.com/2017/03/29/CDH-spark/</id>
-    <published>2017-03-29T03:30:00.000Z</published>
-    <updated>2017-03-31T13:27:02.808Z</updated>
-    
-    <content type="html"><![CDATA[<p>添加服务选择spark on yarn<br>安装的时候会选择history server，博主选择的是slave1，后续可以通过这个地址看spark的UI</p>
-<p>博主安装的是：<br>scala     version 2.10.5（后续再UI上看到的）<br>spark   version 1.6.0（执行spark-shell时看到的）</p>
-<p>安装完后测试：</p>
-<p>su hdfs<br>spark-submit –class org.apache.spark.examples.SparkPi –executor-memory 1G –total-executor-cores 2 /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/spark/examples/lib/spark-examples-1.6.0-cdh5.10.0-hadoop2.6.0-cdh5.10.0.jar 100</p>
-<p>查看UI：<br><a href="http://slave1:18088/" target="_blank" rel="external">http://slave1:18088/</a></p>
-<a id="more"></a>
-<p>编写代码测试离线功能：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</div><div class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</div><div class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</div><div class="line"></div><div class="line">    &lt;groupId&gt;cn.zwjf.spark&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;SpakrZwujf&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</div><div class="line"></div><div class="line"></div><div class="line">    &lt;properties&gt;</div><div class="line">        &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;</div><div class="line">        &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;</div><div class="line">        &lt;encoding&gt;UTF-8&lt;/encoding&gt;</div><div class="line">        &lt;scala.version&gt;2.10.5&lt;/scala.version&gt;</div><div class="line">        &lt;scala.compat.version&gt;2.10&lt;/scala.compat.version&gt;</div><div class="line">    &lt;/properties&gt;</div><div class="line"></div><div class="line">    &lt;dependencies&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.scala-lang&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;scala-library&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;$&#123;scala.version&#125;&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;spark-core_2.10&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;1.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;spark-streaming_2.10&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;1.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;2.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">    &lt;/dependencies&gt;</div><div class="line"></div><div class="line">    &lt;build&gt;</div><div class="line">        &lt;sourceDirectory&gt;src/main/scala&lt;/sourceDirectory&gt;</div><div class="line">        &lt;testSourceDirectory&gt;src/test/scala&lt;/testSourceDirectory&gt;</div><div class="line">        &lt;plugins&gt;</div><div class="line">            &lt;plugin&gt;</div><div class="line">                &lt;groupId&gt;net.alchim31.maven&lt;/groupId&gt;</div><div class="line">                &lt;artifactId&gt;scala-maven-plugin&lt;/artifactId&gt;</div><div class="line">                &lt;version&gt;3.2.0&lt;/version&gt;</div><div class="line">                &lt;executions&gt;</div><div class="line">                    &lt;execution&gt;</div><div class="line">                        &lt;goals&gt;</div><div class="line">                            &lt;goal&gt;compile&lt;/goal&gt;</div><div class="line">                            &lt;goal&gt;testCompile&lt;/goal&gt;</div><div class="line">                        &lt;/goals&gt;</div><div class="line">                        &lt;configuration&gt;</div><div class="line">                            &lt;args&gt;</div><div class="line">                                &lt;arg&gt;-make:transitive&lt;/arg&gt;</div><div class="line">                                &lt;arg&gt;-dependencyfile&lt;/arg&gt;</div><div class="line">                                &lt;arg&gt;$&#123;project.build.directory&#125;/.scala_dependencies&lt;/arg&gt;</div><div class="line">                            &lt;/args&gt;</div><div class="line">                        &lt;/configuration&gt;</div><div class="line">                    &lt;/execution&gt;</div><div class="line">                &lt;/executions&gt;</div><div class="line">            &lt;/plugin&gt;</div><div class="line">            &lt;plugin&gt;</div><div class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</div><div class="line">                &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;</div><div class="line">                &lt;version&gt;2.18.1&lt;/version&gt;</div><div class="line">                &lt;configuration&gt;</div><div class="line">                    &lt;useFile&gt;false&lt;/useFile&gt;</div><div class="line">                    &lt;disableXmlReport&gt;true&lt;/disableXmlReport&gt;</div><div class="line">                    &lt;includes&gt;</div><div class="line">                        &lt;include&gt;**/*Test.*&lt;/include&gt;</div><div class="line">                        &lt;include&gt;**/*Suite.*&lt;/include&gt;</div><div class="line">                    &lt;/includes&gt;</div><div class="line">                &lt;/configuration&gt;</div><div class="line">            &lt;/plugin&gt;</div><div class="line"></div><div class="line">            &lt;plugin&gt;</div><div class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</div><div class="line">                &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;</div><div class="line">                &lt;version&gt;2.3&lt;/version&gt;</div><div class="line">                &lt;executions&gt;</div><div class="line">                    &lt;execution&gt;</div><div class="line">                        &lt;phase&gt;package&lt;/phase&gt;</div><div class="line">                        &lt;goals&gt;</div><div class="line">                            &lt;goal&gt;shade&lt;/goal&gt;</div><div class="line">                        &lt;/goals&gt;</div><div class="line">                        &lt;configuration&gt;</div><div class="line">                            &lt;filters&gt;</div><div class="line">                                &lt;filter&gt;</div><div class="line">                                    &lt;artifact&gt;*:*&lt;/artifact&gt;</div><div class="line">                                    &lt;excludes&gt;</div><div class="line">                                        &lt;exclude&gt;META-INF/*.SF&lt;/exclude&gt;</div><div class="line">                                        &lt;exclude&gt;META-INF/*.DSA&lt;/exclude&gt;</div><div class="line">                                        &lt;exclude&gt;META-INF/*.RSA&lt;/exclude&gt;</div><div class="line">                                    &lt;/excludes&gt;</div><div class="line">                                &lt;/filter&gt;</div><div class="line">                            &lt;/filters&gt;</div><div class="line">                            &lt;transformers&gt;</div><div class="line">                                &lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&gt;</div><div class="line">                                    &lt;mainClass&gt;cn.zwjf.uidPhone&lt;/mainClass&gt;</div><div class="line">                                &lt;/transformer&gt;</div><div class="line">                            &lt;/transformers&gt;</div><div class="line">                        &lt;/configuration&gt;</div><div class="line">                    &lt;/execution&gt;</div><div class="line">                &lt;/executions&gt;</div><div class="line">            &lt;/plugin&gt;</div><div class="line">        &lt;/plugins&gt;</div><div class="line">    &lt;/build&gt;</div><div class="line">&lt;/project&gt;</div></pre></td></tr></table></figure>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> cn.zwjf</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">  * Created by Administrator on 2017/3/29.</div><div class="line">  */</div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">uidPhone</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</div><div class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"uid_phone_etl"</span>)</div><div class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</div><div class="line">    sc.textFile(args(<span class="number">0</span>)).map(line =&gt; &#123;</div><div class="line">      <span class="keyword">val</span> arr = line.split(<span class="string">","</span>)</div><div class="line">      <span class="keyword">if</span>(arr.length &gt; <span class="number">1</span> &amp;&amp; !arr(<span class="number">1</span>).equals(<span class="string">"null"</span>))&#123;</div><div class="line">        arr(<span class="number">0</span>)+<span class="string">","</span>+arr(<span class="number">1</span>)</div><div class="line">      &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="string">"null"</span></div><div class="line">      &#125;</div><div class="line"></div><div class="line">    &#125;).filter(!_.equals(<span class="string">"null"</span>)).saveAsTextFile(args(<span class="number">1</span>))</div><div class="line">    sc.stop()</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>打包提交到服务器</p>
-<p>spark-submit \<br>–class cn.zwjf.uidPhone –executor-memory 2G –total-executor-cores 4 \<br>/var/lib/hadoop-hdfs/data/spark/SpakrZwujf-1.0-SNAPSHOT.jar \<br>/bigdata/data/hdfs/Baidu/uid_phone/* \<br>/bigdata/data/hdfs/Baidu/uid_phone3</p>
-<p>/bigdata/data/hdfs/Baidu/uid_phone/* /bigdata/data/hdfs/Baidu/uid_phone2</p>
-<p>本地调试方法：、<br><a href="http://www.jianshu.com/p/c801761ce088" target="_blank" rel="external">http://www.jianshu.com/p/c801761ce088</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;添加服务选择spark on yarn&lt;br&gt;安装的时候会选择history server，博主选择的是slave1，后续可以通过这个地址看spark的UI&lt;/p&gt;
-&lt;p&gt;博主安装的是：&lt;br&gt;scala     version 2.10.5（后续再UI上看到的）&lt;br&gt;spark   version 1.6.0（执行spark-shell时看到的）&lt;/p&gt;
-&lt;p&gt;安装完后测试：&lt;/p&gt;
-&lt;p&gt;su hdfs&lt;br&gt;spark-submit –class org.apache.spark.examples.SparkPi –executor-memory 1G –total-executor-cores 2 /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/spark/examples/lib/spark-examples-1.6.0-cdh5.10.0-hadoop2.6.0-cdh5.10.0.jar 100&lt;/p&gt;
-&lt;p&gt;查看UI：&lt;br&gt;&lt;a href=&quot;http://slave1:18088/&quot;&gt;http://slave1:18088/&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
-    
-    
-      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>strom 监控</title>
-    <link href="http://yoursite.com/2017/03/26/strom-%E7%9B%91%E6%8E%A7/"/>
-    <id>http://yoursite.com/2017/03/26/strom-监控/</id>
-    <published>2017-03-26T01:30:00.000Z</published>
-    <updated>2017-03-31T13:27:13.752Z</updated>
-    
-    <content type="html"><![CDATA[<p>看当前GC的情况<br>jstat -gcutil 端口号 1000</p>
-<p>看wait的是否过高<br>top -p 端口号</p>
-<p>把某个端口当前的堆栈信息dump到某个文件<br>jstack 端口号 &gt; 文件</p>
-<p>看磁盘<br>iostat -x 1</p>
-<p>如果发现分配不均匀，例如FiledGrouping userid=1特别多，导致下游nolt或execute搞死了，重新启动也很快就死掉。可以对userid 做hash或md5或者组成更多条件，让下游Bolt分布更均匀</p>
-<p>complete latency(这里主要针对spout)是一个tuple从发出, 到经过bolt处理完成, 最终调用spout的ack这个完整的过程所花的时间.complete latency和吞吐量可以认为是互斥的, 二者不可兼得, 要提高吞吐量, 必然会增加complete latency, 反之亦然. 所以我们需要根据具体的场景, 在二者之间找到一个平衡.<br>complete latency受到两个因素的影响:<br>bolt的处理时间<br>spout的parallelism数量<br><a id="more"></a></p>
-<p>官网对并行度等的设置方式：<br>storm.apache.org/releases/1.0.3/Understanding-the-parallelism-of-a-Storm-topology.html</p>
-<p>如果executors总是挂就需要关注</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;看当前GC的情况&lt;br&gt;jstat -gcutil 端口号 1000&lt;/p&gt;
-&lt;p&gt;看wait的是否过高&lt;br&gt;top -p 端口号&lt;/p&gt;
-&lt;p&gt;把某个端口当前的堆栈信息dump到某个文件&lt;br&gt;jstack 端口号 &amp;gt; 文件&lt;/p&gt;
-&lt;p&gt;看磁盘&lt;br&gt;iostat -x 1&lt;/p&gt;
-&lt;p&gt;如果发现分配不均匀，例如FiledGrouping userid=1特别多，导致下游nolt或execute搞死了，重新启动也很快就死掉。可以对userid 做hash或md5或者组成更多条件，让下游Bolt分布更均匀&lt;/p&gt;
-&lt;p&gt;complete latency(这里主要针对spout)是一个tuple从发出, 到经过bolt处理完成, 最终调用spout的ack这个完整的过程所花的时间.complete latency和吞吐量可以认为是互斥的, 二者不可兼得, 要提高吞吐量, 必然会增加complete latency, 反之亦然. 所以我们需要根据具体的场景, 在二者之间找到一个平衡.&lt;br&gt;complete latency受到两个因素的影响:&lt;br&gt;bolt的处理时间&lt;br&gt;spout的parallelism数量&lt;br&gt;
-    
-    </summary>
-    
-      <category term="storm" scheme="http://yoursite.com/categories/storm/"/>
-    
-    
-      <category term="storm" scheme="http://yoursite.com/tags/storm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>strom-Metrics</title>
-    <link href="http://yoursite.com/2017/03/25/strom-Metrics/"/>
-    <id>http://yoursite.com/2017/03/25/strom-Metrics/</id>
-    <published>2017-03-24T16:30:00.000Z</published>
-    <updated>2017-03-31T13:27:19.669Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。"><a href="#Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。" class="headerlink" title="Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。"></a>Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。</h2><p>使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复位为初始值。例如，在 MeanReducer 中就实现了通过运行总数除以对应的运行计数的方式来求取均值，然后将两个值都重新设置为 0。</p>
-<p>Storm 提供了以下几种 metric 类型：</p>
-<h4 id="AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。"><a href="#AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。" class="headerlink" title="AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。"></a>AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。</h4><h4 id="CombinedMetric-–-可以对-metric-进行关联更新的通用接口。"><a href="#CombinedMetric-–-可以对-metric-进行关联更新的通用接口。" class="headerlink" title="CombinedMetric – 可以对 metric 进行关联更新的通用接口。"></a>CombinedMetric – 可以对 metric 进行关联更新的通用接口。</h4><h4 id="CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。"><a href="#CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。" class="headerlink" title="CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。"></a>CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。</h4><h4 id="MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap"><a href="#MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap" class="headerlink" title="MultiCountMetric – 返回包含一组 CountMetric 的 HashMap"></a>MultiCountMetric – 返回包含一组 CountMetric 的 HashMap</h4><h4 id="ReducedMetric"><a href="#ReducedMetric" class="headerlink" title="ReducedMetric"></a>ReducedMetric</h4><h6 id="MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。"><a href="#MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。" class="headerlink" title="MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。"></a>MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。</h6><h6 id="MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap"><a href="#MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap" class="headerlink" title="MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap"></a>MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap</h6><a id="more"></a>
-<p>自定义Metric：<br>代码注册：<br>conf.registerMetricsConsumer(org.apache.storm.metric.LoggingMetricsConsumer.class, 1);<br>或者修改配置文件<br>topology.metrics.consumer.register:</p>
-<ul>
-<li>class: “org.apache.storm.metric.LoggingMetricsConsumer”<br>parallelism.hint: 1</li>
-<li>class: “org.apache.storm.metric.HttpForwardingMetricsConsumer”<br>parallelism.hint: 1<br>argument: “<a href="http://example.com:8080/metrics/my-topology/" target="_blank" rel="external">http://example.com:8080/metrics/my-topology/</a>“</li>
-</ul>
-<p>构建自己的Metric<br>定义不可被序列号类型transient<br>private transient CountMetric countMetric;</p>
-<p>重写prepare<br>@Override<br>public void prepare(Map conf, TopologyContext context, OutputCollector collector) {<br>    // other intialization here.<br>    countMetric = new CountMetric();<br>    context.registerMetric(“execute_count”, countMetric, 60);<br>}</p>
-<p>bolt的execute</p>
-<p>public void execute(Tuple input) {<br>    countMetric.incr();<br>    // handle tuple here.<br>}</p>
-<p>builtin_metrics.clj 为内部的 metrics 设置了数据结构，以及其他框架组件可以用于更新的虚拟方法。metrics 本身是在回调代码中实现计算的 – 请参考 clj/b/s/daemon/daemon/executor.clj 中的 ack-spout-msg 的例子。</p>
-<p>LoggingMetricsConsumer,统计指标值将输出到metric.log日志文件中。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。&quot;&gt;&lt;a href=&quot;#Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。&quot; class=&quot;headerlink&quot; title=&quot;Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。&quot;&gt;&lt;/a&gt;Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。&lt;/h2&gt;&lt;p&gt;使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复位为初始值。例如，在 MeanReducer 中就实现了通过运行总数除以对应的运行计数的方式来求取均值，然后将两个值都重新设置为 0。&lt;/p&gt;
-&lt;p&gt;Storm 提供了以下几种 metric 类型：&lt;/p&gt;
-&lt;h4 id=&quot;AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。&quot;&gt;&lt;a href=&quot;#AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。&quot; class=&quot;headerlink&quot; title=&quot;AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。&quot;&gt;&lt;/a&gt;AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。&lt;/h4&gt;&lt;h4 id=&quot;CombinedMetric-–-可以对-metric-进行关联更新的通用接口。&quot;&gt;&lt;a href=&quot;#CombinedMetric-–-可以对-metric-进行关联更新的通用接口。&quot; class=&quot;headerlink&quot; title=&quot;CombinedMetric – 可以对 metric 进行关联更新的通用接口。&quot;&gt;&lt;/a&gt;CombinedMetric – 可以对 metric 进行关联更新的通用接口。&lt;/h4&gt;&lt;h4 id=&quot;CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。&quot;&gt;&lt;a href=&quot;#CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。&quot; class=&quot;headerlink&quot; title=&quot;CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。&quot;&gt;&lt;/a&gt;CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。&lt;/h4&gt;&lt;h4 id=&quot;MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap&quot;&gt;&lt;a href=&quot;#MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap&quot; class=&quot;headerlink&quot; title=&quot;MultiCountMetric – 返回包含一组 CountMetric 的 HashMap&quot;&gt;&lt;/a&gt;MultiCountMetric – 返回包含一组 CountMetric 的 HashMap&lt;/h4&gt;&lt;h4 id=&quot;ReducedMetric&quot;&gt;&lt;a href=&quot;#ReducedMetric&quot; class=&quot;headerlink&quot; title=&quot;ReducedMetric&quot;&gt;&lt;/a&gt;ReducedMetric&lt;/h4&gt;&lt;h6 id=&quot;MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。&quot;&gt;&lt;a href=&quot;#MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。&quot; class=&quot;headerlink&quot; title=&quot;MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。&quot;&gt;&lt;/a&gt;MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。&lt;/h6&gt;&lt;h6 id=&quot;MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap&quot;&gt;&lt;a href=&quot;#MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap&quot; class=&quot;headerlink&quot; title=&quot;MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap&quot;&gt;&lt;/a&gt;MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap&lt;/h6&gt;
-    
-    </summary>
-    
-      <category term="storm" scheme="http://yoursite.com/categories/storm/"/>
-    
-    
-      <category term="storm" scheme="http://yoursite.com/tags/storm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>bash脚本实战</title>
-    <link href="http://yoursite.com/2017/03/19/bash%E8%84%9A%E6%9C%AC%E5%AE%9E%E6%88%98/"/>
-    <id>http://yoursite.com/2017/03/19/bash脚本实战/</id>
-    <published>2017-03-19T15:30:00.000Z</published>
-    <updated>2017-08-12T01:05:48.413Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h2><p>写一个脚本getinterface.sh，脚本可以接受参数(i,I,a)，完成以下任务：<br>   (1)使用以下形式：getinterface.sh [-i interface|-I IP|-a]<br>   (2)当用户使用-i选项时，显示其指定网卡的IP地址；<br>   (3)当用户使用-I选项时，显示其后面的IP地址所属的网络接口；（如 192.168.199.183：eth0）<br>   (4)当用户单独使用-a选项时，显示所有网络接口及其IP地址（lo除外）</p>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>参数1为param1 参数2位param2<br>（1）利用CAT &lt;&lt; EOF  <em>*</em> EOF打印信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat &lt;&lt; EOF</div><div class="line">    getinterface.sh [-i interface|-I IP|<span class="_">-a</span>]</div><div class="line">    -i interface) show ip of the interface</div><div class="line">    -I IP) show interface of the IP and IP with :;</div><div class="line">    <span class="_">-a</span>) list all interfaces and their IPs except lo;</div><div class="line">    *) quit</div><div class="line">=================================================================</div><div class="line">EOF</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>（2）校验接口是否存在（参数2）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ifconfig <span class="variable">$interface</span> &gt;/dev/null </div><div class="line">$? <span class="_">-ne</span> 1  </div><div class="line"><span class="comment">#如果存在打印网卡的IP</span></div><div class="line">ifconfig <span class="variable">$parma2</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span></div></pre></td></tr></table></figure></p>
-<p>（3）先打印所有接口<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -i | sed -n <span class="string">'3,65535p'</span>|awk -F<span class="string">" "</span> <span class="string">'&#123;print $1&#125;</span></div></pre></td></tr></table></figure></p>
-<p>并存在一个变量中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list=`netstat -i | sed -n <span class="string">'3,65535p'</span>|awk -F<span class="string">" "</span> <span class="string">'&#123;print $1&#125;'</span>`</div></pre></td></tr></table></figure>
-<p>遍历集合，查看和输入IP相同的打印IP和接口<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> inter <span class="keyword">in</span> <span class="variable">$list</span>;  </div><div class="line"><span class="keyword">do</span>  </div><div class="line">    ip_temp=`ifconfig <span class="variable">$param2</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span></div><div class="line">    <span class="keyword">if</span> [ <span class="variable">$IP</span> == <span class="variable">$ip_temp</span> ];<span class="keyword">then</span>  </div><div class="line">	<span class="built_in">echo</span> <span class="string">"<span class="variable">$IP</span> : <span class="variable">$inter</span>"</span>  </div><div class="line">	<span class="built_in">exit</span> 0  </div><div class="line">    <span class="keyword">fi</span>  </div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure></p>
-<p>（4）遍历集合，过滤接口为lo的，打印IP和接口<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> inter <span class="keyword">in</span> <span class="variable">$list</span>;  </div><div class="line"><span class="keyword">do</span>  </div><div class="line">    ip_temp=`ifconfig <span class="variable">$param2</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span></div><div class="line">    <span class="keyword">if</span> [ <span class="variable">$inter</span> != <span class="string">"lo"</span> ];<span class="keyword">then</span>  </div><div class="line">	<span class="built_in">echo</span> <span class="string">"<span class="variable">$IP</span> : <span class="variable">$inter</span>"</span>  </div><div class="line">	<span class="built_in">exit</span> 0  </div><div class="line">    <span class="keyword">fi</span>  </div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure></p>
-<h2 id="最终的脚本如下："><a href="#最终的脚本如下：" class="headerlink" title="最终的脚本如下："></a>最终的脚本如下：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">cat &lt;&lt; EOF</div><div class="line">    getinterface.sh [-i interface|-I IP|<span class="_">-a</span>]</div><div class="line">    -i interface) show ip of the interface</div><div class="line">    -I IP) show interface of the IP and IP with :;</div><div class="line">    <span class="_">-a</span>) list all interfaces and their IPs except lo;</div><div class="line">    *) quit</div><div class="line">=================================================================</div><div class="line">EOF</div><div class="line"></div><div class="line"><span class="built_in">read</span> -p <span class="string">"please choice "</span> param1 param2</div><div class="line">list=`netstat -i | sed -n <span class="string">'3,65535p'</span>|awk -F<span class="string">" "</span> <span class="string">'&#123;print $1&#125;'</span>`</div><div class="line"></div><div class="line"><span class="keyword">if</span> [[ <span class="string">"<span class="variable">$param1</span>"</span> == <span class="string">'-i'</span> ]]; <span class="keyword">then</span></div><div class="line">    ifconfig <span class="variable">$interface</span> &gt;/dev/null</div><div class="line">    flag=$?</div><div class="line">    <span class="keyword">if</span> [ <span class="variable">$flag</span> <span class="_">-ne</span> 1 ];<span class="keyword">then</span></div><div class="line">        ip=`ifconfig <span class="variable">$param2</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span>`</div><div class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$param2</span> <span class="variable">$ip</span>"</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$parma2</span> is not exist"</span> </div><div class="line">    <span class="keyword">fi</span></div><div class="line"><span class="keyword">elif</span> [[ <span class="string">"<span class="variable">$param1</span>"</span> == <span class="string">'-I'</span> ]]; <span class="keyword">then</span></div><div class="line"><span class="keyword">for</span> lt <span class="keyword">in</span> <span class="variable">$list</span>;</div><div class="line">  <span class="keyword">do</span></div><div class="line">     ip =$(ifconfig <span class="variable">$lt</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span>)</div><div class="line">     <span class="comment">#ip=$(ifconfig $lt | awk -F" " '/inet.*Mask/&#123;print $2&#125;' | awk -F: '&#123;print $2&#125;')</span></div><div class="line">     <span class="keyword">if</span> [ <span class="variable">$param2</span> == <span class="variable">$ip</span> ];<span class="keyword">then</span></div><div class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$lt</span> : <span class="variable">$ip</span>"</span></div><div class="line">     <span class="keyword">fi</span></div><div class="line">  <span class="keyword">done</span></div><div class="line"><span class="keyword">elif</span> [[ <span class="string">"<span class="variable">$param1</span>"</span> == <span class="string">'-a'</span> ]]; <span class="keyword">then</span></div><div class="line"> <span class="keyword">for</span> lt <span class="keyword">in</span> <span class="variable">$list</span>;</div><div class="line">  <span class="keyword">do</span></div><div class="line">     ip=$(ifconfig <span class="variable">$lt</span> | awk -F<span class="string">" "</span> <span class="string">'/inet.*netmask/&#123;print $2&#125;'</span>)</div><div class="line">     <span class="comment">#ip=$(ifconfig $lt | awk -F" " '/inet.*Mask/&#123;print $2&#125;' | awk -F: '&#123;print $2&#125;')</span></div><div class="line">     <span class="keyword">if</span> [ <span class="variable">$lt</span> != <span class="string">"lo"</span> ];<span class="keyword">then</span></div><div class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$lt</span> : <span class="variable">$ip</span>"</span></div><div class="line">        <span class="built_in">exit</span> 0</div><div class="line">     <span class="keyword">fi</span></div><div class="line">  <span class="keyword">done</span></div><div class="line"><span class="keyword">else</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">"quit"</span></div><div class="line">    <span class="built_in">exit</span> 0</div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
-<h3 id="注意如上内容根据你个人机器显示情况而定，如果是显示"><a href="#注意如上内容根据你个人机器显示情况而定，如果是显示" class="headerlink" title="注意如上内容根据你个人机器显示情况而定，如果是显示"></a>注意如上内容根据你个人机器显示情况而定，如果是显示</h3><p> inet addr:127.0.0.1  Mask:255.0.0.0<br> 就要把正则改成<br> ip=$(ifconfig $lt | awk -F” “ ‘/inet.*Mask/{print $2}’ | awk -F: ‘{print $2}’)</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;练习题目&quot;&gt;&lt;a href=&quot;#练习题目&quot; class=&quot;headerlink&quot; title=&quot;练习题目&quot;&gt;&lt;/a&gt;练习题目&lt;/h2&gt;&lt;p&gt;写一个脚本getinterface.sh，脚本可以接受参数(i,I,a)，完成以下任务：&lt;br&gt;   (1)使用以下形式：getinterface.sh [-i interface|-I IP|-a]&lt;br&gt;   (2)当用户使用-i选项时，显示其指定网卡的IP地址；&lt;br&gt;   (3)当用户使用-I选项时，显示其后面的IP地址所属的网络接口；（如 192.168.199.183：eth0）&lt;br&gt;   (4)当用户单独使用-a选项时，显示所有网络接口及其IP地址（lo除外）&lt;/p&gt;
-&lt;h3 id=&quot;分析&quot;&gt;&lt;a href=&quot;#分析&quot; class=&quot;headerlink&quot; title=&quot;分析&quot;&gt;&lt;/a&gt;分析&lt;/h3&gt;&lt;p&gt;参数1为param1 参数2位param2&lt;br&gt;（1）利用CAT &amp;lt;&amp;lt; EOF  &lt;em&gt;*&lt;/em&gt; EOF打印信息&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;cat &amp;lt;&amp;lt; EOF&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    getinterface.sh [-i interface|-I IP|&lt;span class=&quot;_&quot;&gt;-a&lt;/span&gt;]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    -i interface) show ip of the interface&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    -I IP) show interface of the IP and IP with :;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;_&quot;&gt;-a&lt;/span&gt;) list all interfaces and their IPs except lo;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    *) quit&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;=================================================================&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;EOF&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="bash" scheme="http://yoursite.com/categories/bash/"/>
-    
-    
-      <category term="bash" scheme="http://yoursite.com/tags/bash/"/>
     
   </entry>
   
