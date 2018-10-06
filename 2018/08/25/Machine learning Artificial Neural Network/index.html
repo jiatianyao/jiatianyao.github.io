@@ -1,0 +1,816 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  ﻿<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张洪铭的个人博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="什么是人工神经网络模型人工神经网络(Artificial Neural Network, ANN)没有一个严格的正式定义。它的基本特点，是试图模仿大脑的神经元之间传递，处理信息的模式。
+一个计算模型，要被称为为神经网络，通常需要大量彼此连接的节点 （也称 ‘神经元’），并且具备两个特性：每个神经元，通过某种特定的输出函数 （也叫激励函数 activation function），计算处理来自其它相">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习-神经网络">
+<meta property="og:url" content="http://yoursite.com/2018/08/25/Machine learning Artificial Neural Network/index.html">
+<meta property="og:site_name" content="张洪铭的个人博客">
+<meta property="og:description" content="什么是人工神经网络模型人工神经网络(Artificial Neural Network, ANN)没有一个严格的正式定义。它的基本特点，是试图模仿大脑的神经元之间传递，处理信息的模式。
+一个计算模型，要被称为为神经网络，通常需要大量彼此连接的节点 （也称 ‘神经元’），并且具备两个特性：每个神经元，通过某种特定的输出函数 （也叫激励函数 activation function），计算处理来自其它相">
+<meta property="og:updated_time" content="2018-09-01T14:15:55.889Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习-神经网络">
+<meta name="twitter:description" content="什么是人工神经网络模型人工神经网络(Artificial Neural Network, ANN)没有一个严格的正式定义。它的基本特点，是试图模仿大脑的神经元之间传递，处理信息的模式。
+一个计算模型，要被称为为神经网络，通常需要大量彼此连接的节点 （也称 ‘神经元’），并且具备两个特性：每个神经元，通过某种特定的输出函数 （也叫激励函数 activation function），计算处理来自其它相">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'OFEOJRRO4R',
+      apiKey: 'e45796ccb3eeae1fd05f26434d457fb4',
+      indexName: 'hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索...","hits_empty":"未发现与 「${query}」相关的内容","hits_stats":"${hits} 条相关条目，使用了 ${time} 毫秒"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/25/Machine learning Artificial Neural Network/"/>
+
+
+
+
+
+  <title> 机器学习-神经网络 | 张洪铭的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7429985a9690d626019a4aae76bf7702";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">张洪铭的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+             <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/25/Machine learning Artificial Neural Network/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                机器学习-神经网络
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-25T15:36:00+08:00">
+                2018-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2018/08/25/Machine learning Artificial Neural Network/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/25/Machine learning Artificial Neural Network/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>什么是人工神经网络模型<br>人工神经网络(Artificial Neural Network, ANN)没有一个严格的正式定义。它的基本特点，是试图模仿大脑的神经元之间传递，处理信息的模式。</p>
+<p>一个计算模型，要被称为为神经网络，通常需要大量彼此连接的节点 （也称 ‘神经元’），并且具备两个特性：<br>每个神经元，通过某种特定的输出函数 （也叫激励函数 activation function），计算处理来自其它相邻神经元的加权输入值<br>神经元之间的信息传递的强度，用所谓加权值来定义，算法会不断自我学习，调整这个加权值<br>总结：神经网络算法的核心就是：计算、连接、评估、纠错、学习</p>
+<h4 id="神经网络模型可以分为："><a href="#神经网络模型可以分为：" class="headerlink" title="神经网络模型可以分为："></a><strong>神经网络模型可以分为：</strong></h4><h6 id="前向网络"><a href="#前向网络" class="headerlink" title="前向网络"></a><strong>前向网络</strong></h6><p>网络中各个神经元接受前一级的输入，并输出到下一级，网络中没有反馈，可以用一个有向无环路图表示。这种网络实现信号从输入空间到输出空间的变换，它的信息处理能力来自于简单非线性函数的多次复合。网络结构简单，易于实现。反传网络是一种典型的前向网络。</p>
+<h6 id="反馈网络"><a href="#反馈网络" class="headerlink" title="反馈网络"></a><strong>反馈网络</strong></h6><p>网络内神经元间有反馈，可以用一个无向的完备图表示。这种神经网络的信息处理是状态的变换，可以用动力学系统理论处理。系统的稳定性与联想记忆功能有密切关系。Hopfield网络、波耳兹曼机均属于这种类型。</p>
+<h4 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a><strong>激活函数</strong></h4><p>用于处理复杂的非线性分类情况。比线性回归、logistic回归灵活。训练的时候注意过拟合。<br>非线性激活函数<br>Sigmoid<br>𝑓(𝑥)=1/(1+exp⁡(−𝑥))<br>特点：<br>当x趋近负无穷时，y趋近于0；趋近于正无穷时，y趋近于1；<br>x超出[-6,6]的范围后，函数值基本上没有变化，值非常接近0或者1<br>该函数的值域范围限制在(0,1)之间，这样sigmoid函数就能与一个概率分布联系起来了。<br>𝑓^′ (𝑥)=𝑓(𝑥)(1−𝑓(𝑥))</p>
+<h4 id="双曲正切"><a href="#双曲正切" class="headerlink" title="双曲正切"></a><strong>双曲正切</strong></h4><p>tanh⁡(𝑥)=(𝑒^𝑥−𝑒^(−𝑥))/(𝑒^𝑥+𝑒^(−𝑥) )<br>特点：<br>当x趋近负无穷时，y趋近于-1；趋近于正无穷时，y趋近于1；<br>x超出[-3,3]的范围后，函数值基本上没有变化，值非常接近-1或者1<br>该函数的值域范围限制在(-1,1)之间<br>tanh^′ (𝑥)=1−tanh(x)^2</p>
+<h4 id="修正线性单元Rectifier-Linear-Units（ReLU）"><a href="#修正线性单元Rectifier-Linear-Units（ReLU）" class="headerlink" title="修正线性单元Rectifier Linear Units（ReLU）"></a><strong>修正线性单元Rectifier Linear Units（ReLU）</strong></h4><p>𝑓(𝑥)=max⁡(0,𝑥)<br>特点：<br>只有有一半隐含层是处于激活状态，其余都是输出为0<br>不会出现梯度消失的问题（即在sigmoid接近饱和区时，导数趋于0，这种情况会造成信息丢失）<br>只需比较、乘加运算，因此计算方便，计算速度快，加速了网络的训练<br>ReLU比sigmoid更接近生物学的激活模型<br>还有一些改进或的变体</p>
+<h4 id="Softplus"><a href="#Softplus" class="headerlink" title="Softplus"></a><strong>Softplus</strong></h4><p>𝑓(𝑥)=log⁡(1+𝑒^𝑥 )<br>特点：<br>x趋于负无穷时，softplus趋于0；x趋于正无穷时， softplus趋于x<br>它是ReLU的平滑版<br>它是sigmoid的原函数</p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a><strong>损失函数</strong></h3><p>用于回归中的均方损失：<br>𝐸=1/2 (𝑦−𝑦 ̂ )^2<br>用于分类中的交叉熵损失函数：<br>𝐸=−∑▒〖𝑦<em>𝑘 𝑙𝑜𝑔((𝑦</em>𝑘 ) ̂ )” “ 〗<br>k=1,2,…,m表示m种类别。在违约预测中m=2</p>
+<p>基于 Anaconda 的安装<br>安装tensorflow<br>建立一个 conda 计算环境名字叫tensorflow:</p>
+<h1 id="Python-2-7"><a href="#Python-2-7" class="headerlink" title="Python 2.7"></a>Python 2.7</h1><p>$ conda create -n tensorflow python=2.7</p>
+<h1 id="Python-3-4"><a href="#Python-3-4" class="headerlink" title="Python 3.4"></a>Python 3.4</h1><p>$ conda create -n tensorflow python=3.4</p>
+<p>activate tensorflow</p>
+<p>安装tensorflow<br>conda install –channel <a href="https://conda.anaconda.org/conda-forge" target="_blank" rel="external">https://conda.anaconda.org/conda-forge</a> tensorflow</p>
+<p>import tensorflow as tf<br>退出python3环境或当你不用 TensorFlow 的时候,关闭环境:<br>(tensorflow)$  deactivate<br>$  # Your prompt should change back</p>
+<p>windows下安装<br>升级pip<br>python -m pip install –upgrade pip<br>安装tensorflow<br>pip3 install –upgrade <a href="https://storage.googleapis.com/tensorflow/windows/cpu/tensorflow-0.12.0-cp35-cp35m-win_amd64.whl" target="_blank" rel="external">https://storage.googleapis.com/tensorflow/windows/cpu/tensorflow-0.12.0-cp35-cp35m-win_amd64.whl</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/wechat-reward-image.jpg" alt="张洪铭 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/alipay-reward-image.jpg" alt="张洪铭 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/18/Install TensorFlow/" rel="next" title="TensorFlow 安装使用">
+                <i class="fa fa-chevron-left"></i> TensorFlow 安装使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/08/25/Machine learning Artificial Neural Network/"
+           data-title="机器学习-神经网络" data-url="http://yoursite.com/2018/08/25/Machine learning Artificial Neural Network/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/agns.gif"
+               alt="张洪铭" />
+          <p class="site-author-name" itemprop="name">张洪铭</p>
+          <p class="site-description motion-element" itemprop="description">人生在勤 勤则不匮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">83</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jiatianyao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=459442631&auto=1&height=66"></iframe> 
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#神经网络模型可以分为："><span class="nav-number">1.</span> <span class="nav-text">神经网络模型可以分为：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#前向网络"><span class="nav-number">1.0.1.</span> <span class="nav-text">前向网络</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#反馈网络"><span class="nav-number">1.0.2.</span> <span class="nav-text">反馈网络</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#激活函数"><span class="nav-number">2.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双曲正切"><span class="nav-number">3.</span> <span class="nav-text">双曲正切</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修正线性单元Rectifier-Linear-Units（ReLU）"><span class="nav-number">4.</span> <span class="nav-text">修正线性单元Rectifier Linear Units（ReLU）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Softplus"><span class="nav-number">5.</span> <span class="nav-text">Softplus</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#损失函数"><span class="nav-number"></span> <span class="nav-text">损失函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-2-7"><span class="nav-number"></span> <span class="nav-text">Python 2.7</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-3-4"><span class="nav-number"></span> <span class="nav-text">Python 3.4</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+      
+    </main>
+	
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张洪铭</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhm8"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.0"></script>
+
+
+  
+	
+
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  ﻿<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CDH," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张洪铭的个人博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="注：本次oozie是安装到自定义的集群上，因为其他节点都是用CDH手动包安装的，不是CDH自动一键式安装方式
+下载CDH的oozie ，已经编译好，无需编译本次安装选择了下面网址的CDH 5.7.0 版本CDHhttps://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_vd_cdh_package_tarba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CDH oozie">
+<meta property="og:url" content="http://yoursite.com/2017/04/18/CDH oozie 安装/index.html">
+<meta property="og:site_name" content="张洪铭的个人博客">
+<meta property="og:description" content="注：本次oozie是安装到自定义的集群上，因为其他节点都是用CDH手动包安装的，不是CDH自动一键式安装方式
+下载CDH的oozie ，已经编译好，无需编译本次安装选择了下面网址的CDH 5.7.0 版本CDHhttps://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_vd_cdh_package_tarba">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/changeoozietime.png">
+<meta property="og:updated_time" content="2018-09-01T14:13:33.042Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CDH oozie">
+<meta name="twitter:description" content="注：本次oozie是安装到自定义的集群上，因为其他节点都是用CDH手动包安装的，不是CDH自动一键式安装方式
+下载CDH的oozie ，已经编译好，无需编译本次安装选择了下面网址的CDH 5.7.0 版本CDHhttps://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_vd_cdh_package_tarba">
+<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/changeoozietime.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'OFEOJRRO4R',
+      apiKey: 'e45796ccb3eeae1fd05f26434d457fb4',
+      indexName: 'hexo',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索...","hits_empty":"未发现与 「${query}」相关的内容","hits_stats":"${hits} 条相关条目，使用了 ${time} 毫秒"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/18/CDH oozie 安装/"/>
+
+
+
+
+
+  <title> CDH oozie | 张洪铭的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7429985a9690d626019a4aae76bf7702";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">张洪铭的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+             <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/18/CDH oozie 安装/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CDH oozie
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-18T11:30:00+08:00">
+                2017-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/04/18/CDH oozie 安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/18/CDH oozie 安装/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>注：本次oozie是安装到自定义的集群上，因为其他节点都是用CDH手动包安装的，不是CDH自动一键式安装方式</p>
+<p>下载CDH的oozie ，已经编译好，无需编译<br>本次安装选择了下面网址的CDH 5.7.0 版本CDH<br><a href="https://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_vd_cdh_package_tarball_57.html#concept_0vc_ddn_yk" target="_blank" rel="external">https://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_vd_cdh_package_tarball_57.html#concept_0vc_ddn_yk</a></p>
+<p>Linux机器上执行如下命令下载：<br>wget <a href="https://archive.cloudera.com/cdh5/cdh/5/oozie-4.1.0-cdh5.7.0.tar.gz" target="_blank" rel="external">https://archive.cloudera.com/cdh5/cdh/5/oozie-4.1.0-cdh5.7.0.tar.gz</a></p>
+<p>解压后将如下内容添加到core-site.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">vi $HADOOP_HOME/etc/hadoop/core-site.xml</div><div class="line"> </div><div class="line"> &lt;property&gt;</div><div class="line">    &lt;name&gt;hadoop.proxyuser.root.hosts&lt;/name&gt;</div><div class="line">    &lt;value&gt;hadoop000,hadoop001,hadoop002&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div><div class="line">&lt;property&gt;</div><div class="line">    &lt;name&gt;hadoop.proxyuser.root.groups&lt;/name&gt;</div><div class="line">    &lt;value&gt;*&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure></p>
+<p>注意proxyuser后面那个root是使用oozie的用户，hadoop000,hadoop001,hadoop002是集群的主机</p>
+<p>将oozie添加到环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export OOIZE_HOME=/home/app/oozie-4.1.0-cdh5.7.0</div><div class="line">export PATH=$PATH:$OOIZE_HOME/bin:$PATH</div></pre></td></tr></table></figure></p>
+<p>添加以下内容到oozie配置文件，$OOIZE_HOME/conf/oozie-site.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&lt;property&gt;</div><div class="line">    &lt;name&gt;oozie.service.HadoopAccessorService.hadoop.configurations&lt;/name&gt;</div><div class="line">    &lt;value&gt;*=/root/app/hadoop-2.6.0-cdh5.7.0/etc/hadoop&lt;/value&gt;</div><div class="line">    &lt;description&gt;</div><div class="line">        Comma separated AUTHORITY=HADOOP_CONF_DIR, where AUTHORITY is the HOST:PORT of</div><div class="line">        the Hadoop service (JobTracker, HDFS). The wildcard &apos;*&apos; configuration is</div><div class="line">        used when there is no exact match for an authority. The HADOOP_CONF_DIR contains</div><div class="line">        the relevant Hadoop *-site.xml files. If the path is relative is looked within</div><div class="line">        the Oozie configuration directory; though the path can be absolute (i.e. to point</div><div class="line">        to Hadoop client conf/ directories in the local filesystem.</div><div class="line">    &lt;/description&gt;</div><div class="line">&lt;/property&gt;</div><div class="line">&lt;property&gt;</div><div class="line">        &lt;name&gt;oozie.service.JPAService.jdbc.driver&lt;/name&gt;</div><div class="line">        &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line"></div><div class="line">    &lt;property&gt;</div><div class="line">        &lt;name&gt;oozie.service.JPAService.jdbc.url&lt;/name&gt;</div><div class="line">        &lt;value&gt;jdbc:mysql://localhost:3306/oozie?createDatabaseIfNotExist=true&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line"></div><div class="line">    &lt;property&gt;</div><div class="line">        &lt;name&gt;oozie.service.JPAService.jdbc.username&lt;/name&gt;</div><div class="line">        &lt;value&gt;root&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">     &lt;property&gt;</div><div class="line">        &lt;name&gt;oozie.service.JPAService.jdbc.password&lt;/name&gt;</div><div class="line">        &lt;value&gt;123456&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">    &lt;property&gt;</div><div class="line">    &lt;name&gt;oozie.processing.timezone&lt;/name&gt;</div><div class="line">    &lt;value&gt;GMT+0800&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure></p>
+<p>在解压oozie二进制发行包的目录中，解压hadooplibs发行包，也就是oozie-hadooplibs-4.1.0-cdh5.7.0.tar.gz<br>[hadoop@h71 oozie-4.1.0-cdh5.5.2]$ tar -zxvf oozie-hadooplibs-4.1.0-cdh5.5.2.tar.gz    </p>
+<p>在oozie的解压目录下创建libext目录。并将hadooplibs下的jar包拷贝到这个目录里，需要注意的是hadooplibs目录下有个文件夹hadooplib-2.6.0-cdh5.7.0.oozie-4.1.0-cdh5.7.0  hadooplib-2.6.0-mr1-cdh5.7.0.oozie-4.1.0-cdh5.7.0；后者对应于mapreduce1，所以我们拷贝第一个文件夹下的jar包即可。<br>上传ext文件到hadooplibs<br>上传mysql的驱动文件到hadooplibs<br>具体上传什么版本的ext可以看oozie-setup.sh脚本里指定的ext-后面的版本号</p>
+<p>将hadooplibs里面的文件拷贝到libext</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">[root@hadoop000 libext]# ls /home/app/oozie-4.1.0-cdh5.7.0/libext</div><div class="line">activation-1.1.jar                     commons-digester-1.8.jar               hadoop-aws-2.6.0-cdh5.7.0.jar                         jackson-annotations-2.2.3.jar        netty-all-4.0.23.Final.jar</div><div class="line">apacheds-i18n-2.0.0-M15.jar            commons-httpclient-3.1.jar             hadoop-client-2.6.0-cdh5.7.0.jar                      jackson-core-2.2.3.jar               paranamer-2.3.jar</div><div class="line">apacheds-kerberos-codec-2.0.0-M15.jar  commons-io-2.4.jar                     hadoop-common-2.6.0-cdh5.7.0.jar                      jackson-core-asl-1.8.8.jar           protobuf-java-2.5.0.jar</div><div class="line">api-asn1-api-1.0.0-M20.jar             commons-lang-2.4.jar                   hadoop-hdfs-2.6.0-cdh5.7.0.jar                        jackson-databind-2.2.3.jar           servlet-api-2.5.jar</div><div class="line">api-util-1.0.0-M20.jar                 commons-logging-1.1.jar                hadoop-mapreduce-client-app-2.6.0-cdh5.7.0.jar        jackson-jaxrs-1.8.8.jar              slf4j-api-1.7.5.jar</div><div class="line">avro-1.7.6-cdh5.7.0.jar                commons-math3-3.1.1.jar                hadoop-mapreduce-client-common-2.6.0-cdh5.7.0.jar     jackson-mapper-asl-1.8.8.jar         slf4j-log4j12-1.7.5.jar</div><div class="line">aws-java-sdk-core-1.10.6.jar           commons-net-3.1.jar                    hadoop-mapreduce-client-core-2.6.0-cdh5.7.0.jar       jackson-xc-1.8.8.jar                 snappy-java-1.0.4.1.jar</div><div class="line">aws-java-sdk-kms-1.10.6.jar            curator-client-2.7.1.jar               hadoop-mapreduce-client-jobclient-2.6.0-cdh5.7.0.jar  jaxb-api-2.2.2.jar                   stax-api-1.0-2.jar</div><div class="line">aws-java-sdk-s3-1.10.6.jar             curator-framework-2.7.1.jar            hadoop-mapreduce-client-shuffle-2.6.0-cdh5.7.0.jar    jersey-client-1.9.jar                xercesImpl-2.10.0.jar</div><div class="line">commons-beanutils-1.7.0.jar            curator-recipes-2.7.1.jar              hadoop-yarn-api-2.6.0-cdh5.7.0.jar                    jersey-core-1.9.jar                  xml-apis-1.4.01.jar</div><div class="line">commons-beanutils-core-1.8.0.jar       ext-2.2                                hadoop-yarn-client-2.6.0-cdh5.7.0.jar                 jetty-util-6.1.26.cloudera.2.jar     xmlenc-0.52.jar</div><div class="line">commons-cli-1.2.jar                    ext-2.2.zip                            hadoop-yarn-common-2.6.0-cdh5.7.0.jar                 jsr305-3.0.0.jar                     xz-1.0.jar</div><div class="line">commons-codec-1.4.jar                  gson-2.2.4.jar                         hadoop-yarn-server-common-2.6.0-cdh5.7.0.jar          leveldbjni-all-1.8.jar               zookeeper-3.4.5-cdh5.7.0.jar</div><div class="line">commons-collections-3.2.2.jar          guava-11.0.2.jar                       htrace-core4-4.0.1-incubating.jar                     log4j-1.2.17.jar</div><div class="line">commons-compress-1.4.1.jar             hadoop-annotations-2.6.0-cdh5.7.0.jar  httpclient-4.2.5.jar                                  mysql-connector-java-5.1.33-bin.jar</div><div class="line">commons-configuration-1.6.jar          hadoop-auth-2.6.0-cdh5.7.0.jar         httpcore-4.2.5.jar                                    netty-3.6.2.Final.jar</div></pre></td></tr></table></figure>
+<p>使用命令创建数据库<br>bin/oozie-setup.sh db create -run oozie.sql</p>
+<p>编译war包<br> bin/oozie-setup.sh prepare-war</p>
+<p> 在$oozie_home下，有2个sharelib压缩包，分别是<br> oozie-sharelib-4.1.0-cdh5.7.0.tar.gz 和oozie-sharelib-4.1.0-cdh5.7.0-yarn.tar.gz</p>
+<p> 很明显，我们必须拷贝第二个带yarn的压缩包（前边的是1.0版本的，不带yarn的）<br> bin/oozie-setup.sh sharelib create -fs hdfs://hadoop000:9000 -locallib oozie-sharelib-4.1.0-cdh5.7.0-yarn.tar.gz</p>
+<p>重启hadoop</p>
+<p>启动oozie</p>
+<p>bin/oozied.sh start<br>启动后，访问网址<a href="http://hadoop000:11000/oozie/" target="_blank" rel="external">http://hadoop000:11000/oozie/</a></p>
+<p>测试OOZIE</p>
+<p>解压<br>tar -zxvf oozie-examples.tar.gz<br>进入<br>cd examples/apps</p>
+<p>以map-reduce目录为例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">[root@hadoop000 map-reduce]# vi job.properties </div><div class="line">#</div><div class="line"># Licensed to the Apache Software Foundation (ASF) under one</div><div class="line"># or more contributor license agreements.  See the NOTICE file</div><div class="line"># distributed with this work for additional information</div><div class="line"># regarding copyright ownership.  The ASF licenses this file</div><div class="line"># to you under the Apache License, Version 2.0 (the</div><div class="line"># &quot;License&quot;); you may not use this file except in compliance</div><div class="line"># with the License.  You may obtain a copy of the License at</div><div class="line">#</div><div class="line">#      http://www.apache.org/licenses/LICENSE-2.0</div><div class="line">#</div><div class="line"># Unless required by applicable law or agreed to in writing, software</div><div class="line"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</div><div class="line"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</div><div class="line"># See the License for the specific language governing permissions and</div><div class="line"># limitations under the License.</div><div class="line">#</div><div class="line"></div><div class="line">nameNode=hdfs://hadoop000:9000</div><div class="line">jobTracker=hadoop000:8032</div><div class="line">queueName=default</div><div class="line">examplesRoot=examples</div><div class="line"></div><div class="line">oozie.wf.application.path=$&#123;nameNode&#125;/user/$&#123;user.name&#125;/$&#123;examplesRoot&#125;/apps/map-reduce/workflow.xml</div><div class="line">outputDir=map-reduce</div></pre></td></tr></table></figure></p>
+<p>修改workflow.xml </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">[root@hadoop000 map-reduce]# vi workflow.xml </div><div class="line">&lt;!--</div><div class="line">  Licensed to the Apache Software Foundation (ASF) under one</div><div class="line">  or more contributor license agreements.  See the NOTICE file</div><div class="line">  distributed with this work for additional information</div><div class="line">  regarding copyright ownership.  The ASF licenses this file</div><div class="line">  to you under the Apache License, Version 2.0 (the</div><div class="line">  &quot;License&quot;); you may not use this file except in compliance</div><div class="line">  with the License.  You may obtain a copy of the License at</div><div class="line"></div><div class="line">       http://www.apache.org/licenses/LICENSE-2.0</div><div class="line"></div><div class="line">  Unless required by applicable law or agreed to in writing, software</div><div class="line">  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</div><div class="line">  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</div><div class="line">  See the License for the specific language governing permissions and</div><div class="line">  limitations under the License.</div><div class="line">--&gt;</div><div class="line">&lt;workflow-app xmlns=&quot;uri:oozie:workflow:0.2&quot; name=&quot;map-reduce-wf&quot;&gt;</div><div class="line">    &lt;start to=&quot;mr-node&quot;/&gt;</div><div class="line">    &lt;action name=&quot;mr-node&quot;&gt;</div><div class="line">        &lt;map-reduce&gt;</div><div class="line">            &lt;job-tracker&gt;$&#123;jobTracker&#125;&lt;/job-tracker&gt;</div><div class="line">            &lt;name-node&gt;$&#123;nameNode&#125;&lt;/name-node&gt;</div><div class="line">            &lt;prepare&gt;</div><div class="line">                &lt;delete path=&quot;$&#123;nameNode&#125;/user/$&#123;wf:user()&#125;/$&#123;examplesRoot&#125;/output-data/$&#123;outputDir&#125;&quot;/&gt;</div><div class="line">            &lt;/prepare&gt;</div><div class="line">            &lt;configuration&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.job.queue.name&lt;/name&gt;</div><div class="line">                    &lt;value&gt;$&#123;queueName&#125;&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.mapper.class&lt;/name&gt;</div><div class="line">                    &lt;value&gt;org.apache.oozie.example.SampleMapper&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.reducer.class&lt;/name&gt;</div><div class="line">                    &lt;value&gt;org.apache.oozie.example.SampleReducer&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.map.tasks&lt;/name&gt;</div><div class="line">                    &lt;value&gt;1&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.input.dir&lt;/name&gt;</div><div class="line">                    &lt;value&gt;/user/root/$&#123;examplesRoot&#125;/input-data/text&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.output.dir&lt;/name&gt;</div><div class="line">                    &lt;value&gt;/user/root/$&#123;examplesRoot&#125;/output-data/$&#123;outputDir&#125;&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">            &lt;/configuration&gt;</div><div class="line">        &lt;/map-reduce&gt;</div><div class="line">        &lt;ok to=&quot;end&quot;/&gt;</div><div class="line">        &lt;error to=&quot;fail&quot;/&gt;</div><div class="line">    &lt;/action&gt;</div><div class="line">    &lt;kill name=&quot;fail&quot;&gt;</div><div class="line">        &lt;message&gt;Map/Reduce failed, error message[$&#123;wf:errorMessage(wf:lastErrorNode())&#125;]&lt;/message&gt;</div><div class="line">    &lt;/kill&gt;</div><div class="line">    &lt;end name=&quot;end&quot;/</div></pre></td></tr></table></figure>
+<p>上传文件<br>hadoop fs -put examples/ /user/root</p>
+<p>启动</p>
+<p>[root@hadoop000 oozie-4.1.0-cdh5.7.0]# bin/oozie job -oozie <a href="http://hadoop000:11000/oozie" target="_blank" rel="external">http://hadoop000:11000/oozie</a> -config examples/apps/map-reduce/job.properties -run<br>job: 0000000-180830181747338-oozie-root-W</p>
+<p>杀掉job<br>bin/oozie job -oozie <a href="http://hadoop000:11000/oozie" target="_blank" rel="external">http://hadoop000:11000/oozie</a> -kill 0000000-180830181747338-oozie-root-W</p>
+<p>如果启动后发现时间不对，需要修改时间<br>vi /home/app/oozie-4.1.0-cdh5.7.0/src/webapp/src/main/webapp/oozie-console.js</p>
+<p>function getTimeZone() {<br>Ext.state.Manager.setProvider(new Ext.state.CookieProvider());<br>return Ext.state.Manager.get(“TimezoneId”,”GMT+0800”);<br>}</p>
+<p>Oozie重启步骤：<br>    1.进入oozie目录<br>    2.将Oozie停止运行./bin/oozie-stop.sh<br>    3.重新进行打包war包 ./bin/oozie-setup.sh prepare-war<br>    4.重新打开Oozie：./bin/oozie-start.sh</p>
+<p>另外在修改web显示的时间<br><img src="http://oh6ybr0jg.bkt.clouddn.com/changeoozietime.png" alt="此处输入图片的描述"></p>
+<p>oozie添加告警<br>配置oozie-site.xml文件<br> <property><br>        <name>oozie.email.smtp.host</name> <!--邮件账户的smtp服务器地址--><br>        <value>smtp.163.com</value><br>    </property><br>    <property><br>        <name>oozie.email.from.address</name> <!--邮件账户的发送者邮箱地址--><br>        <value>test@163.com</value><br>    </property><br>    <property><br>        <name>oozie.email.smtp.auth</name> <!--是否接受安全认证，根据163邮箱的要求，选择true--><br>        <value>true</value><br>    </property><br>    <property><br>        <name>oozie.email.smtp.username</name> <!--邮件账户的用户名--><br>        <value>test@163.com</value><br>    </property><br>    <property><br>        <name>oozie.email.smtp.password</name> <!--邮件账户的密码--><br>        <value>123456</value><br>    </property></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;workflow-app xmlns=&quot;uri:oozie:workflow:0.2&quot; name=&quot;map-reduce-wf&quot;&gt;</div><div class="line">    &lt;start to=&quot;mr-node&quot;/&gt;</div><div class="line">    &lt;action name=&quot;mr-node&quot;&gt;</div><div class="line">        &lt;map-reduce&gt;</div><div class="line">            &lt;job-tracker&gt;$&#123;jobTracker&#125;&lt;/job-tracker&gt;</div><div class="line">            &lt;name-node&gt;$&#123;nameNode&#125;&lt;/name-node&gt;</div><div class="line">            &lt;prepare&gt;</div><div class="line">                &lt;delete path=&quot;$&#123;nameNode&#125;/user/$&#123;wf:user()&#125;/$&#123;examplesRoot&#125;/output-data/$&#123;outputDir&#125;&quot;/&gt;</div><div class="line">            &lt;/prepare&gt;</div><div class="line">            &lt;configuration&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.job.queue.name&lt;/name&gt;</div><div class="line">                    &lt;value&gt;$&#123;queueName&#125;&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.mapper.class&lt;/name&gt;</div><div class="line">                    &lt;value&gt;org.apache.oozie.example.SampleMapper&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.reducer.class&lt;/name&gt;</div><div class="line">                    &lt;value&gt;org.apache.oozie.example.SampleReducer&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.map.tasks&lt;/name&gt;</div><div class="line">                    &lt;value&gt;1&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.input.dir&lt;/name&gt;</div><div class="line">                    &lt;value&gt;/user/root/$&#123;examplesRoot&#125;/input-data/text&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.output.dir&lt;/name&gt;</div><div class="line">                    &lt;value&gt;/user/root/$&#123;examplesRoot&#125;/output-data/$&#123;outputDir&#125;&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">            &lt;/configuration&gt;</div><div class="line">        &lt;/map-reduce&gt;</div><div class="line">        &lt;ok to=&quot;goemail&quot; /&gt;</div><div class="line">        &lt;error to=&quot;fail&quot;/&gt;</div><div class="line">    &lt;/action&gt;</div><div class="line">    &lt;kill name=&quot;fail&quot;&gt;</div><div class="line">        &lt;message&gt;Map/Reduce failed, error message[$&#123;wf:errorMessage(wf:lastErrorNode())&#125;]&lt;/message&gt;</div><div class="line">    &lt;/kill&gt;</div><div class="line">&lt;action name=&quot;goemail&quot;&gt;</div><div class="line">        &lt;email xmlns=&quot;uri:oozie:email-action:0.1&quot;&gt;</div><div class="line">            &lt;to&gt;5lovezhm@163.com&lt;/to&gt;</div><div class="line">            &lt;subject&gt;Email notifications for $&#123;wf:id()&#125;&lt;/subject&gt;</div><div class="line">            &lt;body&gt;The wf $&#123;wf:id()&#125; successfully completed.&lt;/body&gt;</div><div class="line">        &lt;/email&gt;</div><div class="line">        &lt;ok to =&quot;end&quot;/&gt;</div><div class="line">        &lt;error to =&quot;fail&quot;/&gt;</div><div class="line">    &lt;/action&gt;</div><div class="line">    &lt;end name=&quot;end&quot;/&gt;</div><div class="line">&lt;/workflow-app&gt;</div></pre></td></tr></table></figure>
+<p>如果报错：<br> JA006: Call From hadoop000/xxx.xx.xx.xx to hadoop000:10020 failed on connection exception: java.net.ConnectException: ????; For more details see:  <a href="http://wiki.apache.org/hadoop/ConnectionRefused" target="_blank" rel="external">http://wiki.apache.org/hadoop/ConnectionRefused</a></p>
+<p>启动history<br>$HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/wechat-reward-image.jpg" alt="张洪铭 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/alipay-reward-image.jpg" alt="张洪铭 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CDH/" rel="tag"># CDH</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/18/CDH phoenix安装/" rel="next" title="CDH phoenix安装">
+                <i class="fa fa-chevron-left"></i> CDH phoenix安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/02/kafka源码阅读/" rel="prev" title="kafka源码阅读">
+                kafka源码阅读 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/04/18/CDH oozie 安装/"
+           data-title="CDH oozie" data-url="http://yoursite.com/2017/04/18/CDH oozie 安装/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/agns.gif"
+               alt="张洪铭" />
+          <p class="site-author-name" itemprop="name">张洪铭</p>
+          <p class="site-description motion-element" itemprop="description">人生在勤 勤则不匮</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">83</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jiatianyao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=459442631&auto=1&height=66"></iframe> 
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+      
+    </main>
+	
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张洪铭</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zhm8"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+    
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script type="text/javascript" src="/js/src/algolia.js?v=5.1.0"></script>
+
+
+  
+	
+
+</body>
+</html>

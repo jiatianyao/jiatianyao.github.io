@@ -309,6 +309,453 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/25/phoenix创建二级索引/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/25/phoenix创建二级索引/" itemprop="url">
+                  phoenix创建二级索引
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-25T11:30:00+08:00">
+                2017-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/phoenix/" itemprop="url" rel="index">
+                    <span itemprop="name">phoenix</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/05/25/phoenix创建二级索引/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/25/phoenix创建二级索引/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="索引分为两种："><a href="#索引分为两种：" class="headerlink" title="索引分为两种："></a>索引分为两种：</h3><p>Global Indexing<br>Local Indexing</p>
+<h4 id="Global-Indexing-："><a href="#Global-Indexing-：" class="headerlink" title="Global Indexing ："></a>Global Indexing ：</h4><p>使用于读多，写少的场景.select 查出来的数据必须是索引字段才能使用到索引</p>
+<h4 id="Local-Indexing-："><a href="#Local-Indexing-：" class="headerlink" title="Local Indexing ："></a>Local Indexing ：</h4><h4 id="hbase-bulk-load"><a href="#hbase-bulk-load" class="headerlink" title="hbase bulk load"></a>hbase bulk load</h4><p>数据上传到hdfs：/phoenix_data/fanpu.csv</p>
+<p>HADOOP_CLASSPATH=$(hbase classpath) hadoop jar phoenix-4.8.0-cdh5.8.0-client.jar org.apache.phoenix.mapreduce.CsvBulkLoadTool<br>-libjars /soft/phoenix/phoenix-4.8.0-cdh5.8.0/lib/commons-csv-1.0.jar,/soft/bigdata/clouderamanager/cm-5.10.0/share/cmf/lib/joda-time-2.7.jar –table fanpu –input /phoenix_data/fanpu.csv</p>
+<h4 id="我如果使用Global-Indexing："><a href="#我如果使用Global-Indexing：" class="headerlink" title="我如果使用Global Indexing："></a>我如果使用Global Indexing：</h4><p>创建索引：<br>create index fanpu_index on fanpu (“family”.”id_no”,”family”.”name”,”family”.”mobile”);</p>
+<p>select <em> from fanpu where “family”.”id_no”=’xxxx’ and “family”.”name”=’马文学’ and “family”.”mobile”=’xxxx’; 是不能使用索引的<em>*×</em></em></p>
+<p>select “family”.”id_no”,”family”.”name” from fanpu where “family”.”id_no”=’xxxx’ and “family”.”name”=’马文学’ and “family”.”mobile”=’xxxx’;  才可以<strong>√</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_LENDER_LOAN_DTL on &quot;LENDER-LEN_LENDER_LOAN_DTL&quot; (&quot;family&quot;.&quot;LOAN_RECEIPT_NO&quot;);</div><div class="line">76,392 rows affected (6.256 seconds)</div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_TRANSFER on &quot;LENDER-LEN_TRANSFER&quot; (&quot;family&quot;.&quot;LEN_LOAN_SELL_CONFIRM_ID&quot;);</div><div class="line">99,937 rows affected (6.256 seconds)</div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_TRANSFER_DTL on &quot;LENDER-LEN_TRANSFER_DTL&quot; (&quot;family&quot;.&quot;LENDERINFOID&quot;,&quot;family&quot;.&quot;LOAN_TRANSFER_MODEL_ID&quot;);</div><div class="line">153,029 rows affected (6.239 seconds)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_LENDER_LOAN_DTL2 on &quot;LENDER-LEN_LENDER_LOAN_DTL&quot; (&quot;family&quot;.&quot;LOAN_RECEIPT_NO&quot;);</div><div class="line">76,392 rows affected (6.231 seconds)</div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_LENDER_LOAN_DTL3 on &quot;LENDER-LEN_LENDER_LOAN_DTL&quot; (&quot;family&quot;.&quot;LOAN_ID&quot;);</div><div class="line">76,392 rows affected (6.234 seconds)</div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_LOAN_MAIN on &quot;LENDER-LEN_LOAN_MAIN&quot; (&quot;family&quot;.&quot;ASSUME_DEBTOR_ID&quot;);</div><div class="line">20,865 rows affected (6.233 seconds)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_LOAN_MAIN2 on &quot;LENDER-LEN_LOAN_MAIN&quot; (&quot;family&quot;.&quot;LOAN_CONTRACT_ID&quot;);</div><div class="line">20,865 rows affected (6.231 seconds)</div><div class="line">0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_LENDER_INFO on &quot;LENDER-LEN_LENDER_INFO&quot; (&quot;family&quot;.&quot;CUSTOMER_ID&quot;);</div><div class="line">17,053 rows affected (6.235 seconds)</div></pre></td></tr></table></figure>
+<p>0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_SELL_CONFIRM on “LENDER-LEN_SELL_CONFIRM” (“ID”);<br>9,417 rows affected (6.245 seconds)</p>
+<p>0: jdbc:phoenix:slave1:2181&gt; create index my_index_LEN_TRANSFER3 on “LENDER-LEN_TRANSFER” (“family”.”SELLER_LOAN_DTL_ID”);<br>99,937 rows affected (6.251 seconds)</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/18/CDH oozie安装/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/18/CDH oozie安装/" itemprop="url">
+                  CDH oozie
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-18T11:30:00+08:00">
+                2017-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/05/18/CDH oozie安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/18/CDH oozie安装/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="安装完oozie，打开UI"><a href="#安装完oozie，打开UI" class="headerlink" title="安装完oozie，打开UI:"></a>安装完oozie，打开UI:</h2><p><a href="http://master1:11000/oozie/">http://master1:11000/oozie/</a></p>
+<p>显示Oozie web console is disabled.<br>解决方案;<br>原因是oozie的/var/lib/oozie目录里缺少EXT的包</p>
+<p>点击Documentation链接里quickstart给出了解决方案<br>Download ExtJS library (it must be version 2.2)<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/18/CDH oozie安装/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/08/kafka源码阅读2/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/08/kafka源码阅读2/" itemprop="url">
+                  kafka源码阅读2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-08T11:30:00+08:00">
+                2017-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kafka/" itemprop="url" rel="index">
+                    <span itemprop="name">kafka</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/05/08/kafka源码阅读2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/08/kafka源码阅读2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="导入IDEA即可看kafka源码："><a href="#导入IDEA即可看kafka源码：" class="headerlink" title="导入IDEA即可看kafka源码："></a>导入IDEA即可看kafka源码：</h2><h2 id="启动之前需要安装zookeeper"><a href="#启动之前需要安装zookeeper" class="headerlink" title="启动之前需要安装zookeeper"></a>启动之前需要安装zookeeper</h2><p>地址：<br><a href="http://apache.fayea.com/zookeeper/">http://apache.fayea.com/zookeeper/</a><br><a href="http://apache.fayea.com/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz">http://apache.fayea.com/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz</a></p>
+<h2 id="解压后再当前目录增加"><a href="#解压后再当前目录增加" class="headerlink" title="解压后再当前目录增加"></a>解压后再当前目录增加</h2><p>dataLogDir和data目录<br>复制一份配置文件<br>改名为zoo.cfg<br>修改配置文件：<br>zoo.cfg<br>修改并增加<br>dataDir=D:\tool\zookeeper-3.4.6\data<br>dataLogDir=D:\tool\zookeeper-3.4.6\dataLogDir</p>
+<h2 id="启动zkServer-cmd"><a href="#启动zkServer-cmd" class="headerlink" title="启动zkServer.cmd"></a>启动zkServer.cmd</h2>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/08/kafka源码阅读2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/02/kafka源码阅读/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -424,6 +871,182 @@
             </a>
           </div>
           <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/18/CDH oozie 安装/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/18/CDH oozie 安装/" itemprop="url">
+                  CDH oozie
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-18T11:30:00+08:00">
+                2017-04-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/04/18/CDH oozie 安装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/18/CDH oozie 安装/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>注：本次oozie是安装到自定义的集群上，因为其他节点都是用CDH手动包安装的，不是CDH自动一键式安装方式</p>
+<p>下载CDH的oozie ，已经编译好，无需编译<br>本次安装选择了下面网址的CDH 5.7.0 版本CDH<br><a href="https://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_vd_cdh_package_tarball_57.html#concept_0vc_ddn_yk" target="_blank" rel="external">https://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_vd_cdh_package_tarball_57.html#concept_0vc_ddn_yk</a></p>
+<p>Linux机器上执行如下命令下载：<br>wget <a href="https://archive.cloudera.com/cdh5/cdh/5/oozie-4.1.0-cdh5.7.0.tar.gz" target="_blank" rel="external">https://archive.cloudera.com/cdh5/cdh/5/oozie-4.1.0-cdh5.7.0.tar.gz</a></p>
+<p>解压后将如下内容添加到core-site.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">vi $HADOOP_HOME/etc/hadoop/core-site.xml</div><div class="line"> </div><div class="line"> &lt;property&gt;</div><div class="line">    &lt;name&gt;hadoop.proxyuser.root.hosts&lt;/name&gt;</div><div class="line">    &lt;value&gt;hadoop000,hadoop001,hadoop002&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div><div class="line">&lt;property&gt;</div><div class="line">    &lt;name&gt;hadoop.proxyuser.root.groups&lt;/name&gt;</div><div class="line">    &lt;value&gt;*&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure></p>
+<p>注意proxyuser后面那个root是使用oozie的用户，hadoop000,hadoop001,hadoop002是集群的主机</p>
+<p>将oozie添加到环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export OOIZE_HOME=/home/app/oozie-4.1.0-cdh5.7.0</div><div class="line">export PATH=$PATH:$OOIZE_HOME/bin:$PATH</div></pre></td></tr></table></figure></p>
+<p>添加以下内容到oozie配置文件，$OOIZE_HOME/conf/oozie-site.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&lt;property&gt;</div><div class="line">    &lt;name&gt;oozie.service.HadoopAccessorService.hadoop.configurations&lt;/name&gt;</div><div class="line">    &lt;value&gt;*=/root/app/hadoop-2.6.0-cdh5.7.0/etc/hadoop&lt;/value&gt;</div><div class="line">    &lt;description&gt;</div><div class="line">        Comma separated AUTHORITY=HADOOP_CONF_DIR, where AUTHORITY is the HOST:PORT of</div><div class="line">        the Hadoop service (JobTracker, HDFS). The wildcard &apos;*&apos; configuration is</div><div class="line">        used when there is no exact match for an authority. The HADOOP_CONF_DIR contains</div><div class="line">        the relevant Hadoop *-site.xml files. If the path is relative is looked within</div><div class="line">        the Oozie configuration directory; though the path can be absolute (i.e. to point</div><div class="line">        to Hadoop client conf/ directories in the local filesystem.</div><div class="line">    &lt;/description&gt;</div><div class="line">&lt;/property&gt;</div><div class="line">&lt;property&gt;</div><div class="line">        &lt;name&gt;oozie.service.JPAService.jdbc.driver&lt;/name&gt;</div><div class="line">        &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line"></div><div class="line">    &lt;property&gt;</div><div class="line">        &lt;name&gt;oozie.service.JPAService.jdbc.url&lt;/name&gt;</div><div class="line">        &lt;value&gt;jdbc:mysql://localhost:3306/oozie?createDatabaseIfNotExist=true&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line"></div><div class="line">    &lt;property&gt;</div><div class="line">        &lt;name&gt;oozie.service.JPAService.jdbc.username&lt;/name&gt;</div><div class="line">        &lt;value&gt;root&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">     &lt;property&gt;</div><div class="line">        &lt;name&gt;oozie.service.JPAService.jdbc.password&lt;/name&gt;</div><div class="line">        &lt;value&gt;123456&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">    &lt;property&gt;</div><div class="line">    &lt;name&gt;oozie.processing.timezone&lt;/name&gt;</div><div class="line">    &lt;value&gt;GMT+0800&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure></p>
+<p>在解压oozie二进制发行包的目录中，解压hadooplibs发行包，也就是oozie-hadooplibs-4.1.0-cdh5.7.0.tar.gz<br>[hadoop@h71 oozie-4.1.0-cdh5.5.2]$ tar -zxvf oozie-hadooplibs-4.1.0-cdh5.5.2.tar.gz    </p>
+<p>在oozie的解压目录下创建libext目录。并将hadooplibs下的jar包拷贝到这个目录里，需要注意的是hadooplibs目录下有个文件夹hadooplib-2.6.0-cdh5.7.0.oozie-4.1.0-cdh5.7.0  hadooplib-2.6.0-mr1-cdh5.7.0.oozie-4.1.0-cdh5.7.0；后者对应于mapreduce1，所以我们拷贝第一个文件夹下的jar包即可。<br>上传ext文件到hadooplibs<br>上传mysql的驱动文件到hadooplibs<br>具体上传什么版本的ext可以看oozie-setup.sh脚本里指定的ext-后面的版本号</p>
+<p>将hadooplibs里面的文件拷贝到libext</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">[root@hadoop000 libext]# ls /home/app/oozie-4.1.0-cdh5.7.0/libext</div><div class="line">activation-1.1.jar                     commons-digester-1.8.jar               hadoop-aws-2.6.0-cdh5.7.0.jar                         jackson-annotations-2.2.3.jar        netty-all-4.0.23.Final.jar</div><div class="line">apacheds-i18n-2.0.0-M15.jar            commons-httpclient-3.1.jar             hadoop-client-2.6.0-cdh5.7.0.jar                      jackson-core-2.2.3.jar               paranamer-2.3.jar</div><div class="line">apacheds-kerberos-codec-2.0.0-M15.jar  commons-io-2.4.jar                     hadoop-common-2.6.0-cdh5.7.0.jar                      jackson-core-asl-1.8.8.jar           protobuf-java-2.5.0.jar</div><div class="line">api-asn1-api-1.0.0-M20.jar             commons-lang-2.4.jar                   hadoop-hdfs-2.6.0-cdh5.7.0.jar                        jackson-databind-2.2.3.jar           servlet-api-2.5.jar</div><div class="line">api-util-1.0.0-M20.jar                 commons-logging-1.1.jar                hadoop-mapreduce-client-app-2.6.0-cdh5.7.0.jar        jackson-jaxrs-1.8.8.jar              slf4j-api-1.7.5.jar</div><div class="line">avro-1.7.6-cdh5.7.0.jar                commons-math3-3.1.1.jar                hadoop-mapreduce-client-common-2.6.0-cdh5.7.0.jar     jackson-mapper-asl-1.8.8.jar         slf4j-log4j12-1.7.5.jar</div><div class="line">aws-java-sdk-core-1.10.6.jar           commons-net-3.1.jar                    hadoop-mapreduce-client-core-2.6.0-cdh5.7.0.jar       jackson-xc-1.8.8.jar                 snappy-java-1.0.4.1.jar</div><div class="line">aws-java-sdk-kms-1.10.6.jar            curator-client-2.7.1.jar               hadoop-mapreduce-client-jobclient-2.6.0-cdh5.7.0.jar  jaxb-api-2.2.2.jar                   stax-api-1.0-2.jar</div><div class="line">aws-java-sdk-s3-1.10.6.jar             curator-framework-2.7.1.jar            hadoop-mapreduce-client-shuffle-2.6.0-cdh5.7.0.jar    jersey-client-1.9.jar                xercesImpl-2.10.0.jar</div><div class="line">commons-beanutils-1.7.0.jar            curator-recipes-2.7.1.jar              hadoop-yarn-api-2.6.0-cdh5.7.0.jar                    jersey-core-1.9.jar                  xml-apis-1.4.01.jar</div><div class="line">commons-beanutils-core-1.8.0.jar       ext-2.2                                hadoop-yarn-client-2.6.0-cdh5.7.0.jar                 jetty-util-6.1.26.cloudera.2.jar     xmlenc-0.52.jar</div><div class="line">commons-cli-1.2.jar                    ext-2.2.zip                            hadoop-yarn-common-2.6.0-cdh5.7.0.jar                 jsr305-3.0.0.jar                     xz-1.0.jar</div><div class="line">commons-codec-1.4.jar                  gson-2.2.4.jar                         hadoop-yarn-server-common-2.6.0-cdh5.7.0.jar          leveldbjni-all-1.8.jar               zookeeper-3.4.5-cdh5.7.0.jar</div><div class="line">commons-collections-3.2.2.jar          guava-11.0.2.jar                       htrace-core4-4.0.1-incubating.jar                     log4j-1.2.17.jar</div><div class="line">commons-compress-1.4.1.jar             hadoop-annotations-2.6.0-cdh5.7.0.jar  httpclient-4.2.5.jar                                  mysql-connector-java-5.1.33-bin.jar</div><div class="line">commons-configuration-1.6.jar          hadoop-auth-2.6.0-cdh5.7.0.jar         httpcore-4.2.5.jar                                    netty-3.6.2.Final.jar</div></pre></td></tr></table></figure>
+<p>使用命令创建数据库<br>bin/oozie-setup.sh db create -run oozie.sql</p>
+<p>编译war包<br> bin/oozie-setup.sh prepare-war</p>
+<p> 在$oozie_home下，有2个sharelib压缩包，分别是<br> oozie-sharelib-4.1.0-cdh5.7.0.tar.gz 和oozie-sharelib-4.1.0-cdh5.7.0-yarn.tar.gz</p>
+<p> 很明显，我们必须拷贝第二个带yarn的压缩包（前边的是1.0版本的，不带yarn的）<br> bin/oozie-setup.sh sharelib create -fs hdfs://hadoop000:9000 -locallib oozie-sharelib-4.1.0-cdh5.7.0-yarn.tar.gz</p>
+<p>重启hadoop</p>
+<p>启动oozie</p>
+<p>bin/oozied.sh start<br>启动后，访问网址<a href="http://hadoop000:11000/oozie/" target="_blank" rel="external">http://hadoop000:11000/oozie/</a></p>
+<p>测试OOZIE</p>
+<p>解压<br>tar -zxvf oozie-examples.tar.gz<br>进入<br>cd examples/apps</p>
+<p>以map-reduce目录为例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">[root@hadoop000 map-reduce]# vi job.properties </div><div class="line">#</div><div class="line"># Licensed to the Apache Software Foundation (ASF) under one</div><div class="line"># or more contributor license agreements.  See the NOTICE file</div><div class="line"># distributed with this work for additional information</div><div class="line"># regarding copyright ownership.  The ASF licenses this file</div><div class="line"># to you under the Apache License, Version 2.0 (the</div><div class="line"># &quot;License&quot;); you may not use this file except in compliance</div><div class="line"># with the License.  You may obtain a copy of the License at</div><div class="line">#</div><div class="line">#      http://www.apache.org/licenses/LICENSE-2.0</div><div class="line">#</div><div class="line"># Unless required by applicable law or agreed to in writing, software</div><div class="line"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</div><div class="line"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</div><div class="line"># See the License for the specific language governing permissions and</div><div class="line"># limitations under the License.</div><div class="line">#</div><div class="line"></div><div class="line">nameNode=hdfs://hadoop000:9000</div><div class="line">jobTracker=hadoop000:8032</div><div class="line">queueName=default</div><div class="line">examplesRoot=examples</div><div class="line"></div><div class="line">oozie.wf.application.path=$&#123;nameNode&#125;/user/$&#123;user.name&#125;/$&#123;examplesRoot&#125;/apps/map-reduce/workflow.xml</div><div class="line">outputDir=map-reduce</div></pre></td></tr></table></figure></p>
+<p>修改workflow.xml </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">[root@hadoop000 map-reduce]# vi workflow.xml </div><div class="line">&lt;!--</div><div class="line">  Licensed to the Apache Software Foundation (ASF) under one</div><div class="line">  or more contributor license agreements.  See the NOTICE file</div><div class="line">  distributed with this work for additional information</div><div class="line">  regarding copyright ownership.  The ASF licenses this file</div><div class="line">  to you under the Apache License, Version 2.0 (the</div><div class="line">  &quot;License&quot;); you may not use this file except in compliance</div><div class="line">  with the License.  You may obtain a copy of the License at</div><div class="line"></div><div class="line">       http://www.apache.org/licenses/LICENSE-2.0</div><div class="line"></div><div class="line">  Unless required by applicable law or agreed to in writing, software</div><div class="line">  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</div><div class="line">  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</div><div class="line">  See the License for the specific language governing permissions and</div><div class="line">  limitations under the License.</div><div class="line">--&gt;</div><div class="line">&lt;workflow-app xmlns=&quot;uri:oozie:workflow:0.2&quot; name=&quot;map-reduce-wf&quot;&gt;</div><div class="line">    &lt;start to=&quot;mr-node&quot;/&gt;</div><div class="line">    &lt;action name=&quot;mr-node&quot;&gt;</div><div class="line">        &lt;map-reduce&gt;</div><div class="line">            &lt;job-tracker&gt;$&#123;jobTracker&#125;&lt;/job-tracker&gt;</div><div class="line">            &lt;name-node&gt;$&#123;nameNode&#125;&lt;/name-node&gt;</div><div class="line">            &lt;prepare&gt;</div><div class="line">                &lt;delete path=&quot;$&#123;nameNode&#125;/user/$&#123;wf:user()&#125;/$&#123;examplesRoot&#125;/output-data/$&#123;outputDir&#125;&quot;/&gt;</div><div class="line">            &lt;/prepare&gt;</div><div class="line">            &lt;configuration&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.job.queue.name&lt;/name&gt;</div><div class="line">                    &lt;value&gt;$&#123;queueName&#125;&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.mapper.class&lt;/name&gt;</div><div class="line">                    &lt;value&gt;org.apache.oozie.example.SampleMapper&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.reducer.class&lt;/name&gt;</div><div class="line">                    &lt;value&gt;org.apache.oozie.example.SampleReducer&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.map.tasks&lt;/name&gt;</div><div class="line">                    &lt;value&gt;1&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.input.dir&lt;/name&gt;</div><div class="line">                    &lt;value&gt;/user/root/$&#123;examplesRoot&#125;/input-data/text&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.output.dir&lt;/name&gt;</div><div class="line">                    &lt;value&gt;/user/root/$&#123;examplesRoot&#125;/output-data/$&#123;outputDir&#125;&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">            &lt;/configuration&gt;</div><div class="line">        &lt;/map-reduce&gt;</div><div class="line">        &lt;ok to=&quot;end&quot;/&gt;</div><div class="line">        &lt;error to=&quot;fail&quot;/&gt;</div><div class="line">    &lt;/action&gt;</div><div class="line">    &lt;kill name=&quot;fail&quot;&gt;</div><div class="line">        &lt;message&gt;Map/Reduce failed, error message[$&#123;wf:errorMessage(wf:lastErrorNode())&#125;]&lt;/message&gt;</div><div class="line">    &lt;/kill&gt;</div><div class="line">    &lt;end name=&quot;end&quot;/</div></pre></td></tr></table></figure>
+<p>上传文件<br>hadoop fs -put examples/ /user/root</p>
+<p>启动</p>
+<p>[root@hadoop000 oozie-4.1.0-cdh5.7.0]# bin/oozie job -oozie <a href="http://hadoop000:11000/oozie" target="_blank" rel="external">http://hadoop000:11000/oozie</a> -config examples/apps/map-reduce/job.properties -run<br>job: 0000000-180830181747338-oozie-root-W</p>
+<p>杀掉job<br>bin/oozie job -oozie <a href="http://hadoop000:11000/oozie" target="_blank" rel="external">http://hadoop000:11000/oozie</a> -kill 0000000-180830181747338-oozie-root-W</p>
+<p>如果启动后发现时间不对，需要修改时间<br>vi /home/app/oozie-4.1.0-cdh5.7.0/src/webapp/src/main/webapp/oozie-console.js</p>
+<p>function getTimeZone() {<br>Ext.state.Manager.setProvider(new Ext.state.CookieProvider());<br>return Ext.state.Manager.get(“TimezoneId”,”GMT+0800”);<br>}</p>
+<p>Oozie重启步骤：<br>    1.进入oozie目录<br>    2.将Oozie停止运行./bin/oozie-stop.sh<br>    3.重新进行打包war包 ./bin/oozie-setup.sh prepare-war<br>    4.重新打开Oozie：./bin/oozie-start.sh</p>
+<p>另外在修改web显示的时间<br><img src="http://oh6ybr0jg.bkt.clouddn.com/changeoozietime.png" alt="此处输入图片的描述"></p>
+<p>oozie添加告警<br>配置oozie-site.xml文件<br> <property><br>        <name>oozie.email.smtp.host</name> <!--邮件账户的smtp服务器地址--><br>        <value>smtp.163.com</value><br>    </property><br>    <property><br>        <name>oozie.email.from.address</name> <!--邮件账户的发送者邮箱地址--><br>        <value>test@163.com</value><br>    </property><br>    <property><br>        <name>oozie.email.smtp.auth</name> <!--是否接受安全认证，根据163邮箱的要求，选择true--><br>        <value>true</value><br>    </property><br>    <property><br>        <name>oozie.email.smtp.username</name> <!--邮件账户的用户名--><br>        <value>test@163.com</value><br>    </property><br>    <property><br>        <name>oozie.email.smtp.password</name> <!--邮件账户的密码--><br>        <value>123456</value><br>    </property></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;workflow-app xmlns=&quot;uri:oozie:workflow:0.2&quot; name=&quot;map-reduce-wf&quot;&gt;</div><div class="line">    &lt;start to=&quot;mr-node&quot;/&gt;</div><div class="line">    &lt;action name=&quot;mr-node&quot;&gt;</div><div class="line">        &lt;map-reduce&gt;</div><div class="line">            &lt;job-tracker&gt;$&#123;jobTracker&#125;&lt;/job-tracker&gt;</div><div class="line">            &lt;name-node&gt;$&#123;nameNode&#125;&lt;/name-node&gt;</div><div class="line">            &lt;prepare&gt;</div><div class="line">                &lt;delete path=&quot;$&#123;nameNode&#125;/user/$&#123;wf:user()&#125;/$&#123;examplesRoot&#125;/output-data/$&#123;outputDir&#125;&quot;/&gt;</div><div class="line">            &lt;/prepare&gt;</div><div class="line">            &lt;configuration&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.job.queue.name&lt;/name&gt;</div><div class="line">                    &lt;value&gt;$&#123;queueName&#125;&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.mapper.class&lt;/name&gt;</div><div class="line">                    &lt;value&gt;org.apache.oozie.example.SampleMapper&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.reducer.class&lt;/name&gt;</div><div class="line">                    &lt;value&gt;org.apache.oozie.example.SampleReducer&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.map.tasks&lt;/name&gt;</div><div class="line">                    &lt;value&gt;1&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.input.dir&lt;/name&gt;</div><div class="line">                    &lt;value&gt;/user/root/$&#123;examplesRoot&#125;/input-data/text&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.output.dir&lt;/name&gt;</div><div class="line">                    &lt;value&gt;/user/root/$&#123;examplesRoot&#125;/output-data/$&#123;outputDir&#125;&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">            &lt;/configuration&gt;</div><div class="line">        &lt;/map-reduce&gt;</div><div class="line">        &lt;ok to=&quot;goemail&quot; /&gt;</div><div class="line">        &lt;error to=&quot;fail&quot;/&gt;</div><div class="line">    &lt;/action&gt;</div><div class="line">    &lt;kill name=&quot;fail&quot;&gt;</div><div class="line">        &lt;message&gt;Map/Reduce failed, error message[$&#123;wf:errorMessage(wf:lastErrorNode())&#125;]&lt;/message&gt;</div><div class="line">    &lt;/kill&gt;</div><div class="line">&lt;action name=&quot;goemail&quot;&gt;</div><div class="line">        &lt;email xmlns=&quot;uri:oozie:email-action:0.1&quot;&gt;</div><div class="line">            &lt;to&gt;5lovezhm@163.com&lt;/to&gt;</div><div class="line">            &lt;subject&gt;Email notifications for $&#123;wf:id()&#125;&lt;/subject&gt;</div><div class="line">            &lt;body&gt;The wf $&#123;wf:id()&#125; successfully completed.&lt;/body&gt;</div><div class="line">        &lt;/email&gt;</div><div class="line">        &lt;ok to =&quot;end&quot;/&gt;</div><div class="line">        &lt;error to =&quot;fail&quot;/&gt;</div><div class="line">    &lt;/action&gt;</div><div class="line">    &lt;end name=&quot;end&quot;/&gt;</div><div class="line">&lt;/workflow-app&gt;</div></pre></td></tr></table></figure>
+<p>如果报错：<br> JA006: Call From hadoop000/xxx.xx.xx.xx to hadoop000:10020 failed on connection exception: java.net.ConnectException: ????; For more details see:  <a href="http://wiki.apache.org/hadoop/ConnectionRefused" target="_blank" rel="external">http://wiki.apache.org/hadoop/ConnectionRefused</a></p>
+<p>启动history<br>$HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver</p>
+
+          
         
       
     </div>
@@ -1195,599 +1818,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/14/CDH hadoop实战/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/14/CDH hadoop实战/" itemprop="url">
-                  CDH hadoop实战
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T14:30:00+08:00">
-                2017-03-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CDH/" itemprop="url" rel="index">
-                    <span itemprop="name">CDH</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/14/CDH hadoop实战/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/14/CDH hadoop实战/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h5 id="解决问题："><a href="#解决问题：" class="headerlink" title="解决问题："></a>解决问题：</h5><p>因为数据手机号一项包含为NULL的数据，需要清洗。</p>
-<p>创建工程，添加如下依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;dependencies&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;hadoop-common&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;2.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;hadoop-hdfs&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;2.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;org.apache.hadoop&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;hadoop-client&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;2.6.0&lt;/version&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line"></div><div class="line">        &lt;dependency&gt;</div><div class="line">            &lt;groupId&gt;junit&lt;/groupId&gt;</div><div class="line">            &lt;artifactId&gt;junit&lt;/artifactId&gt;</div><div class="line">            &lt;version&gt;3.8.1&lt;/version&gt;</div><div class="line">            &lt;scope&gt;test&lt;/scope&gt;</div><div class="line">        &lt;/dependency&gt;</div><div class="line">    &lt;/dependencies&gt;</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/14/CDH hadoop实战/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/14/CDH hive 实战/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/14/CDH hive 实战/" itemprop="url">
-                  CDH hive 实战
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T08:30:00+08:00">
-                2017-03-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CDH/" itemprop="url" rel="index">
-                    <span itemprop="name">CDH</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/14/CDH hive 实战/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/14/CDH hive 实战/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">hive&gt; create database BD;</div><div class="line">OK</div><div class="line">Time taken: 0.161 seconds</div><div class="line">hive&gt; use BD;</div><div class="line">OK</div><div class="line">Time taken: 0.013 seconds</div></pre></td></tr></table></figure>
-<p>创建表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">hive&gt; create table UP(uid STRING,phone STRING) row format delimited fields terminated by <span class="string">','</span> ;</div><div class="line">OK</div><div class="line">Time taken: 0.211 seconds</div><div class="line">hive&gt; load data inpath <span class="string">'/bigdata/data/hdfs/shuju/SO/part-m-00000'</span> into table UP;</div><div class="line">Loading data to table BD.UP</div><div class="line">Table BD.UP stats: [numFiles=1, totalSize=898611236]</div><div class="line">OK</div><div class="line">Time taken: 0.317 seconds</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/14/CDH hive 实战/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战-带条件的导入/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/13/CDH sqoop1 实战-带条件的导入/" itemprop="url">
-                  CDH sqoop1 实战-带条件的导入
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T09:30:00+08:00">
-                2017-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CDH/" itemprop="url" rel="index">
-                    <span itemprop="name">CDH</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/13/CDH sqoop1 实战-带条件的导入/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/CDH sqoop1 实战-带条件的导入/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h2><p>[hdfs@slave3 lib]$ sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query “SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1”  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming<br>17/03/15 11:57:44 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6-cdh5.10.0<br>17/03/15 11:57:44 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.<br>17/03/15 11:57:44 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.<br>17/03/15 11:57:44 INFO tool.CodeGenTool: Beginning code generation<br>17/03/15 11:57:44 ERROR tool.ImportTool: Encountered IOException running import job: java.io.IOException: Query [SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming where 1=1] must contain ‘$CONDITIONS’ in WHERE clause.<br>        at org.apache.sqoop.manager.ConnManager.getColumnTypes(ConnManager.java:332)<br>        at org.apache.sqoop.orm.ClassWriter.getColumnTypes(ClassWriter.java:1858)<br>        at org.apache.sqoop.orm.ClassWriter.generate(ClassWriter.java:1658)<br>        at org.apache.sqoop.tool.CodeGenTool.generateORM(CodeGenTool.java:107)<br>        at org.apache.sqoop.tool.ImportTool.importTable(ImportTool.java:488)<br>        at org.apache.sqoop.tool.ImportTool.run(ImportTool.java:615)<br>        at org.apache.sqoop.Sqoop.run(Sqoop.java:143)<br>        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)<br>        at org.apache.sqoop.Sqoop.runSqoop(Sqoop.java:179)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:218)<br>        at org.apache.sqoop.Sqoop.runTool(Sqoop.java:227)<br>        at org.apache.sqoop.Sqoop.main(Sqoop.java:236)</p>
-<p>修改为：<br>sqoop import –connect jdbc:mysql://10.105.10.46:3306/shuju –username username –password password –query ‘SELECT id,name,name_en,update_time,modify_user_name,first_mobile,second_mobile FROM biaoming WHERE $CONDITIONS’  –fields-terminated-by “,” –lines-terminated-by “\n” –split-by id  –hive-import  –create-hive-table –hive-table card_record –target-dir /bigdata/data/hdfs/shuju/biaoming</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/13/CDH sqoop1 实战-带条件的导入/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/13/CDH sqoop1 实战/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/13/CDH sqoop1 实战/" itemprop="url">
-                  CDH sqoop1 实战
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T09:30:00+08:00">
-                2017-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CDH/" itemprop="url" rel="index">
-                    <span itemprop="name">CDH</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/13/CDH sqoop1 实战/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/CDH sqoop1 实战/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="下载sqlserver的jdbc驱动包"><a href="#下载sqlserver的jdbc驱动包" class="headerlink" title="下载sqlserver的jdbc驱动包"></a>下载sqlserver的jdbc驱动包</h2><p><a href="https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599">https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=21599</a><br>解压<br>将sqljdbc4.jar放在：<br>/soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/sqoop/lib</p>
-<p>下载SQL Server-Hadoop Connector：sqoop-sqlserver-1.0.tar.gz<br>             <a href="http://www.microsoft.com/en-us/download/details.aspx?id=27584">http://www.microsoft.com/en-us/download/details.aspx?id=27584</a></p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/13/CDH sqoop1 实战/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1828,7 +1863,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">83</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1845,7 +1880,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
