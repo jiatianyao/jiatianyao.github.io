@@ -220,6 +220,164 @@
   </entry>
   
   <entry>
+    <title>机器学习-回归算法实例</title>
+    <link href="http://yoursite.com/2018/03/27/Mathematical%20regression%20/"/>
+    <id>http://yoursite.com/2018/03/27/Mathematical regression /</id>
+    <published>2018-03-27T01:30:00.000Z</published>
+    <updated>2018-12-21T08:14:28.452Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="概念梳理："><a href="#概念梳理：" class="headerlink" title="概念梳理："></a>概念梳理：</h2><p>数学期望：<br>在概率论和统计学中，数学期望(mean)（或均值，亦简称期望）是试验中每次可能结果的概率乘以其结果的总和，是最基本的数学特征之一。它反映随机变量平均取值的大小</p>
+<p>方差：<br>（variance)是在概率论和统计方差衡量随机变量或一组数据时离散程度的度量。概率论中方差用来度量随机变量和其数学期望（即均值）之间的偏离程度。统计中的方差（样本方差）是每个样本值与全体样本值的平均数之差的平方值的平均数。在许多实际问题中，研究方差即偏离程度有着重要意义。</p>
+<p>概率密度函数：<br>在数学中，连续型随机变量的概率密度函数（在不至于混淆时可以简称为密度函数）是一个描述这个随机变量的输出值，在某个确定的取值点附近的可能性的函数。而随机变量的取值落在某个区域之内的概率则为概率密度函数在这个区域上的积分。当概率密度函数存在的时候，累积分布函数是概率密度函数的积分。概率密度函数一般以小写标记<br>正态分布是重要的概率分布。它的概率密度函数是：<br><img src="http://oh6ybr0jg.bkt.clouddn.com/gailvmidu.jpg" alt="此处输入图片的描述"><br>随着参数μ和σ变化，概率分布也产生变化。<br>期望：μ<br>方差：σ^2<br>中位数：μ<br>众44o6fdeswq    DFGI-数：μ<br>偏度：0<br>峰度：3<br>\]<br><a id="more"></a><br>正态分布：<br>又称为常态分布，高斯分布。<br>若随机变量X服从一个数学期望为μ、方差为σ^2的正态分布，记为N(μ，σ^2)。其概率密度函数为正态分布的期望值μ决定了其位置，其标准差σ决定了分布的幅度。当μ = 0,σ = 1时的正态分布是标准正态分布。</p>
+<p>线性回归：<br>线性回归是利用数理统计中回归分析，来确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法，运用十分广泛。其表达形式为y = w’x+e，e为误差服从均值为0的正态分布。</p>
+<p>回归数据：<br><a href="http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption" target="_blank" rel="external">http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption</a></p>
+<p>属性信息：</p>
+<p>1.date：格式dd/mm/yyyy日期<br>2.time：格式HH时间：MM：SS<br>3.global_active_power：家用全球分钟平均有功<strong>功率</strong>（千瓦）<br>4.global_reactive_power: 家用全球分钟平均无功<strong>功率</strong>（千瓦）<br>5.voltage：分钟平均<strong>电压</strong>（伏特）<br>6.global_intensity：家用全球分钟平均<strong>电流</strong>强度（安培）<br>7.sub_metering_1：能耗分项计量1号（中有功电能电能）。它与<strong>厨房</strong>相对应，主要包括洗碗机、烤箱和微波炉（热板不是电动的，而是燃气驱动的）。<br>8.sub_metering_2：能耗分项计量2号（中有功电能电能）。它对应<strong>洗衣</strong>房，包括洗衣机、滚筒烘干机、冰箱和灯。<br>9.sub_metering_3：能耗分项计量3号（中有功电能电能）。它相当于一个<strong>电热水器</strong>和一个空调。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">import</span> sklearn</div><div class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</div><div class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</div><div class="line"></div><div class="line"></div><div class="line">path=<span class="string">'C:/Users/zhanghongming/Documents/data/100.txt'</span></div><div class="line">names = [<span class="string">'Date'</span>,<span class="string">'Time'</span>,<span class="string">'Global_active_power'</span>,<span class="string">'Global_reactive_power'</span>,<span class="string">'Voltage'</span>,<span class="string">'Global_intensity'</span>,<span class="string">'Sub_metering_1'</span>,<span class="string">'Sub_metering_2'</span>,<span class="string">'Sub_metering_3'</span>]</div><div class="line"></div><div class="line"></div><div class="line">df=pd.read_csv(path,sep=<span class="string">';'</span>)</div><div class="line">print(df.head())</div></pre></td></tr></table></figure>
+<pre><code>Date      Time  Global_active_power  Global_reactive_power  Voltage  \
+</code></pre><p>0  16/12/2006  17:24:00                4.216                  0.418   234.84<br>1  16/12/2006  17:25:00                5.360                  0.436   233.63<br>2  16/12/2006  17:26:00                5.374                  0.498   233.29<br>3  16/12/2006  17:27:00                5.388                  0.502   233.74<br>4  16/12/2006  17:28:00                3.666                  0.528   235.68   </p>
+<p>   Global_intensity  Sub_metering_1  Sub_metering_2  Sub_metering_3<br>0              18.4             0.0             1.0            17.0<br>1              23.0             0.0             1.0            16.0<br>2              23.0             0.0             2.0            17.0<br>3              23.0             0.0             1.0            17.0<br>4              15.8             0.0             1.0            17.0  </p>
+<h4 id="看所有的变量值"><a href="#看所有的变量值" class="headerlink" title="看所有的变量值"></a>看所有的变量值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> df.columns:</div><div class="line">    print(df[i].value_counts())</div></pre></td></tr></table></figure>
+<p>Name: Date, dtype: int64<br>19:01:00    1<br>17:27:00    1<br>18:24:00    1<br>           ..</p>
+<p>Name: Time, Length: 99, dtype: int64<br>4.230    2<br>2.912    2<br>4.218    2<br>6.072    1<br>5.412    1<br>           ..</p>
+<p>Name: Global_active_power, Length: 96, dtype: int64<br>0.000    33<br>0.090     7<br>0.054     4<br>0.144     3<br>           ..</p>
+<p>Name: Global_reactive_power, dtype: int64<br>235.84    3<br>234.20    2<br>235.68    2<br>233.74    2<br>           ..</p>
+<p>Name: Voltage, Length: 90, dtype: int64<br>12.4    7<br>13.8    5<br>15.8    5<br>           ..<br>Name: Global_intensity, dtype: int64<br>0.0    99<br>Name: Sub_metering_1, dtype: int64<br>1.0     50<br>0.0     26<br>2.0      8</p>
+<p>Name: Sub_metering_2, dtype: int64<br>17.0    77<br>16.0    18<br>18.0     4</p>
+<p>Name: Sub_metering_3, dtype: int64</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#空值处理</span></div><div class="line">new_df= df.replace(<span class="string">'?'</span>,np.nan)</div><div class="line"></div><div class="line">datas = new_df.dropna(how=<span class="string">'any'</span>)</div><div class="line"></div><div class="line"><span class="comment">#定义时间格式化</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">datae_format</span><span class="params">(dt)</span>:</span></div><div class="line">    t = time.strptime(<span class="string">' '</span>.join(dt),<span class="string">'%d/%m/%Y %H:%M:%S'</span>)</div><div class="line">    <span class="keyword">return</span> (t.tm_year,t.tm_mon,t.tm_mday,t.tm_hour,t.tm_min,t.tm_sec)</div><div class="line"></div><div class="line"><span class="comment">##分析功率和时间的线性关系。将时间转换为连续的</span></div><div class="line"></div><div class="line">X = datas[names[<span class="number">0</span>:<span class="number">2</span>]]</div><div class="line">X = X.apply(<span class="keyword">lambda</span> x :pd.Series(datae_format(x)),axis=<span class="number">1</span>)</div><div class="line">Y = datas[names[<span class="number">2</span>]]</div><div class="line"></div><div class="line"></div><div class="line">print(X.head(<span class="number">5</span>))</div><div class="line">print(Y.head(<span class="number">5</span>))</div></pre></td></tr></table></figure>
+<pre><code>0   1   2   3   4  5
+</code></pre><p>0  2006  12  16  17  24  0<br>1  2006  12  16  17  25  0<br>2  2006  12  16  17  26  0<br>3  2006  12  16  17  27  0<br>4  2006  12  16  17  28  0<br>0    4.216<br>1    5.360<br>2    5.374<br>3    5.388<br>4    3.666<br>Name: Global_active_power, dtype: float64</p>
+<h6 id="函数讲解"><a href="#函数讲解" class="headerlink" title="函数讲解"></a>函数讲解</h6><p>sklearn.model_selection.train_test_split随机划分训练集和测试集<br>一般形式：<br>train_test_split是交叉验证中常用的函数，功能是从样本中随机的按比例选取train data和testdata，形式为：<br>X_train,X_test, y_train, y_test =<br>cross_validation.train_test_split(train_data,train_target,test_size=0.4, random_state=0)<br>参数解释：<br>train_data：所要划分的样本特征集<br>train_target：所要划分的样本结果<br>test_size：样本占比，如果是整数的话就是样本的数量<br>random_state：是随机数的种子。<br>随机数种子：其实就是该组随机数的编号，在需要重复试验的时候，保证得到一组一样的随机数。比如你每次都填1，其他参数一样的情况下你得到的随机数组是一样的。但填0或不填，每次都会不一样。<br>随机数的产生取决于种子，随机数和种子之间的关系遵从以下两个规则：<br>种子不同，产生不同的随机数；种子相同，即使实例不同也产生相同的随机数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">X_train,X_test,Y_train,Y_test = train_test_split( X, Y, test_size=<span class="number">0.2</span>, random_state=<span class="number">42</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">## 数据标准换行</span></div><div class="line">ss = StandardScaler()</div><div class="line">X_train = ss.fit_transform(X_train)</div><div class="line">X_test = ss.fit_transform(X_test)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##训练数据</span></div><div class="line">lr = LinearRegression()</div><div class="line">lr.fit(X_train,Y_train)</div><div class="line"></div><div class="line"><span class="comment">##预测Y值</span></div><div class="line">y_predict = lr.predict(X_test)</div><div class="line"></div><div class="line">print(<span class="string">"准确率:"</span>,lr.score(X_test,Y_test))</div></pre></td></tr></table></figure>
+<p>样本数据100条：<br>准确率: 0.0226499044921<br>样本数据1000条：<br>0.103073016594</p>
+<p>模型保存及加载：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.externals <span class="keyword">import</span> joblib</div><div class="line"><span class="comment">## 模型保存：</span></div><div class="line">joblib.dump(ss,<span class="string">"data_ss.model"</span>)</div><div class="line">joblib.dump(lr,<span class="string">"data_lr.model"</span>)</div><div class="line"></div><div class="line"><span class="comment">## 加载模型</span></div><div class="line">joblib,load(<span class="string">"data_ss.model"</span>)</div><div class="line">joblib,load(<span class="string">"data_lr.model"</span>)</div></pre></td></tr></table></figure></p>
+<p>plot文档：<br><a href="https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" target="_blank" rel="external">https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">## 解决中文问题</span></div><div class="line">mpl.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">u'SimHei'</span>];</div><div class="line">mpl.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="keyword">False</span></div><div class="line"></div><div class="line">t=np.arange(len(X_test))</div><div class="line">plt.figure(facecolor=<span class="string">'w'</span>)</div><div class="line">plt.plot(t,Y_test,<span class="string">'r--'</span>,linewidth=<span class="number">2</span>,label=<span class="string">u'真实值'</span>)</div><div class="line">plt.plot(t,y_predict,<span class="string">'g--'</span>,linewidth=<span class="number">2</span>,label=<span class="string">u'预测值'</span>)</div><div class="line">plt.legend(loc =<span class="string">'lower right'</span>)</div><div class="line">plt.title(<span class="string">u'线性回归时间与电压的关系'</span>,fontsize=<span class="number">20</span> )</div><div class="line">plt.grid(b=<span class="keyword">True</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p>100条数据：<br><img src="http://oh6ybr0jg.bkt.clouddn.com/linear_regression_100.png" alt="此处输入图片的描述"></p>
+<p>1000条数据：<br><img src="http://oh6ybr0jg.bkt.clouddn.com/linear_regression_1000.png" alt="此处输入图片的描述"></p>
+<h3 id="linear多项式"><a href="#linear多项式" class="headerlink" title="linear多项式"></a>linear多项式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.pipeline <span class="keyword">import</span> Pipeline</div><div class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> PolynomialFeatures</div><div class="line"><span class="keyword">from</span> sklearn.grid_search <span class="keyword">import</span> GridSearchCV</div><div class="line">models = [Pipeline([(<span class="string">'Poly'</span>,PolynomialFeatures()),(<span class="string">'Linear'</span>,LinearRegression())])]</div><div class="line">model = models[<span class="number">0</span>]</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##获取X，Y变量，并将时间变量转换为数值型连续的</span></div><div class="line">X = datas[names[<span class="number">0</span>:<span class="number">2</span>]]</div><div class="line">X = X.apply(<span class="keyword">lambda</span> x :pd.Series(datae_format(x)),axis=<span class="number">1</span>)</div><div class="line">Y = datas[names[<span class="number">4</span>]]</div><div class="line"></div><div class="line"><span class="comment">## 对数据集进行划分</span></div><div class="line">X_train,X_test,Y_train,Y_test = train_test_split( X, Y, test_size=<span class="number">0.2</span>, random_state=<span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="comment">## 数据标准化</span></div><div class="line">ss = StandardScaler()</div><div class="line">X_train = ss.fit_transform(X_train)</div><div class="line">X_test = ss.fit_transform(X_test)</div><div class="line"></div><div class="line"><span class="comment">## 模型训练</span></div><div class="line">t=np.arange(len(X_test))</div><div class="line">N =<span class="number">5</span></div><div class="line">d_pool= np.arange(<span class="number">1</span>,N,<span class="number">1</span>)</div><div class="line">m=d_pool.size</div><div class="line">clrs = []  <span class="comment"># 颜色</span></div><div class="line"><span class="keyword">for</span> c <span class="keyword">in</span> np.linspace(<span class="number">16711680</span>, <span class="number">255</span>, m,dtype=<span class="string">'int64'</span>):</div><div class="line">    clrs.append(<span class="string">'#%06x'</span> % c)</div><div class="line">line_width = <span class="number">3</span></div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>),facecolor=<span class="string">'w'</span>)</div><div class="line"><span class="keyword">for</span> i,d <span class="keyword">in</span> enumerate(d_pool):</div><div class="line">    plt.subplot(N<span class="number">-1</span>,<span class="number">1</span>,i+<span class="number">1</span>)</div><div class="line">    plt.plot(t,Y_test,<span class="string">'r--'</span>,label=<span class="string">u'真实值'</span>,ms=<span class="number">10</span>,zorder=N)</div><div class="line">    model.set_params(Poly__degree=d) <span class="comment"># 设置多项式的阶</span></div><div class="line">    model.fit(X_train,Y_train)</div><div class="line">    lin = model.get_params(<span class="string">'Linear'</span>)[<span class="string">'Linear'</span>]</div><div class="line">    output =<span class="string">u'%d阶，系数为：'</span>%d</div><div class="line">    print( output,lin.coef_.ravel())</div><div class="line"></div><div class="line">    y_hat = model.predict(X_test)</div><div class="line">    s = model.score(X_test,Y_test)</div><div class="line"></div><div class="line">    z=N<span class="number">-1</span> <span class="keyword">if</span> (d==<span class="number">2</span>) <span class="keyword">else</span> <span class="number">0</span></div><div class="line">    label=<span class="string">u'%d阶,准确率=%.3f'</span>%(d,s)</div><div class="line"></div><div class="line"></div><div class="line">    plt.plot(t,y_hat,color=clrs[i],lw=line_width,alpha = <span class="number">0.75</span>,label=label,zorder=z)</div><div class="line">    plt.legend(loc = <span class="string">'upper left'</span>)</div><div class="line">    plt.grid(<span class="keyword">True</span>)</div><div class="line">    plt.ylabel(<span class="string">u'%d阶结果'</span>%d,fontsize=<span class="number">12</span>)</div><div class="line"></div><div class="line"><span class="comment"># 预测值和真实值画图比较</span></div><div class="line">plt.legend(loc = <span class="string">'lower right'</span>)</div><div class="line">plt.suptitle(<span class="string">u'线性回归时间与电压之间多项式关系'</span>)</div><div class="line">plt.grid(b=<span class="keyword">True</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p>1阶，系数为： [  0.00000000e+00   5.55111512e-17   0.00000000e+00   0.00000000e+00<br>  -4.22939297e-01  -4.34494704e-01   0.00000000e+00]<br>2阶，系数为： [  2.47983335e-17   1.11022302e-16  -2.22044605e-16  -1.11022302e-16<br>  -5.05820937e-01  -3.46571423e-01   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00  -8.58357173e-01  -7.57689882e-01<br>   0.00000000e+00  -1.60364055e-01   0.00000000e+00   0.00000000e+00]<br>3阶，系数为： [ -1.69309011e-15  -2.99760217e-15   3.33066907e-16   5.55111512e-16<br>  -4.41970713e-02  -3.57278153e-01   0.00000000e+00   2.22044605e-16<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   3.43644538e-01   4.86208530e-01<br>   0.00000000e+00   3.26242425e-02   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   0.00000000e+00   0.00000000e+00<br>   0.00000000e+00   0.00000000e+00   4.48140740e-01   6.37890832e-01<br>   0.00000000e+00  -7.45035081e-01   0.00000000e+00   0.00000000e+00<br>  -5.02511111e-01   0.00000000e+00   0.00000000e+00   0.00000000e+00]<br>4阶，系数为： [  2.22002972e-013  -8.01497757e-013   5.37209166e-014  -4.53519167e-013<br>   7.19933381e-003   2.05441337e-001   3.86510268e-013  -5.94066463e-013<br>   6.66133815e-015   6.66133815e-016  -1.88737914e-015   6.27276009e-015<br>  -5.30131494e-015  -1.01585407e-014   3.35287353e-014   8.21565038e-015<br>  -2.55351296e-015  -2.22044605e-016  -6.31088724e-030   3.02922588e-028<br>   1.00974196e-028  -5.04870979e-029  -4.89052469e-002   3.28220946e-001<br>   0.00000000e+000   6.15440583e-003   0.00000000e+000   0.00000000e+000<br>   1.26217745e-029   0.00000000e+000  -5.60519386e-044  -8.40779079e-045<br>  -7.00649232e-045  -2.24207754e-044  -5.60519386e-045   2.80259693e-045<br>   1.40129846e-045   0.00000000e+000   0.00000000e+000   4.97841222e-060<br>   1.55575382e-061  -1.24460306e-060  -2.48920611e-060   0.00000000e+000<br>  -3.11150764e-061  -1.16681536e-061  -3.11150764e-061  -4.66726146e-061<br>   2.21085915e-075  -5.52714788e-076  -1.38178697e-076   2.76357394e-076<br>  -1.38178697e-076  -3.45446742e-077   0.00000000e+000   1.34940134e-079<br>   0.00000000e+000   1.91761463e-093   1.49813643e-095  -5.99254573e-095<br>   4.49440930e-095   1.12360233e-095   0.00000000e+000   7.49068217e-096<br>  -2.34083818e-097   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000  -1.66326556e-111   4.15816391e-112<br>  -2.07908195e-112   0.00000000e+000  -6.13741990e-002  -8.70197287e-001<br>   8.39734513e-140  -1.48604949e+000   0.00000000e+000   0.00000000e+000<br>  -4.67097255e-001   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000   0.00000000e+000  -2.42848401e-001<br>  -9.28403263e-001   0.00000000e+000  -8.91115491e-001   0.00000000e+000<br>   0.00000000e+000   1.33924630e-001   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   2.81909059e-001   0.00000000e+000   0.00000000e+000<br>   0.00000000e+000   0.00000000e+000]</p>
+<p>   <img src="http://oh6ybr0jg.bkt.clouddn.com/linear_regression_polynomial.png" alt="此处输入图片的描述"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;概念梳理：&quot;&gt;&lt;a href=&quot;#概念梳理：&quot; class=&quot;headerlink&quot; title=&quot;概念梳理：&quot;&gt;&lt;/a&gt;概念梳理：&lt;/h2&gt;&lt;p&gt;数学期望：&lt;br&gt;在概率论和统计学中，数学期望(mean)（或均值，亦简称期望）是试验中每次可能结果的概率乘以其结果的总和，是最基本的数学特征之一。它反映随机变量平均取值的大小&lt;/p&gt;
+&lt;p&gt;方差：&lt;br&gt;（variance)是在概率论和统计方差衡量随机变量或一组数据时离散程度的度量。概率论中方差用来度量随机变量和其数学期望（即均值）之间的偏离程度。统计中的方差（样本方差）是每个样本值与全体样本值的平均数之差的平方值的平均数。在许多实际问题中，研究方差即偏离程度有着重要意义。&lt;/p&gt;
+&lt;p&gt;概率密度函数：&lt;br&gt;在数学中，连续型随机变量的概率密度函数（在不至于混淆时可以简称为密度函数）是一个描述这个随机变量的输出值，在某个确定的取值点附近的可能性的函数。而随机变量的取值落在某个区域之内的概率则为概率密度函数在这个区域上的积分。当概率密度函数存在的时候，累积分布函数是概率密度函数的积分。概率密度函数一般以小写标记&lt;br&gt;正态分布是重要的概率分布。它的概率密度函数是：&lt;br&gt;&lt;img src=&quot;http://oh6ybr0jg.bkt.clouddn.com/gailvmidu.jpg&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;br&gt;随着参数μ和σ变化，概率分布也产生变化。&lt;br&gt;期望：μ&lt;br&gt;方差：σ^2&lt;br&gt;中位数：μ&lt;br&gt;众44o6fdeswq    DFGI-数：μ&lt;br&gt;偏度：0&lt;br&gt;峰度：3&lt;br&gt;\]&lt;br&gt;
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>scikit-learn pca</title>
+    <link href="http://yoursite.com/2018/03/03/scikit-learn%20pca/"/>
+    <id>http://yoursite.com/2018/03/03/scikit-learn pca/</id>
+    <published>2018-03-03T03:06:30.000Z</published>
+    <updated>2018-12-21T08:14:17.397Z</updated>
+    
+    <content type="html"><![CDATA[<p>from sklearn import datasets</p>
+<p>digits = datasets.load_digits()<br>x = digits.data<br>y = digits.target</p>
+<p>from sklearn.model_selection import  train_test_split<br>x_train,x_test,y_train,y_test = train_test_split(x,y,random_state=666)</p>
+<p>print(x_train.shape)</p>
+<p>#(1347, 64)<br>from sklearn.neighbors import KNeighborsClassifier<br>import time<br>start = time.clock()<br>knn_clf = KNeighborsClassifier()</p>
+<p>knn_clf.fit(x_train,y_train)<br>end = time.clock()</p>
+<p>print(end-start)</p>
+<p>#0.009107513739889835<br>score = knn_clf.score(x_test,y_test)</p>
+<p>print(score)</p>
+<p>#0.986666666667</p>
+<p>from sklearn.decomposition import  PCA</p>
+<p>pca = PCA(n_components=2)<br>pca.fit(x_train)<br>X_train_reduction = pca.transform(x_train)<br>X_test_reduction = pca.transform(x_test)</p>
+<p>start2 = time.clock()<br>knn_clf = KNeighborsClassifier()<br>knn_clf.fit(X_train_reduction,y_train)<br>end2 = time.clock()</p>
+<p>print(end2-start2)</p>
+<p>#0.0019209365663966915<br>score = knn_clf.score(X_test_reduction,y_test)<br>print(score)</p>
+<p>#0.606666666667</p>
+<p>print(pca.explained<em>variance</em>)</p>
+<p>pca = PCA(n_components=x_train.shape[1])</p>
+<p>pca3 = PCA(0.95)<br>pca3.fit(x_train)<br>print(pca3.n<em>components</em>)</p>
+<p>#28</p>
+<p>start3 = time.clock()<br>knn_clf3 = KNeighborsClassifier()<br>X_train_reduction = pca3.transform(x_train)<br>X_test_reduction = pca3.transform(x_test)<br>knn_clf3.fit(X_train_reduction,y_train)<br>end3 = time.clock()</p>
+<p>print(end3-start3)</p>
+<p>#0.006395458395239972<br>score = knn_clf3.score(X_test_reduction,y_test)<br>print(score)</p>
+<p>#0.98</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;from sklearn import datasets&lt;/p&gt;
+&lt;p&gt;digits = datasets.load_digits()&lt;br&gt;x = digits.data&lt;br&gt;y = digits.target&lt;/p&gt;
+&lt;p&gt;from sklearn.model_sel
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>scikit-learn KNN</title>
+    <link href="http://yoursite.com/2018/03/02/scikit-learn%20KNN/"/>
+    <id>http://yoursite.com/2018/03/02/scikit-learn KNN/</id>
+    <published>2018-03-02T02:06:30.000Z</published>
+    <updated>2018-12-21T08:14:37.220Z</updated>
+    
+    <content type="html"><![CDATA[<p>地址：<br><a href="http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier" target="_blank" rel="external">http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</div><div class="line"></div><div class="line">X = [[<span class="number">0</span>], [<span class="number">1</span>], [<span class="number">2</span>], [<span class="number">3</span>]]</div><div class="line">y = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]</div><div class="line">neigh = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</div><div class="line">neigh.fit(X, y)</div><div class="line"></div><div class="line">print(neigh.predict([[<span class="number">1.1</span>]]))</div><div class="line"><span class="comment"># [0]</span></div><div class="line">print(neigh.predict_proba([[<span class="number">0.9</span>]]))</div><div class="line"><span class="comment">#[[ 0.66666667  0.33333333]]</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>手写数字练习：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</div><div class="line"></div><div class="line">digits = datasets.load_digits()</div><div class="line">x= digits.data</div><div class="line">y= digits.target</div><div class="line">print(x.shape)</div><div class="line"><span class="comment">#(1797, 64)</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span>  train_test_split</div><div class="line">x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=<span class="number">0.2</span>,random_state=<span class="number">666</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</div><div class="line"></div><div class="line">knn_clf = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</div><div class="line">knn_clf.fit(x_train,y_train)</div><div class="line">score= knn_clf.score(x_test,y_test)</div><div class="line">print(score)</div><div class="line"><span class="comment">#0.988888888889</span></div></pre></td></tr></table></figure>
+<p>查找最佳超参数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">beat_score=<span class="number">0</span></div><div class="line">break_k =<span class="number">-1</span></div><div class="line"><span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">11</span>):</div><div class="line">    knn_clf2 = KNeighborsClassifier(n_neighbors=k)</div><div class="line">    knn_clf2.fit(x_train,y_train)</div><div class="line">    score= knn_clf2.score(x_test,y_test)</div><div class="line">    <span class="keyword">if</span>(score &gt;beat_score):</div><div class="line">        break_k =k</div><div class="line">        beat_score = score</div><div class="line"></div><div class="line">print(<span class="string">"beat_score"</span>,beat_score)</div><div class="line">print(<span class="string">"break_k"</span>,break_k)</div></pre></td></tr></table></figure></p>
+<p>beat_score 0.991666666667<br>break_k 4</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">beat_score=<span class="number">0</span></div><div class="line">break_k =<span class="number">-1</span></div><div class="line">beat_method=<span class="string">''</span></div><div class="line"><span class="keyword">for</span> method <span class="keyword">in</span> [<span class="string">'uniform'</span>,<span class="string">'distance'</span>]:</div><div class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">11</span>):</div><div class="line">        knn_clf2 = KNeighborsClassifier(n_neighbors=k,weights=method)</div><div class="line">        knn_clf2.fit(x_train,y_train)</div><div class="line">        score= knn_clf2.score(x_test,y_test)</div><div class="line">        <span class="keyword">if</span>(score &gt;beat_score):</div><div class="line">            beat_method = method</div><div class="line">            break_k =k</div><div class="line">            beat_score = score</div><div class="line"></div><div class="line">print(<span class="string">"beat_score"</span>,beat_score)</div><div class="line">print(<span class="string">"break_k"</span>,break_k)</div></pre></td></tr></table></figure>
+<p>网格搜素：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> time</div><div class="line">start = time.clock()</div><div class="line">param_grid=[</div><div class="line">    &#123;</div><div class="line">        <span class="string">'weights'</span>:[<span class="string">'uniform'</span>],</div><div class="line">        <span class="string">'n_neighbors'</span>:[i  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">11</span>)]</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        <span class="string">'weights'</span>:[<span class="string">'distance'</span>],</div><div class="line">        <span class="string">'n_neighbors'</span>:[i  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">11</span>)],</div><div class="line">        <span class="string">'p'</span>:[i  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">6</span>)]</div><div class="line">    &#125;</div><div class="line">]</div><div class="line"></div><div class="line">knn_clf = KNeighborsClassifier()</div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span>  GridSearchCV</div><div class="line">grid_search = GridSearchCV(knn_clf,param_grid)</div><div class="line">grid_search.fit(x_train,y_train)</div><div class="line">print(<span class="string">"grid_search.best_estimator_:"</span>,grid_search.best_estimator_)</div><div class="line">print(<span class="string">"grid_search.best_score_:"</span>,grid_search.best_score_)</div><div class="line">print(<span class="string">"grid_search.best_params_:"</span>,grid_search.best_params_)</div><div class="line"></div><div class="line">knn_clf = grid_search.best_estimator_</div><div class="line">knn_clf_score = knn_clf.score(x_test,y_test)</div><div class="line">print(knn_clf_score)</div><div class="line">end = time.clock()</div><div class="line">print(end-start)</div></pre></td></tr></table></figure></p>
+<p>grid_search.best<em>estimator</em>: KNeighborsClassifier(algorithm=’auto’, leaf_size=30, metric=’minkowski’,<br>           metric_params=None, n_jobs=1, n_neighbors=3, p=3,<br>           weights=’distance’)<br>grid_search.best<em>score</em>: 0.985386221294<br>grid_search.best<em>params</em>: {‘n_neighbors’: 3, ‘p’: 3, ‘weights’: ‘distance’}<br>0.983333333333<br>296.18877317471</p>
+<p>增加并行化处理：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grid_search = GridSearchCV(knn_clf,param_grid,n_jobs=<span class="number">2</span>,verbose=<span class="number">2</span>)</div></pre></td></tr></table></figure></p>
+<p>速度变为：156.67693082041933</p>
+<p>最值归一化：<br>适用于分布有明显边界的情况，受outlier影响较大<br>均值方差归一化：<br>适用于分布没有明显边界的情况，有可能存在极端数值</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;地址：&lt;br&gt;&lt;a href=&quot;http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier&quot;&gt;http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; sklearn.neighbors &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; KNeighborsClassifier&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;X = [[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;], [&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;], [&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;], [&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;]]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;y = [&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;neigh = KNeighborsClassifier(n_neighbors=&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;neigh.fit(X, y)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;print(neigh.predict([[&lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt;]]))&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# [0]&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;print(neigh.predict_proba([[&lt;span class=&quot;number&quot;&gt;0.9&lt;/span&gt;]]))&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#[[ 0.66666667  0.33333333]]&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>scikit-learn regression</title>
+    <link href="http://yoursite.com/2018/03/01/scikit-learn%20regression/"/>
+    <id>http://yoursite.com/2018/03/01/scikit-learn regression/</id>
+    <published>2018-03-01T03:06:30.000Z</published>
+    <updated>2018-12-21T08:14:24.851Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</div><div class="line"></div><div class="line">boston = datasets.load_boston()</div><div class="line">x= boston.data</div><div class="line">y= boston.targe</div><div class="line"></div><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span>  train_test_split</div><div class="line">x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=<span class="number">0.2</span>,random_state=<span class="number">666</span>)</div><div class="line"></div><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> linear_model</div><div class="line">clf = linear_model.LinearRegression()</div><div class="line"></div><div class="line">clf.fit(x_train,y_train)</div><div class="line">y_predict = clf.predict(x_test)</div><div class="line"></div><div class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</div><div class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_absolute_error</div><div class="line"></div><div class="line">MSE = mean_squared_error(y_test,y_predict)</div><div class="line">print(MSE)</div><div class="line">MAE = mean_absolute_error(y_test,y_predict)</div><div class="line">print(MAE)</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/d
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>机器学习-决策树算法实例</title>
     <link href="http://yoursite.com/2018/02/18/Mathematical%20decision%20tree/"/>
     <id>http://yoursite.com/2018/02/18/Mathematical decision tree/</id>
@@ -313,31 +471,65 @@
   </entry>
   
   <entry>
-    <title>设计模式目录</title>
-    <link href="http://yoursite.com/2018/01/27/Design%20pattern%20catalog/"/>
-    <id>http://yoursite.com/2018/01/27/Design pattern catalog/</id>
-    <published>2018-01-27T01:30:00.000Z</published>
-    <updated>2018-02-06T14:27:35.863Z</updated>
+    <title>2018学习计划</title>
+    <link href="http://yoursite.com/2018/02/07/2018%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/"/>
+    <id>http://yoursite.com/2018/02/07/2018学习计划/</id>
+    <published>2018-02-07T00:00:00.000Z</published>
+    <updated>2018-12-21T08:12:32.620Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="创建性模式："><a href="#创建性模式：" class="headerlink" title="创建性模式："></a>创建性模式：</h3><p>1.类的创建模式——使用继承关系，把类的创建延迟到子类<br>2.对象的创建模式——把对象的创建过程动态地委派给另一个对象<br>    封装要创建的具体类（类的实例）的信息<br>    隐藏这些类（类的实例）被创建和组合的过程</p>
-<p>包含<br>抽象工厂、建造者、工厂方式、原型、单例</p>
-<h3 id="结构性模式："><a href="#结构性模式：" class="headerlink" title="结构性模式："></a>结构性模式：</h3><p>考虑如何组合类和对象构成较大的结构。<br>1.结构性类模式：使用继承来组合接口或实现<br>2.结构性对象模式：对象合成实现新功能。<br><a id="more"></a><br>包含：<br>适配器、桥接、组合、装饰着、外观、轻量、代理</p>
-<h3 id="行为模式："><a href="#行为模式：" class="headerlink" title="行为模式："></a>行为模式：</h3><p>主要解决算法和对象之间的责任分配问题。<br>对象或类的模式<br>它们之间的通信模式。<br>包含：<br>责任链、命令、解释器、迭代、中介者、备忘录、观察者、状态、策略、模板方法、观察者</p>
-<p>工厂方法主要针对一个产品等级结构<br>抽象工厂模式需要面对多个产品等级结构</p>
+    <content type="html"><![CDATA[<h2 id="大数据及机器学习学习计划"><a href="#大数据及机器学习学习计划" class="headerlink" title="大数据及机器学习学习计划"></a>大数据及机器学习学习计划</h2><ol>
+<li><p>编程基础：Python<br><a href="https://cn.udacity.com/course/programming-foundations-with-python--ud036" target="_blank" rel="external">https://cn.udacity.com/course/programming-foundations-with-python--ud036</a></p>
+</li>
+<li><p>计算机科学导论  72小时<br><a href="https://cn.udacity.com/course/intro-to-computer-science--cs101" target="_blank" rel="external">https://cn.udacity.com/course/intro-to-computer-science--cs101</a></p>
+</li>
+<li>推论统计学  48小时<br><a href="https://cn.udacity.com/course/intro-to-inferential-statistics--ud201" target="_blank" rel="external">https://cn.udacity.com/course/intro-to-inferential-statistics--ud201</a></li>
+<li>描述统计学  48小时<br><a href="https://cn.udacity.com/course/intro-to-inferential-statistics--ud201" target="_blank" rel="external">https://cn.udacity.com/course/intro-to-inferential-statistics--ud201</a></li>
+<li>机器学习  240小时<br><a href="https://cn.udacity.com/course/machine-learning--ud262" target="_blank" rel="external">https://cn.udacity.com/course/machine-learning--ud262</a></li>
+<li>统计学入门<br><a href="https://cn.udacity.com/course/intro-to-statistics--st101" target="_blank" rel="external">https://cn.udacity.com/course/intro-to-statistics--st101</a></li>
+<li>基础线性代数<br><a href="https://cn.udacity.com/course/linear-algebra-refresher-course--ud953" target="_blank" rel="external">https://cn.udacity.com/course/linear-algebra-refresher-course--ud953</a></li>
+<li><p>机器学习<br><a href="https://cn.udacity.com/course/machine-learning-engineer-nanodegree--nd009" target="_blank" rel="external">https://cn.udacity.com/course/machine-learning-engineer-nanodegree--nd009</a></p>
+</li>
+<li><p>Apache Storm 进行实时分析  48小时<br><a href="https://cn.udacity.com/course/real-time-analytics-with-apache-storm--ud381" target="_blank" rel="external">https://cn.udacity.com/course/real-time-analytics-with-apache-storm--ud381</a></p>
+</li>
+<li><p>Bash脚本  40+小时</p>
+</li>
+</ol>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;创建性模式：&quot;&gt;&lt;a href=&quot;#创建性模式：&quot; class=&quot;headerlink&quot; title=&quot;创建性模式：&quot;&gt;&lt;/a&gt;创建性模式：&lt;/h3&gt;&lt;p&gt;1.类的创建模式——使用继承关系，把类的创建延迟到子类&lt;br&gt;2.对象的创建模式——把对象的创建过程动态地委派给另一个对象&lt;br&gt;    封装要创建的具体类（类的实例）的信息&lt;br&gt;    隐藏这些类（类的实例）被创建和组合的过程&lt;/p&gt;
-&lt;p&gt;包含&lt;br&gt;抽象工厂、建造者、工厂方式、原型、单例&lt;/p&gt;
-&lt;h3 id=&quot;结构性模式：&quot;&gt;&lt;a href=&quot;#结构性模式：&quot; class=&quot;headerlink&quot; title=&quot;结构性模式：&quot;&gt;&lt;/a&gt;结构性模式：&lt;/h3&gt;&lt;p&gt;考虑如何组合类和对象构成较大的结构。&lt;br&gt;1.结构性类模式：使用继承来组合接口或实现&lt;br&gt;2.结构性对象模式：对象合成实现新功能。&lt;br&gt;
+      &lt;h2 id=&quot;大数据及机器学习学习计划&quot;&gt;&lt;a href=&quot;#大数据及机器学习学习计划&quot; class=&quot;headerlink&quot; title=&quot;大数据及机器学习学习计划&quot;&gt;&lt;/a&gt;大数据及机器学习学习计划&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;编程基础：Python&lt;br&gt;&lt;a hre
     
     </summary>
     
-      <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="学习计划" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/"/>
     
     
-      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="学习" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习-支持向量机</title>
+    <link href="http://yoursite.com/2018/02/05/Mathematical%20Support%20Vector%20Machine/"/>
+    <id>http://yoursite.com/2018/02/05/Mathematical Support Vector Machine/</id>
+    <published>2018-02-05T01:30:00.000Z</published>
+    <updated>2018-12-21T08:13:30.038Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="支持向量机（Support-Vector-Machine，SVM）的基本概念："><a href="#支持向量机（Support-Vector-Machine，SVM）的基本概念：" class="headerlink" title="支持向量机（Support Vector Machine，SVM）的基本概念："></a>支持向量机（Support Vector Machine，SVM）的基本概念：</h3><h5 id="点到超平面的距离"><a href="#点到超平面的距离" class="headerlink" title="点到超平面的距离"></a>点到超平面的距离</h5><p>在分类任务中，为了获取稳健的线性分类器，一个很自然的想法是，找出一条分割线使得两侧样本与该分割线的平均距离足够的远。在欧式空间中，定义一个点𝒙到直线（或者高维空间中的超平面）𝒘^𝑇 𝒙+𝑏=0的距离公式是：<br>            𝑟(𝑥)=  (|𝒘^𝑇 𝒙+𝑏|)/(||𝒘||)<br>在分类问题中，如果这样的分割线或者分割平面能够准确地将样本分开，对于样本{𝒙<em>𝑖,𝑦</em>𝑖}∈𝐷, 𝑦<em>𝑖=±1 而言，若𝑦</em>𝑖=1，则有𝒘^𝑇 𝒙<em>𝒊+𝑏≥1，反之若𝑦</em>𝑖=-1，则有𝒘^𝑇 𝒙_𝒊+𝑏≤−1.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;支持向量机（Support-Vector-Machine，SVM）的基本概念：&quot;&gt;&lt;a href=&quot;#支持向量机（Support-Vector-Machine，SVM）的基本概念：&quot; class=&quot;headerlink&quot; title=&quot;支持向量机（Support 
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -361,6 +553,35 @@
     
       &lt;p&gt;创建几个套皮肤，所有的UI控件 如按钮，滚动条，窗口 都要创建出来。现在需要红色主题，黑色主题，和蓝色主题3套皮肤。&lt;/p&gt;
 &lt;p&gt;接口类：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Button&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ScrollBar&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Window&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;SkinFactory&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; ScrollBar &lt;span class=&quot;title&quot;&gt;createScrollBar&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; Button &lt;span class=&quot;title&quot;&gt;createButton&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; Window &lt;span class=&quot;title&quot;&gt;createWindow&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式目录</title>
+    <link href="http://yoursite.com/2018/01/27/Design%20pattern%20catalog/"/>
+    <id>http://yoursite.com/2018/01/27/Design pattern catalog/</id>
+    <published>2018-01-27T01:30:00.000Z</published>
+    <updated>2018-02-06T14:27:35.863Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="创建性模式："><a href="#创建性模式：" class="headerlink" title="创建性模式："></a>创建性模式：</h3><p>1.类的创建模式——使用继承关系，把类的创建延迟到子类<br>2.对象的创建模式——把对象的创建过程动态地委派给另一个对象<br>    封装要创建的具体类（类的实例）的信息<br>    隐藏这些类（类的实例）被创建和组合的过程</p>
+<p>包含<br>抽象工厂、建造者、工厂方式、原型、单例</p>
+<h3 id="结构性模式："><a href="#结构性模式：" class="headerlink" title="结构性模式："></a>结构性模式：</h3><p>考虑如何组合类和对象构成较大的结构。<br>1.结构性类模式：使用继承来组合接口或实现<br>2.结构性对象模式：对象合成实现新功能。<br><a id="more"></a><br>包含：<br>适配器、桥接、组合、装饰着、外观、轻量、代理</p>
+<h3 id="行为模式："><a href="#行为模式：" class="headerlink" title="行为模式："></a>行为模式：</h3><p>主要解决算法和对象之间的责任分配问题。<br>对象或类的模式<br>它们之间的通信模式。<br>包含：<br>责任链、命令、解释器、迭代、中介者、备忘录、观察者、状态、策略、模板方法、观察者</p>
+<p>工厂方法主要针对一个产品等级结构<br>抽象工厂模式需要面对多个产品等级结构</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;创建性模式：&quot;&gt;&lt;a href=&quot;#创建性模式：&quot; class=&quot;headerlink&quot; title=&quot;创建性模式：&quot;&gt;&lt;/a&gt;创建性模式：&lt;/h3&gt;&lt;p&gt;1.类的创建模式——使用继承关系，把类的创建延迟到子类&lt;br&gt;2.对象的创建模式——把对象的创建过程动态地委派给另一个对象&lt;br&gt;    封装要创建的具体类（类的实例）的信息&lt;br&gt;    隐藏这些类（类的实例）被创建和组合的过程&lt;/p&gt;
+&lt;p&gt;包含&lt;br&gt;抽象工厂、建造者、工厂方式、原型、单例&lt;/p&gt;
+&lt;h3 id=&quot;结构性模式：&quot;&gt;&lt;a href=&quot;#结构性模式：&quot; class=&quot;headerlink&quot; title=&quot;结构性模式：&quot;&gt;&lt;/a&gt;结构性模式：&lt;/h3&gt;&lt;p&gt;考虑如何组合类和对象构成较大的结构。&lt;br&gt;1.结构性类模式：使用继承来组合接口或实现&lt;br&gt;2.结构性对象模式：对象合成实现新功能。&lt;br&gt;
     
     </summary>
     
@@ -527,295 +748,6 @@
 &lt;p&gt;1.基本统计&lt;br&gt;计算两组数据之间的相关性&lt;/p&gt;
 &lt;h3 id=&quot;皮尔森相关系数（Pearson-correlation-coefficient）&quot;&gt;&lt;a href=&quot;#皮尔森相关系数（Pearson-correlation-coefficient）&quot; class=&quot;headerlink&quot; title=&quot;皮尔森相关系数（Pearson correlation coefficient）&quot;&gt;&lt;/a&gt;皮尔森相关系数（Pearson correlation coefficient）&lt;/h3&gt;&lt;p&gt;也称皮尔森积矩相关系数(Pearson product-moment correlation coefficient) ，是一种线性相关系数。皮尔森相关系数是用来反映两个变量线性相关程度的统计量。相关系数用r表示，其中n为样本量，分别为两个变量的观测值和均值。r描述的是两个变量间线性相关强弱的程度。r的绝对值越大表明相关性越强&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://segmentfault.com/img/cGNupC&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://segmentfault.com/img/eOV3Oj&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://segmentfault.com/img/lJqNL&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
-    
-    
-      <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>spark shuffle 调优</title>
-    <link href="http://yoursite.com/2017/08/30/spark%20shuffle%20%E8%B0%83%E4%BC%98/"/>
-    <id>http://yoursite.com/2017/08/30/spark shuffle 调优/</id>
-    <published>2017-08-30T03:30:00.000Z</published>
-    <updated>2017-09-17T12:04:23.244Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="shuffle实现的具体过程"><a href="#shuffle实现的具体过程" class="headerlink" title="shuffle实现的具体过程"></a>shuffle实现的具体过程</h2><p>1.Spark系统在运行含shuffle过程的应用时，Executor进程除了运行task，还要负责写shuffle 数据，给其他Executor提供shuffle数据。<br>    当Executor进程任务过重，导致GC而不能为其 他Executor提供shuffle数据时，会影响任务运行。<br>    这里实际上是利用External Shuffle Service 来提升性能，External shuffle Service是长期存在于NodeManager进程中的一个辅助服务。<br>    通过该服务 来抓取shuffle数据，减少了Executor的压力，在Executor GC的时候也不会影响其他 Executor的任务运行。</p>
-<p>启用方法：</p>
-<h3 id="一-在NodeManager中启动External-shuffle-Service。"><a href="#一-在NodeManager中启动External-shuffle-Service。" class="headerlink" title="一. 在NodeManager中启动External shuffle Service。"></a>一. 在NodeManager中启动External shuffle Service。</h3><pre><code>a. 在“yarn-site.xml”中添加如下配置项：
-&lt;property&gt;
-&lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
-&lt;value&gt;spark_shuffle&lt;/value&gt;
-&lt;/property&gt;
-&lt;property&gt;
-&lt;name&gt;yarn.nodemanager.aux-services.spark_shuffle.class&lt;/name&gt;
-&lt;value&gt;org.apache.spark.network.yarn.YarnShuffleService&lt;/value&gt;
-&lt;/property&gt;
-&lt;property&gt;
-&lt;name&gt;spark.shuffle.service.port&lt;/name&gt;
-&lt;value&gt;7337&lt;/value&gt;
-&lt;/property&gt;
-配置参数描述
-yarn.nodemanager.aux-services  ：NodeManager中一个长期运行的辅助服务，用于提升Shuffle计算性能。
-yarn.nodemanager.auxservices.spark_shuffle.class ：NodeManager中辅助服务对应的类。
-spark.shuffle.service.port ：Shuffle服务监听数据获取请求的端口。可选配置，默认值为“7337”。
-b. 添加依赖的jar包
-拷贝“${SPARK_HOME}/lib/spark-1.3.0-yarn-shuffle.jar”到“${HADOOP_HOME}/share/hadoop/yarn/lib/”目录下。
-c. 重启NodeManager进程，也就启动了External shuffle Service。
-</code></pre><a id="more"></a>
-<h3 id="二-Spark应用使用External-shuffle-Service。"><a href="#二-Spark应用使用External-shuffle-Service。" class="headerlink" title="二. Spark应用使用External shuffle Service。"></a>二. Spark应用使用External shuffle Service。</h3><pre><code>在“spark-defaults.conf”中必须添加如下配置项： 
-    spark.shuffle.service.enabled true 
-    spark.shuffle.service.port 7337 
-说明 
-1.如果1.如果“yarn.nodemanager.aux-services”配置项已存在，则在value中添加 “spark_shuffle”，且用逗号和其他值分开。 
-2.“spark.shuffle.service.port”的值需要和上面“yarn-site.xml”中的值一样。 
-配置参数描述 
-spark.shuffle.service.enabled   ：NodeManager中一个长期运行的辅助服务，用于提升Shuffle 计算性能。默认为false，表示不启用该功能。 
-spark.shuffle.service.port   ：Shuffle服务监听数据获取请求的端口。可选配置，默认值 为“7337”。
-</code></pre><p>Hash Shuffle不足<br>map task会根据reduce的数量（partition） 生成相应的bucket 写shuffle blockFile</p>
-<p>如果map 和reduce数量过多，会写很多blockFile，造成问题1：超过操作系统所能打开最大文件数，问题2：大量随机写随机读</p>
-<p>解决方案：</p>
-<p>1.shuffle 参数：<br>spark.shuffle.consolidateFiles  默认为false<br>如果设置为”true”，在shuffle期间，合并的中间文件将会被创建。创建更少的文件可以提供文件系统的shuffle的效 率。这些shuffle都伴随着大量递归任务。当用ext4和dfs文件系统时，推荐设置为”true”。在ext3中，因为文件系统的限制，这个选项可 能机器（大于8核）降低效率</p>
-<p>2.sort shuffle<br>每个map只写到一个文件，和上面的写到reduce个数个文件不同</p>
-<h2 id="不同算子影响shuffle表现形式不同"><a href="#不同算子影响shuffle表现形式不同" class="headerlink" title="不同算子影响shuffle表现形式不同"></a>不同算子影响shuffle表现形式不同</h2><p>reduceByKey(func, numPartitions=None)<br>也就是，reduceByKey用于对每个key对应的多个value进行merge操作，最重要的是它能够在本地先进行merge操作，并且merge操作可以通过函数自定义。<br><img src="http://oh6ybr0jg.bkt.clouddn.com/reduceByKey.png" alt="此处输入图片的描述"></p>
-<p>groupByKey(numPartitions=None)<br>也就是，groupByKey也是对每个key进行操作，但只生成一个sequence。需要特别注意“Note”中的话，它告诉我们：如果需要对sequence进行aggregation操作（注意，groupByKey本身不能自定义操作函数），那么，选择reduceByKey/aggregateByKey更好。这是因为groupByKey不能自定义函数，我们需要先用groupByKey生成RDD，然后才能对此RDD通过map进行自定义函数操作。<br><img src="http://oh6ybr0jg.bkt.clouddn.com/groupByKey.png" alt="此处输入图片的描述"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;shuffle实现的具体过程&quot;&gt;&lt;a href=&quot;#shuffle实现的具体过程&quot; class=&quot;headerlink&quot; title=&quot;shuffle实现的具体过程&quot;&gt;&lt;/a&gt;shuffle实现的具体过程&lt;/h2&gt;&lt;p&gt;1.Spark系统在运行含shuffle过程的应用时，Executor进程除了运行task，还要负责写shuffle 数据，给其他Executor提供shuffle数据。&lt;br&gt;    当Executor进程任务过重，导致GC而不能为其 他Executor提供shuffle数据时，会影响任务运行。&lt;br&gt;    这里实际上是利用External Shuffle Service 来提升性能，External shuffle Service是长期存在于NodeManager进程中的一个辅助服务。&lt;br&gt;    通过该服务 来抓取shuffle数据，减少了Executor的压力，在Executor GC的时候也不会影响其他 Executor的任务运行。&lt;/p&gt;
-&lt;p&gt;启用方法：&lt;/p&gt;
-&lt;h3 id=&quot;一-在NodeManager中启动External-shuffle-Service。&quot;&gt;&lt;a href=&quot;#一-在NodeManager中启动External-shuffle-Service。&quot; class=&quot;headerlink&quot; title=&quot;一. 在NodeManager中启动External shuffle Service。&quot;&gt;&lt;/a&gt;一. 在NodeManager中启动External shuffle Service。&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;a. 在“yarn-site.xml”中添加如下配置项：
-&amp;lt;property&amp;gt;
-&amp;lt;name&amp;gt;yarn.nodemanager.aux-services&amp;lt;/name&amp;gt;
-&amp;lt;value&amp;gt;spark_shuffle&amp;lt;/value&amp;gt;
-&amp;lt;/property&amp;gt;
-&amp;lt;property&amp;gt;
-&amp;lt;name&amp;gt;yarn.nodemanager.aux-services.spark_shuffle.class&amp;lt;/name&amp;gt;
-&amp;lt;value&amp;gt;org.apache.spark.network.yarn.YarnShuffleService&amp;lt;/value&amp;gt;
-&amp;lt;/property&amp;gt;
-&amp;lt;property&amp;gt;
-&amp;lt;name&amp;gt;spark.shuffle.service.port&amp;lt;/name&amp;gt;
-&amp;lt;value&amp;gt;7337&amp;lt;/value&amp;gt;
-&amp;lt;/property&amp;gt;
-配置参数描述
-yarn.nodemanager.aux-services  ：NodeManager中一个长期运行的辅助服务，用于提升Shuffle计算性能。
-yarn.nodemanager.auxservices.spark_shuffle.class ：NodeManager中辅助服务对应的类。
-spark.shuffle.service.port ：Shuffle服务监听数据获取请求的端口。可选配置，默认值为“7337”。
-b. 添加依赖的jar包
-拷贝“${SPARK_HOME}/lib/spark-1.3.0-yarn-shuffle.jar”到“${HADOOP_HOME}/share/hadoop/yarn/lib/”目录下。
-c. 重启NodeManager进程，也就启动了External shuffle Service。
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
-    
-    
-      <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>spark 机器学习入门(二)</title>
-    <link href="http://yoursite.com/2017/08/29/spark%20%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    <id>http://yoursite.com/2017/08/29/spark 性能优化/</id>
-    <published>2017-08-29T06:30:00.000Z</published>
-    <updated>2018-07-25T16:46:02.230Z</updated>
-    
-    <content type="html"><![CDATA[<h5 id="部署优化："><a href="#部署优化：" class="headerlink" title="部署优化："></a><strong>部署优化：</strong></h5><p>磁盘：<br>挂载磁盘时使用noatime和nodiratime选项减少写的开销</p>
-<p>linux每个文件都会保留3个时间戳<br>用stat 文件名 来查看<br>Acess：文件访问时间<br>Modfiy：内容修改时间<br>Change：文件名修改时间</p>
-<p>参数含义：<br>磁盘下的所有文件不更新访问时间<br><a id="more"></a><br>内存：<br>JVM 内存不建议每个executor 超过200G</p>
-<p>CPU<br>每台机器的Vcore数不建议小于8</p>
-<h2 id="JOB调度："><a href="#JOB调度：" class="headerlink" title="JOB调度："></a><strong>JOB调度：</strong></h2><p>Fail Schedule 可最大程度保证各个Job都有机会获取资源</p>
-<h2 id="数据序列化："><a href="#数据序列化：" class="headerlink" title="数据序列化："></a><strong>数据序列化：</strong></h2><p>Kyro serialization序列化速度更快，结果更紧凑<br>为了更好的性能，需提前注册被序列化的类，否则会存在大量的空间浪费<br>通过spark.serializer指定</p>
-<h2 id="减少内存消耗："><a href="#减少内存消耗：" class="headerlink" title="减少内存消耗："></a><strong>减少内存消耗：</strong></h2><p>尽量使用基本数据类型和数组，避免使用java集合类<br>尽量减少包含大量小对象的嵌套结构<br>Key尽量使用数值或枚举类型而不是字符串<br>RAM小于32GB时，使用-XX:+UseCompressedOops使用4字节（而非8字节）的指针</p>
-<h2 id="调整并行度："><a href="#调整并行度：" class="headerlink" title="调整并行度："></a><strong>调整并行度：</strong></h2><p>调整Map侧并行度<br>对于kafka direct stream 可通过调整Topic的Patition个数调整Spark Map侧并行度<br>对于spark.textFile，通过参数调整</p>
-<p>调整Reduce侧并行度<br>通过spark.default.parallelism设置shuffle时默认并行度</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h5 id=&quot;部署优化：&quot;&gt;&lt;a href=&quot;#部署优化：&quot; class=&quot;headerlink&quot; title=&quot;部署优化：&quot;&gt;&lt;/a&gt;&lt;strong&gt;部署优化：&lt;/strong&gt;&lt;/h5&gt;&lt;p&gt;磁盘：&lt;br&gt;挂载磁盘时使用noatime和nodiratime选项减少写的开销&lt;/p&gt;
-&lt;p&gt;linux每个文件都会保留3个时间戳&lt;br&gt;用stat 文件名 来查看&lt;br&gt;Acess：文件访问时间&lt;br&gt;Modfiy：内容修改时间&lt;br&gt;Change：文件名修改时间&lt;/p&gt;
-&lt;p&gt;参数含义：&lt;br&gt;磁盘下的所有文件不更新访问时间&lt;br&gt;
-    
-    </summary>
-    
-      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
-    
-    
-      <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>开源爬虫介绍</title>
-    <link href="http://yoursite.com/2017/08/05/%E5%BC%80%E6%BA%90%E7%88%AC%E8%99%AB%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://yoursite.com/2017/08/05/开源爬虫介绍/</id>
-    <published>2017-08-05T03:30:00.000Z</published>
-    <updated>2017-10-17T11:10:37.532Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://github.com/Chyroc/WechatSogou" target="_blank" rel="external">https://github.com/Chyroc/WechatSogou</a></p>
-<p> 微信公众号爬虫。基于搜狗微信搜索的微信公众号爬虫接口，可以扩展成基于搜狗搜索的爬虫，返回结果是列表，每一项均是公众号具体信息字典。</p>
-<p> <a href="https://github.com/lanbing510/DouBanSpider" target="_blank" rel="external">https://github.com/lanbing510/DouBanSpider</a><br> 豆瓣读书爬虫。可以爬下豆瓣读书标签下的所有图书，按评分排名依次存储，存储到Excel中，可方便大家筛选搜罗，比如筛选评价人数&gt;1000的高分书籍；可依据不同的主题存储到Excel不同的Sheet ，采用User Agent伪装为浏览器进行爬取，并加入随机延时来更好的模仿浏览器行为，避免爬虫被封。</p>
-<p><a href="https://github.com/LiuRoy/zhihu_spider" target="_blank" rel="external">https://github.com/LiuRoy/zhihu_spider</a><br>知乎爬虫。此项目的功能是爬取知乎用户信息以及人际拓扑关系，爬虫框架使用scrapy，数据存储使用mongo</p>
-<p><a href="https://github.com/airingursb/bilibili-user" target="_blank" rel="external">https://github.com/airingursb/bilibili-user</a><br>Bilibili用户爬虫。总数据数：20119918，抓取字段：用户id，昵称，性别，头像，等级，经验值，粉丝数，生日，地址，注册时间，签名，等级与经验值等。抓取之后生成B站用户数据报告。<br><a id="more"></a></p>
-<p><a href="https://github.com/LiuXingMing/SinaSpider" target="_blank" rel="external">https://github.com/LiuXingMing/SinaSpider</a><br>新浪微博爬虫。主要爬取新浪微博用户的个人信息、微博信息、粉丝和关注。代码获取新浪微博Cookie进行登录，可通过多账号登录来防止新浪的反扒。主要使用 scrapy 爬虫框架</p>
-<p><a href="https://github.com/gnemoug/distribute_crawler" target="_blank" rel="external">https://github.com/gnemoug/distribute_crawler</a><br>小说下载分布式爬虫。使用scrapy,Redis, MongoDB,graphite实现的一个分布式网络爬虫,底层存储mongodb集群,分布式使用redis实现,爬虫状态显示使用graphite实现，主要针对一个小说站点。</p>
-<p><a href="https://github.com/yanzhou/CnkiSpider" target="_blank" rel="external">https://github.com/yanzhou/CnkiSpider</a><br>中国知网爬虫。设置检索条件后，执行src/CnkiSpider.py抓取数据，抓取数据存储在/data目录下，每个数据文件的第一行为字段名称。</p>
-<p><a href="https://github.com/lanbing510/LianJiaSpider" target="_blank" rel="external">https://github.com/lanbing510/LianJiaSpider</a><br>链家网爬虫。爬取北京地区链家历年二手房成交记录。涵盖链家爬虫一文的全部代码，包括链家模拟登录代码。</p>
-<p><a href="https://github.com/taizilongxu/scrapy_jingdong" target="_blank" rel="external">https://github.com/taizilongxu/scrapy_jingdong</a><br>京东爬虫。基于scrapy的京东网站爬虫，保存格式为csv。</p>
-<p><a href="https://github.com/caspartse/QQ-Groups-Spider" target="_blank" rel="external">https://github.com/caspartse/QQ-Groups-Spider</a><br>QQ 群爬虫。批量抓取 QQ 群信息，包括群名称、群号、群人数、群主、群简介等内容，最终生成 XLS(X) / CSV 结果文件。</p>
-<p><a href="https://github.com/hanc00l/wooyun_public" target="_blank" rel="external">https://github.com/hanc00l/wooyun_public</a><br>乌云爬虫。 乌云公开漏洞、知识库爬虫和搜索。全部公开漏洞的列表和每个漏洞的文本内容存在mongodb中，大概约2G内容；如果整站爬全部文本和图片作为离线查询，大概需要10G空间、2小时（10M电信带宽）；爬取全部知识库，总共约500M空间。漏洞搜索使用了Flask作为web server，bootstrap作为前端。</p>
-<p><a href="https://github.com/fankcoder/findtrip" target="_blank" rel="external">https://github.com/fankcoder/findtrip</a><br>机票爬虫（去哪儿和携程网）。Findtrip是一个基于Scrapy的机票爬虫，目前整合了国内两大机票网站（去哪儿 + 携程）。</p>
-<p><a href="https://github.com/leyle/163spider" target="_blank" rel="external">https://github.com/leyle/163spider</a><br>基于requests、MySQLdb、torndb的网易客户端内容爬虫</p>
-<p><a href="https://github.com/fanpei91/doubanspiders" target="_blank" rel="external">https://github.com/fanpei91/doubanspiders</a><br>豆瓣电影、书籍、小组、相册、东西等爬虫集</p>
-<p><a href="https://github.com/LiuXingMing/QQSpider" target="_blank" rel="external">https://github.com/LiuXingMing/QQSpider</a><br>QQ空间爬虫，包括日志、说说、个人信息等，一天可抓取 400 万条数据。</p>
-<p><a href="https://github.com/Shu-Ji/baidu-music-spider" target="_blank" rel="external">https://github.com/Shu-Ji/baidu-music-spider</a><br>百度mp3全站爬虫，使用redis支持断点续传。</p>
-<p><a href="https://github.com/pakoo/tbcrawler" target="_blank" rel="external">https://github.com/pakoo/tbcrawler</a><br>淘宝和天猫的爬虫,可以根据搜索关键词,物品id来抓去页面的信息，数据存储在mongodb。</p>
-<p><a href="https://github.com/benitoro/stockholm" target="_blank" rel="external">https://github.com/benitoro/stockholm</a><br>一个股票数据（沪深）爬虫和选股策略测试框架。根据选定的日期范围抓取所有沪深两市股票的行情数据。支持使用表达式定义选股策略。支持多线程处理。保存数据到JSON文件、CSV文件。</p>
-<p><a href="https://github.com/k1995/BaiduyunSpider" target="_blank" rel="external">https://github.com/k1995/BaiduyunSpider</a><br>百度云盘爬虫</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://github.com/Chyroc/WechatSogou&quot;&gt;https://github.com/Chyroc/WechatSogou&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt; 微信公众号爬虫。基于搜狗微信搜索的微信公众号爬虫接口，可以扩展成基于搜狗搜索的爬虫，返回结果是列表，每一项均是公众号具体信息字典。&lt;/p&gt;
-&lt;p&gt; &lt;a href=&quot;https://github.com/lanbing510/DouBanSpider&quot;&gt;https://github.com/lanbing510/DouBanSpider&lt;/a&gt;&lt;br&gt; 豆瓣读书爬虫。可以爬下豆瓣读书标签下的所有图书，按评分排名依次存储，存储到Excel中，可方便大家筛选搜罗，比如筛选评价人数&amp;gt;1000的高分书籍；可依据不同的主题存储到Excel不同的Sheet ，采用User Agent伪装为浏览器进行爬取，并加入随机延时来更好的模仿浏览器行为，避免爬虫被封。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/LiuRoy/zhihu_spider&quot;&gt;https://github.com/LiuRoy/zhihu_spider&lt;/a&gt;&lt;br&gt;知乎爬虫。此项目的功能是爬取知乎用户信息以及人际拓扑关系，爬虫框架使用scrapy，数据存储使用mongo&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/airingursb/bilibili-user&quot;&gt;https://github.com/airingursb/bilibili-user&lt;/a&gt;&lt;br&gt;Bilibili用户爬虫。总数据数：20119918，抓取字段：用户id，昵称，性别，头像，等级，经验值，粉丝数，生日，地址，注册时间，签名，等级与经验值等。抓取之后生成B站用户数据报告。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
-    
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CDH 安装spark2.2</title>
-    <link href="http://yoursite.com/2017/08/05/CDH%20%E5%AE%89%E8%A3%85spark2.2/"/>
-    <id>http://yoursite.com/2017/08/05/CDH 安装spark2.2/</id>
-    <published>2017-08-05T03:30:00.000Z</published>
-    <updated>2017-10-09T12:11:28.450Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="官方链接"><a href="#官方链接" class="headerlink" title="官方链接"></a>官方链接</h2><p><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html</a></p>
-<p>1.下载Spark2 CSD<br><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging" target="_blank" rel="external">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging</a></p>
-<p>1.1.1 CSD<br>笔者下载2.2版本<br><a href="http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar" target="_blank" rel="external">http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar</a><br><a id="more"></a><br>1.1.2 Parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/</a></p>
-<p>1.1.2.1 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel</a></p>
-<p>1.1.2.2 SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el6.parcel.sha1</a><br>然后将SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha1改名为<br>SPARK2-2.2.0.cloudera1-1.cdh5.12.0.p0.142354-el7.parcel.sha</p>
-<p>1.1.2.3 manifest.json<br><a href="http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json" target="_blank" rel="external">http://archive.cloudera.com/spark2/parcels/2.2.0.cloudera1/manifest.json</a></p>
-<p>停止服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server stop<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent stop</p>
-<p>将csd文件放到<br>/soft/bigdata/clouderamanager/cloudera/csd</p>
-<p>将parcel文件放到<br>/soft/bigdata/clouderamanager/cloudera/parcel-repo</p>
-<p>修改权限<br>chgrp cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar<br>chown cloudera-scm SPARK2_ON_YARN-2.2.0.cloudera1.jar </p>
-<p>开启服务<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-server start<br>/soft/bigdata/clouderamanager/cm-5.10.0/etc/init.d/cloudera-scm-agent start</p>
-<p>主机-&gt; Parcel就能看到spark2了</p>
-<p>分配，激活。然后就可以添加服务了</p>
-<p>如果添加服务不成功需要把jar文件放到/opt/cloudera/csd</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;官方链接&quot;&gt;&lt;a href=&quot;#官方链接&quot; class=&quot;headerlink&quot; title=&quot;官方链接&quot;&gt;&lt;/a&gt;官方链接&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;1.下载Spark2 CSD&lt;br&gt;&lt;a href=&quot;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&quot;&gt;https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;1.1.1 CSD&lt;br&gt;笔者下载2.2版本&lt;br&gt;&lt;a href=&quot;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&quot;&gt;http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar&lt;/a&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="CDH" scheme="http://yoursite.com/categories/CDH/"/>
-    
-    
-      <category term="CDH" scheme="http://yoursite.com/tags/CDH/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>spark 2.2.0源码编译</title>
-    <link href="http://yoursite.com/2017/08/02/spark%202.2.0%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/"/>
-    <id>http://yoursite.com/2017/08/02/spark 2.2.0源码编译/</id>
-    <published>2017-08-02T03:30:00.000Z</published>
-    <updated>2017-08-13T05:14:38.067Z</updated>
-    
-    <content type="html"><![CDATA[<p>官网下载spark源码<br><a href="https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0.tgz" target="_blank" rel="external">https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0.tgz</a><br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-source-download.png" alt="此处输入图片的描述"></p>
-<p>然后在idea中导入spark源码项目(idea maven配置正确)，然后对spark项目build。Build成功后在进行编译。<br>Build过程中遇到问题：</p>
-<p>找不到org.apache.spark.streaming.flume.sink.SparkFlumeProtocol<br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem2.png" alt="此处输入图片的描述"><br>找不到org.apache.spark.sql.catalyst.parser.SqlBaseParser<br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem3.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem4.png" alt="此处输入图片的描述"></p>
-<p>设置maven的参数，否则一直出现outofMemory<br>在apache-maven-3.3.9-bin\bin下面的mvn.cmd文件里的：<br>@REM set MAVEN_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000<br>下面添加<br>set MAVEN_OPTS= -Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m</p>
-<p>在git bash 里编译<br>进入spark源码目录<br>mvn -Pyarn -Phadoop-2.7 -Dhadoop.version=2.7.3 -DskipTests clean package</p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-success.png" alt="此处输入图片的描述"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;官网下载spark源码&lt;br&gt;&lt;a href=&quot;https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0.tgz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://d3kbcqa49mib13.clou
-    
-    </summary>
-    
-      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
-    
-    
-      <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用Ambari安装部署Spark集群</title>
-    <link href="http://yoursite.com/2017/06/30/%E4%BD%BF%E7%94%A8Ambari%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2Spark%E9%9B%86%E7%BE%A4/"/>
-    <id>http://yoursite.com/2017/06/30/使用Ambari安装部署Spark集群/</id>
-    <published>2017-06-30T03:30:00.000Z</published>
-    <updated>2017-09-03T09:42:14.380Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>进入官网，选择产品里面的下载页面或者直接登录<br><a href="https://hortonworks.com/downloads/" target="_blank" rel="external">https://hortonworks.com/downloads/</a><br>选择<br>HDP® 2.6: Ready for the enterprise<br>下面的<br>Automated Install Guide</p>
-<p>因为博主是CENTOS 7<br>在这个页面直接选择：<br>RHEL/CentOS/Oracle Linux 7</p>
-<p>wget  <a href="http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo" target="_blank" rel="external">http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo</a> -O /etc/yum.repos.d/ambari.repo<br>yum repolist</p>
-<p>yum install ambari-server</p>
-<p>进入​Setup Options<br>ambari-server setup –j /usr/java/default<br>提示参数只能是一个，看来jdk要后设置</p>
-<p>ambari-server setup<br>各种回车，jdk的时候选择安装1.8的<br>如果输入自定义的jdk要注意权限问题</p>
-<h2 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h2><p>ambari-server start</p>
-<p>查看：<br>[root@storm01 storm]# lsof -i:8080<br>COMMAND  PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME<br>java    7648 storm 1438u  IPv6 124470      0t0  TCP *:webcache (LISTEN)</p>
-<p>关闭防火墙<br>systemctl disable firewalld.service<br>systemctl stop firewalld.service    </p>
-<a id="more"></a>
-<h2 id="在浏览器输入http-storm01-8080即可进入UI"><a href="#在浏览器输入http-storm01-8080即可进入UI" class="headerlink" title="在浏览器输入http://storm01:8080即可进入UI"></a>在浏览器输入<a href="http://storm01:8080即可进入UI" target="_blank" rel="external">http://storm01:8080即可进入UI</a></h2><p>用户密码都为admin</p>
-<p>在每个机器上安装agent<br>yum install -y ambari-agent</p>
-<p>修改配置文件<br> vi /etc/ambari-agent/conf/ambari-agent.ini<br> hostname=localhost更改为<br> hostname=storm01</p>
-<p> 启动agent<br> service ambari-agent start</p>
-<h2 id="设置hive"><a href="#设置hive" class="headerlink" title="设置hive"></a>设置hive</h2><p>用户密码都为hive</p>
-<p>需要PostgreSQL支持远程连接<br>find / -name pg_hba.conf</p>
-<p>vi /var/lib/pgsql/data/pg_hba.conf<br>将<br>local   all   postgres                                     peer改成<br>local   all   postgres                                     trust<br>host    all   postgres             127.0.0.1/32            ident改成<br>host    all   postgres             127.0.0.1/32            trust<br>local  all  ambari,mapred md5改成<br>local  all  ambari,mapred,hive trust<br>host  all   ambari,mapred 0.0.0.0/0  md5改成<br>host  all   ambari,mapred,hive 0.0.0.0/0  md5<br>host  all   ambari,mapred ::/0 md5改成<br>host  all   ambari,mapred,hive ::/0 md5</p>
-<p>重启数据库<br>service postgresql restart</p>
-<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p>lsof -i:5432</p>
-<p>去仓库下载postgresql</p>
-<p><a href="http://mvnrepository.com/" target="_blank" rel="external">http://mvnrepository.com/</a></p>
-<p>下载</p>
-<p>PostgreSQL JDBC Driver JDBC 4.2<br>的<br>9.2-1002-jdbc4</p>
-<p>或者直接输入：<br>wget <a href="http://central.maven.org/maven2/org/postgresql/postgresql/9.2-1002-jdbc4/postgresql-9.2-1002-jdbc4.jar" target="_blank" rel="external">http://central.maven.org/maven2/org/postgresql/postgresql/9.2-1002-jdbc4/postgresql-9.2-1002-jdbc4.jar</a></p>
-<p>ambari-server setup –jdbc-db=postgres –jdbc-driver=/root/postgresql-9.2-1002-jdbc4.jar</p>
-<p>创建用户<br>psql -U postgres -d postgres<br>create user hive;<br>alter user hive password ‘hive’;<br>create database hive;<br>grant all on database hive to hive;<br>alter database hive owner to hive;</p>
-<p>此时test ConnectionConnection 就可以测试成功</p>
-<p>设置Ambari Metrics和Smart Sense用户密码都为admin</p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariInstallOptions.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariConfirmHostsing.png" alt="此处输入图片的描述"><br>如果发现失败，需要设置/etc/hosts文件<br>192.168.247.180    spark01<br>192.168.247.181    spark02<br>192.168.247.182    spark03</p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariConfirmHosts.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariChooseServices1.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariChooseServices2.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariAssignMasters.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariAssignSlavesandClients.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariCustomize1.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariCustomize2.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariCustomize3.png" alt="此处输入图片的描述"></p>
-<p>安装完成<br><img src="http://oh6ybr0jg.bkt.clouddn.com/AmbariInstallSuccess.png" alt="此处输入图片的描述"></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;下载&quot;&gt;&lt;a href=&quot;#下载&quot; class=&quot;headerlink&quot; title=&quot;下载&quot;&gt;&lt;/a&gt;下载&lt;/h2&gt;&lt;p&gt;进入官网，选择产品里面的下载页面或者直接登录&lt;br&gt;&lt;a href=&quot;https://hortonworks.com/downloads/&quot;&gt;https://hortonworks.com/downloads/&lt;/a&gt;&lt;br&gt;选择&lt;br&gt;HDP® 2.6: Ready for the enterprise&lt;br&gt;下面的&lt;br&gt;Automated Install Guide&lt;/p&gt;
-&lt;p&gt;因为博主是CENTOS 7&lt;br&gt;在这个页面直接选择：&lt;br&gt;RHEL/CentOS/Oracle Linux 7&lt;/p&gt;
-&lt;p&gt;wget  &lt;a href=&quot;http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo&quot;&gt;http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo&lt;/a&gt; -O /etc/yum.repos.d/ambari.repo&lt;br&gt;yum repolist&lt;/p&gt;
-&lt;p&gt;yum install ambari-server&lt;/p&gt;
-&lt;p&gt;进入​Setup Options&lt;br&gt;ambari-server setup –j /usr/java/default&lt;br&gt;提示参数只能是一个，看来jdk要后设置&lt;/p&gt;
-&lt;p&gt;ambari-server setup&lt;br&gt;各种回车，jdk的时候选择安装1.8的&lt;br&gt;如果输入自定义的jdk要注意权限问题&lt;/p&gt;
-&lt;h2 id=&quot;启动：&quot;&gt;&lt;a href=&quot;#启动：&quot; class=&quot;headerlink&quot; title=&quot;启动：&quot;&gt;&lt;/a&gt;启动：&lt;/h2&gt;&lt;p&gt;ambari-server start&lt;/p&gt;
-&lt;p&gt;查看：&lt;br&gt;[root@storm01 storm]# lsof -i:8080&lt;br&gt;COMMAND  PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME&lt;br&gt;java    7648 storm 1438u  IPv6 124470      0t0  TCP *:webcache (LISTEN)&lt;/p&gt;
-&lt;p&gt;关闭防火墙&lt;br&gt;systemctl disable firewalld.service&lt;br&gt;systemctl stop firewalld.service    &lt;/p&gt;
     
     </summary>
     

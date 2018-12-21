@@ -294,6 +294,921 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/spark shuffle 调优/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/30/spark shuffle 调优/" itemprop="url">
+                  spark shuffle 调优
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-30T11:30:00+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/08/30/spark shuffle 调优/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/30/spark shuffle 调优/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="shuffle实现的具体过程"><a href="#shuffle实现的具体过程" class="headerlink" title="shuffle实现的具体过程"></a>shuffle实现的具体过程</h2><p>1.Spark系统在运行含shuffle过程的应用时，Executor进程除了运行task，还要负责写shuffle 数据，给其他Executor提供shuffle数据。<br>    当Executor进程任务过重，导致GC而不能为其 他Executor提供shuffle数据时，会影响任务运行。<br>    这里实际上是利用External Shuffle Service 来提升性能，External shuffle Service是长期存在于NodeManager进程中的一个辅助服务。<br>    通过该服务 来抓取shuffle数据，减少了Executor的压力，在Executor GC的时候也不会影响其他 Executor的任务运行。</p>
+<p>启用方法：</p>
+<h3 id="一-在NodeManager中启动External-shuffle-Service。"><a href="#一-在NodeManager中启动External-shuffle-Service。" class="headerlink" title="一. 在NodeManager中启动External shuffle Service。"></a>一. 在NodeManager中启动External shuffle Service。</h3><pre><code>a. 在“yarn-site.xml”中添加如下配置项：
+&lt;property&gt;
+&lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+&lt;value&gt;spark_shuffle&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+&lt;name&gt;yarn.nodemanager.aux-services.spark_shuffle.class&lt;/name&gt;
+&lt;value&gt;org.apache.spark.network.yarn.YarnShuffleService&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+&lt;name&gt;spark.shuffle.service.port&lt;/name&gt;
+&lt;value&gt;7337&lt;/value&gt;
+&lt;/property&gt;
+配置参数描述
+yarn.nodemanager.aux-services  ：NodeManager中一个长期运行的辅助服务，用于提升Shuffle计算性能。
+yarn.nodemanager.auxservices.spark_shuffle.class ：NodeManager中辅助服务对应的类。
+spark.shuffle.service.port ：Shuffle服务监听数据获取请求的端口。可选配置，默认值为“7337”。
+b. 添加依赖的jar包
+拷贝“${SPARK_HOME}/lib/spark-1.3.0-yarn-shuffle.jar”到“${HADOOP_HOME}/share/hadoop/yarn/lib/”目录下。
+c. 重启NodeManager进程，也就启动了External shuffle Service。
+</code></pre>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/08/30/spark shuffle 调优/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/29/spark 性能优化/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/29/spark 性能优化/" itemprop="url">
+                  spark 机器学习入门(二)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-29T14:30:00+08:00">
+                2017-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/08/29/spark 性能优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/29/spark 性能优化/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h5 id="部署优化："><a href="#部署优化：" class="headerlink" title="部署优化："></a><strong>部署优化：</strong></h5><p>磁盘：<br>挂载磁盘时使用noatime和nodiratime选项减少写的开销</p>
+<p>linux每个文件都会保留3个时间戳<br>用stat 文件名 来查看<br>Acess：文件访问时间<br>Modfiy：内容修改时间<br>Change：文件名修改时间</p>
+<p>参数含义：<br>磁盘下的所有文件不更新访问时间<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/08/29/spark 性能优化/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/05/开源爬虫介绍/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/05/开源爬虫介绍/" itemprop="url">
+                  开源爬虫介绍
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-05T11:30:00+08:00">
+                2017-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/08/05/开源爬虫介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/05/开源爬虫介绍/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="https://github.com/Chyroc/WechatSogou">https://github.com/Chyroc/WechatSogou</a></p>
+<p> 微信公众号爬虫。基于搜狗微信搜索的微信公众号爬虫接口，可以扩展成基于搜狗搜索的爬虫，返回结果是列表，每一项均是公众号具体信息字典。</p>
+<p> <a href="https://github.com/lanbing510/DouBanSpider">https://github.com/lanbing510/DouBanSpider</a><br> 豆瓣读书爬虫。可以爬下豆瓣读书标签下的所有图书，按评分排名依次存储，存储到Excel中，可方便大家筛选搜罗，比如筛选评价人数&gt;1000的高分书籍；可依据不同的主题存储到Excel不同的Sheet ，采用User Agent伪装为浏览器进行爬取，并加入随机延时来更好的模仿浏览器行为，避免爬虫被封。</p>
+<p><a href="https://github.com/LiuRoy/zhihu_spider">https://github.com/LiuRoy/zhihu_spider</a><br>知乎爬虫。此项目的功能是爬取知乎用户信息以及人际拓扑关系，爬虫框架使用scrapy，数据存储使用mongo</p>
+<p><a href="https://github.com/airingursb/bilibili-user">https://github.com/airingursb/bilibili-user</a><br>Bilibili用户爬虫。总数据数：20119918，抓取字段：用户id，昵称，性别，头像，等级，经验值，粉丝数，生日，地址，注册时间，签名，等级与经验值等。抓取之后生成B站用户数据报告。<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/08/05/开源爬虫介绍/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/05/CDH 安装spark2.2/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/05/CDH 安装spark2.2/" itemprop="url">
+                  CDH 安装spark2.2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-05T11:30:00+08:00">
+                2017-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/08/05/CDH 安装spark2.2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/05/CDH 安装spark2.2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="官方链接"><a href="#官方链接" class="headerlink" title="官方链接"></a>官方链接</h2><p><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_installing.html</a></p>
+<p>1.下载Spark2 CSD<br><a href="https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging">https://www.cloudera.com/documentation/spark2/latest/topics/spark2_packaging.html#packaging</a></p>
+<p>1.1.1 CSD<br>笔者下载2.2版本<br><a href="http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar">http://archive.cloudera.com/spark2/csd/SPARK2_ON_YARN-2.2.0.cloudera1.jar</a><br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/08/05/CDH 安装spark2.2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/spark 2.2.0源码编译/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/02/spark 2.2.0源码编译/" itemprop="url">
+                  spark 2.2.0源码编译
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-02T11:30:00+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/08/02/spark 2.2.0源码编译/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/02/spark 2.2.0源码编译/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>官网下载spark源码<br><a href="https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0.tgz" target="_blank" rel="external">https://d3kbcqa49mib13.cloudfront.net/spark-2.2.0.tgz</a><br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-source-download.png" alt="此处输入图片的描述"></p>
+<p>然后在idea中导入spark源码项目(idea maven配置正确)，然后对spark项目build。Build成功后在进行编译。<br>Build过程中遇到问题：</p>
+<p>找不到org.apache.spark.streaming.flume.sink.SparkFlumeProtocol<br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem2.png" alt="此处输入图片的描述"><br>找不到org.apache.spark.sql.catalyst.parser.SqlBaseParser<br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem3.png" alt="此处输入图片的描述"><br><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-problem4.png" alt="此处输入图片的描述"></p>
+<p>设置maven的参数，否则一直出现outofMemory<br>在apache-maven-3.3.9-bin\bin下面的mvn.cmd文件里的：<br>@REM set MAVEN_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000<br>下面添加<br>set MAVEN_OPTS= -Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m</p>
+<p>在git bash 里编译<br>进入spark源码目录<br>mvn -Pyarn -Phadoop-2.7 -Dhadoop.version=2.7.3 -DskipTests clean package</p>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/spark-idea-build-success.png" alt="此处输入图片的描述"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/30/使用Ambari安装部署Spark集群/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/30/使用Ambari安装部署Spark集群/" itemprop="url">
+                  使用Ambari安装部署Spark集群
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-30T11:30:00+08:00">
+                2017-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spark/" itemprop="url" rel="index">
+                    <span itemprop="name">spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/06/30/使用Ambari安装部署Spark集群/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/30/使用Ambari安装部署Spark集群/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>进入官网，选择产品里面的下载页面或者直接登录<br><a href="https://hortonworks.com/downloads/">https://hortonworks.com/downloads/</a><br>选择<br>HDP® 2.6: Ready for the enterprise<br>下面的<br>Automated Install Guide</p>
+<p>因为博主是CENTOS 7<br>在这个页面直接选择：<br>RHEL/CentOS/Oracle Linux 7</p>
+<p>wget  <a href="http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo">http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.5.0.3/ambari.repo</a> -O /etc/yum.repos.d/ambari.repo<br>yum repolist</p>
+<p>yum install ambari-server</p>
+<p>进入​Setup Options<br>ambari-server setup –j /usr/java/default<br>提示参数只能是一个，看来jdk要后设置</p>
+<p>ambari-server setup<br>各种回车，jdk的时候选择安装1.8的<br>如果输入自定义的jdk要注意权限问题</p>
+<h2 id="启动："><a href="#启动：" class="headerlink" title="启动："></a>启动：</h2><p>ambari-server start</p>
+<p>查看：<br>[root@storm01 storm]# lsof -i:8080<br>COMMAND  PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME<br>java    7648 storm 1438u  IPv6 124470      0t0  TCP *:webcache (LISTEN)</p>
+<p>关闭防火墙<br>systemctl disable firewalld.service<br>systemctl stop firewalld.service    </p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/06/30/使用Ambari安装部署Spark集群/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/25/phoenix创建二级索引/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -852,926 +1767,6 @@
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/05/02/kafka源码阅读/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/18/CDH phoenix安装/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/18/CDH phoenix安装/" itemprop="url">
-                  CDH phoenix安装
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-18T11:30:00+08:00">
-                2017-04-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CDH/" itemprop="url" rel="index">
-                    <span itemprop="name">CDH</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/04/18/CDH phoenix安装/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/18/CDH phoenix安装/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="首先下载jdk-略"><a href="#首先下载jdk-略" class="headerlink" title="首先下载jdk 略"></a>首先下载jdk 略</h3><p>安装maven</p>
-<h2 id="下载yum源"><a href="#下载yum源" class="headerlink" title="下载yum源"></a>下载yum源</h2><p>wget <a href="http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo">http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo</a> -O /etc/yum.repos.d/epel-apache-maven.repo</p>
-<h2 id="安装maven："><a href="#安装maven：" class="headerlink" title="安装maven："></a>安装maven：</h2><p>yum -y install apache-maven</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/18/CDH phoenix安装/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/18/CDH oozie 安装/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/18/CDH oozie 安装/" itemprop="url">
-                  CDH oozie
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-18T11:30:00+08:00">
-                2017-04-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CDH/" itemprop="url" rel="index">
-                    <span itemprop="name">CDH</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/04/18/CDH oozie 安装/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/18/CDH oozie 安装/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>注：本次oozie是安装到自定义的集群上，因为其他节点都是用CDH手动包安装的，不是CDH自动一键式安装方式</p>
-<p>下载CDH的oozie ，已经编译好，无需编译<br>本次安装选择了下面网址的CDH 5.7.0 版本CDH<br><a href="https://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_vd_cdh_package_tarball_57.html#concept_0vc_ddn_yk" target="_blank" rel="external">https://www.cloudera.com/documentation/enterprise/release-notes/topics/cdh_vd_cdh_package_tarball_57.html#concept_0vc_ddn_yk</a></p>
-<p>Linux机器上执行如下命令下载：<br>wget <a href="https://archive.cloudera.com/cdh5/cdh/5/oozie-4.1.0-cdh5.7.0.tar.gz" target="_blank" rel="external">https://archive.cloudera.com/cdh5/cdh/5/oozie-4.1.0-cdh5.7.0.tar.gz</a></p>
-<p>解压后将如下内容添加到core-site.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">vi $HADOOP_HOME/etc/hadoop/core-site.xml</div><div class="line"> </div><div class="line"> &lt;property&gt;</div><div class="line">    &lt;name&gt;hadoop.proxyuser.root.hosts&lt;/name&gt;</div><div class="line">    &lt;value&gt;hadoop000,hadoop001,hadoop002&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div><div class="line">&lt;property&gt;</div><div class="line">    &lt;name&gt;hadoop.proxyuser.root.groups&lt;/name&gt;</div><div class="line">    &lt;value&gt;*&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure></p>
-<p>注意proxyuser后面那个root是使用oozie的用户，hadoop000,hadoop001,hadoop002是集群的主机</p>
-<p>将oozie添加到环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export OOIZE_HOME=/home/app/oozie-4.1.0-cdh5.7.0</div><div class="line">export PATH=$PATH:$OOIZE_HOME/bin:$PATH</div></pre></td></tr></table></figure></p>
-<p>添加以下内容到oozie配置文件，$OOIZE_HOME/conf/oozie-site.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&lt;property&gt;</div><div class="line">    &lt;name&gt;oozie.service.HadoopAccessorService.hadoop.configurations&lt;/name&gt;</div><div class="line">    &lt;value&gt;*=/root/app/hadoop-2.6.0-cdh5.7.0/etc/hadoop&lt;/value&gt;</div><div class="line">    &lt;description&gt;</div><div class="line">        Comma separated AUTHORITY=HADOOP_CONF_DIR, where AUTHORITY is the HOST:PORT of</div><div class="line">        the Hadoop service (JobTracker, HDFS). The wildcard &apos;*&apos; configuration is</div><div class="line">        used when there is no exact match for an authority. The HADOOP_CONF_DIR contains</div><div class="line">        the relevant Hadoop *-site.xml files. If the path is relative is looked within</div><div class="line">        the Oozie configuration directory; though the path can be absolute (i.e. to point</div><div class="line">        to Hadoop client conf/ directories in the local filesystem.</div><div class="line">    &lt;/description&gt;</div><div class="line">&lt;/property&gt;</div><div class="line">&lt;property&gt;</div><div class="line">        &lt;name&gt;oozie.service.JPAService.jdbc.driver&lt;/name&gt;</div><div class="line">        &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line"></div><div class="line">    &lt;property&gt;</div><div class="line">        &lt;name&gt;oozie.service.JPAService.jdbc.url&lt;/name&gt;</div><div class="line">        &lt;value&gt;jdbc:mysql://localhost:3306/oozie?createDatabaseIfNotExist=true&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line"></div><div class="line">    &lt;property&gt;</div><div class="line">        &lt;name&gt;oozie.service.JPAService.jdbc.username&lt;/name&gt;</div><div class="line">        &lt;value&gt;root&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">     &lt;property&gt;</div><div class="line">        &lt;name&gt;oozie.service.JPAService.jdbc.password&lt;/name&gt;</div><div class="line">        &lt;value&gt;123456&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">    &lt;property&gt;</div><div class="line">    &lt;name&gt;oozie.processing.timezone&lt;/name&gt;</div><div class="line">    &lt;value&gt;GMT+0800&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure></p>
-<p>在解压oozie二进制发行包的目录中，解压hadooplibs发行包，也就是oozie-hadooplibs-4.1.0-cdh5.7.0.tar.gz<br>[hadoop@h71 oozie-4.1.0-cdh5.5.2]$ tar -zxvf oozie-hadooplibs-4.1.0-cdh5.5.2.tar.gz    </p>
-<p>在oozie的解压目录下创建libext目录。并将hadooplibs下的jar包拷贝到这个目录里，需要注意的是hadooplibs目录下有个文件夹hadooplib-2.6.0-cdh5.7.0.oozie-4.1.0-cdh5.7.0  hadooplib-2.6.0-mr1-cdh5.7.0.oozie-4.1.0-cdh5.7.0；后者对应于mapreduce1，所以我们拷贝第一个文件夹下的jar包即可。<br>上传ext文件到hadooplibs<br>上传mysql的驱动文件到hadooplibs<br>具体上传什么版本的ext可以看oozie-setup.sh脚本里指定的ext-后面的版本号</p>
-<p>将hadooplibs里面的文件拷贝到libext</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">[root@hadoop000 libext]# ls /home/app/oozie-4.1.0-cdh5.7.0/libext</div><div class="line">activation-1.1.jar                     commons-digester-1.8.jar               hadoop-aws-2.6.0-cdh5.7.0.jar                         jackson-annotations-2.2.3.jar        netty-all-4.0.23.Final.jar</div><div class="line">apacheds-i18n-2.0.0-M15.jar            commons-httpclient-3.1.jar             hadoop-client-2.6.0-cdh5.7.0.jar                      jackson-core-2.2.3.jar               paranamer-2.3.jar</div><div class="line">apacheds-kerberos-codec-2.0.0-M15.jar  commons-io-2.4.jar                     hadoop-common-2.6.0-cdh5.7.0.jar                      jackson-core-asl-1.8.8.jar           protobuf-java-2.5.0.jar</div><div class="line">api-asn1-api-1.0.0-M20.jar             commons-lang-2.4.jar                   hadoop-hdfs-2.6.0-cdh5.7.0.jar                        jackson-databind-2.2.3.jar           servlet-api-2.5.jar</div><div class="line">api-util-1.0.0-M20.jar                 commons-logging-1.1.jar                hadoop-mapreduce-client-app-2.6.0-cdh5.7.0.jar        jackson-jaxrs-1.8.8.jar              slf4j-api-1.7.5.jar</div><div class="line">avro-1.7.6-cdh5.7.0.jar                commons-math3-3.1.1.jar                hadoop-mapreduce-client-common-2.6.0-cdh5.7.0.jar     jackson-mapper-asl-1.8.8.jar         slf4j-log4j12-1.7.5.jar</div><div class="line">aws-java-sdk-core-1.10.6.jar           commons-net-3.1.jar                    hadoop-mapreduce-client-core-2.6.0-cdh5.7.0.jar       jackson-xc-1.8.8.jar                 snappy-java-1.0.4.1.jar</div><div class="line">aws-java-sdk-kms-1.10.6.jar            curator-client-2.7.1.jar               hadoop-mapreduce-client-jobclient-2.6.0-cdh5.7.0.jar  jaxb-api-2.2.2.jar                   stax-api-1.0-2.jar</div><div class="line">aws-java-sdk-s3-1.10.6.jar             curator-framework-2.7.1.jar            hadoop-mapreduce-client-shuffle-2.6.0-cdh5.7.0.jar    jersey-client-1.9.jar                xercesImpl-2.10.0.jar</div><div class="line">commons-beanutils-1.7.0.jar            curator-recipes-2.7.1.jar              hadoop-yarn-api-2.6.0-cdh5.7.0.jar                    jersey-core-1.9.jar                  xml-apis-1.4.01.jar</div><div class="line">commons-beanutils-core-1.8.0.jar       ext-2.2                                hadoop-yarn-client-2.6.0-cdh5.7.0.jar                 jetty-util-6.1.26.cloudera.2.jar     xmlenc-0.52.jar</div><div class="line">commons-cli-1.2.jar                    ext-2.2.zip                            hadoop-yarn-common-2.6.0-cdh5.7.0.jar                 jsr305-3.0.0.jar                     xz-1.0.jar</div><div class="line">commons-codec-1.4.jar                  gson-2.2.4.jar                         hadoop-yarn-server-common-2.6.0-cdh5.7.0.jar          leveldbjni-all-1.8.jar               zookeeper-3.4.5-cdh5.7.0.jar</div><div class="line">commons-collections-3.2.2.jar          guava-11.0.2.jar                       htrace-core4-4.0.1-incubating.jar                     log4j-1.2.17.jar</div><div class="line">commons-compress-1.4.1.jar             hadoop-annotations-2.6.0-cdh5.7.0.jar  httpclient-4.2.5.jar                                  mysql-connector-java-5.1.33-bin.jar</div><div class="line">commons-configuration-1.6.jar          hadoop-auth-2.6.0-cdh5.7.0.jar         httpcore-4.2.5.jar                                    netty-3.6.2.Final.jar</div></pre></td></tr></table></figure>
-<p>使用命令创建数据库<br>bin/oozie-setup.sh db create -run oozie.sql</p>
-<p>编译war包<br> bin/oozie-setup.sh prepare-war</p>
-<p> 在$oozie_home下，有2个sharelib压缩包，分别是<br> oozie-sharelib-4.1.0-cdh5.7.0.tar.gz 和oozie-sharelib-4.1.0-cdh5.7.0-yarn.tar.gz</p>
-<p> 很明显，我们必须拷贝第二个带yarn的压缩包（前边的是1.0版本的，不带yarn的）<br> bin/oozie-setup.sh sharelib create -fs hdfs://hadoop000:9000 -locallib oozie-sharelib-4.1.0-cdh5.7.0-yarn.tar.gz</p>
-<p>重启hadoop</p>
-<p>启动oozie</p>
-<p>bin/oozied.sh start<br>启动后，访问网址<a href="http://hadoop000:11000/oozie/" target="_blank" rel="external">http://hadoop000:11000/oozie/</a></p>
-<p>测试OOZIE</p>
-<p>解压<br>tar -zxvf oozie-examples.tar.gz<br>进入<br>cd examples/apps</p>
-<p>以map-reduce目录为例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">[root@hadoop000 map-reduce]# vi job.properties </div><div class="line">#</div><div class="line"># Licensed to the Apache Software Foundation (ASF) under one</div><div class="line"># or more contributor license agreements.  See the NOTICE file</div><div class="line"># distributed with this work for additional information</div><div class="line"># regarding copyright ownership.  The ASF licenses this file</div><div class="line"># to you under the Apache License, Version 2.0 (the</div><div class="line"># &quot;License&quot;); you may not use this file except in compliance</div><div class="line"># with the License.  You may obtain a copy of the License at</div><div class="line">#</div><div class="line">#      http://www.apache.org/licenses/LICENSE-2.0</div><div class="line">#</div><div class="line"># Unless required by applicable law or agreed to in writing, software</div><div class="line"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</div><div class="line"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</div><div class="line"># See the License for the specific language governing permissions and</div><div class="line"># limitations under the License.</div><div class="line">#</div><div class="line"></div><div class="line">nameNode=hdfs://hadoop000:9000</div><div class="line">jobTracker=hadoop000:8032</div><div class="line">queueName=default</div><div class="line">examplesRoot=examples</div><div class="line"></div><div class="line">oozie.wf.application.path=$&#123;nameNode&#125;/user/$&#123;user.name&#125;/$&#123;examplesRoot&#125;/apps/map-reduce/workflow.xml</div><div class="line">outputDir=map-reduce</div></pre></td></tr></table></figure></p>
-<p>修改workflow.xml </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">[root@hadoop000 map-reduce]# vi workflow.xml </div><div class="line">&lt;!--</div><div class="line">  Licensed to the Apache Software Foundation (ASF) under one</div><div class="line">  or more contributor license agreements.  See the NOTICE file</div><div class="line">  distributed with this work for additional information</div><div class="line">  regarding copyright ownership.  The ASF licenses this file</div><div class="line">  to you under the Apache License, Version 2.0 (the</div><div class="line">  &quot;License&quot;); you may not use this file except in compliance</div><div class="line">  with the License.  You may obtain a copy of the License at</div><div class="line"></div><div class="line">       http://www.apache.org/licenses/LICENSE-2.0</div><div class="line"></div><div class="line">  Unless required by applicable law or agreed to in writing, software</div><div class="line">  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</div><div class="line">  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</div><div class="line">  See the License for the specific language governing permissions and</div><div class="line">  limitations under the License.</div><div class="line">--&gt;</div><div class="line">&lt;workflow-app xmlns=&quot;uri:oozie:workflow:0.2&quot; name=&quot;map-reduce-wf&quot;&gt;</div><div class="line">    &lt;start to=&quot;mr-node&quot;/&gt;</div><div class="line">    &lt;action name=&quot;mr-node&quot;&gt;</div><div class="line">        &lt;map-reduce&gt;</div><div class="line">            &lt;job-tracker&gt;$&#123;jobTracker&#125;&lt;/job-tracker&gt;</div><div class="line">            &lt;name-node&gt;$&#123;nameNode&#125;&lt;/name-node&gt;</div><div class="line">            &lt;prepare&gt;</div><div class="line">                &lt;delete path=&quot;$&#123;nameNode&#125;/user/$&#123;wf:user()&#125;/$&#123;examplesRoot&#125;/output-data/$&#123;outputDir&#125;&quot;/&gt;</div><div class="line">            &lt;/prepare&gt;</div><div class="line">            &lt;configuration&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.job.queue.name&lt;/name&gt;</div><div class="line">                    &lt;value&gt;$&#123;queueName&#125;&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.mapper.class&lt;/name&gt;</div><div class="line">                    &lt;value&gt;org.apache.oozie.example.SampleMapper&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.reducer.class&lt;/name&gt;</div><div class="line">                    &lt;value&gt;org.apache.oozie.example.SampleReducer&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.map.tasks&lt;/name&gt;</div><div class="line">                    &lt;value&gt;1&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.input.dir&lt;/name&gt;</div><div class="line">                    &lt;value&gt;/user/root/$&#123;examplesRoot&#125;/input-data/text&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.output.dir&lt;/name&gt;</div><div class="line">                    &lt;value&gt;/user/root/$&#123;examplesRoot&#125;/output-data/$&#123;outputDir&#125;&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">            &lt;/configuration&gt;</div><div class="line">        &lt;/map-reduce&gt;</div><div class="line">        &lt;ok to=&quot;end&quot;/&gt;</div><div class="line">        &lt;error to=&quot;fail&quot;/&gt;</div><div class="line">    &lt;/action&gt;</div><div class="line">    &lt;kill name=&quot;fail&quot;&gt;</div><div class="line">        &lt;message&gt;Map/Reduce failed, error message[$&#123;wf:errorMessage(wf:lastErrorNode())&#125;]&lt;/message&gt;</div><div class="line">    &lt;/kill&gt;</div><div class="line">    &lt;end name=&quot;end&quot;/</div></pre></td></tr></table></figure>
-<p>上传文件<br>hadoop fs -put examples/ /user/root</p>
-<p>启动</p>
-<p>[root@hadoop000 oozie-4.1.0-cdh5.7.0]# bin/oozie job -oozie <a href="http://hadoop000:11000/oozie" target="_blank" rel="external">http://hadoop000:11000/oozie</a> -config examples/apps/map-reduce/job.properties -run<br>job: 0000000-180830181747338-oozie-root-W</p>
-<p>杀掉job<br>bin/oozie job -oozie <a href="http://hadoop000:11000/oozie" target="_blank" rel="external">http://hadoop000:11000/oozie</a> -kill 0000000-180830181747338-oozie-root-W</p>
-<p>如果启动后发现时间不对，需要修改时间<br>vi /home/app/oozie-4.1.0-cdh5.7.0/src/webapp/src/main/webapp/oozie-console.js</p>
-<p>function getTimeZone() {<br>Ext.state.Manager.setProvider(new Ext.state.CookieProvider());<br>return Ext.state.Manager.get(“TimezoneId”,”GMT+0800”);<br>}</p>
-<p>Oozie重启步骤：<br>    1.进入oozie目录<br>    2.将Oozie停止运行./bin/oozie-stop.sh<br>    3.重新进行打包war包 ./bin/oozie-setup.sh prepare-war<br>    4.重新打开Oozie：./bin/oozie-start.sh</p>
-<p>另外在修改web显示的时间<br><img src="http://oh6ybr0jg.bkt.clouddn.com/changeoozietime.png" alt="此处输入图片的描述"></p>
-<p>oozie添加告警<br>配置oozie-site.xml文件<br> <property><br>        <name>oozie.email.smtp.host</name> <!--邮件账户的smtp服务器地址--><br>        <value>smtp.163.com</value><br>    </property><br>    <property><br>        <name>oozie.email.from.address</name> <!--邮件账户的发送者邮箱地址--><br>        <value>test@163.com</value><br>    </property><br>    <property><br>        <name>oozie.email.smtp.auth</name> <!--是否接受安全认证，根据163邮箱的要求，选择true--><br>        <value>true</value><br>    </property><br>    <property><br>        <name>oozie.email.smtp.username</name> <!--邮件账户的用户名--><br>        <value>test@163.com</value><br>    </property><br>    <property><br>        <name>oozie.email.smtp.password</name> <!--邮件账户的密码--><br>        <value>123456</value><br>    </property></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;workflow-app xmlns=&quot;uri:oozie:workflow:0.2&quot; name=&quot;map-reduce-wf&quot;&gt;</div><div class="line">    &lt;start to=&quot;mr-node&quot;/&gt;</div><div class="line">    &lt;action name=&quot;mr-node&quot;&gt;</div><div class="line">        &lt;map-reduce&gt;</div><div class="line">            &lt;job-tracker&gt;$&#123;jobTracker&#125;&lt;/job-tracker&gt;</div><div class="line">            &lt;name-node&gt;$&#123;nameNode&#125;&lt;/name-node&gt;</div><div class="line">            &lt;prepare&gt;</div><div class="line">                &lt;delete path=&quot;$&#123;nameNode&#125;/user/$&#123;wf:user()&#125;/$&#123;examplesRoot&#125;/output-data/$&#123;outputDir&#125;&quot;/&gt;</div><div class="line">            &lt;/prepare&gt;</div><div class="line">            &lt;configuration&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.job.queue.name&lt;/name&gt;</div><div class="line">                    &lt;value&gt;$&#123;queueName&#125;&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.mapper.class&lt;/name&gt;</div><div class="line">                    &lt;value&gt;org.apache.oozie.example.SampleMapper&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.reducer.class&lt;/name&gt;</div><div class="line">                    &lt;value&gt;org.apache.oozie.example.SampleReducer&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.map.tasks&lt;/name&gt;</div><div class="line">                    &lt;value&gt;1&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.input.dir&lt;/name&gt;</div><div class="line">                    &lt;value&gt;/user/root/$&#123;examplesRoot&#125;/input-data/text&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">                &lt;property&gt;</div><div class="line">                    &lt;name&gt;mapred.output.dir&lt;/name&gt;</div><div class="line">                    &lt;value&gt;/user/root/$&#123;examplesRoot&#125;/output-data/$&#123;outputDir&#125;&lt;/value&gt;</div><div class="line">                &lt;/property&gt;</div><div class="line">            &lt;/configuration&gt;</div><div class="line">        &lt;/map-reduce&gt;</div><div class="line">        &lt;ok to=&quot;goemail&quot; /&gt;</div><div class="line">        &lt;error to=&quot;fail&quot;/&gt;</div><div class="line">    &lt;/action&gt;</div><div class="line">    &lt;kill name=&quot;fail&quot;&gt;</div><div class="line">        &lt;message&gt;Map/Reduce failed, error message[$&#123;wf:errorMessage(wf:lastErrorNode())&#125;]&lt;/message&gt;</div><div class="line">    &lt;/kill&gt;</div><div class="line">&lt;action name=&quot;goemail&quot;&gt;</div><div class="line">        &lt;email xmlns=&quot;uri:oozie:email-action:0.1&quot;&gt;</div><div class="line">            &lt;to&gt;5lovezhm@163.com&lt;/to&gt;</div><div class="line">            &lt;subject&gt;Email notifications for $&#123;wf:id()&#125;&lt;/subject&gt;</div><div class="line">            &lt;body&gt;The wf $&#123;wf:id()&#125; successfully completed.&lt;/body&gt;</div><div class="line">        &lt;/email&gt;</div><div class="line">        &lt;ok to =&quot;end&quot;/&gt;</div><div class="line">        &lt;error to =&quot;fail&quot;/&gt;</div><div class="line">    &lt;/action&gt;</div><div class="line">    &lt;end name=&quot;end&quot;/&gt;</div><div class="line">&lt;/workflow-app&gt;</div></pre></td></tr></table></figure>
-<p>如果报错：<br> JA006: Call From hadoop000/xxx.xx.xx.xx to hadoop000:10020 failed on connection exception: java.net.ConnectException: ????; For more details see:  <a href="http://wiki.apache.org/hadoop/ConnectionRefused" target="_blank" rel="external">http://wiki.apache.org/hadoop/ConnectionRefused</a></p>
-<p>启动history<br>$HADOOP_HOME/sbin/mr-jobhistory-daemon.sh start historyserver</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/CDH-spark/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/29/CDH-spark/" itemprop="url">
-                  CDH-spark
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T11:30:00+08:00">
-                2017-03-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CDH/" itemprop="url" rel="index">
-                    <span itemprop="name">CDH</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/29/CDH-spark/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/CDH-spark/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>添加服务选择spark on yarn<br>安装的时候会选择history server，博主选择的是slave1，后续可以通过这个地址看spark的UI</p>
-<p>博主安装的是：<br>scala     version 2.10.5（后续再UI上看到的）<br>spark   version 1.6.0（执行spark-shell时看到的）</p>
-<p>安装完后测试：</p>
-<p>su hdfs<br>spark-submit –class org.apache.spark.examples.SparkPi –executor-memory 1G –total-executor-cores 2 /soft/bigdata/clouderamanager/cloudera/parcels/CDH-5.10.0-1.cdh5.10.0.p0.41/lib/spark/examples/lib/spark-examples-1.6.0-cdh5.10.0-hadoop2.6.0-cdh5.10.0.jar 100</p>
-<p>查看UI：<br><a href="http://slave1:18088/">http://slave1:18088/</a></p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/29/CDH-spark/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/26/strom-监控/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/26/strom-监控/" itemprop="url">
-                  strom 监控
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-26T09:30:00+08:00">
-                2017-03-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/storm/" itemprop="url" rel="index">
-                    <span itemprop="name">storm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/26/strom-监控/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/26/strom-监控/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>看当前GC的情况<br>jstat -gcutil 端口号 1000</p>
-<p>看wait的是否过高<br>top -p 端口号</p>
-<p>把某个端口当前的堆栈信息dump到某个文件<br>jstack 端口号 &gt; 文件</p>
-<p>看磁盘<br>iostat -x 1</p>
-<p>如果发现分配不均匀，例如FiledGrouping userid=1特别多，导致下游nolt或execute搞死了，重新启动也很快就死掉。可以对userid 做hash或md5或者组成更多条件，让下游Bolt分布更均匀</p>
-<p>complete latency(这里主要针对spout)是一个tuple从发出, 到经过bolt处理完成, 最终调用spout的ack这个完整的过程所花的时间.complete latency和吞吐量可以认为是互斥的, 二者不可兼得, 要提高吞吐量, 必然会增加complete latency, 反之亦然. 所以我们需要根据具体的场景, 在二者之间找到一个平衡.<br>complete latency受到两个因素的影响:<br>bolt的处理时间<br>spout的parallelism数量<br>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/26/strom-监控/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/25/strom-Metrics/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/25/strom-Metrics/" itemprop="url">
-                  strom-Metrics
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-25T00:30:00+08:00">
-                2017-03-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/storm/" itemprop="url" rel="index">
-                    <span itemprop="name">storm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/25/strom-Metrics/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/25/strom-Metrics/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。"><a href="#Storm-提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm-内部通过该接口跟踪各类统计数字：executor-和-acker-的数量、每个-bolt-的平均处理时延、worker-使用的最大堆容量等等，这些信息都可以在-Nimbus-的-UI-界面中看到。" class="headerlink" title="Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。"></a>Storm 提供了一个可以获取整个拓扑中所有的统计信息的metrics接口。Storm 内部通过该接口跟踪各类统计数字：executor 和 acker 的数量、每个 bolt 的平均处理时延、worker 使用的最大堆容量等等，这些信息都可以在 Nimbus 的 UI 界面中看到。</h2><p>使用 Metrics 只需要实现一个接口方法：getValueAndReset，在方法中可以查找汇总值、并将该值复位为初始值。例如，在 MeanReducer 中就实现了通过运行总数除以对应的运行计数的方式来求取均值，然后将两个值都重新设置为 0。</p>
-<p>Storm 提供了以下几种 metric 类型：</p>
-<h4 id="AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。"><a href="#AssignableMetric-–-将-metric-设置为指定值。此类型在两种情况下有用：1-metric-本身为外部设置的值；2-你已经另外计算出了汇总的统计值。" class="headerlink" title="AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。"></a>AssignableMetric – 将 metric 设置为指定值。此类型在两种情况下有用：1. metric 本身为外部设置的值；2. 你已经另外计算出了汇总的统计值。</h4><h4 id="CombinedMetric-–-可以对-metric-进行关联更新的通用接口。"><a href="#CombinedMetric-–-可以对-metric-进行关联更新的通用接口。" class="headerlink" title="CombinedMetric – 可以对 metric 进行关联更新的通用接口。"></a>CombinedMetric – 可以对 metric 进行关联更新的通用接口。</h4><h4 id="CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。"><a href="#CountMetric-–-返回-metric-的汇总结果。可以调用-incr-方法来将结果加一；调用-incrBy-n-方法来将结果加上给定值。" class="headerlink" title="CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。"></a>CountMetric – 返回 metric 的汇总结果。可以调用 incr() 方法来将结果加一；调用 incrBy(n) 方法来将结果加上给定值。</h4><h4 id="MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap"><a href="#MultiCountMetric-–-返回包含一组-CountMetric-的-HashMap" class="headerlink" title="MultiCountMetric – 返回包含一组 CountMetric 的 HashMap"></a>MultiCountMetric – 返回包含一组 CountMetric 的 HashMap</h4><h4 id="ReducedMetric"><a href="#ReducedMetric" class="headerlink" title="ReducedMetric"></a>ReducedMetric</h4><h6 id="MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。"><a href="#MeanReducer-–-跟踪由它的-reduce-方法提供的运行状态均值结果（可以接受-Double、Integer、Long-等类型，内置的均值结果是-Double-类型）。MeanReducer-确实是一个相当棒的家伙。" class="headerlink" title="MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。"></a>MeanReducer – 跟踪由它的 reduce() 方法提供的运行状态均值结果（可以接受 Double、Integer、Long 等类型，内置的均值结果是 Double 类型）。MeanReducer 确实是一个相当棒的家伙。</h6><h6 id="MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap"><a href="#MultiReducedMetric-–-返回包含一组-ReducedMetric-的-HashMap" class="headerlink" title="MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap"></a>MultiReducedMetric – 返回包含一组 ReducedMetric 的 HashMap</h6>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/25/strom-Metrics/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/19/bash脚本实战/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/19/bash脚本实战/" itemprop="url">
-                  bash脚本实战
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T23:30:00+08:00">
-                2017-03-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bash/" itemprop="url" rel="index">
-                    <span itemprop="name">bash</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2017/03/19/bash脚本实战/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/19/bash脚本实战/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h2><p>写一个脚本getinterface.sh，脚本可以接受参数(i,I,a)，完成以下任务：<br>   (1)使用以下形式：getinterface.sh [-i interface|-I IP|-a]<br>   (2)当用户使用-i选项时，显示其指定网卡的IP地址；<br>   (3)当用户使用-I选项时，显示其后面的IP地址所属的网络接口；（如 192.168.199.183：eth0）<br>   (4)当用户单独使用-a选项时，显示所有网络接口及其IP地址（lo除外）</p>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>参数1为param1 参数2位param2<br>（1）利用CAT &lt;&lt; EOF  <em>*</em> EOF打印信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">cat &lt;&lt; EOF</div><div class="line">    getinterface.sh [-i interface|-I IP|<span class="_">-a</span>]</div><div class="line">    -i interface) show ip of the interface</div><div class="line">    -I IP) show interface of the IP and IP with :;</div><div class="line">    <span class="_">-a</span>) list all interfaces and their IPs except lo;</div><div class="line">    *) quit</div><div class="line">=================================================================</div><div class="line">EOF</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/19/bash脚本实战/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
