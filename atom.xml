@@ -534,6 +534,35 @@
   </entry>
   
   <entry>
+    <title>设计模式目录</title>
+    <link href="http://yoursite.com/2018/01/27/Design%20pattern%20catalog/"/>
+    <id>http://yoursite.com/2018/01/27/Design pattern catalog/</id>
+    <published>2018-01-27T01:30:00.000Z</published>
+    <updated>2018-02-06T14:27:35.863Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="创建性模式："><a href="#创建性模式：" class="headerlink" title="创建性模式："></a>创建性模式：</h3><p>1.类的创建模式——使用继承关系，把类的创建延迟到子类<br>2.对象的创建模式——把对象的创建过程动态地委派给另一个对象<br>    封装要创建的具体类（类的实例）的信息<br>    隐藏这些类（类的实例）被创建和组合的过程</p>
+<p>包含<br>抽象工厂、建造者、工厂方式、原型、单例</p>
+<h3 id="结构性模式："><a href="#结构性模式：" class="headerlink" title="结构性模式："></a>结构性模式：</h3><p>考虑如何组合类和对象构成较大的结构。<br>1.结构性类模式：使用继承来组合接口或实现<br>2.结构性对象模式：对象合成实现新功能。<br><a id="more"></a><br>包含：<br>适配器、桥接、组合、装饰着、外观、轻量、代理</p>
+<h3 id="行为模式："><a href="#行为模式：" class="headerlink" title="行为模式："></a>行为模式：</h3><p>主要解决算法和对象之间的责任分配问题。<br>对象或类的模式<br>它们之间的通信模式。<br>包含：<br>责任链、命令、解释器、迭代、中介者、备忘录、观察者、状态、策略、模板方法、观察者</p>
+<p>工厂方法主要针对一个产品等级结构<br>抽象工厂模式需要面对多个产品等级结构</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;创建性模式：&quot;&gt;&lt;a href=&quot;#创建性模式：&quot; class=&quot;headerlink&quot; title=&quot;创建性模式：&quot;&gt;&lt;/a&gt;创建性模式：&lt;/h3&gt;&lt;p&gt;1.类的创建模式——使用继承关系，把类的创建延迟到子类&lt;br&gt;2.对象的创建模式——把对象的创建过程动态地委派给另一个对象&lt;br&gt;    封装要创建的具体类（类的实例）的信息&lt;br&gt;    隐藏这些类（类的实例）被创建和组合的过程&lt;/p&gt;
+&lt;p&gt;包含&lt;br&gt;抽象工厂、建造者、工厂方式、原型、单例&lt;/p&gt;
+&lt;h3 id=&quot;结构性模式：&quot;&gt;&lt;a href=&quot;#结构性模式：&quot; class=&quot;headerlink&quot; title=&quot;结构性模式：&quot;&gt;&lt;/a&gt;结构性模式：&lt;/h3&gt;&lt;p&gt;考虑如何组合类和对象构成较大的结构。&lt;br&gt;1.结构性类模式：使用继承来组合接口或实现&lt;br&gt;2.结构性对象模式：对象合成实现新功能。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>设计模式-工厂模式</title>
     <link href="http://yoursite.com/2018/01/27/Design%20pattern%20factory/"/>
     <id>http://yoursite.com/2018/01/27/Design pattern factory/</id>
@@ -564,197 +593,473 @@
   </entry>
   
   <entry>
-    <title>设计模式目录</title>
-    <link href="http://yoursite.com/2018/01/27/Design%20pattern%20catalog/"/>
-    <id>http://yoursite.com/2018/01/27/Design pattern catalog/</id>
-    <published>2018-01-27T01:30:00.000Z</published>
-    <updated>2018-02-06T14:27:35.863Z</updated>
+    <title>kNN实现手写数字识别</title>
+    <link href="http://yoursite.com/2018/01/25/kNN%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/"/>
+    <id>http://yoursite.com/2018/01/25/kNN实现手写数字识别/</id>
+    <published>2018-01-25T10:42:30.000Z</published>
+    <updated>2018-12-21T08:21:57.435Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="创建性模式："><a href="#创建性模式：" class="headerlink" title="创建性模式："></a>创建性模式：</h3><p>1.类的创建模式——使用继承关系，把类的创建延迟到子类<br>2.对象的创建模式——把对象的创建过程动态地委派给另一个对象<br>    封装要创建的具体类（类的实例）的信息<br>    隐藏这些类（类的实例）被创建和组合的过程</p>
-<p>包含<br>抽象工厂、建造者、工厂方式、原型、单例</p>
-<h3 id="结构性模式："><a href="#结构性模式：" class="headerlink" title="结构性模式："></a>结构性模式：</h3><p>考虑如何组合类和对象构成较大的结构。<br>1.结构性类模式：使用继承来组合接口或实现<br>2.结构性对象模式：对象合成实现新功能。<br><a id="more"></a><br>包含：<br>适配器、桥接、组合、装饰着、外观、轻量、代理</p>
-<h3 id="行为模式："><a href="#行为模式：" class="headerlink" title="行为模式："></a>行为模式：</h3><p>主要解决算法和对象之间的责任分配问题。<br>对象或类的模式<br>它们之间的通信模式。<br>包含：<br>责任链、命令、解释器、迭代、中介者、备忘录、观察者、状态、策略、模板方法、观察者</p>
-<p>工厂方法主要针对一个产品等级结构<br>抽象工厂模式需要面对多个产品等级结构</p>
+    <content type="html"><![CDATA[<p>需求<br>利用一个手写数字“先验数据”集，使用knn算法来实现对手写数字的自动识别；<br>先验数据（训练数据）集：<br>    数据维度比较大，样本数比较多。<br>    数据集包括数字0-9的手写体。<br>    每个数字大约有200个样本。<br>    每个样本保持在一个txt文件中。<br>    手写体图像本身的大小是32x32的二值图，转换到txt文件保存后，内容也是32x32个数字，0或者1，如下：<br><a id="more"></a><br><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%95%B0%E5%AD%97012.png" alt="此处输入图片的描述"></p>
+<p>首先准备测试文件:<br>1934个训练数据<br>946个测试数据</p>
+<p>分析：<br>1、手写体因为每个人，甚至每次写的字都不会完全精确一致，所以，识别手写体的关键是“相似度”<br>2、既然是要求样本之间的相似度，那么，首先需要将样本进行抽象，将每个样本变成一系列特征数据（即特征向量）<br>3、手写体在直观上就是一个个的图片，而图片是由上述图示中的像素点来描述的，样本的相似度其实就是像素的位置和颜色之间的组合的相似度<br>4、因此，将图片的像素按照固定顺序读取到一个个的向量中，即可很好地表示手写体样本<br>5、抽象出了样本向量，及相似度计算模型，即可应用KNN来实现</p>
+<p>代码：<br>1)    一个用来生成将每个样本的txt文件转换为对应的一个向量，<br>2)    一个用来加载整个数据集，<br>3)    一个实现kNN分类算法。<br>4)    最后就是实现加载、测试的函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#########################################</span></div><div class="line"><span class="comment"># kNN: k Nearest Neighbors</span></div><div class="line"></div><div class="line"><span class="comment"># 参数:        inX: vector to compare to existing dataset (1xN)</span></div><div class="line"><span class="comment">#             dataSet: size m data set of known vectors (NxM)</span></div><div class="line"><span class="comment">#             labels: data set labels (1xM vector)</span></div><div class="line"><span class="comment">#             k: number of neighbors to use for comparison </span></div><div class="line">            </div><div class="line"><span class="comment"># 输出:     多数类</span></div><div class="line"><span class="comment">#########################################</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="keyword">import</span> operator</div><div class="line"><span class="keyword">import</span> os</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># KNN分类核心方法</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">kNNClassify</span><span class="params">(newInput, dataSet, labels, k)</span>:</span></div><div class="line">	numSamples = dataSet.shape[<span class="number">0</span>]  <span class="comment"># shape[0]代表行数</span></div><div class="line"></div><div class="line">	<span class="comment">## step 1: 计算欧式距离</span></div><div class="line">	<span class="comment"># tile(A, reps): 将A重复reps次来构造一个矩阵</span></div><div class="line">	<span class="comment"># the following copy numSamples rows for dataSet</span></div><div class="line">	diff = tile(newInput, (numSamples, <span class="number">1</span>)) - dataSet  <span class="comment"># Subtract element-wise</span></div><div class="line">	squaredDiff = diff ** <span class="number">2</span> <span class="comment"># squared for the subtract</span></div><div class="line">	squaredDist = sum(squaredDiff, axis = <span class="number">1</span>)  <span class="comment"># sum is performed by row</span></div><div class="line">	distance = squaredDist ** <span class="number">0.5</span></div><div class="line"></div><div class="line">	<span class="comment">## step 2: 对距离排序</span></div><div class="line">	<span class="comment"># argsort()返回排序后的索引</span></div><div class="line">	sortedDistIndices = argsort(distance)</div><div class="line"></div><div class="line">	classCount = &#123;&#125;  <span class="comment"># 定义一个空的字典</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(k):</div><div class="line">		<span class="comment">## step 3: 选择k个最小距离</span></div><div class="line">		voteLabel = labels[sortedDistIndices[i]]</div><div class="line"></div><div class="line">		<span class="comment">## step 4: 计算类别的出现次数</span></div><div class="line">		<span class="comment"># when the key voteLabel is not in dictionary classCount, get()</span></div><div class="line">		<span class="comment"># will return 0</span></div><div class="line">		classCount[voteLabel] = classCount.get(voteLabel, <span class="number">0</span>) + <span class="number">1</span></div><div class="line"></div><div class="line">	<span class="comment">## step 5: 返回出现次数最多的类别作为分类结果</span></div><div class="line">	maxCount = <span class="number">0</span></div><div class="line">	<span class="keyword">for</span> key, value <span class="keyword">in</span> classCount.items():</div><div class="line">		<span class="keyword">if</span> value &gt; maxCount:</div><div class="line">			maxCount = value</div><div class="line">			maxIndex = key</div><div class="line"></div><div class="line">	<span class="keyword">return</span> maxIndex	</div><div class="line"></div><div class="line"><span class="comment"># 将图片转换为向量</span></div><div class="line"><span class="function"><span class="keyword">def</span>  <span class="title">img2vector</span><span class="params">(filename)</span>:</span></div><div class="line"> 	rows = <span class="number">32</span></div><div class="line"> 	cols = <span class="number">32</span></div><div class="line"> 	imgVector = zeros((<span class="number">1</span>, rows * cols)) </div><div class="line"> 	fileIn = open(filename)</div><div class="line"> 	<span class="keyword">for</span> row <span class="keyword">in</span> xrange(rows):</div><div class="line"> 		lineStr = fileIn.readline()</div><div class="line"> 		<span class="keyword">for</span> col <span class="keyword">in</span> xrange(cols):</div><div class="line"> 			imgVector[<span class="number">0</span>, row * <span class="number">32</span> + col] = int(lineStr[col])</div><div class="line"></div><div class="line"> 	<span class="keyword">return</span> imgVector</div><div class="line"></div><div class="line"><span class="comment"># 加载数据集</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadDataSet</span><span class="params">()</span>:</span></div><div class="line">	<span class="comment">## step 1: 读取训练数据集</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"---Getting training set..."</span></div><div class="line">	dataSetDir = <span class="string">'E:/Python/ml/knn/'</span></div><div class="line">	trainingFileList = os.listdir(dataSetDir + <span class="string">'trainingDigits'</span>)  <span class="comment"># 加载测试数据</span></div><div class="line">	numSamples = len(trainingFileList)</div><div class="line"></div><div class="line">	train_x = zeros((numSamples, <span class="number">1024</span>))</div><div class="line">	train_y = []</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(numSamples):</div><div class="line">		filename = trainingFileList[i]</div><div class="line"></div><div class="line">		<span class="comment"># get train_x</span></div><div class="line">		train_x[i, :] = img2vector(dataSetDir + <span class="string">'trainingDigits/%s'</span> % filename) </div><div class="line"></div><div class="line">		<span class="comment"># get label from file name such as "1_18.txt"</span></div><div class="line">		label = int(filename.split(<span class="string">'_'</span>)[<span class="number">0</span>]) <span class="comment"># return 1</span></div><div class="line">		train_y.append(label)</div><div class="line"></div><div class="line">	<span class="comment">## step 2:读取测试数据集</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"---Getting testing set..."</span></div><div class="line">	testingFileList = os.listdir(dataSetDir + <span class="string">'testDigits'</span>) <span class="comment"># load the testing set</span></div><div class="line">	numSamples = len(testingFileList)</div><div class="line">	test_x = zeros((numSamples, <span class="number">1024</span>))</div><div class="line">	test_y = []</div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(numSamples):</div><div class="line">		filename = testingFileList[i]</div><div class="line"></div><div class="line">		<span class="comment"># get train_x</span></div><div class="line">		test_x[i, :] = img2vector(dataSetDir + <span class="string">'testDigits/%s'</span> % filename) </div><div class="line"></div><div class="line">		<span class="comment"># get label from file name such as "1_18.txt"</span></div><div class="line">		label = int(filename.split(<span class="string">'_'</span>)[<span class="number">0</span>]) <span class="comment"># return 1</span></div><div class="line">		test_y.append(label)</div><div class="line"></div><div class="line">	<span class="keyword">return</span> train_x, train_y, test_x, test_y</div><div class="line"></div><div class="line"><span class="comment"># 手写识别主流程</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">testHandWritingClass</span><span class="params">()</span>:</span></div><div class="line">	<span class="comment">## step 1: 加载数据</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"step 1: load data..."</span></div><div class="line">	train_x, train_y, test_x, test_y = loadDataSet()</div><div class="line"></div><div class="line">	<span class="comment">## step 2: 模型训练.</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"step 2: training..."</span></div><div class="line">	<span class="keyword">pass</span></div><div class="line"></div><div class="line">	<span class="comment">## step 3: 测试</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"step 3: testing..."</span></div><div class="line">	numTestSamples = test_x.shape[<span class="number">0</span>]</div><div class="line">	matchCount = <span class="number">0</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(numTestSamples):</div><div class="line">		predict = kNNClassify(test_x[i], train_x, train_y, <span class="number">3</span>)</div><div class="line">		<span class="keyword">if</span> predict == test_y[i]:</div><div class="line">			matchCount += <span class="number">1</span></div><div class="line">	accuracy = float(matchCount) / numTestSamples</div><div class="line"></div><div class="line">	<span class="comment">## step 4: 输出结果</span></div><div class="line">	<span class="keyword">print</span> <span class="string">"step 4: show the result..."</span></div><div class="line">	<span class="keyword">print</span> <span class="string">'The classify accuracy is: %.2f%%'</span> % (accuracy * <span class="number">100</span>)</div></pre></td></tr></table></figure>
+<p>测试<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> kNN</div><div class="line">kNN.testHandWritingClass()</div></pre></td></tr></table></figure></p>
+<p>执行结果：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tep <span class="number">1</span>: load data...</div><div class="line">---Getting training set...</div><div class="line">---Getting testing set...</div><div class="line">step <span class="number">2</span>: training...</div><div class="line">step <span class="number">3</span>: testing...</div><div class="line">step <span class="number">4</span>: show the result...</div><div class="line">The classify accuracy <span class="keyword">is</span>: <span class="number">98.84</span>%</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;创建性模式：&quot;&gt;&lt;a href=&quot;#创建性模式：&quot; class=&quot;headerlink&quot; title=&quot;创建性模式：&quot;&gt;&lt;/a&gt;创建性模式：&lt;/h3&gt;&lt;p&gt;1.类的创建模式——使用继承关系，把类的创建延迟到子类&lt;br&gt;2.对象的创建模式——把对象的创建过程动态地委派给另一个对象&lt;br&gt;    封装要创建的具体类（类的实例）的信息&lt;br&gt;    隐藏这些类（类的实例）被创建和组合的过程&lt;/p&gt;
-&lt;p&gt;包含&lt;br&gt;抽象工厂、建造者、工厂方式、原型、单例&lt;/p&gt;
-&lt;h3 id=&quot;结构性模式：&quot;&gt;&lt;a href=&quot;#结构性模式：&quot; class=&quot;headerlink&quot; title=&quot;结构性模式：&quot;&gt;&lt;/a&gt;结构性模式：&lt;/h3&gt;&lt;p&gt;考虑如何组合类和对象构成较大的结构。&lt;br&gt;1.结构性类模式：使用继承来组合接口或实现&lt;br&gt;2.结构性对象模式：对象合成实现新功能。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-    
-      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python numpy</title>
-    <link href="http://yoursite.com/2018/01/10/python%20numpy/"/>
-    <id>http://yoursite.com/2018/01/10/python numpy/</id>
-    <published>2018-01-10T03:30:00.000Z</published>
-    <updated>2018-03-16T16:49:05.804Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="jupyter-notebook"><a href="#jupyter-notebook" class="headerlink" title="jupyter notebook:"></a>jupyter notebook:</h3><p>1.arange<br>生成数组<br>np.arange(10)<br>array([0,1,2,3,4,5,6,7,8,9])</p>
-<p>2.等差数列是指从第二项起，每一项与它的前一项的差等于同一个常数的一种数列，常用A、P表示<br>等差数列 linspace<br>np.linspace(1,10,5)<br>array([1. , 3.25 ,5.5,5.75,10])</p>
-<p>np.linspace(1,10,5,endpoint=False)  相当于生成6个数只显示前五个<br>array([1. , 2.8 ,4.6,6.5,8.2])</p>
-<p>3.等比数列是指从第二项起，每一项与它的前一项的比值等于同一个常数的一种数列<br>等比数列logspace<br>np.logspace(1,10,5)</p>
-<p>4.shape<br><a id="more"></a><br>arr = np.array([  [1,2,3],<br>                  [2,3,4]<br>               ])</p>
-<p>arr.shape<br>(2, 3)</p>
-<p>5.zeros<br>help(np.zeros)<br>zeros(shape, dtype=float, order=’C’)<br> Examples<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros(<span class="number">5</span>)</div><div class="line">array([ <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>,  <span class="number">0.</span>])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros((<span class="number">5</span>,), dtype=np.int)</div><div class="line">array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros((<span class="number">2</span>, <span class="number">1</span>))</div><div class="line">array([[ <span class="number">0.</span>],</div><div class="line">       [ <span class="number">0.</span>]])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = (<span class="number">2</span>,<span class="number">2</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros(s)</div><div class="line">array([[ <span class="number">0.</span>,  <span class="number">0.</span>],</div><div class="line">       [ <span class="number">0.</span>,  <span class="number">0.</span>]])</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.zeros((<span class="number">2</span>,), dtype=[(<span class="string">'x'</span>, <span class="string">'i4'</span>), (<span class="string">'y'</span>, <span class="string">'i4'</span>)]) <span class="comment"># custom dtype</span></div><div class="line">array([(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">0</span>, <span class="number">0</span>)],</div><div class="line">      dtype=[(<span class="string">'x'</span>, <span class="string">'&lt;i4'</span>), (<span class="string">'y'</span>, <span class="string">'&lt;i4'</span>)])</div></pre></td></tr></table></figure></p>
-<p>6.ones<br>类似zeros,只不过填充的是1</p>
-<p>7.empty<br>类似zeros,只不过填充的是随机值</p>
-<p>8.reshape<br>把一维数组转置为多维数组<br>reshape 不会改变原来的ndarray，但是得到新的ndarray是原数组的视图<br>对于ndarray的一些方法操作，首先要区分是否会改变原来变量，以此来判断是视图还是副本</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;jupyter-notebook&quot;&gt;&lt;a href=&quot;#jupyter-notebook&quot; class=&quot;headerlink&quot; title=&quot;jupyter notebook:&quot;&gt;&lt;/a&gt;jupyter notebook:&lt;/h3&gt;&lt;p&gt;1.arange&lt;br&gt;生成数组&lt;br&gt;np.arange(10)&lt;br&gt;array([0,1,2,3,4,5,6,7,8,9])&lt;/p&gt;
-&lt;p&gt;2.等差数列是指从第二项起，每一项与它的前一项的差等于同一个常数的一种数列，常用A、P表示&lt;br&gt;等差数列 linspace&lt;br&gt;np.linspace(1,10,5)&lt;br&gt;array([1. , 3.25 ,5.5,5.75,10])&lt;/p&gt;
-&lt;p&gt;np.linspace(1,10,5,endpoint=False)  相当于生成6个数只显示前五个&lt;br&gt;array([1. , 2.8 ,4.6,6.5,8.2])&lt;/p&gt;
-&lt;p&gt;3.等比数列是指从第二项起，每一项与它的前一项的比值等于同一个常数的一种数列&lt;br&gt;等比数列logspace&lt;br&gt;np.logspace(1,10,5)&lt;/p&gt;
-&lt;p&gt;4.shape&lt;br&gt;
+      &lt;p&gt;需求&lt;br&gt;利用一个手写数字“先验数据”集，使用knn算法来实现对手写数字的自动识别；&lt;br&gt;先验数据（训练数据）集：&lt;br&gt;    数据维度比较大，样本数比较多。&lt;br&gt;    数据集包括数字0-9的手写体。&lt;br&gt;    每个数字大约有200个样本。&lt;br&gt;    每个样本保持在一个txt文件中。&lt;br&gt;    手写体图像本身的大小是32x32的二值图，转换到txt文件保存后，内容也是32x32个数字，0或者1，如下：&lt;br&gt;
     
     </summary>
     
       <category term="python" scheme="http://yoursite.com/categories/python/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
-    <title>python—pandas</title>
-    <link href="http://yoursite.com/2018/01/08/python%E2%80%94pandas/"/>
-    <id>http://yoursite.com/2018/01/08/python—pandas/</id>
-    <published>2018-01-08T01:30:00.000Z</published>
-    <updated>2018-01-19T16:02:42.664Z</updated>
+    <title>机器学习之KNN算法推演</title>
+    <link href="http://yoursite.com/2018/01/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BKNN%E7%AE%97%E6%B3%95%E6%8E%A8%E6%BC%94/"/>
+    <id>http://yoursite.com/2018/01/21/机器学习之KNN算法推演/</id>
+    <published>2018-01-21T13:06:30.000Z</published>
+    <updated>2018-12-21T08:21:00.169Z</updated>
     
-    <content type="html"><![CDATA[<p>from pandas import Series,DataFrame<br>import pandas as pd</p>
-<h3 id="Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。-索引可重复"><a href="#Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。-索引可重复" class="headerlink" title="Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。  索引可重复"></a>Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。  索引可重复</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> Series,DataFrame</div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line">arr = np.array([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,np.NaN,<span class="number">10</span>])</div><div class="line">serises0=Series(arr)</div><div class="line">serises0</div></pre></td></tr></table></figure>
-<p>0     1.0<br>1     3.0<br>2     5.0<br>3     NaN<br>4    10.0<br>dtype: float64<br><a id="more"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises0.dtype</div></pre></td></tr></table></figure></p>
-<p>dtype(‘float64’)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises0.index</div></pre></td></tr></table></figure>
-<p>RangeIndex(start=0, stop=5, step=1)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises0.values</div></pre></td></tr></table></figure>
-<p>array([  1.,   3.,   5.,  nan,  10.])</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">serises1=Series(data=[<span class="number">91</span>,<span class="number">92</span>,<span class="number">93</span>],dtype=np.float64,index=[<span class="string">u'数学'</span>,<span class="string">u'语文'</span>,<span class="string">u'外语'</span>])</div><div class="line">serises1</div></pre></td></tr></table></figure>
-<p>数学    91.0<br>语文    92.0<br>外语    93.0<br>dtype: float64</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dict0=&#123;<span class="string">u'数学'</span>:<span class="number">91.0</span>,<span class="string">u'语文'</span>:<span class="number">92</span>,<span class="string">u'外语'</span>:<span class="number">93</span>&#125;</div><div class="line">dict0</div></pre></td></tr></table></figure>
-<p>{u’\u5916\u8bed’: 93, u’\u6570\u5b66’: 91.0, u’\u8bed\u6587’: 92}</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">serises2=Series(dict0)</div><div class="line">serises2</div></pre></td></tr></table></figure>
-<p>外语    93.0<br>数学    91.0<br>语文    92.0<br>dtype: float64</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises2[<span class="number">0</span>]</div></pre></td></tr></table></figure>
-<p>93.0</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises2[<span class="string">u'外语'</span>]</div></pre></td></tr></table></figure>
-<p>93.0</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">serises2[<span class="string">'外语'</span>:<span class="string">'语文'</span>]</div></pre></td></tr></table></figure>
-<p>外语    93.0<br>数学    91.0<br>语文    92.0<br>dtype: float64</p>
-<p>Series运算，自动对齐索引<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">serises2=Series(data=[<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>],dtype=np.float64,index=[<span class="string">'p1'</span>,<span class="string">'p2'</span>,<span class="string">'p3'</span>])</div><div class="line">serises3=Series(data=[<span class="number">22</span>,<span class="number">23</span>,<span class="number">24</span>,<span class="number">25</span>],dtype=np.float64,index=[<span class="string">'p2'</span>,<span class="string">'p3'</span>,<span class="string">'p4'</span>,<span class="string">'p5'</span>])</div><div class="line">serises2 +serises3</div></pre></td></tr></table></figure></p>
-<p>p1     NaN<br>p2    34.0<br>p3    36.0<br>p4     NaN<br>p5     NaN<br>dtype: float64</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">serises1.name=<span class="string">'name'</span></div><div class="line">serises1.index.name=<span class="string">'考试科目'</span></div><div class="line">serises1</div></pre></td></tr></table></figure>
-<p>考试科目<br>数学    91.0<br>语文    92.0<br>外语    93.0<br>Name: name, dtype: float64</p>
-<h3 id="DataFrame-：-表格形式的数据结构，包含一组有序的列，每列可以是不同的值类型，DataFrame既有行索引又有列索引，可以看做是由Series组成的字典"><a href="#DataFrame-：-表格形式的数据结构，包含一组有序的列，每列可以是不同的值类型，DataFrame既有行索引又有列索引，可以看做是由Series组成的字典" class="headerlink" title="DataFrame ： 表格形式的数据结构，包含一组有序的列，每列可以是不同的值类型，DataFrame既有行索引又有列索引，可以看做是由Series组成的字典"></a>DataFrame ： 表格形式的数据结构，包含一组有序的列，每列可以是不同的值类型，DataFrame既有行索引又有列索引，可以看做是由Series组成的字典</h3><p>通过二维数组创建<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">df01=DataFrame([[<span class="string">'Tom'</span>,<span class="string">'John'</span>],[<span class="number">88</span>,<span class="number">90</span>]])</div><div class="line">df01</div></pre></td></tr></table></figure></p>
-<pre><code>0    1
-</code></pre><p>0    Tom    John<br>1    88    90</p>
-<p>通过字典创建<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">data=&#123;<span class="string">'Tom'</span>:[<span class="number">88</span>,<span class="number">55</span>],<span class="string">'John'</span>:[<span class="number">90</span>,<span class="number">22</span>]&#125;</div><div class="line">df02=DataFrame(data)</div><div class="line">df02</div></pre></td></tr></table></figure></p>
-<p>   John    Tom<br>0    90    88<br>1    22    55</p>
-<p>DataFrame 可以增加数据<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">df02.ix[<span class="string">'2'</span>]=np.NaN</div></pre></td></tr></table></figure></p>
-<pre><code>John    Tom
-</code></pre><p>0    90.0    88.0<br>1    22.0    55.0<br>2    NaN        NaN</p>
-<p>数据删除<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">df02=df02.dropna()</div><div class="line">df02</div></pre></td></tr></table></figure></p>
-<pre><code>John    Tom
-</code></pre><p>0    90.0    88.0<br>1    22.0    55.0</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">arr1=np.random.randint(<span class="number">5</span>,<span class="number">10</span>,(<span class="number">4</span>,<span class="number">4</span>))</div><div class="line">df1=pd.DataFrame(arr1)</div><div class="line">df1</div><div class="line">df1.ix[:<span class="number">2</span>,<span class="number">1</span>]=np.NAN</div><div class="line">df1.ix[:<span class="number">1</span>,<span class="number">2</span>]=np.NAN</div><div class="line">df1</div></pre></td></tr></table></figure>
-<pre><code>0    1    2    3
-</code></pre><p>0    8    NaN    NaN    7<br>1    5    NaN    NaN    9<br>2    5    NaN    5.0    5<br>3    9    8.0    7.0    5</p>
-<h3 id="loc-iloc"><a href="#loc-iloc" class="headerlink" title="loc iloc"></a>loc iloc</h3><p>iloc 对于下标进行操作<br>loc 对于索引值进行操作</p>
+    <content type="html"><![CDATA[<h4 id="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。"><a href="#从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。" class="headerlink" title="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。"></a>从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。</h4><h5 id="算法涉及3个主要因素："><a href="#算法涉及3个主要因素：" class="headerlink" title="算法涉及3个主要因素："></a>算法涉及3个主要因素：</h5><p>1)    训练数据集<br>2)    距离或相似度的计算衡量<br>3)    k的大小<br><img src="http://oh6ybr0jg.bkt.clouddn.com/KNN%E7%AE%97%E6%B3%95.jpg" alt="此处输入图片的描述"><br>绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。</p>
+<h2 id="KNN分类算法Python实战"><a href="#KNN分类算法Python实战" class="headerlink" title="KNN分类算法Python实战"></a>KNN分类算法Python实战</h2><p>有以下先验数据，使用knn算法对未知类别数据分类</p>
+<table>
+<thead>
+<tr>
+<th>x轴</th>
+<th style="text-align:center">y轴</th>
+<th style="text-align:right">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td style="text-align:center">0.9</td>
+<td style="text-align:right">A</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:right">A</td>
+</tr>
+<tr>
+<td>0.0</td>
+<td style="text-align:center">0.1</td>
+<td style="text-align:right">B</td>
+</tr>
+<tr>
+<td>0.1</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:right">B</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<p>未知类别数据</p>
+<table>
+<thead>
+<tr>
+<th>x轴</th>
+<th style="text-align:center">y轴</th>
+<th style="text-align:right">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.2</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:right">？</td>
+</tr>
+<tr>
+<td>0.1</td>
+<td style="text-align:center">0.3</td>
+<td style="text-align:right">？</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#########################################</span></div><div class="line"><span class="comment"># kNN: k Nearest Neighbors</span></div><div class="line"></div><div class="line"><span class="comment"># 输入:      newInput:  (1xN)的待分类向量</span></div><div class="line"><span class="comment">#             dataSet:   (NxM)的训练数据集</span></div><div class="line"><span class="comment">#             labels: 	训练数据集的类别标签向量</span></div><div class="line"><span class="comment">#             k: 		近邻数 </span></div><div class="line">            </div><div class="line"><span class="comment"># 输出:     可能性最大的分类标签</span></div><div class="line"><span class="comment">#########################################</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="keyword">import</span> operator</div><div class="line"></div><div class="line"><span class="comment">#创建一个数据集，包含2个类别共4个样本</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></div><div class="line">	<span class="comment"># 生成一个矩阵，每行表示一个样本</span></div><div class="line">	group = array([[<span class="number">1.0</span>, <span class="number">0.9</span>], [<span class="number">1.0</span>, <span class="number">1.0</span>], [<span class="number">0.1</span>, <span class="number">0.2</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>]])</div><div class="line">	<span class="comment"># 4个样本分别所属的类别</span></div><div class="line">	labels = [<span class="string">'A'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>]</div><div class="line">	<span class="keyword">return</span> group, labels</div><div class="line"></div><div class="line"><span class="comment"># KNN分类算法函数定义</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">kNNClassify</span><span class="params">(newInput, dataSet, labels, k)</span>:</span></div><div class="line">	numSamples = dataSet.shape[<span class="number">0</span>]   <span class="comment"># shape[0]表示行数</span></div><div class="line"></div><div class="line">	<span class="comment">## step 1: 计算距离</span></div><div class="line">	<span class="comment"># tile(A, reps): 构造一个矩阵，通过A重复reps次得到(tile(A, （repsX，repsY）)此处在行的方向重复repsX次，在Y的方向重复repsY次)</span></div><div class="line">	<span class="comment"># the following copy numSamples rows for dataSet</span></div><div class="line">	diff = tile(newInput, (numSamples, <span class="number">1</span>)) - dataSet  <span class="comment"># 按元素求差值</span></div><div class="line">	squaredDiff = diff ** <span class="number">2</span>  <span class="comment">#将差值平方</span></div><div class="line">	squaredDist = sum(squaredDiff, axis = <span class="number">1</span>)   <span class="comment"># 按行累加</span></div><div class="line">	distance = squaredDist ** <span class="number">0.5</span>  <span class="comment">#将差值平方和求开方，即得距离</span></div><div class="line"></div><div class="line">	<span class="comment">## step 2: 对距离排序</span></div><div class="line">	<span class="comment">## 此处排序需要注意样本标签的顺序。排序后存的是角标号。后续直接从排序后的标签序列找下标是排序内容的数据</span></div><div class="line">	<span class="comment"># argsort() 返回排序后的索引值</span></div><div class="line">	sortedDistIndices = argsort(distance)  <span class="comment">#或distance.argsort()</span></div><div class="line">	classCount = &#123;&#125; <span class="comment"># define a dictionary (can be append element)</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(k):</div><div class="line">		<span class="comment">## step 3: 选择k个最近邻</span></div><div class="line">		voteLabel = labels[sortedDistIndices[i]]</div><div class="line"></div><div class="line">		<span class="comment">## step 4: 计算k个最近邻中各类别出现的次数</span></div><div class="line">		<span class="comment"># when the key voteLabel is not in dictionary classCount, get()</span></div><div class="line">		<span class="comment"># will return 0</span></div><div class="line">		classCount[voteLabel] = classCount.get(voteLabel, <span class="number">0</span>) + <span class="number">1</span></div><div class="line"></div><div class="line">	<span class="comment">## step 5: 返回出现次数最多的类别标签</span></div><div class="line">	maxCount = <span class="number">0</span></div><div class="line">	<span class="keyword">for</span> key, value <span class="keyword">in</span> classCount.items():</div><div class="line">		<span class="keyword">if</span> value &gt; maxCount:</div><div class="line">			maxCount = value</div><div class="line">			maxIndex = key</div><div class="line"></div><div class="line">	<span class="keyword">return</span> maxIndex	</div><div class="line">	</div><div class="line">	<span class="comment">##step 5 可以改成：</span></div><div class="line">	<span class="comment"># sortedClassCount = sorted(classCount.iteritems(),key=operator.itemgetter(1),reverse=True)</span></div><div class="line">	<span class="comment">#return sortedClassCount[0][0]</span></div></pre></td></tr></table></figure>
+<p>然后调用算法进行测试：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> kNN</div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> * </div><div class="line"><span class="comment">#生成数据集和类别标签</span></div><div class="line">dataSet, labels = kNN.createDataSet()</div><div class="line"><span class="comment">#定义一个未知类别的数据</span></div><div class="line">testX = array([<span class="number">1.2</span>, <span class="number">1.0</span>])</div><div class="line">k = <span class="number">3</span></div><div class="line"><span class="comment">#调用分类函数对未知数据分类</span></div><div class="line">outputLabel = kNN.kNNClassify(testX, dataSet, labels, <span class="number">3</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">"Your input is:"</span>, testX, <span class="string">"and classified to class: "</span>, outputLabel</div><div class="line"></div><div class="line">testX = array([<span class="number">0.1</span>, <span class="number">0.3</span>])</div><div class="line">outputLabel = kNN.kNNClassify(testX, dataSet, labels, <span class="number">3</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">"Your input is:"</span>, testX, <span class="string">"and classified to class: "</span>, outputLabel</div></pre></td></tr></table></figure></p>
+<p>这时候会输出<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Your input <span class="keyword">is</span>: [ <span class="number">1.2</span>  <span class="number">1.0</span>] <span class="keyword">and</span> classified to <span class="class"><span class="keyword">class</span>:</span>  A</div><div class="line">Your input <span class="keyword">is</span>: [ <span class="number">0.1</span>  <span class="number">0.3</span>] <span class="keyword">and</span> classified to <span class="class"><span class="keyword">class</span>:</span>  B</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;from pandas import Series,DataFrame&lt;br&gt;import pandas as pd&lt;/p&gt;
-&lt;h3 id=&quot;Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。-索引可重复&quot;&gt;&lt;a href=&quot;#Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。-索引可重复&quot; class=&quot;headerlink&quot; title=&quot;Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。  索引可重复&quot;&gt;&lt;/a&gt;Series：一种类似于一维数组的对象，是由一组数据（各种NumPy数据类型）以及一组与之相关的数据标签（即索引）组成。  索引可重复&lt;/h3&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; pandas &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; Series,DataFrame&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pandas &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; pd&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;arr = np.array([&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;,np.NaN,&lt;span class=&quot;number&quot;&gt;10&lt;/span&gt;])&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;serises0=Series(arr)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;serises0&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;0     1.0&lt;br&gt;1     3.0&lt;br&gt;2     5.0&lt;br&gt;3     NaN&lt;br&gt;4    10.0&lt;br&gt;dtype: float64&lt;br&gt;
+      &lt;h4 id=&quot;从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。&quot;&gt;&lt;a href=&quot;#从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。&quot; class=&quot;headerlink&quot; title=&quot;从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。&quot;&gt;&lt;/a&gt;从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。&lt;/h4&gt;&lt;h5 id=&quot;算法涉及3个主要因素：&quot;&gt;&lt;a href=&quot;#算法涉及3个主要因素：&quot; class=&quot;headerlink&quot; title=&quot;算法涉及3个主要因素：&quot;&gt;&lt;/a&gt;算法涉及3个主要因素：&lt;/h5&gt;&lt;p&gt;1)    训练数据集&lt;br&gt;2)    距离或相似度的计算衡量&lt;br&gt;3)    k的大小&lt;br&gt;&lt;img src=&quot;http://oh6ybr0jg.bkt.clouddn.com/KNN%E7%AE%97%E6%B3%95.jpg&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;br&gt;绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。&lt;/p&gt;
+&lt;h2 id=&quot;KNN分类算法Python实战&quot;&gt;&lt;a href=&quot;#KNN分类算法Python实战&quot; class=&quot;headerlink&quot; title=&quot;KNN分类算法Python实战&quot;&gt;&lt;/a&gt;KNN分类算法Python实战&lt;/h2&gt;&lt;p&gt;有以下先验数据，使用knn算法对未知类别数据分类&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;x轴&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;y轴&lt;/th&gt;
+&lt;th style=&quot;text-align:right&quot;&gt;类型&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.9&lt;/td&gt;
+&lt;td style=&quot;text-align:right&quot;&gt;A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1.0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;1.0&lt;/td&gt;
+&lt;td style=&quot;text-align:right&quot;&gt;A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.0&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.1&lt;/td&gt;
+&lt;td style=&quot;text-align:right&quot;&gt;B&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.1&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;0.2&lt;/td&gt;
+&lt;td style=&quot;text-align:right&quot;&gt;B&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
     
     </summary>
     
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
-    <title>spark 机器学习入门(二)</title>
-    <link href="http://yoursite.com/2017/10/19/spark%20ml2/"/>
-    <id>http://yoursite.com/2017/10/19/spark ml2/</id>
-    <published>2017-10-19T06:30:00.000Z</published>
-    <updated>2018-07-25T16:43:43.579Z</updated>
+    <title>机器学习-概念</title>
+    <link href="http://yoursite.com/2018/01/12/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%A6%82%E5%BF%B5/"/>
+    <id>http://yoursite.com/2018/01/12/机器学习-概念/</id>
+    <published>2018-01-12T15:55:30.000Z</published>
+    <updated>2018-12-21T08:21:32.463Z</updated>
     
-    <content type="html"><![CDATA[<p>Spark MLlib 核心组件<br>Ø DataFrame 包含不同的列，可存储文本、 图片、 标签、 特征向量、 预测值等<br>Ø Estimator 用于从训练数据算出机器学习模型，输入DataFrame输出Model<br>Ø Transformer 输入DataFrame输出DataFrame<br>• Model即为一种Transformer，用于从测试数据生成预测结果<br>• 特征转换Transformer转换一个或多个特征，并将转换后的特征列追加到输出DataFrame中<br>Ø Pipeline<br>• 将多个Transformer和Estimator链接起来形成一个机器学习workflow<br>• Pipeline也是一种Estimator，生成一个PipelineModel<br>Ø Parameter 所有的Transformer和Estimator共享该通用的API来指定参数<br>Ø PipelineModel 保证对测试数据使用与训练数据完全相同的数据转换</p>
-<p>训练模型：</p>
-<p>Tokenizer and HashingTF 是Transformers<br>LogisticRegression 是Estimator<br><img src="http://spark.apache.org/docs/latest/img/ml-Pipeline.png" alt="此处输入图片的描述"></p>
-<p>预测结果<br>Pipeline 是 Estimator<br>fit()方法会产生一个PipelineModel<br><img src="http://spark.apache.org/docs/latest/img/ml-PipelineModel.png" alt="此处输入图片的描述"><br>transform()方法Pipelines and PipelineModels帮助确保训练数据和测试数据经过相同特征的处理步骤。</p>
-<p>SparseMatrix<br>介绍推荐博主：<br><a href="http://blog.csdn.net/sinat_29508201/article/details/54089771" target="_blank" rel="external">http://blog.csdn.net/sinat_29508201/article/details/54089771</a></p>
+    <content type="html"><![CDATA[<h2 id="监督学习："><a href="#监督学习：" class="headerlink" title="监督学习："></a>监督学习：</h2><p>我们向系统输入我们所称的“已标记样本”<br>已标记样本指我们给系统一些信息，让它用于理解我们向它输入的数据。<br>例如我们创建一个系统来识别我的脸，我们将给他一些我的面部照片，一些别人的面部照片，我们会告诉系统 这些照片是David的，那些照片是别人的。随时间推移，它会利用这些信息提升它的理解程度。<br>”监督“表示你有很多样本，你了解这些样本的正确答案</p>
+<h2 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h2><p>比如在医疗保健方面，如果我们已经了解某种疾病，监督学习可用以帮助系统，识别哪些人有患该病的风险，而非监督学习实际上可以根据常见症状的模式帮助我们发现甚至我们还不知道的疾病。</p>
+<h2 id="聚类："><a href="#聚类：" class="headerlink" title="聚类："></a>聚类：</h2><p>K-MEANS<br><a id="more"></a></p>
+<h2 id="朴素贝叶斯："><a href="#朴素贝叶斯：" class="headerlink" title="朴素贝叶斯："></a>朴素贝叶斯：</h2><p>推导过程和用法：<br><a href="http://scikit-learn.org/stable/modules/naive_bayes.html" target="_blank" rel="external">http://scikit-learn.org/stable/modules/naive_bayes.html</a><br><img src="http://scikit-learn.org/stable/_images/math/47537fc301bbf8971084f2ecbaa76658ad088235.png" alt="此处输入图片的描述"><br><img src="http://scikit-learn.org/stable/_images/math/4a2f8ee56238deb56e9e970a749bbe26d96465f7.png" alt="此处输入图片的描述"><br><img src="http://scikit-learn.org/stable/_images/math/7d90ebd2dc0cc2e1136a22625a489c3326d30ec7.png" alt="此处输入图片的描述"><br><img src="http://scikit-learn.org/stable/_images/math/201f076a3330f2928c26978c4eac59cc8ba4a440.png" alt="此处输入图片的描述"></p>
+<p>还有高斯朴素贝叶斯<br><img src="http://scikit-learn.org/stable/_images/math/ed0c1181c1696f72e1be266187e4694919047d9e.png" alt="此处输入图片的描述"></p>
+<p>python有一个库叫sklearn</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Spark MLlib 核心组件&lt;br&gt;Ø DataFrame 包含不同的列，可存储文本、 图片、 标签、 特征向量、 预测值等&lt;br&gt;Ø Estimator 用于从训练数据算出机器学习模型，输入DataFrame输出Model&lt;br&gt;Ø Transformer 输入Dat
+      &lt;h2 id=&quot;监督学习：&quot;&gt;&lt;a href=&quot;#监督学习：&quot; class=&quot;headerlink&quot; title=&quot;监督学习：&quot;&gt;&lt;/a&gt;监督学习：&lt;/h2&gt;&lt;p&gt;我们向系统输入我们所称的“已标记样本”&lt;br&gt;已标记样本指我们给系统一些信息，让它用于理解我们向它输入的数据。&lt;br&gt;例如我们创建一个系统来识别我的脸，我们将给他一些我的面部照片，一些别人的面部照片，我们会告诉系统 这些照片是David的，那些照片是别人的。随时间推移，它会利用这些信息提升它的理解程度。&lt;br&gt;”监督“表示你有很多样本，你了解这些样本的正确答案&lt;/p&gt;
+&lt;h2 id=&quot;非监督学习&quot;&gt;&lt;a href=&quot;#非监督学习&quot; class=&quot;headerlink&quot; title=&quot;非监督学习&quot;&gt;&lt;/a&gt;非监督学习&lt;/h2&gt;&lt;p&gt;比如在医疗保健方面，如果我们已经了解某种疾病，监督学习可用以帮助系统，识别哪些人有患该病的风险，而非监督学习实际上可以根据常见症状的模式帮助我们发现甚至我们还不知道的疾病。&lt;/p&gt;
+&lt;h2 id=&quot;聚类：&quot;&gt;&lt;a href=&quot;#聚类：&quot; class=&quot;headerlink&quot; title=&quot;聚类：&quot;&gt;&lt;/a&gt;聚类：&lt;/h2&gt;&lt;p&gt;K-MEANS&lt;br&gt;
     
     </summary>
     
-      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
-    <title>spark 机器学习入门(一)</title>
-    <link href="http://yoursite.com/2017/10/18/spark%20ml1/"/>
-    <id>http://yoursite.com/2017/10/18/spark ml1/</id>
-    <published>2017-10-18T03:30:00.000Z</published>
-    <updated>2017-10-22T11:03:05.867Z</updated>
+    <title>机器学习-预测泰坦尼克号乘客生还率</title>
+    <link href="http://yoursite.com/2018/01/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E9%A2%84%E6%B5%8B%E6%B3%B0%E5%9D%A6%E5%B0%BC%E5%85%8B%E5%8F%B7%E4%B9%98%E5%AE%A2%E7%94%9F%E8%BF%98%E7%8E%87/"/>
+    <id>http://yoursite.com/2018/01/11/机器学习-预测泰坦尼克号乘客生还率/</id>
+    <published>2018-01-11T08:02:30.000Z</published>
+    <updated>2018-12-21T08:21:17.674Z</updated>
     
-    <content type="html"><![CDATA[<p>目前基于RDD的MLlib已经进入维护莫斯。大概在spark2.3基于RDD的MLlib API将要被废弃。未来是基于DataFrame的API</p>
-<p>1.基本统计<br>计算两组数据之间的相关性</p>
-<h3 id="皮尔森相关系数（Pearson-correlation-coefficient）"><a href="#皮尔森相关系数（Pearson-correlation-coefficient）" class="headerlink" title="皮尔森相关系数（Pearson correlation coefficient）"></a>皮尔森相关系数（Pearson correlation coefficient）</h3><p>也称皮尔森积矩相关系数(Pearson product-moment correlation coefficient) ，是一种线性相关系数。皮尔森相关系数是用来反映两个变量线性相关程度的统计量。相关系数用r表示，其中n为样本量，分别为两个变量的观测值和均值。r描述的是两个变量间线性相关强弱的程度。r的绝对值越大表明相关性越强</p>
-<p><img src="http://segmentfault.com/img/cGNupC" alt="此处输入图片的描述"><br><img src="http://segmentfault.com/img/eOV3Oj" alt="此处输入图片的描述"><br><img src="http://segmentfault.com/img/lJqNL" alt="此处输入图片的描述"><br><a id="more"></a><br>按照高中数学水平来理解, 它很简单, 可以看做将两组数据首先做Z分数处理之后, 然后两组数据的乘积和除以样本数</p>
-<p>Z分数一般代表正态分布中, 数据偏离中心点的距离.等于变量减掉平均数再除以标准差.(就是高考的标准分类似的处理)</p>
-<p>标准差则等于变量减掉平均数的平方和,再除以样本数,最后再开方.</p>
-<p>所以, 根据这个最朴素的理解,我们可以将公式依次精简为:</p>
-<p><img src="http://segmentfault.com/img/bKDASK" alt="此处输入图片的描述"></p>
-<p>spearman相关系数：是衡量分级定序变量之间的相关程度的统计量，对不服从正态分布的资料、原始资料等级资料、一侧开口资料、总体分布类型未知的资料不符合使用积矩相关系数来描述关联性。此时可采用秩相关（rank correlation），也称等级相关，来描述两个变量之间的关联程度与方向。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.apache.spark.ml.linalg.&#123;<span class="type">Matrix</span>, <span class="type">Vectors</span>&#125;</div><div class="line"><span class="keyword">import</span> org.apache.spark.ml.stat.<span class="type">Correlation</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.sql.<span class="type">SparkSession</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.sql.<span class="type">Row</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">ml_1</span> </span>&#123;</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</div><div class="line">    <span class="keyword">val</span> spark = <span class="type">SparkSession</span></div><div class="line">      .builder</div><div class="line">      .master(<span class="string">"local"</span>)</div><div class="line">      .getOrCreate()</div><div class="line">    <span class="keyword">import</span> spark.implicits._</div><div class="line"></div><div class="line">    <span class="comment">// $example on$</span></div><div class="line">    <span class="keyword">val</span> data = <span class="type">Seq</span>(</div><div class="line">      <span class="type">Vectors</span>.sparse(<span class="number">4</span>, <span class="type">Seq</span>((<span class="number">0</span>, <span class="number">1.0</span>), (<span class="number">3</span>, <span class="number">-2.0</span>))),</div><div class="line">      <span class="type">Vectors</span>.dense(<span class="number">4.0</span>, <span class="number">5.0</span>, <span class="number">0.0</span>, <span class="number">3.0</span>),</div><div class="line">      <span class="type">Vectors</span>.dense(<span class="number">6.0</span>, <span class="number">7.0</span>, <span class="number">0.0</span>, <span class="number">8.0</span>),</div><div class="line">      <span class="type">Vectors</span>.sparse(<span class="number">4</span>, <span class="type">Seq</span>((<span class="number">0</span>, <span class="number">9.0</span>), (<span class="number">3</span>, <span class="number">1.0</span>)))</div><div class="line">    )</div><div class="line"></div><div class="line">    <span class="keyword">val</span> df = data.map(<span class="type">Tuple1</span>.apply).toDF(<span class="string">"features"</span>)</div><div class="line">    <span class="keyword">val</span> <span class="type">Row</span>(coeff1: <span class="type">Matrix</span>) = <span class="type">Correlation</span>.corr(df, <span class="string">"features"</span>).head</div><div class="line">    println(<span class="string">"Pearson correlation matrix:\n"</span> + coeff1.toString)</div><div class="line">    </div><div class="line">    <span class="keyword">val</span> <span class="type">Row</span>(coeff2: <span class="type">Matrix</span>) = <span class="type">Correlation</span>.corr(df, <span class="string">"features"</span>, <span class="string">"spearman"</span>).head</div><div class="line">    println(<span class="string">"Spearman correlation matrix:\n"</span> + coeff2.toString)</div><div class="line">    <span class="comment">// $example off$</span></div><div class="line"></div><div class="line">    spark.stop()</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>1.0为第一列和第一列计算<br>0.055641488407465814为第一列和第二列计算<br>0.4004714203168137 为第三列和第四列计算</p>
-<p>计算结果:<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="type">Pearson</span> correlation matrix:</div><div class="line"><span class="number">1.0</span>                   <span class="number">0.055641488407465814</span>  <span class="type">NaN</span>  <span class="number">0.4004714203168137</span> </div><div class="line"><span class="number">0.055641488407465814</span>  <span class="number">1.0</span>                   <span class="type">NaN</span>  <span class="number">0.9135958615342522</span>  </div><div class="line"><span class="type">NaN</span>                   <span class="type">NaN</span>                   <span class="number">1.0</span>  <span class="type">NaN</span>                 </div><div class="line"><span class="number">0.4004714203168137</span>    <span class="number">0.9135958615342522</span>    <span class="type">NaN</span>  <span class="number">1.0</span>                 </div><div class="line"><span class="type">Spearman</span> correlation matrix:</div><div class="line"><span class="number">1.0</span>                  <span class="number">0.10540925533894532</span>  <span class="type">NaN</span>  <span class="number">0.40000000000000174</span>  </div><div class="line"><span class="number">0.10540925533894532</span>  <span class="number">1.0</span>                  <span class="type">NaN</span>  <span class="number">0.9486832980505141</span>   </div><div class="line"><span class="type">NaN</span>                  <span class="type">NaN</span>                  <span class="number">1.0</span>  <span class="type">NaN</span>                  </div><div class="line"><span class="number">0.40000000000000174</span>  <span class="number">0.9486832980505141</span>   <span class="type">NaN</span>  <span class="number">1.0</span></div></pre></td></tr></table></figure></p>
-<h4 id="卡方检验"><a href="#卡方检验" class="headerlink" title="卡方检验"></a><strong>卡方检验</strong></h4><p>卡方检验是用途非常广的一种假设检验方法，它在分类资料统计推断中的应用，包括：两个率或两个构成比比较的卡方检验；多个率或多个构成比比较的卡方检验以及分类资料的相关分析等。<br>卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离程度就决定卡方值的大小，卡方值越大，越不符合；卡方值越小，偏差越小，越趋于符合，若两个值完全相等时，卡方值就为0，表明理论值完全符合。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.apache.spark.ml.linalg.<span class="type">Vector</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.ml.linalg.<span class="type">Vectors</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.ml.stat.<span class="type">ChiSquareTest</span></div><div class="line"><span class="keyword">import</span> org.apache.spark.sql.<span class="type">SparkSession</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">  * Created by Administrator on 2017/10/18.</div><div class="line">  */</div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">ChiSquareTest</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</div><div class="line">    <span class="keyword">val</span> spark = <span class="type">SparkSession</span></div><div class="line">      .builder</div><div class="line">      .master(<span class="string">"local"</span>)</div><div class="line">      .getOrCreate()</div><div class="line">    <span class="keyword">import</span> spark.implicits._</div><div class="line"></div><div class="line">    <span class="keyword">val</span> data = <span class="type">Seq</span>(</div><div class="line">      (<span class="number">0.0</span>, <span class="type">Vectors</span>.dense(<span class="number">0.5</span>, <span class="number">10.0</span>)),</div><div class="line">      (<span class="number">0.0</span>, <span class="type">Vectors</span>.dense(<span class="number">1.5</span>, <span class="number">20.0</span>)),</div><div class="line">      (<span class="number">1.0</span>, <span class="type">Vectors</span>.dense(<span class="number">1.5</span>, <span class="number">30.0</span>)),</div><div class="line">      (<span class="number">0.0</span>, <span class="type">Vectors</span>.dense(<span class="number">3.5</span>, <span class="number">30.0</span>)),</div><div class="line">      (<span class="number">0.0</span>, <span class="type">Vectors</span>.dense(<span class="number">3.5</span>, <span class="number">40.0</span>)),</div><div class="line">      (<span class="number">1.0</span>, <span class="type">Vectors</span>.dense(<span class="number">3.5</span>, <span class="number">40.0</span>))</div><div class="line">    )</div><div class="line"></div><div class="line">    <span class="keyword">val</span> df = data.toDF(<span class="string">"label"</span>, <span class="string">"features"</span>)</div><div class="line">    <span class="keyword">val</span> chi = <span class="type">ChiSquareTest</span>.test(df, <span class="string">"features"</span>, <span class="string">"label"</span>).head</div><div class="line">    println(<span class="string">"pValues = "</span> + chi.getAs[<span class="type">Vector</span>](<span class="number">0</span>))</div><div class="line">    println(<span class="string">"degreesOfFreedom = "</span> + chi.getSeq[<span class="type">Int</span>](<span class="number">1</span>).mkString(<span class="string">"["</span>, <span class="string">","</span>, <span class="string">"]"</span>))</div><div class="line">    println(<span class="string">"statistics = "</span> + chi.getAs[<span class="type">Vector</span>](<span class="number">2</span>))</div><div class="line"></div><div class="line">    spark.stop()</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>结果：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pValues = [<span class="number">0.6872892787909721</span>,<span class="number">0.6822703303362126</span>]</div><div class="line">degreesOfFreedom = [<span class="number">2</span>,<span class="number">3</span>]</div><div class="line">statistics = [<span class="number">0.75</span>,<span class="number">1.5</span>]</div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1><h2 id="项目-0-预测泰坦尼克号乘客生还率"><a href="#项目-0-预测泰坦尼克号乘客生还率" class="headerlink" title="项目 0: 预测泰坦尼克号乘客生还率"></a>项目 0: 预测泰坦尼克号乘客生还率</h2><p>1912年，泰坦尼克号在第一次航行中就与冰山相撞沉没，导致了大部分乘客和船员身亡。在这个入门项目中，我们将探索部分泰坦尼克号旅客名单，来确定哪些特征可以最好地预测一个人是否会生还。为了完成这个项目，你将需要实现几个基于条件的预测并回答下面的问题。我们将根据代码的完成度和对问题的解答来对你提交的项目的进行评估。 </p>
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>当我们开始处理泰坦尼克号乘客数据时，会先导入我们需要的功能模块以及将数据加载到 <code>pandas</code> DataFrame。运行下面区域中的代码加载数据，并使用 <code>.head()</code> 函数显示前几项乘客数据。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"></div><div class="line"><span class="comment"># RMS Titanic data visualization code </span></div><div class="line"><span class="comment"># 数据可视化代码</span></div><div class="line"><span class="keyword">from</span> titanic_visualizations <span class="keyword">import</span> survival_stats</div><div class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> display</div><div class="line">%matplotlib inline</div><div class="line"></div><div class="line"><span class="comment"># Load the dataset </span></div><div class="line"><span class="comment"># 加载数据集</span></div><div class="line">in_file = <span class="string">'titanic_data.csv'</span></div><div class="line">full_data = pd.read_csv(in_file)</div><div class="line"></div><div class="line"><span class="comment"># Print the first few entries of the RMS Titanic data </span></div><div class="line"><span class="comment"># 显示数据列表中的前几项乘客数据</span></div><div class="line">display(full_data.head())</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>PassengerId</th>
+<th>Survived</th>
+<th>Pclass</th>
+<th>Name</th>
+<th>Sex</th>
+<th>Age</th>
+<th>SibSp</th>
+<th>Parch</th>
+<th>Ticket</th>
+<th>Fare</th>
+<th>Cabin</th>
+<th>Embarked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>Braund, Mr. Owen Harris</td>
+<td>male</td>
+<td>22.0</td>
+<td>1</td>
+<td>0</td>
+<td>A/5 21171</td>
+<td>7.2500</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>Cumings, Mrs. John Bradley (Florence Briggs Th…</td>
+<td>female</td>
+<td>38.0</td>
+<td>1</td>
+<td>0</td>
+<td>PC 17599</td>
+<td>71.2833</td>
+<td>C85</td>
+<td>C</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+<td>Heikkinen, Miss. Laina</td>
+<td>female</td>
+<td>26.0</td>
+<td>0</td>
+<td>0</td>
+<td>STON/O2. 3101282</td>
+<td>7.9250</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+<td>female</td>
+<td>35.0</td>
+<td>1</td>
+<td>0</td>
+<td>113803</td>
+<td>53.1000</td>
+<td>C123</td>
+<td>S</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>0</td>
+<td>3</td>
+<td>Allen, Mr. William Henry</td>
+<td>male</td>
+<td>35.0</td>
+<td>0</td>
+<td>0</td>
+<td>373450</td>
+<td>8.0500</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+</tbody>
+</table>
+<p>从泰坦尼克号的数据样本中，我们可以看到船上每位旅客的特征</p>
+<ul>
+<li><strong>Survived</strong>：是否存活（0代表否，1代表是）</li>
+<li><strong>Pclass</strong>：社会阶级（1代表上层阶级，2代表中层阶级，3代表底层阶级）</li>
+<li><strong>Name</strong>：船上乘客的名字</li>
+<li><strong>Sex</strong>：船上乘客的性别</li>
+<li><strong>Age</strong>:船上乘客的年龄（可能存在 <code>NaN</code>）</li>
+<li><strong>SibSp</strong>：乘客在船上的兄弟姐妹和配偶的数量</li>
+<li><strong>Parch</strong>：乘客在船上的父母以及小孩的数量</li>
+<li><strong>Ticket</strong>：乘客船票的编号</li>
+<li><strong>Fare</strong>：乘客为船票支付的费用</li>
+<li><strong>Cabin</strong>：乘客所在船舱的编号（可能存在 <code>NaN</code>）</li>
+<li><strong>Embarked</strong>：乘客上船的港口（C 代表从 Cherbourg 登船，Q 代表从 Queenstown 登船，S 代表从 Southampton 登船）</li>
+</ul>
+<p>因为我们感兴趣的是每个乘客或船员是否在事故中活了下来。可以将 <strong>Survived</strong> 这一特征从这个数据集移除，并且用一个单独的变量 <code>outcomes</code> 来存储。它也做为我们要预测的目标。</p>
+<p>运行该代码，从数据集中移除 <strong>Survived</strong> 这个特征，并将它存储在变量 <code>outcomes</code> 中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Store the 'Survived' feature in a new variable and remove it from the dataset </span></div><div class="line"><span class="comment"># 从数据集中移除 'Survived' 这个特征，并将它存储在一个新的变量中。</span></div><div class="line">outcomes = full_data[<span class="string">'Survived'</span>]</div><div class="line">data = full_data.drop(<span class="string">'Survived'</span>, axis = <span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="comment"># Show the new dataset with 'Survived' removed</span></div><div class="line"><span class="comment"># 显示已移除 'Survived' 特征的数据集</span></div><div class="line">display(data.head())</div><div class="line"></div><div class="line">display(outcomes[<span class="number">1</span>])</div><div class="line"></div><div class="line">display(data.loc[<span class="number">1</span>])</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th>PassengerId</th>
+<th>Pclass</th>
+<th>Name</th>
+<th>Sex</th>
+<th>Age</th>
+<th>SibSp</th>
+<th>Parch</th>
+<th>Ticket</th>
+<th>Fare</th>
+<th>Cabin</th>
+<th>Embarked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td>1</td>
+<td>3</td>
+<td>Braund, Mr. Owen Harris</td>
+<td>male</td>
+<td>22.0</td>
+<td>1</td>
+<td>0</td>
+<td>A/5 21171</td>
+<td>7.2500</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td>2</td>
+<td>1</td>
+<td>Cumings, Mrs. John Bradley (Florence Briggs Th…</td>
+<td>female</td>
+<td>38.0</td>
+<td>1</td>
+<td>0</td>
+<td>PC 17599</td>
+<td>71.2833</td>
+<td>C85</td>
+<td>C</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td>3</td>
+<td>3</td>
+<td>Heikkinen, Miss. Laina</td>
+<td>female</td>
+<td>26.0</td>
+<td>0</td>
+<td>0</td>
+<td>STON/O2. 3101282</td>
+<td>7.9250</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td>4</td>
+<td>1</td>
+<td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+<td>female</td>
+<td>35.0</td>
+<td>1</td>
+<td>0</td>
+<td>113803</td>
+<td>53.1000</td>
+<td>C123</td>
+<td>S</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td>5</td>
+<td>3</td>
+<td>Allen, Mr. William Henry</td>
+<td>male</td>
+<td>35.0</td>
+<td>0</td>
+<td>0</td>
+<td>373450</td>
+<td>8.0500</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+</tbody>
+</table>
+<p> 1</p>
+<pre><code>PassengerId                                                    2
+Pclass                                                         1
+Name           Cumings, Mrs. John Bradley (Florence Briggs Th...
+Sex                                                       female
+Age                                                           38
+SibSp                                                          1
+Parch                                                          0
+Ticket                                                  PC 17599
+Fare                                                     71.2833
+Cabin                                                        C85
+Embarked                                                       C
+Name: 1, dtype: object
+</code></pre><p>这个例子展示了如何将泰坦尼克号的 <strong>Survived</strong> 数据从 DataFrame 移除。注意到 <code>data</code>（乘客数据）和 <code>outcomes</code> （是否存活）现在已经匹配好。这意味着对于任何乘客的 <code>data.loc[i]</code> 都有对应的存活的结果 <code>outcome[i]</code>。</p>
+<p>为了验证我们预测的结果，我们需要一个标准来给我们的预测打分。因为我们最感兴趣的是我们预测的<strong>准确率</strong>，既正确预测乘客存活的比例。运行下面的代码来创建我们的 <code>accuracy_score</code> 函数以对前五名乘客的预测来做测试。</p>
+<p><strong>思考题</strong>：从第六个乘客算起，如果我们预测他们全部都存活，你觉得我们预测的准确率是多少？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">accuracy_score</span><span class="params">(truth, pred)</span>:</span></div><div class="line">    <span class="string">""" Returns accuracy score for input truth and predictions. """</span></div><div class="line">    </div><div class="line">    <span class="comment"># Ensure that the number of predictions matches number of outcomes</span></div><div class="line">    <span class="comment"># 确保预测的数量与结果的数量一致</span></div><div class="line">    <span class="keyword">if</span> len(truth) == len(pred): </div><div class="line"><span class="comment">#         print "kaish1"</span></div><div class="line"><span class="comment">#         print truth</span></div><div class="line"><span class="comment">#         print "kaish2"</span></div><div class="line"><span class="comment">#         print pred</span></div><div class="line"><span class="comment">#         print "end"</span></div><div class="line">        <span class="comment"># Calculate and return the accuracy as a percent</span></div><div class="line">        <span class="comment"># 计算预测准确率（百分比）</span></div><div class="line">        <span class="keyword">return</span> <span class="string">"Predictions have an accuracy of &#123;:.2f&#125;%."</span>.format((truth == pred).mean()*<span class="number">100</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> <span class="string">"Number of predictions does not match number of outcomes!"</span></div><div class="line">    </div><div class="line"><span class="comment"># Test the 'accuracy_score' function</span></div><div class="line"><span class="comment"># 测试 'accuracy_score' 函数</span></div><div class="line"><span class="comment"># print np.ones(5, dtype = int)</span></div><div class="line"><span class="comment"># print outcomes[:5]</span></div><div class="line">predictions = pd.Series(np.ones(<span class="number">5</span>, dtype = int))</div><div class="line"><span class="comment"># print accuracy_score(outcomes[:5], predictions)</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>提示</strong>：如果你保存 iPython Notebook，代码运行的输出也将被保存。但是，一旦你重新打开项目，你的工作区将会被重置。请确保每次都从上次离开的地方运行代码来重新生成变量和函数。</p>
+</blockquote>
+<h1 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h1><p>如果我们要预测泰坦尼克号上的乘客是否存活，但是我们又对他们一无所知，那么最好的预测就是船上的人无一幸免。这是因为，我们可以假定当船沉没的时候大多数乘客都遇难了。下面的 <code>predictions_0</code> 函数就预测船上的乘客全部遇难。  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predictions_0</span><span class="params">(data)</span>:</span></div><div class="line">    <span class="string">""" Model with no features. Always predicts a passenger did not survive. """</span></div><div class="line"></div><div class="line">    predictions = []</div><div class="line">    <span class="keyword">for</span> _, passenger <span class="keyword">in</span> data.iterrows():</div><div class="line">        </div><div class="line">        <span class="comment"># Predict the survival of 'passenger'</span></div><div class="line">        <span class="comment"># 预测 'passenger' 的生还率</span></div><div class="line">        predictions.append(<span class="number">0</span>)</div><div class="line">    </div><div class="line">    <span class="comment"># Return our predictions</span></div><div class="line">    <span class="comment"># 返回预测结果</span></div><div class="line">    <span class="keyword">return</span> pd.Series(predictions)</div><div class="line"></div><div class="line"><span class="comment"># Make the predictions</span></div><div class="line"><span class="comment"># 进行预测</span></div><div class="line">predictions = predictions_0(data)</div></pre></td></tr></table></figure>
+<h3 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h3><p>对比真实的泰坦尼克号的数据，如果我们做一个所有乘客都没有存活的预测，你认为这个预测的准确率能达到多少？</p>
+<p><strong>提示</strong>：运行下面的代码来查看预测的准确率。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> accuracy_score(outcomes, predictions)</div></pre></td></tr></table></figure>
+<pre><code>Predictions have an accuracy of 61.62%.
+</code></pre><p><strong>回答:</strong> <em>请用上面出现的预测结果来替换掉这里的文字</em> 61.62%</p>
+<hr>
+<p>我们可以使用 <code>survival_stats</code> 函数来看看 <strong>Sex</strong> 这一特征对乘客的存活率有多大影响。这个函数定义在名为 <code>titanic_visualizations.py</code> 的 Python 脚本文件中，我们的项目提供了这个文件。传递给函数的前两个参数分别是泰坦尼克号的乘客数据和乘客的 生还结果。第三个参数表明我们会依据哪个特征来绘制图形。</p>
+<p>运行下面的代码绘制出依据乘客性别计算存活率的柱形图。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">survival_stats(data, outcomes, <span class="string">'Sex'</span>)</div></pre></td></tr></table></figure>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/output_14_0.png" alt="此处输入图片的描述"></p>
+<p>观察泰坦尼克号上乘客存活的数据统计，我们可以发现大部分男性乘客在船沉没的时候都遇难了。相反的，大部分女性乘客都在事故中<strong>生还</strong>。让我们在先前推断的基础上继续创建：如果乘客是男性，那么我们就预测他们遇难；如果乘客是女性，那么我们预测他们在事故中活了下来。</p>
+<p>将下面的代码补充完整，让函数可以进行正确预测。  </p>
+<p><strong>提示</strong>：您可以用访问 dictionary（字典）的方法来访问船上乘客的每个特征对应的值。例如， <code>passenger[&#39;Sex&#39;]</code> 返回乘客的性别。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predictions_1</span><span class="params">(data)</span>:</span></div><div class="line">    <span class="string">""" Model with one feature: </span></div><div class="line">            - Predict a passenger survived if they are female. """</div><div class="line">    </div><div class="line">    predictions = []</div><div class="line">    <span class="keyword">for</span> _, passenger <span class="keyword">in</span> data.iterrows():</div><div class="line">        </div><div class="line">        <span class="comment"># Remove the 'pass' statement below </span></div><div class="line">        <span class="comment"># 移除下方的 'pass' 声明</span></div><div class="line">        <span class="comment"># and write your prediction conditions here</span></div><div class="line">        <span class="comment"># 输入你自己的预测条件</span></div><div class="line">        <span class="comment">#  print passenger['Sex']</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span>(passenger[<span class="string">'Sex'</span>] == <span class="string">"male"</span>) :</div><div class="line">            predictions.append(<span class="number">0</span>)</div><div class="line">        <span class="keyword">else</span> :</div><div class="line">            predictions.append(<span class="number">1</span>)</div><div class="line">    </div><div class="line">    <span class="comment"># Return our predictions</span></div><div class="line">    <span class="comment"># 返回预测结果</span></div><div class="line">    <span class="keyword">return</span> pd.Series(predictions)</div><div class="line"></div><div class="line"><span class="comment"># Make the predictions</span></div><div class="line"><span class="comment"># 进行预测</span></div><div class="line">predictions = predictions_1(data)</div><div class="line"></div><div class="line"><span class="comment"># print predictions</span></div></pre></td></tr></table></figure>
+<h3 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h3><p>当我们预测船上女性乘客全部存活，而剩下的人全部遇难，那么我们预测的准确率会达到多少？</p>
+<p><strong>提示</strong>：运行下面的代码来查看我们预测的准确率。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#print predictions</span></div><div class="line"><span class="keyword">print</span> accuracy_score(outcomes, predictions)</div></pre></td></tr></table></figure>
+<pre><code>Predictions have an accuracy of 78.68%.
+</code></pre><p><strong>回答</strong>: <em>用上面出现的预测结果来替换掉这里的文字</em> 78.68%.</p>
+<hr>
+<p>仅仅使用乘客性别（Sex）这一特征，我们预测的准确性就有了明显的提高。现在再看一下使用额外的特征能否更进一步提升我们的预测准确度。例如，综合考虑所有在泰坦尼克号上的男性乘客：我们是否找到这些乘客中的一个子集，他们的存活概率较高。让我们再次使用 <code>survival_stats</code> 函数来看看每位男性乘客的年龄（Age）。这一次，我们将使用第四个参数来限定柱形图中只有男性乘客。</p>
+<p>运行下面这段代码，把男性基于年龄的生存结果绘制出来。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">survival_stats(data, outcomes, <span class="string">'Age'</span>, [<span class="string">"Sex == 'male'"</span>])</div></pre></td></tr></table></figure>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/output_21_0.png" alt="此处输入图片的描述"></p>
+<p>仔细观察泰坦尼克号存活的数据统计，在船沉没的时候，大部分小于10岁的男孩都活着，而大多数10岁以上的男性都随着船的沉没而<strong>遇难</strong>。让我们继续在先前预测的基础上构建：如果乘客是女性，那么我们就预测她们全部存活；如果乘客是男性并且小于10岁，我们也会预测他们全部存活；所有其它我们就预测他们都没有幸存。  </p>
+<p>将下面缺失的代码补充完整，让我们的函数可以实现预测。<br><strong>提示</strong>: 您可以用之前 <code>predictions_1</code> 的代码作为开始来修改代码，实现新的预测函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predictions_2</span><span class="params">(data)</span>:</span></div><div class="line">    <span class="string">""" Model with two features: </span></div><div class="line">            - Predict a passenger survived if they are female.</div><div class="line">            - Predict a passenger survived if they are male and younger than 10. """</div><div class="line">    </div><div class="line">    predictions = []</div><div class="line">    <span class="keyword">for</span> _, passenger <span class="keyword">in</span> data.iterrows():</div><div class="line">        </div><div class="line">        <span class="comment"># Remove the 'pass' statement below </span></div><div class="line">        <span class="comment"># 移除下方的 'pass' 声明</span></div><div class="line">        <span class="comment"># and write your prediction conditions here</span></div><div class="line">        <span class="comment"># 输入你自己的预测条件</span></div><div class="line">        <span class="keyword">if</span>(passenger[<span class="string">'Sex'</span>] == <span class="string">"male"</span>) :</div><div class="line">           </div><div class="line">            <span class="keyword">if</span>(passenger[<span class="string">'Age'</span>] &lt; <span class="number">10</span>) :</div><div class="line">                predictions.append(<span class="number">1</span>)</div><div class="line">            <span class="keyword">else</span> :</div><div class="line">                predictions.append(<span class="number">0</span>)</div><div class="line">        <span class="keyword">else</span> :</div><div class="line">             predictions.append(<span class="number">1</span>)</div><div class="line">            </div><div class="line">    </div><div class="line">    <span class="comment"># Return our predictions</span></div><div class="line">    <span class="comment"># 返回预测结果</span></div><div class="line">    <span class="keyword">return</span> pd.Series(predictions)</div><div class="line"></div><div class="line"><span class="comment"># Make the predictions</span></div><div class="line"><span class="comment"># 进行预测</span></div><div class="line">predictions = predictions_2(data)</div><div class="line"></div><div class="line"><span class="comment"># print predictions</span></div></pre></td></tr></table></figure>
+<h3 id="问题3"><a href="#问题3" class="headerlink" title="问题3"></a>问题3</h3><p>当预测所有女性以及小于10岁的男性都存活的时候，预测的准确率会达到多少？</p>
+<p><strong>提示：</strong>运行下面的代码来查看预测的准确率。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> accuracy_score(outcomes, predictions)</div></pre></td></tr></table></figure>
+<pre><code>Predictions have an accuracy of 79.35%.
+</code></pre><p><strong>回答</strong>: <em>用上面出现的预测结果来替换掉这里的文字</em>   79.35%</p>
+<hr>
+<p>添加年龄（Age）特征与性别（Sex）的结合比单独使用性别（Sex）也提高了不少准确度。现在该你来做预测了：找到一系列的特征和条件来对数据进行划分，使得预测结果提高到80%以上。这可能需要多个特性和多个层次的条件语句才会成功。你可以在不同的条件下多次使用相同的特征。<strong>Pclass</strong>，<strong>Sex</strong>，<strong>Age</strong>，<strong>SibSp</strong> 和 <strong>Parch</strong> 是建议尝试使用的特征。   </p>
+<p>使用 <code>survival_stats</code> 函数来观测泰坦尼克号上乘客存活的数据统计。<br><strong>提示:</strong> 要使用多个过滤条件，把每一个条件放在一个列表里作为最后一个参数传递进去。例如: <code>[&quot;Sex == &#39;male&#39;&quot;, &quot;Age &lt; 18&quot;]</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">survival_stats(data, outcomes, <span class="string">'Embarked'</span>, [<span class="string">"Sex == 'female'"</span>,<span class="string">"Pclass == 3"</span>])</div></pre></td></tr></table></figure>
+<p><img src="http://oh6ybr0jg.bkt.clouddn.com/output_28_0.png" alt="此处输入图片的描述"></p>
+<p>当查看和研究了图形化的泰坦尼克号上乘客的数据统计后，请补全下面这段代码中缺失的部分，使得函数可以返回你的预测。<br>在到达最终的预测模型前请确保记录你尝试过的各种特征和条件。<br><strong>提示:</strong> 您可以用之前 <code>predictions_2</code> 的代码作为开始来修改代码，实现新的预测函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predictions_3</span><span class="params">(data)</span>:</span></div><div class="line">    <span class="string">""" Model with multiple features. Makes a prediction with an accuracy of at least 80%. """</span></div><div class="line">    </div><div class="line">    predictions = []</div><div class="line">    <span class="keyword">for</span> _, passenger <span class="keyword">in</span> data.iterrows():</div><div class="line">        </div><div class="line">        <span class="comment"># Remove the 'pass' statement below </span></div><div class="line">        <span class="comment"># and write your prediction conditions here</span></div><div class="line">        <span class="keyword">if</span>(passenger[<span class="string">'Sex'</span>] == <span class="string">"male"</span>) :</div><div class="line">           </div><div class="line">            <span class="keyword">if</span>(passenger[<span class="string">'Age'</span>] &lt; <span class="number">18</span>) :</div><div class="line">                <span class="keyword">if</span>(passenger[<span class="string">'Pclass'</span>] &lt; <span class="number">3</span> ) :</div><div class="line">                     predictions.append(<span class="number">1</span>)</div><div class="line">                <span class="keyword">else</span> :</div><div class="line">                     predictions.append(<span class="number">0</span>)</div><div class="line">            <span class="keyword">else</span> :</div><div class="line">                </div><div class="line">                    predictions.append(<span class="number">0</span>)      </div><div class="line">               </div><div class="line"><span class="comment">#                 print passenger['Pclass']</span></div><div class="line"><span class="comment">#                if(passenger['Pclass'] &gt; 1 ) :</span></div><div class="line"><span class="comment">#                     predictions.append(0)</span></div><div class="line"><span class="comment">#                else :</span></div><div class="line"><span class="comment">#                     predictions.append(1)</span></div><div class="line">        <span class="keyword">else</span> :</div><div class="line">            </div><div class="line">             <span class="keyword">if</span>(passenger[<span class="string">'Pclass'</span>] == <span class="number">3</span> ) :</div><div class="line">                    <span class="keyword">if</span>(passenger[<span class="string">'Embarked'</span>] == <span class="string">'S'</span> ) :</div><div class="line">                        predictions.append(<span class="number">0</span>)</div><div class="line">                    <span class="keyword">else</span> :</div><div class="line">                        predictions.append(<span class="number">1</span>)</div><div class="line">             <span class="keyword">else</span> :</div><div class="line">                    predictions.append(<span class="number">1</span>)</div><div class="line">    </div><div class="line">    <span class="comment"># Return our predictions</span></div><div class="line">    <span class="keyword">return</span> pd.Series(predictions)</div><div class="line"></div><div class="line"><span class="comment"># Make the predictions</span></div><div class="line">predictions = predictions_3(data)</div></pre></td></tr></table></figure>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>请描述你实现80%准确度的预测模型所经历的步骤。您观察过哪些特征？某些特性是否比其他特征更有帮助？你用了什么条件来预测生还结果？你最终的预测的准确率是多少？<br><strong>提示:</strong>运行下面的代码来查看你的预测准确度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> accuracy_score(outcomes, predictions)</div></pre></td></tr></table></figure>
+<pre><code>Predictions have an accuracy of 82.38%.
+</code></pre><p><strong>回答</strong>: <em>用上面问题的答案来替换掉这里的文字</em></p>
+<h1 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h1><p>经过了数次对数据的探索和分类，你创建了一个预测泰坦尼克号乘客存活率的有用的算法。在这个项目中你手动地实现了一个简单的机器学习模型——决策树（decision tree）。决策树每次按照一个特征把数据分割成越来越小的群组（被称为 <em>nodes</em>）。每次数据的一个子集被分出来，如果分割结果的子集中的数据比之前更同质（包含近似的标签），我们的预测也就更加准确。电脑来帮助我们做这件事会比手动做更彻底，更精确。<a href="http://www.r2d3.us/visual-intro-to-machine-learning-part-1/" target="_blank" rel="external">这个链接</a>提供了另一个使用决策树做机器学习入门的例子。  </p>
+<p>决策树是许多<strong>监督学习</strong>算法中的一种。在监督学习中，我们关心的是使用数据的特征并根据数据的结果标签进行预测或建模。也就是说，每一组数据都有一个真正的结果值，不论是像泰坦尼克号生存数据集一样的标签，或者是连续的房价预测。</p>
+<h3 id="问题5"><a href="#问题5" class="headerlink" title="问题5"></a>问题5</h3><p>想象一个真实世界中应用监督学习的场景，你期望预测的结果是什么？举出两个在这个场景中能够帮助你进行预测的数据集中的特征。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;目前基于RDD的MLlib已经进入维护莫斯。大概在spark2.3基于RDD的MLlib API将要被废弃。未来是基于DataFrame的API&lt;/p&gt;
-&lt;p&gt;1.基本统计&lt;br&gt;计算两组数据之间的相关性&lt;/p&gt;
-&lt;h3 id=&quot;皮尔森相关系数（Pearson-correlation-coefficient）&quot;&gt;&lt;a href=&quot;#皮尔森相关系数（Pearson-correlation-coefficient）&quot; class=&quot;headerlink&quot; title=&quot;皮尔森相关系数（Pearson correlation coefficient）&quot;&gt;&lt;/a&gt;皮尔森相关系数（Pearson correlation coefficient）&lt;/h3&gt;&lt;p&gt;也称皮尔森积矩相关系数(Pearson product-moment correlation coefficient) ，是一种线性相关系数。皮尔森相关系数是用来反映两个变量线性相关程度的统计量。相关系数用r表示，其中n为样本量，分别为两个变量的观测值和均值。r描述的是两个变量间线性相关强弱的程度。r的绝对值越大表明相关性越强&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://segmentfault.com/img/cGNupC&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://segmentfault.com/img/eOV3Oj&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://segmentfault.com/img/lJqNL&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;br&gt;
+      &lt;h1 id=&quot;机器学习&quot;&gt;&lt;a href=&quot;#机器学习&quot; class=&quot;headerlink&quot; title=&quot;机器学习&quot;&gt;&lt;/a&gt;机器学习&lt;/h1&gt;&lt;h2 id=&quot;项目-0-预测泰坦尼克号乘客生还率&quot;&gt;&lt;a href=&quot;#项目-0-预测泰坦尼克号乘客生还率&quot; class=&quot;headerlink&quot; title=&quot;项目 0: 预测泰坦尼克号乘客生还率&quot;&gt;&lt;/a&gt;项目 0: 预测泰坦尼克号乘客生还率&lt;/h2&gt;&lt;p&gt;1912年，泰坦尼克号在第一次航行中就与冰山相撞沉没，导致了大部分乘客和船员身亡。在这个入门项目中，我们将探索部分泰坦尼克号旅客名单，来确定哪些特征可以最好地预测一个人是否会生还。为了完成这个项目，你将需要实现几个基于条件的预测并回答下面的问题。我们将根据代码的完成度和对问题的解答来对你提交的项目的进行评估。 &lt;/p&gt;
+&lt;h1 id=&quot;开始&quot;&gt;&lt;a href=&quot;#开始&quot; class=&quot;headerlink&quot; title=&quot;开始&quot;&gt;&lt;/a&gt;开始&lt;/h1&gt;&lt;p&gt;当我们开始处理泰坦尼克号乘客数据时，会先导入我们需要的功能模块以及将数据加载到 &lt;code&gt;pandas&lt;/code&gt; DataFrame。运行下面区域中的代码加载数据，并使用 &lt;code&gt;.head()&lt;/code&gt; 函数显示前几项乘客数据。 &lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; numpy &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; np&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; pandas &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; pd&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# RMS Titanic data visualization code &lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 数据可视化代码&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; titanic_visualizations &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; survival_stats&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; IPython.display &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; display&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;%matplotlib inline&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Load the dataset &lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 加载数据集&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;in_file = &lt;span class=&quot;string&quot;&gt;&#39;titanic_data.csv&#39;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;full_data = pd.read_csv(in_file)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Print the first few entries of the RMS Titanic data &lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 显示数据列表中的前几项乘客数据&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;display(full_data.head())&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
-      <category term="spark" scheme="http://yoursite.com/categories/spark/"/>
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="spark" scheme="http://yoursite.com/tags/spark/"/>
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

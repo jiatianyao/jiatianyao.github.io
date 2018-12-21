@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="算法," />
+  <meta name="keywords" content="机器学习," />
 
 
 
@@ -86,31 +86,21 @@
 
 
 
-<meta name="description" content="条件概率事件A在另外一个事件B已经发生条件下的发生概率。条件概率表示为P（A|B），读作“在B条件下A的概率”。
-设A，B 是两个事件，且A不是不可能事件，则称为在事件A发生的条件下，事件B发生的条件概率。一般地，，且它满足以下三条件：（1）非负性；（2）规范性；（3）可列可加性。
-如上图求：红球来自A的概率P（A|红） =  P（A红）/P（红）
-全概率公式全概率公式为概率论中的重要公式，它将">
+<meta name="description" content="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。算法涉及3个主要因素：1)    训练数据集2)    距离或相似度的计算衡量3)    k的大小绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。
+KNN分类算法Python实">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法推演">
-<meta property="og:url" content="http://yoursite.com/2017/01/10/算法推演/index.html">
+<meta property="og:title" content="机器学习之KNN算法推演">
+<meta property="og:url" content="http://yoursite.com/2018/01/21/机器学习之KNN算法推演/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
-<meta property="og:description" content="条件概率事件A在另外一个事件B已经发生条件下的发生概率。条件概率表示为P（A|B），读作“在B条件下A的概率”。
-设A，B 是两个事件，且A不是不可能事件，则称为在事件A发生的条件下，事件B发生的条件概率。一般地，，且它满足以下三条件：（1）非负性；（2）规范性；（3）可列可加性。
-如上图求：红球来自A的概率P（A|红） =  P（A红）/P（红）
-全概率公式全概率公式为概率论中的重要公式，它将">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%872.jpg">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F.png">
-<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%BC%94.png">
-<meta property="og:updated_time" content="2017-03-04T13:05:36.531Z">
+<meta property="og:description" content="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。算法涉及3个主要因素：1)    训练数据集2)    距离或相似度的计算衡量3)    k的大小绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。
+KNN分类算法Python实">
+<meta property="og:image" content="http://oh6ybr0jg.bkt.clouddn.com/KNN%E7%AE%97%E6%B3%95.jpg">
+<meta property="og:updated_time" content="2018-12-21T08:21:00.169Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法推演">
-<meta name="twitter:description" content="条件概率事件A在另外一个事件B已经发生条件下的发生概率。条件概率表示为P（A|B），读作“在B条件下A的概率”。
-设A，B 是两个事件，且A不是不可能事件，则称为在事件A发生的条件下，事件B发生的条件概率。一般地，，且它满足以下三条件：（1）非负性；（2）规范性；（3）可列可加性。
-如上图求：红球来自A的概率P（A|红） =  P（A红）/P（红）
-全概率公式全概率公式为概率论中的重要公式，它将">
-<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png">
+<meta name="twitter:title" content="机器学习之KNN算法推演">
+<meta name="twitter:description" content="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。算法涉及3个主要因素：1)    训练数据集2)    距离或相似度的计算衡量3)    k的大小绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。
+KNN分类算法Python实">
+<meta name="twitter:image" content="http://oh6ybr0jg.bkt.clouddn.com/KNN%E7%AE%97%E6%B3%95.jpg">
 
 
 
@@ -138,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/01/10/算法推演/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/21/机器学习之KNN算法推演/"/>
 
 
 
 
 
-  <title> 算法推演 | 张洪铭的个人博客 </title>
+  <title> 机器学习之KNN算法推演 | 张洪铭的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -308,7 +298,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/10/算法推演/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/21/机器学习之KNN算法推演/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -332,7 +322,7 @@
             
             
               
-                算法推演
+                机器学习之KNN算法推演
               
             
           </h1>
@@ -345,8 +335,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-10T21:13:30+08:00">
-                2017-01-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-21T21:06:30+08:00">
+                2018-01-21
               </time>
             
 
@@ -364,8 +354,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -379,8 +369,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/01/10/算法推演/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/10/算法推演/" itemprop="commentCount"></span>
+                <a href="/2018/01/21/机器学习之KNN算法推演/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/21/机器学习之KNN算法推演/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -406,19 +396,65 @@
       
 
       
-        <p><img src="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" alt="此处输入图片的描述"></p>
-<h2 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h2><p>事件A在另外一个事件B已经发生条件下的发生概率。条件概率表示为P（A|B），读作“在B条件下A的概率”。</p>
-<p>设A，B 是两个事件，且A不是不可能事件，则称<img src="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" alt="此处输入图片的描述"><br>为在事件A发生的条件下，事件B发生的条件概率。一般地，<img src="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%872.jpg" alt="此处输入图片的描述"><br>，且它满足以下三条件：<br>（1）非负性；（2）规范性；（3）可列可加性。</p>
-<p>如上图<br>求：红球来自A的概率<br>P（A|红） =  P（A红）/P（红）</p>
-<h2 id="全概率公式"><a href="#全概率公式" class="headerlink" title="全概率公式"></a>全概率公式</h2><p>全概率公式为概率论中的重要公式，它将对一复杂事件A的概率求解问题转化为了在不同情况下发生的简单事件的概率的求和问题。</p>
-<p>公式表示若事件A1，A2，…，An构成一个完备事件组且都有正概率，则对任意一个事件B都有公式成立。</p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/%E5%85%A8%E6%A6%82%E7%8E%87%E5%85%AC%E5%BC%8F.png" alt="此处输入图片的描述"></p>
-<p>如上图<br>求：红球的概率<br>P（红） =  P（A红）+P（B红）</p>
+        <h4 id="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。"><a href="#从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。" class="headerlink" title="从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。"></a>从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。</h4><h5 id="算法涉及3个主要因素："><a href="#算法涉及3个主要因素：" class="headerlink" title="算法涉及3个主要因素："></a>算法涉及3个主要因素：</h5><p>1)    训练数据集<br>2)    距离或相似度的计算衡量<br>3)    k的大小<br><img src="http://oh6ybr0jg.bkt.clouddn.com/KNN%E7%AE%97%E6%B3%95.jpg" alt="此处输入图片的描述"><br>绿色圆要被决定赋予哪个类，是红色三角形还是蓝色四方形？如果K=3，由于红色三角形所占比例为2/3，绿色圆将被赋予红色三角形那个类，如果K=5，由于蓝色四方形比例为3/5，因此绿色圆被赋予蓝色四方形类。</p>
+<h2 id="KNN分类算法Python实战"><a href="#KNN分类算法Python实战" class="headerlink" title="KNN分类算法Python实战"></a>KNN分类算法Python实战</h2><p>有以下先验数据，使用knn算法对未知类别数据分类</p>
+<table>
+<thead>
+<tr>
+<th>x轴</th>
+<th style="text-align:center">y轴</th>
+<th style="text-align:right">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td style="text-align:center">0.9</td>
+<td style="text-align:right">A</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:right">A</td>
+</tr>
+<tr>
+<td>0.0</td>
+<td style="text-align:center">0.1</td>
+<td style="text-align:right">B</td>
+</tr>
+<tr>
+<td>0.1</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:right">B</td>
+</tr>
+</tbody>
+</table>
 <a id="more"></a>
-<h2 id="贝叶斯定理"><a href="#贝叶斯定理" class="headerlink" title="贝叶斯定理"></a>贝叶斯定理</h2><p>贝叶斯定理是关于随机事件A和B的条件概率（或边缘概率）的一则定理。<br>其中P(A|B)是在B发生的情况下A发生的可能性。</p>
-<p><img src="http://oh6ybr0jg.bkt.clouddn.com/%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%BC%94.png" alt="此处输入图片的描述"></p>
-<h2 id="欧几里得定理"><a href="#欧几里得定理" class="headerlink" title="欧几里得定理"></a>欧几里得定理</h2><p>二维空间的公式<br>0ρ = sqrt( (x1-x2)^2+(y1-y2)^2 )　|x| = √( x2 + y2 )<br>三维空间的公式<br>0ρ = √( (x1-x2)^2+(y1-y2)^2+(z1-z2)^2 )　|x| = √( x2 + y2 + z2 )<br>n维空间的公式<br>n维欧氏空间是一个点集,它的每个点 X 或向量 x 可以表示为 (x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>，x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>，…，x[n]) ，其中 x<a href="i = 1，2，…，n">i</a> 是实数，称为 X 的第i个坐标。<br>两个点 A = (a<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>，a<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>，…，a[n]) 和 B = (b<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>，b<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>，…，b[n]) 之间的距离 ρ(A，B) 定义为下面的公式：<br>ρ(A，B) =√ [ ∑( a[i] - b[i] )^2 ] (i = 1，2，…，n)<br>向量 x = (x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>，x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>，…，x[n]) 的自然长度 |x| 定义为下面的公式：<br>|x| = √( x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E6%8E%A8%E6%BC%94%E5%9B%BE.png" target="_blank" rel="external">1</a>^2 + x<a href="http://oh6ybr0jg.bkt.clouddn.com/%E7%AE%97%E6%B3%95-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87.jpg" target="_blank" rel="external">2</a>^2 + … + x[n]^2 )</p>
-<h2 id="线性方程"><a href="#线性方程" class="headerlink" title="线性方程"></a>线性方程</h2><p>线性方程也称一次方程。指未知数都是一次的方程。其一般的形式是ax+by+…+cz+d=0。线性方程的本质是等式两边乘以任何相同的非零数，方程的本质都不受影响。<br>ax + by = c<br>机器学习里面用逼近论来算</p>
+<p>未知类别数据</p>
+<table>
+<thead>
+<tr>
+<th>x轴</th>
+<th style="text-align:center">y轴</th>
+<th style="text-align:right">类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.2</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:right">？</td>
+</tr>
+<tr>
+<td>0.1</td>
+<td style="text-align:center">0.3</td>
+<td style="text-align:right">？</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#########################################</span></div><div class="line"><span class="comment"># kNN: k Nearest Neighbors</span></div><div class="line"></div><div class="line"><span class="comment"># 输入:      newInput:  (1xN)的待分类向量</span></div><div class="line"><span class="comment">#             dataSet:   (NxM)的训练数据集</span></div><div class="line"><span class="comment">#             labels: 	训练数据集的类别标签向量</span></div><div class="line"><span class="comment">#             k: 		近邻数 </span></div><div class="line">            </div><div class="line"><span class="comment"># 输出:     可能性最大的分类标签</span></div><div class="line"><span class="comment">#########################################</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="keyword">import</span> operator</div><div class="line"></div><div class="line"><span class="comment">#创建一个数据集，包含2个类别共4个样本</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></div><div class="line">	<span class="comment"># 生成一个矩阵，每行表示一个样本</span></div><div class="line">	group = array([[<span class="number">1.0</span>, <span class="number">0.9</span>], [<span class="number">1.0</span>, <span class="number">1.0</span>], [<span class="number">0.1</span>, <span class="number">0.2</span>], [<span class="number">0.0</span>, <span class="number">0.1</span>]])</div><div class="line">	<span class="comment"># 4个样本分别所属的类别</span></div><div class="line">	labels = [<span class="string">'A'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>]</div><div class="line">	<span class="keyword">return</span> group, labels</div><div class="line"></div><div class="line"><span class="comment"># KNN分类算法函数定义</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">kNNClassify</span><span class="params">(newInput, dataSet, labels, k)</span>:</span></div><div class="line">	numSamples = dataSet.shape[<span class="number">0</span>]   <span class="comment"># shape[0]表示行数</span></div><div class="line"></div><div class="line">	<span class="comment">## step 1: 计算距离</span></div><div class="line">	<span class="comment"># tile(A, reps): 构造一个矩阵，通过A重复reps次得到(tile(A, （repsX，repsY）)此处在行的方向重复repsX次，在Y的方向重复repsY次)</span></div><div class="line">	<span class="comment"># the following copy numSamples rows for dataSet</span></div><div class="line">	diff = tile(newInput, (numSamples, <span class="number">1</span>)) - dataSet  <span class="comment"># 按元素求差值</span></div><div class="line">	squaredDiff = diff ** <span class="number">2</span>  <span class="comment">#将差值平方</span></div><div class="line">	squaredDist = sum(squaredDiff, axis = <span class="number">1</span>)   <span class="comment"># 按行累加</span></div><div class="line">	distance = squaredDist ** <span class="number">0.5</span>  <span class="comment">#将差值平方和求开方，即得距离</span></div><div class="line"></div><div class="line">	<span class="comment">## step 2: 对距离排序</span></div><div class="line">	<span class="comment">## 此处排序需要注意样本标签的顺序。排序后存的是角标号。后续直接从排序后的标签序列找下标是排序内容的数据</span></div><div class="line">	<span class="comment"># argsort() 返回排序后的索引值</span></div><div class="line">	sortedDistIndices = argsort(distance)  <span class="comment">#或distance.argsort()</span></div><div class="line">	classCount = &#123;&#125; <span class="comment"># define a dictionary (can be append element)</span></div><div class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> xrange(k):</div><div class="line">		<span class="comment">## step 3: 选择k个最近邻</span></div><div class="line">		voteLabel = labels[sortedDistIndices[i]]</div><div class="line"></div><div class="line">		<span class="comment">## step 4: 计算k个最近邻中各类别出现的次数</span></div><div class="line">		<span class="comment"># when the key voteLabel is not in dictionary classCount, get()</span></div><div class="line">		<span class="comment"># will return 0</span></div><div class="line">		classCount[voteLabel] = classCount.get(voteLabel, <span class="number">0</span>) + <span class="number">1</span></div><div class="line"></div><div class="line">	<span class="comment">## step 5: 返回出现次数最多的类别标签</span></div><div class="line">	maxCount = <span class="number">0</span></div><div class="line">	<span class="keyword">for</span> key, value <span class="keyword">in</span> classCount.items():</div><div class="line">		<span class="keyword">if</span> value &gt; maxCount:</div><div class="line">			maxCount = value</div><div class="line">			maxIndex = key</div><div class="line"></div><div class="line">	<span class="keyword">return</span> maxIndex	</div><div class="line">	</div><div class="line">	<span class="comment">##step 5 可以改成：</span></div><div class="line">	<span class="comment"># sortedClassCount = sorted(classCount.iteritems(),key=operator.itemgetter(1),reverse=True)</span></div><div class="line">	<span class="comment">#return sortedClassCount[0][0]</span></div></pre></td></tr></table></figure>
+<p>然后调用算法进行测试：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> kNN</div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> * </div><div class="line"><span class="comment">#生成数据集和类别标签</span></div><div class="line">dataSet, labels = kNN.createDataSet()</div><div class="line"><span class="comment">#定义一个未知类别的数据</span></div><div class="line">testX = array([<span class="number">1.2</span>, <span class="number">1.0</span>])</div><div class="line">k = <span class="number">3</span></div><div class="line"><span class="comment">#调用分类函数对未知数据分类</span></div><div class="line">outputLabel = kNN.kNNClassify(testX, dataSet, labels, <span class="number">3</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">"Your input is:"</span>, testX, <span class="string">"and classified to class: "</span>, outputLabel</div><div class="line"></div><div class="line">testX = array([<span class="number">0.1</span>, <span class="number">0.3</span>])</div><div class="line">outputLabel = kNN.kNNClassify(testX, dataSet, labels, <span class="number">3</span>)</div><div class="line"><span class="keyword">print</span> <span class="string">"Your input is:"</span>, testX, <span class="string">"and classified to class: "</span>, outputLabel</div></pre></td></tr></table></figure></p>
+<p>这时候会输出<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Your input <span class="keyword">is</span>: [ <span class="number">1.2</span>  <span class="number">1.0</span>] <span class="keyword">and</span> classified to <span class="class"><span class="keyword">class</span>:</span>  A</div><div class="line">Your input <span class="keyword">is</span>: [ <span class="number">0.1</span>  <span class="number">0.3</span>] <span class="keyword">and</span> classified to <span class="class"><span class="keyword">class</span>:</span>  B</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -463,7 +499,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
           
         </div>
       
@@ -472,8 +508,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/10/python 初探/" rel="next" title="python 初探">
-                <i class="fa fa-chevron-left"></i> python 初探
+              <a href="/2018/01/12/机器学习-概念/" rel="next" title="机器学习-概念">
+                <i class="fa fa-chevron-left"></i> 机器学习-概念
               </a>
             
           </div>
@@ -482,8 +518,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/16/Apache Beam/" rel="prev" title="Apache Beam">
-                Apache Beam <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/25/kNN实现手写数字识别/" rel="prev" title="kNN实现手写数字识别">
+                kNN实现手写数字识别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -516,8 +552,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/01/10/算法推演/"
-           data-title="算法推演" data-url="http://yoursite.com/2017/01/10/算法推演/">
+      <div class="ds-thread" data-thread-key="2018/01/21/机器学习之KNN算法推演/"
+           data-title="机器学习之KNN算法推演" data-url="http://yoursite.com/2018/01/21/机器学习之KNN算法推演/">
       </div>
     
   </div>
@@ -632,7 +668,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#条件概率"><span class="nav-number">1.</span> <span class="nav-text">条件概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全概率公式"><span class="nav-number">2.</span> <span class="nav-text">全概率公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贝叶斯定理"><span class="nav-number">3.</span> <span class="nav-text">贝叶斯定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里得定理"><span class="nav-number">4.</span> <span class="nav-text">欧几里得定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性方程"><span class="nav-number">5.</span> <span class="nav-text">线性方程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。"><span class="nav-number">1.</span> <span class="nav-text">从训练集中找到和新数据最接近的k条记录，然后根据多数类来决定新数据类别。</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#算法涉及3个主要因素："><span class="nav-number">1.1.</span> <span class="nav-text">算法涉及3个主要因素：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KNN分类算法Python实战"><span class="nav-number"></span> <span class="nav-text">KNN分类算法Python实战</span></a></div>
             
 
           </div>
