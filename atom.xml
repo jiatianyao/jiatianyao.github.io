@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-18T02:48:44.867Z</updated>
+  <updated>2019-08-18T03:02:46.596Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,10 +20,10 @@
     <link href="http://yoursite.com/2019/09/17/flink-Event_Time/"/>
     <id>http://yoursite.com/2019/09/17/flink-Event_Time/</id>
     <published>2019-09-17T03:30:00.000Z</published>
-    <updated>2019-08-18T02:48:44.867Z</updated>
+    <updated>2019-08-18T03:02:46.596Z</updated>
     
     <content type="html"><![CDATA[<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/times_clocks.svg" alt="此处输入图片的描述"></p>
-<h1 id="精简介绍："><a href="#精简介绍：" class="headerlink" title="精简介绍："></a>精简介绍：</h1><p>Processing time:<br>Processing time refers to the system time of the machine that is executing the respective operation.<br>Processing time 是指执行相应操作的机器的系统时间。</p>
+<p>精简介绍：<br>Processing time:<br>Processing time refers to the system time of the machine that is executing the respective operation.<br>Processing time 是指执行相应操作的机器的系统时间。</p>
 <p>Event time: :<br> Event time is the time that each individual event occurred on its producing device.<br> Event time programs must specify how to generate Event Time Watermarks,<br> which is the mechanism that signals progress in event time.<br> 事件时间是每个事件在其生产设备上发生的时间。<br> 事件时间程序必须指定如何生成事件时间水印，这是事件时间中表示进度的机制</p>
 <p>Ingestion time:<br>Ingestion time is the time that events enter Flink. At the source operator each record gets the source’s current time as a timestamp, and time-based operations (like time windows) refer to that timestamp.<br>摄取时间是事件进入燧石的时间。在源操作符中，每个记录都将源的当前时间作为时间戳，基于时间的操作（如时间窗口）引用该时间戳。</p>
 <p>官方详细介绍：中文翻译：</p>
@@ -56,7 +56,7 @@
     <summary type="html">
     
       &lt;p&gt;&lt;img src=&quot;https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/times_clocks.svg&quot; alt=&quot;此处输入图片的描述&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;精简介绍：&quot;&gt;&lt;a href=&quot;
+&lt;p&gt;精简介绍：&lt;br&gt;Processing t
     
     </summary>
     
