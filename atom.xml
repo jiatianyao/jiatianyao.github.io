@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-18T03:02:46.596Z</updated>
+  <updated>2019-08-18T03:05:28.165Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>事件时间</title>
-    <link href="http://yoursite.com/2019/09/17/flink-Event_Time/"/>
-    <id>http://yoursite.com/2019/09/17/flink-Event_Time/</id>
-    <published>2019-09-17T03:30:00.000Z</published>
-    <updated>2019-08-18T03:02:46.596Z</updated>
+    <link href="http://yoursite.com/2019/08/17/flink-Event_Time/"/>
+    <id>http://yoursite.com/2019/08/17/flink-Event_Time/</id>
+    <published>2019-08-17T03:30:00.000Z</published>
+    <updated>2019-08-18T03:05:28.165Z</updated>
     
     <content type="html"><![CDATA[<p><img src="https://ci.apache.org/projects/flink/flink-docs-release-1.8/fig/times_clocks.svg" alt="此处输入图片的描述"></p>
 <p>精简介绍：<br>Processing time:<br>Processing time refers to the system time of the machine that is executing the respective operation.<br>Processing time 是指执行相应操作的机器的系统时间。</p>
