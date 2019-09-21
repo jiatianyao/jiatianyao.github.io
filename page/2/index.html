@@ -294,6 +294,353 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/16/Mathematical  Random Forest/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/08/16/Mathematical  Random Forest/" itemprop="url">
+                  机器学习-随机森林
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-16T09:30:00+08:00">
+                2018-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2018/08/16/Mathematical  Random Forest/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/16/Mathematical  Random Forest/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>sklearn.ensemble.RandomForestClassifier</p>
+<ul>
+<li><strong>n_estimators</strong> : integer, optional (default=10)<br> 森林里（决策）树的数目</li>
+<li><strong>criterion</strong> : string, optional (default=”gini”)<br> 衡量分裂质量的性能（函数）。 受支持的标准是基尼不纯度的”gini”,和信息增益的”entropy”（熵）。<br>注意：这个参数是特定树的</li>
+<li><p><strong>max_features</strong> : int, float, string or None, optional (default=”auto”)<br> 选择最适属性时划分的特征不能超过此值:</p>
+<pre><code>如果是int，就要考虑每一次分割处的max_feature特征
+如果是float，那么max_features就是一个百分比，那么（max_feature*n_features）特征整数值是在每个分割处考虑的。
+如果是auto，那么max_features=sqrt(n_features)，即n_features的平方根值。
+如果是log2，那么max_features=log2(n_features)
+如果是None,那么max_features=n_features
+</code></pre><p>注意：寻找分割点不会停止，直到找到最少一个有效的节点划分区，即使它需要有效检查超过max_features的特征。</p>
+</li>
+<li><p><strong>max_depth</strong> : integer or None, optional (default=None)<br>（决策）树的最大深度。如果值为None，那么会扩展节点，直到所有的叶子是纯净的，或者直到所有叶子包含少于min_sample_split的样本。</p>
+</li>
+<li><p><strong>min_samples_split</strong> : int, float, optional (default=2)<br> 根据属性划分节点时，每个划分最少的样本数。</p>
+<pre><code>如果为int，那么考虑min_samples_split作为最小的数字。
+如果为float，那么min_samples_split是一个百分比，并且把ceil(min_samples_split*n_samples)是每一个分割最小的样本数量。
+</code></pre><p> 在版本0.18中更改：为百分比添加浮点值。<br> 叶子节点最少的样本数。</p>
+<pre><code>如果为int，那么考虑min_samples_leaf作为最小的数字。
+如果为float，那么min_samples_leaf为一个百分比，并且ceil(min_samples_leaf*n_samples)是每一个节点的最小样本数量。
+</code></pre><p> 在版本0.18中更改：为百分比添加浮点值。</p>
+</li>
+<li><strong>min_weight_fraction_leaf</strong> : float, optional (default=0.)<br> 一个叶子节点所需要的权重总和（所有的输入样本）的最小加权分数。当sample_weight没有提供时，样本具有相同的权重</li>
+<li><strong>max_leaf_nodes</strong> : int or None, optional (default=None)<br> 叶子树的最大样本数。<br> 以最优的方法使用max_leaf_nodes来生长树。最好的节点被定义为不纯度上的相对减少。如果为None,那么不限制叶子节点的数量。</li>
+<li><strong>min_impurity_split</strong> : float,<br> 树早期生长的阈值。如果一个节点的不纯度超过阈值那么这个节点将会分裂，否则它还是一片叶子。<br> 自0.19版以后不推荐使用：min_impurity_split已被弃用，取而代之的是0.19中的min_impurity_decrease。min_impurity_split将在0.21中被删除。 使用min_impurity_decrease</li>
+<li><strong>min_impurity_decrease</strong> : float, optional (default=0.)<br> 如果节点的分裂导致的不纯度的下降程度大于或者等于这个节点的值，那么这个节点将会被分裂。<br> 不纯度加权减少方程式如下：<br> N_t / N <em> (impurity - N_t_R / N_t </em> right_impurity<pre><code>- N_t_L / N_t * left_impurity)
+</code></pre> N是样本总的数量，N_t是当前节点处的样本数量，N_t_L是左孩子节点样本的数量,还有N_t_R是右孩子节点的样本数量。<br> N，N_t，N_t_R和N_t_L全部是指加权总和，如果sample_weight通过的话。<br> 0.19版本新加的参数。</li>
+<li><strong>bootstrap</strong> : boolean, optional (default=True)<br> 建立决策树时，是否使用有放回抽样。</li>
+<li><strong>oob_score</strong> : bool (default=False)<br> 是否使用袋外样本来估计泛化精度。</li>
+<li><strong>n_jobs</strong> : integer, optional (default=1)<br> 用于拟合和预测的并行运行的工作（作业）数量。如果值为-1，那么工作数量被设置为核的数量。</li>
+<li><strong>random_state</strong> : int, RandomState instance or None, optional (default=None)<br> RandomStateIf int，random_state是随机数生成器使用的种子;<br> 如果是RandomState实例，random_state就是随机数生成器;<br> 如果为None，则随机数生成器是np.random使用的RandomState实例。</li>
+<li><strong>verbose</strong> : int, optional (default=0)<br> 控制决策树建立过程的冗余度。</li>
+<li><strong>warm_start</strong> : bool, optional (default=False)<br> 当被设置为True时，重新使用之前呼叫的解决方案，用来给全体拟合和添加更多的估计器，反之，仅仅只是为了拟合一个全新的森林。</li>
+<li>class_weight : dict, list of dicts, “balanced”,<br> “balanced_subsample” 或者None,（默认值为None）,与格式{class_label: weight}相关联的类的可选的权值。如果没有给值，所有的类到都应该有一个权值。对于多输出问题，一个字典序    列可以按照y的列的顺利被提供。<br> 请注意，对于多输出（包括多标签），其权值应该被定义为它自己字典的每一列的每一个类。例如，对于四类多标签分类，权值应该如[{0: 1, 1: 1}, {0: 1, 1: 5}, {0: 1, 1: 1}, {0: 1, 1: 1}] 这样，而不是[{1:1}, {2:5}, {3:1}, {4:1}].这样。<br> “balanced”模式使用y的值来自动的调整权值，与输入数据中类别频率成反比，如：<pre><code>n_samples / (n_classes * np.bincount(y))
+</code></pre> “balanced_subsample”模式和”balanced”相同，除了权值是基于每棵成长树有放回抽样计算的。<br> 对于多输出，y的每列权值将相乘。<br> 请注意，如果指定了sample_weight,这些权值将会和sample_weight相乘（通过拟合方法传递）。</li>
+</ul>
+<p>Attributes:    属性</p>
+<ul>
+<li><strong>estimators_</strong> :  决策树分类器的序列<br> 拟合的子估计器的集合。</li>
+<li><strong>classes_</strong> :  数组维度=[n_classes]的数组或者一个这样数组的序列。<br> 类别标签（单一输出问题），或者类别标签的数组序列（多输出问题）。</li>
+<li><strong>n<em>classes</em></strong> : int or list<br> 类别的数量（单输出问题），或者一个序列，包含每一个输出的类别数量（多输出问题）</li>
+<li><strong>n<em>features</em></strong> : int<br> 执行拟合时的特征数量。</li>
+<li><strong>n<em>outputs</em></strong> : int<br> 执行拟合时的输出数量。</li>
+<li><strong>feature<em>importances</em></strong> : array of shape = [n_features]<br> 特征的重要性（值越高，特征越重要）</li>
+<li><strong>oob<em>score</em></strong> : float<br>使用袋外估计获得的训练数据集的得分。</li>
+<li><strong>oob_decision<em>function</em></strong> :维度=[n_samples,n_classes]的数组<br> 在训练集上用袋外估计计算的决策函数。如果n_estimators很小的话，那么在有放回抽样中，一个数据点也不会被忽略是可能的。在这种情况下，oob_decision<em>function</em> 可能包括NaN。</li>
+</ul>
+<p>参数的默认值控制决策树的大小（例如，max_depth，，min_samples_leaf等等），导致完全的生长和在某些数据集上可能非常大的未修剪的树。为了降低内容消耗，决策树的复杂度和大小应该通过设置这些参数值来控制。<br>这些特征总是在每个分割中随机排列。 因此，即使使用相同的训练数据，max_features = n_features和bootstrap = False，如果在搜索最佳分割期间所列举的若干分割的准则的改进是相同的，那么找到的最佳分割点可能会不同。 为了在拟合过程中获得一个确定的行为，random_state将不得不被修正。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/Mathematical regression gradient descent/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/04/27/Mathematical regression gradient descent/" itemprop="url">
+                  机器学习-梯度下降
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-27T09:30:00+08:00">
+                2018-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2018/04/27/Mathematical regression gradient descent/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/27/Mathematical regression gradient descent/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="梯度下降："><a href="#梯度下降：" class="headerlink" title="梯度下降："></a>梯度下降：</h3><p>批量梯度下降法（Batch Gradient Descent，简称BGD）<br>    优点：全局最优解；易于并行实现；<br>　　缺点：当样本数目很多时，训练过程会很慢。<br>随机梯度下降法（Stochastic Gradient Descent，简称SGD）<br>    优点：训练速度快；迭代次数少<br>    缺点：准确度下降，并不是全局最优；不易于并行实现。<br>小批量梯度下降算法（MBGD）<br>如果损失函数是凸函数，梯度下降法得到的解就一定是全局最优解。</p>
+<h4 id="凸凹函数："><a href="#凸凹函数：" class="headerlink" title="凸凹函数："></a>凸凹函数：</h4><p>设f(x)在区间D上连续，如果对D上任意两点a、b恒有<br>f（（a+b）/2）&lt;(f(a)+f(b))/2<br>那么称f(x)在D上的图形是（向上）凹的（或凹弧）；如果恒有<br>f（（a+b）/2）&gt;(f(a)+f(b))/2<br>那么称f(x)在D上的图形是（向上）凸的（或凸弧）</p>
+<h3 id="梯度下降相关概念："><a href="#梯度下降相关概念：" class="headerlink" title="梯度下降相关概念："></a>梯度下降相关概念：</h3><ol>
+<li>步长（Learning rate）：步长决定了在梯度下降迭代的过程中，每一步沿梯度负方向前进的长度。用上面下山的例子，步长就是在当前这一步所在位置沿着最陡峭最易下山的位置走的那一步的长度。</li>
+</ol>
+<p>2.特征（feature）：指的是样本中输入部分，比如2个单特征的样本（x(0),y(0)）,（x(1),y(1)）（x(0),y(0)）,（x(1),y(1)）,则第一个样本特征为x(0)x(0)，第一个样本输出为y(0)y(0)。</p>
+<ol>
+<li><p>假设函数（hypothesis function）：在监督学习中，为了拟合输入样本，而使用的假设函数，记为hθ(x)hθ(x)。比如对于单个特征的m个样本（x(i),y(i)）(i=1,2,…m)（x(i),y(i)）(i=1,2,…m),可以采用拟合函数如下： hθ(x)=θ0+θ1xhθ(x)=θ0+θ1x。</p>
+</li>
+<li><p>损失函数（loss function）：为了评估模型拟合的好坏，通常用损失函数来度量拟合的程度。损失函数极小化，意味着拟合程度最好，对应的模型参数即为最优参数。在线性回归中，损失函数通常为样本输出和假设函数的差取平方。比如对于m个样本（xi,yi）(i=1,2,…m)（xi,yi）(i=1,2,…m),采用线性回归，损失函数为：</p>
+<pre><code>J(θ0,θ1)=∑i=1m(hθ(xi)−yi)2J(θ0,θ1)=∑i=1m(hθ(xi)−yi)2
+</code></pre><p>其中xixi表示第i个样本特征，yiyi表示第i个样本对应的输出，hθ(xi)hθ(xi)为假设函数。
+　　　　</p>
+</li>
+</ol>
+<h3 id="局部加权回归"><a href="#局部加权回归" class="headerlink" title="局部加权回归"></a>局部加权回归</h3><p>简单来说，这个过程其实是在先拟合出一条曲线，然后再用这个曲线去预测需要预测的点。(源自百度)<br>为什么改进要用加权回归呢？ 很简单，因为非线性拟合出直线误差会很大，这里的局部加权类似于knn算法的权重，即距离中心点越近的权重越大，对拟合曲线的影响也就越大，所以也有了局部加权这一名词</p>
+<p>参考文献：<br><a href="https://blog.csdn.net/Gentle_Guan/article/details/76586689?locationNum=8&amp;fps=1" target="_blank" rel="external">https://blog.csdn.net/Gentle_Guan/article/details/76586689?locationNum=8&amp;fps=1</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/08/Mathematical Feature processing of logistic regression model/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1421,311 +1768,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/07/2018学习计划/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/02/07/2018学习计划/" itemprop="url">
-                  2018学习计划
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-07T08:00:00+08:00">
-                2018-02-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习计划/" itemprop="url" rel="index">
-                    <span itemprop="name">学习计划</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2018/02/07/2018学习计划/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/02/07/2018学习计划/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="大数据及机器学习学习计划"><a href="#大数据及机器学习学习计划" class="headerlink" title="大数据及机器学习学习计划"></a>大数据及机器学习学习计划</h2><ol>
-<li><p>编程基础：Python<br><a href="https://cn.udacity.com/course/programming-foundations-with-python--ud036" target="_blank" rel="external">https://cn.udacity.com/course/programming-foundations-with-python--ud036</a></p>
-</li>
-<li><p>计算机科学导论  72小时<br><a href="https://cn.udacity.com/course/intro-to-computer-science--cs101" target="_blank" rel="external">https://cn.udacity.com/course/intro-to-computer-science--cs101</a></p>
-</li>
-<li>推论统计学  48小时<br><a href="https://cn.udacity.com/course/intro-to-inferential-statistics--ud201" target="_blank" rel="external">https://cn.udacity.com/course/intro-to-inferential-statistics--ud201</a></li>
-<li>描述统计学  48小时<br><a href="https://cn.udacity.com/course/intro-to-inferential-statistics--ud201" target="_blank" rel="external">https://cn.udacity.com/course/intro-to-inferential-statistics--ud201</a></li>
-<li>机器学习  240小时<br><a href="https://cn.udacity.com/course/machine-learning--ud262" target="_blank" rel="external">https://cn.udacity.com/course/machine-learning--ud262</a></li>
-<li>统计学入门<br><a href="https://cn.udacity.com/course/intro-to-statistics--st101" target="_blank" rel="external">https://cn.udacity.com/course/intro-to-statistics--st101</a></li>
-<li>基础线性代数<br><a href="https://cn.udacity.com/course/linear-algebra-refresher-course--ud953" target="_blank" rel="external">https://cn.udacity.com/course/linear-algebra-refresher-course--ud953</a></li>
-<li><p>机器学习<br><a href="https://cn.udacity.com/course/machine-learning-engineer-nanodegree--nd009" target="_blank" rel="external">https://cn.udacity.com/course/machine-learning-engineer-nanodegree--nd009</a></p>
-</li>
-<li><p>Apache Storm 进行实时分析  48小时<br><a href="https://cn.udacity.com/course/real-time-analytics-with-apache-storm--ud381" target="_blank" rel="external">https://cn.udacity.com/course/real-time-analytics-with-apache-storm--ud381</a></p>
-</li>
-<li><p>Bash脚本  40+小时</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/05/Mathematical Support Vector Machine/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/02/05/Mathematical Support Vector Machine/" itemprop="url">
-                  机器学习-支持向量机
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-05T09:30:00+08:00">
-                2018-02-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2018/02/05/Mathematical Support Vector Machine/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/02/05/Mathematical Support Vector Machine/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="支持向量机（Support-Vector-Machine，SVM）的基本概念："><a href="#支持向量机（Support-Vector-Machine，SVM）的基本概念：" class="headerlink" title="支持向量机（Support Vector Machine，SVM）的基本概念："></a>支持向量机（Support Vector Machine，SVM）的基本概念：</h3><h5 id="点到超平面的距离"><a href="#点到超平面的距离" class="headerlink" title="点到超平面的距离"></a>点到超平面的距离</h5><p>在分类任务中，为了获取稳健的线性分类器，一个很自然的想法是，找出一条分割线使得两侧样本与该分割线的平均距离足够的远。在欧式空间中，定义一个点𝒙到直线（或者高维空间中的超平面）𝒘^𝑇 𝒙+𝑏=0的距离公式是：<br>            𝑟(𝑥)=  (|𝒘^𝑇 𝒙+𝑏|)/(||𝒘||)<br>在分类问题中，如果这样的分割线或者分割平面能够准确地将样本分开，对于样本{𝒙<em>𝑖,𝑦</em>𝑖}∈𝐷, 𝑦<em>𝑖=±1 而言，若𝑦</em>𝑖=1，则有𝒘^𝑇 𝒙<em>𝒊+𝑏≥1，反之若𝑦</em>𝑖=-1，则有𝒘^𝑇 𝒙_𝒊+𝑏≤−1.</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1766,7 +1813,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">89</span>
+              <span class="site-state-item-count">91</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
