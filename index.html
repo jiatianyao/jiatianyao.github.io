@@ -294,6 +294,171 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/spring eureka/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/06/27/spring eureka/" itemprop="url">
+                  spring eureka
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-27T10:00:00+08:00">
+                2020-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring-cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">spring cloud</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2020/06/27/spring eureka/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/06/27/spring eureka/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>创建eureka-server 子项目</p>
+<p>创建application.properties<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 是否将自己实例注册到Eureka Server中</div><div class="line">eureka.client.register-with-eureka=false</div><div class="line"># 是否应从Eureka Server获取Eureka注册表信息</div><div class="line">eureka.client.fetch-registry=false</div><div class="line"></div><div class="line">spring.profiles.active=master</div></pre></td></tr></table></figure></p>
+<p>创建application-master.properties<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">server.port=8761</div><div class="line"></div><div class="line"># 注册到从节点</div><div class="line">eureka.client.serviceUrl.defaultZone=http://localhost:8762/eureka/</div></pre></td></tr></table></figure></p>
+<p>创建application-slave.properties<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">server.port=8762</div><div class="line"></div><div class="line"># 注册到主节点</div><div class="line">eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/</div></pre></td></tr></table></figure></p>
+<p>创建EurekaServerApplication.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.eureka;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@EnableEurekaServer</span></div><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EurekaServerApplication</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SpringApplication.run(EurekaServerApplication.class, args);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>打开</p>
+<p><a href="http://localhost:8761/" target="_blank" rel="external">http://localhost:8761/</a></p>
+<p>改成spring.profiles.active=slave<br>启动<br><img src="https://imgchr.com/i/Nc14oV" alt="此处输入图片的描述"></p>
+<p>eureka client 如何注册？<br>创建子项目：eureka-client-provider</p>
+<p>创建：application.properties</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">server.port=8081</div><div class="line">spring.application.name=eureka-client-provider</div><div class="line"></div><div class="line">eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/</div><div class="line"># 自定义实例ID格式</div><div class="line">eureka.instance.instance-id=$&#123;spring.application.name&#125;:$&#123;spring.cloud.client.ip-address&#125;:$&#123;server.port&#125; </div><div class="line">#eureka.client.healthcheck.enabled=true</div></pre></td></tr></table></figure>
+<p>创建EurekaClientProviderApplication<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.eureka;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.cloud.client.discovery.EnableDiscoveryClient;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"><span class="meta">@EnableDiscoveryClient</span></div><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EurekaClientProviderApplication</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SpringApplication.run(EurekaClientProviderApplication.class, args);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建CustomHealthIndicator<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.eureka;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.actuate.health.AbstractHealthIndicator;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.actuate.health.Health;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomHealthIndicator</span> <span class="keyword">extends</span> <span class="title">AbstractHealthIndicator</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> status = <span class="keyword">true</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStatus</span><span class="params">(<span class="keyword">boolean</span> status)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.status = status;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doHealthCheck</span><span class="params">(Health.Builder builder)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">if</span> (status) &#123;</div><div class="line">            builder.up();</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            builder.down();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建TestController<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">package</span> spring.cloud.eureka;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> CustomHealthIndicator customHealthIndicator;</div><div class="line"></div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/updateStatus"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">updateStatus</span><span class="params">(<span class="keyword">boolean</span> status)</span> </span>&#123;</div><div class="line">        customHealthIndicator.setStatus(status);</div><div class="line">        <span class="keyword">return</span> <span class="string">"success"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>启动<br><img src="https://imgchr.com/i/Nc1IiT" alt="此处输入图片的描述"></p>
+<p>那么消费者如何消费呢？</p>
+<p>创建子项目eureka-client-consumer</p>
+<p>创建application.properties<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">server.port=8082</div><div class="line">spring.application.name=eureka-client-consumer</div><div class="line"></div><div class="line">eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/</div><div class="line"># 自定义实例ID格式</div><div class="line">eureka.instance.instance-id=$&#123;spring.application.name&#125;:$&#123;spring.cloud.client.ip-address&#125;:$&#123;server.port&#125;</div></pre></td></tr></table></figure></p>
+<p>创建EurekaConsumerApplication<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.eureka;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EurekaConsumerApplication</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SpringApplication.run(EurekaConsumerApplication.class, args);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建EurekaController.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.eureka.controller;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"><span class="keyword">import</span> java.util.stream.Collectors;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.cloud.client.ServiceInstance;</div><div class="line"><span class="keyword">import</span> org.springframework.cloud.client.discovery.DiscoveryClient;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EurekaController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> DiscoveryClient discoveryClient;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取Eureka Server中所有服务实例信息</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/instances"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;ServiceInstance&gt; <span class="title">getApplications</span><span class="params">()</span> </span>&#123;</div><div class="line">        List&lt;ServiceInstance&gt; instances = discoveryClient.getServices().stream()</div><div class="line">                .map(sid -&gt; discoveryClient.getInstances(sid))</div><div class="line">                .collect(Collectors.toList())</div><div class="line">                .stream().flatMap(list -&gt; list.stream()).collect(Collectors.toList());</div><div class="line">        <span class="keyword">return</span> instances;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>启动<br>打开<br><a href="http://localhost:8082/instances" target="_blank" rel="external">http://localhost:8082/instances</a><br><img src="https://imgchr.com/i/Nc17z4" alt="此处输入图片的描述"></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div></pre></td><td class="code"><pre><div class="line">[&#123;</div><div class="line">	<span class="attr">"host"</span>: <span class="string">"zhm-pc"</span>,</div><div class="line">	<span class="attr">"port"</span>: <span class="number">8081</span>,</div><div class="line">	<span class="attr">"metadata"</span>: &#123;</div><div class="line">		<span class="attr">"management.port"</span>: <span class="string">"8081"</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"secure"</span>: <span class="literal">false</span>,</div><div class="line">	<span class="attr">"serviceId"</span>: <span class="string">"EUREKA-CLIENT-PROVIDER"</span>,</div><div class="line">	<span class="attr">"uri"</span>: <span class="string">"http://zhm-pc:8081"</span>,</div><div class="line">	<span class="attr">"instanceInfo"</span>: &#123;</div><div class="line">		<span class="attr">"instanceId"</span>: <span class="string">"eureka-client-provider:192.168.1.3:8081"</span>,</div><div class="line">		<span class="attr">"app"</span>: <span class="string">"EUREKA-CLIENT-PROVIDER"</span>,</div><div class="line">		<span class="attr">"appGroupName"</span>: <span class="literal">null</span>,</div><div class="line">		<span class="attr">"ipAddr"</span>: <span class="string">"192.168.1.3"</span>,</div><div class="line">		<span class="attr">"sid"</span>: <span class="string">"na"</span>,</div><div class="line">		<span class="attr">"homePageUrl"</span>: <span class="string">"http://zhm-pc:8081/"</span>,</div><div class="line">		<span class="attr">"statusPageUrl"</span>: <span class="string">"http://zhm-pc:8081/actuator/info"</span>,</div><div class="line">		<span class="attr">"healthCheckUrl"</span>: <span class="string">"http://zhm-pc:8081/actuator/health"</span>,</div><div class="line">		<span class="attr">"secureHealthCheckUrl"</span>: <span class="literal">null</span>,</div><div class="line">		<span class="attr">"vipAddress"</span>: <span class="string">"eureka-client-provider"</span>,</div><div class="line">		<span class="attr">"secureVipAddress"</span>: <span class="string">"eureka-client-provider"</span>,</div><div class="line">		<span class="attr">"countryId"</span>: <span class="number">1</span>,</div><div class="line">		<span class="attr">"dataCenterInfo"</span>: &#123;</div><div class="line">			<span class="attr">"@class"</span>: <span class="string">"com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo"</span>,</div><div class="line">			<span class="attr">"name"</span>: <span class="string">"MyOwn"</span></div><div class="line">		&#125;,</div><div class="line">		<span class="attr">"hostName"</span>: <span class="string">"zhm-pc"</span>,</div><div class="line">		<span class="attr">"status"</span>: <span class="string">"UP"</span>,</div><div class="line">		<span class="attr">"overriddenStatus"</span>: <span class="string">"UNKNOWN"</span>,</div><div class="line">		<span class="attr">"leaseInfo"</span>: &#123;</div><div class="line">			<span class="attr">"renewalIntervalInSecs"</span>: <span class="number">30</span>,</div><div class="line">			<span class="attr">"durationInSecs"</span>: <span class="number">90</span>,</div><div class="line">			<span class="attr">"registrationTimestamp"</span>: <span class="number">1593256140359</span>,</div><div class="line">			<span class="attr">"lastRenewalTimestamp"</span>: <span class="number">1593256620293</span>,</div><div class="line">			<span class="attr">"evictionTimestamp"</span>: <span class="number">0</span>,</div><div class="line">			<span class="attr">"serviceUpTimestamp"</span>: <span class="number">1593256140360</span></div><div class="line">		&#125;,</div><div class="line">		<span class="attr">"isCoordinatingDiscoveryServer"</span>: <span class="literal">false</span>,</div><div class="line">		<span class="attr">"metadata"</span>: &#123;</div><div class="line">			<span class="attr">"management.port"</span>: <span class="string">"8081"</span></div><div class="line">		&#125;,</div><div class="line">		<span class="attr">"lastUpdatedTimestamp"</span>: <span class="number">1593256140360</span>,</div><div class="line">		<span class="attr">"lastDirtyTimestamp"</span>: <span class="number">1593256140191</span>,</div><div class="line">		<span class="attr">"actionType"</span>: <span class="string">"ADDED"</span>,</div><div class="line">		<span class="attr">"asgName"</span>: <span class="literal">null</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"instanceId"</span>: <span class="string">"eureka-client-provider:192.168.1.3:8081"</span>,</div><div class="line">	<span class="attr">"scheme"</span>: <span class="literal">null</span></div><div class="line">&#125;, &#123;</div><div class="line">	<span class="attr">"host"</span>: <span class="string">"zhm-pc"</span>,</div><div class="line">	<span class="attr">"port"</span>: <span class="number">8080</span>,</div><div class="line">	<span class="attr">"metadata"</span>: &#123;</div><div class="line">		<span class="attr">"management.port"</span>: <span class="string">"8080"</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"secure"</span>: <span class="literal">false</span>,</div><div class="line">	<span class="attr">"serviceId"</span>: <span class="string">"UNKNOWN"</span>,</div><div class="line">	<span class="attr">"uri"</span>: <span class="string">"http://zhm-pc:8080"</span>,</div><div class="line">	<span class="attr">"instanceInfo"</span>: &#123;</div><div class="line">		<span class="attr">"instanceId"</span>: <span class="string">"zhm-pc"</span>,</div><div class="line">		<span class="attr">"app"</span>: <span class="string">"UNKNOWN"</span>,</div><div class="line">		<span class="attr">"appGroupName"</span>: <span class="literal">null</span>,</div><div class="line">		<span class="attr">"ipAddr"</span>: <span class="string">"192.168.1.3"</span>,</div><div class="line">		<span class="attr">"sid"</span>: <span class="string">"na"</span>,</div><div class="line">		<span class="attr">"homePageUrl"</span>: <span class="string">"http://zhm-pc:8080/"</span>,</div><div class="line">		<span class="attr">"statusPageUrl"</span>: <span class="string">"http://zhm-pc:8080/actuator/info"</span>,</div><div class="line">		<span class="attr">"healthCheckUrl"</span>: <span class="string">"http://zhm-pc:8080/actuator/health"</span>,</div><div class="line">		<span class="attr">"secureHealthCheckUrl"</span>: <span class="literal">null</span>,</div><div class="line">		<span class="attr">"vipAddress"</span>: <span class="string">"unknown"</span>,</div><div class="line">		<span class="attr">"secureVipAddress"</span>: <span class="string">"unknown"</span>,</div><div class="line">		<span class="attr">"countryId"</span>: <span class="number">1</span>,</div><div class="line">		<span class="attr">"dataCenterInfo"</span>: &#123;</div><div class="line">			<span class="attr">"@class"</span>: <span class="string">"com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo"</span>,</div><div class="line">			<span class="attr">"name"</span>: <span class="string">"MyOwn"</span></div><div class="line">		&#125;,</div><div class="line">		<span class="attr">"hostName"</span>: <span class="string">"zhm-pc"</span>,</div><div class="line">		<span class="attr">"status"</span>: <span class="string">"UP"</span>,</div><div class="line">		<span class="attr">"overriddenStatus"</span>: <span class="string">"UNKNOWN"</span>,</div><div class="line">		<span class="attr">"leaseInfo"</span>: &#123;</div><div class="line">			<span class="attr">"renewalIntervalInSecs"</span>: <span class="number">30</span>,</div><div class="line">			<span class="attr">"durationInSecs"</span>: <span class="number">90</span>,</div><div class="line">			<span class="attr">"registrationTimestamp"</span>: <span class="number">1593255452890</span>,</div><div class="line">			<span class="attr">"lastRenewalTimestamp"</span>: <span class="number">1593256622230</span>,</div><div class="line">			<span class="attr">"evictionTimestamp"</span>: <span class="number">0</span>,</div><div class="line">			<span class="attr">"serviceUpTimestamp"</span>: <span class="number">1593255452891</span></div><div class="line">		&#125;,</div><div class="line">		<span class="attr">"isCoordinatingDiscoveryServer"</span>: <span class="literal">false</span>,</div><div class="line">		<span class="attr">"metadata"</span>: &#123;</div><div class="line">			<span class="attr">"management.port"</span>: <span class="string">"8080"</span></div><div class="line">		&#125;,</div><div class="line">		<span class="attr">"lastUpdatedTimestamp"</span>: <span class="number">1593255452892</span>,</div><div class="line">		<span class="attr">"lastDirtyTimestamp"</span>: <span class="number">1593255452440</span>,</div><div class="line">		<span class="attr">"actionType"</span>: <span class="string">"ADDED"</span>,</div><div class="line">		<span class="attr">"asgName"</span>: <span class="literal">null</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"instanceId"</span>: <span class="string">"zhm-pc"</span>,</div><div class="line">	<span class="attr">"scheme"</span>: <span class="literal">null</span></div><div class="line">&#125;, &#123;</div><div class="line">	<span class="attr">"host"</span>: <span class="string">"zhm-pc"</span>,</div><div class="line">	<span class="attr">"port"</span>: <span class="number">8082</span>,</div><div class="line">	<span class="attr">"metadata"</span>: &#123;</div><div class="line">		<span class="attr">"management.port"</span>: <span class="string">"8082"</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"secure"</span>: <span class="literal">false</span>,</div><div class="line">	<span class="attr">"serviceId"</span>: <span class="string">"EUREKA-CLIENT-CONSUMER"</span>,</div><div class="line">	<span class="attr">"uri"</span>: <span class="string">"http://zhm-pc:8082"</span>,</div><div class="line">	<span class="attr">"instanceInfo"</span>: &#123;</div><div class="line">		<span class="attr">"instanceId"</span>: <span class="string">"eureka-client-consumer:192.168.1.3:8082"</span>,</div><div class="line">		<span class="attr">"app"</span>: <span class="string">"EUREKA-CLIENT-CONSUMER"</span>,</div><div class="line">		<span class="attr">"appGroupName"</span>: <span class="literal">null</span>,</div><div class="line">		<span class="attr">"ipAddr"</span>: <span class="string">"192.168.1.3"</span>,</div><div class="line">		<span class="attr">"sid"</span>: <span class="string">"na"</span>,</div><div class="line">		<span class="attr">"homePageUrl"</span>: <span class="string">"http://zhm-pc:8082/"</span>,</div><div class="line">		<span class="attr">"statusPageUrl"</span>: <span class="string">"http://zhm-pc:8082/actuator/info"</span>,</div><div class="line">		<span class="attr">"healthCheckUrl"</span>: <span class="string">"http://zhm-pc:8082/actuator/health"</span>,</div><div class="line">		<span class="attr">"secureHealthCheckUrl"</span>: <span class="literal">null</span>,</div><div class="line">		<span class="attr">"vipAddress"</span>: <span class="string">"eureka-client-consumer"</span>,</div><div class="line">		<span class="attr">"secureVipAddress"</span>: <span class="string">"eureka-client-consumer"</span>,</div><div class="line">		<span class="attr">"countryId"</span>: <span class="number">1</span>,</div><div class="line">		<span class="attr">"dataCenterInfo"</span>: &#123;</div><div class="line">			<span class="attr">"@class"</span>: <span class="string">"com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo"</span>,</div><div class="line">			<span class="attr">"name"</span>: <span class="string">"MyOwn"</span></div><div class="line">		&#125;,</div><div class="line">		<span class="attr">"hostName"</span>: <span class="string">"zhm-pc"</span>,</div><div class="line">		<span class="attr">"status"</span>: <span class="string">"UP"</span>,</div><div class="line">		<span class="attr">"overriddenStatus"</span>: <span class="string">"UNKNOWN"</span>,</div><div class="line">		<span class="attr">"leaseInfo"</span>: &#123;</div><div class="line">			<span class="attr">"renewalIntervalInSecs"</span>: <span class="number">30</span>,</div><div class="line">			<span class="attr">"durationInSecs"</span>: <span class="number">90</span>,</div><div class="line">			<span class="attr">"registrationTimestamp"</span>: <span class="number">1593256562280</span>,</div><div class="line">			<span class="attr">"lastRenewalTimestamp"</span>: <span class="number">1593256562280</span>,</div><div class="line">			<span class="attr">"evictionTimestamp"</span>: <span class="number">0</span>,</div><div class="line">			<span class="attr">"serviceUpTimestamp"</span>: <span class="number">1593256562280</span></div><div class="line">		&#125;,</div><div class="line">		<span class="attr">"isCoordinatingDiscoveryServer"</span>: <span class="literal">false</span>,</div><div class="line">		<span class="attr">"metadata"</span>: &#123;</div><div class="line">			<span class="attr">"management.port"</span>: <span class="string">"8082"</span></div><div class="line">		&#125;,</div><div class="line">		<span class="attr">"lastUpdatedTimestamp"</span>: <span class="number">1593256562280</span>,</div><div class="line">		<span class="attr">"lastDirtyTimestamp"</span>: <span class="number">1593256562192</span>,</div><div class="line">		<span class="attr">"actionType"</span>: <span class="string">"ADDED"</span>,</div><div class="line">		<span class="attr">"asgName"</span>: <span class="literal">null</span></div><div class="line">	&#125;,</div><div class="line">	<span class="attr">"instanceId"</span>: <span class="string">"eureka-client-consumer:192.168.1.3:8082"</span>,</div><div class="line">	<span class="attr">"scheme"</span>: <span class="literal">null</span></div><div class="line">&#125;]</div></pre></td></tr></table></figure>
+<p><img src="https://imgchr.com/i/Nc1TWF" alt="此处输入图片的描述"></p>
+<p>源码跟踪<br>AbstractInstanceRegistry</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/20/flink back pressure/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2295,154 +2460,6 @@ public DataStream(StreamExecutionEnvironment environment, Transformation&lt;T&gt
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/Install TensorFlow/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/08/18/Install TensorFlow/" itemprop="url">
-                  TensorFlow 安装使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-18T11:30:00+08:00">
-                2018-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2018/08/18/Install TensorFlow/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/18/Install TensorFlow/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="基于Anaconda的Tensorflow"><a href="#基于Anaconda的Tensorflow" class="headerlink" title="基于Anaconda的Tensorflow"></a>基于Anaconda的Tensorflow</h2><h3 id="安装Anaconda"><a href="#安装Anaconda" class="headerlink" title="安装Anaconda"></a>安装Anaconda</h3><p>根据官网选择基于不同的python版本安装：<br><a href="https://www.anaconda.com/download/#windows" target="_blank" rel="external">https://www.anaconda.com/download/#windows</a></p>
-<p>博主选择Python 3.6 version，windows 64bit</p>
-<p>安装完成后需要配置环境变量，根目录和Scripts目录加入到Path下面<br>G:\ProgramData\Anaconda3;G:\ProgramData\Anaconda3\Scripts</p>
-<p>1.检测anaconda环境是否安装成功：conda –version<br>2.检测目前安装了哪些环境变量：conda info –envs</p>
-<p>3.安装python版本（博主选择3.5）：conda create –name tensorflow python=3.5<br>安装后是3.5.6<br>4.激活tensflow的环境：activate tensorflow<br>5.检测tensflow的环境添加到了Anaconda里面：conda info –envs<br><img src="http://oh6ybr0jg.bkt.clouddn.com/TENSORFLOW_ENV.png" alt="此处输入图片的描述"><br>6.安装tensorflow gru版本<br>pip install –ignore-installed –upgrade tensorflow-gpu</p>
-<p>安装其他组件：<br>pip install pandas<br>conda install scikit-learn<br>conda install matplotlib</p>
-<p>IDE想要使用tensorflow 需要制定tensorflow的python版本<br><img src="http://oh6ybr0jg.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20180901134100.png" alt="此处输入图片的描述"></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2488,7 +2505,7 @@ public DataStream(StreamExecutionEnvironment environment, Transformation&lt;T&gt
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">91</span>
+              <span class="site-state-item-count">92</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2496,7 +2513,7 @@ public DataStream(StreamExecutionEnvironment environment, Transformation&lt;T&gt
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2505,7 +2522,7 @@ public DataStream(StreamExecutionEnvironment environment, Transformation&lt;T&gt
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2564,7 +2581,7 @@ public DataStream(StreamExecutionEnvironment environment, Transformation&lt;T&gt
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
