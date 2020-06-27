@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="spark," />
+  <meta name="keywords" content="spring cloud," />
 
 
 
@@ -86,22 +86,21 @@
 
 
 
-<meta name="description" content="部署优化：磁盘：挂载磁盘时使用noatime和nodiratime选项减少写的开销
-linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文件访问时间Modfiy：内容修改时间Change：文件名修改时间
-参数含义：磁盘下的所有文件不更新访问时间">
+<meta name="description" content="创建子项目：user-service创建application.properties
+1234567server.port=8084spring.application.name=user-serviceeureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/# 自定义实例ID格式eureka.instance.insta">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spark 机器学习入门(二)">
-<meta property="og:url" content="http://yoursite.com/2017/08/29/spark 性能优化/index.html">
+<meta property="og:title" content="spring ribbon">
+<meta property="og:url" content="http://yoursite.com/2020/06/27/spring ribbon/index.html">
 <meta property="og:site_name" content="张洪铭的个人博客">
-<meta property="og:description" content="部署优化：磁盘：挂载磁盘时使用noatime和nodiratime选项减少写的开销
-linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文件访问时间Modfiy：内容修改时间Change：文件名修改时间
-参数含义：磁盘下的所有文件不更新访问时间">
-<meta property="og:updated_time" content="2018-07-25T16:46:02.230Z">
+<meta property="og:description" content="创建子项目：user-service创建application.properties
+1234567server.port=8084spring.application.name=user-serviceeureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/# 自定义实例ID格式eureka.instance.insta">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/27/Nc1oJU.png">
+<meta property="og:updated_time" content="2020-06-27T15:15:16.081Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spark 机器学习入门(二)">
-<meta name="twitter:description" content="部署优化：磁盘：挂载磁盘时使用noatime和nodiratime选项减少写的开销
-linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文件访问时间Modfiy：内容修改时间Change：文件名修改时间
-参数含义：磁盘下的所有文件不更新访问时间">
+<meta name="twitter:title" content="spring ribbon">
+<meta name="twitter:description" content="创建子项目：user-service创建application.properties
+1234567server.port=8084spring.application.name=user-serviceeureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/# 自定义实例ID格式eureka.instance.insta">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/06/27/Nc1oJU.png">
 
 
 
@@ -129,13 +128,13 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/29/spark 性能优化/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/06/27/spring ribbon/"/>
 
 
 
 
 
-  <title> spark 机器学习入门(二) | 张洪铭的个人博客 </title>
+  <title> spring ribbon | 张洪铭的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -299,7 +298,7 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/29/spark 性能优化/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/spring ribbon/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="张洪铭">
@@ -323,7 +322,7 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
             
             
               
-                spark 机器学习入门(二)
+                spring ribbon
               
             
           </h1>
@@ -336,8 +335,8 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-29T14:30:00+08:00">
-                2017-08-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-27T12:00:00+08:00">
+                2020-06-27
               </time>
             
 
@@ -355,8 +354,8 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spark/" itemprop="url" rel="index">
-                    <span itemprop="name">spark</span>
+                  <a href="/categories/spring-cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">spring cloud</span>
                   </a>
                 </span>
 
@@ -370,8 +369,8 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2017/08/29/spark 性能优化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/29/spark 性能优化/" itemprop="commentCount"></span>
+                <a href="/2020/06/27/spring ribbon/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/06/27/spring ribbon/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -397,15 +396,21 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
       
 
       
-        <h5 id="部署优化："><a href="#部署优化：" class="headerlink" title="部署优化："></a><strong>部署优化：</strong></h5><p>磁盘：<br>挂载磁盘时使用noatime和nodiratime选项减少写的开销</p>
-<p>linux每个文件都会保留3个时间戳<br>用stat 文件名 来查看<br>Acess：文件访问时间<br>Modfiy：内容修改时间<br>Change：文件名修改时间</p>
-<p>参数含义：<br>磁盘下的所有文件不更新访问时间<br><a id="more"></a><br>内存：<br>JVM 内存不建议每个executor 超过200G</p>
-<p>CPU<br>每台机器的Vcore数不建议小于8</p>
-<h2 id="JOB调度："><a href="#JOB调度：" class="headerlink" title="JOB调度："></a><strong>JOB调度：</strong></h2><p>Fail Schedule 可最大程度保证各个Job都有机会获取资源</p>
-<h2 id="数据序列化："><a href="#数据序列化：" class="headerlink" title="数据序列化："></a><strong>数据序列化：</strong></h2><p>Kyro serialization序列化速度更快，结果更紧凑<br>为了更好的性能，需提前注册被序列化的类，否则会存在大量的空间浪费<br>通过spark.serializer指定</p>
-<h2 id="减少内存消耗："><a href="#减少内存消耗：" class="headerlink" title="减少内存消耗："></a><strong>减少内存消耗：</strong></h2><p>尽量使用基本数据类型和数组，避免使用java集合类<br>尽量减少包含大量小对象的嵌套结构<br>Key尽量使用数值或枚举类型而不是字符串<br>RAM小于32GB时，使用-XX:+UseCompressedOops使用4字节（而非8字节）的指针</p>
-<h2 id="调整并行度："><a href="#调整并行度：" class="headerlink" title="调整并行度："></a><strong>调整并行度：</strong></h2><p>调整Map侧并行度<br>对于kafka direct stream 可通过调整Topic的Patition个数调整Spark Map侧并行度<br>对于spark.textFile，通过参数调整</p>
-<p>调整Reduce侧并行度<br>通过spark.default.parallelism设置shuffle时默认并行度</p>
+        <p>创建子项目：user-service<br>创建application.properties</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">server.port=8084</div><div class="line">spring.application.name=user-service</div><div class="line"></div><div class="line">eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/</div><div class="line"></div><div class="line"># 自定义实例ID格式</div><div class="line">eureka.instance.instance-id=$&#123;spring.application.name&#125;:$&#123;spring.cloud.client.ip-address&#125;:$&#123;server.port&#125;</div></pre></td></tr></table></figure>
+<p>UserApplication<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.ribbon;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserApplication</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SpringApplication.run(UserApplication.class, args);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建User<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.ribbon.dto;</div><div class="line"></div><div class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</div><div class="line"><span class="keyword">import</span> lombok.Data;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="meta">@AllArgsConstructor</span></div><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">()</span></span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建UserController<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.ribbon.controller;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"><span class="keyword">import</span> spring.cloud.ribbon.dto.User;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/user/get"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User(id, <span class="string">"zhm"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>启动</p>
+<p><img src="https://s1.ax1x.com/2020/06/27/Nc1oJU.png" alt="此处输入图片的描述"></p>
+<p>创建子项目：ribbon<br>创建application.properties</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">server.port=8089</div><div class="line">spring.application.name=ribbon</div><div class="line"></div><div class="line">eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/</div><div class="line"></div><div class="line"># 自定义实例ID格式</div><div class="line">eureka.instance.instance-id=$&#123;spring.application.name&#125;:$&#123;spring.cloud.client.ip-address&#125;:$&#123;server.port&#125;</div></pre></td></tr></table></figure>
+<p>创建RibbonApplication<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.ribbon;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RibbonApplication</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SpringApplication.run(RibbonApplication.class, args);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建RibbonController<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.ribbon.controller;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"><span class="keyword">import</span> org.springframework.web.client.RestTemplate;</div><div class="line"></div><div class="line"><span class="keyword">import</span> spring.cloud.ribbon.dto.User;</div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RibbonController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> RestTemplate restTemplate;</div><div class="line"></div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/get"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">get</span><span class="params">()</span> </span>&#123;</div><div class="line">        User user = restTemplate.getForEntity(<span class="string">"http://user-service/user/get?id=1"</span>, User.class).getBody();</div><div class="line">        <span class="keyword">return</span> user;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建RestConfiguration</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.ribbon.config;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.cloud.client.loadbalancer.LoadBalanced;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.web.client.RestTemplate;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestConfiguration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="meta">@LoadBalanced</span></div><div class="line">    <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>启动</p>
+<p>调用接口<a href="http://localhost:8089/get/，返回" target="_blank" rel="external">http://localhost:8089/get/，返回</a><br>{“id”:1,”name”:”zhm”}</p>
 
       
     </div>
@@ -450,7 +455,7 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
       
         <div class="post-tags">
           
-            <a href="/tags/spark/" rel="tag"># spark</a>
+            <a href="/tags/spring-cloud/" rel="tag"># spring cloud</a>
           
         </div>
       
@@ -459,8 +464,8 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/05/CDH 安装spark2.2/" rel="next" title="CDH 安装spark2.2">
-                <i class="fa fa-chevron-left"></i> CDH 安装spark2.2
+              <a href="/2020/06/27/spring eureka/" rel="next" title="spring eureka">
+                <i class="fa fa-chevron-left"></i> spring eureka
               </a>
             
           </div>
@@ -468,10 +473,6 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/30/spark shuffle 调优/" rel="prev" title="spark shuffle 调优">
-                spark shuffle 调优 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -503,8 +504,8 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/08/29/spark 性能优化/"
-           data-title="spark 机器学习入门(二)" data-url="http://yoursite.com/2017/08/29/spark 性能优化/">
+      <div class="ds-thread" data-thread-key="2020/06/27/spring ribbon/"
+           data-title="spring ribbon" data-url="http://yoursite.com/2020/06/27/spring ribbon/">
       </div>
     
   </div>
@@ -528,17 +529,8 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/agns.gif"
@@ -609,22 +601,6 @@ linux每个文件都会保留3个时间戳用stat 文件名 来查看Acess：文
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#部署优化："><span class="nav-number">1.</span> <span class="nav-text">部署优化：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JOB调度："><span class="nav-number"></span> <span class="nav-text">JOB调度：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据序列化："><span class="nav-number"></span> <span class="nav-text">数据序列化：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#减少内存消耗："><span class="nav-number"></span> <span class="nav-text">减少内存消耗：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调整并行度："><span class="nav-number"></span> <span class="nav-text">调整并行度：</span></a></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>

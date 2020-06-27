@@ -294,6 +294,163 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/25/Machine learning Artificial Neural Network/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/08/25/Machine learning Artificial Neural Network/" itemprop="url">
+                  机器学习-神经网络
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-25T15:36:00+08:00">
+                2018-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2018/08/25/Machine learning Artificial Neural Network/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/25/Machine learning Artificial Neural Network/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>什么是人工神经网络模型<br>人工神经网络(Artificial Neural Network, ANN)没有一个严格的正式定义。它的基本特点，是试图模仿大脑的神经元之间传递，处理信息的模式。</p>
+<p>一个计算模型，要被称为为神经网络，通常需要大量彼此连接的节点 （也称 ‘神经元’），并且具备两个特性：<br>每个神经元，通过某种特定的输出函数 （也叫激励函数 activation function），计算处理来自其它相邻神经元的加权输入值<br>神经元之间的信息传递的强度，用所谓加权值来定义，算法会不断自我学习，调整这个加权值<br>总结：神经网络算法的核心就是：计算、连接、评估、纠错、学习</p>
+<h4 id="神经网络模型可以分为："><a href="#神经网络模型可以分为：" class="headerlink" title="神经网络模型可以分为："></a><strong>神经网络模型可以分为：</strong></h4><h6 id="前向网络"><a href="#前向网络" class="headerlink" title="前向网络"></a><strong>前向网络</strong></h6><p>网络中各个神经元接受前一级的输入，并输出到下一级，网络中没有反馈，可以用一个有向无环路图表示。这种网络实现信号从输入空间到输出空间的变换，它的信息处理能力来自于简单非线性函数的多次复合。网络结构简单，易于实现。反传网络是一种典型的前向网络。</p>
+<h6 id="反馈网络"><a href="#反馈网络" class="headerlink" title="反馈网络"></a><strong>反馈网络</strong></h6><p>网络内神经元间有反馈，可以用一个无向的完备图表示。这种神经网络的信息处理是状态的变换，可以用动力学系统理论处理。系统的稳定性与联想记忆功能有密切关系。Hopfield网络、波耳兹曼机均属于这种类型。</p>
+<h4 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a><strong>激活函数</strong></h4><p>用于处理复杂的非线性分类情况。比线性回归、logistic回归灵活。训练的时候注意过拟合。<br>非线性激活函数<br>Sigmoid<br>𝑓(𝑥)=1/(1+exp⁡(−𝑥))<br>特点：<br>当x趋近负无穷时，y趋近于0；趋近于正无穷时，y趋近于1；<br>x超出[-6,6]的范围后，函数值基本上没有变化，值非常接近0或者1<br>该函数的值域范围限制在(0,1)之间，这样sigmoid函数就能与一个概率分布联系起来了。<br>𝑓^′ (𝑥)=𝑓(𝑥)(1−𝑓(𝑥))</p>
+<h4 id="双曲正切"><a href="#双曲正切" class="headerlink" title="双曲正切"></a><strong>双曲正切</strong></h4><p>tanh⁡(𝑥)=(𝑒^𝑥−𝑒^(−𝑥))/(𝑒^𝑥+𝑒^(−𝑥) )<br>特点：<br>当x趋近负无穷时，y趋近于-1；趋近于正无穷时，y趋近于1；<br>x超出[-3,3]的范围后，函数值基本上没有变化，值非常接近-1或者1<br>该函数的值域范围限制在(-1,1)之间<br>tanh^′ (𝑥)=1−tanh(x)^2</p>
+<h4 id="修正线性单元Rectifier-Linear-Units（ReLU）"><a href="#修正线性单元Rectifier-Linear-Units（ReLU）" class="headerlink" title="修正线性单元Rectifier Linear Units（ReLU）"></a><strong>修正线性单元Rectifier Linear Units（ReLU）</strong></h4><p>𝑓(𝑥)=max⁡(0,𝑥)<br>特点：<br>只有有一半隐含层是处于激活状态，其余都是输出为0<br>不会出现梯度消失的问题（即在sigmoid接近饱和区时，导数趋于0，这种情况会造成信息丢失）<br>只需比较、乘加运算，因此计算方便，计算速度快，加速了网络的训练<br>ReLU比sigmoid更接近生物学的激活模型<br>还有一些改进或的变体</p>
+<h4 id="Softplus"><a href="#Softplus" class="headerlink" title="Softplus"></a><strong>Softplus</strong></h4><p>𝑓(𝑥)=log⁡(1+𝑒^𝑥 )<br>特点：<br>x趋于负无穷时，softplus趋于0；x趋于正无穷时， softplus趋于x<br>它是ReLU的平滑版<br>它是sigmoid的原函数</p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a><strong>损失函数</strong></h3><p>用于回归中的均方损失：<br>𝐸=1/2 (𝑦−𝑦 ̂ )^2<br>用于分类中的交叉熵损失函数：<br>𝐸=−∑▒〖𝑦<em>𝑘 𝑙𝑜𝑔((𝑦</em>𝑘 ) ̂ )” “ 〗<br>k=1,2,…,m表示m种类别。在违约预测中m=2</p>
+<p>基于 Anaconda 的安装<br>安装tensorflow<br>建立一个 conda 计算环境名字叫tensorflow:</p>
+<h1 id="Python-2-7"><a href="#Python-2-7" class="headerlink" title="Python 2.7"></a>Python 2.7</h1><p>$ conda create -n tensorflow python=2.7</p>
+<h1 id="Python-3-4"><a href="#Python-3-4" class="headerlink" title="Python 3.4"></a>Python 3.4</h1><p>$ conda create -n tensorflow python=3.4</p>
+<p>activate tensorflow</p>
+<p>安装tensorflow<br>conda install –channel <a href="https://conda.anaconda.org/conda-forge" target="_blank" rel="external">https://conda.anaconda.org/conda-forge</a> tensorflow</p>
+<p>import tensorflow as tf<br>退出python3环境或当你不用 TensorFlow 的时候,关闭环境:<br>(tensorflow)$  deactivate<br>$  # Your prompt should change back</p>
+<p>windows下安装<br>升级pip<br>python -m pip install –upgrade pip<br>安装tensorflow<br>pip3 install –upgrade <a href="https://storage.googleapis.com/tensorflow/windows/cpu/tensorflow-0.12.0-cp35-cp35m-win_amd64.whl" target="_blank" rel="external">https://storage.googleapis.com/tensorflow/windows/cpu/tensorflow-0.12.0-cp35-cp35m-win_amd64.whl</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/Install TensorFlow/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1617,159 +1774,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/11/Design pattern structural/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/02/11/Design pattern structural/" itemprop="url">
-                  设计模式-结构模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-11T09:30:00+08:00">
-                2018-02-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2018/02/11/Design pattern structural/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/02/11/Design pattern structural/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1-适配器"><a href="#1-适配器" class="headerlink" title="1.适配器"></a>1.适配器</h3><p>效果及优缺点：<br>对于类适配器：</p>
-<ol>
-<li>用一个具体的Adapter类对Adaptee和Taget进行匹配。结果是当我们想要匹配一个类以及所有它的子类时，类Adapter将不能胜任工作。</li>
-<li>使得Adapter可以override（重定义） Adaptee的部分行为，因为Adapter是Adaptee的一个子类。<br>对于对象适配器：</li>
-<li>允许一个Adapter与多个Adaptee，即Adaptee本身以及它的所有子类（如果有子类的话）同时工作。Adapter也可以一次给所有的Adaptee添加功能。</li>
-<li>使得override（重定义）Adaptee的行为比较困难。如果一定要override Adaptee的方法，就只好先做一个Adaptee的子类以override Adaptee的方法，然后再把这个子类当作真正的Adaptee源进行适配。</li>
-</ol>
-<h3 id="2-桥接"><a href="#2-桥接" class="headerlink" title="2.桥接"></a>2.桥接</h3><p>继承是一种强耦合的结果，父类变，子类就必须要变。可以使用组合/继承来解耦合。将抽象和他的实现分离<br><img src="https://images.cnblogs.com/cnblogs_com/houleixx/Snap1.jpg" alt="此处输入图片的描述"></p>
-<h3 id="3-组合"><a href="#3-组合" class="headerlink" title="3.组合"></a>3.组合</h3><p>将对象组合成属性结构以表示‘部分-整体’的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</p>
-<p>组合模式描述了如何使用递归的组合，使客户不用区分这些类</p>
-<h3 id="4-装配器"><a href="#4-装配器" class="headerlink" title="4.装配器"></a>4.装配器</h3><h3 id="5-外观"><a href="#5-外观" class="headerlink" title="5.外观"></a>5.外观</h3><h3 id="6-享元模式"><a href="#6-享元模式" class="headerlink" title="6.享元模式"></a>6.享元模式</h3><h3 id="7-代理模式"><a href="#7-代理模式" class="headerlink" title="7.代理模式"></a>7.代理模式</h3><p>Copy-on-writedai代理：即写即复制“快照”虚拟代理的一种，把复制拖延到只有客户端需要时，才真正执行<br>保护代理：允许在访问对象时附加管理任务</p>
-<p>1.什么是代理模式：例如我们找房子找中介<br>2.为什么要使用代理：我们不需要自己找房子</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1815,7 +1819,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">92</span>
+              <span class="site-state-item-count">93</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
