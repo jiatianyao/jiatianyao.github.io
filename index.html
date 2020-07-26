@@ -294,6 +294,335 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/28/spring fegin/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/06/28/spring fegin/" itemprop="url">
+                  spring fegin
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-28T12:00:00+08:00">
+                2020-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring-cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">spring cloud</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2020/06/28/spring fegin/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/06/28/spring fegin/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>创建feign moudule</p>
+<p>pom.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>创建application.properties<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">server.port=8086</div><div class="line">spring.application.name=feign</div><div class="line"></div><div class="line">eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/</div><div class="line"></div><div class="line"># 自定义实例ID格式</div><div class="line">eureka.instance.instance-id=$&#123;spring.application.name&#125;:$&#123;spring.cloud.client.ip-address&#125;:$&#123;server.port&#125;</div><div class="line"></div><div class="line">feign.hystrix.enabled=false</div><div class="line"></div><div class="line">logging.level.com.example.feign.client.UserRemoteClient=DEBUG</div><div class="line"></div><div class="line">spring.main.allow-bean-definition-overriding=true</div></pre></td></tr></table></figure></p>
+<p>创建FeignApplication.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">package</span> spring.cloud.feign;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.cloud.openfeign.EnableFeignClients;</div><div class="line"></div><div class="line"><span class="meta">@EnableFeignClients</span></div><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FeignApplication</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SpringApplication.run(FeignApplication.class, args);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建User<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.feign.dto;</div><div class="line"></div><div class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</div><div class="line"><span class="keyword">import</span> lombok.Data;</div><div class="line"></div><div class="line"><span class="meta">@AllArgsConstructor</span></div><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建UserRemoteClientFallback<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.feign.client;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"><span class="keyword">import</span> spring.cloud.feign.dto.User;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserRemoteClientFallback</span> <span class="keyword">implements</span> <span class="title">UserRemoteClient</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User(<span class="number">0</span>, <span class="string">"默认fallback"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建UserRemoteClientFallbackFactory<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.feign.client;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> feign.hystrix.FallbackFactory;</div><div class="line"><span class="keyword">import</span> spring.cloud.feign.dto.User;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserRemoteClientFallbackFactory</span> <span class="keyword">implements</span> <span class="title">FallbackFactory</span>&lt;<span class="title">UserRemoteClient</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> Logger logger = LoggerFactory.getLogger(UserRemoteClientFallbackFactory.class);</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> UserRemoteClient <span class="title">create</span><span class="params">(Throwable cause)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> UserRemoteClient() &#123;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">                logger.error(<span class="string">"UserRemoteClient.getUser异常"</span>, cause);</div><div class="line">                <span class="keyword">return</span> <span class="keyword">new</span> User(<span class="number">0</span>, <span class="string">"默认"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建CustomRequestInterceptor.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.feign.interceptor;</div><div class="line"></div><div class="line"><span class="keyword">import</span> feign.RequestInterceptor;</div><div class="line"><span class="keyword">import</span> feign.RequestTemplate;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomRequestInterceptor</span> <span class="keyword">implements</span> <span class="title">RequestInterceptor</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">apply</span><span class="params">(RequestTemplate template)</span> </span>&#123;</div><div class="line">        System.err.println(template.url());</div><div class="line">        template.header(<span class="string">"myHeader"</span>, <span class="string">"xx.com"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建FeignConfiguration<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.feign.config;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"></div><div class="line"><span class="keyword">import</span> feign.Logger;</div><div class="line"><span class="keyword">import</span> feign.auth.BasicAuthRequestInterceptor;</div><div class="line"><span class="keyword">import</span> spring.cloud.feign.interceptor.CustomRequestInterceptor;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FeignConfiguration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="keyword">public</span> Logger.<span class="function">Level <span class="title">getLoggerLevel</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> Logger.Level.FULL;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> BasicAuthRequestInterceptor <span class="title">basicAuthRequestInterceptor</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BasicAuthRequestInterceptor(<span class="string">"user"</span>, <span class="string">"password"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> CustomRequestInterceptor <span class="title">customRequestInterceptor</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CustomRequestInterceptor();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建接口UserRemoteClient<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.feign.client;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.cloud.openfeign.FeignClient;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</div><div class="line"><span class="keyword">import</span> spring.cloud.feign.config.FeignConfiguration;</div><div class="line"><span class="keyword">import</span> spring.cloud.feign.dto.User;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@FeignClient</span>(value = <span class="string">"user-service"</span>, configuration = FeignConfiguration.class,fallbackFactory = UserRemoteClientFallbackFactory.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserRemoteClient</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/user/get"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(@RequestParam(<span class="string">"id"</span>)</span><span class="keyword">int</span> id)</span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建FeignController<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.feign.controller;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"><span class="keyword">import</span> spring.cloud.feign.client.UserRemoteClient;</div><div class="line"><span class="keyword">import</span> spring.cloud.feign.dto.User;</div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FeignController</span> </span>&#123;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> UserRemoteClient userRemoteClient;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/getUser"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> userRemoteClient.getUser(<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>调用<br><a href="http://localhost:8086/getUser" target="_blank" rel="external">http://localhost:8086/getUser</a><br><img src="https://s1.ax1x.com/2020/07/26/ap0ThT.png" alt="此处输入图片的描述"><br><img src="https://s1.ax1x.com/2020/07/26/ap0oNV.png" alt="此处输入图片的描述"></p>
+<p>如果把feign.hystrix.enabled=true打开<br>就可以和hystrix连用<br>结合上篇文章内容，设置超时回退机制<br>再次执行上面调用会返回</p>
+<p><img src="https://s1.ax1x.com/2020/07/26/apB0v4.png" alt="此处输入图片的描述"></p>
+<p>五步带你读Feign 执行过程源码解读<br>地址：<a href="https://github.com/OpenFeign/feign/blob/master/core/src/main/java/feign/Feign.java" target="_blank" rel="external">https://github.com/OpenFeign/feign/blob/master/core/src/main/java/feign/Feign.java</a></p>
+<p>1.构建接口实例<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Builder <span class="title">builder</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Builder();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>2.target方法生成代理类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">target</span><span class="params">(Class&lt;T&gt; apiType, String url)</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> target(<span class="keyword">new</span> HardCodedTarget&lt;T&gt;(apiType, url));</div><div class="line">    &#125;</div><div class="line">    </div><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">target</span><span class="params">(Target&lt;T&gt; target)</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> build().newInstance(target);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Feign <span class="title">build</span><span class="params">()</span> </span>&#123;</div><div class="line">      Client client = Capability.enrich(<span class="keyword">this</span>.client, capabilities);</div><div class="line">      Retryer retryer = Capability.enrich(<span class="keyword">this</span>.retryer, capabilities);</div><div class="line">      List&lt;RequestInterceptor&gt; requestInterceptors = <span class="keyword">this</span>.requestInterceptors.stream()</div><div class="line">          .map(ri -&gt; Capability.enrich(ri, capabilities))</div><div class="line">          .collect(Collectors.toList());</div><div class="line">      Logger logger = Capability.enrich(<span class="keyword">this</span>.logger, capabilities);</div><div class="line">      Contract contract = Capability.enrich(<span class="keyword">this</span>.contract, capabilities);</div><div class="line">      Options options = Capability.enrich(<span class="keyword">this</span>.options, capabilities);</div><div class="line">      Encoder encoder = Capability.enrich(<span class="keyword">this</span>.encoder, capabilities);</div><div class="line">      Decoder decoder = Capability.enrich(<span class="keyword">this</span>.decoder, capabilities);</div><div class="line">      InvocationHandlerFactory invocationHandlerFactory =</div><div class="line">          Capability.enrich(<span class="keyword">this</span>.invocationHandlerFactory, capabilities);</div><div class="line">      QueryMapEncoder queryMapEncoder = Capability.enrich(<span class="keyword">this</span>.queryMapEncoder, capabilities);</div><div class="line"></div><div class="line">      SynchronousMethodHandler.Factory synchronousMethodHandlerFactory =</div><div class="line">          <span class="keyword">new</span> SynchronousMethodHandler.Factory(client, retryer, requestInterceptors, logger,</div><div class="line">              logLevel, decode404, closeAfterDecode, propagationPolicy, forceDecoding);</div><div class="line">      ParseHandlersByName handlersByName =</div><div class="line">          <span class="keyword">new</span> ParseHandlersByName(contract, options, encoder, decoder, queryMapEncoder,</div><div class="line">              errorDecoder, synchronousMethodHandlerFactory);</div><div class="line">      <span class="keyword">return</span> <span class="keyword">new</span> ReflectiveFeign(handlersByName, invocationHandlerFactory, queryMapEncoder);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>3.进入ReflectiveFeign 的newInstance绑定代理对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">newInstance</span><span class="params">(Target&lt;T&gt; target)</span> </span>&#123;</div><div class="line">    Map&lt;String, MethodHandler&gt; nameToHandler = targetToHandlersByName.apply(target);</div><div class="line">    Map&lt;Method, MethodHandler&gt; methodToHandler = <span class="keyword">new</span> LinkedHashMap&lt;Method, MethodHandler&gt;();</div><div class="line">    List&lt;DefaultMethodHandler&gt; defaultMethodHandlers = <span class="keyword">new</span> LinkedList&lt;DefaultMethodHandler&gt;();</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (Method method : target.type().getMethods()) &#123;</div><div class="line">      <span class="keyword">if</span> (method.getDeclaringClass() == Object.class) &#123;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (Util.isDefault(method)) &#123;</div><div class="line">        DefaultMethodHandler handler = <span class="keyword">new</span> DefaultMethodHandler(method);</div><div class="line">        defaultMethodHandlers.add(handler);</div><div class="line">        methodToHandler.put(method, handler);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        methodToHandler.put(method, nameToHandler.get(Feign.configKey(target.type(), method)));</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    InvocationHandler handler = factory.create(target, methodToHandler);</div><div class="line">    T proxy = (T) Proxy.newProxyInstance(target.type().getClassLoader(),</div><div class="line">        <span class="keyword">new</span> Class&lt;?&gt;[] &#123;target.type()&#125;, handler);</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (DefaultMethodHandler defaultMethodHandler : defaultMethodHandlers) &#123;</div><div class="line">      defaultMethodHandler.bindTo(proxy);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> proxy;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>4.static calss FeignInvocationHandler重写invoke方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">     <span class="keyword">if</span> (<span class="string">"equals"</span>.equals(method.getName())) &#123;</div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">         Object otherHandler =</div><div class="line">             args.length &gt; <span class="number">0</span> &amp;&amp; args[<span class="number">0</span>] != <span class="keyword">null</span> ? Proxy.getInvocationHandler(args[<span class="number">0</span>]) : <span class="keyword">null</span>;</div><div class="line">         <span class="keyword">return</span> equals(otherHandler);</div><div class="line">       &#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">       &#125;</div><div class="line">     &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"hashCode"</span>.equals(method.getName())) &#123;</div><div class="line">       <span class="keyword">return</span> hashCode();</div><div class="line">     &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"toString"</span>.equals(method.getName())) &#123;</div><div class="line">       <span class="keyword">return</span> toString();</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     <span class="keyword">return</span> dispatch.get(method).invoke(args);</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>5.调用<br>SynchronousMethodHandler -&gt;invoke -&gt;  executeAndDecode<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object[] argv)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">    RequestTemplate template = buildTemplateFromArgs.create(argv);</div><div class="line">    Options options = findOptions(argv);</div><div class="line">    Retryer retryer = <span class="keyword">this</span>.retryer.clone();</div><div class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">return</span> executeAndDecode(template, options);</div><div class="line">      &#125; <span class="keyword">catch</span> (RetryableException e) &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">          retryer.continueOrPropagate(e);</div><div class="line">        &#125; <span class="keyword">catch</span> (RetryableException th) &#123;</div><div class="line">          Throwable cause = th.getCause();</div><div class="line">          <span class="keyword">if</span> (propagationPolicy == UNWRAP &amp;&amp; cause != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> cause;</div><div class="line">          &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">throw</span> th;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (logLevel != Logger.Level.NONE) &#123;</div><div class="line">          logger.logRetry(metadata.configKey(), logLevel);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  </div><div class="line">   <span class="function">Object <span class="title">executeAndDecode</span><span class="params">(RequestTemplate template, Options options)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">    Request request = targetRequest(template);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (logLevel != Logger.Level.NONE) &#123;</div><div class="line">      logger.logRequest(metadata.configKey(), logLevel, request);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Response response;</div><div class="line">    <span class="keyword">long</span> start = System.nanoTime();</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      response = client.execute(request, options);</div><div class="line">      <span class="comment">// ensure the request is set. <span class="doctag">TODO:</span> remove in Feign 12</span></div><div class="line">      response = response.toBuilder()</div><div class="line">          .request(request)</div><div class="line">          .requestTemplate(template)</div><div class="line">          .build();</div><div class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">      <span class="keyword">if</span> (logLevel != Logger.Level.NONE) &#123;</div><div class="line">        logger.logIOException(metadata.configKey(), logLevel, e, elapsedTime(start));</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">throw</span> errorExecuting(request, e);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">long</span> elapsedTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - start);</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (decoder != <span class="keyword">null</span>)</div><div class="line">      <span class="keyword">return</span> decoder.decode(response, metadata.returnType());</div><div class="line"></div><div class="line">    CompletableFuture&lt;Object&gt; resultFuture = <span class="keyword">new</span> CompletableFuture&lt;&gt;();</div><div class="line">    asyncResponseHandler.handleResponse(resultFuture, metadata.configKey(), response,</div><div class="line">        metadata.returnType(),</div><div class="line">        elapsedTime);</div><div class="line"></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      <span class="keyword">if</span> (!resultFuture.isDone())</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Response handling not done"</span>);</div><div class="line"></div><div class="line">      <span class="keyword">return</span> resultFuture.join();</div><div class="line">    &#125; <span class="keyword">catch</span> (CompletionException e) &#123;</div><div class="line">      Throwable cause = e.getCause();</div><div class="line">      <span class="keyword">if</span> (cause != <span class="keyword">null</span>)</div><div class="line">        <span class="keyword">throw</span> cause;</div><div class="line">      <span class="keyword">throw</span> e;</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>feign和hystrix整合代码<br><a href="https://github.com/spring-cloud/spring-cloud-openfeign/blob/2.1.x/spring-cloud-openfeign-core/src/main/java/org/springframework/cloud/openfeign/FeignClientsConfiguration.java" target="_blank" rel="external">https://github.com/spring-cloud/spring-cloud-openfeign/blob/2.1.x/spring-cloud-openfeign-core/src/main/java/org/springframework/cloud/openfeign/FeignClientsConfiguration.java</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line">	<span class="meta">@ConditionalOnClass</span>(&#123; HystrixCommand.class, HystrixFeign.class &#125;)</div><div class="line">	<span class="keyword">protected</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">HystrixFeignConfiguration</span> </span>&#123;</div><div class="line"></div><div class="line">		<span class="meta">@Bean</span></div><div class="line">		<span class="meta">@Scope</span>(<span class="string">"prototype"</span>)</div><div class="line">		<span class="meta">@ConditionalOnMissingBean</span></div><div class="line">		<span class="comment">//配置feign.hystrix.enabled</span></div><div class="line">		<span class="meta">@ConditionalOnProperty</span>(name = <span class="string">"feign.hystrix.enabled"</span>)</div><div class="line">		<span class="keyword">public</span> Feign.<span class="function">Builder <span class="title">feignHystrixBuilder</span><span class="params">()</span> </span>&#123;</div><div class="line">	       	<span class="comment">//重新对feign的build重新定义</span></div><div class="line">			<span class="keyword">return</span> HystrixFeign.builder();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/OpenFeign/feign/blob/master/hystrix/src/main/java/feign/hystrix/HystrixFeign.java" target="_blank" rel="external">https://github.com/OpenFeign/feign/blob/master/hystrix/src/main/java/feign/hystrix/HystrixFeign.java</a><br>HystrixFeign 类Builder extends feign.Feign.Builder </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function">Feign <span class="title">build</span><span class="params">(<span class="keyword">final</span> FallbackFactory&lt;?&gt; nullableFallbackFactory)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.invocationHandlerFactory(<span class="keyword">new</span> InvocationHandlerFactory() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> InvocationHandler <span class="title">create</span><span class="params">(Target target,</span></span></div><div class="line">                                        Map&lt;Method, MethodHandler&gt; dispatch) &#123;</div><div class="line">          <span class="keyword">return</span> <span class="keyword">new</span> HystrixInvocationHandler(target, dispatch, setterFactory,</div><div class="line">              nullableFallbackFactory);</div><div class="line">        &#125;</div><div class="line">      &#125;);</div><div class="line">      <span class="keyword">super</span>.contract(<span class="keyword">new</span> HystrixDelegatingContract(contract));</div><div class="line">      <span class="keyword">return</span> <span class="keyword">super</span>.build();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>创建HystrixInvocationHandler<br>执行invoke方法封装HystrixCommand（包含回退）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"> <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(<span class="keyword">final</span> Object proxy, <span class="keyword">final</span> Method method, <span class="keyword">final</span> Object[] args)</span></span></div><div class="line">     <span class="keyword">throws</span> Throwable &#123;</div><div class="line">   <span class="comment">// early exit if the invoked method is from java.lang.Object</span></div><div class="line">   <span class="comment">// code is the same as ReflectiveFeign.FeignInvocationHandler</span></div><div class="line">   <span class="keyword">if</span> (<span class="string">"equals"</span>.equals(method.getName())) &#123;</div><div class="line">     <span class="keyword">try</span> &#123;</div><div class="line">       Object otherHandler =</div><div class="line">           args.length &gt; <span class="number">0</span> &amp;&amp; args[<span class="number">0</span>] != <span class="keyword">null</span> ? Proxy.getInvocationHandler(args[<span class="number">0</span>]) : <span class="keyword">null</span>;</div><div class="line">       <span class="keyword">return</span> equals(otherHandler);</div><div class="line">     &#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">     &#125;</div><div class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"hashCode"</span>.equals(method.getName())) &#123;</div><div class="line">     <span class="keyword">return</span> hashCode();</div><div class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"toString"</span>.equals(method.getName())) &#123;</div><div class="line">     <span class="keyword">return</span> toString();</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   HystrixCommand&lt;Object&gt; hystrixCommand =</div><div class="line">       <span class="keyword">new</span> HystrixCommand&lt;Object&gt;(setterMethodMap.get(method)) &#123;</div><div class="line">         <span class="meta">@Override</span></div><div class="line">         <span class="function"><span class="keyword">protected</span> Object <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">           <span class="keyword">try</span> &#123;</div><div class="line">             <span class="keyword">return</span> HystrixInvocationHandler.<span class="keyword">this</span>.dispatch.get(method).invoke(args);</div><div class="line">           &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">             <span class="keyword">throw</span> e;</div><div class="line">           &#125; <span class="keyword">catch</span> (Throwable t) &#123;</div><div class="line">             <span class="keyword">throw</span> (Error) t;</div><div class="line">           &#125;</div><div class="line">         &#125;</div><div class="line"></div><div class="line">         <span class="meta">@Override</span></div><div class="line">         <span class="function"><span class="keyword">protected</span> Object <span class="title">getFallback</span><span class="params">()</span> </span>&#123;</div><div class="line">           <span class="keyword">if</span> (fallbackFactory == <span class="keyword">null</span>) &#123;</div><div class="line">             <span class="keyword">return</span> <span class="keyword">super</span>.getFallback();</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">try</span> &#123;</div><div class="line">             Object fallback = fallbackFactory.create(getExecutionException());</div><div class="line">             Object result = fallbackMethodMap.get(method).invoke(fallback, args);</div><div class="line">             <span class="keyword">if</span> (isReturnsHystrixCommand(method)) &#123;</div><div class="line">               <span class="keyword">return</span> ((HystrixCommand) result).execute();</div><div class="line">             &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isReturnsObservable(method)) &#123;</div><div class="line">               <span class="comment">// Create a cold Observable</span></div><div class="line">               <span class="keyword">return</span> ((Observable) result).toBlocking().first();</div><div class="line">             &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isReturnsSingle(method)) &#123;</div><div class="line">               <span class="comment">// Create a cold Observable as a Single</span></div><div class="line">               <span class="keyword">return</span> ((Single) result).toObservable().toBlocking().first();</div><div class="line">             &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isReturnsCompletable(method)) &#123;</div><div class="line">               ((Completable) result).await();</div><div class="line">               <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">             &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isReturnsCompletableFuture(method)) &#123;</div><div class="line">               <span class="keyword">return</span> ((Future) result).get();</div><div class="line">             &#125; <span class="keyword">else</span> &#123;</div><div class="line">               <span class="keyword">return</span> result;</div><div class="line">             &#125;</div><div class="line">           &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</div><div class="line">             <span class="comment">// shouldn't happen as method is public due to being an interface</span></div><div class="line">             <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError(e);</div><div class="line">           &#125; <span class="keyword">catch</span> (InvocationTargetException | ExecutionException e) &#123;</div><div class="line">             <span class="comment">// Exceptions on fallback are tossed by Hystrix</span></div><div class="line">             <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError(e.getCause());</div><div class="line">           &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">             <span class="comment">// Exceptions on fallback are tossed by Hystrix</span></div><div class="line">             Thread.currentThread().interrupt();</div><div class="line">             <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError(e.getCause());</div><div class="line">           &#125;</div><div class="line">         &#125;</div><div class="line">       &#125;;</div><div class="line"></div><div class="line">   <span class="keyword">if</span> (Util.isDefault(method)) &#123;</div><div class="line">     <span class="keyword">return</span> hystrixCommand.execute();</div><div class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isReturnsHystrixCommand(method)) &#123;</div><div class="line">     <span class="keyword">return</span> hystrixCommand;</div><div class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isReturnsObservable(method)) &#123;</div><div class="line">     <span class="comment">// Create a cold Observable</span></div><div class="line">     <span class="keyword">return</span> hystrixCommand.toObservable();</div><div class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isReturnsSingle(method)) &#123;</div><div class="line">     <span class="comment">// Create a cold Observable as a Single</span></div><div class="line">     <span class="keyword">return</span> hystrixCommand.toObservable().toSingle();</div><div class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isReturnsCompletable(method)) &#123;</div><div class="line">     <span class="keyword">return</span> hystrixCommand.toObservable().toCompletable();</div><div class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isReturnsCompletableFuture(method)) &#123;</div><div class="line">     <span class="keyword">return</span> <span class="keyword">new</span> ObservableCompletableFuture&lt;&gt;(hystrixCommand);</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">return</span> hystrixCommand.execute();</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/spring hystrix/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="张洪铭">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/agns.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="张洪铭的个人博客">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/06/27/spring hystrix/" itemprop="url">
+                  spring hystrix
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-27T12:00:00+08:00">
+                2020-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring-cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">spring cloud</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2020/06/27/spring hystrix/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/06/27/spring hystrix/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在分布式系统中，远程系统或服务不可避免的调用失败（超时或者异常）<br>Netflix的组件Hystrix可以将这些请求隔离，针对服务限流，当服务不可用时能够熔断并降级，防止级联故障。</p>
+<p>架构图：<br><img src="https://s1.ax1x.com/2020/07/05/UpQC5Q.png" alt="此处输入图片的描述"></p>
+<p>创建hystrix 子项目</p>
+<p>创建application.properties<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">server.port=8085</div><div class="line">spring.application.name=hystrix</div><div class="line"></div><div class="line">eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka/</div><div class="line"></div><div class="line"># 自定义实例ID格式</div><div class="line">eureka.instance.instance-id=$&#123;spring.application.name&#125;:$&#123;spring.cloud.client.ip-address&#125;:$&#123;server.port&#125;</div><div class="line"></div><div class="line">#hystrix.command.getUser.execution.isolation.thread.timeoutInMilliseconds = 3000</div><div class="line">#hystrix.command.getUser.execution.isolation.strategy = SEMAPHORE</div><div class="line"></div><div class="line">management.endpoints.web.exposure.include=hystrix.stream</div></pre></td></tr></table></figure></p>
+<p>创建 CustomHystrixPropertiesStrategy.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.hystrix.plugin;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.netflix.hystrix.HystrixCommandKey;</div><div class="line"><span class="keyword">import</span> com.netflix.hystrix.HystrixCommandProperties;</div><div class="line"><span class="keyword">import</span> com.netflix.hystrix.strategy.properties.HystrixPropertiesCommandDefault;</div><div class="line"><span class="keyword">import</span> com.netflix.hystrix.strategy.properties.HystrixPropertiesStrategy;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 自定义属性配置</div><div class="line"> * <span class="doctag">@author</span> yinjihuan</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomHystrixPropertiesStrategy</span> <span class="keyword">extends</span> <span class="title">HystrixPropertiesStrategy</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> HystrixCommandProperties <span class="title">getCommandProperties</span><span class="params">(HystrixCommandKey commandKey, HystrixCommandProperties.Setter builder)</span> </span>&#123;</div><div class="line">        <span class="comment">// 这里可以自己控制</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HystrixPropertiesCommandDefault(commandKey, builder);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">创建RibbonApplication.java</div><div class="line">```java</div><div class="line"><span class="keyword">package</span> spring.cloud.hystrix;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.netflix.hystrix.strategy.HystrixPlugins;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.cloud.netflix.hystrix.EnableHystrix;</div><div class="line"><span class="keyword">import</span> spring.cloud.hystrix.plugin.CustomHystrixPropertiesStrategy;</div><div class="line"></div><div class="line"><span class="meta">@EnableHystrix</span></div><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HystrixApplication</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">// 手动注册插件</span></div><div class="line">        <span class="comment">//HystrixPlugins.getInstance().registerEventNotifier(new CustomHystrixEventNotifier());</span></div><div class="line">        HystrixPlugins.getInstance().registerPropertiesStrategy(<span class="keyword">new</span> CustomHystrixPropertiesStrategy());</div><div class="line">        SpringApplication.run(HystrixApplication.class, args);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建RestConfiguration.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.hystrix.config;</div><div class="line"><span class="keyword">import</span> org.springframework.cloud.client.loadbalancer.LoadBalanced;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.web.client.RestTemplate;</div><div class="line"></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestConfiguration</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="meta">@LoadBalanced</span></div><div class="line">    <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建 User.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.hystrix.dto;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</div><div class="line"><span class="keyword">import</span> lombok.Data;</div><div class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</div><div class="line"></div><div class="line"><span class="meta">@AllArgsConstructor</span></div><div class="line"><span class="meta">@NoArgsConstructor</span></div><div class="line"><span class="meta">@Data</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建 HystrixController.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.hystrix.controller;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.web.client.RestTemplateBuilder;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"><span class="keyword">import</span> org.springframework.web.client.RestTemplate;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;</div><div class="line"><span class="keyword">import</span> com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;</div><div class="line"><span class="keyword">import</span> spring.cloud.hystrix.dto.User;</div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HystrixController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> RestTemplate restTemplate;</div><div class="line"></div><div class="line">    <span class="meta">@HystrixCommand</span>(commandKey=<span class="string">"getUser"</span>, groupKey=<span class="string">"user"</span>, fallbackMethod = <span class="string">"fallback"</span>, threadPoolKey =<span class="string">"tpk1"</span>,</div><div class="line">            commandProperties = &#123;</div><div class="line">                    <span class="meta">@HystrixProperty</span>(name = <span class="string">"execution.isolation.thread.timeoutInMilliseconds"</span>, value = <span class="string">"3000"</span>)</div><div class="line">            &#125;</div><div class="line">    )</div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/get"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">get</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.err.println(Thread.currentThread().getName());</div><div class="line">        User user = restTemplate.getForEntity(<span class="string">"http://user-service/user/get?id=1"</span>, User.class).getBody();</div><div class="line">        <span class="keyword">return</span> user;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@HystrixCommand</span>(commandKey=<span class="string">"getUser2"</span>, groupKey=<span class="string">"user"</span>,  fallbackMethod = <span class="string">"fallback"</span>, threadPoolKey =<span class="string">"tpk1"</span>,</div><div class="line">            commandProperties = &#123;</div><div class="line">                    <span class="meta">@HystrixProperty</span>(name = <span class="string">"execution.isolation.thread.timeoutInMilliseconds"</span>, value = <span class="string">"20000"</span>)</div><div class="line">            &#125;</div><div class="line">    )</div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/get2"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">get2</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.err.println(Thread.currentThread().getName());</div><div class="line">        User user = restTemplate.getForEntity(<span class="string">"http://user-service/user/get?id=1"</span>, User.class).getBody();</div><div class="line">        <span class="keyword">return</span> user;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@HystrixCommand</span>(commandKey=<span class="string">"getUser3"</span>, groupKey=<span class="string">"user3"</span>,  fallbackMethod = <span class="string">"fallback"</span>, threadPoolKey =<span class="string">"tpk3"</span>,</div><div class="line">            commandProperties = &#123;</div><div class="line">                    <span class="meta">@HystrixProperty</span>(name = <span class="string">"execution.isolation.thread.timeoutInMilliseconds"</span>, value = <span class="string">"20000"</span>)</div><div class="line">            &#125;,</div><div class="line">            threadPoolProperties = &#123;</div><div class="line">                    <span class="meta">@HystrixProperty</span>(name = <span class="string">"queueSizeRejectionThreshold"</span>, value = <span class="string">"20"</span>)</div><div class="line">            &#125;</div><div class="line">    )</div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/get3"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">get3</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.err.println(Thread.currentThread().getName());</div><div class="line">        User user = restTemplate.getForEntity(<span class="string">"http://user-service/user/get?id=1"</span>, User.class).getBody();</div><div class="line">        <span class="keyword">return</span> user;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">fallback</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User(<span class="number">100</span>, <span class="string">"默认"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>打开</p>
+<p><a href="http://localhost:8761/" target="_blank" rel="external">http://localhost:8761/</a></p>
+<p><img src="https://s1.ax1x.com/2020/07/05/Upg3AU.png" alt="此处输入图片的描述"></p>
+<p>修改UserController<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.ribbon.controller;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"><span class="keyword">import</span> spring.cloud.ribbon.dto.User;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhanghongming on 2020/6/27.</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/user/get"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Thread.sleep(<span class="number">10000</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User(id, <span class="string">"zhm"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>增加sleep10秒</p>
+<p>打开<a href="http://localhost:8085/get" target="_blank" rel="external">http://localhost:8085/get</a></p>
+<p>就会输出<br>{“id”:100,”name”:”默认”}</p>
+<p>配置内容<br><a href="https://github.com/Netflix/Hystrix/wiki/Configuration" target="_blank" rel="external">https://github.com/Netflix/Hystrix/wiki/Configuration</a></p>
+<p>创建 DashboardApplication<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> spring.cloud.hystrix;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;</div><div class="line"></div><div class="line"><span class="meta">@EnableHystrixDashboard</span></div><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DashboardApplication</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SpringApplication.run(DashboardApplication.class, args);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>打开<br><a href="http://localhost:8080/hystrix" target="_blank" rel="external">http://localhost:8080/hystrix</a></p>
+<p><img src="https://s1.ax1x.com/2020/07/06/U9crvR.png" alt="此处输入图片的描述"></p>
+<p>访问<a href="http://localhost:8006/actuator/hystrix.stream" target="_blank" rel="external">http://localhost:8006/actuator/hystrix.stream</a><br><img src="https://s1.ax1x.com/2020/07/19/URBG3q.png" alt="此处输入图片的描述"><br>此时访问<br><a href="http://localhost:8006/get" target="_blank" rel="external">http://localhost:8006/get</a></p>
+<p>查看返回值为<br>{“id”:100,”name”:”默认”}<br><img src="https://s1.ax1x.com/2020/07/19/URB14s.png" alt="此处输入图片的描述"><br>查看hystrix<br><img src="https://s1.ax1x.com/2020/07/19/URB2DO.png" alt="此处输入图片的描述"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/spring ribbon/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1929,536 +2258,6 @@ public CompletableFuture&lt;JobSubmissionResult&gt; submitJob(JobGraph jobGraph)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/03/flink源码2/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/08/03/flink源码2/" itemprop="url">
-                  flink源码2
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-03T11:30:00+08:00">
-                2019-08-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
-                    <span itemprop="name">大数据</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2019/08/03/flink源码2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/08/03/flink源码2/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>根据上篇文章内容扩展一下chaining demo</p>
-<p>首先写一个streaming的 wordcount</p>
-<pre><code>public class StreamingChainingDemo {
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public static class KeyCount{
-    private String key;
-    private int count;
-}
-
-public static void main(String[] args) throws Exception {
-    // set up the streaming execution environment
-
-    Configuration configuration= new Configuration(){
-        {
-            setInteger(&quot;rest.port&quot;,9191);
-            setBoolean(&quot;local.start-webserver&quot;,true);
-        }
-    };
-    final StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(configuration);
-
-    env.setParallelism(2).setStreamTimeCharacteristic(TimeCharacteristic.IngestionTime);
-    DataStreamSource&lt;String&gt; dataStreamSource = env.socketTextStream(&quot;localhost&quot;, 9999);
-    dataStreamSource.flatMap((String line, Collector&lt;KeyCount&gt; out)
-    -&gt; {
-         Stream.of(line.split(&quot;\\s+&quot;)).forEach(value -&gt; out.collect(new KeyCount(value,1)));
-       }
-    ).returns(Types.POJO(KeyCount.class))
-    .keyBy(new KeySelector&lt;KeyCount, Object&gt;() {
-        @Override
-        public Object getKey(KeyCount value) throws Exception {
-            return value.getKey();
-        }
-    }).timeWindow(Time.seconds(10)).sum(&quot;count&quot;).print();
-    // execute program
-    env.execute(&quot;Flink StreamingChainingDemo&quot;);
-}
-</code></pre><p>}</p>
-<p>运行如上代码后我们看WEB UI<br><img src="https://s2.ax1x.com/2019/08/03/esAc8K.png" alt="此处输入图片的描述"><br>可以看到keyBy操作和sink是chaining在一起的。<br>如果我们在print()的后面加上.disableChaining()</p>
-<p><img src="https://s2.ax1x.com/2019/08/03/esErLQ.png" alt="此处输入图片的描述"></p>
-<p>可以看到keyBy和sink是forward的并非chaining在一起</p>
-<p>此时我们在returns(Types.POJO(KeyCount.class))<br>后面增加.filter(word-&gt; !””.equals(word))<br>大家猜flat和filter会chaining在一起吗？</p>
-<p><img src="https://s2.ax1x.com/2019/08/03/esEfzT.png" alt="此处输入图片的描述"></p>
-<p>yeah，你答对了吗？flat和filter会chaining在一起。</p>
-<p>这时 我引入并行度的概念：<br>在.filter(word-&gt; !””.equals(word))<br>后面机上.setParallelism(3)</p>
-<p>就会发现flat和filter是Reblance的关系<br><img src="https://s2.ax1x.com/2019/08/03/esE7w9.png" alt="此处输入图片的描述"></p>
-<p>StreamOperator 源码解析<br>这个接口继承 CheckpointListener, KeyContext, Disposable, Serializable</p>
-<p>提供了如下方法：</p>
-<p>生命周期相关：<br>    open<br>    close<br>    dispose<br>    prepareSnapshotPreBarrier</p>
-<p>容错与状态</p>
-<pre><code>snapshotState
-initializeState
-</code></pre><p>与StreamRecord相关</p>
-<pre><code>setKeyContextElement1
-setKeyContextElement2
-</code></pre><p>chain相关</p>
-<pre><code>getChainingStrategy
-setChainingStrategy
-</code></pre><p>监控相关</p>
-<pre><code>getMetricGroup
-getOperatorID
-</code></pre><p>AbstractStreamOperator，OneInputStreamOperator与TwoInputStreamOperator接口继承自StreamOperator</p>
-<p>OneInputStreamOperator有3个方法</p>
-<pre><code>processElement
-processWatermark
-processLatencyMarker
-</code></pre><p>TwoInputStreamOperator有6个方法</p>
-<pre><code>processElement1
-processElement2
-processWatermark1
-processWatermark2
-processLatencyMarker1
-processLatencyMarker2
-</code></pre><p>AbstractStreamOperator 重要的变量：后面会将具体的用法用处<br>决定是否在生成JobGraph时对算子进行Chaining优化：</p>
-<pre><code>protected ChainingStrategy chainingStrategy = ChainingStrategy.HEAD; 
-</code></pre><p>3个与状态相关的变量</p>
-<pre><code>private transient AbstractKeyedStateBackend&lt;?&gt; keyedStateBackend;
-private transient DefaultKeyedStateStore keyedStateStore;
-private transient OperatorStateBackend operatorStateBackend;
-</code></pre><p>监控相关的变量</p>
-<pre><code>protected transient OperatorMetricGroup metrics;
-protected transient LatencyStats latencyStats;
-</code></pre><p>方法作用和父类大同小异此处略</p>
-<p>AbstractStreamOperator的子类抽象类AbstractUdfStreamOperator<br>这个抽象类同时实现了OutputTypeConfigurable接口并重写了setOutputType方法设置了输出类型</p>
-<p>最后我们来看<br>OneInputStreamOperator这个类的实现类：</p>
-<p>StreamFilter，StreamMap与StreamFlatMap算子在实现的processElement分别调用传入的FilterFunction，MapFunction， FlatMapFunction的udf将element传到下游。其中StreamFlatMap用到了TimestampedCollector，它是output的一层封装，将timestamp加入到StreamRecord中发送到下游。</p>
-<p>StreamGroupedReduce与StreamGroupedFold算子相似的点是都涉及到了操作状态, 所以在覆盖open方法时通过创建一个状态的描述符以及调用AbstractStreamOperator实现的getPartitionedState方法获取了一个stateBackend的操作句柄。在processElement方法中借助这个句柄获取当前状态值，在用UDF将新的元素聚合进去并更新状态值，最后输出到下游。不同的是Fold的输出类型可能不一样（所以实现了OutputTypeConfigurable接口的setOutputType方法），并且有初始值。</p>
-<p>ProcessOperator， LegacyKeyedProcessOperator（@Deprecated）<br>ProcessFunction是比较灵活的UDF，允许用户通过在processElement的时候可以通过传入的ctx操作TimerService<br>注册ProcessingTimeTimer和EventTimeTimer，并且通过实现方法onTimer就可以在Timer被触发的时候执行回调的逻辑。</p>
-<p>StreamSink：<br>SimpleContext，可以获取processingTime，watermark和element的时间戳。<br>GenericWriteAheadSink提供了一个可以被实现为Exactly once的sink的抽象类<br>AsyncWaitOperator提供了异步处理的能力，是一个比较特殊的算子，对元素的处理和备份恢复都比较特殊。element的输出通过一个Emitter对象来实现<br>TimestampsAndPeriodicWatermarksOperator，TimestampsAndPunctuatedWatermarksOperator通过TimestampAssigner提取timestamp并生按照规则生成watermark</p>
-<p>和TwoInputStreamOperator这个类的实现类<br>CoStreamMap， CoStreamFlatMap基本与单流的逻辑没什么区别，只是针对两个流的Function做类似的处理。<br>IntervalJoinOperator对双流的元素根据提供的ProcessJoinFunction做内连接，并且每个元素都有失效时间。在processElement方法中，每当一个流的元素到达，会将它加入对应流的buffer，并且遍历另一个流的buffer找到所有join的选项。最后再根据失效时间注册一个状态清理的Timer防止buffer无限增长。</p>
-<p>CoBroadcastWithKeyedOperator和CoBroadcastWithNonKeyedOperator提供了对(Keyed)BroadcastProcessFunction的支持，和CoProcess有一些类似，只是Broadcast的Stream只有读权限，没有写权限。并且可以通过context直接获得BroadcastState</p>
-<p>CoProcessOperator和KeyedCoProcessOperator本质上与单流的处理也没有什么区别，但是提供了双流之间共享状态的可能。CoProcessOperator也被用来实现NonWindowJoin</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/flink源码1/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="张洪铭">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/agns.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="张洪铭的个人博客">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="张洪铭的个人博客" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/08/02/flink源码1/" itemprop="url">
-                  flink源码1
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-02T20:30:00+08:00">
-                2019-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
-                    <span itemprop="name">大数据</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2019/08/02/flink源码1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/08/02/flink源码1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>nc -lk 9000<br> bin/flink run examples/streaming/SocketWindowWordCount.jar –hostname localhost –port 9000</p>
-<p>编译flink<br>git clone <a href="https://github.com/apache/flink.git" target="_blank" rel="external">https://github.com/apache/flink.git</a><br>cd flink<br>mvn clean package -DskipTests # this will take up to 10 minutes</p>
-<p>Flink源码阅读：<br>从读取文件开始：<br>例如env.readFileStream<br>共有如下DataSource：</p>
-<pre><code>fromElements
-fromElements
-fromCollection
-fromCollection
-fromCollection
-fromCollection
-fromParallelCollection
-fromParallelCollection
-fromParallelCollection
-readTextFile
-readTextFile
-readFile
-readFile
-readFile
-readFileStream
-readFile
-socketTextStream
-socketTextStream
-socketTextStream
-socketTextStream
-socketTextStream
-createInput
-createInput
-createInput
-createFileInput
-addSource
-addSource
-addSource
-addSource
-
-public DataStream&lt;String&gt; readFileStream(String filePath, long intervalMillis, FileMonitoringFunction.WatchType watchType) {
-    DataStream&lt;Tuple3&lt;String, Long, Long&gt;&gt; source = addSource(new FileMonitoringFunction(
-            filePath, intervalMillis, watchType), &quot;Read File Stream source&quot;);
-
-    return source.flatMap(new FileReadFunction());
-}
-</code></pre><p>第三个参数分为：</p>
-<pre><code>ONLY_NEW_FILES, // Only new files will be processed. 仅处理新增文件
-REPROCESS_WITH_APPENDED, // When some files are appended, all contents of the files will be processed. 当文件内容增加了之后会重新处理整个文件。
-PROCESS_ONLY_APPENDED // When some files are appended, only appended  contents will be processed. 当文件内容增加了之后只处理新增加内容
-</code></pre><p>FileMonitoringFunction 继承于SourceFunction<br>接口SourceFunction有两个方法：<br>run  业务逻辑方法<br>cancel  取消数据源的数据产生<br>FileMonitoringFunction实现了这两个方法</p>
-<pre><code>@Override
-public void run(SourceContext&lt;Tuple3&lt;String, Long, Long&gt;&gt; ctx) throws Exception {
-    FileSystem fileSystem = FileSystem.get(new URI(path));
-
-    while (isRunning) {
-        List&lt;String&gt; files = listNewFiles(fileSystem);//列出新增文件
-        for (String filePath : files) {
-            if (watchType == WatchType.ONLY_NEW_FILES
-                    || watchType == WatchType.REPROCESS_WITH_APPENDED) {
-                ctx.collect(new Tuple3&lt;String, Long, Long&gt;(filePath, 0L, -1L));//从头到尾收集数据
-                offsetOfFiles.put(filePath, -1L);
-            } else if (watchType == WatchType.PROCESS_ONLY_APPENDED) {
-                long offset = 0;
-                long fileSize = fileSystem.getFileStatus(new Path(filePath)).getLen();
-                if (offsetOfFiles.containsKey(filePath)) {
-                    offset = offsetOfFiles.get(filePath);
-                }
-                //只收集新增部分数据，即从上次获取的offset到这次文件末尾filesize
-                ctx.collect(new Tuple3&lt;String, Long, Long&gt;(filePath, offset, fileSize));
-                offsetOfFiles.put(filePath, fileSize);
-
-                LOG.info(&quot;File processed: {}, {}, {}&quot;, filePath, offset, fileSize);
-            }
-        }
-
-        Thread.sleep(interval);
-    }
-}
-
-private List&lt;String&gt; listNewFiles(FileSystem fileSystem) throws IOException {
-    List&lt;String&gt; files = new ArrayList&lt;String&gt;();
-
-    FileStatus[] statuses = fileSystem.listStatus(new Path(path));//列出给定路径中文件/目录的状态（如果路径为一个目录。)
-    //FileStatus 有getLen，getBlockSize,getReplication,getModificationTime，getAccessTime，isDir,getPath方法
-
-    if (statuses == null) {
-        LOG.warn(&quot;Path does not exist: {}&quot;, path);
-    } else {
-        for (FileStatus status : statuses) {
-            Path filePath = status.getPath();
-            String fileName = filePath.getName();
-            long modificationTime = status.getModificationTime();
-
-            if (!isFiltered(fileName, modificationTime)) {
-                //当WatchType 为ONLY_NEW_FILES并且modificationTimes这个map包含读取的文件时即新增文件
-                // 或文件修改时间大于modificationTime时为true
-                files.add(filePath.toString());
-                modificationTimes.put(fileName, modificationTime);
-            }
-        }
-    }
-
-    return files;
-}
-</code></pre><p>接下来为们看canal方法只做了一件事挺直running</p>
-<pre><code>@Override
-public void cancel() {
-        isRunning = false;
-}
-</code></pre><p>对FileMonitoringFunction的实现清楚之后，回到StreamExecutionEnvironment中，看addSource方法。</p>
-<pre><code>public &lt;OUT&gt; DataStreamSource&lt;OUT&gt; addSource(SourceFunction&lt;OUT&gt; function, String sourceName) {
-    return addSource(function, sourceName, null);
-}
-
-public &lt;OUT&gt; DataStreamSource&lt;OUT&gt; addSource(SourceFunction&lt;OUT&gt; function, String sourceName, TypeInformation&lt;OUT&gt; typeInfo) {
-
-    if (function instanceof ResultTypeQueryable) {
-        //如果传入的function实现了ResultTypeQueryable接口, 则直接通过接口获取
-        typeInfo = ((ResultTypeQueryable&lt;OUT&gt;) function).getProducedType();
-    }
-    if (typeInfo == null) {
-        try {
-            typeInfo = TypeExtractor.createTypeInfo(
-                    SourceFunction.class,
-                    function.getClass(), 0, null, null);//这个方法有点长，实际是typeInfo为空通过反射机制来提取typeInfo
-        } catch (final InvalidTypesException e) {
-            //获取失败返回MissingTypeInfo实例，里面两个变量：functionName，typeException
-            typeInfo = (TypeInformation&lt;OUT&gt;) new MissingTypeInfo(sourceName, e);
-        }
-    }
-    //根据function是实现了ParallelSourceFunction来判断是否是一个并行数据源节点
-    boolean isParallel = function instanceof ParallelSourceFunction;
-    //闭包清理, 可减少序列化内容, 以及防止序列化出错
-    clean(function);
-    //初始化一个ChainingStrategy.HEAD节点
-    final StreamSource&lt;OUT, ?&gt; sourceOperator = new StreamSource&lt;&gt;(function);
-    return new DataStreamSource&lt;&gt;(this, typeInfo, sourceOperator, isParallel, sourceName);//返回DataStreamSource
-}
-</code></pre><p>由于FileMonitoringFunction继承的是SourceFunction不是    ParallelSourceFunction 故isParallel为flase，即并行度为1<br>上面看到ChainingStrategy这个枚举类实际有三个属性：<br>ALWAYS  表示尽可能的与前后operator chaining<br>NEVER  表示不会chaining<br>HEAD  表示只会chaining后面。具体后面详细讲解其作用</p>
-<p>接下来看最后一个函数DataStreamSource</p>
-<pre><code>public DataStreamSource(StreamExecutionEnvironment environment,
-        TypeInformation&lt;T&gt; outTypeInfo, StreamSource&lt;T, ?&gt; operator,
-        boolean isParallel, String sourceName) {
-    super(environment, new SourceTransformation&lt;&gt;(sourceName, operator, outTypeInfo, environment.getParallelism()));
-
-    this.isParallel = isParallel;
-    if (!isParallel) {
-        setParallelism(1);
-    }
-}
-
-protected SingleOutputStreamOperator(StreamExecutionEnvironment environment, Transformation&lt;T&gt; transformation) {
-    super(environment, transformation);
-}
-
-public DataStream(StreamExecutionEnvironment environment, Transformation&lt;T&gt; transformation) {
-    this.environment = Preconditions.checkNotNull(environment, &quot;Execution Environment must not be null.&quot;);
-    this.transformation = Preconditions.checkNotNull(transformation, &quot;Stream Transformation must not be null.&quot;);
-}
-</code></pre><p>后面就是一系列transform 后面章节详细介绍</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2504,7 +2303,7 @@ public DataStream(StreamExecutionEnvironment environment, Transformation&lt;T&gt
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">93</span>
+              <span class="site-state-item-count">95</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
